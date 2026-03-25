@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tutorial: Migração OneDrive → Google Drive</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 40px 50px;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+  .cover {
+    text-align: center;
+    padding: 60px 0 50px;
+    border-bottom: 3px solid #0a1628;
+    margin-bottom: 40px;
+  }
+  .cover .logo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin-bottom: 30px;
+  }
+  .cover h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a1628;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .cover .subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  .cover .meta {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.8;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0a1628;
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #C9A84C;
+  }
+  h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a1628;
+    margin: 20px 0 8px;
+  }
+  p { line-height: 1.7; margin-bottom: 10px; color: #333; }
+  ul, ol { margin: 8px 0 12px 20px; }
+  li { line-height: 1.8; margin-bottom: 4px; }
+  .alert {
+    background: #fff8e6;
+    border-left: 4px solid #C9A84C;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+  }
+  .alert strong { color: #0a1628; }
+  .info {
+    background: #e8f0fe;
+    border-left: 4px solid #1a73e8;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+  }
+  .success {
+    background: #e6f4ea;
+    border-left: 4px solid #34a853;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+  }
+  code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #c7254e;
+  }
+  .code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .code-block .comment { color: #6c7086; }
+  .step-box {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 14px 0;
+  }
+  .step-num {
+    display: inline-block;
+    background: #0a1628;
+    color: #C9A84C;
+    font-weight: 700;
+    font-size: 12px;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .step-title { font-weight: 700; color: #0a1628; font-size: 13px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+  th {
+    background: #0a1628;
+    color: #fff;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
+  tr:nth-child(even) td { background: #f8f9fa; }
+  .section-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 30px 0;
+  }
+  .footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 2px solid #0a1628;
+    text-align: center;
+    font-size: 10px;
+    color: #999;
+  }
+  @media print {
+    body { padding: 20px 30px; }
+    .step-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="logo">OMNI Brasil — Documentação Técnica</div>
+  <h1>Migração OneDrive para Google Drive</h1>
+  <div class="subtitle">Guia passo a passo para transferência completa de arquivos</div>
+  <div class="meta">
+    Versão 1.0 &nbsp;·&nbsp; Março 2026 &nbsp;·&nbsp; Infraestrutura &amp; Operações<br>
+    Elaborado com base na migração real realizada em 25/03/2026
+  </div>
+</div>
+
+
+<h2>Visão Geral</h2>
+
+<p>Este tutorial explica como migrar todos os arquivos do OneDrive (Microsoft 365) para o Google Drive usando o <strong>rclone</strong> — uma ferramenta gratuita e open source de transferência de arquivos em nuvem.</p>
+
+<div class="info">
+  <strong>O que este processo faz:</strong> Copia tudo do OneDrive para o Google Drive sem apagar nada. Se cair no meio, retoma de onde parou. Os arquivos do OneDrive ficam intactos até você decidir cancelar o plano Microsoft.
+</div>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Detalhe</th>
+  </tr>
+  <tr><td>Ferramenta utilizada</td><td>rclone v1.73+</td></tr>
+  <tr><td>Onde roda</td><td>VPS da empresa (fica ligado 24/7, mais rápido)</td></tr>
+  <tr><td>Tempo estimado (800 GB)</td><td>8–24 horas dependendo da velocidade do VPS</td></tr>
+  <tr><td>Custo</td><td>Zero</td></tr>
+  <tr><td>Pré-requisito principal</td><td>Acesso ao portal.azure.com como administrador</td></tr>
+</table>
+
+
+<h2>Pré-requisitos</h2>
+
+<ul>
+  <li>Acesso ao <strong>portal.azure.com</strong> com conta de administrador do Microsoft 365</li>
+  <li>Google Workspace já contratado e domínio verificado</li>
+  <li>Acesso SSH ao VPS da empresa</li>
+  <li>VPS com Linux e rclone instalado (ver Passo 1)</li>
+</ul>
+
+
+<h2>PARTE 1 — Preparar o VPS</h2>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Conectar no VPS via SSH</span>
+  <div class="code-block">ssh usuario@IP-DO-VPS</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Instalar o rclone</span>
+  <div class="code-block">curl https://rclone.org/install.sh | sudo bash</div>
+  <p style="margin-top:8px; font-size:12px;">Se já estiver instalado, o script pula automaticamente.</p>
+</div>
+
+
+<h2>PARTE 2 — Registrar Aplicativo no Azure</h2>
+
+<p>Para o rclone se autenticar no OneDrive da empresa, precisamos criar um "App Registration" no Azure. Isso é feito <strong>uma única vez</strong> e só leva 5 minutos.</p>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Abrir o portal Azure</span>
+  <p>Acesse <strong>portal.azure.com</strong> com a conta de administrador.</p>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Criar novo App Registration</span>
+  <ol>
+    <li>Na barra de busca no topo, digite <strong>App registrations</strong> e clique</li>
+    <li>Clique em <strong>New registration</strong></li>
+    <li>No campo <em>Name</em>, coloque <code>rclone</code></li>
+    <li>Clique em <strong>Register</strong></li>
+  </ol>
+</div>
+
+<div class="step-box">
+  <span class="step-num">3</span>
+  <span class="step-title">Copiar o Client ID</span>
+  <p>Na página do app criado, copie o valor de <strong>Application (client) ID</strong>. Você vai precisar dele depois.</p>
+</div>
+
+<div class="step-box">
+  <span class="step-num">4</span>
+  <span class="step-title">Criar o Client Secret</span>
+  <ol>
+    <li>Menu esquerdo → <strong>Certificates &amp; secrets</strong></li>
+    <li>Clique em <strong>New client secret</strong></li>
+    <li>Em <em>Description</em> coloque <code>rclone</code></li>
+    <li>Clique <strong>Add</strong></li>
+    <li>Copie o valor na coluna <strong>Value</strong> (não o Secret ID)</li>
+  </ol>
+  <div class="alert">
+    <strong>Atenção:</strong> O Value aparece apenas uma vez. Copie imediatamente — depois de sair da página, não aparece mais.
+  </div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">5</span>
+  <span class="step-title">Adicionar permissões de acesso ao OneDrive</span>
+  <ol>
+    <li>Menu esquerdo → <strong>API permissions</strong></li>
+    <li>Clique <strong>Add a permission</strong></li>
+    <li>Clique <strong>Microsoft Graph</strong></li>
+    <li>Clique <strong>Delegated permissions</strong></li>
+    <li>Na busca, digite <code>Files.ReadWrite</code> e marque <strong>Files.ReadWrite.All</strong></li>
+    <li>Clique <strong>Add permissions</strong></li>
+    <li>Clique no botão <strong>"Grant admin consent for [empresa]"</strong> → confirme</li>
+  </ol>
+</div>
+
+<div class="step-box">
+  <span class="step-num">6</span>
+  <span class="step-title">Habilitar autenticação por código (Device Flow)</span>
+  <ol>
+    <li>Menu esquerdo → <strong>Authentication</strong></li>
+    <li>Role até <strong>Advanced settings</strong></li>
+    <li>Em <em>Allow public client flows</em> → mude para <strong>Yes</strong></li>
+    <li>Clique <strong>Save</strong></li>
+  </ol>
+</div>
+
+
+<h2>PARTE 3 — Autenticar OneDrive</h2>
+
+<p>Agora vamos gerar um código de autenticação que o usuário precisa autorizar no navegador — sem instalar nada no computador pessoal.</p>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Gerar o código de autenticação (no VPS)</span>
+  <p>Substitua <code>SEU-CLIENT-ID</code> e <code>SEU-TENANT-ID</code> pelos valores corretos. O tenant ID está no portal Azure → Azure Active Directory → Overview.</p>
+  <div class="code-block">TENANT="SEU-TENANT-ID"
+CLIENT_ID="SEU-CLIENT-ID"
+
+curl -s -X POST \
+  "https://login.microsoftonline.com/${TENANT}/oauth2/v2.0/devicecode" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  --data-urlencode "client_id=${CLIENT_ID}" \
+  --data-urlencode "scope=https://graph.microsoft.com/Files.ReadWrite.All offline_access" \
+  | python3 -c "
+import sys, json
+r = json.load(sys.stdin)
+print('URL:', r['verification_uri'])
+print('CÓDIGO:', r['user_code'])
+with open('/home/usuario/device_code.txt', 'w') as f:
+    f.write(r['device_code'])
+"</div>
+  <p style="margin-top:8px; font-size:12px;">O comando vai mostrar uma URL e um código de 9 caracteres.</p>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Autorizar no navegador</span>
+  <ol>
+    <li>Abra <strong>https://login.microsoft.com/device</strong> no navegador</li>
+    <li>Digite o código de 9 caracteres exibido no terminal</li>
+    <li>Faça login com a conta Microsoft da empresa</li>
+    <li>Clique em <strong>Autorizar</strong></li>
+  </ol>
+</div>
+
+<div class="step-box">
+  <span class="step-num">3</span>
+  <span class="step-title">Capturar o token (no VPS)</span>
+  <div class="code-block">python3 << 'EOF'
+import urllib.request, urllib.parse, json
+
+tenant = "SEU-TENANT-ID"
+client_id = "SEU-CLIENT-ID"
+
+with open('/home/usuario/device_code.txt') as f:
+    device_code = f.read().strip()
+
+data = urllib.parse.urlencode({
+    "client_id": client_id,
+    "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+    "device_code": device_code
+}).encode()
+
+url = f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+req = urllib.request.Request(url, data=data,
+      headers={"Content-Type": "application/x-www-form-urlencoded"})
+
+try:
+    with urllib.request.urlopen(req) as resp:
+        r = json.loads(resp.read())
+        with open('/home/usuario/od_token.json', 'w') as f:
+            json.dump(r, f)
+        print("TOKEN CAPTURADO COM SUCESSO")
+except urllib.error.HTTPError as e:
+    r = json.loads(e.read())
+    print("ERRO:", r.get('error_description',''))
+EOF</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">4</span>
+  <span class="step-title">Obter o Drive ID do OneDrive</span>
+  <div class="code-block">python3 << 'EOF'
+import urllib.request, json
+
+with open('/home/usuario/od_token.json') as f:
+    t = json.load(f)
+
+req = urllib.request.Request(
+    "https://graph.microsoft.com/v1.0/me/drive",
+    headers={"Authorization": f"Bearer {t['access_token']}"}
+)
+with urllib.request.urlopen(req) as resp:
+    d = json.loads(resp.read())
+
+print("DRIVE ID:", d['id'])
+print("TIPO:", d['driveType'])
+
+with open('/home/usuario/drive_info.json', 'w') as f:
+    json.dump({'drive_id': d['id'], 'drive_type': d['driveType']}, f)
+EOF</div>
+  <p style="margin-top:8px; font-size:12px;">Anote o Drive ID exibido — vai ser usado na configuração do rclone.</p>
+</div>
+
+
+<h2>PARTE 4 — Autenticar Google Drive</h2>
+
+<p>No Mac ou computador com navegador, instale o rclone e execute o comando abaixo:</p>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Instalar rclone no Mac (se não tiver)</span>
+  <div class="code-block">brew install rclone</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Autorizar acesso ao Google Drive</span>
+  <div class="code-block">rclone authorize "drive"</div>
+  <p style="margin-top:8px; font-size:12px;">O navegador abre automaticamente. Faça login com a conta Google Workspace da empresa e clique em Permitir. O terminal exibe um JSON com o token — copie o JSON completo.</p>
+</div>
+
+<div class="step-box">
+  <span class="step-num">3</span>
+  <span class="step-title">Salvar o token do Google Drive no VPS</span>
+  <p>Copie o JSON exibido no terminal e salve no arquivo <code>/home/usuario/gd_token.json</code> no VPS.</p>
+</div>
+
+
+<h2>PARTE 5 — Configurar o rclone no VPS</h2>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Criar o arquivo de configuração</span>
+  <div class="code-block">python3 << 'EOF'
+import json
+
+<span class="comment"># Carregar tokens</span>
+with open('/home/usuario/od_token.json') as f:
+    od = json.load(f)
+
+with open('/home/usuario/gd_token.json') as f:
+    gd = json.load(f)
+
+with open('/home/usuario/drive_info.json') as f:
+    drive = json.load(f)
+
+od_token = json.dumps({
+    "access_token": od['access_token'],
+    "token_type": "Bearer",
+    "refresh_token": od['refresh_token'],
+    "expiry": "2020-01-01T00:00:00Z"  <span class="comment"># força refresh automático</span>
+}, separators=(',', ':'))
+
+gd_token = json.dumps({
+    "access_token": gd['access_token'],
+    "token_type": "Bearer",
+    "refresh_token": gd['refresh_token'],
+    "expiry": "2020-01-01T00:00:00Z"
+}, separators=(',', ':'))
+
+config = f"""[onedrive]
+type = onedrive
+client_id = SEU-CLIENT-ID
+client_secret = SEU-CLIENT-SECRET
+token = {od_token}
+drive_id = {drive['drive_id']}
+drive_type = {drive['drive_type']}
+
+[gdrive]
+type = drive
+scope = drive
+token = {gd_token}
+"""
+
+import os
+os.makedirs('/home/usuario/.config/rclone', exist_ok=True)
+with open('/home/usuario/.config/rclone/rclone.conf', 'w') as f:
+    f.write(config)
+print("Configuração salva!")
+EOF</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Testar as conexões</span>
+  <div class="code-block"><span class="comment"># Testar OneDrive (deve listar as pastas)</span>
+rclone lsd onedrive: --max-depth 1
+
+<span class="comment"># Testar Google Drive (sem erros = OK)</span>
+rclone ls gdrive: --max-depth 1</div>
+</div>
+
+
+<h2>PARTE 6 — Iniciar a Migração</h2>
+
+<div class="step-box">
+  <span class="step-num">1</span>
+  <span class="step-title">Rodar a migração em background</span>
+  <div class="code-block">python3 -c "
+import subprocess
+proc = subprocess.Popen(
+    ['rclone', 'copy', 'onedrive:', 'gdrive:',
+     '--transfers', '4',
+     '--checkers', '8',
+     '--log-file', '/home/usuario/rclone-migration.log',
+     '--log-level', 'INFO'],
+    stdout=open('/home/usuario/rclone-out.log', 'w'),
+    stderr=subprocess.STDOUT
+)
+print('Migração iniciada. PID:', proc.pid)
+with open('/home/usuario/rclone.pid', 'w') as f:
+    f.write(str(proc.pid))
+"</div>
+  <div class="success">A migração roda em background. O VPS continua trabalhando mesmo que você feche o terminal.</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">2</span>
+  <span class="step-title">Acompanhar o progresso</span>
+  <div class="code-block"><span class="comment"># Ver últimas linhas do log</span>
+tail -20 /home/usuario/rclone-migration.log
+
+<span class="comment"># Ver processo rodando</span>
+ps aux | grep rclone | grep -v grep</div>
+</div>
+
+<div class="step-box">
+  <span class="step-num">3</span>
+  <span class="step-title">Retomar se cair</span>
+  <p>Se a migração parar por qualquer motivo, basta rodar o mesmo comando do Passo 1 novamente. O rclone pula automaticamente os arquivos já copiados.</p>
+</div>
+
+
+<h2>Pós-migração</h2>
+
+<div class="alert">
+  <strong>Antes de cancelar o Microsoft 365:</strong> verifique no Google Drive que todos os arquivos chegaram corretamente. Compare pelo menos as pastas principais. Só depois cancele o plano Microsoft.
+</div>
+
+<ol>
+  <li>Acesse o Google Drive e confirme que as pastas e arquivos estão lá</li>
+  <li>Verifique arquivos importantes (documentos críticos, planilhas, apresentações)</li>
+  <li>Confirme com a equipe que está tudo acessível</li>
+  <li>Então cancele o plano Microsoft 365</li>
+</ol>
+
+
+<h2>Parâmetros Utilizados</h2>
+
+<table>
+  <tr>
+    <th>Parâmetro</th>
+    <th>Valor</th>
+    <th>O que faz</th>
+  </tr>
+  <tr><td><code>--transfers 4</code></td><td>4</td><td>Copia 4 arquivos em paralelo</td></tr>
+  <tr><td><code>--checkers 8</code></td><td>8</td><td>Verifica 8 arquivos em paralelo</td></tr>
+  <tr><td><code>--log-level INFO</code></td><td>INFO</td><td>Registra cada arquivo copiado</td></tr>
+  <tr><td><code>rclone copy</code></td><td>—</td><td>Copia sem apagar a origem</td></tr>
+</table>
+
+
+<h2>Resolução de Problemas</h2>
+
+<table>
+  <tr>
+    <th>Erro</th>
+    <th>Causa</th>
+    <th>Solução</th>
+  </tr>
+  <tr>
+    <td>AADSTS650051</td>
+    <td>App não autorizado no tenant</td>
+    <td>Criar App Registration próprio no Azure (Parte 2)</td>
+  </tr>
+  <tr>
+    <td>AADSTS7000218</td>
+    <td>Public client flows desabilitado</td>
+    <td>Authentication → Allow public client flows → Yes</td>
+  </tr>
+  <tr>
+    <td>Permission denied no log</td>
+    <td>Pasta de log sem permissão</td>
+    <td>Usar pasta home do usuário em vez de /var/log</td>
+  </tr>
+  <tr>
+    <td>Invalid Credentials (Google)</td>
+    <td>Token expirado</td>
+    <td>Definir expiry para data passada, rclone renova automaticamente</td>
+  </tr>
+  <tr>
+    <td>drive_id não encontrado</td>
+    <td>Config sem drive_id</td>
+    <td>Consultar Graph API com token válido (Parte 3, Passo 4)</td>
+  </tr>
+</table>
+
+<hr class="section-divider">
+
+<div class="footer">
+  OMNI Brasil &nbsp;·&nbsp; Documento interno &nbsp;·&nbsp; Migração OneDrive → Google Drive &nbsp;·&nbsp; Março 2026
+</div>
+
+</body>
+</html>
