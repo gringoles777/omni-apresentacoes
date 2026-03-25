@@ -2,303 +2,546 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Tutorial: Migração OneDrive → Google Drive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tutorial: Migração OneDrive → Google Drive — OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Open+Sans:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@1,300&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --dark-texture: #2D2D2D;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --offwhite: #F5F0E8;
+    --white: #FFFFFF;
+    --muted: #6B6B6B;
+    --green: #52C478;
+    --yellow: #E0B852;
+    --red: #E05252;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--black);
+    color: var(--offwhite);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(13,13,13,0.96);
+    border-bottom: 1px solid var(--gold-deep);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 48px;
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif;
     font-size: 13px;
-    color: #1a1a1a;
-    background: #fff;
-    padding: 40px 50px;
-    max-width: 850px;
-    margin: 0 auto;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
   }
-  .cover {
-    text-align: center;
-    padding: 60px 0 50px;
-    border-bottom: 3px solid #0a1628;
-    margin-bottom: 40px;
-  }
-  .cover .logo {
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
     font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-right: 1px solid #1a1a1a;
+  }
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid var(--gold-deep);
+    padding: 6px 16px;
+    display: inline-block;
+    margin-bottom: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
     font-weight: 700;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--muted);
+    margin-top: 20px;
+    max-width: 600px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--dark-texture);
+    flex-wrap: wrap;
+  }
+  .meta-item label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .meta-item span { font-size: 14px; color: var(--offwhite); }
+
+  /* SECTIONS */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 60px;
+    border-top: 1px solid var(--dark-texture);
+  }
+  .section-tag {
+    font-size: 9px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #C9A84C;
-    margin-bottom: 30px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 16px;
   }
-  .cover h1 {
-    font-size: 28px;
+  .section h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
     font-weight: 700;
-    color: #0a1628;
-    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 32px;
+    line-height: 1.1;
+  }
+  .section h2 span { color: var(--gold); }
+
+  /* OVERVIEW GRID */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--dark-texture);
+    border: 1px solid var(--dark-texture);
+    margin-top: 40px;
+  }
+  .overview-card {
+    background: var(--dark);
+    padding: 32px 28px;
+  }
+  .overview-card .label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
     margin-bottom: 12px;
   }
-  .cover .subtitle {
-    font-size: 15px;
-    color: #666;
-    margin-bottom: 30px;
+  .overview-card .value {
+    font-size: 24px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
   }
-  .cover .meta {
-    font-size: 11px;
-    color: #999;
-    line-height: 1.8;
+  .overview-card p { font-size: 13px; color: var(--muted); }
+
+  /* STEPS */
+  .steps { margin-top: 40px; }
+  .step {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 8px;
+    background: var(--dark);
+    border: 1px solid var(--dark-texture);
+    padding: 28px 32px;
+    position: relative;
   }
-  h2 {
+  .step:hover { border-color: var(--gold-deep); }
+  .step-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--dark-texture);
+    line-height: 1;
+    min-width: 48px;
+    text-align: right;
+    letter-spacing: 0.04em;
+    user-select: none;
+  }
+  .step-content { flex: 1; }
+  .step-content h3 {
+    font-family: 'Oswald', sans-serif;
     font-size: 16px;
     font-weight: 700;
-    color: #0a1628;
-    margin: 32px 0 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #C9A84C;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 12px;
   }
-  h3 {
+  .step-content p { font-size: 13px; color: var(--offwhite); margin-bottom: 10px; }
+  .step-content ul, .step-content ol {
+    margin-left: 20px;
     font-size: 13px;
-    font-weight: 700;
-    color: #0a1628;
-    margin: 20px 0 8px;
+    color: var(--offwhite);
   }
-  p { line-height: 1.7; margin-bottom: 10px; color: #333; }
-  ul, ol { margin: 8px 0 12px 20px; }
-  li { line-height: 1.8; margin-bottom: 4px; }
-  .alert {
-    background: #fff8e6;
-    border-left: 4px solid #C9A84C;
-    padding: 12px 16px;
-    margin: 14px 0;
-    border-radius: 0 4px 4px 0;
-    font-size: 12px;
-  }
-  .alert strong { color: #0a1628; }
-  .info {
-    background: #e8f0fe;
-    border-left: 4px solid #1a73e8;
-    padding: 12px 16px;
-    margin: 14px 0;
-    border-radius: 0 4px 4px 0;
-    font-size: 12px;
-  }
-  .success {
-    background: #e6f4ea;
-    border-left: 4px solid #34a853;
-    padding: 12px 16px;
-    margin: 14px 0;
-    border-radius: 0 4px 4px 0;
-    font-size: 12px;
-  }
-  code {
-    background: #f1f3f4;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    color: #c7254e;
-  }
+  .step-content li { margin-bottom: 6px; }
+
+  /* CODE */
   .code-block {
-    background: #1e1e2e;
-    color: #cdd6f4;
-    padding: 16px 20px;
-    border-radius: 6px;
-    margin: 12px 0;
+    background: #111118;
+    border: 1px solid var(--dark-texture);
+    border-left: 3px solid var(--gold-deep);
+    padding: 18px 22px;
+    margin: 14px 0;
     font-family: 'Courier New', monospace;
     font-size: 12px;
-    line-height: 1.7;
+    color: #cdd6f4;
+    line-height: 1.8;
     overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
   }
-  .code-block .comment { color: #6c7086; }
-  .step-box {
-    background: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 18px 20px;
-    margin: 14px 0;
-  }
-  .step-num {
-    display: inline-block;
-    background: #0a1628;
-    color: #C9A84C;
-    font-weight: 700;
+  .code-block .comment { color: #45475a; }
+  code {
+    background: #1a1a2e;
+    color: var(--gold-light);
+    padding: 2px 7px;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
     font-size: 12px;
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    text-align: center;
-    border-radius: 50%;
-    margin-right: 8px;
   }
-  .step-title { font-weight: 700; color: #0a1628; font-size: 13px; }
+
+  /* ALERTS */
+  .alert {
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13px;
+    border-left: 3px solid;
+    display: flex;
+    gap: 12px;
+  }
+  .alert-warning { background: rgba(224,184,82,0.08); border-color: var(--yellow); color: var(--offwhite); }
+  .alert-info    { background: rgba(200,168,75,0.06); border-color: var(--gold);   color: var(--offwhite); }
+  .alert-success { background: rgba(82,196,120,0.08); border-color: var(--green);  color: var(--offwhite); }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* TABLE */
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 12px 0;
-    font-size: 12px;
+    margin: 20px 0;
+    font-size: 13px;
   }
+  thead tr { background: var(--dark-texture); }
   th {
-    background: #0a1628;
-    color: #fff;
-    padding: 8px 12px;
+    padding: 12px 16px;
     text-align: left;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
     font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
   }
-  td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
-  tr:nth-child(even) td { background: #f8f9fa; }
-  .section-divider {
-    border: none;
-    border-top: 1px solid #e0e0e0;
-    margin: 30px 0;
+  td { padding: 12px 16px; border-bottom: 1px solid var(--dark-texture); color: var(--offwhite); }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(200,168,75,0.04); }
+
+  /* PART HEADER */
+  .part-header {
+    background: var(--dark);
+    border-top: 3px solid var(--gold);
+    padding: 32px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
   }
-  .footer {
-    margin-top: 50px;
-    padding-top: 20px;
-    border-top: 2px solid #0a1628;
-    text-align: center;
-    font-size: 10px;
-    color: #999;
+  .part-label {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 8px;
   }
-  @media print {
-    body { padding: 20px 30px; }
-    .step-box { break-inside: avoid; }
+  .part-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--white);
   }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  }
+
+  /* FOOTER */
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 60px;
+    border-top: 1px solid var(--dark-texture);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .footer-info { font-size: 11px; color: var(--muted); }
 </style>
 </head>
 <body>
 
-<div class="cover">
-  <div class="logo">OMNI Brasil — Documentação Técnica</div>
-  <h1>Migração OneDrive para Google Drive</h1>
-  <div class="subtitle">Guia passo a passo para transferência completa de arquivos</div>
-  <div class="meta">
-    Versão 1.0 &nbsp;·&nbsp; Março 2026 &nbsp;·&nbsp; Infraestrutura &amp; Operações<br>
-    Elaborado com base na migração real realizada em 25/03/2026
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">OMNI Brasil</div>
+  <ul class="nav-links">
+    <li><a href="#visao-geral">Visão Geral</a></li>
+    <li><a href="#azure">Azure</a></li>
+    <li><a href="#onedrive">OneDrive</a></li>
+    <li><a href="#gdrive">Google Drive</a></li>
+    <li><a href="#migracao">Migração</a></li>
+    <li><a href="#problemas">Problemas</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Documentação Técnica · Infraestrutura</div>
+  <h1>Migração <span>OneDrive</span><br>para Google Drive</h1>
+  <div class="hero-subtitle">Guia completo para transferência de arquivos em nuvem usando rclone no VPS da empresa</div>
+  <div class="hero-meta">
+    <div class="meta-item"><label>Versão</label><span>1.0</span></div>
+    <div class="meta-item"><label>Data</label><span>Março 2026</span></div>
+    <div class="meta-item"><label>Ferramenta</label><span>rclone</span></div>
+    <div class="meta-item"><label>Origem</label><span>Migração real 25/03/2026</span></div>
+    <div class="meta-item"><label>Status</label><span style="color:var(--green)">✓ Testado e validado</span></div>
   </div>
 </div>
 
+<!-- VISÃO GERAL -->
+<div id="visao-geral" class="section">
+  <div class="section-tag">01 · Visão Geral</div>
+  <h2>O que este <span>processo</span> faz</h2>
+  <p style="max-width:700px; font-size:14px; margin-bottom:32px;">
+    Copia todos os arquivos do OneDrive (Microsoft 365) para o Google Drive usando o rclone — ferramenta gratuita e open source. A migração roda no VPS da empresa, sem ocupar o computador de ninguém.
+  </p>
 
-<h2>Visão Geral</h2>
-
-<p>Este tutorial explica como migrar todos os arquivos do OneDrive (Microsoft 365) para o Google Drive usando o <strong>rclone</strong> — uma ferramenta gratuita e open source de transferência de arquivos em nuvem.</p>
-
-<div class="info">
-  <strong>O que este processo faz:</strong> Copia tudo do OneDrive para o Google Drive sem apagar nada. Se cair no meio, retoma de onde parou. Os arquivos do OneDrive ficam intactos até você decidir cancelar o plano Microsoft.
-</div>
-
-<table>
-  <tr>
-    <th>Item</th>
-    <th>Detalhe</th>
-  </tr>
-  <tr><td>Ferramenta utilizada</td><td>rclone v1.73+</td></tr>
-  <tr><td>Onde roda</td><td>VPS da empresa (fica ligado 24/7, mais rápido)</td></tr>
-  <tr><td>Tempo estimado (800 GB)</td><td>8–24 horas dependendo da velocidade do VPS</td></tr>
-  <tr><td>Custo</td><td>Zero</td></tr>
-  <tr><td>Pré-requisito principal</td><td>Acesso ao portal.azure.com como administrador</td></tr>
-</table>
-
-
-<h2>Pré-requisitos</h2>
-
-<ul>
-  <li>Acesso ao <strong>portal.azure.com</strong> com conta de administrador do Microsoft 365</li>
-  <li>Google Workspace já contratado e domínio verificado</li>
-  <li>Acesso SSH ao VPS da empresa</li>
-  <li>VPS com Linux e rclone instalado (ver Passo 1)</li>
-</ul>
-
-
-<h2>PARTE 1 — Preparar o VPS</h2>
-
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Conectar no VPS via SSH</span>
-  <div class="code-block">ssh usuario@IP-DO-VPS</div>
-</div>
-
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Instalar o rclone</span>
-  <div class="code-block">curl https://rclone.org/install.sh | sudo bash</div>
-  <p style="margin-top:8px; font-size:12px;">Se já estiver instalado, o script pula automaticamente.</p>
-</div>
-
-
-<h2>PARTE 2 — Registrar Aplicativo no Azure</h2>
-
-<p>Para o rclone se autenticar no OneDrive da empresa, precisamos criar um "App Registration" no Azure. Isso é feito <strong>uma única vez</strong> e só leva 5 minutos.</p>
-
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Abrir o portal Azure</span>
-  <p>Acesse <strong>portal.azure.com</strong> com a conta de administrador.</p>
-</div>
-
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Criar novo App Registration</span>
-  <ol>
-    <li>Na barra de busca no topo, digite <strong>App registrations</strong> e clique</li>
-    <li>Clique em <strong>New registration</strong></li>
-    <li>No campo <em>Name</em>, coloque <code>rclone</code></li>
-    <li>Clique em <strong>Register</strong></li>
-  </ol>
-</div>
-
-<div class="step-box">
-  <span class="step-num">3</span>
-  <span class="step-title">Copiar o Client ID</span>
-  <p>Na página do app criado, copie o valor de <strong>Application (client) ID</strong>. Você vai precisar dele depois.</p>
-</div>
-
-<div class="step-box">
-  <span class="step-num">4</span>
-  <span class="step-title">Criar o Client Secret</span>
-  <ol>
-    <li>Menu esquerdo → <strong>Certificates &amp; secrets</strong></li>
-    <li>Clique em <strong>New client secret</strong></li>
-    <li>Em <em>Description</em> coloque <code>rclone</code></li>
-    <li>Clique <strong>Add</strong></li>
-    <li>Copie o valor na coluna <strong>Value</strong> (não o Secret ID)</li>
-  </ol>
-  <div class="alert">
-    <strong>Atenção:</strong> O Value aparece apenas uma vez. Copie imediatamente — depois de sair da página, não aparece mais.
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="label">Segurança</div>
+      <div class="value">Não apaga nada</div>
+      <p>OneDrive permanece intacto até você decidir cancelar o plano Microsoft</p>
+    </div>
+    <div class="overview-card">
+      <div class="label">Resiliência</div>
+      <div class="value">Retoma sozinho</div>
+      <p>Se cair no meio, basta rodar novamente — pula o que já foi copiado</p>
+    </div>
+    <div class="overview-card">
+      <div class="label">Custo</div>
+      <div class="value" style="color:var(--green)">Gratuito</div>
+      <p>rclone é open source. Roda no VPS que você já paga</p>
+    </div>
+    <div class="overview-card">
+      <div class="label">Pré-requisito principal</div>
+      <div class="value" style="font-size:16px">Admin Azure</div>
+      <p>Acesso de administrador ao portal.azure.com</p>
+    </div>
+    <div class="overview-card">
+      <div class="label">Tempo estimado (800 GB)</div>
+      <div class="value">8–24 horas</div>
+      <p>VPS fica trabalhando sozinho, sem precisar ficar online</p>
+    </div>
+    <div class="overview-card">
+      <div class="label">Google Workspace</div>
+      <div class="value" style="font-size:16px">Já contratado</div>
+      <p>Domínio verificado e e-mail funcionando antes de iniciar</p>
+    </div>
   </div>
 </div>
 
-<div class="step-box">
-  <span class="step-num">5</span>
-  <span class="step-title">Adicionar permissões de acesso ao OneDrive</span>
-  <ol>
-    <li>Menu esquerdo → <strong>API permissions</strong></li>
-    <li>Clique <strong>Add a permission</strong></li>
-    <li>Clique <strong>Microsoft Graph</strong></li>
-    <li>Clique <strong>Delegated permissions</strong></li>
-    <li>Na busca, digite <code>Files.ReadWrite</code> e marque <strong>Files.ReadWrite.All</strong></li>
-    <li>Clique <strong>Add permissions</strong></li>
-    <li>Clique no botão <strong>"Grant admin consent for [empresa]"</strong> → confirme</li>
-  </ol>
+<!-- PARTE 1 -->
+<div class="part-header">
+  <div class="part-label">Parte 01</div>
+  <h2>Preparar o VPS</h2>
 </div>
 
-<div class="step-box">
-  <span class="step-num">6</span>
-  <span class="step-title">Habilitar autenticação por código (Device Flow)</span>
-  <ol>
-    <li>Menu esquerdo → <strong>Authentication</strong></li>
-    <li>Role até <strong>Advanced settings</strong></li>
-    <li>Em <em>Allow public client flows</em> → mude para <strong>Yes</strong></li>
-    <li>Clique <strong>Save</strong></li>
-  </ol>
+<div class="section">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Conectar no VPS via SSH</h3>
+        <div class="code-block">ssh usuario@IP-DO-VPS</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Instalar o rclone</h3>
+        <div class="code-block">curl https://rclone.org/install.sh | sudo bash</div>
+        <p style="font-size:12px; color:var(--muted);">Se já estiver instalado, o script pula automaticamente.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- PARTE 2 -->
+<div class="part-header" id="azure">
+  <div class="part-label">Parte 02</div>
+  <h2>Registrar Aplicativo no Azure</h2>
+</div>
 
-<h2>PARTE 3 — Autenticar OneDrive</h2>
+<div class="section">
+  <p style="font-size:14px; max-width:700px; margin-bottom:32px;">Para o rclone autenticar no OneDrive da empresa, é necessário criar um "App Registration" no Azure. Feito <strong style="color:var(--gold)">uma única vez</strong> — leva 5 minutos.</p>
 
-<p>Agora vamos gerar um código de autenticação que o usuário precisa autorizar no navegador — sem instalar nada no computador pessoal.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Acessar o portal Azure</h3>
+        <p>Acesse <code>portal.azure.com</code> com a conta de administrador da empresa.</p>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Gerar o código de autenticação (no VPS)</span>
-  <p>Substitua <code>SEU-CLIENT-ID</code> e <code>SEU-TENANT-ID</code> pelos valores corretos. O tenant ID está no portal Azure → Azure Active Directory → Overview.</p>
-  <div class="code-block">TENANT="SEU-TENANT-ID"
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Criar novo App Registration</h3>
+        <ol>
+          <li>Na barra de busca no topo, digite <strong>App registrations</strong> → clique</li>
+          <li>Clique em <strong>New registration</strong></li>
+          <li>No campo Name, coloque <code>rclone</code></li>
+          <li>Clique em <strong>Register</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Copiar o Client ID</h3>
+        <p>Na página do app, copie o valor de <strong>Application (client) ID</strong> — você vai precisar depois.</p>
+        <p>Também copie o <strong>Directory (tenant) ID</strong> na mesma página.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Criar o Client Secret</h3>
+        <ol>
+          <li>Menu esquerdo → <strong>Certificates &amp; secrets</strong></li>
+          <li>Clique em <strong>New client secret</strong></li>
+          <li>Em Description coloque <code>rclone</code> → clique <strong>Add</strong></li>
+          <li>Copie o valor na coluna <strong>Value</strong> (não o Secret ID)</li>
+        </ol>
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠</span>
+          <span>O Value aparece <strong>apenas uma vez</strong>. Copie imediatamente — depois de sair da página não é possível visualizá-lo novamente.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-content">
+        <h3>Adicionar permissões de acesso ao OneDrive</h3>
+        <ol>
+          <li>Menu esquerdo → <strong>API permissions</strong></li>
+          <li>Clique <strong>Add a permission</strong> → <strong>Microsoft Graph</strong> → <strong>Delegated permissions</strong></li>
+          <li>Busque <code>Files.ReadWrite</code> → marque <strong>Files.ReadWrite.All</strong></li>
+          <li>Clique <strong>Add permissions</strong></li>
+          <li>Clique em <strong>"Grant admin consent for [empresa]"</strong> → confirme</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-content">
+        <h3>Habilitar autenticação por código (Device Flow)</h3>
+        <ol>
+          <li>Menu esquerdo → <strong>Authentication</strong></li>
+          <li>Role até <strong>Advanced settings</strong></li>
+          <li>Em <em>Allow public client flows</em> → mude para <strong>Yes</strong></li>
+          <li>Clique <strong>Save</strong></li>
+        </ol>
+        <div class="alert alert-info">
+          <span class="alert-icon">ℹ</span>
+          <span>Sem essa configuração, a autenticação por código retorna erro <code>AADSTS7000218</code>.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTE 3 -->
+<div class="part-header" id="onedrive">
+  <div class="part-label">Parte 03</div>
+  <h2>Autenticar OneDrive no VPS</h2>
+</div>
+
+<div class="section">
+  <p style="font-size:14px; max-width:700px; margin-bottom:32px;">Autenticação via código — sem instalar nada no computador pessoal. O usuário apenas abre uma URL e digita um código de 9 caracteres.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Gerar o código de autenticação</h3>
+        <p>No VPS, substitua os valores e execute:</p>
+        <div class="code-block">TENANT="SEU-TENANT-ID"
 CLIENT_ID="SEU-CLIENT-ID"
 
 curl -s -X POST \
@@ -313,25 +556,30 @@ print('URL:', r['verification_uri'])
 print('CÓDIGO:', r['user_code'])
 with open('/home/usuario/device_code.txt', 'w') as f:
     f.write(r['device_code'])
+print('device_code salvo.')
 "</div>
-  <p style="margin-top:8px; font-size:12px;">O comando vai mostrar uma URL e um código de 9 caracteres.</p>
-</div>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Autorizar no navegador</span>
-  <ol>
-    <li>Abra <strong>https://login.microsoft.com/device</strong> no navegador</li>
-    <li>Digite o código de 9 caracteres exibido no terminal</li>
-    <li>Faça login com a conta Microsoft da empresa</li>
-    <li>Clique em <strong>Autorizar</strong></li>
-  </ol>
-</div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Autorizar no navegador</h3>
+        <ol>
+          <li>Abra <strong>https://login.microsoft.com/device</strong> no navegador</li>
+          <li>Digite o código de 9 caracteres exibido no terminal</li>
+          <li>Faça login com a conta Microsoft da empresa</li>
+          <li>Clique em <strong>Autorizar</strong></li>
+        </ol>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">3</span>
-  <span class="step-title">Capturar o token (no VPS)</span>
-  <div class="code-block">python3 << 'EOF'
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Capturar o token</h3>
+        <p>Após autorizar, execute no VPS:</p>
+        <div class="code-block">python3 &lt;&lt; 'EOF'
 import urllib.request, urllib.parse, json
 
 tenant = "SEU-TENANT-ID"
@@ -360,12 +608,14 @@ except urllib.error.HTTPError as e:
     r = json.loads(e.read())
     print("ERRO:", r.get('error_description',''))
 EOF</div>
-</div>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">4</span>
-  <span class="step-title">Obter o Drive ID do OneDrive</span>
-  <div class="code-block">python3 << 'EOF'
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Obter o Drive ID</h3>
+        <div class="code-block">python3 &lt;&lt; 'EOF'
 import urllib.request, json
 
 with open('/home/usuario/od_token.json') as f:
@@ -384,43 +634,63 @@ print("TIPO:", d['driveType'])
 with open('/home/usuario/drive_info.json', 'w') as f:
     json.dump({'drive_id': d['id'], 'drive_type': d['driveType']}, f)
 EOF</div>
-  <p style="margin-top:8px; font-size:12px;">Anote o Drive ID exibido — vai ser usado na configuração do rclone.</p>
+        <p style="font-size:12px; color:var(--muted)">Anote o Drive ID — será usado na configuração do rclone.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-<h2>PARTE 4 — Autenticar Google Drive</h2>
-
-<p>No Mac ou computador com navegador, instale o rclone e execute o comando abaixo:</p>
-
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Instalar rclone no Mac (se não tiver)</span>
-  <div class="code-block">brew install rclone</div>
+<!-- PARTE 4 -->
+<div class="part-header" id="gdrive">
+  <div class="part-label">Parte 04</div>
+  <h2>Autenticar Google Drive</h2>
 </div>
 
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Autorizar acesso ao Google Drive</span>
-  <div class="code-block">rclone authorize "drive"</div>
-  <p style="margin-top:8px; font-size:12px;">O navegador abre automaticamente. Faça login com a conta Google Workspace da empresa e clique em Permitir. O terminal exibe um JSON com o token — copie o JSON completo.</p>
+<div class="section">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Instalar rclone no Mac (se necessário)</h3>
+        <div class="code-block">brew install rclone</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Autorizar acesso ao Google Drive</h3>
+        <div class="code-block">rclone authorize "drive"</div>
+        <p>O navegador abre automaticamente. Faça login com a conta Google Workspace da empresa e clique em <strong>Permitir</strong>.</p>
+        <p style="margin-top:8px;">O terminal exibe um JSON — copie o conteúdo completo.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Salvar o token no VPS</h3>
+        <p>Cole o JSON gerado e salve no arquivo <code>/home/usuario/gd_token.json</code> no VPS.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="step-box">
-  <span class="step-num">3</span>
-  <span class="step-title">Salvar o token do Google Drive no VPS</span>
-  <p>Copie o JSON exibido no terminal e salve no arquivo <code>/home/usuario/gd_token.json</code> no VPS.</p>
+<!-- PARTE 5 -->
+<div class="part-header">
+  <div class="part-label">Parte 05</div>
+  <h2>Configurar o rclone no VPS</h2>
 </div>
 
+<div class="section">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Criar o arquivo de configuração</h3>
+        <div class="code-block">python3 &lt;&lt; 'EOF'
+import json, os
 
-<h2>PARTE 5 — Configurar o rclone no VPS</h2>
-
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Criar o arquivo de configuração</span>
-  <div class="code-block">python3 << 'EOF'
-import json
-
-<span class="comment"># Carregar tokens</span>
 with open('/home/usuario/od_token.json') as f:
     od = json.load(f)
 
@@ -434,7 +704,7 @@ od_token = json.dumps({
     "access_token": od['access_token'],
     "token_type": "Bearer",
     "refresh_token": od['refresh_token'],
-    "expiry": "2020-01-01T00:00:00Z"  <span class="comment"># força refresh automático</span>
+    "expiry": "2020-01-01T00:00:00Z"
 }, separators=(',', ':'))
 
 gd_token = json.dumps({
@@ -458,31 +728,41 @@ scope = drive
 token = {gd_token}
 """
 
-import os
 os.makedirs('/home/usuario/.config/rclone', exist_ok=True)
 with open('/home/usuario/.config/rclone/rclone.conf', 'w') as f:
     f.write(config)
 print("Configuração salva!")
 EOF</div>
-</div>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Testar as conexões</span>
-  <div class="code-block"><span class="comment"># Testar OneDrive (deve listar as pastas)</span>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Testar as conexões</h3>
+        <div class="code-block"><span class="comment"># Testar OneDrive — deve listar as pastas</span>
 rclone lsd onedrive: --max-depth 1
 
-<span class="comment"># Testar Google Drive (sem erros = OK)</span>
+<span class="comment"># Testar Google Drive — sem erros = OK</span>
 rclone ls gdrive: --max-depth 1</div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- PARTE 6 -->
+<div class="part-header" id="migracao">
+  <div class="part-label">Parte 06</div>
+  <h2>Iniciar a Migração</h2>
+</div>
 
-<h2>PARTE 6 — Iniciar a Migração</h2>
-
-<div class="step-box">
-  <span class="step-num">1</span>
-  <span class="step-title">Rodar a migração em background</span>
-  <div class="code-block">python3 -c "
+<div class="section">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Rodar a migração em background</h3>
+        <div class="code-block">python3 -c "
 import subprocess
 proc = subprocess.Popen(
     ['rclone', 'copy', 'onedrive:', 'gdrive:',
@@ -497,95 +777,119 @@ print('Migração iniciada. PID:', proc.pid)
 with open('/home/usuario/rclone.pid', 'w') as f:
     f.write(str(proc.pid))
 "</div>
-  <div class="success">A migração roda em background. O VPS continua trabalhando mesmo que você feche o terminal.</div>
-</div>
+        <div class="alert alert-success">
+          <span class="alert-icon">✓</span>
+          <span>A migração roda em background. O VPS continua trabalhando mesmo que você feche o terminal.</span>
+        </div>
+      </div>
+    </div>
 
-<div class="step-box">
-  <span class="step-num">2</span>
-  <span class="step-title">Acompanhar o progresso</span>
-  <div class="code-block"><span class="comment"># Ver últimas linhas do log</span>
-tail -20 /home/usuario/rclone-migration.log
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Acompanhar o progresso</h3>
+        <div class="code-block"><span class="comment"># Ver arquivos sendo copiados em tempo real</span>
+tail -f /home/usuario/rclone-migration.log
 
-<span class="comment"># Ver processo rodando</span>
+<span class="comment"># Ver se o processo está rodando</span>
 ps aux | grep rclone | grep -v grep</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Retomar se cair</h3>
+        <p>Se a migração parar por qualquer motivo, basta rodar o mesmo comando do Passo 01 novamente. O rclone pula automaticamente os arquivos já copiados.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" style="margin-top:32px;">
+    <span class="alert-icon">⚠</span>
+    <span><strong>Antes de cancelar o Microsoft 365:</strong> verifique no Google Drive que todos os arquivos chegaram corretamente. Compare as pastas principais, confirme com a equipe, e só então cancele o plano Microsoft.</span>
+  </div>
 </div>
 
-<div class="step-box">
-  <span class="step-num">3</span>
-  <span class="step-title">Retomar se cair</span>
-  <p>Se a migração parar por qualquer motivo, basta rodar o mesmo comando do Passo 1 novamente. O rclone pula automaticamente os arquivos já copiados.</p>
+<!-- REFERÊNCIAS -->
+<div class="section">
+  <div class="section-tag">Referência</div>
+  <h2>Parâmetros <span>utilizados</span></h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Parâmetro</th>
+        <th>Valor</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>--transfers 4</code></td><td>4</td><td>Copia 4 arquivos em paralelo</td></tr>
+      <tr><td><code>--checkers 8</code></td><td>8</td><td>Verifica 8 arquivos em paralelo</td></tr>
+      <tr><td><code>--log-level INFO</code></td><td>INFO</td><td>Registra cada arquivo copiado no log</td></tr>
+      <tr><td><code>rclone copy</code></td><td>—</td><td>Copia sem apagar a origem</td></tr>
+    </tbody>
+  </table>
 </div>
 
-
-<h2>Pós-migração</h2>
-
-<div class="alert">
-  <strong>Antes de cancelar o Microsoft 365:</strong> verifique no Google Drive que todos os arquivos chegaram corretamente. Compare pelo menos as pastas principais. Só depois cancele o plano Microsoft.
+<!-- PROBLEMAS -->
+<div class="part-header" id="problemas">
+  <div class="part-label">Resolução de Problemas</div>
+  <h2>Erros comuns e soluções</h2>
 </div>
 
-<ol>
-  <li>Acesse o Google Drive e confirme que as pastas e arquivos estão lá</li>
-  <li>Verifique arquivos importantes (documentos críticos, planilhas, apresentações)</li>
-  <li>Confirme com a equipe que está tudo acessível</li>
-  <li>Então cancele o plano Microsoft 365</li>
-</ol>
-
-
-<h2>Parâmetros Utilizados</h2>
-
-<table>
-  <tr>
-    <th>Parâmetro</th>
-    <th>Valor</th>
-    <th>O que faz</th>
-  </tr>
-  <tr><td><code>--transfers 4</code></td><td>4</td><td>Copia 4 arquivos em paralelo</td></tr>
-  <tr><td><code>--checkers 8</code></td><td>8</td><td>Verifica 8 arquivos em paralelo</td></tr>
-  <tr><td><code>--log-level INFO</code></td><td>INFO</td><td>Registra cada arquivo copiado</td></tr>
-  <tr><td><code>rclone copy</code></td><td>—</td><td>Copia sem apagar a origem</td></tr>
-</table>
-
-
-<h2>Resolução de Problemas</h2>
-
-<table>
-  <tr>
-    <th>Erro</th>
-    <th>Causa</th>
-    <th>Solução</th>
-  </tr>
-  <tr>
-    <td>AADSTS650051</td>
-    <td>App não autorizado no tenant</td>
-    <td>Criar App Registration próprio no Azure (Parte 2)</td>
-  </tr>
-  <tr>
-    <td>AADSTS7000218</td>
-    <td>Public client flows desabilitado</td>
-    <td>Authentication → Allow public client flows → Yes</td>
-  </tr>
-  <tr>
-    <td>Permission denied no log</td>
-    <td>Pasta de log sem permissão</td>
-    <td>Usar pasta home do usuário em vez de /var/log</td>
-  </tr>
-  <tr>
-    <td>Invalid Credentials (Google)</td>
-    <td>Token expirado</td>
-    <td>Definir expiry para data passada, rclone renova automaticamente</td>
-  </tr>
-  <tr>
-    <td>drive_id não encontrado</td>
-    <td>Config sem drive_id</td>
-    <td>Consultar Graph API com token válido (Parte 3, Passo 4)</td>
-  </tr>
-</table>
-
-<hr class="section-divider">
-
-<div class="footer">
-  OMNI Brasil &nbsp;·&nbsp; Documento interno &nbsp;·&nbsp; Migração OneDrive → Google Drive &nbsp;·&nbsp; Março 2026
+<div class="section">
+  <table>
+    <thead>
+      <tr>
+        <th>Erro</th>
+        <th>Causa</th>
+        <th>Solução</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>AADSTS650051</code></td>
+        <td>App padrão do rclone bloqueado pelo tenant</td>
+        <td>Criar App Registration próprio no Azure (Parte 02)</td>
+      </tr>
+      <tr>
+        <td><code>AADSTS7000218</code></td>
+        <td>Public client flows desabilitado</td>
+        <td>Authentication → Allow public client flows → Yes</td>
+      </tr>
+      <tr>
+        <td>Permission denied no log</td>
+        <td>Pasta de log sem permissão de escrita</td>
+        <td>Usar pasta home do usuário em vez de <code>/var/log</code></td>
+      </tr>
+      <tr>
+        <td>Invalid Credentials (Google)</td>
+        <td>Access token expirado</td>
+        <td>Definir expiry para data passada — rclone renova com o refresh_token</td>
+      </tr>
+      <tr>
+        <td>drive_id não encontrado</td>
+        <td>Config sem drive_id</td>
+        <td>Consultar Graph API com token válido (Parte 03, Passo 04)</td>
+      </tr>
+      <tr>
+        <td>Signature is invalid</td>
+        <td>Token corrompido no copy-paste</td>
+        <td>Usar device code flow em vez de copiar tokens manualmente</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">OMNI Brasil</div>
+  <div class="footer-info">Documentação Técnica · Infraestrutura · Migração OneDrive → Google Drive · Março 2026</div>
+</footer>
 
 </body>
 </html>
