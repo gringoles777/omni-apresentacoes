@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatorio de Acoes — HypnoFlash 27/Mar/2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  #lock {
+    position: fixed; inset: 0; z-index: 9999; background: #0A0A0A;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+  }
+  #lock .logo { font-weight: 900; font-size: 22px; letter-spacing: 6px; color: #C9A84C; text-transform: uppercase; }
+  #lock .sub { font-size: 12px; letter-spacing: 3px; color: rgba(244,244,232,0.4); text-transform: uppercase; }
+  #lock input {
+    width: 260px; padding: 14px 20px; background: #111; border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px; color: #F4F4E8; font-size: 16px; text-align: center; letter-spacing: 2px; outline: none;
+  }
+  #lock input:focus { border-color: #C9A84C; }
+  #lock input::placeholder { color: rgba(244,244,232,0.25); letter-spacing: 1px; }
+  #lock .err { color: #E74C3C; font-size: 13px; min-height: 18px; }
+  #lock button {
+    padding: 12px 40px; background: #C9A84C; color: #0A0A0A;
+    border: none; border-radius: 8px; font-weight: 700; font-size: 14px;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+  }
+  #lock button:hover { background: #D4B85E; }
+  #content { display: none; }
+  body { background: #0A0A0A; color: #F4F4E8; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  .header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .header .badge { display: inline-block; padding: 6px 16px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #C9A84C; margin-bottom: 16px; }
+  .header h1 { font-size: 30px; font-weight: 900; color: #F4F4E8; margin-bottom: 8px; }
+  .header .meta { font-size: 14px; color: rgba(244,244,232,0.5); }
+  .header .meta strong { color: #C9A84C; }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .kpi { background: #111; border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 20px; text-align: center; }
+  .kpi .value { font-size: 26px; font-weight: 900; color: #C9A84C; }
+  .kpi .label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,244,232,0.5); margin-top: 4px; }
+  .section { margin-bottom: 48px; }
+  .section h2 { font-size: 20px; font-weight: 800; color: #C9A84C; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .section h3 { font-size: 16px; font-weight: 700; color: #F4F4E8; margin: 24px 0 12px; }
+  .table-wrap { overflow-x: auto; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; padding: 12px 14px; background: #111; color: #C9A84C; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); white-space: nowrap; }
+  td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; }
+  tr:hover td { background: rgba(201,168,76,0.04); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .best { color: #2ECC71; font-weight: 700; }
+  .ok { color: #C9A84C; }
+  .warn { color: #F39C12; }
+  .bad { color: #E74C3C; font-weight: 700; }
+
+  /* Action executed cards */
+  .exec-card { display: flex; gap: 16px; padding: 20px; background: #111; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid; align-items: flex-start; }
+  .exec-card.done { border-color: #2ECC71; }
+  .exec-card.monitoring { border-color: #F39C12; }
+  .exec-card.waiting { border-color: #3498DB; }
+  .exec-card .icon { font-size: 24px; min-width: 36px; text-align: center; }
+  .exec-card .info { flex: 1; }
+  .exec-card .title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .exec-card .detail { font-size: 13px; color: rgba(244,244,232,0.6); }
+  .exec-card .detail strong { color: #F4F4E8; }
+  .exec-card .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  .badge-done { background: rgba(46,204,113,0.15); color: #2ECC71; border: 1px solid rgba(46,204,113,0.3); }
+  .badge-monitoring { background: rgba(243,156,18,0.15); color: #F39C12; border: 1px solid rgba(243,156,18,0.3); }
+  .badge-waiting { background: rgba(52,152,219,0.15); color: #3498DB; border: 1px solid rgba(52,152,219,0.3); }
+
+  /* Creative cards */
+  .creative-card { background: #111; border: 1px solid rgba(201,168,76,0.12); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .creative-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .creative-rank { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: #C9A84C; font-weight: 900; font-size: 14px; }
+  .creative-name { font-weight: 700; font-size: 16px; margin-left: 12px; }
+  .creative-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .creative-stats .stat .sv { font-size: 20px; font-weight: 800; }
+  .creative-stats .stat .sl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(244,244,232,0.5); }
+  .creative-meta { font-size: 13px; color: rgba(244,244,232,0.6); }
+  .creative-meta strong { color: #F4F4E8; }
+
+  /* Pattern tags */
+  .pattern-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .pattern-card { background: #111; border: 1px solid rgba(201,168,76,0.12); border-radius: 12px; padding: 20px; }
+  .pattern-card .pt { font-weight: 700; font-size: 14px; color: #C9A84C; margin-bottom: 8px; }
+  .pattern-card .pd { font-size: 13px; color: rgba(244,244,232,0.7); line-height: 1.6; }
+  .tag { display: inline-block; padding: 4px 10px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; font-size: 12px; color: #C9A84C; margin: 2px 4px 2px 0; }
+
+  /* Brief cards */
+  .brief-card { background: #111; border: 1px solid rgba(201,168,76,0.12); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .brief-card h4 { font-size: 15px; font-weight: 700; color: #C9A84C; margin-bottom: 12px; }
+  .brief-card .hook { background: rgba(46,204,113,0.08); border: 1px solid rgba(46,204,113,0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 12px; font-size: 14px; font-style: italic; color: #2ECC71; }
+  .brief-card .hook-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(46,204,113,0.6); margin-bottom: 6px; font-style: normal; }
+  .brief-card .script { font-size: 13px; color: rgba(244,244,232,0.7); line-height: 1.8; }
+  .brief-card .script strong { color: #F4F4E8; }
+  .brief-card .specs { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+  .brief-card .spec { padding: 6px 12px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.15); border-radius: 6px; font-size: 11px; color: rgba(244,244,232,0.6); }
+
+  /* Next steps */
+  .next-step { display: flex; gap: 14px; padding: 16px 20px; background: #111; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid; align-items: flex-start; }
+  .next-step.api { border-color: #2ECC71; }
+  .next-step.manual { border-color: #9B59B6; }
+  .next-step .ns-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; min-width: 60px; padding-top: 2px; }
+  .next-step .ns-badge.api { color: #2ECC71; }
+  .next-step .ns-badge.manual { color: #9B59B6; }
+  .next-step .ns-text { font-size: 14px; }
+  .next-step .ns-text strong { color: #F4F4E8; }
+
+  .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(201,168,76,0.1); margin-top: 48px; }
+  .footer .sig { font-size: 12px; color: rgba(244,244,232,0.3); letter-spacing: 2px; }
+  .footer .ts { font-size: 11px; color: rgba(244,244,232,0.2); margin-top: 4px; }
+  .divider { height: 1px; background: rgba(201,168,76,0.1); margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Area Restrita</div>
+  <input type="password" id="pw" placeholder="Senha" autofocus onkeydown="if(event.key==='Enter')unlock()">
+  <div class="err" id="err"></div>
+  <button onclick="unlock()">Acessar</button>
+</div>
+
+<div id="content">
+<div class="container">
+
+  <div class="header">
+    <div class="badge">Midas Action Report</div>
+    <h1>HypnoFlash — Acoes Executadas + Criativos</h1>
+    <div class="meta">
+      Conta <strong>Hypnoflash</strong> (act_1127653835150900) &mdash;
+      <strong>27/Mar/2026</strong> 17:20 BRT &mdash;
+      Dados: ultimos 7 dias (20-26/Mar)
+    </div>
+  </div>
+
+  <!-- KPIs Pos-Acao -->
+  <div class="kpi-row">
+    <div class="kpi"><div class="value">4</div><div class="label">Acoes Executadas</div></div>
+    <div class="kpi"><div class="value">~R$127</div><div class="label">Economia/Dia</div></div>
+    <div class="kpi"><div class="value">+20%</div><div class="label">Scale Escala #5</div></div>
+    <div class="kpi"><div class="value">29</div><div class="label">Ads Analisados</div></div>
+    <div class="kpi"><div class="value">R$12,25</div><div class="label">Melhor CPA (Ad)</div></div>
+    <div class="kpi"><div class="value">3</div><div class="label">Briefs Gerados</div></div>
+  </div>
+
+  <!-- SECTION 1: Acoes Executadas -->
+  <div class="section">
+    <h2>1. Acoes Executadas</h2>
+
+    <div class="exec-card done">
+      <div class="icon">&#x1F6D1;</div>
+      <div class="info">
+        <div class="title">P0 — Pausar TesteCriativos #2 Advantage+ R$87</div>
+        <div class="detail">
+          CPA <strong>R$88,97</strong> &mdash; 2,5x acima da media da conta. Gastou R$889,73 para apenas 10 vendas em 7 dias.
+          <br>Campaign ID: 120243381082930414 &rarr; Status: <strong>PAUSED</strong>
+          <br>Economia estimada: <strong>~R$127/dia</strong> redirecionados para campanhas campeas.
+        </div>
+      </div>
+      <span class="status-badge badge-done">EXECUTADO</span>
+    </div>
+
+    <div class="exec-card done">
+      <div class="icon">&#x1F4C8;</div>
+      <div class="info">
+        <div class="title">P1 — Escalar Escala #5 CBO (+20%)</div>
+        <div class="detail">
+          Melhor CPA da conta: <strong>R$27,14</strong>. Budget ajustado de R$112,80 &rarr; <strong>R$135,00/dia</strong>.
+          <br>Campaign ID: 120243361169320414
+          <br>Projecao: +4-5 vendas/dia ao CPA atual. Rampagem dentro do limite de 20%/dia (safety-rules).
+        </div>
+      </div>
+      <span class="status-badge badge-done">EXECUTADO</span>
+    </div>
+
+    <div class="exec-card monitoring">
+      <div class="icon">&#x26A0;&#xFE0F;</div>
+      <div class="info">
+        <div class="title">P2 — Monitorar TesteCriativos PUBLICO GERAL #1</div>
+        <div class="detail">
+          Frequencia atual: <strong>1,79</strong> (limite: 2,0). CPA R$41,35, CTR mais baixo da conta (4,81%).
+          <br>Se frequencia ultrapassar 2,0 nos proximos 2 dias: pausar automaticamente.
+          <br>Publico mostrando sinais de saturacao.
+        </div>
+      </div>
+      <span class="status-badge badge-monitoring">MONITORANDO</span>
+    </div>
+
+    <div class="exec-card waiting">
+      <div class="icon">&#x23F3;</div>
+      <div class="info">
+        <div class="title">P3 — Aguardar TestePublico #4 Fisioterapia</div>
+        <div class="detail">
+          Campanha com apenas 2 dias (desde 25/Mar). 5 purchases, CPA R$41,69.
+          <br>Taxa checkout&rarr;purchase de <strong>50%</strong> (excelente!) mas volume insuficiente para conclusao.
+          <br>Aguardar ate <strong>01/Abr</strong> (minimo 50 conversoes) antes de decidir escalar ou pausar.
+        </div>
+      </div>
+      <span class="status-badge badge-waiting">AGUARDANDO</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2: Ranking de Criativos -->
+  <div class="section">
+    <h2>2. Ranking de Criativos (29 Ads Analisados)</h2>
+    <p style="font-size: 14px; color: rgba(244,244,232,0.6); margin-bottom: 24px;">
+      Todos os ads com pelo menos 1 purchase nos ultimos 7 dias, ordenados por CPA.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Ad Name</th>
+            <th>Campanha</th>
+            <th class="num">Spend</th>
+            <th class="num">Purchases</th>
+            <th class="num">CPA</th>
+            <th class="num">Checkouts</th>
+            <th class="num">LPV</th>
+            <th class="num">CTR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="best">1</td>
+            <td class="best">HF-PG-004-V2</td>
+            <td>Publico Geral</td>
+            <td class="num">R$85,72</td>
+            <td class="num best">7</td>
+            <td class="num best">R$12,25</td>
+            <td class="num">18</td>
+            <td class="num">35</td>
+            <td class="num best">5,71%</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>HF-008</td>
+            <td>Escala #4 CBO</td>
+            <td class="num">R$35,70</td>
+            <td class="num">2</td>
+            <td class="num best">R$17,85</td>
+            <td class="num">10</td>
+            <td class="num">20</td>
+            <td class="num best">8,40%</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>HF-PG-002-V2</td>
+            <td>Publico Geral</td>
+            <td class="num">R$80,92</td>
+            <td class="num">4</td>
+            <td class="num best">R$20,23</td>
+            <td class="num">4</td>
+            <td class="num">21</td>
+            <td class="num">3,49%</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td class="best">HF-003</td>
+            <td>TestePublico Terapias</td>
+            <td class="num">R$212,98</td>
+            <td class="num best">10</td>
+            <td class="num best">R$21,30</td>
+            <td class="num">25</td>
+            <td class="num">137</td>
+            <td class="num">6,47%</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>HF-012</td>
+            <td>Escala #4 CBO</td>
+            <td class="num">R$154,88</td>
+            <td class="num">6</td>
+            <td class="num ok">R$25,81</td>
+            <td class="num">13</td>
+            <td class="num">57</td>
+            <td class="num">5,98%</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td class="best">HF-012</td>
+            <td>TesteCriativos #1</td>
+            <td class="num">R$581,41</td>
+            <td class="num best">22</td>
+            <td class="num ok">R$26,43</td>
+            <td class="num">63</td>
+            <td class="num">253</td>
+            <td class="num">5,21%</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>HF-PG-003-V2</td>
+            <td>Publico Geral</td>
+            <td class="num">R$83,84</td>
+            <td class="num">3</td>
+            <td class="num ok">R$27,95</td>
+            <td class="num">3</td>
+            <td class="num">25</td>
+            <td class="num">3,72%</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td class="best">HF-001</td>
+            <td>TestePublico Fisio</td>
+            <td class="num">R$637,78</td>
+            <td class="num best">21</td>
+            <td class="num ok">R$30,37</td>
+            <td class="num">61</td>
+            <td class="num">247</td>
+            <td class="num">5,38%</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>HF-005</td>
+            <td>Escala #2</td>
+            <td class="num">R$66,45</td>
+            <td class="num">2</td>
+            <td class="num">R$33,23</td>
+            <td class="num">3</td>
+            <td class="num">24</td>
+            <td class="num">6,14%</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>HF-012</td>
+            <td>TesteCriativos #1</td>
+            <td class="num">R$581,41</td>
+            <td class="num">22</td>
+            <td class="num">R$26,43</td>
+            <td class="num">63</td>
+            <td class="num">253</td>
+            <td class="num">5,21%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Campeoes Absolutos (Volume + CPA)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ad</th>
+            <th>Total Purchases (todas campanhas)</th>
+            <th>CPA Medio</th>
+            <th>Veredicto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="best">HF-012</td>
+            <td class="num best">29+ purchases</td>
+            <td class="num best">~R$26</td>
+            <td><span class="best">CAMPEAO #1 — Volume king</span></td>
+          </tr>
+          <tr>
+            <td class="best">HF-001</td>
+            <td class="num best">21+ purchases</td>
+            <td class="num ok">~R$30</td>
+            <td><span class="ok">CAMPEAO #2 — Consistente</span></td>
+          </tr>
+          <tr>
+            <td class="best">HF-003</td>
+            <td class="num">13+ purchases</td>
+            <td class="num best">~R$21</td>
+            <td><span class="best">CAMPEAO #3 — Melhor CPA com volume</span></td>
+          </tr>
+          <tr>
+            <td class="best">HF-PG-004-V2</td>
+            <td class="num">7 purchases</td>
+            <td class="num best">R$12,25</td>
+            <td><span class="best">CAMPEAO #4 — CPA mais baixo, monitorar volume</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3: Padroes dos Vencedores -->
+  <div class="section">
+    <h2>3. Padroes dos Criativos Vencedores</h2>
+
+    <div class="pattern-grid">
+      <div class="pattern-card">
+        <div class="pt">100% Video</div>
+        <div class="pd">Nenhum criativo estatico (imagem) aparece entre os top performers. Todos os 29 ads com vendas usam <strong>video</strong> como formato principal.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pt">Advantage+ Asset Feed</div>
+        <div class="pd">Os melhores criativos usam <strong>multiplos videos por placement</strong> (feed, stories, reels). O Meta otimiza automaticamente qual video mostrar em cada posicionamento.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pt">Duas LPs Funcionam</div>
+        <div class="pd"><strong>hypnoflash-v2</strong> (original) e <strong>hypnoflash-v3-pg</strong> (nova). A v3-pg parece performar melhor para publico frio (Publico Geral).</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pt">CTA: Learn More</div>
+        <div class="pd">Todos os criativos campeoes usam <strong>LEARN_MORE</strong> como call-to-action. Nenhum usa "Buy Now" ou "Sign Up" — o funil depende da LP para converter.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pt">Page Posts Organicos</div>
+        <div class="pd">HF-001 e HF-003 sao <strong>posts organicos da pagina</strong> promovidos como ads. Isso acumula social proof (likes, comments, shares) e melhora CTR ao longo do tempo.</div>
+      </div>
+      <div class="pattern-card">
+        <div class="pt">Targeting: Lookalikes 2%</div>
+        <div class="pd">Todos os adsets das campanhas de escala usam <strong>Custom Audiences de seguidores + Lookalikes 2%</strong> com Advantage Audience ativado.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4: Briefs de Novos Criativos -->
+  <div class="section">
+    <h2>4. Briefs para Novos Criativos</h2>
+    <p style="font-size: 14px; color: rgba(244,244,232,0.6); margin-bottom: 24px;">
+      Baseados nos padroes dos criativos vencedores. Cada brief inclui hook, estrutura de script e specs tecnicos.
+    </p>
+
+    <!-- Brief 1 -->
+    <div class="brief-card">
+      <h4>Brief #1 — "O Segredo dos Profissionais de Saude" (Angulo Fisioterapia)</h4>
+      <div class="hook">
+        <div class="hook-label">Hook (primeiros 3 segundos)</div>
+        "Eu era fisioterapeuta e achava que hipnose era coisa de show... ate um paciente com dor cronica me provar o contrario."
+      </div>
+      <div class="script">
+        <strong>Estrutura (30-60s):</strong><br>
+        0-3s: Hook com conflito pessoal (profissional de saude + ceticismo)<br>
+        3-10s: Virada — "Entao eu descobri o HypnoFlash e tudo mudou"<br>
+        10-25s: Beneficios concretos — "Em 21 dias eu estava aplicando tecnicas reais com pacientes"<br>
+        25-40s: Prova social — "Hoje mais de X profissionais de saude usam isso"<br>
+        40-50s: CTA — "Clica no link e descobre como isso funciona na pratica"<br>
+        <br>
+        <strong>Por que este angulo:</strong> HF-001 (CPA R$30) e HF-PG-004-V2 (CPA R$12!) performam forte com interesse Fisioterapia.
+        O nicho saude e um dos que mais converte — profissionais buscam diferencial.
+      </div>
+      <div class="specs">
+        <span class="spec">Video vertical 9:16</span>
+        <span class="spec">30-60 segundos</span>
+        <span class="spec">Legendado</span>
+        <span class="spec">LP: hypnoflash-v3-pg</span>
+        <span class="spec">CTA: Learn More</span>
+      </div>
+    </div>
+
+    <!-- Brief 2 -->
+    <div class="brief-card">
+      <h4>Brief #2 — "Depoimento Transformacao" (Angulo Social Proof)</h4>
+      <div class="hook">
+        <div class="hook-label">Hook (primeiros 3 segundos)</div>
+        "3 semanas atras eu nao sabia nada de hipnose. Hoje eu ja fiz minha primeira sessao real."
+      </div>
+      <div class="script">
+        <strong>Estrutura (30-45s):</strong><br>
+        0-3s: Hook — resultado rapido, pessoa comum<br>
+        3-12s: Antes — "Eu trabalhava com X e sentia que faltava algo"<br>
+        12-25s: Processo — "O HypnoFlash me ensinou passo a passo, sem enrolacao"<br>
+        25-35s: Resultado — "Hoje ja aplico com clientes / ja atendo / ja mudou minha vida"<br>
+        35-45s: CTA — "Se eu consegui, voce tambem consegue. Link na bio."<br>
+        <br>
+        <strong>Por que este angulo:</strong> HF-003 (CPA R$21) e HF-012 (22 vendas!) sao os mais consistentes.
+        Ambos sao page posts — o formato depoimento/testemunho gera confianca e social proof acumulado.
+      </div>
+      <div class="specs">
+        <span class="spec">Video vertical 9:16</span>
+        <span class="spec">30-45 segundos</span>
+        <span class="spec">Pessoa real falando</span>
+        <span class="spec">LP: hypnoflash-v2</span>
+        <span class="spec">CTA: Learn More</span>
+      </div>
+    </div>
+
+    <!-- Brief 3 -->
+    <div class="brief-card">
+      <h4>Brief #3 — "Mito vs Realidade" (Angulo Educativo/Contraste)</h4>
+      <div class="hook">
+        <div class="hook-label">Hook (primeiros 3 segundos)</div>
+        "90% das pessoas acham que hipnose e aquilo do palco. Deixa eu te mostrar o que a hipnose REALMENTE faz."
+      </div>
+      <div class="script">
+        <strong>Estrutura (45-60s):</strong><br>
+        0-3s: Hook — estatistica + quebra de expectativa<br>
+        3-15s: Mito 1 — "As pessoas acham que e controle mental" &rarr; Realidade<br>
+        15-25s: Mito 2 — "Acham que precisa de dom" &rarr; Realidade — "E tecnica, qualquer um aprende"<br>
+        25-40s: O que muda — "Com o HypnoFlash voce aprende em 21 dias, na pratica"<br>
+        40-50s: Autoridade — mencionar Michael/OMNI<br>
+        50-60s: CTA — "Link aqui embaixo pra conhecer o metodo"<br>
+        <br>
+        <strong>Por que este angulo:</strong> Os criativos com melhor CTR (6%+) sao os que geram curiosidade.
+        O formato "mito vs realidade" educa E engaja — perfeito para publico frio no Advantage+.
+      </div>
+      <div class="specs">
+        <span class="spec">Video vertical 9:16</span>
+        <span class="spec">45-60 segundos</span>
+        <span class="spec">Cortes rapidos</span>
+        <span class="spec">LP: hypnoflash-v3-pg</span>
+        <span class="spec">CTA: Learn More</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 5: Proximos Passos -->
+  <div class="section">
+    <h2>5. Proximos Passos</h2>
+
+    <div class="next-step api">
+      <div class="ns-badge api">API</div>
+      <div class="ns-text"><strong>Duplicar HF-PG-004-V2</strong> (CPA R$12) para campanhas Escala #5 e #6 — testar o criativo campeao em publicos de escala</div>
+    </div>
+
+    <div class="next-step api">
+      <div class="ns-badge api">API</div>
+      <div class="ns-text"><strong>Criar variacao HF-012 + LP v3-pg</strong> — o campeao de volume (22 vendas) roda na v2, testar na v3-pg</div>
+    </div>
+
+    <div class="next-step api">
+      <div class="ns-badge api">API</div>
+      <div class="ns-text"><strong>Criar variacao HF-003 + LP v3-pg</strong> — segundo melhor CPA (R$21) tambem na v2, testar LP nova</div>
+    </div>
+
+    <div class="next-step manual">
+      <div class="ns-badge manual">EQUIPE</div>
+      <div class="ns-text"><strong>Gravar Brief #1</strong> (Angulo Fisioterapia) — Fernanda ou aluno fisio com depoimento real</div>
+    </div>
+
+    <div class="next-step manual">
+      <div class="ns-badge manual">EQUIPE</div>
+      <div class="ns-text"><strong>Gravar Brief #2</strong> (Depoimento Transformacao) — Coletar 2-3 depoimentos reais de alunos</div>
+    </div>
+
+    <div class="next-step manual">
+      <div class="ns-badge manual">EQUIPE</div>
+      <div class="ns-text"><strong>Gravar Brief #3</strong> (Mito vs Realidade) — Michael gravando direto, formato educativo</div>
+    </div>
+
+    <div class="next-step api">
+      <div class="ns-badge api">AUTO</div>
+      <div class="ns-text"><strong>Monitorar Publico Geral #1</strong> — se freq > 2,0 ate 29/Mar, pausar automaticamente</div>
+    </div>
+
+    <div class="next-step api">
+      <div class="ns-badge api">AUTO</div>
+      <div class="ns-text"><strong>Reavaliar TestePublico #4 Fisio</strong> em 01/Abr — decisao de escalar ou pausar com dados suficientes</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="sig">Midas &mdash; Media Strategist // OMNI Brasil</div>
+    <div class="ts">Gerado automaticamente em 27/Mar/2026 via Meta Marketing API v21.0 + Claude</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function unlock(){
+  var p=document.getElementById('pw').value;
+  if(p==='omni777'){
+    document.getElementById('lock').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('err').textContent='Senha incorreta';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+  }
+}
+</script>
+</body>
+</html>
