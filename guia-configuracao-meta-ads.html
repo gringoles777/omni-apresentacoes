@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Configuracao — Meta Ads (Hypnoflash)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --accent: #c8a96e;
+    --accent-soft: rgba(200, 169, 110, 0.12);
+    --text: #e8e8e8;
+    --muted: #888;
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.1);
+    --warn: #f97316;
+    --warn-soft: rgba(249, 115, 22, 0.1);
+    --info: #3b82f6;
+    --info-soft: rgba(59, 130, 246, 0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .hero {
+    position: relative;
+    padding: 60px 40px 44px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .overview {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .overview-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .overview-card .icon { font-size: 28px; margin-bottom: 8px; }
+
+  .overview-card .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .overview-card .value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+  .steps {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .step:hover { border-color: rgba(200,169,110,0.35); }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 28px 0;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  .step-title { font-size: 18px; font-weight: 700; line-height: 1.3; }
+
+  .step-title small {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .step-body { padding: 20px 28px 28px; }
+
+  .step-body p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(232,232,232,0.85);
+    margin-bottom: 16px;
+  }
+
+  .step-body p:last-child { margin-bottom: 0; }
+
+  .instruction-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .instruction-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(232,232,232,0.85);
+  }
+
+  .instruction-list li .num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: rgba(200,169,110,0.12);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 1px;
+  }
+
+  .link-box {
+    display: block;
+    background: var(--accent-soft);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .link-box:hover { border-color: var(--accent); }
+
+  .link-box .link-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .link-box .link-url {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    word-break: break-all;
+  }
+
+  .alert {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .alert-warn { background: var(--warn-soft); border: 1px solid rgba(249,115,22,0.25); color: var(--warn); }
+  .alert-info { background: var(--info-soft); border: 1px solid rgba(59,130,246,0.25); color: var(--info); }
+  .alert-success { background: var(--success-soft); border: 1px solid rgba(34,197,94,0.25); color: var(--success); }
+
+  .alert .alert-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+
+  .output-box {
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--accent);
+    margin-bottom: 16px;
+    overflow-x: auto;
+  }
+
+  .output-box .line-label { color: var(--muted); user-select: none; }
+  .output-box .line-value { color: rgba(232,232,232,0.5); }
+
+  .result-section {
+    max-width: 720px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 2px solid rgba(200,169,110,0.3);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .result-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .result-card h2 span { color: var(--accent); }
+
+  .result-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .result-output {
+    background: #0d0d0d;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 2.2;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .result-output .var-name { color: var(--accent); }
+  .result-output .var-eq { color: var(--muted); }
+  .result-output .var-placeholder { color: rgba(232,232,232,0.3); }
+
+  .copy-all-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(200,169,110,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .copy-all-btn:hover { background: rgba(200,169,110,0.25); }
+
+  .faq {
+    max-width: 720px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+
+  .faq h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .faq-q {
+    padding: 18px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: color 0.2s;
+  }
+
+  .faq-q:hover { color: var(--accent); }
+  .faq-q .chevron { font-size: 12px; color: var(--muted); transition: transform 0.3s; }
+  .faq-item.open .faq-q .chevron { transform: rotate(180deg); }
+
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-item.open .faq-a { max-height: 200px; }
+
+  .faq-a-inner {
+    padding: 0 24px 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  footer .brand {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(232,232,232,0.25);
+    margin-bottom: 6px;
+  }
+
+  footer .sub { font-size: 11px; color: rgba(232,232,232,0.15); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px 32px; }
+    .step-header { padding: 20px 20px 0; }
+    .step-body { padding: 16px 20px 24px; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .result-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-tag">Guia de Configuracao</div>
+  <h1>Conectar <span>Meta Ads</span><br>ao Sistema AIOX</h1>
+  <p>Passo a passo para conectar as campanhas do Hypnoflash ao sistema de gestao automatizada da Omni Brasil.</p>
+</section>
+
+<section class="overview">
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="icon">&#9201;</div>
+      <div class="label">Tempo</div>
+      <div class="value">15-20 min</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">&#128273;</div>
+      <div class="label">Itens</div>
+      <div class="value">4 credenciais</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">&#128188;</div>
+      <div class="label">Acesso</div>
+      <div class="value">Admin no BM</div>
+    </div>
+    <div class="overview-card">
+      <div class="icon">&#128640;</div>
+      <div class="label">Resultado</div>
+      <div class="value">Conexao ativa</div>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <div class="step-title">
+        Criar conta no Pipeboard e gerar Token
+        <small>Plataforma que conecta o Meta Ads ao nosso sistema</small>
+      </div>
+    </div>
+    <div class="step-body">
+      <a class="link-box" href="https://pipeboard.co" target="_blank" rel="noopener">
+        <div class="link-label">Acessar</div>
+        <div class="link-url">pipeboard.co</div>
+      </a>
+      <ol class="instruction-list">
+        <li><span class="num">1</span><span>Acesse <strong>pipeboard.co</strong> e clique em <strong>Sign Up</strong> (pode usar email corporativo)</span></li>
+        <li><span class="num">2</span><span>Conecte sua conta do <strong>Facebook/Meta</strong> quando solicitado</span></li>
+        <li><span class="num">3</span><span>Autorize <strong>acesso completo</strong> (Full Access) ao Business Manager da Omni</span></li>
+        <li><span class="num">4</span><span>Va em <strong>Settings &gt; API Tokens</strong></span></li>
+        <li><span class="num">5</span><span>Clique em <strong>Generate Token</strong> com escopo <strong>Full Access</strong></span></li>
+        <li><span class="num">6</span><span><strong>Copie o token imediatamente</strong> — ele nao sera mostrado novamente!</span></li>
+      </ol>
+      <div class="alert alert-warn">
+        <span class="alert-icon">&#9888;</span>
+        <span>O token comeca com <strong>"EAA"</strong> e tem ~200 caracteres. Salve num bloco de notas antes de fechar a pagina.</span>
+      </div>
+      <div class="output-box">
+        <span class="line-label">META_ADS_ACCESS_TOKEN</span> <span class="line-value">= [cole o token aqui]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <div class="step-title">
+        Pegar o ID da Conta de Anuncios
+        <small>Identificador unico da conta no Meta Ads</small>
+      </div>
+    </div>
+    <div class="step-body">
+      <a class="link-box" href="https://adsmanager.facebook.com" target="_blank" rel="noopener">
+        <div class="link-label">Acessar</div>
+        <div class="link-url">adsmanager.facebook.com</div>
+      </a>
+      <ol class="instruction-list">
+        <li><span class="num">1</span><span>Acesse o <strong>Gerenciador de Anuncios</strong></span></li>
+        <li><span class="num">2</span><span>No canto <strong>superior esquerdo</strong>, clique no nome da conta de anuncios</span></li>
+        <li><span class="num">3</span><span>O <strong>Account ID</strong> aparece abaixo do nome (formato: numeros, ex: 123456789)</span></li>
+        <li><span class="num">4</span><span>Copie esse numero</span></li>
+      </ol>
+      <div class="alert alert-info">
+        <span class="alert-icon">&#8505;</span>
+        <span>Se houver mais de uma conta, escolha a conta que roda as campanhas do <strong>Hypnoflash</strong>.</span>
+      </div>
+      <div class="output-box">
+        <span class="line-label">META_ADS_ACCOUNT_ID</span> <span class="line-value">= [cole o ID aqui]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <div class="step-title">
+        Pegar o ID do Pixel
+        <small>Rastreamento de conversoes no site</small>
+      </div>
+    </div>
+    <div class="step-body">
+      <a class="link-box" href="https://business.facebook.com/events_manager" target="_blank" rel="noopener">
+        <div class="link-label">Acessar</div>
+        <div class="link-url">business.facebook.com/events_manager</div>
+      </a>
+      <ol class="instruction-list">
+        <li><span class="num">1</span><span>Acesse o <strong>Gerenciador de Eventos</strong> (Events Manager)</span></li>
+        <li><span class="num">2</span><span>No menu lateral, selecione o <strong>Pixel</strong> conectado ao site da Omni</span></li>
+        <li><span class="num">3</span><span>O <strong>Pixel ID</strong> aparece no topo da pagina (formato: numeros, ex: 987654321)</span></li>
+        <li><span class="num">4</span><span>Copie esse numero</span></li>
+      </ol>
+      <div class="alert alert-warn">
+        <span class="alert-icon">&#9888;</span>
+        <span>Se <strong>nao tiver Pixel configurado</strong>, avise o Michael. Vamos configurar juntos antes de rodar campanhas.</span>
+      </div>
+      <div class="output-box">
+        <span class="line-label">META_ADS_PIXEL_ID</span> <span class="line-value">= [cole o ID aqui]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <div class="step-title">
+        Pegar o ID da Pagina do Facebook
+        <small>Pagina vinculada a entrega dos anuncios</small>
+      </div>
+    </div>
+    <div class="step-body">
+      <a class="link-box" href="https://business.facebook.com/settings/pages" target="_blank" rel="noopener">
+        <div class="link-label">Acessar</div>
+        <div class="link-url">business.facebook.com/settings/pages</div>
+      </a>
+      <ol class="instruction-list">
+        <li><span class="num">1</span><span>Acesse o <strong>Business Suite &gt; Settings &gt; Pages</strong></span></li>
+        <li><span class="num">2</span><span>Selecione a pagina da <strong>Omni Hypnosis</strong></span></li>
+        <li><span class="num">3</span><span>O <strong>Page ID</strong> aparece na URL ou nas configuracoes</span></li>
+        <li><span class="num">4</span><span>Copie esse numero</span></li>
+      </ol>
+      <div class="alert alert-info">
+        <span class="alert-icon">&#8505;</span>
+        <span><strong>Alternativa:</strong> Acesse a pagina do Facebook e adicione <strong>/about</strong> na URL. O ID aparece na secao "Transparencia da pagina".</span>
+      </div>
+      <div class="output-box">
+        <span class="line-label">META_ADS_PAGE_ID</span> <span class="line-value">= [cole o ID aqui]</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- RESULT -->
+<section class="result-section">
+  <div class="result-card">
+    <h2>Enviar para o <span>Michael</span></h2>
+    <p>Copie o bloco abaixo, preencha com os dados e envie por <strong>WhatsApp ou email direto</strong>.</p>
+    <div class="result-output">
+      <button class="copy-all-btn" onclick="copyResult()">Copiar</button>
+      <span class="var-name">META_ADS_ACCESS_TOKEN</span> <span class="var-eq">=</span> <span class="var-placeholder">[token do Pipeboard]</span><br>
+      <span class="var-name">META_ADS_ACCOUNT_ID</span> <span class="var-eq">=</span> <span class="var-placeholder">[ID da conta de anuncios]</span><br>
+      <span class="var-name">META_ADS_PIXEL_ID</span> <span class="var-eq">=</span> <span class="var-placeholder">[ID do pixel]</span><br>
+      <span class="var-name">META_ADS_PAGE_ID</span> <span class="var-eq">=</span> <span class="var-placeholder">[ID da pagina]</span>
+    </div>
+    <div class="alert alert-warn" style="text-align:left;">
+      <span class="alert-icon">&#128274;</span>
+      <span>Esses dados sao <strong>sensiveis</strong>. Envie apenas por canal direto com o Michael. <strong>Nunca em grupos.</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2>Duvidas Frequentes</h2>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      O token do Pipeboard expira?
+      <span class="chevron">&#9660;</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">Nao. O Pipeboard gerencia a renovacao automaticamente. Se parar de funcionar, basta gerar um novo token na plataforma.</div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Preciso ter acesso de admin ao Business Manager?
+      <span class="chevron">&#9660;</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">Sim. O token herda as permissoes da sua conta no Meta. Voce precisa ter acesso de admin ao Business Manager da Omni. Se nao tiver, peca para quem administra te adicionar em: <strong>business.facebook.com &gt; Settings &gt; People</strong>.</div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      Posso usar minha conta pessoal do Facebook?
+      <span class="chevron">&#9660;</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">Pode, desde que ela tenha acesso de admin ao Business Manager da Omni. O token sera vinculado a sua conta pessoal, mas opera sobre os ativos da empresa.</div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      E se eu nao encontrar o Pixel?
+      <span class="chevron">&#9660;</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">Avise o Michael. Se nao houver Pixel configurado, vamos criar um juntos antes de lancar campanhas. O Pixel e essencial para rastrear conversoes.</div>
+    </div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">
+      O que acontece depois que eu enviar os dados?
+      <span class="chevron">&#9660;</span>
+    </div>
+    <div class="faq-a">
+      <div class="faq-a-inner">O Michael vai configurar tudo no sistema e rodar um teste de conexao automatico. Voce sera notificada quando estiver pronto — nao precisa fazer mais nada.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">OMNI BRASIL</div>
+  <div class="sub">Documento interno // Mar 2026</div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+function copyResult() {
+  const text = 'META_ADS_ACCESS_TOKEN = \nMETA_ADS_ACCOUNT_ID = \nMETA_ADS_PIXEL_ID = \nMETA_ADS_PAGE_ID = ';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-all-btn');
+    btn.textContent = 'Copiado!';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
