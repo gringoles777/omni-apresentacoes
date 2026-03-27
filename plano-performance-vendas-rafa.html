@@ -455,8 +455,8 @@
     <div class="gap-card critical">
       <div class="gap-badge">Furo #1 · Crítico</div>
       <div class="gap-title">Lead some antes do agendamento</div>
-      <div class="gap-desc">Discador instalado resolve parcialmente. Próximo passo: documentar o processo de SDR para definir SLAs e cadência de follow-up.</div>
-      <div class="gap-impact">→ Discador instalado ✓ — processo sendo documentado</div>
+      <div class="gap-desc">Discador instalado resolve parcialmente. Próximo passo: fechar vazamentos simples (no-show + não-respondentes), revisar e melhorar o processo, depois documentar.</div>
+      <div class="gap-impact">→ Discador instalado ✓ — automações de vazamento em andamento</div>
     </div>
     <div class="gap-card high">
       <div class="gap-badge">Furo #2 · Alto</div>
@@ -503,38 +503,22 @@
       </div>
     </div>
 
-    <!-- FASE 1 — AGORA (PARALELO) -->
+    <!-- FASE 1 — AGORA -->
     <div class="phase-block p1-phase">
       <div class="phase-header">
         <div class="phase-dot">1</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Agora — Semanas 1–2 · Em paralelo</div>
-          <div class="phase-name">Documentar + Fechar vazamentos imediatos</div>
-          <div class="phase-desc">Documentação e automações independentes rodam ao mesmo tempo — não precisa esperar uma para começar a outra</div>
+          <div class="phase-period">Agora — Semanas 1–2</div>
+          <div class="phase-name">Fechar os vazamentos simples</div>
+          <div class="phase-desc">Impacto imediato, zero dependência de processo — pode rodar agora mesmo</div>
         </div>
       </div>
       <div class="check-list">
-        <div class="check-item" data-id="doc-sdr" onclick="toggleItem(this)">
-          <div class="checkbox"></div>
-          <div class="item-content">
-            <div class="item-title">Documentar processo de SDR (do lead ao agendamento)</div>
-            <div class="item-desc">Levantar o que existe, identificar furos, documentar o processo ideal com SLAs por etapa.</div>
-          </div>
-          <div class="item-badge">@aiox-sop</div>
-        </div>
-        <div class="check-item" data-id="sla-definir" onclick="toggleItem(this)">
-          <div class="checkbox"></div>
-          <div class="item-content">
-            <div class="item-title">Definir SLAs por etapa do funil</div>
-            <div class="item-desc">Ex: lead novo → primeira ligação em até 5min. Em qualificação → sem movimentação em 24h. Reunião agendada → confirmação 24h antes.</div>
-          </div>
-          <div class="item-badge">Rafa + @aiox-sop</div>
-        </div>
         <div class="check-item" data-id="no-show" onclick="toggleItem(this)">
           <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Automação de redução de no-show</div>
-            <div class="item-desc">Confirmação automática 24h + 2h antes da reunião. Independe de documentação — pode rodar agora. Meta: 45% → 25% de no-show.</div>
+            <div class="item-desc">Confirmação automática 24h + 2h antes da reunião. Meta: 45% → 25% de no-show. +5 vendas/mês potencial.</div>
           </div>
           <div class="item-badge">@sales-ops</div>
         </div>
@@ -542,7 +526,7 @@
           <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Automação para não respondentes</div>
-            <div class="item-desc">Cadência básica para leads que não atendem: alerta ligação → WhatsApp → email → nova tentativa. A cadência ideal é refinada com o processo documentado, mas a básica já funciona.</div>
+            <div class="item-desc">Cadência básica: alerta ligação → WhatsApp → email → nova tentativa. Recupera leads que somem após o cadastro.</div>
           </div>
           <div class="item-badge">@sales-ops</div>
         </div>
@@ -554,19 +538,27 @@
       <div class="phase-header">
         <div class="phase-dot">2</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Mês 1 — Após documentação</div>
-          <div class="phase-name">SLA Monitor e inteligência de calls</div>
-          <div class="phase-desc">Depende dos SLAs definidos na fase anterior — configura os alertas com os números certos</div>
+          <div class="phase-period">Mês 1 — Processo</div>
+          <div class="phase-name">Revisar, melhorar e documentar</div>
+          <div class="phase-desc">Com automações rodando e dados do discador acumulando — revisar o processo real, encontrar gargalos, melhorar antes de documentar</div>
         </div>
       </div>
       <div class="check-list">
-        <div class="check-item" data-id="sla-monitor" onclick="toggleItem(this)">
+        <div class="check-item" data-id="revisar-processo" onclick="toggleItem(this)">
           <div class="checkbox"></div>
           <div class="item-content">
-            <div class="item-title">SLA Monitor → Telegram</div>
-            <div class="item-desc">Corrigir bug no n8n (fetch indisponível) e configurar alertas por etapa com os SLAs definidos. Rafa recebe alerta quando lead para de ser trabalhado.</div>
+            <div class="item-title">Revisar processo SDR — encontrar gargalos</div>
+            <div class="item-desc">Mapear o processo atual, identificar onde quebra, propor melhorias. Usar dados reais do discador e gravações como insumo.</div>
           </div>
-          <div class="item-badge">@sales-ops</div>
+          <div class="item-badge">Rafa + @aiox-sop</div>
+        </div>
+        <div class="check-item" data-id="doc-sdr" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Documentar o processo melhorado + definir SLAs</div>
+            <div class="item-desc">Documentar o processo já revisado e melhorado. Definir SLAs por etapa. Não documentar o processo com furos — documentar o processo certo.</div>
+          </div>
+          <div class="item-badge">@aiox-sop</div>
         </div>
         <div class="check-item" data-id="transcricoes" onclick="toggleItem(this)">
           <div class="checkbox"></div>
@@ -585,11 +577,19 @@
         <div class="phase-dot">3</div>
         <div class="phase-title-wrap">
           <div class="phase-period">Mês 2 — Inteligência</div>
-          <div class="phase-name">Visibilidade e canais</div>
-          <div class="phase-desc">Dados para decidir melhor onde investir energia e budget</div>
+          <div class="phase-name">SLA Monitor, visibilidade e canais</div>
+          <div class="phase-desc">Processo documentado → SLAs definidos → alertas e dashboards configurados com os números certos</div>
         </div>
       </div>
       <div class="check-list">
+        <div class="check-item" data-id="sla-monitor" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">SLA Monitor → Telegram</div>
+            <div class="item-desc">Corrigir bug no n8n (fetch indisponível) e configurar alertas com os SLAs definidos. Rafa recebe alerta quando lead para de ser trabalhado.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
         <div class="check-item" data-id="dashboard" onclick="toggleItem(this)">
           <div class="checkbox"></div>
           <div class="item-content">
