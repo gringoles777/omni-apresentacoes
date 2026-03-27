@@ -14,13 +14,15 @@
     --border: #2a2a2a;
     --accent: #c8a96e;
     --accent-soft: rgba(200, 169, 110, 0.12);
-    --accent-glow: rgba(200, 169, 110, 0.25);
     --text: #e8e8e8;
     --muted: #888;
-    --phase1: #ef4444;
-    --phase2: #f97316;
-    --phase3: #3b82f6;
-    --phase4: #8b5cf6;
+    --done: #22c55e;
+    --done-soft: rgba(34, 197, 94, 0.1);
+    --p1: #ef4444;
+    --p2: #f97316;
+    --p3: #3b82f6;
+    --p4: #8b5cf6;
+    --future: #64748b;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,13 +32,12 @@
     color: var(--text);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
   /* HERO */
   .hero {
     position: relative;
-    padding: 80px 40px 60px;
+    padding: 72px 40px 52px;
     text-align: center;
     overflow: hidden;
   }
@@ -46,7 +47,7 @@
     position: absolute;
     top: -200px; left: 50%; transform: translateX(-50%);
     width: 800px; height: 600px;
-    background: radial-gradient(ellipse, rgba(200,169,110,0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(200,169,110,0.13) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -61,64 +62,101 @@
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: 100px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
 
   .hero h1 {
-    font-size: clamp(32px, 5vw, 56px);
+    font-size: clamp(28px, 4.5vw, 52px);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -1px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .hero h1 span { color: var(--accent); }
 
   .hero p {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--muted);
-    max-width: 520px;
-    margin: 0 auto 40px;
+    max-width: 480px;
+    margin: 0 auto 32px;
     line-height: 1.6;
   }
 
-  /* FUNIL */
-  .section { padding: 60px 40px; max-width: 1100px; margin: 0 auto; }
+  /* PROGRESS BAR */
+  .progress-wrap {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .progress-label span:first-child { color: var(--muted); }
+  .progress-label span:last-child { color: var(--accent); }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #e8c88a);
+    border-radius: 100px;
+    transition: width 0.5s ease;
+  }
+
+  /* SECTION */
+  .section { padding: 52px 40px; max-width: 1100px; margin: 0 auto; }
+
   .section-label {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-size: clamp(22px, 3vw, 32px);
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .section-sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 
-  /* FUNIL VISUAL */
+  .section-title {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* FUNIL */
   .funnel-wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     gap: 0;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .funnel-step {
     position: relative;
     text-align: center;
-    padding: 28px 12px 24px;
+    padding: 24px 10px 20px;
     background: var(--card);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    border-left: 1px solid var(--border);
+    border: 1px solid var(--border);
+    border-right: none;
   }
 
   .funnel-step:last-child { border-right: 1px solid var(--border); }
@@ -126,229 +164,193 @@
   .funnel-step::after {
     content: '→';
     position: absolute;
-    right: -14px;
-    top: 50%;
+    right: -12px; top: 50%;
     transform: translateY(-50%);
     color: var(--accent);
-    font-size: 18px;
+    font-size: 16px;
     z-index: 2;
   }
+
   .funnel-step:last-child::after { display: none; }
 
-  .funnel-num {
-    font-size: 32px;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .funnel-label {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 6px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-  .funnel-sub {
-    font-size: 10px;
-    color: #555;
-    margin-top: 4px;
-  }
+  .funnel-num { font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; }
+  .funnel-label { font-size: 11px; color: var(--muted); margin-top: 5px; font-weight: 500; }
+  .funnel-sub { font-size: 10px; color: #555; margin-top: 3px; }
 
-  /* FUROS */
-  .gaps-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 0;
-  }
+  /* GAPS */
+  .gaps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 
   .gap-card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 20px;
     position: relative;
     overflow: hidden;
   }
 
-  .gap-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-  }
-
-  .gap-card.critical::before { background: var(--phase1); }
-  .gap-card.high::before { background: var(--phase2); }
-  .gap-card.medium::before { background: var(--phase3); }
+  .gap-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .gap-card.critical::before { background: var(--p1); }
+  .gap-card.high::before { background: var(--p2); }
+  .gap-card.medium::before { background: var(--p3); }
 
   .gap-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 100px;
-    margin-bottom: 14px;
-    display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 3px 10px;
+    border-radius: 100px; margin-bottom: 12px; display: inline-block;
   }
 
   .critical .gap-badge { background: rgba(239,68,68,0.15); color: #ef4444; }
   .high .gap-badge { background: rgba(249,115,22,0.15); color: #f97316; }
   .medium .gap-badge { background: rgba(59,130,246,0.15); color: #3b82f6; }
 
-  .gap-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
+  .gap-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .gap-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .gap-impact { margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); }
 
-  .gap-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+  /* CHECKLIST PLANO */
+  .plan-wrap { display: grid; gap: 16px; }
 
-  .gap-impact {
-    margin-top: 14px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
-  /* FASES */
-  .phases-wrap { display: grid; gap: 20px; }
-
-  .phase-card {
+  .phase-block {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
   }
 
   .phase-header {
-    padding: 24px 28px;
+    padding: 20px 24px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     border-bottom: 1px solid var(--border);
   }
 
-  .phase-badge {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 900;
+  .phase-dot {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900;
     flex-shrink: 0;
   }
 
-  .p1 .phase-badge { background: rgba(239,68,68,0.15); color: #ef4444; }
-  .p2 .phase-badge { background: rgba(249,115,22,0.15); color: #f97316; }
-  .p3 .phase-badge { background: rgba(59,130,246,0.15); color: #3b82f6; }
-  .p4 .phase-badge { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+  .done-phase .phase-dot { background: var(--done-soft); color: var(--done); }
+  .p1-phase .phase-dot { background: rgba(239,68,68,0.12); color: var(--p1); }
+  .p2-phase .phase-dot { background: rgba(249,115,22,0.12); color: var(--p2); }
+  .p3-phase .phase-dot { background: rgba(59,130,246,0.12); color: var(--p3); }
+  .p4-phase .phase-dot { background: rgba(139,92,246,0.12); color: var(--p4); }
+  .future-phase .phase-dot { background: rgba(100,116,139,0.12); color: var(--future); }
 
   .phase-title-wrap { flex: 1; }
-  .phase-period {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .p1 .phase-period { color: #ef4444; }
-  .p2 .phase-period { color: #f97316; }
-  .p3 .phase-period { color: #3b82f6; }
-  .p4 .phase-period { color: #8b5cf6; }
 
-  .phase-name {
-    font-size: 20px;
+  .phase-period {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px;
+  }
+
+  .done-phase .phase-period { color: var(--done); }
+  .p1-phase .phase-period { color: var(--p1); }
+  .p2-phase .phase-period { color: var(--p2); }
+  .p3-phase .phase-period { color: var(--p3); }
+  .p4-phase .phase-period { color: var(--p4); }
+  .future-phase .phase-period { color: var(--future); }
+
+  .phase-name { font-size: 17px; font-weight: 800; }
+  .phase-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* CHECKLIST ITEMS */
+  .check-list { padding: 4px 0; }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+  .check-item:hover { background: rgba(255,255,255,0.02); }
+
+  .check-item.done-item { opacity: 0.6; }
+  .check-item.done-item .item-title { text-decoration: line-through; color: var(--muted); }
+
+  .checkbox {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+
+  .check-item.done-item .checkbox {
+    background: var(--done);
+    border-color: var(--done);
+  }
+
+  .check-item.done-item .checkbox::after {
+    content: '✓';
+    color: #000;
+    font-size: 12px;
     font-weight: 800;
   }
 
-  .phase-desc {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 2px;
+  /* Done phase items always checked */
+  .done-phase .checkbox {
+    background: var(--done);
+    border-color: var(--done);
   }
 
-  .phase-items {
-    padding: 0;
+  .done-phase .checkbox::after {
+    content: '✓';
+    color: #000;
+    font-size: 12px;
+    font-weight: 800;
   }
 
-  .phase-item {
-    display: grid;
-    grid-template-columns: 32px 1fr auto;
-    gap: 16px;
-    align-items: start;
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .phase-item:last-child { border-bottom: none; }
-
-  .item-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--muted);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .done-phase .check-item { opacity: 0.65; cursor: default; }
+  .done-phase .check-item .item-title { text-decoration: line-through; color: var(--muted); }
+  .done-phase .check-item:hover { background: transparent; }
 
   .item-content { flex: 1; }
-  .item-title { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
-  .item-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .item-squad {
-    font-size: 10px;
-    font-weight: 700;
+  .item-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .item-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .item-badge {
+    font-size: 10px; font-weight: 700;
     letter-spacing: 1px;
     background: var(--accent-soft);
     color: var(--accent);
-    padding: 4px 10px;
+    padding: 3px 9px;
     border-radius: 6px;
     white-space: nowrap;
+    flex-shrink: 0;
     margin-top: 2px;
   }
 
   /* PROJECAO */
-  .projection-wrap {
+  .proj-wrap {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 40px;
+    border-radius: 14px;
+    padding: 36px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .projection-wrap::before {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: 50%; transform: translateX(-50%);
-    width: 600px; height: 300px;
-    background: radial-gradient(ellipse, rgba(200,169,110,0.1) 0%, transparent 70%);
-    pointer-events: none;
   }
 
   .proj-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    margin: 32px 0;
+    margin: 28px 0 20px;
   }
 
   .proj-item {
-    padding: 24px;
+    padding: 20px;
     border-left: 1px solid var(--border);
     position: relative;
   }
@@ -356,101 +358,22 @@
   .proj-item:first-child { border-left: none; }
 
   .proj-arrow {
-    position: absolute;
-    right: -12px;
-    top: 50%;
+    position: absolute; right: -10px; top: 50%;
     transform: translateY(-50%);
-    color: var(--accent);
-    font-size: 20px;
-    z-index: 2;
+    color: var(--accent); font-size: 18px; z-index: 2;
   }
 
-  .proj-num {
-    font-size: 40px;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 1;
-  }
+  .proj-num { font-size: 36px; font-weight: 900; color: var(--accent); line-height: 1; }
+  .proj-label { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .proj-change { font-size: 11px; font-weight: 700; color: var(--done); margin-top: 5px; }
 
-  .proj-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 8px;
-  }
-
-  .proj-change {
-    font-size: 11px;
-    font-weight: 700;
-    color: #22c55e;
-    margin-top: 6px;
-  }
-
-  .proj-note {
-    font-size: 13px;
-    color: var(--muted);
-    max-width: 480px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* TIMELINE */
-  .timeline-wrap {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 40px;
-  }
-
-  .timeline-row {
-    display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 24px;
-    margin-bottom: 24px;
-    align-items: start;
-  }
-
-  .timeline-row:last-child { margin-bottom: 0; }
-
-  .tl-period {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--accent);
-    text-align: right;
-    padding-top: 4px;
-  }
-
-  .tl-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-left: 24px;
-    border-left: 2px solid var(--border);
-    padding-top: 2px;
-    padding-bottom: 8px;
-  }
-
-  .tl-tag {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 12px;
-    border-radius: 8px;
-    background: var(--border);
-    color: var(--text);
-  }
-
-  .tl-tag.p1 { background: rgba(239,68,68,0.12); color: #ef4444; }
-  .tl-tag.p2 { background: rgba(249,115,22,0.12); color: #f97316; }
-  .tl-tag.p3 { background: rgba(59,130,246,0.12); color: #3b82f6; }
-  .tl-tag.p4 { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+  .proj-note { font-size: 12px; color: var(--muted); max-width: 440px; margin: 0 auto; line-height: 1.6; }
 
   /* FOOTER */
   .footer {
-    text-align: center;
-    padding: 40px;
-    color: #444;
-    font-size: 12px;
+    text-align: center; padding: 36px 40px;
+    color: #444; font-size: 11px;
     border-top: 1px solid var(--border);
-    margin-top: 40px;
   }
 
   .footer span { color: var(--accent); }
@@ -459,12 +382,12 @@
   @media (max-width: 768px) {
     .funnel-wrap { grid-template-columns: 1fr 1fr; }
     .funnel-step::after { display: none; }
+    .funnel-step { border-right: 1px solid var(--border); }
     .gaps-grid { grid-template-columns: 1fr; }
     .proj-grid { grid-template-columns: 1fr 1fr; }
-    .phase-item { grid-template-columns: 28px 1fr; }
-    .item-squad { display: none; }
-    .section { padding: 40px 20px; }
-    .hero { padding: 60px 20px 40px; }
+    .section { padding: 36px 20px; }
+    .hero { padding: 52px 20px 36px; }
+    .item-badge { display: none; }
   }
 </style>
 </head>
@@ -472,16 +395,26 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-tag">CEO Advisor OMNI · Março 2026</div>
+  <div class="hero-tag">CEO Advisor OMNI · Atualizado em Março 2026</div>
   <h1>Plano de <span>Performance</span><br>Comercial</h1>
-  <p>Diagnóstico completo do funil de vendas e roteiro de execução em 4 fases para dobrar os resultados sem aumentar budget.</p>
+  <p>Clique nas iniciativas para marcar como concluído. O progresso é salvo automaticamente no seu navegador.</p>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Progresso geral</span>
+      <span id="progress-text">1 de 9 concluídas</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width: 11%"></div>
+    </div>
+  </div>
 </div>
 
-<!-- FUNIL ATUAL -->
+<!-- FUNIL -->
 <div class="section">
   <div class="section-label">Diagnóstico</div>
   <div class="section-title">O funil hoje</div>
-  <div class="section-sub">900 leads/mês · R$30k budget · 2 SDRs humanos + 1 SDR IA</div>
+  <div class="section-sub">900 leads/mês · R$30k budget · 2 SDRs (David + Layslla) + 1 SDR IA · Closers: Diumara + Brandy</div>
 
   <div class="funnel-wrap">
     <div class="funnel-step">
@@ -491,22 +424,22 @@
     </div>
     <div class="funnel-step">
       <div class="funnel-num">~164</div>
-      <div class="funnel-label">Reuniões agendadas</div>
+      <div class="funnel-label">Agendadas</div>
       <div class="funnel-sub">18% dos leads</div>
     </div>
     <div class="funnel-step">
       <div class="funnel-num">90</div>
-      <div class="funnel-label">Reuniões realizadas</div>
+      <div class="funnel-label">Realizadas</div>
       <div class="funnel-sub">55% comparecem</div>
     </div>
     <div class="funnel-step">
       <div class="funnel-num">~13</div>
-      <div class="funnel-label">Vendas fechadas</div>
+      <div class="funnel-label">Vendas/mês</div>
       <div class="funnel-sub">14% fechamento</div>
     </div>
     <div class="funnel-step">
       <div class="funnel-num">R$2.3k</div>
-      <div class="funnel-label">Custo por venda</div>
+      <div class="funnel-label">Custo/venda</div>
       <div class="funnel-sub">só tráfego pago</div>
     </div>
   </div>
@@ -514,7 +447,7 @@
 
 <!-- FUROS -->
 <div class="section" style="padding-top:0">
-  <div class="section-label">Onde está o vazamento</div>
+  <div class="section-label">Diagnóstico</div>
   <div class="section-title">3 furos no funil</div>
   <div class="section-sub">Em ordem de prioridade por impacto imediato</div>
 
@@ -522,156 +455,208 @@
     <div class="gap-card critical">
       <div class="gap-badge">Furo #1 · Crítico</div>
       <div class="gap-title">Lead some antes do agendamento</div>
-      <div class="gap-desc">Lead entra pelo tráfego pago, SDR tenta contato, silêncio. Sem discador integrado, o time não consegue fazer volume de ligação — e ligação é o canal que converte.</div>
-      <div class="gap-impact">↓ Volume de ligações limitado pelo processo manual</div>
+      <div class="gap-desc">Discador instalado resolve parcialmente. Próximo passo: documentar o processo de SDR para definir SLAs e cadência de follow-up.</div>
+      <div class="gap-impact">→ Discador instalado ✓ — processo sendo documentado</div>
     </div>
     <div class="gap-card high">
       <div class="gap-badge">Furo #2 · Alto</div>
       <div class="gap-title">45% de no-show</div>
-      <div class="gap-desc">74 reuniões agendadas não acontecem todo mês. Se metade delas tivesse comparecido e fechado na média, seriam +5 vendas/mês — só com esse furo.</div>
-      <div class="gap-impact">↓ +5 vendas/mês potenciais só reduzindo o no-show</div>
+      <div class="gap-desc">74 reuniões agendadas não acontecem por mês. Automação de confirmação resolve após processo documentado.</div>
+      <div class="gap-impact">→ +5 vendas/mês ao reduzir para 25%</div>
     </div>
     <div class="gap-card medium">
       <div class="gap-badge">Furo #3 · Médio</div>
       <div class="gap-title">14% de fechamento</div>
-      <div class="gap-desc">É o terceiro problema, não o primeiro. Mas com análise de reuniões e lead mais aquecido chegando, tem espaço para chegar a 20%+ sem mudar o time.</div>
-      <div class="gap-impact">↓ 14% → 20% = +5 vendas/mês adicionais</div>
+      <div class="gap-desc">Análise de calls e coaching das consultoras (Diumara + Brandy) pode elevar para 20%+.</div>
+      <div class="gap-impact">→ +5 vendas/mês adicionais</div>
     </div>
   </div>
 </div>
 
-<!-- FASES -->
+<!-- PLANO CHECKLIST -->
 <div class="section" style="padding-top:0">
   <div class="section-label">Execução</div>
-  <div class="section-title">Plano em 4 fases</div>
-  <div class="section-sub">Sequência otimizada por impacto imediato — cada fase prepara a próxima</div>
+  <div class="section-title">Plano de execução</div>
+  <div class="section-sub">Clique para marcar cada iniciativa como concluída</div>
 
-  <div class="phases-wrap">
+  <div class="plan-wrap">
 
-    <!-- FASE 1 -->
-    <div class="phase-card p1">
+    <!-- FASE CONCLUÍDA -->
+    <div class="phase-block done-phase">
       <div class="phase-header">
-        <div class="phase-badge">1</div>
+        <div class="phase-dot">✓</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Semanas 1–2</div>
-          <div class="phase-name">Destravar o canal principal</div>
-          <div class="phase-desc">Parar de perder leads por problema técnico e operacional</div>
+          <div class="phase-period">Concluído</div>
+          <div class="phase-name">Discador instalado</div>
+          <div class="phase-desc">Click-to-call ativo, gravações salvas no CRM, métricas de ligações disponíveis</div>
         </div>
       </div>
-      <div class="phase-items">
-        <div class="phase-item">
-          <div class="item-num">1</div>
+      <div class="check-list">
+        <div class="check-item">
+          <div class="checkbox"></div>
           <div class="item-content">
-            <div class="item-title">Discador integrado ao Pipedrive</div>
-            <div class="item-desc">Power dialer conectado ao CRM. 2–3x mais ligações/dia com o mesmo time. JustCall ou Kixie têm integração nativa com Pipedrive. Implementação em dias.</div>
+            <div class="item-title">Api4com integrado ao Pipedrive</div>
+            <div class="item-desc">Click-to-call funcionando para David e Layslla. Gravações na timeline do deal. Métricas de chamadas disponíveis.</div>
           </div>
-          <div class="item-squad">@dev · n8n</div>
+          <div class="item-badge">@sales-ops</div>
         </div>
-        <div class="phase-item">
-          <div class="item-num">2</div>
+      </div>
+    </div>
+
+    <!-- FASE 1 — AGORA -->
+    <div class="phase-block p1-phase">
+      <div class="phase-header">
+        <div class="phase-dot">1</div>
+        <div class="phase-title-wrap">
+          <div class="phase-period">Agora — Semanas 1–2</div>
+          <div class="phase-name">Documentar o processo comercial</div>
+          <div class="phase-desc">Base para todas as automações — sem processo documentado, SLA não tem sentido</div>
+        </div>
+      </div>
+      <div class="check-list">
+        <div class="check-item" data-id="doc-sdr" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
-            <div class="item-title">Corrigir SLA Monitor → Telegram</div>
-            <div class="item-desc">Bug no n8n (fetch indisponível no Code node). Já existe — só corrigir e ligar ao Pipedrive para alertar quando o time descumprir SLA de resposta.</div>
+            <div class="item-title">Documentar processo de SDR (do lead ao agendamento)</div>
+            <div class="item-desc">Levantar o que existe, identificar furos, documentar o processo ideal com SLAs por etapa.</div>
           </div>
-          <div class="item-squad">@dev · n8n</div>
+          <div class="item-badge">@aiox-sop</div>
+        </div>
+        <div class="check-item" data-id="sla-definir" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Definir SLAs por etapa do funil</div>
+            <div class="item-desc">Ex: lead novo → primeira ligação em até 5min. Em qualificação → sem movimentação em 24h. Reunião agendada → confirmação 24h antes.</div>
+          </div>
+          <div class="item-badge">Rafa + @aiox-sop</div>
         </div>
       </div>
     </div>
 
     <!-- FASE 2 -->
-    <div class="phase-card p2">
+    <div class="phase-block p2-phase">
       <div class="phase-header">
-        <div class="phase-badge">2</div>
+        <div class="phase-dot">2</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Mês 1</div>
+          <div class="phase-period">Mês 1 — Automações</div>
           <div class="phase-name">Fechar os vazamentos</div>
-          <div class="phase-desc">Recuperar leads perdidos e reduzir o no-show de 45%</div>
+          <div class="phase-desc">Com processo documentado e SLAs definidos, implementar os alertas e cadências</div>
         </div>
       </div>
-      <div class="phase-items">
-        <div class="phase-item">
-          <div class="item-num">3</div>
+      <div class="check-list">
+        <div class="check-item" data-id="sla-monitor" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">SLA Monitor → Telegram</div>
+            <div class="item-desc">Corrigir bug no n8n (fetch indisponível) e configurar alertas por etapa com os SLAs definidos.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
+        <div class="check-item" data-id="nao-respondentes" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Automação para não respondentes</div>
-            <div class="item-desc">Sequência automática para quem não atende ligação: WhatsApp → email → nova tentativa. Cadência inteligente com saída automática quando o lead responder.</div>
+            <div class="item-desc">Cadência multi-canal automática para leads que não atendem. WhatsApp → email → nova tentativa.</div>
           </div>
-          <div class="item-squad">n8n · @dev</div>
+          <div class="item-badge">@sales-ops</div>
         </div>
-        <div class="phase-item">
-          <div class="item-num">4</div>
+        <div class="check-item" data-id="no-show" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Automação de redução de no-show</div>
-            <div class="item-desc">Sequência pré-reunião: confirmação 24h antes + 2h antes + mensagem que cria comprometimento e antecipação. Meta: 45% → 25% de no-show.</div>
+            <div class="item-desc">Sequência pré-reunião: confirmação 24h + antecipação 2h. Meta: 45% → 25% de no-show.</div>
           </div>
-          <div class="item-squad">n8n · @dev</div>
+          <div class="item-badge">@sales-ops</div>
         </div>
-        <div class="phase-item">
-          <div class="item-num">5</div>
+        <div class="check-item" data-id="transcricoes" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
-            <div class="item-title">Integrar transcrições → Sales Intelligence</div>
-            <div class="item-desc">Squad já existe com análise de calls e coaching. Conectar gravações do discador → transcrição automática → feedback para você e para o consultor após cada reunião.</div>
+            <div class="item-title">Integrar gravações → Sales Intelligence</div>
+            <div class="item-desc">Conectar gravações do Api4com → transcrição automática → análise e feedback para Diumara e Brandy.</div>
           </div>
-          <div class="item-squad">@sales-intelligence</div>
+          <div class="item-badge">@sales-intelligence</div>
         </div>
       </div>
     </div>
 
     <!-- FASE 3 -->
-    <div class="phase-card p3">
+    <div class="phase-block p3-phase">
       <div class="phase-header">
-        <div class="phase-badge">3</div>
+        <div class="phase-dot">3</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Mês 2</div>
-          <div class="phase-name">Inteligência e visibilidade</div>
-          <div class="phase-desc">Dados para decidir melhor onde colocar energia e dinheiro</div>
+          <div class="phase-period">Mês 2 — Inteligência</div>
+          <div class="phase-name">Visibilidade e canais</div>
+          <div class="phase-desc">Dados para decidir melhor onde investir energia e budget</div>
         </div>
       </div>
-      <div class="phase-items">
-        <div class="phase-item">
-          <div class="item-num">6</div>
+      <div class="check-list">
+        <div class="check-item" data-id="dashboard" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Dashboard de campanhas por qualidade</div>
-            <div class="item-desc">Não apenas custo por lead — custo por reunião realizada e por venda fechada, por campanha e canal. Descobrir qual tráfego pago gera lead que fecha, não só lead barato.</div>
+            <div class="item-desc">Custo por reunião e por venda, por campanha/canal. Descobrir qual tráfego gera lead que fecha.</div>
           </div>
-          <div class="item-squad">@dev · Pipedrive API</div>
+          <div class="item-badge">@sales-ops</div>
         </div>
-        <div class="phase-item">
-          <div class="item-num">7</div>
+        <div class="check-item" data-id="wavoip" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
-            <div class="item-title">Documentação de processos comerciais</div>
-            <div class="item-desc">Revisar o que existe, documentar o que falta. Base essencial para treinar o SDR IA com consistência e escalar sem depender de memória de pessoas.</div>
+            <div class="item-title">Integrar Wavoip (canal WhatsApp complementar)</div>
+            <div class="item-desc">Para leads que não atendem ligação normal. Lead recebe ligação identificada com nome da OMNI no WhatsApp.</div>
           </div>
-          <div class="item-squad">@aiox-sop</div>
+          <div class="item-badge">@sales-ops</div>
         </div>
       </div>
     </div>
 
     <!-- FASE 4 -->
-    <div class="phase-card p4">
+    <div class="phase-block p4-phase">
       <div class="phase-header">
-        <div class="phase-badge">4</div>
+        <div class="phase-dot">4</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Mês 3</div>
-          <div class="phase-name">Novos vetores de crescimento</div>
+          <div class="phase-period">Mês 3 — Crescimento</div>
+          <div class="phase-name">Novos vetores de aquisição</div>
           <div class="phase-desc">Escalar com processo validado — sem improvisar</div>
         </div>
       </div>
-      <div class="phase-items">
-        <div class="phase-item">
-          <div class="item-num">8</div>
+      <div class="check-list">
+        <div class="check-item" data-id="diagnosis-ia" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">Lead Diagnosis IA</div>
-            <div class="item-desc">Diagnóstico IA personalizado como isca de aquisição. Lead passa pelo diagnóstico antes de entrar no funil — chega na reunião aquecido, comprometido e com dados que o consultor usa para apresentar a solução certa.</div>
+            <div class="item-desc">Diagnóstico IA como isca de aquisição. Lead chega na reunião aquecido, comprometido e com dados para o consultor.</div>
           </div>
-          <div class="item-squad">@squad-creator · @dev</div>
+          <div class="item-badge">@squad-creator</div>
         </div>
-        <div class="phase-item">
-          <div class="item-num">9</div>
+        <div class="check-item" data-id="sdr-ia" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">SDR IA consolidado</div>
-            <div class="item-desc">Evoluir o SDR IA que está em teste com processos documentados, scripts validados pelos dados reais das transcrições e integração completa com o discador.</div>
+            <div class="item-desc">Evoluir o SDR IA em teste com processo documentado, scripts validados por dados reais das transcrições.</div>
           </div>
-          <div class="item-squad">@sales-intelligence</div>
+          <div class="item-badge">@sales-intelligence</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUTURO -->
+    <div class="phase-block future-phase">
+      <div class="phase-header">
+        <div class="phase-dot">+</div>
+        <div class="phase-title-wrap">
+          <div class="phase-period">Futuro — quando processo estiver sólido</div>
+          <div class="phase-name">Power dialer automático</div>
+          <div class="phase-desc">Discador que disca sozinho — exige processo 100% documentado e integração n8n avançada</div>
+        </div>
+      </div>
+      <div class="check-list">
+        <div class="check-item" data-id="power-dialer" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Automatizar discagem via n8n + Api4com</div>
+            <div class="item-desc">Power dialer que prioriza e disca automaticamente, sem depender do SDR iniciar cada ligação.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
         </div>
       </div>
     </div>
@@ -683,9 +668,9 @@
 <div class="section" style="padding-top:0">
   <div class="section-label">Impacto Projetado</div>
   <div class="section-title">O que isso move em 90 dias</div>
-  <div class="section-sub">Sem aumentar budget de tráfego — só corrigindo vazamentos internos</div>
+  <div class="section-sub">Sem aumentar budget — corrigindo vazamentos e melhorando processo</div>
 
-  <div class="projection-wrap">
+  <div class="proj-wrap">
     <div class="proj-grid">
       <div class="proj-item">
         <div class="proj-num">13</div>
@@ -695,8 +680,8 @@
       </div>
       <div class="proj-item">
         <div class="proj-num">+6</div>
-        <div class="proj-label">Com discador</div>
-        <div class="proj-change">Mais reuniões</div>
+        <div class="proj-label">Discador + processo</div>
+        <div class="proj-change">Mais contatos</div>
         <div class="proj-arrow">→</div>
       </div>
       <div class="proj-item">
@@ -711,46 +696,7 @@
         <div class="proj-change">+115% potencial</div>
       </div>
     </div>
-    <p class="proj-note">Projeção conservadora. Não inclui o impacto do Lead Diagnosis IA e da melhoria de fechamento via análise de reuniões — que devem elevar ainda mais o resultado.</p>
-  </div>
-</div>
-
-<!-- TIMELINE RESUMO -->
-<div class="section" style="padding-top:0">
-  <div class="section-label">Resumo</div>
-  <div class="section-title">Linha do tempo</div>
-  <div class="section-sub">Visão rápida de tudo em sequência</div>
-
-  <div class="timeline-wrap">
-    <div class="timeline-row">
-      <div class="tl-period">Semanas 1–2</div>
-      <div class="tl-items">
-        <span class="tl-tag p1">Discador no Pipedrive</span>
-        <span class="tl-tag p1">SLA Monitor → Telegram</span>
-      </div>
-    </div>
-    <div class="timeline-row">
-      <div class="tl-period">Mês 1</div>
-      <div class="tl-items">
-        <span class="tl-tag p2">Automação não respondentes</span>
-        <span class="tl-tag p2">Redução de no-show</span>
-        <span class="tl-tag p2">Transcrições → Sales Intelligence</span>
-      </div>
-    </div>
-    <div class="timeline-row">
-      <div class="tl-period">Mês 2</div>
-      <div class="tl-items">
-        <span class="tl-tag p3">Dashboard de campanhas</span>
-        <span class="tl-tag p3">Documentação de processos</span>
-      </div>
-    </div>
-    <div class="timeline-row">
-      <div class="tl-period">Mês 3</div>
-      <div class="tl-items">
-        <span class="tl-tag p4">Lead Diagnosis IA</span>
-        <span class="tl-tag p4">SDR IA consolidado</span>
-      </div>
-    </div>
+    <p class="proj-note">Não inclui o impacto do Lead Diagnosis IA e da melhoria de fechamento via análise de calls das consultoras.</p>
   </div>
 </div>
 
@@ -759,5 +705,53 @@
   Para uso interno — Rafa Mendes · OMNI Brasil
 </div>
 
+<script>
+  const STORAGE_KEY = 'omni-plano-checks';
+
+  function getChecks() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function saveChecks(checks) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checks));
+  }
+
+  function toggleItem(el) {
+    if (!el.dataset.id) return;
+    const checks = getChecks();
+    const id = el.dataset.id;
+    checks[id] = !checks[id];
+    saveChecks(checks);
+    applyState(el, checks[id]);
+    updateProgress();
+  }
+
+  function applyState(el, done) {
+    if (done) { el.classList.add('done-item'); }
+    else { el.classList.remove('done-item'); }
+  }
+
+  function updateProgress() {
+    const checks = getChecks();
+    const allItems = document.querySelectorAll('.check-item[data-id]');
+    const total = allItems.length + 1; // +1 for discador (always done)
+    let done = 1; // discador always counts
+    allItems.forEach(el => { if (checks[el.dataset.id]) done++; });
+    const pct = Math.round((done / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = done + ' de ' + total + ' concluídas';
+  }
+
+  function init() {
+    const checks = getChecks();
+    document.querySelectorAll('.check-item[data-id]').forEach(el => {
+      applyState(el, checks[el.dataset.id]);
+    });
+    updateProgress();
+  }
+
+  init();
+</script>
 </body>
 </html>
