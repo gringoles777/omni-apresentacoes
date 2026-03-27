@@ -402,10 +402,10 @@
   <div class="progress-wrap">
     <div class="progress-label">
       <span>Progresso geral</span>
-      <span id="progress-text">1 de 9 concluídas</span>
+      <span id="progress-text">2 de 14 concluídas</span>
     </div>
     <div class="progress-bar">
-      <div class="progress-fill" id="progress-fill" style="width: 11%"></div>
+      <div class="progress-fill" id="progress-fill" style="width: 14%"></div>
     </div>
   </div>
 </div>
@@ -500,6 +500,14 @@
           </div>
           <div class="item-badge">@sales-ops</div>
         </div>
+        <div class="check-item">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Transcrição configurada no Google Meet</div>
+            <div class="item-desc">Reuniões de consultoria com transcrição automática ativa. Base para análise de calls e coaching das consultoras.</div>
+          </div>
+          <div class="item-badge">Rafa</div>
+        </div>
       </div>
     </div>
 
@@ -527,6 +535,22 @@
           <div class="item-content">
             <div class="item-title">Automação para não respondentes</div>
             <div class="item-desc">Cadência básica: alerta ligação → WhatsApp → email → nova tentativa. Recupera leads que somem após o cadastro.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
+        <div class="check-item" data-id="feedback-reuniao" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Automação de feedback pós-reunião (SDR)</div>
+            <div class="item-desc">Quando reunião muda de etapa no Pipedrive, automação captura feedback via gravação registrada no CRM. Alimenta análise de motivos de perda e fechamento.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
+        <div class="check-item" data-id="dash-basico" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Dashboard básico do funil (Pipedrive API)</div>
+            <div class="item-desc">Visibilidade mínima para decisão: conversão por etapa, reuniões agendadas vs realizadas, motivos de perda por período. Sem dash não tem como revisar processo com dados.</div>
           </div>
           <div class="item-badge">@sales-ops</div>
         </div>
@@ -709,7 +733,7 @@
 </div>
 
 <div class="footer">
-  Gerado por <span>CEO Advisor OMNI v3</span> · AIOX · Março 2026<br>
+  Gerado por <span>CEO Advisor OMNI v4</span> · AIOX · Março 2026<br>
   Para uso interno — Rafa Mendes · OMNI Brasil
 </div>
 
@@ -743,8 +767,8 @@
   function updateProgress() {
     const checks = getChecks();
     const allItems = document.querySelectorAll('.check-item[data-id]');
-    const total = allItems.length + 1; // +1 for discador (always done)
-    let done = 1; // discador always counts
+    const total = allItems.length + 2; // +2 for discador + transcrição (always done)
+    let done = 2; // discador + transcrição always count
     allItems.forEach(el => { if (checks[el.dataset.id]) done++; });
     const pct = Math.round((done / total) * 100);
     document.getElementById('progress-fill').style.width = pct + '%';
