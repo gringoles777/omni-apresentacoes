@@ -461,7 +461,7 @@
     <div class="gap-card high">
       <div class="gap-badge">Furo #2 · Alto</div>
       <div class="gap-title">45% de no-show</div>
-      <div class="gap-desc">74 reuniões agendadas não acontecem por mês. Automação de confirmação resolve após processo documentado.</div>
+      <div class="gap-desc">74 reuniões agendadas não acontecem por mês. Automação de confirmação (24h + 2h antes) é independente de documentação — pode rodar agora.</div>
       <div class="gap-impact">→ +5 vendas/mês ao reduzir para 25%</div>
     </div>
     <div class="gap-card medium">
@@ -503,14 +503,14 @@
       </div>
     </div>
 
-    <!-- FASE 1 — AGORA -->
+    <!-- FASE 1 — AGORA (PARALELO) -->
     <div class="phase-block p1-phase">
       <div class="phase-header">
         <div class="phase-dot">1</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Agora — Semanas 1–2</div>
-          <div class="phase-name">Documentar o processo comercial</div>
-          <div class="phase-desc">Base para todas as automações — sem processo documentado, SLA não tem sentido</div>
+          <div class="phase-period">Agora — Semanas 1–2 · Em paralelo</div>
+          <div class="phase-name">Documentar + Fechar vazamentos imediatos</div>
+          <div class="phase-desc">Documentação e automações independentes rodam ao mesmo tempo — não precisa esperar uma para começar a outra</div>
         </div>
       </div>
       <div class="check-list">
@@ -530,6 +530,22 @@
           </div>
           <div class="item-badge">Rafa + @aiox-sop</div>
         </div>
+        <div class="check-item" data-id="no-show" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Automação de redução de no-show</div>
+            <div class="item-desc">Confirmação automática 24h + 2h antes da reunião. Independe de documentação — pode rodar agora. Meta: 45% → 25% de no-show.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
+        <div class="check-item" data-id="nao-respondentes" onclick="toggleItem(this)">
+          <div class="checkbox"></div>
+          <div class="item-content">
+            <div class="item-title">Automação para não respondentes</div>
+            <div class="item-desc">Cadência básica para leads que não atendem: alerta ligação → WhatsApp → email → nova tentativa. A cadência ideal é refinada com o processo documentado, mas a básica já funciona.</div>
+          </div>
+          <div class="item-badge">@sales-ops</div>
+        </div>
       </div>
     </div>
 
@@ -538,9 +554,9 @@
       <div class="phase-header">
         <div class="phase-dot">2</div>
         <div class="phase-title-wrap">
-          <div class="phase-period">Mês 1 — Automações</div>
-          <div class="phase-name">Fechar os vazamentos</div>
-          <div class="phase-desc">Com processo documentado e SLAs definidos, implementar os alertas e cadências</div>
+          <div class="phase-period">Mês 1 — Após documentação</div>
+          <div class="phase-name">SLA Monitor e inteligência de calls</div>
+          <div class="phase-desc">Depende dos SLAs definidos na fase anterior — configura os alertas com os números certos</div>
         </div>
       </div>
       <div class="check-list">
@@ -548,23 +564,7 @@
           <div class="checkbox"></div>
           <div class="item-content">
             <div class="item-title">SLA Monitor → Telegram</div>
-            <div class="item-desc">Corrigir bug no n8n (fetch indisponível) e configurar alertas por etapa com os SLAs definidos.</div>
-          </div>
-          <div class="item-badge">@sales-ops</div>
-        </div>
-        <div class="check-item" data-id="nao-respondentes" onclick="toggleItem(this)">
-          <div class="checkbox"></div>
-          <div class="item-content">
-            <div class="item-title">Automação para não respondentes</div>
-            <div class="item-desc">Cadência multi-canal automática para leads que não atendem. WhatsApp → email → nova tentativa.</div>
-          </div>
-          <div class="item-badge">@sales-ops</div>
-        </div>
-        <div class="check-item" data-id="no-show" onclick="toggleItem(this)">
-          <div class="checkbox"></div>
-          <div class="item-content">
-            <div class="item-title">Automação de redução de no-show</div>
-            <div class="item-desc">Sequência pré-reunião: confirmação 24h + antecipação 2h. Meta: 45% → 25% de no-show.</div>
+            <div class="item-desc">Corrigir bug no n8n (fetch indisponível) e configurar alertas por etapa com os SLAs definidos. Rafa recebe alerta quando lead para de ser trabalhado.</div>
           </div>
           <div class="item-badge">@sales-ops</div>
         </div>
