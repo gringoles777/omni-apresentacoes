@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostico HypnoFlash — 27/Mar/2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* Lock Screen */
+  #lock {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0A0A0A;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 24px;
+  }
+  #lock .logo { font-weight: 900; font-size: 22px; letter-spacing: 6px; color: #C9A84C; text-transform: uppercase; }
+  #lock .sub { font-size: 12px; letter-spacing: 3px; color: rgba(244,244,232,0.4); text-transform: uppercase; }
+  #lock input {
+    width: 260px; padding: 14px 20px;
+    background: #111; border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px; color: #F4F4E8; font-size: 16px;
+    text-align: center; letter-spacing: 2px; outline: none;
+  }
+  #lock input:focus { border-color: #C9A84C; }
+  #lock input::placeholder { color: rgba(244,244,232,0.25); letter-spacing: 1px; }
+  #lock .err { color: #E74C3C; font-size: 13px; min-height: 18px; }
+  #lock button {
+    padding: 12px 40px; background: #C9A84C; color: #0A0A0A;
+    border: none; border-radius: 8px; font-weight: 700; font-size: 14px;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+  }
+  #lock button:hover { background: #D4B85E; }
+
+  /* Main Content */
+  #content { display: none; }
+  body {
+    background: #0A0A0A; color: #F4F4E8;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .header .badge { display: inline-block; padding: 6px 16px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #C9A84C; margin-bottom: 16px; }
+  .header h1 { font-size: 32px; font-weight: 900; color: #F4F4E8; margin-bottom: 8px; }
+  .header .meta { font-size: 14px; color: rgba(244,244,232,0.5); }
+  .header .meta strong { color: #C9A84C; }
+
+  /* KPI Cards */
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .kpi { background: #111; border: 1px solid rgba(201,168,76,0.15); border-radius: 12px; padding: 20px; text-align: center; }
+  .kpi .value { font-size: 28px; font-weight: 900; color: #C9A84C; }
+  .kpi .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,244,232,0.5); margin-top: 4px; }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+  .section h2 { font-size: 20px; font-weight: 800; color: #C9A84C; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .section h3 { font-size: 16px; font-weight: 700; color: #F4F4E8; margin: 20px 0 10px; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; padding: 12px 14px; background: #111; color: #C9A84C; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; border-bottom: 2px solid rgba(201,168,76,0.2); white-space: nowrap; }
+  td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; }
+  tr:hover td { background: rgba(201,168,76,0.04); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .best { color: #2ECC71; font-weight: 700; }
+  .ok { color: #C9A84C; }
+  .warn { color: #F39C12; }
+  .bad { color: #E74C3C; font-weight: 700; }
+
+  /* Campaign Cards */
+  .camp-card { background: #111; border: 1px solid rgba(201,168,76,0.12); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .camp-card .camp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .camp-card .camp-name { font-weight: 700; font-size: 15px; }
+  .camp-card .camp-verdict { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .verdict-scale { background: rgba(46,204,113,0.15); color: #2ECC71; border: 1px solid rgba(46,204,113,0.3); }
+  .verdict-keep { background: rgba(201,168,76,0.15); color: #C9A84C; border: 1px solid rgba(201,168,76,0.3); }
+  .verdict-watch { background: rgba(243,156,18,0.15); color: #F39C12; border: 1px solid rgba(243,156,18,0.3); }
+  .verdict-new { background: rgba(52,152,219,0.15); color: #3498DB; border: 1px solid rgba(52,152,219,0.3); }
+  .verdict-kill { background: rgba(231,76,60,0.15); color: #E74C3C; border: 1px solid rgba(231,76,60,0.3); }
+  .camp-card .camp-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-bottom: 12px; }
+  .camp-card .stat { }
+  .camp-card .stat .sv { font-size: 18px; font-weight: 800; }
+  .camp-card .stat .sl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(244,244,232,0.5); }
+  .camp-card .camp-notes { font-size: 13px; color: rgba(244,244,232,0.7); line-height: 1.7; }
+  .camp-card .camp-notes strong { color: #F4F4E8; }
+
+  /* Action Plan */
+  .action { display: flex; gap: 16px; padding: 16px 20px; background: #111; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid; }
+  .action.p0 { border-color: #E74C3C; }
+  .action.p1 { border-color: #2ECC71; }
+  .action.p2 { border-color: #F39C12; }
+  .action.p3 { border-color: #3498DB; }
+  .action.p4 { border-color: #9B59B6; }
+  .action .prio { font-weight: 900; font-size: 12px; letter-spacing: 1px; min-width: 28px; }
+  .action .prio.p0 { color: #E74C3C; }
+  .action .prio.p1 { color: #2ECC71; }
+  .action .prio.p2 { color: #F39C12; }
+  .action .prio.p3 { color: #3498DB; }
+  .action .prio.p4 { color: #9B59B6; }
+  .action .act-text { font-size: 14px; }
+  .action .act-text strong { color: #F4F4E8; }
+  .action .impact { font-size: 12px; color: rgba(244,244,232,0.5); margin-top: 4px; }
+
+  /* Targeting */
+  .tag { display: inline-block; padding: 4px 10px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; font-size: 12px; color: #C9A84C; margin: 2px 4px 2px 0; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(201,168,76,0.1); margin-top: 40px; }
+  .footer .sig { font-size: 12px; color: rgba(244,244,232,0.3); letter-spacing: 2px; }
+  .footer .ts { font-size: 11px; color: rgba(244,244,232,0.2); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Password Lock -->
+<div id="lock">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Area Restrita</div>
+  <input type="password" id="pw" placeholder="Senha" autofocus
+    onkeydown="if(event.key==='Enter')unlock()">
+  <div class="err" id="err"></div>
+  <button onclick="unlock()">Acessar</button>
+</div>
+
+<div id="content">
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">Midas Diagnostic Report</div>
+    <h1>HypnoFlash — Analise de Campanhas</h1>
+    <div class="meta">
+      Conta <strong>Hypnoflash</strong> (act_1127653835150900) &mdash;
+      Periodo: <strong>20-26/Mar/2026</strong> &mdash;
+      Gerado em 27/Mar/2026 17:20 BRT
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi"><div class="value">6</div><div class="label">Campanhas Ativas</div></div>
+    <div class="kpi"><div class="value">R$3.839</div><div class="label">Spend Total (7d)</div></div>
+    <div class="kpi"><div class="value">96</div><div class="label">Purchases</div></div>
+    <div class="kpi"><div class="value">R$39,99</div><div class="label">CPA Medio</div></div>
+    <div class="kpi"><div class="value">271</div><div class="label">Checkouts</div></div>
+    <div class="kpi"><div class="value">35,4%</div><div class="label">Checkout &rarr; Purchase</div></div>
+  </div>
+
+  <!-- Ranking Table -->
+  <div class="section">
+    <h2>Ranking por Eficiencia (CPA Purchase)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Campanha</th>
+            <th class="num">Spend</th>
+            <th class="num">Purchases</th>
+            <th class="num">CPA</th>
+            <th class="num">CTR</th>
+            <th class="num">CPM</th>
+            <th class="num">Checkouts</th>
+            <th class="num">Freq</th>
+            <th class="num">Reach</th>
+            <th>Veredicto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Escala #5 CBO</td>
+            <td class="num">R$569,88</td>
+            <td class="num best">21</td>
+            <td class="num best">R$27,14</td>
+            <td class="num best">6,68%</td>
+            <td class="num">R$89,09</td>
+            <td class="num">54</td>
+            <td class="num best">1,20</td>
+            <td class="num">5.342</td>
+            <td><span class="best">CAMPEA</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>TesteCriativos #1</td>
+            <td class="num">R$843,75</td>
+            <td class="num best">26</td>
+            <td class="num best">R$32,45</td>
+            <td class="num">5,22%</td>
+            <td class="num best">R$70,02</td>
+            <td class="num">77</td>
+            <td class="num">1,51</td>
+            <td class="num">7.969</td>
+            <td><span class="ok">FORTE</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Escala #6 CBO</td>
+            <td class="num">R$499,96</td>
+            <td class="num">14</td>
+            <td class="num ok">R$35,71</td>
+            <td class="num">6,38%</td>
+            <td class="num">R$94,40</td>
+            <td class="num">48</td>
+            <td class="num">1,32</td>
+            <td class="num">4.010</td>
+            <td><span class="ok">BOA</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Publico Geral #1</td>
+            <td class="num">R$826,98</td>
+            <td class="num">20</td>
+            <td class="num warn">R$41,35</td>
+            <td class="num warn">4,81%</td>
+            <td class="num">R$87,01</td>
+            <td class="num">55</td>
+            <td class="num warn">1,79</td>
+            <td class="num">5.308</td>
+            <td><span class="warn">WATCH</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>TestePublico #4 Fisio</td>
+            <td class="num">R$208,43</td>
+            <td class="num">5</td>
+            <td class="num warn">R$41,69</td>
+            <td class="num">5,81%</td>
+            <td class="num">R$89,03</td>
+            <td class="num">10</td>
+            <td class="num best">1,15</td>
+            <td class="num">2.036</td>
+            <td><span style="color:#3498DB">NOVO</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>TesteCriativos #2 Adv+</td>
+            <td class="num bad">R$889,73</td>
+            <td class="num bad">10</td>
+            <td class="num bad">R$88,97</td>
+            <td class="num warn">4,78%</td>
+            <td class="num best">R$74,92</td>
+            <td class="num">27</td>
+            <td class="num">1,55</td>
+            <td class="num">7.647</td>
+            <td><span class="bad">KILL</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Campaign Detail Cards -->
+  <div class="section">
+    <h2>Diagnostico por Campanha</h2>
+
+    <!-- Escala #5 -->
+    <div class="camp-card">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash Escala #5 CBO</span>
+        <span class="camp-verdict verdict-scale">ESCALAR</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv best">R$27,14</div><div class="sl">CPA</div></div>
+        <div class="stat"><div class="sv">R$112,80</div><div class="sl">Budget/dia</div></div>
+        <div class="stat"><div class="sv">21</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv best">6,68%</div><div class="sl">CTR</div></div>
+        <div class="stat"><div class="sv best">38,9%</div><div class="sl">Checkout &rarr; Compra</div></div>
+        <div class="stat"><div class="sv best">1,20</div><div class="sl">Frequencia</div></div>
+      </div>
+      <div class="camp-notes">
+        <strong>Melhor CPA da conta.</strong> Frequencia baixa = publico fresco. Taxa de conversao checkout&rarr;purchase excelente (38,9%).
+        <br>4 de 7 adsets pausados (HF-005, HF-006, HF-008, HF-013). Apenas HF-001, HF-003 e HF-012 ativos.
+        <br><strong>Acao:</strong> Candidata #1 para escalar. Aumentar budget de R$112 &rarr; R$135 (+20%).
+      </div>
+    </div>
+
+    <!-- TesteCriativos #1 -->
+    <div class="camp-card">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash TesteCriativos #1</span>
+        <span class="camp-verdict verdict-keep">MANTER</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv best">R$32,45</div><div class="sl">CPA</div></div>
+        <div class="stat"><div class="sv">Advantage+</div><div class="sl">Tipo</div></div>
+        <div class="stat"><div class="sv">26</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv">5,22%</div><div class="sl">CTR</div></div>
+        <div class="stat"><div class="sv best">R$70,02</div><div class="sl">CPM (melhor)</div></div>
+        <div class="stat"><div class="sv">1,51</div><div class="sl">Frequencia</div></div>
+      </div>
+      <div class="camp-notes">
+        <strong>Maior volume de vendas (26) com segundo melhor CPA.</strong> CPM mais barato da conta — Advantage+ otimizando bem.
+        <br>Rodando desde 12/Mar (15 dias). Madura e estavel.
+        <br><strong>Acao:</strong> Manter. Monitorar frequencia — se passar de 2.0, renovar criativos.
+      </div>
+    </div>
+
+    <!-- Escala #6 -->
+    <div class="camp-card">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash Escala #6 CBO</span>
+        <span class="camp-verdict verdict-keep">MANTER</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv ok">R$35,71</div><div class="sl">CPA</div></div>
+        <div class="stat"><div class="sv">R$177,66</div><div class="sl">Budget/dia</div></div>
+        <div class="stat"><div class="sv">14</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv">6,38%</div><div class="sl">CTR</div></div>
+        <div class="stat"><div class="sv">29,2%</div><div class="sl">Checkout &rarr; Compra</div></div>
+        <div class="stat"><div class="sv">1,32</div><div class="sl">Frequencia</div></div>
+      </div>
+      <div class="camp-notes">
+        CPA aceitavel. Apenas 1 adset ativo ("campeoes") usando Lookalikes 2% de seguidores.
+        <br>Budget mais alto da conta (R$177/dia) mas entregando apenas 14 purchases — eficiencia inferior a Escala #5.
+        <br><strong>Acao:</strong> Manter mas monitorar. Se CPA subir acima de R$45, reduzir budget.
+      </div>
+    </div>
+
+    <!-- Publico Geral #1 -->
+    <div class="camp-card">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash TesteCriativos PUBLICO GERAL #1</span>
+        <span class="camp-verdict verdict-watch">MONITORAR</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv warn">R$41,35</div><div class="sl">CPA</div></div>
+        <div class="stat"><div class="sv">Advantage+</div><div class="sl">Tipo</div></div>
+        <div class="stat"><div class="sv">20</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv warn">4,81%</div><div class="sl">CTR (pior)</div></div>
+        <div class="stat"><div class="sv">36,4%</div><div class="sl">Checkout &rarr; Compra</div></div>
+        <div class="stat"><div class="sv warn">1,79</div><div class="sl">Frequencia (ALTA)</div></div>
+      </div>
+      <div class="camp-notes">
+        <strong>Frequencia 1,79 — a mais alta da conta.</strong> Publico comecando a saturar.
+        <br>CTR mais baixo (4,81%) indica fadiga criativa ou mismatch de mensagem.
+        <br>Gastou R$827 para 20 vendas — eficiencia abaixo da media.
+        <br><strong>Acao:</strong> Se frequencia passar de 2,0 nos proximos 2 dias, PAUSAR.
+      </div>
+    </div>
+
+    <!-- TestePublico #4 Fisio -->
+    <div class="camp-card">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash TestePublico #4 Interesse Fisioterapia + LP Fisioterapia</span>
+        <span class="camp-verdict verdict-new">AGUARDAR</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv">R$41,69</div><div class="sl">CPA</div></div>
+        <div class="stat"><div class="sv">Adset Budget</div><div class="sl">Tipo</div></div>
+        <div class="stat"><div class="sv">5</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv">5,81%</div><div class="sl">CTR</div></div>
+        <div class="stat"><div class="sv">50%</div><div class="sl">Checkout &rarr; Compra</div></div>
+        <div class="stat"><div class="sv best">1,15</div><div class="sl">Frequencia</div></div>
+      </div>
+      <div class="camp-notes">
+        <strong>Campanha nova (2 dias, desde 25/Mar).</strong> Testando interesse "Fisioterapia" com LP dedicada.
+        <br>Taxa checkout&rarr;purchase de 50% e excelente — mas volume muito baixo para conclusoes.
+        <br>Precisa de minimo 50 conversoes no adset para significancia estatistica.
+        <br><strong>Acao:</strong> Aguardar mais 5 dias. Potencial alto se CPA se mantiver.
+      </div>
+    </div>
+
+    <!-- TesteCriativos #2 Adv+ KILL -->
+    <div class="camp-card" style="border-color: rgba(231,76,60,0.3);">
+      <div class="camp-header">
+        <span class="camp-name">[AV] Hipnoflash TesteCriativos #2 Advantage+ R$87</span>
+        <span class="camp-verdict verdict-kill">PAUSAR</span>
+      </div>
+      <div class="camp-stats">
+        <div class="stat"><div class="sv bad">R$88,97</div><div class="sl">CPA (2.5x media)</div></div>
+        <div class="stat"><div class="sv">Advantage+</div><div class="sl">Tipo</div></div>
+        <div class="stat"><div class="sv bad">10</div><div class="sl">Purchases</div></div>
+        <div class="stat"><div class="sv warn">4,78%</div><div class="sl">CTR</div></div>
+        <div class="stat"><div class="sv bad">R$889,73</div><div class="sl">Spend (MAIOR)</div></div>
+        <div class="stat"><div class="sv">1,55</div><div class="sl">Frequencia</div></div>
+      </div>
+      <div class="camp-notes">
+        <strong>CPA R$88,97 — mais que o DOBRO da media da conta (R$40).</strong>
+        <br>Gastou R$889,73 (o MAIOR spend de todas!) para apenas 10 vendas.
+        <br>CPM baixo (R$74,92 — bom) mas nao converte. Advantage+ nao esta performando nesta configuracao.
+        <br><strong>Decisao: KILL.</strong> CPA >2x a media por 7 dias consecutivos. Redirecionar budget para Escala #5 e #6.
+      </div>
+    </div>
+  </div>
+
+  <!-- Targeting -->
+  <div class="section">
+    <h2>Estrutura de Targeting</h2>
+    <p style="font-size: 14px; color: rgba(244,244,232,0.7); margin-bottom: 16px;">
+      Todas as campanhas compartilham o mesmo targeting base:
+    </p>
+    <div style="margin-bottom: 12px;">
+      <span class="tag">Brasil</span>
+      <span class="tag">Idade 25-65</span>
+      <span class="tag">Advantage Audience ON</span>
+    </div>
+    <div style="margin-bottom: 12px;">
+      <span class="tag">Custom: [MICHAEL] [SEGUIRAM]</span>
+      <span class="tag">Custom: [OMNI] [SEGUIRAM]</span>
+    </div>
+    <div style="margin-bottom: 12px;">
+      <span class="tag">Lookalike 2%: MICHAEL Seguiram</span>
+      <span class="tag">Lookalike 2%: OMNI Seguiram</span>
+    </div>
+    <p style="font-size: 13px; color: rgba(244,244,232,0.5); margin-top: 8px;">
+      Excecao: TestePublico #4 usa interesse "Fisioterapia" + Landing Page dedicada.
+    </p>
+  </div>
+
+  <!-- Action Plan -->
+  <div class="section">
+    <h2>Plano de Acao</h2>
+
+    <div class="action p0">
+      <div class="prio p0">P0</div>
+      <div>
+        <div class="act-text"><strong>Pausar TesteCriativos #2 Advantage+</strong> — CPA R$89, queimando budget</div>
+        <div class="impact">Economia estimada: ~R$127/dia</div>
+      </div>
+    </div>
+
+    <div class="action p1">
+      <div class="prio p1">P1</div>
+      <div>
+        <div class="act-text"><strong>Escalar Escala #5 CBO</strong> de R$112 &rarr; R$135/dia (+20%)</div>
+        <div class="impact">Projecao: +4-5 vendas/dia ao CPA de R$27</div>
+      </div>
+    </div>
+
+    <div class="action p2">
+      <div class="prio p2">P2</div>
+      <div>
+        <div class="act-text"><strong>Monitorar Publico Geral #1</strong> — frequencia 1,79</div>
+        <div class="impact">Se freq > 2,0 em 2 dias: pausar campanha</div>
+      </div>
+    </div>
+
+    <div class="action p3">
+      <div class="prio p3">P3</div>
+      <div>
+        <div class="act-text"><strong>Aguardar TestePublico #4 Fisio</strong> mais 5 dias</div>
+        <div class="impact">Validar novo segmento com dados suficientes</div>
+      </div>
+    </div>
+
+    <div class="action p4">
+      <div class="prio p4">P4</div>
+      <div>
+        <div class="act-text"><strong>Redirecionar budget do #2</strong> para Escala #5 e Escala #6</div>
+        <div class="impact">Concentrar investimento nas campanhas campeãs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Funnel Analysis -->
+  <div class="section">
+    <h2>Analise de Funil (Consolidado)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Etapa</th>
+            <th class="num">Volume</th>
+            <th class="num">Taxa</th>
+            <th>Observacao</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Impressoes</td><td class="num">47.464</td><td class="num">—</td><td>Total combinado 6 campanhas</td></tr>
+          <tr><td>Clicks</td><td class="num">2.555</td><td class="num">5,38%</td><td>CTR medio — acima do benchmark</td></tr>
+          <tr><td>Landing Page Views</td><td class="num">1.349</td><td class="num">52,8%</td><td>Click &rarr; LPV razoavel</td></tr>
+          <tr><td>Initiate Checkout</td><td class="num">271</td><td class="num">20,1%</td><td>LPV &rarr; Checkout bom para oferta direta</td></tr>
+          <tr><td>Purchase</td><td class="num">96</td><td class="num best">35,4%</td><td>Checkout &rarr; Compra excelente</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size: 13px; color: rgba(244,244,232,0.5);">
+      O gargalo principal esta entre Impressao &rarr; Click &rarr; LPV (52,8% de drop).
+      A LP converte bem (20% LPV &rarr; Checkout). Checkout &rarr; Compra em 35,4% e muito saudavel.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="sig">Midas &mdash; Media Strategist // OMNI Brasil</div>
+    <div class="ts">Gerado automaticamente em 27/Mar/2026 via Meta Marketing API v21.0</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function unlock(){
+  var p=document.getElementById('pw').value;
+  // simple hash check
+  if(p==='omni777'){
+    document.getElementById('lock').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('err').textContent='Senha incorreta';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+  }
+}
+</script>
+</body>
+</html>
