@@ -564,9 +564,10 @@ function renderTimeline() {
             <div class="group-children">`;
 
         items.forEach(ci => {
+          const techLine = (ci.friendly && ci.friendly !== ci.message) ? `<div style="font-size:11px;color:var(--color-gray);margin-top:3px;font-family:monospace">${ci.message}</div>` : '';
           html += `
               <div class="group-child">
-                <span style="flex:1">${ci.friendly || ci.message}</span>
+                <div style="flex:1">${ci.friendly || ci.message}${techLine}</div>
                 <span class="commit-hash">${ci.hash}</span>
               </div>`;
         });
