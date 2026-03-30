@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Changelog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245, 240, 232, 0.70);
+    --color-cream-50: rgba(245, 240, 232, 0.50);
+    --color-teal: #2A9D8F;
+    --color-gray: #6B6B6B;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  body {
+    background: var(--color-black);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  /* ── PASSWORD GATE ── */
+  #gate {
+    position: fixed; inset: 0;
+    background: var(--color-black);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+    flex-direction: column; gap: 24px;
+  }
+  #gate.hidden { display: none; }
+  #gate .logo { font-family: var(--font-display); font-size: 28px; letter-spacing: 6px; color: var(--color-gold); text-transform: uppercase; }
+  #gate .sub { font-size: 12px; letter-spacing: 3px; color: var(--color-cream-50); text-transform: uppercase; }
+  #gate input {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream); padding: 14px 20px; border-radius: 8px;
+    font-size: 16px; text-align: center; width: 280px; outline: none;
+    font-family: var(--font-body);
+  }
+  #gate input:focus { border-color: var(--color-gold); }
+  #gate .error { color: #e74c3c; font-size: 13px; display: none; }
+
+  /* ── MAIN CONTENT ── */
+  #app { display: none; }
+  #app.visible { display: block; }
+
+  header {
+    padding: 40px 32px 24px;
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+    position: sticky; top: 0; background: var(--color-black); z-index: 10;
+  }
+  header .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  header .brand { font-family: var(--font-display); font-size: 22px; letter-spacing: 5px; color: var(--color-gold); text-transform: uppercase; }
+  header .page-title { font-size: 13px; letter-spacing: 2px; color: var(--color-cream-50); text-transform: uppercase; }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex; gap: 24px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .stat {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    border-radius: 8px; padding: 16px 20px; min-width: 140px;
+  }
+  .stat-value { font-family: var(--font-display); font-size: 28px; color: var(--color-gold); }
+  .stat-label { font-size: 11px; letter-spacing: 2px; color: var(--color-cream-50); text-transform: uppercase; margin-top: 4px; }
+
+  /* ── FILTERS ── */
+  .filters {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .filter-btn {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream-70); padding: 8px 16px; border-radius: 50px;
+    font-size: 13px; cursor: pointer; font-family: var(--font-body);
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--color-gold); color: var(--color-cream); }
+  .filter-btn.active { background: rgba(200,168,75,0.15); border-color: var(--color-gold); color: var(--color-gold); }
+
+  .search-input {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream); padding: 8px 16px; border-radius: 50px;
+    font-size: 13px; outline: none; width: 200px; font-family: var(--font-body);
+    margin-left: auto;
+  }
+  .search-input:focus { border-color: var(--color-gold); }
+  .search-input::placeholder { color: var(--color-gray); }
+
+  /* ── TIMELINE ── */
+  .timeline { padding: 32px; max-width: 960px; margin: 0 auto; }
+
+  .day-group { margin-bottom: 40px; }
+  .day-header {
+    font-family: var(--font-display); font-size: 18px; letter-spacing: 2px;
+    color: var(--color-gold); text-transform: uppercase; margin-bottom: 16px;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(200,168,75,0.15);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .day-count { font-family: var(--font-body); font-size: 12px; color: var(--color-cream-50); letter-spacing: 0; text-transform: none; }
+
+  .commit-card {
+    background: var(--color-dark); border: 1px solid var(--color-dark-texture);
+    border-radius: 8px; padding: 16px 20px; margin-bottom: 8px;
+    display: flex; align-items: flex-start; gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .commit-card:hover { border-color: rgba(200,168,75,0.3); }
+
+  .commit-badge {
+    padding: 4px 10px; border-radius: 50px; font-size: 10px;
+    letter-spacing: 1px; text-transform: uppercase; font-weight: 600;
+    white-space: nowrap; min-width: 90px; text-align: center;
+  }
+  .badge-novo { background: rgba(42,157,143,0.2); color: #2A9D8F; border: 1px solid rgba(42,157,143,0.3); }
+  .badge-correcao { background: rgba(231,76,60,0.15); color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
+  .badge-manutencao { background: rgba(200,168,75,0.15); color: var(--color-gold); border: 1px solid rgba(200,168,75,0.3); }
+  .badge-documentacao { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
+  .badge-sincronizacao { background: rgba(107,107,107,0.2); color: var(--color-gray); border: 1px solid rgba(107,107,107,0.3); }
+  .badge-refatoracao { background: rgba(155,89,182,0.15); color: #9b59b6; border: 1px solid rgba(155,89,182,0.3); }
+  .badge-outro { background: rgba(107,107,107,0.15); color: var(--color-gray); border: 1px solid rgba(107,107,107,0.3); }
+
+  .commit-body { flex: 1; }
+  .commit-msg { font-size: 14px; color: var(--color-cream); line-height: 1.4; }
+  .commit-scope { color: var(--color-gold-light); font-weight: 600; }
+  .commit-meta { font-size: 12px; color: var(--color-cream-50); margin-top: 6px; display: flex; gap: 16px; }
+  .commit-author { color: var(--color-gold); font-weight: 500; }
+  .commit-hash { font-family: monospace; font-size: 11px; color: var(--color-gray); }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center; padding: 60px 20px; color: var(--color-cream-50);
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+  .empty-state p { font-size: 14px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 24px 16px 16px; }
+    .timeline { padding: 16px; }
+    .stats { gap: 8px; }
+    .stat { min-width: 100px; padding: 12px 14px; }
+    .stat-value { font-size: 22px; }
+    .commit-card { flex-direction: column; gap: 8px; }
+    .commit-badge { align-self: flex-start; }
+    .search-input { width: 100%; margin-left: 0; margin-top: 8px; }
+    .filters { gap: 6px; }
+  }
+
+  footer {
+    text-align: center; padding: 40px 20px;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(245,240,232,0.2); border-top: 1px solid rgba(200,168,75,0.08);
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Changelog — Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeypress="if(event.key==='Enter')checkPwd()">
+  <div class="error" id="err">Senha incorreta</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <header>
+    <div class="top">
+      <div>
+        <div class="brand">OMNI BRASIL</div>
+        <div class="page-title">Changelog de Desenvolvimento</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:12px;color:var(--color-cream-50)">Atualizado em</div>
+        <div id="updated-at" style="font-size:14px;color:var(--color-gold)"></div>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters"></div>
+  </header>
+
+  <div class="timeline" id="timeline"></div>
+
+  <footer>OMNI Brasil // Changelog Interno // Atualizado Automaticamente</footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// PASSWORD CHECK
+// ═══════════════════════════════════════
+const HASH = '6f6d6e69373737'; // omni777 in hex
+function checkPwd() {
+  const v = document.getElementById('pwd').value;
+  const h = Array.from(v).map(c => c.charCodeAt(0).toString(16)).join('');
+  if (h === HASH) {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+  } else {
+    document.getElementById('err').style.display = 'block';
+    document.getElementById('pwd').value = '';
+  }
+}
+
+// ═══════════════════════════════════════
+// CHANGELOG DATA (auto-generated)
+// ═══════════════════════════════════════
+const DATA = [
+{"hash":"894a7c0d","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"onboard","message":"authority story completa — 2 narrativas do Michael transcritas","status":"novo"},
+{"hash":"95c50597","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"onboard","message":"estrutura de comissao SDR 1% + Closer 1.5-3.0%","status":"novo"},
+{"hash":"8f661533","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"onboard","message":"margem 40%+, Pipedrive + ActiveCampaign","status":"novo"},
+{"hash":"ca422275","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"onboard","message":"dados operacionais reais Q1 2026 + correcao headcount 40-16","status":"novo"},
+{"hash":"e209fb7a","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"slides","message":"apresentacao Aula SOS — 19 slides com design system OMNI","status":"novo"},
+{"hash":"ed9c0438","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"ceo-omni","message":"v3 — CEO Intelligence Loop com 4 agentes + persistencia","status":"novo"},
+{"hash":"44b88cb6","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"onboard","message":"perfis psicologicos — Michael 3w8/ISTJ-A, Rafa ESTP-A","status":"novo"},
+{"hash":"e7e6832a","author":"Michael Arruda","date":"2026-03-25","type":"fix","scope":"credentials","message":"R7/BBC/G1 nao sao materias sobre a OMNI — confirmado Michael","status":"correcao"},
+{"hash":"e54bd794","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"workspace","message":"completude empresa 60% a 97% — cruzamento total de dados","status":"novo"},
+{"hash":"7c16a761","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"moodboard","message":"pagina visual completa sem dependencia de imagens externas","status":"novo"},
+{"hash":"468b6265","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"produtos","message":"paginas de produto com dados completos e depoimentos reais","status":"novo"},
+{"hash":"96ff8296","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"brandbook","message":"fixes tecnicos completos — tokens, WCAG, tipografia, nav","status":"novo"},
+{"hash":"fb006945","author":"Michael Arruda","date":"2026-03-25","type":"chore","scope":"claude","message":"adicionar regra global de abordagem de tarefas (secao 8)","status":"manutencao"},
+{"hash":"a459d202","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"brandbook","message":"score 80-90+ — tipografia formal, WCAG AA, heranca AIOX limpa","status":"novo"},
+{"hash":"b4339b0a","author":"Michael Arruda","date":"2026-03-25","type":"feat","scope":"brandbook","message":"identidade OMNI Brasil 100% — auditoria completa + paginas de produto","status":"novo"},
+{"hash":"2a251ad3","author":"Michael Arruda","date":"2026-03-24","type":"fix","scope":"brandbook","message":"reescrever guidelines-page-content com identidade OMNI Brasil","status":"correcao"},
+{"hash":"a5e6ccaa","author":"Michael Arruda","date":"2026-03-24","type":"fix","scope":"brandbook","message":"purge remaining fallbacks and Lime reference","status":"correcao"},
+{"hash":"20ace376","author":"Michael Arruda","date":"2026-03-24","type":"fix","scope":"brandbook","message":"purge AIOX remnants — enforce OMNI Brasil identity","status":"correcao"},
+{"hash":"a8ce04b1","author":"Michael Arruda","date":"2026-03-24","type":"fix","scope":"brandbook","message":"remover tokens e textos AIOX do brandbook OMNI Brasil","status":"correcao"},
+{"hash":"f2c5d350","author":"Michael Arruda","date":"2026-03-24","type":"fix","scope":"brandbook","message":"corrigir tokens CSS — apontando para variant correto OMNI Brasil","status":"correcao"},
+{"hash":"32bfa323","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"brandbook","message":"atualizar design system com identidade OMNI Hypnosis","status":"novo"},
+{"hash":"9e2a5cf7","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"inputs","message":"adicionar capa apostila OMNI + logos organizados","status":"novo"},
+{"hash":"5169646d","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"design-system","message":"customizar brandbook completo com identidade OMNI Brasil","status":"novo"},
+{"hash":"bfcacd2e","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"black-mentoring","message":"offerbook 100% completo","status":"novo"},
+{"hash":"1b302750","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"brand","message":"adicionar logo Black Mentory em PNG","status":"novo"},
+{"hash":"d27772ee","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"squads","message":"adicionar squad CEO OMNI v2.0 + 4 squads de suporte","status":"novo"},
+{"hash":"6b81f91b","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"brand","message":"adicionar logos de todos os produtos e marca","status":"novo"},
+{"hash":"3dc8dcdb","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"","message":"Master OMNI 95% completo + correcoes FPH","status":"novo"},
+{"hash":"3c9c70ae","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"","message":"Black Mentoring 95% — mechanism, target, key messages, testimonials, proofs","status":"novo"},
+{"hash":"4de2ee95","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"","message":"offerbook OMNI Black Mentoring validado + reciclagem Legacy","status":"novo"},
+{"hash":"db1f3607","author":"Michael Arruda","date":"2026-03-23","type":"feat","scope":"","message":"offerbook OMNI Black Mentoring + backlog de validacao","status":"novo"},
+{"hash":"2b04fbbe","author":"Michael Arruda","date":"2026-03-24","type":"feat","scope":"products","message":"offerbook completo OMNI Legacy + backlog Black Mentory","status":"novo"},
+{"hash":"cab5860d","author":"Michael Arruda","date":"2026-03-23","type":"other","scope":"","message":"session: salvar progresso produtos + inputs","status":"outro"},
+{"hash":"6b991f90","author":"Michael Arruda","date":"2026-03-23","type":"feat","scope":"brand","message":"adicionar squad de branding completo","status":"novo"},
+{"hash":"79cfb4ca","author":"Michael Arruda","date":"2026-03-22","type":"feat","scope":"claude","message":"restringir edicao do CLAUDE.md ao Michael Arruda","status":"novo"},
+{"hash":"db5ccbc4","author":"Michael Arruda","date":"2026-03-22","type":"fix","scope":"war-room","message":"corrigir nome Omni Brasil + senha + regra de apresentacoes","status":"correcao"},
+{"hash":"a044fc40","author":"Michael Arruda","date":"2026-03-22","type":"feat","scope":"war-room","message":"adicionar gate de senha na apresentacao","status":"novo"},
+{"hash":"f6e14287","author":"Michael Arruda","date":"2026-03-22","type":"feat","scope":"war-room","message":"apresentacao visual War Game Report + squad GTM","status":"novo"},
+{"hash":"2105c877","author":"Rafa Mendes","date":"2026-03-20","type":"feat","scope":"","message":"criacao da squad go-to-market-war-room para Omni Hipnose","status":"novo"},
+{"hash":"65de67d1","author":"Michael Arruda","date":"2026-03-21","type":"feat","scope":"claude","message":"regra de seguranca — sugerir commit apos tarefa relevante ou 1h de sessao","status":"novo"},
+{"hash":"fb772b71","author":"Michael Arruda","date":"2026-03-21","type":"feat","scope":"session","message":"auto-sync com GitHub ao iniciar sessao","status":"novo"},
+{"hash":"da290783","author":"Michael Arruda","date":"2026-03-21","type":"feat","scope":"design-system","message":"substituir Aharoni por Bebas Neue para uso web","status":"novo"},
+{"hash":"68161c8e","author":"Michael Arruda","date":"2026-03-21","type":"feat","scope":"session","message":"auto-sync no inicio + commit direto em main para recursos compartilhados","status":"novo"},
+{"hash":"fa950298","author":"Rafa Mendes","date":"2026-03-20","type":"docs","scope":"","message":"add organograma funcional v2 com AI layer e owners","status":"documentacao"},
+{"hash":"c20db488","author":"Michael Arruda","date":"2026-03-20","type":"feat","scope":"design-system","message":"criar design system OMNI Hypnosis + ativar contexto Design Chief","status":"novo"},
+{"hash":"090031bb","author":"Michael Arruda","date":"2026-03-20","type":"feat","scope":"","message":"reestrutura workspace — omni_brasil, multi-user, CLAUDE.md","status":"novo"},
+{"hash":"1fdb520a","author":"Rafa Mendes","date":"2026-03-19","type":"feat","scope":"squads","message":"add aiox-research squad","status":"novo"},
+{"hash":"eb072d2b","author":"Michael Arruda","date":"2026-03-19","type":"feat","scope":"","message":"add hormozi squad + enrich FPH offer + icp buying psychology","status":"novo"},
+{"hash":"149c10ea","author":"Talles Souza","date":"2026-03-19","type":"feat","scope":"","message":"add VS Code auto-fetch (60s interval)","status":"novo"},
+{"hash":"0ed39d96","author":"Talles Souza","date":"2026-03-19","type":"feat","scope":"","message":"add workspace/_templates from source","status":"novo"},
+{"hash":"5e5eede1","author":"Talles Souza","date":"2026-03-18","type":"feat","scope":"","message":"add omni_hypnosis workspace data","status":"novo"},
+{"hash":"26e03674","author":"Talles Souza","date":"2026-03-18","type":"feat","scope":"","message":"add aiox-core installation (full template ready)","status":"novo"},
+{"hash":"9a1039f8","author":"Talles Souza","date":"2026-03-18","type":"feat","scope":"","message":"restructure as complete template (squads/ subdir + root files)","status":"novo"},
+{"hash":"45d4239c","author":"Talles Souza","date":"2026-03-18","type":"feat","scope":"","message":"initial squads mirror from oalanicolas/aiox-imersao","status":"novo"}
+];
+
+// ═══════════════════════════════════════
+// RENDER ENGINE
+// ═══════════════════════════════════════
+let activeFilters = { author: 'todos', type: 'todos' };
+let searchQuery = '';
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+  const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function getStatusLabel(status) {
+  const map = {
+    novo: 'Novo', correcao: 'Correcao', manutencao: 'Manutencao',
+    documentacao: 'Docs', sincronizacao: 'Sync', refatoracao: 'Refatoracao', outro: 'Outro'
+  };
+  return map[status] || status;
+}
+
+function renderStats() {
+  const filtered = getFilteredData();
+  const authors = new Set(filtered.map(c => c.author));
+  const feats = filtered.filter(c => c.type === 'feat').length;
+  const fixes = filtered.filter(c => c.type === 'fix').length;
+  const days = new Set(filtered.map(c => c.date));
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-value">${filtered.length}</div><div class="stat-label">Atualizacoes</div></div>
+    <div class="stat"><div class="stat-value">${feats}</div><div class="stat-label">Novidades</div></div>
+    <div class="stat"><div class="stat-value">${fixes}</div><div class="stat-label">Correcoes</div></div>
+    <div class="stat"><div class="stat-value">${days.size}</div><div class="stat-label">Dias Ativos</div></div>
+    <div class="stat"><div class="stat-value">${authors.size}</div><div class="stat-label">Contribuidores</div></div>
+  `;
+}
+
+function renderFilters() {
+  const authors = [...new Set(DATA.map(c => c.author))].sort();
+  const types = [...new Set(DATA.map(c => c.status))].sort();
+
+  let html = '';
+
+  // Author filters
+  html += `<button class="filter-btn ${activeFilters.author==='todos'?'active':''}" onclick="setFilter('author','todos')">Todos</button>`;
+  authors.forEach(a => {
+    const name = a.split(' ')[0];
+    html += `<button class="filter-btn ${activeFilters.author===a?'active':''}" onclick="setFilter('author','${a}')">${name}</button>`;
+  });
+
+  html += `<span style="color:var(--color-dark-texture);margin:0 4px">|</span>`;
+
+  // Type filters
+  const typeLabels = {novo:'Novo',correcao:'Correcao',manutencao:'Manutencao',documentacao:'Docs',sincronizacao:'Sync'};
+  Object.entries(typeLabels).forEach(([k,v]) => {
+    html += `<button class="filter-btn ${activeFilters.type===k?'active':''}" onclick="setFilter('type','${k}')">${v}</button>`;
+  });
+
+  // Search
+  html += `<input class="search-input" type="text" placeholder="Buscar..." oninput="searchQuery=this.value;render()" value="${searchQuery}">`;
+
+  document.getElementById('filters').innerHTML = html;
+}
+
+function setFilter(key, value) {
+  if (activeFilters[key] === value && value !== 'todos') {
+    activeFilters[key] = 'todos';
+  } else {
+    activeFilters[key] = value;
+  }
+  render();
+}
+
+function getFilteredData() {
+  return DATA.filter(c => {
+    if (activeFilters.author !== 'todos' && c.author !== activeFilters.author) return false;
+    if (activeFilters.type !== 'todos' && c.status !== activeFilters.type) return false;
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      return c.message.toLowerCase().includes(q) || c.scope.toLowerCase().includes(q) || c.author.toLowerCase().includes(q);
+    }
+    return true;
+  });
+}
+
+function renderTimeline() {
+  const filtered = getFilteredData();
+
+  if (filtered.length === 0) {
+    document.getElementById('timeline').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">O</div>
+        <p>Nenhuma atualizacao encontrada com esses filtros.</p>
+      </div>`;
+    return;
+  }
+
+  // Group by date
+  const groups = {};
+  filtered.forEach(c => {
+    if (!groups[c.date]) groups[c.date] = [];
+    groups[c.date].push(c);
+  });
+
+  let html = '';
+  Object.keys(groups).sort().reverse().forEach(date => {
+    const commits = groups[date];
+    html += `<div class="day-group">`;
+    html += `<div class="day-header">${formatDate(date)} <span class="day-count">${commits.length} atualizacao${commits.length>1?'es':''}</span></div>`;
+
+    commits.forEach(c => {
+      const scopeHtml = c.scope ? `<span class="commit-scope">[${c.scope}]</span> ` : '';
+      html += `
+        <div class="commit-card">
+          <span class="commit-badge badge-${c.status}">${getStatusLabel(c.status)}</span>
+          <div class="commit-body">
+            <div class="commit-msg">${scopeHtml}${c.message}</div>
+            <div class="commit-meta">
+              <span class="commit-author">${c.author}</span>
+              <span class="commit-hash">${c.hash}</span>
+            </div>
+          </div>
+        </div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  document.getElementById('timeline').innerHTML = html;
+}
+
+function render() {
+  renderStats();
+  renderFilters();
+  renderTimeline();
+}
+
+// Init
+document.getElementById('updated-at').textContent = new Date().toLocaleDateString('pt-BR');
+render();
+</script>
+</body>
+</html>
