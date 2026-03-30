@@ -191,6 +191,81 @@
     .filters { gap: 6px; }
   }
 
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 0; margin-bottom: 20px; }
+  .tab {
+    padding: 10px 24px; font-size: 13px; font-weight: 600; cursor: pointer;
+    color: var(--color-cream-50); border-bottom: 2px solid transparent;
+    font-family: var(--font-body); background: none; border-top: none; border-left: none; border-right: none;
+    transition: all 0.2s; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .tab:hover { color: var(--color-cream); }
+  .tab.active { color: var(--color-gold); border-bottom-color: var(--color-gold); }
+
+  /* ── RECURSOS VIEW ── */
+  #recursos-view { display: none; padding: 32px; max-width: 960px; margin: 0 auto; }
+  #recursos-view.visible { display: block; }
+
+  .cap-section-title {
+    font-family: var(--font-display); font-size: 16px; letter-spacing: 3px;
+    color: var(--color-gold); text-transform: uppercase; margin: 32px 0 16px;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+  .cap-section-title:first-child { margin-top: 0; }
+
+  .cap-card {
+    background: var(--color-dark); border: 1px solid var(--color-dark-texture);
+    border-radius: 10px; padding: 24px; margin-bottom: 12px; transition: border-color 0.2s;
+  }
+  .cap-card:hover { border-color: rgba(200,168,75,0.3); }
+
+  .cap-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .cap-id { font-family: monospace; font-size: 11px; color: var(--color-gold-deep); }
+  .cap-name { font-size: 17px; font-weight: 700; color: var(--color-cream); margin-top: 2px; }
+  .cap-desc { font-size: 14px; color: var(--color-cream-70); line-height: 1.5; margin-bottom: 14px; }
+
+  .cap-status {
+    padding: 4px 12px; border-radius: 50px; font-size: 11px;
+    letter-spacing: 1px; text-transform: uppercase; font-weight: 600; white-space: nowrap;
+  }
+  .cap-status-ativo { background: rgba(39,174,96,0.15); color: #27ae60; border: 1px solid rgba(39,174,96,0.3); }
+  .cap-status-em_teste, .cap-status-em_desenvolvimento, .cap-status-parcialmente_funcional, .cap-status-parcialmente_ativo {
+    background: rgba(243,156,18,0.15); color: #f39c12; border: 1px solid rgba(243,156,18,0.3);
+  }
+  .cap-status-planejado { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
+  .cap-status-inativo { background: rgba(107,107,107,0.15); color: var(--color-gray); border: 1px solid rgba(107,107,107,0.3); }
+
+  .cap-abilities { margin-bottom: 14px; }
+  .cap-abilities-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cream-50); font-weight: 600; margin-bottom: 6px; }
+  .cap-ability {
+    font-size: 13px; color: var(--color-cream-70); padding: 4px 0 4px 16px;
+    position: relative; line-height: 1.4;
+  }
+  .cap-ability::before { content: ''; position: absolute; left: 0; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--color-gold-deep); }
+
+  .cap-tech { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .cap-tech-tag {
+    font-size: 11px; padding: 3px 10px; border-radius: 50px;
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream-50); font-family: monospace;
+  }
+
+  .cap-meta { font-size: 12px; color: var(--color-cream-50); display: flex; gap: 16px; flex-wrap: wrap; }
+  .cap-meta .responsavel { color: var(--color-gold); font-weight: 500; }
+  .cap-note { font-size: 12px; color: #f39c12; margin-top: 8px; font-style: italic; }
+
+  /* ── INFRA SECTION ── */
+  .infra-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .infra-card {
+    background: var(--color-dark); border: 1px solid var(--color-dark-texture);
+    border-radius: 8px; padding: 16px;
+  }
+  .infra-name { font-size: 14px; font-weight: 600; color: var(--color-cream); }
+  .infra-detail { font-size: 12px; color: var(--color-cream-50); margin-top: 4px; }
+  .infra-status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .dot-ativo, .dot-operacional { background: #27ae60; }
+  .dot-inativo { background: #e74c3c; }
+
   footer {
     text-align: center; padding: 40px 20px;
     font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
@@ -221,13 +296,18 @@
         <div id="updated-at" style="font-size:14px;color:var(--color-gold)"></div>
       </div>
     </div>
+    <div class="tabs">
+      <button class="tab active" id="tab-changelog" onclick="switchTab('changelog')">Timeline</button>
+      <button class="tab" id="tab-recursos" onclick="switchTab('recursos')">Recursos</button>
+    </div>
     <div class="stats" id="stats"></div>
     <div class="filters" id="filters"></div>
   </header>
 
   <div class="timeline" id="timeline"></div>
+  <div id="recursos-view"></div>
 
-  <footer>OMNI Brasil // Changelog Interno // Atualizado Automaticamente</footer>
+  <footer>OMNI Brasil // Painel Interno // Atualizado Automaticamente</footer>
 </div>
 
 <script>
@@ -588,6 +668,212 @@ function render() {
   renderStats();
   renderFilters();
   renderTimeline();
+}
+
+// ═══════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════
+let currentTab = 'changelog';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-changelog').classList.toggle('active', tab === 'changelog');
+  document.getElementById('tab-recursos').classList.toggle('active', tab === 'recursos');
+  document.getElementById('timeline').style.display = tab === 'changelog' ? 'block' : 'none';
+  document.getElementById('recursos-view').classList.toggle('visible', tab === 'recursos');
+  document.getElementById('stats').style.display = tab === 'changelog' ? 'flex' : 'none';
+  document.getElementById('filters').style.display = tab === 'changelog' ? 'flex' : 'none';
+  if (tab === 'recursos') renderRecursos();
+}
+
+// ═══════════════════════════════════════
+// RECURSOS DATA
+// ═══════════════════════════════════════
+const CAPABILITIES = [
+  {
+    id:"CAP-001", nome:"Gustaff Whatsbot", categoria:"assistente-interno", status:"parcialmente_funcional",
+    statusLabel:"Parcial", responsavel:"Michael Arruda",
+    descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, lembra o contexto por 10 minutos e executa operacoes com registro de auditoria.",
+    habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Lembra o contexto da conversa (5 min, max 20 msgs)","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
+    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],
+    nota:"Bug — Claude consome todos os turnos no setup do CLAUDE.md"
+  },
+  {
+    id:"CAP-002", nome:"Backlog Inteligente via Gustaff", categoria:"gestao", status:"em_desenvolvimento",
+    statusLabel:"Em Dev", responsavel:"Michael Arruda",
+    descricao:"A equipe manda ideias pelo WhatsApp pro Gustaff e ele adiciona automaticamente no backlog, entendendo se e ideia nova ou complemento de algo que ja existe.",
+    habilidades:["Detecta intencao de backlog (gatilhos naturais)","Classifica como NOVA IDEIA ou COMPLEMENTO","Matching semantico (>70% similaridade)","Gera ID unico automatico (OMNI-XXX)","Responde com confirmacao e contexto","Commit automatico no GitHub"],
+    apis:["OpenCloud Webhook","n8n","Google Gemini 2.0 Flash (OpenRouter)","GitHub API"],
+    nota:"Infraestrutura pronta, aguardando correcao do bug do Gustaff"
+  },
+  {
+    id:"CAP-003", nome:"SDR com IA", categoria:"vendas", status:"em_teste",
+    statusLabel:"Em Teste", responsavel:"Rafa Mendes + Michael Arruda",
+    descricao:"Vendedor automatizado que qualifica leads e agenda reunioes via WhatsApp, integrado ao CRM Pipedrive.",
+    habilidades:["Qualificacao automatica de leads por scoring","Agendamento de reunioes via WhatsApp","Integracao com CRM (Pipedrive)","Complementa os 2 SDRs humanos"],
+    apis:["OpenCloud","Pipedrive CRM","AIOX Pro"],
+    nota:"Em teste com problemas de performance — prioridade ALTA"
+  },
+  {
+    id:"CAP-004", nome:"Meta Ads API Client", categoria:"marketing", status:"ativo",
+    statusLabel:"Ativo", responsavel:"Michael Arruda",
+    descricao:"Ferramenta que permite criar, editar e pausar campanhas do Meta Ads direto pelo terminal, sem abrir o Gerenciador de Anuncios.",
+    habilidades:["Criar campanhas Meta Ads via CLI","Editar campanhas existentes","Pausar/ativar campanhas","Visualizar metricas"],
+    apis:["Meta Marketing API","Meta Business SDK"],
+    nota:null
+  },
+  {
+    id:"CAP-005", nome:"CEO Intelligence Assistant", categoria:"assistente-estrategico", status:"ativo",
+    statusLabel:"Ativo (v4)", responsavel:"Michael Arruda + Rafa Mendes",
+    descricao:"Assistente de IA do CEO com 4 agentes especializados que lembram decisoes anteriores. Inclui modo Challenger que questiona decisoes.",
+    habilidades:["4 agentes de inteligencia especializados","Persistencia de decisoes (lembra historico)","Modo Challenger — questiona e explora alternativas","Diagnostico profundo de problemas","Exploracao de possibilidades estrategicas"],
+    apis:["Claude AI (AIOX framework)","GitHub (persistencia)"],
+    nota:null
+  },
+  {
+    id:"CAP-006", nome:"Changelog Automatico", categoria:"gestao", status:"ativo",
+    statusLabel:"Ativo", responsavel:"Michael Arruda",
+    descricao:"Painel web protegido por senha que mostra toda a evolucao da empresa — o que foi criado, corrigido e atualizado, por quem e quando.",
+    habilidades:["Timeline visual de todas as atualizacoes","Agrupamento por tipo/scope/autor com expand (+)","Mensagens em linguagem natural","Filtros por pessoa, tipo e busca","Aba de Recursos com inventario completo"],
+    apis:["Git log","GitHub Pages"],
+    nota:null
+  },
+  {
+    id:"CAP-007", nome:"Infraestrutura Comercial (Sales Ops)", categoria:"vendas", status:"parcialmente_ativo",
+    statusLabel:"Parcial", responsavel:"Rafa Mendes",
+    descricao:"Squad de IA que cuida da infraestrutura de vendas — discador, controle de SLA, automacoes e dashboard.",
+    habilidades:["Integracao Api4com com Pipedrive (telefone + CRM)","Checklist de onboarding SDR","Manual completo do SDR OMNI","Power dialer automatico (planejado)","Monitoramento de SLA de resposta"],
+    apis:["Api4com","Pipedrive CRM","n8n"],
+    nota:"Integracao Api4com-Pipedrive concluida, demais em desenvolvimento"
+  },
+  {
+    id:"CAP-008", nome:"Design System OMNI Brasil", categoria:"marca", status:"ativo",
+    statusLabel:"Ativo (90+)", responsavel:"Michael Arruda",
+    descricao:"Sistema completo de identidade visual da OMNI Brasil — cores, tipografia, componentes e brandbook com 34 paginas.",
+    habilidades:["Tokens CSS (cores, fontes, espacamentos, sombras)","Brandbook visual com 34 paginas","Acessibilidade WCAG AA","Paginas de produto com depoimentos reais","Moodboard visual offline"],
+    apis:["GitHub Pages","CSS custom properties"],
+    nota:null
+  },
+  {
+    id:"CAP-009", nome:"Transcricao de Calls com Insights", categoria:"vendas", status:"planejado",
+    statusLabel:"Planejado", responsavel:"Rafa Mendes",
+    descricao:"Transcricao automatica de chamadas de vendas com extracao de insights acionaveis para melhorar o processo comercial.",
+    habilidades:["Transcricao automatica de chamadas","Extracao de insights acionaveis","Integracao com processo de vendas"],
+    apis:["Groq Whisper API","LLM (analise)"],
+    nota:null
+  },
+  {
+    id:"CAP-010", nome:"Criacao Automatizada de Funis", categoria:"marketing", status:"planejado",
+    statusLabel:"Planejado", responsavel:"Michael Arruda",
+    descricao:"Criacao automatica de funis de marketing completos — paginas, copy e automacoes — com IA. Meta: reduzir 50%+ o tempo.",
+    habilidades:["Geracao de paginas de vendas","Geracao de copy","Configuracao de automacoes de email"],
+    apis:["LLM","ActiveCampaign"],
+    nota:null
+  },
+  {
+    id:"CAP-011", nome:"Sistema de Gestao de Mentoria", categoria:"produto", status:"em_desenvolvimento",
+    statusLabel:"Em Dev", responsavel:"Michael Arruda",
+    descricao:"Sistema automatizado de gestao de turmas e mentorandos, desenvolvido com Vibe Coding (low-code pelo Michael).",
+    habilidades:["Gestao automatizada de turmas","Acompanhamento de progresso dos alunos","Notificacoes automaticas"],
+    apis:["Vibe Coding (low-code)"],
+    nota:null
+  }
+];
+
+const INFRA = [
+  {nome:"WhatsApp Business", detalhe:"OpenCloud + Evolution API 2.3.7 | suporte-omni", status:"ativo"},
+  {nome:"OpenRouter", detalhe:"Roteador LLM — Gemini 2.0 Flash, Claude", status:"ativo"},
+  {nome:"AIOX Pro", detalhe:"Plataforma de operacoes com IA | Skills: summarize, memory", status:"ativo"},
+  {nome:"Claude AI (CLI)", detalhe:"Inteligencia principal do Gustaff e agentes", status:"ativo"},
+  {nome:"Groq Whisper API", detalhe:"Transcricao de audio em portugues (tier gratuito)", status:"ativo"},
+  {nome:"n8n", detalhe:"Orquestrador de workflows e automacoes (VPS)", status:"ativo"},
+  {nome:"Pipedrive", detalhe:"CRM principal de vendas", status:"ativo"},
+  {nome:"ActiveCampaign", detalhe:"Automacao de marketing e email", status:"ativo"},
+  {nome:"Hostinger VPS", detalhe:"Ubuntu 24 | 8GB RAM | 2 vCPU | 76.13.169.211", status:"operacional"},
+  {nome:"Tailscale VPN", detalhe:"Acesso seguro ao servidor", status:"ativo"},
+  {nome:"GitHub Pages", detalhe:"Hospedagem de apresentacoes e paineis", status:"ativo"},
+  {nome:"PostgreSQL 15", detalhe:"Banco de dados relacional (Docker, porta 5432)", status:"ativo"},
+  {nome:"Redis 7", detalhe:"Cache e sessoes (Docker, porta 6379)", status:"ativo"}
+];
+
+// ═══════════════════════════════════════
+// RENDER RECURSOS
+// ═══════════════════════════════════════
+function getStatusClass(s) {
+  if (s.includes('ativo') || s === 'ativo') return 'ativo';
+  if (s.includes('teste') || s.includes('desenvolvimento') || s.includes('parcial') || s.includes('funcional')) return 'em_teste';
+  if (s === 'planejado') return 'planejado';
+  return 'inativo';
+}
+
+function renderRecursos() {
+  const ativos = CAPABILITIES.filter(c => c.status === 'ativo' || c.status.includes('parcial'));
+  const emDev = CAPABILITIES.filter(c => c.status.includes('desenvolvimento') || c.status.includes('teste'));
+  const planejados = CAPABILITIES.filter(c => c.status === 'planejado');
+
+  let html = '';
+
+  // Ativos
+  if (ativos.length) {
+    html += `<div class="cap-section-title">Ativos (${ativos.length})</div>`;
+    ativos.forEach(c => { html += renderCapCard(c); });
+  }
+
+  // Em desenvolvimento
+  if (emDev.length) {
+    html += `<div class="cap-section-title">Em Desenvolvimento (${emDev.length})</div>`;
+    emDev.forEach(c => { html += renderCapCard(c); });
+  }
+
+  // Planejados
+  if (planejados.length) {
+    html += `<div class="cap-section-title">Planejados (${planejados.length})</div>`;
+    planejados.forEach(c => { html += renderCapCard(c); });
+  }
+
+  // Infraestrutura
+  html += `<div class="cap-section-title">Infraestrutura Base (${INFRA.length})</div>`;
+  html += `<div class="infra-grid">`;
+  INFRA.forEach(i => {
+    const dotClass = i.status === 'ativo' || i.status === 'operacional' ? 'dot-ativo' : 'dot-inativo';
+    html += `
+      <div class="infra-card">
+        <div class="infra-name"><span class="infra-status-dot ${dotClass}"></span>${i.nome}</div>
+        <div class="infra-detail">${i.detalhe}</div>
+      </div>`;
+  });
+  html += `</div>`;
+
+  document.getElementById('recursos-view').innerHTML = html;
+}
+
+function renderCapCard(c) {
+  const statusClass = getStatusClass(c.status);
+  const abilities = c.habilidades.map(h => `<div class="cap-ability">${h}</div>`).join('');
+  const apis = c.apis.map(a => `<span class="cap-tech-tag">${a}</span>`).join('');
+  const nota = c.nota ? `<div class="cap-note">${c.nota}</div>` : '';
+
+  return `
+    <div class="cap-card">
+      <div class="cap-header">
+        <div>
+          <div class="cap-id">${c.id}</div>
+          <div class="cap-name">${c.nome}</div>
+        </div>
+        <span class="cap-status cap-status-${statusClass}">${c.statusLabel}</span>
+      </div>
+      <div class="cap-desc">${c.descricao}</div>
+      <div class="cap-abilities">
+        <div class="cap-abilities-title">Habilidades</div>
+        ${abilities}
+      </div>
+      <div class="cap-abilities-title">APIs e Sistemas</div>
+      <div class="cap-tech">${apis}</div>
+      <div class="cap-meta">
+        <span class="responsavel">${c.responsavel}</span>
+      </div>
+      ${nota}
+    </div>`;
 }
 
 // Init
