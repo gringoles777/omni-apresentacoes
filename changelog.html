@@ -690,94 +690,50 @@ function switchTab(tab) {
 // RECURSOS DATA
 // ═══════════════════════════════════════
 const CAPABILITIES = [
-  {
-    id:"CAP-001", nome:"Gustaff Whatsbot", categoria:"assistente-interno", status:"parcialmente_funcional",
-    statusLabel:"Parcial", responsavel:"Michael Arruda",
+  {id:"CAP-001",nome:"Gustaff Whatsbot",categoria:"assistente-interno",status:"parcialmente_funcional",statusLabel:"Parcial",responsavel:"Michael Arruda",inicio:"28/03",atualizado:"30/03",
     descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, lembra o contexto por 10 minutos e executa operacoes com registro de auditoria.",
     habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Lembra o contexto da conversa (5 min, max 20 msgs)","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
-    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],
-    nota:"Bug — Claude consome todos os turnos no setup do CLAUDE.md"
-  },
-  {
-    id:"CAP-002", nome:"Backlog Inteligente via Gustaff", categoria:"gestao", status:"em_desenvolvimento",
-    statusLabel:"Em Dev", responsavel:"Michael Arruda",
+    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],nota:"Bug — Claude consome todos os turnos no setup do CLAUDE.md"},
+  {id:"CAP-002",nome:"Backlog Inteligente via Gustaff",categoria:"gestao",status:"em_desenvolvimento",statusLabel:"Em Dev",responsavel:"Michael Arruda",inicio:"29/03",atualizado:"29/03",
     descricao:"A equipe manda ideias pelo WhatsApp pro Gustaff e ele adiciona automaticamente no backlog, entendendo se e ideia nova ou complemento de algo que ja existe.",
     habilidades:["Detecta intencao de backlog (gatilhos naturais)","Classifica como NOVA IDEIA ou COMPLEMENTO","Matching semantico (>70% similaridade)","Gera ID unico automatico (OMNI-XXX)","Responde com confirmacao e contexto","Commit automatico no GitHub"],
-    apis:["OpenCloud Webhook","n8n","Google Gemini 2.0 Flash (OpenRouter)","GitHub API"],
-    nota:"Infraestrutura pronta, aguardando correcao do bug do Gustaff"
-  },
-  {
-    id:"CAP-003", nome:"SDR com IA", categoria:"vendas", status:"em_teste",
-    statusLabel:"Em Teste", responsavel:"Rafa Mendes + Michael Arruda",
+    apis:["OpenCloud Webhook","n8n","Google Gemini 2.0 Flash (OpenRouter)","GitHub API"],nota:"Infraestrutura pronta, aguardando correcao do bug do Gustaff"},
+  {id:"CAP-003",nome:"SDR com IA",categoria:"vendas",status:"em_teste",statusLabel:"Em Teste",responsavel:"Rafa Mendes + Michael Arruda",inicio:"19/03",atualizado:"27/03",
     descricao:"Vendedor automatizado que qualifica leads e agenda reunioes via WhatsApp, integrado ao CRM Pipedrive.",
     habilidades:["Qualificacao automatica de leads por scoring","Agendamento de reunioes via WhatsApp","Integracao com CRM (Pipedrive)","Complementa os 2 SDRs humanos"],
-    apis:["OpenCloud","Pipedrive CRM","AIOX Pro"],
-    nota:"Em teste com problemas de performance — prioridade ALTA"
-  },
-  {
-    id:"CAP-004", nome:"Meta Ads API Client", categoria:"marketing", status:"ativo",
-    statusLabel:"Ativo", responsavel:"Michael Arruda",
+    apis:["OpenCloud","Pipedrive CRM","AIOX Pro"],nota:"Em teste com problemas de performance — prioridade ALTA"},
+  {id:"CAP-004",nome:"Meta Ads API Client",categoria:"marketing",status:"ativo",statusLabel:"Ativo",responsavel:"Michael Arruda",inicio:"27/03",atualizado:"27/03",
     descricao:"Ferramenta que permite criar, editar e pausar campanhas do Meta Ads direto pelo terminal, sem abrir o Gerenciador de Anuncios.",
     habilidades:["Criar campanhas Meta Ads via CLI","Editar campanhas existentes","Pausar/ativar campanhas","Visualizar metricas"],
-    apis:["Meta Marketing API","Meta Business SDK"],
-    nota:null
-  },
-  {
-    id:"CAP-005", nome:"CEO Intelligence Assistant", categoria:"assistente-estrategico", status:"ativo",
-    statusLabel:"Ativo (v4)", responsavel:"Michael Arruda + Rafa Mendes",
+    apis:["Meta Marketing API","Meta Business SDK"],nota:null},
+  {id:"CAP-005",nome:"CEO Intelligence Assistant",categoria:"assistente-estrategico",status:"ativo",statusLabel:"Ativo (v4)",responsavel:"Michael Arruda + Rafa Mendes",inicio:"24/03",atualizado:"27/03",
     descricao:"Assistente de IA do CEO com 4 agentes especializados que lembram decisoes anteriores. Inclui modo Challenger que questiona decisoes.",
     habilidades:["4 agentes de inteligencia especializados","Persistencia de decisoes (lembra historico)","Modo Challenger — questiona e explora alternativas","Diagnostico profundo de problemas","Exploracao de possibilidades estrategicas"],
-    apis:["Claude AI (AIOX framework)","GitHub (persistencia)"],
-    nota:null
-  },
-  {
-    id:"CAP-006", nome:"Changelog Automatico", categoria:"gestao", status:"ativo",
-    statusLabel:"Ativo", responsavel:"Michael Arruda",
+    apis:["Claude AI (AIOX framework)","GitHub (persistencia)"],nota:null},
+  {id:"CAP-006",nome:"Changelog Automatico",categoria:"gestao",status:"ativo",statusLabel:"Ativo",responsavel:"Michael Arruda",inicio:"29/03",atualizado:"29/03",
     descricao:"Painel web protegido por senha que mostra toda a evolucao da empresa — o que foi criado, corrigido e atualizado, por quem e quando.",
     habilidades:["Timeline visual de todas as atualizacoes","Agrupamento por tipo/scope/autor com expand (+)","Mensagens em linguagem natural","Filtros por pessoa, tipo e busca","Aba de Recursos com inventario completo"],
-    apis:["Git log","GitHub Pages"],
-    nota:null
-  },
-  {
-    id:"CAP-007", nome:"Infraestrutura Comercial (Sales Ops)", categoria:"vendas", status:"parcialmente_ativo",
-    statusLabel:"Parcial", responsavel:"Rafa Mendes",
+    apis:["Git log","GitHub Pages"],nota:null},
+  {id:"CAP-007",nome:"Infraestrutura Comercial (Sales Ops)",categoria:"vendas",status:"parcialmente_ativo",statusLabel:"Parcial",responsavel:"Rafa Mendes",inicio:"26/03",atualizado:"27/03",
     descricao:"Squad de IA que cuida da infraestrutura de vendas — discador, controle de SLA, automacoes e dashboard.",
     habilidades:["Integracao Api4com com Pipedrive (telefone + CRM)","Checklist de onboarding SDR","Manual completo do SDR OMNI","Power dialer automatico (planejado)","Monitoramento de SLA de resposta"],
-    apis:["Api4com","Pipedrive CRM","n8n"],
-    nota:"Integracao Api4com-Pipedrive concluida, demais em desenvolvimento"
-  },
-  {
-    id:"CAP-008", nome:"Design System OMNI Brasil", categoria:"marca", status:"ativo",
-    statusLabel:"Ativo (90+)", responsavel:"Michael Arruda",
+    apis:["Api4com","Pipedrive CRM","n8n"],nota:"Integracao Api4com-Pipedrive concluida, demais em desenvolvimento"},
+  {id:"CAP-008",nome:"Design System OMNI Brasil",categoria:"marca",status:"ativo",statusLabel:"Ativo (90+)",responsavel:"Michael Arruda",inicio:"20/03",atualizado:"25/03",
     descricao:"Sistema completo de identidade visual da OMNI Brasil — cores, tipografia, componentes e brandbook com 34 paginas.",
     habilidades:["Tokens CSS (cores, fontes, espacamentos, sombras)","Brandbook visual com 34 paginas","Acessibilidade WCAG AA","Paginas de produto com depoimentos reais","Moodboard visual offline"],
-    apis:["GitHub Pages","CSS custom properties"],
-    nota:null
-  },
-  {
-    id:"CAP-009", nome:"Transcricao de Calls com Insights", categoria:"vendas", status:"planejado",
-    statusLabel:"Planejado", responsavel:"Rafa Mendes",
+    apis:["GitHub Pages","CSS custom properties"],nota:null},
+  {id:"CAP-009",nome:"Transcricao de Calls com Insights",categoria:"vendas",status:"planejado",statusLabel:"Planejado",responsavel:"Rafa Mendes",inicio:"25/03",atualizado:"25/03",
     descricao:"Transcricao automatica de chamadas de vendas com extracao de insights acionaveis para melhorar o processo comercial.",
     habilidades:["Transcricao automatica de chamadas","Extracao de insights acionaveis","Integracao com processo de vendas"],
-    apis:["Groq Whisper API","LLM (analise)"],
-    nota:null
-  },
-  {
-    id:"CAP-010", nome:"Criacao Automatizada de Funis", categoria:"marketing", status:"planejado",
-    statusLabel:"Planejado", responsavel:"Michael Arruda",
+    apis:["Groq Whisper API","LLM (analise)"],nota:null},
+  {id:"CAP-010",nome:"Criacao Automatizada de Funis",categoria:"marketing",status:"planejado",statusLabel:"Planejado",responsavel:"Michael Arruda",inicio:"25/03",atualizado:"25/03",
     descricao:"Criacao automatica de funis de marketing completos — paginas, copy e automacoes — com IA. Meta: reduzir 50%+ o tempo.",
     habilidades:["Geracao de paginas de vendas","Geracao de copy","Configuracao de automacoes de email"],
-    apis:["LLM","ActiveCampaign"],
-    nota:null
-  },
-  {
-    id:"CAP-011", nome:"Sistema de Gestao de Mentoria", categoria:"produto", status:"em_desenvolvimento",
-    statusLabel:"Em Dev", responsavel:"Michael Arruda",
+    apis:["LLM","ActiveCampaign"],nota:null},
+  {id:"CAP-011",nome:"Sistema de Gestao de Mentoria",categoria:"produto",status:"em_desenvolvimento",statusLabel:"Em Dev",responsavel:"Michael Arruda",inicio:"20/03",atualizado:"25/03",
     descricao:"Sistema automatizado de gestao de turmas e mentorandos, desenvolvido com Vibe Coding (low-code pelo Michael).",
     habilidades:["Gestao automatizada de turmas","Acompanhamento de progresso dos alunos","Notificacoes automaticas"],
-    apis:["Vibe Coding (low-code)"],
-    nota:null
-  }
+    apis:["Vibe Coding (low-code)"],nota:null}
 ];
 
 const INFRA = [
@@ -847,32 +803,52 @@ function renderRecursos() {
   document.getElementById('recursos-view').innerHTML = html;
 }
 
+let openCaps = {};
+
+function toggleCap(id) {
+  openCaps[id] = !openCaps[id];
+  const el = document.getElementById('cap-'+id);
+  if (el) {
+    el.classList.toggle('open', openCaps[id]);
+    const toggle = el.querySelector('.group-toggle');
+    if (toggle) toggle.textContent = openCaps[id] ? '−' : '+';
+  }
+}
+
 function renderCapCard(c) {
   const statusClass = getStatusClass(c.status);
   const abilities = c.habilidades.map(h => `<div class="cap-ability">${h}</div>`).join('');
   const apis = c.apis.map(a => `<span class="cap-tech-tag">${a}</span>`).join('');
   const nota = c.nota ? `<div class="cap-note">${c.nota}</div>` : '';
+  const isOpen = openCaps[c.id] || false;
 
   return `
-    <div class="cap-card">
-      <div class="cap-header">
-        <div>
-          <div class="cap-id">${c.id}</div>
-          <div class="cap-name">${c.nome}</div>
+    <div class="cap-card" id="cap-${c.id}" style="padding:0;${isOpen?'':''}">
+      <div class="group-header" onclick="toggleCap('${c.id}')" style="padding:20px 24px;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none">
+        <span class="group-toggle" style="flex-shrink:0">${isOpen ? '−' : '+'}</span>
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span class="cap-id">${c.id}</span>
+            <span class="cap-name" style="font-size:15px;margin:0">${c.nome}</span>
+          </div>
+          <div class="cap-meta" style="margin-top:4px">
+            <span class="responsavel">${c.responsavel}</span>
+            <span>Inicio: ${c.inicio}</span>
+            <span>Atualizado: ${c.atualizado}</span>
+          </div>
         </div>
         <span class="cap-status cap-status-${statusClass}">${c.statusLabel}</span>
       </div>
-      <div class="cap-desc">${c.descricao}</div>
-      <div class="cap-abilities">
-        <div class="cap-abilities-title">Habilidades</div>
-        ${abilities}
+      <div style="display:${isOpen?'block':'none'};padding:0 24px 20px 58px" class="cap-details">
+        <div class="cap-desc">${c.descricao}</div>
+        <div class="cap-abilities">
+          <div class="cap-abilities-title">Habilidades</div>
+          ${abilities}
+        </div>
+        <div class="cap-abilities-title" style="margin-top:12px">APIs e Sistemas</div>
+        <div class="cap-tech" style="margin-top:6px">${apis}</div>
+        ${nota}
       </div>
-      <div class="cap-abilities-title">APIs e Sistemas</div>
-      <div class="cap-tech">${apis}</div>
-      <div class="cap-meta">
-        <span class="responsavel">${c.responsavel}</span>
-      </div>
-      ${nota}
     </div>`;
 }
 
