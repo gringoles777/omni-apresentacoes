@@ -764,7 +764,15 @@ const CAPABILITIES = [
     depende:[],dependentes:[],
     descricao:"Sistema automatizado de gestao de turmas e mentorandos, desenvolvido com Vibe Coding (low-code pelo Michael).",
     habilidades:["Gestao automatizada de turmas","Acompanhamento de progresso dos alunos","Notificacoes automaticas"],
-    apis:["Vibe Coding (low-code)"],nota:null}
+    apis:["Vibe Coding (low-code)"],nota:null},
+  {id:"CAP-012",nome:"Deep Research Engine (last30days)",categoria:"pesquisa",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"2.9.6",inicio:"30/03",atualizado:"30/03",
+    link:"Skill local: ~/.claude/skills/last30days/",
+    depende:[],dependentes:[],
+    descricao:"Motor de pesquisa profunda que varre 11 fontes nos ultimos 30 dias e sintetiza um briefing com citacoes reais. Pesquisa tendencias, sentimento de mercado, concorrentes e qualquer topico atual.",
+    habilidades:["Pesquisa em 11 fontes simultaneas (Reddit, X, YouTube, TikTok, Instagram, HN, Polymarket, Bluesky, Exa, Brave)","Scoring de relevancia multi-sinal com dedup","Comentarios do Reddit enriquecidos (top comments com upvotes)","Modo comparativo (X vs Y)","Auto-save de briefings em ~/Documents/Last30Days/","Cache de 24h para evitar chamadas duplicadas"],
+    apis:["Exa API","Brave Search API","ScrapeCreators API","Bluesky AT Protocol","X/Twitter (cookies)","yt-dlp (YouTube)"],
+    nota:"11 fontes configuradas. Bluesky com erro 403 (conta nova, resolver em breve)"}
 ];
 
 const INFRA = [
@@ -773,6 +781,9 @@ const INFRA = [
   {nome:"AIOX Pro", detalhe:"Plataforma de operacoes com IA | Skills: summarize, memory", status:"ativo"},
   {nome:"Claude AI (CLI)", detalhe:"Inteligencia principal do Gustaff e agentes", status:"ativo"},
   {nome:"Groq Whisper API", detalhe:"Transcricao de audio em portugues (tier gratuito)", status:"ativo"},
+  {nome:"Exa API", detalhe:"Busca web semantica otimizada para IA ($5/mes gratis)", status:"ativo"},
+  {nome:"Brave Search API", detalhe:"Busca web complementar (2000 queries/mes gratis)", status:"ativo"},
+  {nome:"ScrapeCreators API", detalhe:"Reddit comments + TikTok + Instagram scraping", status:"ativo"},
   {nome:"n8n", detalhe:"Orquestrador de workflows e automacoes (VPS)", status:"ativo"},
   {nome:"Pipedrive", detalhe:"CRM principal de vendas", status:"ativo"},
   {nome:"ActiveCampaign", detalhe:"Automacao de marketing e email", status:"ativo"},
@@ -894,13 +905,16 @@ function renderCapCard(c) {
       </div>
       <div style="display:${isOpen?'block':'none'};padding:0 24px 20px 58px" class="cap-details">
         <div class="cap-desc">${c.descricao}</div>
-        <div style="font-size:12px;color:var(--color-cream-50);margin-bottom:12px">Criado por: <span class="responsavel">${c.criador}</span> | Mantido por: <span class="responsavel">${c.responsavel}</span></div>
         <div class="cap-abilities">
           <div class="cap-abilities-title">Habilidades</div>
           ${abilities}
         </div>
         <div class="cap-abilities-title" style="margin-top:12px">APIs e Sistemas</div>
         <div class="cap-tech" style="margin-top:6px">${apis}</div>
+        <div style="margin-top:12px;font-size:12px;color:var(--color-cream-50);line-height:1.8">
+          <div>Criado por: <span class="responsavel">${c.criador}</span></div>
+          <div>Mantido por: <span class="responsavel">${c.responsavel}</span></div>
+        </div>
         ${linkHtml}
         ${depsHtml}
         ${nota}
