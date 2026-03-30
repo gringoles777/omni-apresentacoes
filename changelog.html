@@ -252,12 +252,12 @@ function checkPwd() {
 // ═══════════════════════════════════════
 const DATA = [
 {"hash":"a5bf3e60","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"operations","message":"changelog automatico + backlog centralizado + integracao Gustaff","status":"novo","friendly":"Criamos o painel de evolucao da empresa e o backlog de ideias, conectados ao Gustaff no WhatsApp"},
-{"hash":"66ec5ecb","author":"Michael Arruda","date":"2026-03-30","type":"chore","scope":"whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
-{"hash":"b60e62fe","author":"Michael Arruda","date":"2026-03-30","type":"chore","scope":"whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
-{"hash":"1c5a1946","author":"Michael Arruda","date":"2026-03-29","type":"chore","scope":"whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
-{"hash":"134e2e43","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"whatsbot","message":"auto-commit, /log, backup audit, notificacao aprovacao","status":"novo","friendly":"Gustaff agora salva conversas automaticamente e avisa quando alguem e aprovado"},
-{"hash":"e53505df","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"whatsbot","message":"audit log, permissoes por usuario, Rafa autorizada","status":"novo","friendly":"Gustaff agora controla quem pode usar cada funcao — Rafa ja esta autorizada"},
-{"hash":"62567b56","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"whatsbot","message":"server completo — contexto de conversa, audio Groq Whisper, typing indicator","status":"novo","friendly":"Gustaff agora lembra o que foi conversado por 10 minutos, entende audio e mostra que esta digitando"},
+{"hash":"66ec5ecb","author":"Michael Arruda","date":"2026-03-30","type":"chore","scope":"Gustaff Whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
+{"hash":"b60e62fe","author":"Michael Arruda","date":"2026-03-30","type":"chore","scope":"Gustaff Whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
+{"hash":"1c5a1946","author":"Michael Arruda","date":"2026-03-29","type":"chore","scope":"Gustaff Whatsbot","message":"backup audit log","status":"manutencao","friendly":"Backup automatico do registro de conversas do Gustaff"},
+{"hash":"134e2e43","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"Gustaff Whatsbot","message":"auto-commit, /log, backup audit, notificacao aprovacao","status":"novo","friendly":"Gustaff agora salva conversas automaticamente e avisa quando alguem e aprovado"},
+{"hash":"e53505df","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"Gustaff Whatsbot","message":"audit log, permissoes por usuario, Rafa autorizada","status":"novo","friendly":"Gustaff agora controla quem pode usar cada funcao — Rafa ja esta autorizada"},
+{"hash":"62567b56","author":"Michael Arruda","date":"2026-03-29","type":"feat","scope":"Gustaff Whatsbot","message":"server completo — contexto de conversa, audio Groq Whisper, typing indicator","status":"novo","friendly":"Gustaff agora lembra o que foi conversado por 10 minutos, entende audio e mostra que esta digitando"},
 {"hash":"319a4940","author":"Michael Arruda","date":"2026-03-28","type":"docs","scope":"tech","message":"referencia completa do setup WhatsBot na VPS","status":"documentacao","friendly":"Documentacao completa de como o Gustaff esta instalado no servidor"},
 {"hash":"e13fe7ea","author":"Michael Arruda","date":"2026-03-27","type":"feat","scope":"ops","message":"regras de roteamento e permissoes — onde-salvar.yaml","status":"novo","friendly":"Definimos regras claras de onde cada tipo de arquivo deve ser salvo no sistema"},
 {"hash":"e43ca316","author":"Michael Arruda","date":"2026-03-27","type":"feat","scope":"ads","message":"Meta Ads API client — criar, editar, pausar campanhas via CLI","status":"novo","friendly":"Agora conseguimos criar, editar e pausar campanhas do Meta Ads direto pelo terminal"},
@@ -466,7 +466,7 @@ function getFilteredData() {
     if (activeFilters.type !== 'todos' && c.status !== activeFilters.type) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
-      return c.message.toLowerCase().includes(q) || c.scope.toLowerCase().includes(q) || c.author.toLowerCase().includes(q);
+      return c.message.toLowerCase().includes(q) || (c.friendly||'').toLowerCase().includes(q) || c.scope.toLowerCase().includes(q) || c.author.toLowerCase().includes(q);
     }
     return true;
   });
@@ -477,7 +477,11 @@ let openGroups = {};
 function toggleGroup(id) {
   openGroups[id] = !openGroups[id];
   const el = document.getElementById(id);
-  if (el) el.classList.toggle('open', openGroups[id]);
+  if (el) {
+    el.classList.toggle('open', openGroups[id]);
+    const toggle = el.querySelector('.group-toggle');
+    if (toggle) toggle.textContent = openGroups[id] ? '−' : '+';
+  }
 }
 
 function renderTimeline() {
