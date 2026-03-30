@@ -118,6 +118,39 @@
   }
   .commit-card:hover { border-color: rgba(200,168,75,0.3); }
 
+  /* ── GROUP CARD ── */
+  .group-card {
+    background: var(--color-dark); border: 1px solid var(--color-dark-texture);
+    border-radius: 8px; margin-bottom: 8px; transition: border-color 0.2s;
+  }
+  .group-card:hover { border-color: rgba(200,168,75,0.3); }
+  .group-header {
+    padding: 16px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer;
+    user-select: none;
+  }
+  .group-toggle {
+    width: 24px; height: 24px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-gold); font-size: 14px; font-weight: 700; flex-shrink: 0;
+    font-family: var(--font-body); transition: all 0.2s;
+  }
+  .group-card.open .group-toggle { background: rgba(200,168,75,0.15); border-color: var(--color-gold); }
+  .group-count {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream-50); font-size: 11px; padding: 2px 8px; border-radius: 50px;
+    margin-left: auto; font-weight: 500;
+  }
+  .group-children {
+    display: none; padding: 0 20px 12px 58px;
+  }
+  .group-card.open .group-children { display: block; }
+  .group-child {
+    padding: 8px 12px; margin-bottom: 4px; border-radius: 6px;
+    background: var(--color-dark-elevated); border: 1px solid rgba(45,45,45,0.5);
+    font-size: 13px; color: var(--color-cream-70); display: flex; align-items: center; gap: 10px;
+  }
+  .group-child .commit-hash { font-family: monospace; font-size: 10px; color: var(--color-gray); }
+
   .commit-badge {
     padding: 4px 10px; border-radius: 50px; font-size: 10px;
     letter-spacing: 1px; text-transform: uppercase; font-weight: 600;
@@ -439,6 +472,14 @@ function getFilteredData() {
   });
 }
 
+let openGroups = {};
+
+function toggleGroup(id) {
+  openGroups[id] = !openGroups[id];
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open', openGroups[id]);
+}
+
 function renderTimeline() {
   const filtered = getFilteredData();
 
@@ -452,31 +493,80 @@ function renderTimeline() {
   }
 
   // Group by date
-  const groups = {};
+  const dayGroups = {};
   filtered.forEach(c => {
-    if (!groups[c.date]) groups[c.date] = [];
-    groups[c.date].push(c);
+    if (!dayGroups[c.date]) dayGroups[c.date] = [];
+    dayGroups[c.date].push(c);
   });
 
   let html = '';
-  Object.keys(groups).sort().reverse().forEach(date => {
-    const commits = groups[date];
+  Object.keys(dayGroups).sort().reverse().forEach(date => {
+    const commits = dayGroups[date];
+
+    // Sub-group by: status + scope + author
+    const subGroups = {};
+    commits.forEach(c => {
+      const key = `${c.status}|${c.scope}|${c.author}`;
+      if (!subGroups[key]) subGroups[key] = [];
+      subGroups[key].push(c);
+    });
+
+    // Count visible cards (groups count as 1)
+    const cardCount = Object.keys(subGroups).length;
+
     html += `<div class="day-group">`;
     html += `<div class="day-header">${formatDate(date)} <span class="day-count">${commits.length} atualizacao${commits.length>1?'es':''}</span></div>`;
 
-    commits.forEach(c => {
-      const scopeHtml = c.scope ? `<span class="commit-scope">[${c.scope}]</span> ` : '';
-      html += `
-        <div class="commit-card">
-          <span class="commit-badge badge-${c.status}">${getStatusLabel(c.status)}</span>
-          <div class="commit-body">
-            <div class="commit-msg">${scopeHtml}${c.message}</div>
-            <div class="commit-meta">
-              <span class="commit-author">${c.author}</span>
-              <span class="commit-hash">${c.hash}</span>
+    Object.entries(subGroups).forEach(([key, items]) => {
+      if (items.length === 1) {
+        // Single commit — render normally
+        const c = items[0];
+        const scopeHtml = c.scope ? `<span class="commit-scope">[${c.scope}]</span> ` : '';
+        html += `
+          <div class="commit-card">
+            <span class="commit-badge badge-${c.status}">${getStatusLabel(c.status)}</span>
+            <div class="commit-body">
+              <div class="commit-msg">${scopeHtml}${c.message}</div>
+              <div class="commit-meta">
+                <span class="commit-author">${c.author}</span>
+                <span class="commit-hash">${c.hash}</span>
+              </div>
             </div>
-          </div>
-        </div>`;
+          </div>`;
+      } else {
+        // Multiple commits — render as collapsible group
+        const groupId = `g-${date}-${key.replace(/[^a-zA-Z0-9]/g,'-')}`;
+        const c = items[0];
+        const scopeLabel = c.scope ? `[${c.scope}] ` : '';
+        const isOpen = openGroups[groupId] || false;
+
+        html += `
+          <div class="group-card ${isOpen ? 'open' : ''}" id="${groupId}">
+            <div class="group-header" onclick="toggleGroup('${groupId}')">
+              <span class="group-toggle">${isOpen ? '−' : '+'}</span>
+              <span class="commit-badge badge-${c.status}">${getStatusLabel(c.status)}</span>
+              <div class="commit-body" style="flex:1">
+                <div class="commit-msg"><span class="commit-scope">${scopeLabel}</span>${items.length} atualizacoes</div>
+                <div class="commit-meta">
+                  <span class="commit-author">${c.author}</span>
+                </div>
+              </div>
+              <span class="group-count">${items.length}</span>
+            </div>
+            <div class="group-children">`;
+
+        items.forEach(ci => {
+          html += `
+              <div class="group-child">
+                <span style="flex:1">${ci.message}</span>
+                <span class="commit-hash">${ci.hash}</span>
+              </div>`;
+        });
+
+        html += `
+            </div>
+          </div>`;
+      }
     });
 
     html += `</div>`;
