@@ -250,74 +250,14 @@ function checkPwd() {
 // ═══════════════════════════════════════
 const BACKLOG = [
   {
-    id: "OMNI-001",
-    titulo: "Changelog automatico da empresa",
-    descricao: "HTML protegido com senha mostrando evolucao do que foi iniciado, desenvolvido e finalizado. Versionado por data e autor. Atualiza automaticamente a partir do git log.",
+    id: "OMNI-007",
+    titulo: "Dashboard completo do trafego ao comercial",
+    descricao: "Criar dashboard que mostra metricas desde o trafego ate o fechamento comercial.",
     autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
-    status: "em_desenvolvimento",
-    prioridade: "alta",
-    categoria: "gestao",
-    complementos: [],
-    relacionadas: ["OMNI-002"]
-  },
-  {
-    id: "OMNI-002",
-    titulo: "Backlog via WhatsApp (Gustaff)",
-    descricao: "Sistema onde Michael, Rafa e Julia mandam ideia pro Gustaff no WhatsApp, e ele adiciona no backlog automaticamente. IA entende se e ideia nova ou complemento de existente. Responde com confirmacao e contexto.",
-    autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
-    status: "em_desenvolvimento",
-    prioridade: "alta",
-    categoria: "gestao",
-    complementos: [],
-    relacionadas: ["OMNI-001"]
-  },
-  {
-    id: "OMNI-003",
-    titulo: "SDR com IA conectado ao CRM",
-    descricao: "Corrigir SDR automatizado que qualifica leads e agenda via WhatsApp. Ja em teste mas com problemas de funcionamento.",
-    autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
-    status: "em_desenvolvimento",
-    prioridade: "alta",
-    categoria: "vendas",
-    complementos: [],
-    relacionadas: []
-  },
-  {
-    id: "OMNI-004",
-    titulo: "Transcricao de calls com insights",
-    descricao: "Implementar transcricao automatica de chamadas de vendas com extracao de insights acionaveis.",
-    autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
+    data_criacao: "2026-03-30",
     status: "idea",
     prioridade: "alta",
-    categoria: "vendas",
-    complementos: [],
-    relacionadas: ["OMNI-003"]
-  },
-  {
-    id: "OMNI-005",
-    titulo: "Automatizar criacao de funis",
-    descricao: "Paginas, copy e automacoes de funil criadas com IA. Reduzir tempo de criacao em 50%+.",
-    autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
-    status: "idea",
-    prioridade: "media",
-    categoria: "marketing",
-    complementos: [],
-    relacionadas: []
-  },
-  {
-    id: "OMNI-006",
-    titulo: "Sistema de gestao de mentoria automatizado",
-    descricao: "Michel desenvolvendo com Vibe Coding. Gestao de turma automatizada.",
-    autor: "Michael Arruda",
-    data_criacao: "2026-03-29",
-    status: "em_desenvolvimento",
-    prioridade: "media",
-    categoria: "produto",
+    categoria: "gestao",
     complementos: [],
     relacionadas: []
   }
@@ -331,10 +271,9 @@ let searchQuery = '';
 let currentView = 'list';
 
 const statusLabels = {
-  idea: 'Ideia', refinando: 'Refinando', pronto: 'Pronto',
-  em_desenvolvimento: 'Em Dev', feito: 'Feito', descartado: 'Descartado'
+  idea: 'Ideia', aprovada: 'Aprovada', descartada: 'Descartada'
 };
-const statusOrder = ['idea','refinando','pronto','em_desenvolvimento','feito','descartado'];
+const statusOrder = ['idea','aprovada','descartada'];
 const prioLabels = { alta: 'Alta', media: 'Media', baixa: 'Baixa' };
 
 function getFiltered() {
@@ -356,14 +295,14 @@ function getFiltered() {
 
 function renderStats() {
   const total = BACKLOG.length;
-  const emDev = BACKLOG.filter(i => i.status === 'em_desenvolvimento').length;
   const ideas = BACKLOG.filter(i => i.status === 'idea').length;
+  const aprovadas = BACKLOG.filter(i => i.status === 'aprovada').length;
   const alta = BACKLOG.filter(i => i.prioridade === 'alta').length;
 
   document.getElementById('stats').innerHTML = `
     <div class="stat"><div class="stat-value">${total}</div><div class="stat-label">Total</div></div>
-    <div class="stat"><div class="stat-value">${emDev}</div><div class="stat-label">Em Dev</div></div>
     <div class="stat"><div class="stat-value">${ideas}</div><div class="stat-label">Ideias</div></div>
+    <div class="stat"><div class="stat-value">${aprovadas}</div><div class="stat-label">Aprovadas</div></div>
     <div class="stat"><div class="stat-value">${alta}</div><div class="stat-label">Alta Prioridade</div></div>
   `;
 }
@@ -373,7 +312,7 @@ function renderFilters() {
   html += `<button class="filter-btn ${activeFilter==='todos'?'active':''}" onclick="setFilter('todos')">Todos</button>`;
   html += `<button class="filter-btn ${activeFilter==='alta'?'active':''}" onclick="setFilter('alta')">Alta</button>`;
   html += `<button class="filter-btn ${activeFilter==='idea'?'active':''}" onclick="setFilter('idea')">Ideias</button>`;
-  html += `<button class="filter-btn ${activeFilter==='em_desenvolvimento'?'active':''}" onclick="setFilter('em_desenvolvimento')">Em Dev</button>`;
+  html += `<button class="filter-btn ${activeFilter==='aprovada'?'active':''}" onclick="setFilter('aprovada')">Aprovadas</button>`;
   document.getElementById('filter-buttons').innerHTML = html;
 }
 
