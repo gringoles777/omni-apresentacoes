@@ -299,7 +299,7 @@
     <div class="tabs">
       <button class="tab active" id="tab-changelog" onclick="switchTab('changelog')">Timeline</button>
       <button class="tab" id="tab-recursos" onclick="switchTab('recursos')">Recursos</button>
-      <a href="backlog.html" class="tab" style="text-decoration:none;background:rgba(42,157,143,0.15);border-color:rgba(42,157,143,0.4);color:#2A9D8F;">Backlog de Ideias</a>
+      <button class="tab" id="tab-backlog" onclick="switchTab('backlog')">Backlog</button>
     </div>
     <div class="stats" id="stats"></div>
     <div class="filters" id="filters"></div>
@@ -307,6 +307,7 @@
 
   <div class="timeline" id="timeline"></div>
   <div id="recursos-view"></div>
+  <div id="backlog-view" style="display:none;padding:32px;max-width:960px;margin:0 auto;"></div>
 
   <footer>OMNI Brasil // Painel Interno // Atualizado Automaticamente</footer>
 </div>
@@ -712,11 +713,53 @@ function switchTab(tab) {
   currentTab = tab;
   document.getElementById('tab-changelog').classList.toggle('active', tab === 'changelog');
   document.getElementById('tab-recursos').classList.toggle('active', tab === 'recursos');
+  document.getElementById('tab-backlog').classList.toggle('active', tab === 'backlog');
   document.getElementById('timeline').style.display = tab === 'changelog' ? 'block' : 'none';
   document.getElementById('recursos-view').classList.toggle('visible', tab === 'recursos');
+  document.getElementById('backlog-view').style.display = tab === 'backlog' ? 'block' : 'none';
   document.getElementById('stats').style.display = tab === 'changelog' ? 'flex' : 'none';
   document.getElementById('filters').style.display = tab === 'changelog' ? 'flex' : 'none';
   if (tab === 'recursos') renderRecursos();
+  if (tab === 'backlog') renderBacklog();
+}
+
+// ═══════════════════════════════════════
+// BACKLOG
+// ═══════════════════════════════════════
+const BACKLOG_DATA = [
+  { id: "OMNI-007", titulo: "Dashboard completo do trafego ao comercial", autor: "Michael Arruda", data: "2026-03-30", prioridade: "alta", categoria: "gestao" }
+];
+
+function renderBacklog() {
+  const el = document.getElementById('backlog-view');
+  if (!BACKLOG_DATA.length) {
+    el.innerHTML = '<div style="text-align:center;padding:60px;color:var(--color-cream-50)">Backlog vazio. Use <strong>/backlog</strong> no Gustaff para adicionar ideias.</div>';
+    return;
+  }
+  const prioColors = { alta: '#e74c3c', media: '#f39c12', baixa: '#2ecc71' };
+  let html = `
+    <div style="margin-bottom:24px">
+      <div style="font-family:var(--font-display);font-size:20px;letter-spacing:3px;color:var(--color-gold);text-transform:uppercase;margin-bottom:8px">Backlog de Ideias</div>
+      <div style="font-size:13px;color:var(--color-cream-50)">${BACKLOG_DATA.length} ideia${BACKLOG_DATA.length>1?'s':''} pendente${BACKLOG_DATA.length>1?'s':''} — adicione via <strong>/backlog</strong> no WhatsApp</div>
+    </div>`;
+  BACKLOG_DATA.forEach(item => {
+    html += `
+      <div style="background:var(--color-dark-elevated);border:1px solid var(--color-dark-texture);border-radius:10px;padding:20px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:var(--font-display);font-size:14px;color:var(--color-gold);letter-spacing:1px">${item.id}</span>
+            <span style="font-size:16px;font-weight:600">${item.titulo}</span>
+          </div>
+          <span style="font-size:11px;padding:4px 10px;border-radius:50px;background:${prioColors[item.prioridade]}22;color:${prioColors[item.prioridade]};border:1px solid ${prioColors[item.prioridade]}44;text-transform:uppercase;letter-spacing:1px">${item.prioridade}</span>
+        </div>
+        <div style="display:flex;gap:16px;font-size:12px;color:var(--color-cream-50)">
+          <span>${item.autor}</span>
+          <span>${item.data}</span>
+          <span style="color:var(--color-teal)">${item.categoria}</span>
+        </div>
+      </div>`;
+  });
+  el.innerHTML = html;
 }
 
 // ═══════════════════════════════════════
