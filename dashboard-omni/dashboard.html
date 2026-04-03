@@ -350,12 +350,42 @@
     }
 
     /* Funnel */
-    .funnel { display: flex; flex-direction: column; gap: 8px; }
+    .funnel { display: flex; flex-direction: column; gap: 0; }
 
     .funnel-row {
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .funnel-conv-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 22px;
+    }
+
+    .funnel-conv-spacer {
+      width: 140px;
+      flex-shrink: 0;
+    }
+
+    .funnel-conv-arrow {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding-left: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .funnel-conv-arrow.teal { color: var(--teal); }
+
+    .funnel-conv-arrow svg {
+      opacity: 0.7;
+      flex-shrink: 0;
     }
 
     .funnel-label {
@@ -824,23 +854,40 @@
             <div class="funnel" id="funnel-sdr">
               <div class="funnel-row">
                 <div class="funnel-label">MQL</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"><span class="funnel-val" id="sdr-v-mql">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow" id="sdr-c-tent">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Tentativa Conectar</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:80%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:80%"><span class="funnel-val" id="sdr-v-tent">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow" id="sdr-c-con">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Conectado</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:55%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:55%"><span class="funnel-val" id="sdr-v-con">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow" id="sdr-c-aval">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Avaliado (Agendar)</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:35%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:35%"><span class="funnel-val" id="sdr-v-aval">—</span></div></div>
               </div>
             </div>
           </div>
@@ -854,28 +901,51 @@
             <div class="funnel" id="funnel-closer">
               <div class="funnel-row">
                 <div class="funnel-label">R. Agendada</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:100%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:100%"><span class="funnel-val" id="cl-v-ag">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow teal" id="cl-c-real">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">R. Realizada</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:72%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:72%"><span class="funnel-val" id="cl-v-real">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow teal" id="cl-c-opor">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Oportunidade</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:48%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:48%"><span class="funnel-val" id="cl-v-opor">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow teal" id="cl-c-neg">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Negociação</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:30%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:30%"><span class="funnel-val" id="cl-v-neg">—</span></div></div>
+              </div>
+              <div class="funnel-conv-row">
+                <div class="funnel-conv-spacer"></div>
+                <div class="funnel-conv-arrow teal" id="cl-c-venda">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="none"><path d="M6 1v9M2 7l4 5 4-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span>—</span>
+                </div>
               </div>
               <div class="funnel-row">
                 <div class="funnel-label">Venda</div>
-                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:18%"><span class="funnel-val">—</span></div></div>
-                <div class="funnel-conv">—</div>
+                <div class="funnel-bar-wrap"><div class="funnel-bar teal" style="width:18%"><span class="funnel-val" id="cl-v-venda">—</span></div></div>
               </div>
             </div>
           </div>
