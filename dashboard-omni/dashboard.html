@@ -509,64 +509,140 @@
     .aqrc-table tr:hover td { background: var(--dark-hl); }
     .aqrc-table .week-row td { background: rgba(200,168,75,0.05); border-top: 1px solid var(--gold-20); }
 
-    /* SDR / Closer bar chart */
-    .agent-bars { display: flex; flex-direction: column; gap: 20px; }
-
-    .agent-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    /* ═══ Vertical stacked bar chart (Closer / SDR) ═══ */
+    .vert-chart-wrap {
+      overflow-x: auto;
+      padding-bottom: 8px;
     }
 
-    .agent-avatar {
-      width: 40px; height: 40px;
+    .vert-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      min-height: 340px;
+      padding: 16px 8px 0;
+    }
+
+    /* cada coluna = um agente */
+    .vert-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+      width: 80px;
+    }
+
+    /* a barra empilhada */
+    .vert-bar {
+      width: 64px;
+      display: flex;
+      flex-direction: column-reverse; /* segmentos crescem de baixo pra cima */
+      position: relative;
+    }
+
+    .vert-seg {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.75);
+      transition: height 600ms ease;
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .vert-seg-label {
+      writing-mode: horizontal-tb;
+      white-space: nowrap;
+      font-size: 0.58rem;
+    }
+
+    /* cores das camadas — de baixo pra cima */
+    .vseg-venda  { background: #9A7A2E; }   /* dourado escuro — vendas (base) */
+    .vseg-neg    { background: #C8A84B; }   /* dourado */
+    .vseg-opor   { background: #E8C86A; }   /* dourado claro */
+    .vseg-real   { background: #F5E090; }   /* amarelo claro — R. Realizadas (topo) */
+
+    /* versão teal para SDR */
+    .vseg-mql    { background: #1d6e64; }
+    .vseg-con    { background: #2A9D8F; }
+    .vseg-aval   { background: #4DC4B5; }
+    .vseg-agend  { background: #83D9CF; }
+    .vseg-rreal  { background: #B8EDE8; }
+
+    /* badge de conversão entre segmentos */
+    .vert-conv {
+      position: absolute;
+      right: -46px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--cream-40);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .vert-conv svg { opacity: 0.5; }
+
+    /* linha separadora entre segmentos */
+    .vert-seg + .vert-seg {
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+
+    /* info abaixo da barra */
+    .vert-agent-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .vert-avatar {
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: var(--dark-tx);
       border: 2px solid var(--dark-tx);
-      overflow: hidden;
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       color: var(--cream-40);
+      overflow: hidden;
+      transition: border-color 200ms;
     }
 
-    .agent-info { width: 90px; flex-shrink: 0; }
-    .agent-name { font-size: 0.78rem; font-weight: 600; color: var(--cream); }
-    .agent-fat {
+    .vert-avatar:hover { border-color: var(--gold); }
+
+    .vert-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .vert-name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .vert-fat {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.6rem;
       color: var(--gold);
-      margin-top: 2px;
+      text-align: center;
     }
-
-    .agent-stack { flex: 1; display: flex; height: 36px; }
-
-    .stack-seg {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      font-weight: 500;
-      color: var(--black);
-      transition: width 600ms ease;
-      overflow: hidden;
-    }
-
-    .seg-1 { background: var(--gold-deep); }
-    .seg-2 { background: var(--gold); }
-    .seg-3 { background: var(--gold-light); }
-    .seg-4 { background: #f0dc92; }
-    .seg-5 { background: #faefc2; }
 
     .stack-legend {
       display: flex;
       gap: 14px;
-      margin-top: 14px;
+      margin-top: 20px;
       flex-wrap: wrap;
     }
 
@@ -1158,16 +1234,55 @@
         </div>
 
         <div class="panel">
-          <div class="agent-bars" id="closer-bars">
-            <div style="color:var(--gray);text-align:center;padding:40px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">
-              Conectando ao Pipedrive...
+          <div class="vert-chart-wrap">
+            <div class="vert-chart" id="closer-vert-chart">
+              <!-- preenchido dinamicamente via JS / API -->
+              <!-- exemplo estático para visualização -->
+              <div class="vert-col">
+                <div class="vert-bar" style="height:260px" id="closer-bar-placeholder">
+                  <!-- segmentos de baixo pra cima: vendas, negociação, oportunidade, realizadas -->
+                  <div class="vert-seg vseg-venda" style="height:15%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-neg" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-opor" style="height:30%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-real" style="height:35%">
+                    <span class="vert-seg-label">—</span>
+                  </div>
+                </div>
+                <div class="vert-agent-info">
+                  <div class="vert-avatar">—</div>
+                  <div class="vert-name">—</div>
+                  <div class="vert-fat">R$ —</div>
+                </div>
+              </div>
+              <!-- mais colunas virão via API -->
+              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:24px">
+                Conectando ao Pipedrive...
+              </div>
             </div>
           </div>
-          <div class="stack-legend" style="margin-top:20px">
-            <div class="legend-item"><div class="legend-dot seg-1"></div>R. Realizadas</div>
-            <div class="legend-item"><div class="legend-dot seg-2"></div>Oportunidades</div>
-            <div class="legend-item"><div class="legend-dot seg-3"></div>Negociação</div>
-            <div class="legend-item"><div class="legend-dot seg-4"></div>Vendas</div>
+          <div class="stack-legend">
+            <div class="legend-item"><div class="legend-dot vseg-real" style="width:10px;height:10px"></div>R. Realizadas</div>
+            <div class="legend-item"><div class="legend-dot vseg-opor" style="width:10px;height:10px"></div>Oportunidades</div>
+            <div class="legend-item"><div class="legend-dot vseg-neg" style="width:10px;height:10px"></div>Negociação</div>
+            <div class="legend-item"><div class="legend-dot vseg-venda" style="width:10px;height:10px"></div>Vendas</div>
           </div>
         </div>
 
@@ -1192,17 +1307,59 @@
         </div>
 
         <div class="panel">
-          <div class="agent-bars" id="sdr-bars">
-            <div style="color:var(--gray);text-align:center;padding:40px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">
-              Conectando ao Pipedrive...
+          <div class="vert-chart-wrap">
+            <div class="vert-chart" id="sdr-vert-chart">
+              <div class="vert-col">
+                <div class="vert-bar" style="height:260px">
+                  <div class="vert-seg vseg-mql" style="height:15%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-con" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-aval" style="height:25%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-agend" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-rreal" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                  </div>
+                </div>
+                <div class="vert-agent-info">
+                  <div class="vert-avatar">—</div>
+                  <div class="vert-name">—</div>
+                  <div class="vert-fat">R$ —</div>
+                </div>
+              </div>
+              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:24px">
+                Conectando ao Pipedrive...
+              </div>
             </div>
           </div>
-          <div class="stack-legend" style="margin-top:20px">
-            <div class="legend-item"><div class="legend-dot seg-1"></div>MQL Recebidos</div>
-            <div class="legend-item"><div class="legend-dot seg-2"></div>Conectados</div>
-            <div class="legend-item"><div class="legend-dot seg-3"></div>Avaliados</div>
-            <div class="legend-item"><div class="legend-dot seg-4"></div>R. Agendadas</div>
-            <div class="legend-item"><div class="legend-dot seg-5"></div>R. Realizadas</div>
+          <div class="stack-legend">
+            <div class="legend-item"><div class="legend-dot vseg-rreal" style="width:10px;height:10px"></div>R. Realizadas</div>
+            <div class="legend-item"><div class="legend-dot vseg-agend" style="width:10px;height:10px"></div>R. Agendadas</div>
+            <div class="legend-item"><div class="legend-dot vseg-aval" style="width:10px;height:10px"></div>Avaliados</div>
+            <div class="legend-item"><div class="legend-dot vseg-con" style="width:10px;height:10px"></div>Conectados</div>
+            <div class="legend-item"><div class="legend-dot vseg-mql" style="width:10px;height:10px"></div>MQL Recebidos</div>
           </div>
         </div>
       </section>
@@ -1224,18 +1381,69 @@
         </div>
 
         <div class="panel">
-          <div class="agent-bars" id="sdr-ia-bars">
-            <div style="color:var(--gray);text-align:center;padding:40px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">
-              Conectando ao Pipedrive...
+          <div class="vert-chart-wrap">
+            <div class="vert-chart" id="sdr-ia-vert-chart">
+              <div class="vert-col">
+                <div class="vert-bar" style="height:260px">
+                  <div class="vert-seg vseg-mql" style="height:10%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-con" style="height:15%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-aval" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <div class="vert-seg vseg-agend" style="height:20%">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <!-- contato IA (teal, etapa automática) -->
+                  <div class="vert-seg" style="height:20%;background:var(--teal)">
+                    <span class="vert-seg-label">—</span>
+                    <span class="vert-conv" style="bottom:0">
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v6M2 5l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      —%
+                    </span>
+                  </div>
+                  <!-- total leads (topo) -->
+                  <div class="vert-seg" style="height:15%;background:#1d6e64">
+                    <span class="vert-seg-label">—</span>
+                  </div>
+                </div>
+                <div class="vert-agent-info">
+                  <div class="vert-avatar">IA</div>
+                  <div class="vert-name">SDR-IA</div>
+                  <div class="vert-fat">R$ —</div>
+                </div>
+              </div>
+              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:24px">
+                Conectando ao Pipedrive...
+              </div>
             </div>
           </div>
-          <div class="stack-legend" style="margin-top:20px">
-            <div class="legend-item"><div class="legend-dot seg-1"></div>Total Leads</div>
-            <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Contato IA</div>
-            <div class="legend-item"><div class="legend-dot seg-2"></div>MQL Recebidos</div>
-            <div class="legend-item"><div class="legend-dot seg-3"></div>Conectados</div>
-            <div class="legend-item"><div class="legend-dot seg-4"></div>Avaliados</div>
-            <div class="legend-item"><div class="legend-dot seg-5"></div>R. Agendadas</div>
+          <div class="stack-legend">
+            <div class="legend-item"><div class="legend-dot" style="width:10px;height:10px;background:#1d6e64"></div>Total Leads</div>
+            <div class="legend-item"><div class="legend-dot" style="width:10px;height:10px;background:var(--teal)"></div>Contato IA</div>
+            <div class="legend-item"><div class="legend-dot vseg-agend" style="width:10px;height:10px"></div>MQL Recebidos</div>
+            <div class="legend-item"><div class="legend-dot vseg-aval" style="width:10px;height:10px"></div>Conectados</div>
+            <div class="legend-item"><div class="legend-dot vseg-con" style="width:10px;height:10px"></div>Avaliados</div>
+            <div class="legend-item"><div class="legend-dot vseg-mql" style="width:10px;height:10px"></div>R. Agendadas</div>
           </div>
         </div>
       </section>
