@@ -710,6 +710,86 @@
 
     .mode-btn.active { background: var(--gold-10); color: var(--gold); }
 
+    /* ═══ Horizontal step funnel (Tráfego Meta / Google) ═══ */
+    .hfunnel {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      overflow-x: auto;
+      padding: 8px 0 4px;
+    }
+
+    .hfunnel-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .hfunnel-block {
+      width: 110px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 10px 8px;
+      background: var(--dark);
+      border: 1px solid var(--dark-tx);
+      border-top: 2px solid var(--gold);
+      position: relative;
+    }
+
+    .hfunnel-block.teal-top { border-top-color: var(--teal); }
+
+    .hfunnel-stage-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .hfunnel-val {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      text-align: center;
+    }
+
+    /* seta + % entre blocos */
+    .hfunnel-conv {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 6px;
+      gap: 2px;
+      flex-shrink: 0;
+      padding-bottom: 10px;
+    }
+
+    .hfunnel-conv-pct {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    .hfunnel-conv-pct.teal { color: var(--teal); }
+
+    .hfunnel-conv-arrow {
+      font-size: 0.9rem;
+      color: var(--gold-30);
+      line-height: 1;
+    }
+
+    .hfunnel-conv-arrow.teal { color: rgba(42,157,143,0.35); }
+
     .stack-legend {
       display: flex;
       gap: 14px;
@@ -1600,54 +1680,106 @@
           </div>
         </div>
 
-        <div class="two-col">
-          <div class="panel">
-            <div class="section-header"><div class="section-title">Funil Landing Page</div></div>
-            <div style="padding-top:10px">
-              <div class="trafego-funnel" id="meta-funil-lp">
-                <div class="tf-stage">
-                  <div class="tf-bar" style="height:100%"></div>
-                  <div class="tf-label">Impressões</div>
-                  <div class="tf-val">—</div>
-                </div>
-                <div class="tf-stage">
-                  <div class="tf-bar" style="height:65%"></div>
-                  <div class="tf-label">Cliques</div>
-                  <div class="tf-val">—</div>
-                </div>
-                <div class="tf-stage">
-                  <div class="tf-bar" style="height:40%"></div>
-                  <div class="tf-label">View Página</div>
-                  <div class="tf-val">—</div>
-                </div>
-                <div class="tf-stage">
-                  <div class="tf-bar" style="height:20%"></div>
-                  <div class="tf-label">Leads</div>
-                  <div class="tf-val">—</div>
-                </div>
+        <!-- Funil Landing Page -->
+        <div class="panel" style="margin-bottom:20px">
+          <div class="section-header" style="margin-bottom:12px">
+            <div class="section-title">Funil Landing Page</div>
+          </div>
+          <div class="hfunnel">
+            <!-- Impressões -->
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:120px">
+                <div class="hfunnel-stage-label">Impressões</div>
+                <div class="hfunnel-val" id="meta-lp-imp">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="meta-lp-ctr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <!-- Cliques -->
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:96px">
+                <div class="hfunnel-stage-label">Cliques</div>
+                <div class="hfunnel-val" id="meta-lp-cli">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="meta-lp-viewr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <!-- View Página -->
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:72px">
+                <div class="hfunnel-stage-label">View Página</div>
+                <div class="hfunnel-val" id="meta-lp-view">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="meta-lp-leadr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <!-- Leads -->
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:52px">
+                <div class="hfunnel-stage-label">Leads</div>
+                <div class="hfunnel-val" id="meta-lp-lead">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="meta-lp-mqlr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <!-- MQL -->
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:36px">
+                <div class="hfunnel-stage-label">MQL</div>
+                <div class="hfunnel-val" id="meta-lp-mql">—</div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="panel">
-            <div class="section-header"><div class="section-title">Funil Form Nativo</div></div>
-            <div style="padding-top:10px">
-              <div class="trafego-funnel" id="meta-funil-form">
-                <div class="tf-stage">
-                  <div class="tf-bar teal-bar" style="height:100%"></div>
-                  <div class="tf-label">Impressões</div>
-                  <div class="tf-val">—</div>
-                </div>
-                <div class="tf-stage">
-                  <div class="tf-bar teal-bar" style="height:50%"></div>
-                  <div class="tf-label">Cliques</div>
-                  <div class="tf-val">—</div>
-                </div>
-                <div class="tf-stage">
-                  <div class="tf-bar teal-bar" style="height:18%"></div>
-                  <div class="tf-label">Leads</div>
-                  <div class="tf-val">—</div>
-                </div>
+        <!-- Funil Form Nativo -->
+        <div class="panel" style="margin-bottom:20px">
+          <div class="section-header" style="margin-bottom:12px">
+            <div class="section-title">Funil Form Nativo</div>
+          </div>
+          <div class="hfunnel">
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block teal-top" style="height:120px">
+                <div class="hfunnel-stage-label">Impressões</div>
+                <div class="hfunnel-val" id="meta-fn-imp">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct teal" id="meta-fn-ctr">—%</div>
+              <div class="hfunnel-conv-arrow teal">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block teal-top" style="height:80px">
+                <div class="hfunnel-stage-label">Cliques</div>
+                <div class="hfunnel-val" id="meta-fn-cli">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct teal" id="meta-fn-leadr">—%</div>
+              <div class="hfunnel-conv-arrow teal">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block teal-top" style="height:44px">
+                <div class="hfunnel-stage-label">Leads</div>
+                <div class="hfunnel-val" id="meta-fn-lead">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct teal" id="meta-fn-mqlr">—%</div>
+              <div class="hfunnel-conv-arrow teal">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block teal-top" style="height:28px">
+                <div class="hfunnel-stage-label">MQL</div>
+                <div class="hfunnel-val" id="meta-fn-mql">—</div>
               </div>
             </div>
           </div>
@@ -1701,14 +1833,59 @@
           </div>
         </div>
 
-        <div class="panel">
+        <!-- Funil Google -->
+        <div class="panel" style="margin-bottom:20px">
+          <div class="section-header" style="margin-bottom:12px">
+            <div class="section-title">Funil</div>
+          </div>
+          <div class="hfunnel">
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:120px">
+                <div class="hfunnel-stage-label">Impressões</div>
+                <div class="hfunnel-val" id="google-f-imp">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="google-f-ctr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:84px">
+                <div class="hfunnel-stage-label">Cliques</div>
+                <div class="hfunnel-val" id="google-f-cli">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="google-f-leadr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:52px">
+                <div class="hfunnel-stage-label">Leads</div>
+                <div class="hfunnel-val" id="google-f-lead">—</div>
+              </div>
+            </div>
+            <div class="hfunnel-conv">
+              <div class="hfunnel-conv-pct" id="google-f-mqlr">—%</div>
+              <div class="hfunnel-conv-arrow">→</div>
+            </div>
+            <div class="hfunnel-stage">
+              <div class="hfunnel-block" style="height:32px">
+                <div class="hfunnel-stage-label">MQL</div>
+                <div class="hfunnel-val" id="google-f-mql">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:20px">
           <div class="section-header"><div class="section-title">Investimento por dia</div></div>
           <div class="chart-wrap">
             <canvas id="chart-google-invest"></canvas>
           </div>
         </div>
 
-        <div style="margin-top:20px" class="panel" style="padding:0">
+        <div class="panel" style="padding:0">
           <div class="section-header" style="padding:20px 22px 0"><div class="section-title">Por Campanha</div></div>
           <div class="table-scroll">
             <table class="data-table" id="google-campanhas-table">
