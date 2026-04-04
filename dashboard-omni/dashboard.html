@@ -226,6 +226,71 @@
 
     .filter-select:focus { border-color: var(--gold-30); }
 
+    /* Date range picker customizado */
+    .date-range-wrap {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      animation: fadeIn 150ms ease;
+    }
+
+    .date-range-wrap.visible { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .date-range-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+    }
+
+    .date-input {
+      background: var(--dark-el);
+      border: 1px solid var(--gold-30);
+      color: var(--cream-70);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      padding: 5px 8px;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 150ms;
+      width: 110px;
+    }
+
+    .date-input:focus { border-color: var(--gold); color: var(--cream); }
+
+    /* sobrescreve aparência nativa do calendário */
+    .date-input::-webkit-calendar-picker-indicator {
+      filter: invert(0.6) sepia(1) saturate(2) hue-rotate(5deg);
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    .date-input::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+
+    .btn-apply-date {
+      padding: 5px 12px;
+      background: var(--gold-10);
+      border: 1px solid var(--gold-30);
+      color: var(--gold);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 150ms, border-color 150ms;
+    }
+
+    .btn-apply-date:hover {
+      background: var(--gold-20);
+      border-color: var(--gold);
+    }
+
     .badge-live {
       display: flex;
       align-items: center;
@@ -1021,13 +1086,22 @@
       <div class="topbar-title">OMNI Brasil / <span id="topbar-screen-name">Visão Geral</span></div>
       <div class="topbar-right">
         <div class="filter-group">
-          <select class="filter-select" id="filter-periodo" onchange="applyFilter()">
+          <select class="filter-select" id="filter-periodo" onchange="onPeriodoChange()">
             <option value="30">Últimos 30 dias</option>
             <option value="7">Últimos 7 dias</option>
             <option value="mes">Este mês</option>
             <option value="mes-ant">Mês anterior</option>
             <option value="trim">Trimestre</option>
+            <option value="custom">Personalizado...</option>
           </select>
+          <!-- Date range picker — aparece apenas quando "Personalizado" está selecionado -->
+          <div class="date-range-wrap" id="date-range-wrap">
+            <span class="date-range-label">De</span>
+            <input type="date" class="date-input" id="date-from" onchange="applyCustomDate()">
+            <span class="date-range-label">até</span>
+            <input type="date" class="date-input" id="date-to" onchange="applyCustomDate()">
+            <button class="btn-apply-date" onclick="applyCustomDate()">Aplicar</button>
+          </div>
           <select class="filter-select" id="filter-fonte" onchange="applyFilter()">
             <option value="all">Todas as fontes</option>
             <option value="meta">Meta Ads</option>
@@ -1991,10 +2065,42 @@
     }
 
     // ═══════════════════════ FILTER ═══════════════════════
+    function onPeriodoChange() {
+      const val = document.getElementById('filter-periodo').value;
+      const wrap = document.getElementById('date-range-wrap');
+
+      if (val === 'custom') {
+        wrap.classList.add('visible');
+        // pré-preenche datas com início do mês atual → hoje
+        const today = new Date();
+        const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+        document.getElementById('date-from').value = firstDay.toISOString().split('T')[0];
+        document.getElementById('date-to').value   = today.toISOString().split('T')[0];
+      } else {
+        wrap.classList.remove('visible');
+        applyFilter();
+      }
+    }
+
     function applyFilter() {
       const periodo = document.getElementById('filter-periodo').value;
       const fonte = document.getElementById('filter-fonte').value;
       console.log('Filtros:', { periodo, fonte });
+      // quando a API estiver conectada, re-fetcha dados com esses parâmetros
+    }
+
+    function applyCustomDate() {
+      const from = document.getElementById('date-from').value;
+      const to   = document.getElementById('date-to').value;
+      if (!from || !to) return;
+      if (from > to) {
+        document.getElementById('date-from').style.borderColor = 'var(--error)';
+        return;
+      }
+      document.getElementById('date-from').style.borderColor = '';
+      const fonte = document.getElementById('filter-fonte').value;
+      console.log('Filtro personalizado:', { from, to, fonte });
+      // quando a API estiver conectada, re-fetcha dados com esse intervalo
     }
 
     // ═══════════════════════ CHARTS ═══════════════════════
