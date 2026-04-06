@@ -1031,6 +1031,7 @@
     .data-table td.num.gold { color: var(--gold); }
     .data-table td.num.teal { color: var(--teal); }
     .data-table td.num.dim  { color: var(--dark-tx); }
+    .data-table td.num.est  { color: rgba(42,157,143,0.55); font-style: italic; }
     .data-table th { text-align: right; }
     .data-table th:first-child,
     .data-table td:first-child { text-align: left; }
@@ -1423,7 +1424,10 @@
       <section class="screen" id="screen-gerenciador">
         <div class="section-header" style="margin-bottom:20px">
           <div class="section-title">Gerenciador — Fonte → Campanha → Conjunto → Anúncio</div>
-          <div class="tag tag-gray">Scroll → para mais colunas</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="tag tag-gray">Scroll → para mais colunas</div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.5rem;color:rgba(42,157,143,0.6);font-style:italic">* valores em itálico = estimativa proporcional por leads</span>
+          </div>
         </div>
 
         <div class="panel" style="padding:0;">
@@ -2541,16 +2545,61 @@
       const pdCloser = funnelData?.closer || {};
 
       // ── Cell helpers ──
-      const NC = (v, cls='') => `<td class="num${cls?' '+cls:''}">${v}</td>`;
-      const NM = (v, cls='') => NC(v !== null && v !== undefined && v !== 0 && !isNaN(v) ? fmtInt(v) : '—', cls);
-      const NB = (v, cls='') => NC(v && !isNaN(v) ? 'R$ '+fmtBRL(v) : '—', cls);
-      const CP = (spend, cnt) => cnt > 0 ? NC('R$ '+Math.round(spend/cnt).toLocaleString('pt-BR')) : NC('—','dim');
+      const NC  = (v, cls='') => `<td class="num${cls?' '+cls:''}">${v}</td>`;
+      const NM  = (v, cls='') => NC(v !== null && v !== undefined && v !== 0 && !isNaN(v) ? fmtInt(v) : '—', cls);
+      const NB  = (v, cls='') => NC(v && !isNaN(v) ? 'R$ '+fmtBRL(v) : '—', cls);
+      const CP  = (spend, cnt) => cnt > 0 ? NC('R$ '+Math.round(spend/cnt).toLocaleString('pt-BR')) : NC('—','dim');
       const DIM = () => NC('—','dim');
+
+      // Estimado (atribuição proporcional por leads) — mesma formatação mas em teal suave
+      const EST = (total, share) => {
+        if (!total || !share || isNaN(total) || isNaN(share)) return NC('—','dim');
+        const v = Math.round(total * share);
+        return v > 0 ? NC(fmtInt(v), 'est') : NC('—','dim');
+      };
+      const CPA_EST = (spend, total, share) => {
+        if (!total || !share || !spend) return NC('—','dim');
+        const v = total * share;
+        return v > 0 ? NC('R$ '+Math.round(spend/v).toLocaleString('pt-BR'), 'est') : NC('—','dim');
+      };
+
       const metaCols = (d) => {
         const cpl = d.leads > 0 ? d.spend / d.leads : null;
         const ctr = d.impressions > 0 ? (d.clicks / d.impressions * 100).toFixed(2) + '%' : '—';
         const cpc = d.clicks > 0 ? 'R$ '+fmtBRL(d.spend / d.clicks) : '—';
         return { cpl, ctr, cpc };
+      };
+
+      // Função que gera 18 células PD (MQL→Ganho + CPs) para qualquer nível
+      const pdCells = (spend, share, isExact) => {
+        if (isExact) {
+          return [
+            NM(pdSdr.mql),          CP(spend, pdSdr.mql),
+            NM(pdSdr.tentativa),    CP(spend, pdSdr.tentativa),
+            NM(pdSdr.conectado),    CP(spend, pdSdr.conectado),
+            NM(pdSdr.avaliado),     CP(spend, pdSdr.avaliado),
+            NM(pdCloser.r_agendada),CP(spend, pdCloser.r_agendada),
+            NM(pdCloser.r_realizada),CP(spend, pdCloser.r_realizada),
+            NM(pdCloser.oportunidade),CP(spend, pdCloser.oportunidade),
+            NM(pdCloser.negociacao),CP(spend, pdCloser.negociacao),
+            NM(pdCloser.venda,'teal'),
+            NB(pdCloser.venda > 0 ? spend/pdCloser.venda : null,'gold'),
+          ].join('');
+        } else {
+          // Proporcional — share = fração do total de leads
+          return [
+            EST(pdSdr.mql, share),          CPA_EST(spend, pdSdr.mql, share),
+            EST(pdSdr.tentativa, share),    CPA_EST(spend, pdSdr.tentativa, share),
+            EST(pdSdr.conectado, share),    CPA_EST(spend, pdSdr.conectado, share),
+            EST(pdSdr.avaliado, share),     CPA_EST(spend, pdSdr.avaliado, share),
+            EST(pdCloser.r_agendada, share),CPA_EST(spend, pdCloser.r_agendada, share),
+            EST(pdCloser.r_realizada, share),CPA_EST(spend, pdCloser.r_realizada, share),
+            EST(pdCloser.oportunidade, share),CPA_EST(spend, pdCloser.oportunidade, share),
+            EST(pdCloser.negociacao, share),CPA_EST(spend, pdCloser.negociacao, share),
+            EST(pdCloser.venda, share, 'teal'),
+            CPA_EST(spend, pdCloser.venda, share),
+          ].join('');
+        }
       };
 
       const rows = [];
@@ -2561,9 +2610,8 @@
         totLeads += fd.leads;
         const fId  = 'tn' + (++idSeq);
         const { cpl: fCpl, ctr: fCtr, cpc: fCpc } = metaCols(fd);
-        const cac  = pdCloser.venda > 0 ? fd.spend / pdCloser.venda : null;
 
-        // Fonte row — Pipedrive totals shown here
+        // Fonte row — dados Pipedrive EXATOS (totais do período)
         rows.push(`<tr class="tree-row tree-lv0" data-id="${fId}">
           <td><div class="tree-cell">
             <span class="tree-toggle" onclick="toggleTree('${fId}',this)">−</span>
@@ -2572,32 +2620,16 @@
           ${NB(fd.spend,'gold')}
           ${NM(fd.leads)}
           ${NB(fCpl)}
-          ${NM(pdSdr.mql)}
-          ${CP(fd.spend, pdSdr.mql)}
-          ${NM(pdSdr.tentativa)}
-          ${CP(fd.spend, pdSdr.tentativa)}
-          ${NM(pdSdr.conectado)}
-          ${CP(fd.spend, pdSdr.conectado)}
-          ${NM(pdSdr.avaliado)}
-          ${CP(fd.spend, pdSdr.avaliado)}
-          ${NM(pdCloser.r_agendada)}
-          ${CP(fd.spend, pdCloser.r_agendada)}
-          ${NM(pdCloser.r_realizada)}
-          ${CP(fd.spend, pdCloser.r_realizada)}
-          ${NM(pdCloser.oportunidade)}
-          ${CP(fd.spend, pdCloser.oportunidade)}
-          ${NM(pdCloser.negociacao)}
-          ${CP(fd.spend, pdCloser.negociacao)}
-          ${NM(pdCloser.venda,'teal')}
-          ${NB(cac,'gold')}
+          ${pdCells(fd.spend, null, true)}
           ${NC(fCtr)}
           ${NC(fCpc)}
         </tr>`);
 
-        // Campaign rows
+        // Campaign rows — Pipedrive ESTIMADO por proporção de leads
         for (const [campName, cd] of Object.entries(fd.campaigns)) {
           const cId = 'tn' + (++idSeq);
           const { cpl: cCpl, ctr: cCtr, cpc: cCpc } = metaCols(cd);
+          const cShare = fd.leads > 0 ? cd.leads / fd.leads : 0;
 
           rows.push(`<tr class="tree-row tree-lv1" data-id="${cId}" data-parent="${fId}">
             <td><div class="tree-cell">
@@ -2608,17 +2640,16 @@
             ${NB(cd.spend)}
             ${NM(cd.leads)}
             ${NB(cCpl)}
-            ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-            ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-            ${DIM()}${DIM()}
+            ${pdCells(cd.spend, cShare, false)}
             ${NC(cCtr)}
             ${NC(cCpc)}
           </tr>`);
 
-          // Adset rows
+          // Adset rows — Pipedrive ESTIMADO por proporção de leads
           for (const [adsetName, asd] of Object.entries(cd.adsets)) {
             const asId = 'tn' + (++idSeq);
             const { cpl: aCpl, ctr: aCtr, cpc: aCpc } = metaCols(asd);
+            const aShare = fd.leads > 0 ? asd.leads / fd.leads : 0;
 
             rows.push(`<tr class="tree-row tree-lv2" data-id="${asId}" data-parent="${cId}" style="display:none">
               <td><div class="tree-cell">
@@ -2630,9 +2661,7 @@
               ${NB(asd.spend)}
               ${NM(asd.leads)}
               ${NB(aCpl)}
-              ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-              ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-              ${DIM()}${DIM()}
+              ${pdCells(asd.spend, aShare, false)}
               ${NC(aCtr)}
               ${NC(aCpc)}
             </tr>`);
@@ -2640,6 +2669,7 @@
             // Ad rows (leaf)
             for (const ad of asd.ads) {
               const adCpl = ad.leads > 0 ? ad.spend / ad.leads : null;
+              const adShare = fd.leads > 0 ? (ad.leads || 0) / fd.leads : 0;
               rows.push(`<tr class="tree-row tree-lv3" data-parent="${asId}" style="display:none">
                 <td><div class="tree-cell">
                   <span class="tree-indent"></span>
@@ -2651,9 +2681,7 @@
                 ${NB(ad.spend)}
                 ${NM(ad.leads)}
                 ${NB(adCpl)}
-                ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-                ${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}${DIM()}
-                ${DIM()}${DIM()}
+                ${pdCells(ad.spend, adShare, false)}
                 ${NC(ad.ctr && ad.ctr !== '0.00' ? ad.ctr+'%' : '—')}
                 ${NC(ad.cpc && ad.cpc !== '0.00' ? 'R$ '+ad.cpc : '—')}
               </tr>`);
@@ -2670,24 +2698,7 @@
         ${NB(totSpend,'gold')}
         ${NM(totLeads)}
         ${NB(totCpl)}
-        ${NM(pdSdr.mql)}
-        ${DIM()}
-        ${NM(pdSdr.tentativa)}
-        ${DIM()}
-        ${NM(pdSdr.conectado)}
-        ${DIM()}
-        ${NM(pdSdr.avaliado)}
-        ${DIM()}
-        ${NM(pdCloser.r_agendada)}
-        ${DIM()}
-        ${NM(pdCloser.r_realizada)}
-        ${DIM()}
-        ${NM(pdCloser.oportunidade)}
-        ${DIM()}
-        ${NM(pdCloser.negociacao)}
-        ${DIM()}
-        ${NM(pdCloser.venda,'teal')}
-        ${NB(totCac,'gold')}
+        ${pdCells(totSpend, null, true)}
         ${DIM()}${DIM()}
       </tr>`);
 
