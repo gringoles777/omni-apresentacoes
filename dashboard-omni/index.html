@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OMNI Brasil — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:       #050505;
+      --dark:        #0D0D0D;
+      --dark-el:     #1A1A1A;
+      --dark-tx:     #2D2D2D;
+      --gold:        #C8A84B;
+      --gold-light:  #E8C86A;
+      --gold-deep:   #9A7A2E;
+      --gold-10:     rgba(200,168,75,0.10);
+      --gold-20:     rgba(200,168,75,0.20);
+      --gold-30:     rgba(200,168,75,0.30);
+      --cream:       #F5F0E8;
+      --cream-70:    rgba(245,240,232,0.70);
+      --cream-40:    rgba(245,240,232,0.40);
+      --gray:        #6B6B6B;
+      --teal:        #2A9D8F;
+      --error:       #E05C5C;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grid pattern background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(200,168,75,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .login-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 420px;
+      padding: 48px 40px;
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,168,75,0.08);
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .logo-img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(200,168,75,0.3));
+    }
+
+    .logo-text {
+      text-align: center;
+    }
+
+    .logo-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+    }
+
+    .logo-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      margin-top: 4px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-20), transparent);
+      margin-bottom: 32px;
+    }
+
+    .form-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--dark);
+      border: 1px solid var(--dark-tx);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 200ms;
+    }
+
+    .form-input:focus {
+      border-color: var(--gold-30);
+    }
+
+    .form-input::placeholder {
+      color: var(--gray);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      border: none;
+      color: var(--black);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: box-shadow 200ms, opacity 200ms;
+      margin-top: 8px;
+    }
+
+    .btn-login:hover {
+      box-shadow: 0 0 24px rgba(200,168,75,0.35);
+    }
+
+    .btn-login:active {
+      opacity: 0.85;
+    }
+
+    .error-msg {
+      font-size: 0.8rem;
+      color: var(--error);
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .error-msg.show { display: block; }
+
+    .footer-label {
+      text-align: center;
+      margin-top: 32px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo-wrap">
+      <img class="logo-img"
+        src="https://omnihypnosis.com.br/wp-content/uploads/2023/03/logo-omni-hypnosis.png"
+        alt="OMNI"
+        onerror="this.style.display='none'">
+      <div class="logo-text">
+        <div class="logo-title">OMNI Brasil</div>
+        <div class="logo-sub">Central de Inteligência Comercial</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label class="form-label" for="password">Senha de acesso</label>
+        <input
+          class="form-input"
+          type="password"
+          id="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          autofocus>
+      </div>
+      <button class="btn-login" type="submit">Acessar Dashboard</button>
+      <div class="error-msg" id="errorMsg">Senha incorreta</div>
+    </form>
+
+    <div class="footer-label">OMNI Hypnosis Training Center · EST. 1979</div>
+  </div>
+
+  <script>
+    // Senha do dashboard — pode ser alterada aqui
+    const SENHA = 'omni2026';
+
+    // Se já autenticado, redireciona
+    if (sessionStorage.getItem('omni_auth') === 'true') {
+      window.location.href = 'dashboard.html';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const senha = document.getElementById('password').value;
+      const erro = document.getElementById('errorMsg');
+
+      if (senha === SENHA) {
+        sessionStorage.setItem('omni_auth', 'true');
+        window.location.href = 'dashboard.html';
+      } else {
+        erro.classList.add('show');
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+        setTimeout(() => erro.classList.remove('show'), 3000);
+      }
+    });
+  </script>
+</body>
+</html>
