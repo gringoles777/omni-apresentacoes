@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia: Conectar Google Ads | OMNI Brasil</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    padding: 40px 0 30px;
+    border-bottom: 2px solid #c8a432;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    color: #c8a432;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: #999;
+    font-size: 0.95rem;
+  }
+  .badge {
+    display: inline-block;
+    background: #c8a432;
+    color: #0a0a0a;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .etapa {
+    background: #141414;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .etapa::before {
+    content: attr(data-step);
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    background: #c8a432;
+    color: #0a0a0a;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+  .etapa h2 {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+    padding-top: 4px;
+  }
+  .etapa .tempo {
+    color: #c8a432;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+  ol.steps {
+    padding-left: 20px;
+  }
+  ol.steps li {
+    margin-bottom: 12px;
+    color: #ccc;
+  }
+  ol.steps li strong {
+    color: #fff;
+  }
+  .sub-steps {
+    margin-top: 8px;
+    padding-left: 18px;
+    list-style: disc;
+  }
+  .sub-steps li {
+    margin-bottom: 6px;
+    font-size: 0.93rem;
+  }
+  .destaque {
+    background: #1a1708;
+    border-left: 3px solid #c8a432;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+  }
+  .destaque strong { color: #c8a432; }
+  .alerta {
+    background: #1a0808;
+    border-left: 3px solid #e74c3c;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: #ddd;
+  }
+  .alerta strong { color: #e74c3c; }
+  .link-box {
+    display: block;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 10px 0;
+    color: #7eb8ff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    word-break: break-all;
+  }
+  .link-box:hover { background: #222244; }
+  .exemplo {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #aaa;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+  .resumo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  .resumo-table th {
+    background: #c8a432;
+    color: #0a0a0a;
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+  .resumo-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #222;
+    font-size: 0.88rem;
+  }
+  .resumo-table tr:nth-child(even) td {
+    background: #141414;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #c8a432;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  footer {
+    text-align: center;
+    padding: 30px 0 20px;
+    border-top: 1px solid #222;
+    margin-top: 40px;
+    color: #666;
+    font-size: 0.8rem;
+  }
+  footer span { color: #c8a432; }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    header h1 { font-size: 1.4rem; }
+    .etapa { padding: 22px 16px; }
+    .etapa h2 { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">AD-MIDAS / GOOGLE ADS</div>
+  <h1>Conectar Google Ads ao Ad-Midas</h1>
+  <p>Passo a passo para gerar as credenciais necessarias</p>
+</header>
+
+<!-- ETAPA 1 -->
+<div class="etapa" data-step="ETAPA 1">
+  <h2>Pegar seu Customer ID</h2>
+  <span class="tempo">~2 minutos</span>
+  <ol class="steps">
+    <li>Abra o Google Ads: <a class="link-box" href="https://ads.google.com" target="_blank">ads.google.com</a></li>
+    <li>Faca login com sua conta Google</li>
+    <li>No <strong>canto superior direito</strong>, voce vai ver um numero no formato:</li>
+  </ol>
+  <div class="exemplo">123-456-7890</div>
+  <ol class="steps" start="4">
+    <li><strong>Anote esse numero</strong> &mdash; esse e seu Customer ID</li>
+  </ol>
+</div>
+
+<!-- ETAPA 2 -->
+<div class="etapa" data-step="ETAPA 2">
+  <h2>Pegar o Developer Token</h2>
+  <span class="tempo">~5 minutos</span>
+  <ol class="steps">
+    <li>Dentro do Google Ads, clique no icone de <strong>ferramentas</strong> (chave inglesa) no topo</li>
+    <li>Em "Configuracao", procure <strong>"Centro de API"</strong> ou acesse direto:
+      <a class="link-box" href="https://ads.google.com/aw/apicenter" target="_blank">ads.google.com/aw/apicenter</a>
+    </li>
+    <li>Se nunca usou, vai aparecer um botao para <strong>solicitar acesso a API</strong> &mdash; clique e preencha</li>
+    <li>Nivel: <strong>Basico</strong> (suficiente para comecar)</li>
+    <li>Depois de aprovado, vai aparecer seu <strong>Developer Token</strong>:</li>
+  </ol>
+  <div class="exemplo">ABcdEfGhIjK123</div>
+  <ol class="steps" start="6">
+    <li><strong>Anote esse token</strong></li>
+  </ol>
+  <div class="destaque">
+    <strong>Nota:</strong> Se o acesso basico nao for aprovado na hora, o Google pode pedir revisao. Nesse caso, avise o Michael.
+  </div>
+</div>
+
+<!-- ETAPA 3 -->
+<div class="etapa" data-step="ETAPA 3">
+  <h2>Criar credenciais OAuth2 no Google Cloud</h2>
+  <span class="tempo">~10 minutos</span>
+
+  <p style="color:#999; margin-bottom:16px;">Essa e a parte mais longa, mas vai clique por clique:</p>
+
+  <h3 style="color:#c8a432; font-size:1rem; margin: 18px 0 10px;">3.1 &mdash; Criar projeto no Google Cloud</h3>
+  <ol class="steps">
+    <li>Acesse: <a class="link-box" href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a></li>
+    <li>Faca login com a <strong>MESMA conta Google</strong> do Google Ads</li>
+    <li>No topo, clique no seletor de projeto (ao lado de "Google Cloud")</li>
+    <li>Clique <strong>"Novo Projeto"</strong>
+      <ul class="sub-steps">
+        <li>Nome: <strong>OMNI Ads</strong> (ou qualquer nome)</li>
+        <li>Clique <strong>"Criar"</strong></li>
+      </ul>
+    </li>
+    <li>Selecione o projeto recem-criado</li>
+  </ol>
+
+  <h3 style="color:#c8a432; font-size:1rem; margin: 18px 0 10px;">3.2 &mdash; Ativar a API do Google Ads</h3>
+  <ol class="steps">
+    <li>No menu lateral, va em <strong>"APIs e Servicos" &gt; "Biblioteca"</strong></li>
+    <li>Pesquise por <strong>"Google Ads API"</strong></li>
+    <li>Clique no resultado e depois em <strong>"Ativar"</strong></li>
+  </ol>
+
+  <h3 style="color:#c8a432; font-size:1rem; margin: 18px 0 10px;">3.3 &mdash; Configurar tela de consentimento</h3>
+  <ol class="steps">
+    <li>Va em <strong>"APIs e Servicos" &gt; "Tela de consentimento OAuth"</strong></li>
+    <li>Escolha tipo <strong>"Externo"</strong> e clique "Criar"</li>
+    <li>Preencha:
+      <ul class="sub-steps">
+        <li>Nome do app: <strong>OMNI Ads</strong></li>
+        <li>E-mail de suporte: <strong>seu e-mail</strong></li>
+        <li>E-mail do desenvolvedor: <strong>seu e-mail</strong></li>
+      </ul>
+    </li>
+    <li>Clique <strong>"Salvar e Continuar"</strong> em todas as telas seguintes (pode pular escopos e usuarios de teste)</li>
+  </ol>
+
+  <h3 style="color:#c8a432; font-size:1rem; margin: 18px 0 10px;">3.4 &mdash; Criar as credenciais OAuth2</h3>
+  <ol class="steps">
+    <li>Va em <strong>"APIs e Servicos" &gt; "Credenciais"</strong></li>
+    <li>Clique <strong>"+ Criar Credenciais" &gt; "ID do cliente OAuth"</strong></li>
+    <li>Tipo de aplicativo: <strong>"App para computador"</strong> (Desktop app)</li>
+    <li>Nome: <strong>OMNI Ads Client</strong></li>
+    <li>Clique <strong>"Criar"</strong></li>
+    <li>Vai aparecer uma janela com dois valores:</li>
+  </ol>
+  <div class="exemplo">Client ID: 123456789-abc.apps.googleusercontent.com
+Client Secret: GOCSPX-abcdefg123</div>
+  <ol class="steps" start="7">
+    <li><strong>Anote os dois valores</strong></li>
+  </ol>
+</div>
+
+<!-- ETAPA 4 -->
+<div class="etapa" data-step="ETAPA 4">
+  <h2>Gerar o Refresh Token</h2>
+  <span class="tempo">~10 minutos</span>
+  <ol class="steps">
+    <li>Acesse: <a class="link-box" href="https://developers.google.com/oauthplayground" target="_blank">developers.google.com/oauthplayground</a></li>
+    <li>No canto superior direito, clique no icone de <strong>engrenagem</strong> (OAuth 2.0 configuration)</li>
+    <li>Marque <strong>"Use your own OAuth credentials"</strong></li>
+    <li>Cole o <strong>Client ID</strong> e o <strong>Client Secret</strong> que voce anotou na Etapa 3</li>
+    <li>Feche a engrenagem</li>
+    <li>No painel da esquerda, procure <strong>"Google Ads API"</strong>. Se nao aparecer, digite manualmente no campo "Input your own scopes":</li>
+  </ol>
+  <div class="exemplo">https://www.googleapis.com/auth/adwords</div>
+  <ol class="steps" start="7">
+    <li>Clique <strong>"Authorize APIs"</strong></li>
+    <li>Vai abrir tela do Google pedindo permissao &mdash; faca login e clique <strong>"Permitir"</strong></li>
+  </ol>
+  <div class="destaque">
+    <strong>App nao verificado?</strong> Se aparecer essa tela, clique em "Avancado" &gt; "Acessar OMNI Ads (nao seguro)". E normal para apps em desenvolvimento.
+  </div>
+  <ol class="steps" start="9">
+    <li>Voce vai voltar ao Playground. Clique <strong>"Exchange authorization code for tokens"</strong></li>
+    <li>Na resposta, procure o campo <strong>"refresh_token"</strong>:</li>
+  </ol>
+  <div class="exemplo">1//0abc-defg_HIJK...</div>
+  <ol class="steps" start="11">
+    <li><strong>Anote esse refresh token</strong></li>
+  </ol>
+</div>
+
+<!-- RESUMO -->
+<div class="etapa" data-step="RESUMO">
+  <h2>O que voce precisa enviar ao Michael</h2>
+  <span class="tempo">5 valores no total</span>
+  <table class="resumo-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>O que</th>
+        <th>Onde pegou</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Customer ID</strong></td>
+        <td>Google Ads, canto superior direito</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Developer Token</strong></td>
+        <td>Google Ads &gt; Ferramentas &gt; Centro de API</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Client ID</strong></td>
+        <td>Google Cloud &gt; Credenciais</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Client Secret</strong></td>
+        <td>Google Cloud &gt; Credenciais</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Refresh Token</strong></td>
+        <td>OAuth Playground</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alerta">
+    <strong>Seguranca:</strong> Nunca compartilhe esses tokens em grupo ou chat publico. Envie diretamente para o Michael em conversa privada.
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="etapa" data-step="CHECKLIST">
+  <h2>Marque conforme for completando</h2>
+  <div class="check-item"><div class="check-box"></div><span>Anotei o Customer ID</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Solicitei e anotei o Developer Token</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Criei o projeto no Google Cloud</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Ativei a Google Ads API</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Configurei a tela de consentimento</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Criei as credenciais OAuth2 (Client ID + Secret)</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Gerei o Refresh Token no OAuth Playground</span></div>
+  <div class="check-item"><div class="check-box"></div><span>Enviei os 5 valores para o Michael</span></div>
+</div>
+
+<footer>
+  <span>OMNI Brasil</span> &mdash; Guia gerado pelo Ad-Midas | Abril 2026
+</footer>
+
+</div>
+</body>
+</html>

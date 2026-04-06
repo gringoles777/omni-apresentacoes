@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise Meta Ads — Conta Formação | OMNI Brasil</title>
+<style>
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245, 240, 232, 0.70);
+    --color-cream-50: rgba(245, 240, 232, 0.50);
+    --color-teal: #2A9D8F;
+    --color-gray: #6B6B6B;
+    --color-red: #E74C3C;
+    --color-green: #27AE60;
+    --color-yellow: #F39C12;
+    --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--color-black);
+    color: var(--color-cream);
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(180deg, var(--color-dark-elevated) 0%, var(--color-black) 100%);
+    border-bottom: 2px solid var(--color-gold);
+    padding: 40px 20px 30px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .header .subtitle {
+    color: var(--color-cream-70);
+    font-size: 0.95rem;
+  }
+
+  .header .date {
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    margin-top: 5px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    color: var(--color-gold);
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-gold-deep);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .kpi-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-dark-texture);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .kpi-card .label {
+    color: var(--color-cream-70);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .kpi-card .value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-gold-light);
+    margin: 5px 0;
+  }
+
+  .kpi-card .sub {
+    font-size: 0.75rem;
+    color: var(--color-gray);
+  }
+
+  .kpi-card.highlight {
+    border-color: var(--color-gold);
+    background: linear-gradient(180deg, rgba(200,168,75,0.08) 0%, var(--color-dark-elevated) 100%);
+  }
+
+  .kpi-card.danger .value { color: var(--color-red); }
+  .kpi-card.success .value { color: var(--color-green); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
+  th {
+    background: var(--color-dark-elevated);
+    color: var(--color-gold);
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-gold-deep);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--color-dark-texture);
+    color: var(--color-cream-70);
+  }
+
+  tr:hover td {
+    background: rgba(200,168,75,0.05);
+  }
+
+  .text-right { text-align: right; }
+  .text-center { text-align: center; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .badge-green { background: rgba(39,174,96,0.2); color: var(--color-green); }
+  .badge-yellow { background: rgba(243,156,18,0.2); color: var(--color-yellow); }
+  .badge-red { background: rgba(231,76,60,0.2); color: var(--color-red); }
+  .badge-gold { background: rgba(200,168,75,0.2); color: var(--color-gold); }
+
+  .insight-box {
+    background: var(--color-dark-elevated);
+    border-left: 3px solid var(--color-gold);
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .insight-box h3 {
+    color: var(--color-gold-light);
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .insight-box p {
+    color: var(--color-cream-70);
+    font-size: 0.85rem;
+  }
+
+  .insight-box.danger { border-left-color: var(--color-red); }
+  .insight-box.danger h3 { color: var(--color-red); }
+  .insight-box.success { border-left-color: var(--color-green); }
+  .insight-box.success h3 { color: var(--color-green); }
+
+  .action-table td:first-child {
+    font-weight: 600;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--color-gray);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--color-dark-texture);
+    margin-top: 40px;
+  }
+
+  .footer .brand {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.3rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 0.75rem; }
+    th, td { padding: 6px 4px; }
+    .container { padding: 10px; }
+  }
+
+  .highlight-row td {
+    background: rgba(200,168,75,0.08);
+    font-weight: 600;
+  }
+
+  .total-row td {
+    background: var(--color-dark-elevated);
+    font-weight: 700;
+    color: var(--color-cream);
+    border-top: 2px solid var(--color-gold-deep);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Analise Meta Ads — Conta Formacao</h1>
+  <div class="subtitle">Campanhas Ativas | Cruzamento com Pipedrive CRM</div>
+  <div class="date">06 de Abril de 2026 | Dados: Jan-Abr 2026</div>
+</div>
+
+<div class="container">
+
+  <!-- KPIs -->
+  <div class="section">
+    <h2>Visao Geral</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card highlight">
+        <div class="label">Investimento Total</div>
+        <div class="value">R$23.956</div>
+        <div class="sub">8 campanhas ativas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Leads Gerados</div>
+        <div class="value">2.204</div>
+        <div class="sub">CPL medio R$10,87</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">Reunioes Realizadas</div>
+        <div class="value">43</div>
+        <div class="sub">CPR medio R$557</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="label">Vendas (Won)</div>
+        <div class="value">3</div>
+        <div class="sub">R$17.787 faturados</div>
+      </div>
+      <div class="kpi-card danger">
+        <div class="label">ROAS Geral</div>
+        <div class="value">0,74x</div>
+        <div class="sub">Abaixo do breakeven</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Por Campanha -->
+  <div class="section">
+    <h2>Performance por Campanha</h2>
+    <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campanha</th>
+          <th>Tipo</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Leads</th>
+          <th class="text-right">CPL</th>
+          <th class="text-right">Reunioes</th>
+          <th class="text-right">CPR</th>
+          <th class="text-right">Won</th>
+          <th class="text-right">Valor</th>
+          <th class="text-right">ROAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>1</td>
+          <td>PG-B (principal)</td>
+          <td><span class="badge badge-gold">ABO</span></td>
+          <td class="text-right">R$10.602</td>
+          <td class="text-right">1.491</td>
+          <td class="text-right">R$7,11</td>
+          <td class="text-right">34</td>
+          <td class="text-right"><strong>R$312</strong></td>
+          <td class="text-right">3</td>
+          <td class="text-right">R$17.787</td>
+          <td class="text-right"><span class="badge badge-green">1,68x</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>PG-B API</td>
+          <td><span class="badge badge-gold">CBO</span></td>
+          <td class="text-right">R$6.397</td>
+          <td class="text-right">558</td>
+          <td class="text-right">R$11,46</td>
+          <td class="text-right">7</td>
+          <td class="text-right">R$914</td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Engajamento</td>
+          <td><span class="badge badge-gold">ABO</span></td>
+          <td class="text-right">R$4.294</td>
+          <td class="text-right">559 msgs</td>
+          <td class="text-right">R$7,68</td>
+          <td class="text-right">—</td>
+          <td class="text-right">—</td>
+          <td class="text-right">—</td>
+          <td class="text-right">—</td>
+          <td class="text-right"><span class="badge badge-yellow">N/A</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Teste de Criativo</td>
+          <td><span class="badge badge-gold">ABO</span></td>
+          <td class="text-right">R$1.291</td>
+          <td class="text-right">66</td>
+          <td class="text-right">R$19,55</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span style="color:var(--color-red);">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Nova Formacao V2</td>
+          <td><span class="badge badge-gold">CBO</span></td>
+          <td class="text-right">R$562</td>
+          <td class="text-right">23</td>
+          <td class="text-right">R$24,44</td>
+          <td class="text-right">0</td>
+          <td class="text-right">—</td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-yellow">novo</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>O-LEADS PQ</td>
+          <td><span class="badge badge-gold">ABO</span></td>
+          <td class="text-right">R$275</td>
+          <td class="text-right">64</td>
+          <td class="text-right">R$4,30</td>
+          <td class="text-right">2</td>
+          <td class="text-right"><strong>R$138</strong></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-yellow">0x</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Consultoria</td>
+          <td><span class="badge badge-gold">CBO</span></td>
+          <td class="text-right">R$333</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$333</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span style="color:var(--color-red);">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Consultoria-Form</td>
+          <td><span class="badge badge-gold">CBO</span></td>
+          <td class="text-right">R$202</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$202</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span style="color:var(--color-red);">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td>TOTAL</td>
+          <td></td>
+          <td class="text-right">R$23.956</td>
+          <td class="text-right">2.204</td>
+          <td class="text-right">R$10,87</td>
+          <td class="text-right">43</td>
+          <td class="text-right">R$557</td>
+          <td class="text-right">3</td>
+          <td class="text-right">R$17.787</td>
+          <td class="text-right">0,74x</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Por Conjunto -->
+  <div class="section">
+    <h2>Performance por Conjunto de Anuncios</h2>
+    <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Conjunto</th>
+          <th class="text-right">Spend</th>
+          <th class="text-right">Leads</th>
+          <th class="text-right">CPL</th>
+          <th class="text-right">Reunioes</th>
+          <th class="text-right">CPR</th>
+          <th class="text-right">Won</th>
+          <th class="text-right">Valor</th>
+          <th class="text-right">ROAS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>1</td>
+          <td>STORY INTERESSE</td>
+          <td class="text-right">R$1.690</td>
+          <td class="text-right">283</td>
+          <td class="text-right">R$5,97</td>
+          <td class="text-right"><strong>17</strong></td>
+          <td class="text-right"><span class="badge badge-green">R$99</span></td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$14.290</td>
+          <td class="text-right"><span class="badge badge-green">8,5x</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>FEED SP-INTERESSE</td>
+          <td class="text-right">R$1.820</td>
+          <td class="text-right">252</td>
+          <td class="text-right">R$7,22</td>
+          <td class="text-right">8</td>
+          <td class="text-right"><span class="badge badge-yellow">R$228</span></td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$497</td>
+          <td class="text-right"><span class="badge badge-red">0,3x</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>STORY SP-INTERESSE</td>
+          <td class="text-right">R$4.929</td>
+          <td class="text-right">684</td>
+          <td class="text-right">R$7,21</td>
+          <td class="text-right">7</td>
+          <td class="text-right"><span class="badge badge-red">R$704</span></td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$3.000</td>
+          <td class="text-right"><span class="badge badge-red">0,6x</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Encerrou contato (ADV)</td>
+          <td class="text-right">R$7.408</td>
+          <td class="text-right">581</td>
+          <td class="text-right">R$12,75</td>
+          <td class="text-right">7</td>
+          <td class="text-right"><span class="badge badge-red">R$1.058</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>@omnibr (envolvimento)</td>
+          <td class="text-right">R$284</td>
+          <td class="text-right">141</td>
+          <td class="text-right">R$2,01</td>
+          <td class="text-right">8</td>
+          <td class="text-right"><span class="badge badge-green">R$36</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-yellow">0x</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Terapeuta/PSI +40</td>
+          <td class="text-right">R$603</td>
+          <td class="text-right">52</td>
+          <td class="text-right">R$11,59</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span class="badge badge-red">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>IG&FB SP-INTER. (teste)</td>
+          <td class="text-right">R$723</td>
+          <td class="text-right">51</td>
+          <td class="text-right">R$14,18</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span class="badge badge-red">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Consultoria + Consult-Form</td>
+          <td class="text-right">R$535</td>
+          <td class="text-right">2</td>
+          <td class="text-right">R$268</td>
+          <td class="text-right">0</td>
+          <td class="text-right"><span class="badge badge-red">&#8734;</span></td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+          <td class="text-right"><span class="badge badge-red">0x</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Funil Pipedrive -->
+  <div class="section">
+    <h2>Funil Pipedrive — Cruzamento por Conjunto (2026)</h2>
+    <div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Conjunto (utm_medium)</th>
+          <th class="text-right">Leads CRM</th>
+          <th class="text-right">Agendadas</th>
+          <th class="text-right">Reunioes</th>
+          <th class="text-right">% Conversao</th>
+          <th class="text-right">Won</th>
+          <th class="text-right">Valor Won</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>STORY INTERESSE</td>
+          <td class="text-right">662</td>
+          <td class="text-right">28</td>
+          <td class="text-right">17</td>
+          <td class="text-right">2,6%</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$14.290</td>
+        </tr>
+        <tr>
+          <td>STORY SP-INTERESSE</td>
+          <td class="text-right">482</td>
+          <td class="text-right">16</td>
+          <td class="text-right">7</td>
+          <td class="text-right">1,5%</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$3.000</td>
+        </tr>
+        <tr>
+          <td>FEED SP-INTERESSE</td>
+          <td class="text-right">380</td>
+          <td class="text-right">11</td>
+          <td class="text-right">8</td>
+          <td class="text-right">2,1%</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$497</td>
+        </tr>
+        <tr>
+          <td>Orgânico (bio)</td>
+          <td class="text-right">326</td>
+          <td class="text-right">28</td>
+          <td class="text-right">17</td>
+          <td class="text-right">5,2%</td>
+          <td class="text-right">1</td>
+          <td class="text-right">R$7.500</td>
+        </tr>
+        <tr>
+          <td>FEED INTERESSE</td>
+          <td class="text-right">277</td>
+          <td class="text-right">4</td>
+          <td class="text-right">2</td>
+          <td class="text-right">0,7%</td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+        </tr>
+        <tr>
+          <td>Encerrou contato (ADV)</td>
+          <td class="text-right">210</td>
+          <td class="text-right">12</td>
+          <td class="text-right">7</td>
+          <td class="text-right">3,3%</td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+        </tr>
+        <tr>
+          <td>@omnibr (envolvimento)</td>
+          <td class="text-right">141</td>
+          <td class="text-right">9</td>
+          <td class="text-right">8</td>
+          <td class="text-right">5,7%</td>
+          <td class="text-right">0</td>
+          <td class="text-right">R$0</td>
+        </tr>
+        <tr>
+          <td>Social Seller</td>
+          <td class="text-right">56</td>
+          <td class="text-right">32</td>
+          <td class="text-right">15</td>
+          <td class="text-right">26,8%</td>
+          <td class="text-right">4</td>
+          <td class="text-right">R$8.997</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Insights -->
+  <div class="section">
+    <h2>Insights Estrategicos</h2>
+
+    <div class="insight-box success">
+      <h3>STORY INTERESSE e o melhor conjunto da conta</h3>
+      <p>CPR de R$99 (5x melhor que a media), ROAS de 8,5x com venda de R$14.290 (high ticket). CPL mais barato: R$5,97. Este conjunto deve receber mais budget.</p>
+    </div>
+
+    <div class="insight-box success">
+      <h3>@omnibr tem o CPR mais baixo: R$36</h3>
+      <p>Com apenas R$284 de investimento, gerou 8 reunioes (5,7% de conversao lead-reuniao). Potencial de escala significativo — budget atual de R$25/dia e muito baixo.</p>
+    </div>
+
+    <div class="insight-box danger">
+      <h3>"Encerrou contato" (remarketing) consome 31% do budget sem vendas</h3>
+      <p>R$7.408 gastos, 7 reunioes (CPR R$1.058), ZERO vendas. E o remarketing mais caro da conta. O publico que encerrou contato nao esta convertendo em venda.</p>
+    </div>
+
+    <div class="insight-box danger">
+      <h3>STORY SP-INTERESSE gasta 3x mais que STORY INTERESSE com 2,4x menos reunioes</h3>
+      <p>R$4.929 vs R$1.690 de spend, mas apenas 7 vs 17 reunioes. O targeting "Sao Paulo + Interesse" gera volume de lead frio. CPR de R$704 vs R$99.</p>
+    </div>
+
+    <div class="insight-box">
+      <h3>Terapeuta/PSI, Teste Criativo e Consultorias: zero reunioes</h3>
+      <p>R$1.861 gastos combinados sem nenhuma reuniao realizada. Terapeuta/PSI (R$603, ativo) deve ser pausado. Consultorias sao recentes (&lt;7 dias), monitorar antes de decidir.</p>
+    </div>
+
+    <div class="insight-box">
+      <h3>ROAS geral abaixo de 1x — operacao no prejuizo</h3>
+      <p>R$23.956 investidos para R$17.787 de receita (ROAS 0,74x). Porem, a campanha PG-B isoladamente tem ROAS 1,68x. O problema esta nos conjuntos que gastam sem converter.</p>
+    </div>
+  </div>
+
+  <!-- Recomendacoes -->
+  <div class="section">
+    <h2>Recomendacoes de Acao</h2>
+    <div style="overflow-x: auto;">
+    <table class="action-table">
+      <thead>
+        <tr>
+          <th>Acao</th>
+          <th>Conjunto</th>
+          <th>Budget Atual</th>
+          <th>Sugestao</th>
+          <th>Motivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-green">ESCALAR</span></td>
+          <td>STORY INTERESSE</td>
+          <td>R$20/dia</td>
+          <td><strong>R$80/dia</strong></td>
+          <td>Melhor CPR (R$99), ROAS 8,5x</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-green">ESCALAR</span></td>
+          <td>@omnibr PQ</td>
+          <td>R$25/dia</td>
+          <td><strong>R$60/dia</strong></td>
+          <td>CPR R$36, testar escala</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-yellow">MANTER</span></td>
+          <td>FEED SP-INTERESSE</td>
+          <td>R$40/dia</td>
+          <td>R$40/dia</td>
+          <td>CPR R$228, aceitavel</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-yellow">REDUZIR</span></td>
+          <td>STORY SP-INTERESSE</td>
+          <td>R$150/dia</td>
+          <td><strong>R$80/dia</strong></td>
+          <td>CPR R$704, alto demais p/ volume</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-yellow">REDUZIR</span></td>
+          <td>Encerrou contato (ADV)</td>
+          <td>CBO R$50/dia</td>
+          <td><strong>R$25/dia</strong></td>
+          <td>CPR R$1.058, zero vendas</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">KILL</span></td>
+          <td>Terapeuta/PSI +40</td>
+          <td>R$25/dia</td>
+          <td><strong>Pausar</strong></td>
+          <td>R$603, zero reunioes</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-yellow">MONITORAR</span></td>
+          <td>Consultoria / Consult-Form</td>
+          <td>CBO R$50 cada</td>
+          <td>Kill se 0 reun em 7d</td>
+          <td>Muito recentes, aguardar dados</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-yellow">MONITORAR</span></td>
+          <td>Teste Criativo</td>
+          <td>R$20/dia</td>
+          <td>Aguardar +7 dias</td>
+          <td>Sem data suficiente</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- Nota sobre equipe -->
+  <div class="section">
+    <h2>Impacto na Equipe Comercial</h2>
+    <div class="insight-box">
+      <h3>Redistribuicao mantem volume de leads, melhora qualidade</h3>
+      <p>A proposta libera ~R$120/dia dos conjuntos em reducao/kill e redireciona para STORY INTERESSE (+R$60) e @omnibr (+R$35). O volume total de leads se mantem proximo (CPL similar), mas a proporcao de leads que convertem em reuniao aumenta significativamente. O STORY INTERESSE tem taxa de conversao lead-reuniao de 2,6% vs 1,2% do Encerrou Contato — e o unico que gera vendas high-ticket (R$14.290).</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p><span class="brand">OMNI Brasil</span> — Relatorio gerado por Midas (Media Strategist)</p>
+  <p>Dados: Meta Ads API + Pipedrive CRM | 06/04/2026</p>
+</div>
+
+</body>
+</html>
