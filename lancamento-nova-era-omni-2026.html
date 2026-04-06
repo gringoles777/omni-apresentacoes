@@ -1522,10 +1522,9 @@ th,td{padding:8px 10px}
 </div>
 </section>
 
-</main>
-
 <!-- FOOTER SPACING -->
 <div style="height:80px"></div>
+
 </main>
 
 <!-- JAVASCRIPT -->
@@ -1552,7 +1551,7 @@ const pb=document.getElementById('progress-bar');
 window.addEventListener('scroll',()=>{const h=document.documentElement;const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;pb.style.width=pct+'%';});
 
 // Intersection Observer for fade-in
-const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.tagName==='SECTION'){const id=e.target.id;document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));const active=document.querySelector('nav a[href="#'+id+'"]');if(active)active.classList.add('active');}};});},{threshold:0.15});
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.tagName==='SECTION'){const id=e.target.id;document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));const active=document.querySelector('nav a[href="#'+id+'"]');if(active)active.classList.add('active');}};});},{threshold:0.05,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('section').forEach(s=>obs.observe(s));
 document.querySelectorAll('.fade-child').forEach(el=>obs.observe(el));
 
