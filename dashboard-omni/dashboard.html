@@ -2422,21 +2422,42 @@
         const { from, to } = getDateRange();
         const qs = `from=${from}&to=${to}`;
 
-        const [rCampaigns, rFunnel, rKPIs, rMeta] = await Promise.allSettled([
+        const [rCampaigns, rFunnel, rKPIs, rMeta, rClosers, rSDRs, rSDRIA, rAQRC, rMetaLP, rMetaFN, rMetaDaily] = await Promise.allSettled([
           fetch(`${API}/api/meta/campaigns?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/funnel?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/kpis?${qs}`).then(r => r.json()),
           fetch(`${API}/api/meta/overview?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/pipedrive/closers?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/pipedrive/sdrs?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/pipedrive/sdr-ia?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/pipedrive/aqrc?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/meta/funnel-lp?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/meta/funnel-form?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/meta/daily?${qs}`).then(r => r.json()),
         ]);
 
         const campaigns = rCampaigns.status === 'fulfilled' ? (rCampaigns.value?.campaigns || []) : [];
         const funnel    = rFunnel.status    === 'fulfilled' ? rFunnel.value    : null;
         const kpis      = rKPIs.status      === 'fulfilled' ? rKPIs.value      : null;
         const meta      = rMeta.status      === 'fulfilled' ? rMeta.value      : null;
+        const closers   = rClosers.status   === 'fulfilled' ? rClosers.value   : null;
+        const sdrs      = rSDRs.status      === 'fulfilled' ? rSDRs.value      : null;
+        const sdrIA     = rSDRIA.status     === 'fulfilled' ? rSDRIA.value     : null;
+        const aqrc      = rAQRC.status      === 'fulfilled' ? rAQRC.value      : null;
+        const metaLP    = rMetaLP.status    === 'fulfilled' ? rMetaLP.value    : null;
+        const metaFN    = rMetaFN.status    === 'fulfilled' ? rMetaFN.value    : null;
+        const metaDaily = rMetaDaily.status === 'fulfilled' ? rMetaDaily.value : null;
 
         renderGerenciador(campaigns, funnel);
         if (kpis) renderKPIs(kpis);
         if (meta) renderMetaOverview(meta);
+        if (funnel) renderVisaoGeralFunnels(funnel, meta);
+        if (closers) renderClosers(closers);
+        if (sdrs) renderSDRs(sdrs);
+        if (sdrIA) renderSDRIA(sdrIA);
+        if (aqrc) renderAQRC(aqrc);
+        if (metaLP || metaFN) renderMetaFunnels(metaLP, metaFN);
+        if (metaDaily) renderMetaDaily(metaDaily);
 
       } catch (e) {
         console.error('[loadAll]', e);
@@ -2460,16 +2481,15 @@
     }
 
     // ─── renderKPIs ──────────────────────────────────────────
+    // Store kpis globally for use in renderVisaoGeralFunnels
+    let _lastKpis = null;
     function renderKPIs(d) {
       if (!d?.ok) return;
+      _lastKpis = d;
       const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      set('kpi-leads',    fmtInt(d.leads));
-      set('kpi-mql',      fmtInt(d.mql));
-      set('kpi-reunioes', fmtInt(d.r_realizadas));
-      set('kpi-vendas',   fmtInt(d.vendas));
-      set('kpi-invest',   'R$ ' + fmtBRL(d.invest));
-      set('kpi-cpl',      d.cpl ? 'R$ ' + fmtBRL(d.cpl) : '—');
-      set('kpi-cac',      d.cac ? 'R$ ' + fmtBRL(d.cac) : '—');
+      // KPIs endpoint returns: faturamento, vendas
+      set('kpi-fat', 'R$ ' + fmtBRL(d.faturamento || 0, 0));
+      set('kpi-fat-delta', d.vendas ? fmtInt(d.vendas) + ' vendas' : '');
     }
 
     // ─── renderMetaOverview ──────────────────────────────────
@@ -2703,6 +2723,523 @@
       </tr>`);
 
       tbody.innerHTML = rows.join('');
+    }
+
+    // ─── renderVisaoGeralFunnels ──────────────────────────────
+    // Popula os funis SDR e Closer no painel Visao Geral + KPIs faltantes
+    function renderVisaoGeralFunnels(funnel, meta) {
+      if (!funnel?.ok) return;
+      const sdr = funnel.sdr || {};
+      const cl  = funnel.closer || {};
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+      // --- Funil SDR ---
+      const sdrMax = Math.max(sdr.mql || 0, 1);
+      set('sdr-v-mql',  fmtInt(sdr.mql));
+      set('sdr-v-tent', fmtInt(sdr.tentativa));
+      set('sdr-v-con',  fmtInt(sdr.conectado));
+      set('sdr-v-aval', fmtInt(sdr.avaliado));
+
+      // barras proporcionais
+      const sdrBars = [
+        { id: null, val: sdr.mql },
+        { id: null, val: sdr.tentativa },
+        { id: null, val: sdr.conectado },
+        { id: null, val: sdr.avaliado },
+      ];
+      const funnelSDR = document.getElementById('funnel-sdr');
+      if (funnelSDR) {
+        const bars = funnelSDR.querySelectorAll('.funnel-bar');
+        sdrBars.forEach((b, i) => {
+          if (bars[i]) bars[i].style.width = Math.max((b.val || 0) / sdrMax * 100, 4) + '%';
+        });
+      }
+
+      // conversoes entre etapas SDR
+      const sdrConvs = [
+        { id: 'sdr-c-tent', from: sdr.mql, to: sdr.tentativa },
+        { id: 'sdr-c-con',  from: sdr.tentativa, to: sdr.conectado },
+        { id: 'sdr-c-aval', from: sdr.conectado, to: sdr.avaliado },
+      ];
+      sdrConvs.forEach(c => {
+        const el = document.getElementById(c.id);
+        if (!el) return;
+        const span = el.querySelector('span');
+        if (span) span.textContent = c.from > 0 ? (c.to / c.from * 100).toFixed(1) + '%' : '--';
+      });
+
+      // conv total SDR
+      const sdrConvTotal = sdr.mql > 0 ? (sdr.avaliado / sdr.mql * 100).toFixed(1) : '0';
+      set('funil-sdr-conv-total', 'Conv. total: ' + sdrConvTotal + '%');
+
+      // --- Funil Closer ---
+      const clMax = Math.max(cl.r_agendada || 0, 1);
+      set('cl-v-ag',    fmtInt(cl.r_agendada));
+      set('cl-v-real',  fmtInt(cl.r_realizada));
+      set('cl-v-opor',  fmtInt(cl.oportunidade));
+      set('cl-v-neg',   fmtInt(cl.negociacao));
+      set('cl-v-venda', fmtInt(cl.venda));
+
+      const funnelCL = document.getElementById('funnel-closer');
+      if (funnelCL) {
+        const bars = funnelCL.querySelectorAll('.funnel-bar');
+        const clVals = [cl.r_agendada, cl.r_realizada, cl.oportunidade, cl.negociacao, cl.venda];
+        clVals.forEach((v, i) => {
+          if (bars[i]) bars[i].style.width = Math.max((v || 0) / clMax * 100, 4) + '%';
+        });
+      }
+
+      const clConvs = [
+        { id: 'cl-c-real',  from: cl.r_agendada, to: cl.r_realizada },
+        { id: 'cl-c-opor',  from: cl.r_realizada, to: cl.oportunidade },
+        { id: 'cl-c-neg',   from: cl.oportunidade, to: cl.negociacao },
+        { id: 'cl-c-venda', from: cl.negociacao, to: cl.venda },
+      ];
+      clConvs.forEach(c => {
+        const el = document.getElementById(c.id);
+        if (!el) return;
+        const span = el.querySelector('span');
+        if (span) span.textContent = c.from > 0 ? (c.to / c.from * 100).toFixed(1) + '%' : '--';
+      });
+
+      const clConvTotal = cl.r_agendada > 0 ? (cl.venda / cl.r_agendada * 100).toFixed(1) : '0';
+      set('funil-closer-conv-total', 'Conv. total: ' + clConvTotal + '%');
+
+      // --- Visao Geral KPIs ---
+      const totalSpend = meta?.spend || 0;
+      const fat = _lastKpis?.faturamento || 0;
+      set('kpi-fat',     'R$ ' + fmtBRL(fat, 0));
+      set('kpi-inv',     'R$ ' + fmtBRL(totalSpend, 0));
+      const roas = totalSpend > 0 ? (fat / totalSpend).toFixed(1) : '0';
+      set('kpi-roas',    roas + 'x');
+      set('kpi-cac',     cl.venda > 0 ? 'R$ ' + fmtBRL(totalSpend / cl.venda, 0) : '--');
+      // rastreio = MQL Pipedrive / leads Meta
+      const rastreio = meta?.leads > 0 ? ((sdr.mql / meta.leads) * 100).toFixed(1) : '0';
+      set('kpi-rastreio', rastreio + '%');
+
+      // deltas -- limpar placeholders
+      const fDelta = document.getElementById('kpi-fat-delta');
+      if (fDelta && _lastKpis?.vendas) { fDelta.textContent = fmtInt(_lastKpis.vendas) + ' vendas'; fDelta.className = 'kpi-delta neutral'; }
+      ['kpi-inv-delta','kpi-roas-delta','kpi-cac-delta','kpi-rastreio-delta'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.textContent = ''; el.className = 'kpi-delta neutral'; }
+      });
+
+      // Visao Geral: metricas de trafego
+      set('mt-clicks',    fmtInt(meta?.clicks));
+      set('mt-cpc',       meta?.cpc ? 'R$ ' + fmtBRL(meta.cpc) : '--');
+      set('mt-impressoes', fmtInt(meta?.impressions));
+      set('mt-cpm',       meta?.cpm ? 'R$ ' + fmtBRL(meta.cpm) : '--');
+      set('mt-ctr',       meta?.ctr ? meta.ctr + '%' : '--');
+      set('mt-leads',     fmtInt(meta?.leads));
+    }
+
+    // ─── renderClosers ───────────────────────────────────────
+    function renderClosers(data) {
+      if (!data?.ok || !data.closers) return;
+      const chart = document.getElementById('closer-vert-chart');
+      if (!chart) return;
+
+      const closers = data.closers.filter(c => (c.r_realizadas || 0) + (c.r_agendadas || 0) > 0);
+      if (!closers.length) {
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de closers para o periodo.</div>';
+        return;
+      }
+
+      const maxTotal = Math.max(...closers.map(c => (c.r_realizadas||0) + (c.oportunidades||0) + (c.negociacoes||0) + (c.vendas||0)), 1);
+      const maxBarH = 280;
+
+      let html = '';
+      closers.forEach((c, idx) => {
+        const total = (c.r_realizadas||0) + (c.oportunidades||0) + (c.negociacoes||0) + (c.vendas||0);
+        const barH = Math.max(total / maxTotal * maxBarH, 40);
+
+        const pctReal  = total > 0 ? (c.r_realizadas||0) / total * 100 : 0;
+        const pctOpor  = total > 0 ? (c.oportunidades||0) / total * 100 : 0;
+        const pctNeg   = total > 0 ? (c.negociacoes||0) / total * 100 : 0;
+        const pctVenda = total > 0 ? (c.vendas||0) / total * 100 : 0;
+
+        // conv rates
+        const convRealOpor = (c.r_realizadas||0) > 0 ? ((c.oportunidades||0)/(c.r_realizadas)*100).toFixed(0) : '0';
+        const convOporNeg  = (c.oportunidades||0) > 0 ? ((c.negociacoes||0)/(c.oportunidades)*100).toFixed(0) : '0';
+        const convNegVenda = (c.negociacoes||0) > 0 ? ((c.vendas||0)/(c.negociacoes)*100).toFixed(0) : '0';
+        // fallback: se negociacoes=0, conv direto de oportunidade pra venda
+        const convLastLabel = (c.negociacoes||0) > 0 ? convNegVenda : ((c.oportunidades||0) > 0 ? ((c.vendas||0)/(c.oportunidades)*100).toFixed(0) : '0');
+
+        const initials = c.name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+        const noshowClass = (c.noshow||0) <= 20 ? 'ok' : (c.noshow||0) <= 40 ? 'warn' : 'bad';
+
+        html += `<div class="vert-col">
+          <div class="vert-bar-wrap">
+            <div class="vert-bar" style="height:${barH}px">
+              <div class="vert-seg vseg-venda" style="height:${Math.max(pctVenda,2)}%">
+                <span class="vert-seg-num">${c.vendas||0}</span>
+                <span class="vert-seg-pct">${pctVenda.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-neg" style="height:${Math.max(pctNeg,2)}%">
+                <span class="vert-seg-num">${c.negociacoes||0}</span>
+                <span class="vert-seg-pct">${pctNeg.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-opor" style="height:${Math.max(pctOpor,2)}%">
+                <span class="vert-seg-num">${c.oportunidades||0}</span>
+                <span class="vert-seg-pct">${pctOpor.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-real" style="height:${Math.max(pctReal,2)}%">
+                <span class="vert-seg-num">${c.r_realizadas||0}</span>
+                <span class="vert-seg-pct">${pctReal.toFixed(0)}%</span>
+              </div>
+            </div>
+            <div class="vert-conv-col" id="closer-conv-col-${idx}">
+              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convLastLabel}%</span></div>
+              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convOporNeg}%</span></div>
+              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convRealOpor}%</span></div>
+            </div>
+          </div>
+          <div class="vert-agent-info">
+            <div class="vert-avatar">${c.avatar ? '<img src="'+c.avatar+'">' : initials}</div>
+            <div class="vert-name">${c.name.split(' ').slice(0,2).join(' ')}</div>
+            <div class="vert-fat">R$ ${fmtBRL(c.faturamento||0, 0)}</div>
+            <div class="vert-noshow">
+              <span class="vert-noshow-label">No-show</span>
+              <span class="vert-noshow-val ${noshowClass}">${c.noshow||0}%</span>
+            </div>
+          </div>
+        </div>`;
+      });
+
+      chart.innerHTML = html;
+
+      // Update closer conversion chart
+      _updateCloserConvChart(closers);
+    }
+
+    function _updateCloserConvChart(closers) {
+      // Aggregate all closers
+      let totReal=0, totOpor=0, totNeg=0, totVenda=0;
+      closers.forEach(c => {
+        totReal  += c.r_realizadas||0;
+        totOpor  += c.oportunidades||0;
+        totNeg   += c.negociacoes||0;
+        totVenda += c.vendas||0;
+      });
+      const c1 = totReal > 0 ? (totOpor/totReal*100).toFixed(1) : 0;
+      const c2 = totOpor > 0 ? (totNeg/totOpor*100).toFixed(1) : 0;
+      const c3 = totNeg > 0 ? (totVenda/totNeg*100).toFixed(1) : (totOpor > 0 ? (totVenda/totOpor*100).toFixed(1) : 0);
+
+      if (chartCloserConv) {
+        chartCloserConv.data.datasets[0].data = [parseFloat(c1), parseFloat(c2), parseFloat(c3)];
+        chartCloserConv.update();
+      }
+    }
+
+    // ─── renderSDRs ──────────────────────────────────────────
+    function renderSDRs(data) {
+      if (!data?.ok || !data.sdrs) return;
+      const chart = document.getElementById('sdr-vert-chart');
+      if (!chart) return;
+
+      const sdrs = data.sdrs.filter(s => (s.mql||0) + (s.r_agendadas||0) > 0);
+      if (!sdrs.length) {
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de SDRs para o periodo.</div>';
+        return;
+      }
+
+      const maxTotal = Math.max(...sdrs.map(s => (s.mql||0)+(s.conectados||0)+(s.avaliados||0)+(s.r_agendadas||0)+(s.r_realizadas||0)), 1);
+      const maxBarH = 280;
+
+      let html = '';
+      sdrs.forEach((s, idx) => {
+        const total = (s.mql||0)+(s.conectados||0)+(s.avaliados||0)+(s.r_agendadas||0)+(s.r_realizadas||0);
+        const barH = Math.max(total / maxTotal * maxBarH, 40);
+
+        const pctMql   = total > 0 ? (s.mql||0) / total * 100 : 0;
+        const pctCon   = total > 0 ? (s.conectados||0) / total * 100 : 0;
+        const pctAval  = total > 0 ? (s.avaliados||0) / total * 100 : 0;
+        const pctAgend = total > 0 ? (s.r_agendadas||0) / total * 100 : 0;
+        const pctReal  = total > 0 ? (s.r_realizadas||0) / total * 100 : 0;
+
+        const conv1 = (s.mql||0) > 0 ? ((s.conectados||0)/(s.mql)*100).toFixed(0) : '0';
+        const conv2 = (s.conectados||0) > 0 ? ((s.avaliados||0)/(s.conectados)*100).toFixed(0) : '0';
+        const conv3 = (s.avaliados||0) > 0 ? ((s.r_agendadas||0)/(s.avaliados)*100).toFixed(0) : ((s.mql||0) > 0 ? ((s.r_agendadas||0)/(s.mql)*100).toFixed(0) : '0');
+        const conv4 = (s.r_agendadas||0) > 0 ? ((s.r_realizadas||0)/(s.r_agendadas)*100).toFixed(0) : '0';
+
+        const initials = s.name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+        const noshowClass = (s.noshow||0) <= 20 ? 'ok' : (s.noshow||0) <= 40 ? 'warn' : 'bad';
+
+        html += `<div class="vert-col">
+          <div class="vert-bar-wrap">
+            <div class="vert-bar" style="height:${barH}px">
+              <div class="vert-seg vseg-mql" style="height:${Math.max(pctMql,2)}%">
+                <span class="vert-seg-num">${s.mql||0}</span>
+                <span class="vert-seg-pct">${pctMql.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-con" style="height:${Math.max(pctCon,2)}%">
+                <span class="vert-seg-num">${s.conectados||0}</span>
+                <span class="vert-seg-pct">${pctCon.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-aval" style="height:${Math.max(pctAval,2)}%">
+                <span class="vert-seg-num">${s.avaliados||0}</span>
+                <span class="vert-seg-pct">${pctAval.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-agend" style="height:${Math.max(pctAgend,2)}%">
+                <span class="vert-seg-num">${s.r_agendadas||0}</span>
+                <span class="vert-seg-pct">${pctAgend.toFixed(0)}%</span>
+              </div>
+              <div class="vert-seg vseg-rreal" style="height:${Math.max(pctReal,2)}%">
+                <span class="vert-seg-num">${s.r_realizadas||0}</span>
+                <span class="vert-seg-pct">${pctReal.toFixed(0)}%</span>
+              </div>
+            </div>
+            <div class="vert-conv-col">
+              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv4}%</span></div>
+              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv3}%</span></div>
+              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv2}%</span></div>
+              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv1}%</span></div>
+            </div>
+          </div>
+          <div class="vert-agent-info">
+            <div class="vert-avatar">${s.avatar ? '<img src="'+s.avatar+'">' : initials}</div>
+            <div class="vert-name">${s.name.split(' ').slice(0,2).join(' ')}</div>
+            <div class="vert-fat">R$ ${fmtBRL(s.faturamento||0, 0)}</div>
+            <div class="vert-noshow">
+              <span class="vert-noshow-label">No-show</span>
+              <span class="vert-noshow-val ${noshowClass}">${s.noshow||0}%</span>
+            </div>
+          </div>
+        </div>`;
+      });
+
+      chart.innerHTML = html;
+    }
+
+    // ─── renderSDRIA ─────────────────────────────────────────
+    function renderSDRIA(data) {
+      if (!data?.ok) return;
+      const chart = document.getElementById('sdr-ia-vert-chart');
+      if (!chart) return;
+
+      const d = data;
+      const vals = [d.total_leads||0, d.contato_ia||0, d.mql||0, d.conectados||0, d.avaliados||0, d.r_agendadas||0];
+      const total = vals.reduce((a,b)=>a+b, 0);
+      if (total === 0) {
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de SDR-IA para o periodo.</div>';
+        return;
+      }
+
+      const maxVal = Math.max(...vals, 1);
+      const barH = 280;
+
+      const pcts = vals.map(v => total > 0 ? v / total * 100 : 0);
+
+      // convs
+      const conv1 = vals[0] > 0 ? (vals[1]/vals[0]*100).toFixed(0) : '0';
+      const conv2 = vals[1] > 0 ? (vals[2]/vals[1]*100).toFixed(0) : '0';
+      const conv3 = vals[2] > 0 ? (vals[3]/vals[2]*100).toFixed(0) : '0';
+      const conv4 = vals[3] > 0 ? (vals[4]/vals[3]*100).toFixed(0) : '0';
+      const conv5 = vals[4] > 0 ? (vals[5]/vals[4]*100).toFixed(0) : '0';
+
+      const noshowClass = (d.noshow||0) <= 20 ? 'ok' : (d.noshow||0) <= 40 ? 'warn' : 'bad';
+
+      const html = `<div class="vert-col">
+        <div class="vert-bar-wrap">
+          <div class="vert-bar" style="height:${barH}px">
+            <div class="vert-seg" style="height:${Math.max(pcts[5],2)}%;background:#1d6e64">
+              <span class="vert-seg-num">${vals[5]}</span>
+              <span class="vert-seg-pct">${pcts[5].toFixed(0)}%</span>
+            </div>
+            <div class="vert-seg" style="height:${Math.max(pcts[4],2)}%;background:var(--teal)">
+              <span class="vert-seg-num">${vals[4]}</span>
+              <span class="vert-seg-pct">${pcts[4].toFixed(0)}%</span>
+            </div>
+            <div class="vert-seg vseg-aval" style="height:${Math.max(pcts[3],2)}%">
+              <span class="vert-seg-num">${vals[3]}</span>
+              <span class="vert-seg-pct">${pcts[3].toFixed(0)}%</span>
+            </div>
+            <div class="vert-seg vseg-agend" style="height:${Math.max(pcts[2],2)}%">
+              <span class="vert-seg-num">${vals[2]}</span>
+              <span class="vert-seg-pct">${pcts[2].toFixed(0)}%</span>
+            </div>
+            <div class="vert-seg vseg-con" style="height:${Math.max(pcts[1],2)}%">
+              <span class="vert-seg-num">${vals[1]}</span>
+              <span class="vert-seg-pct">${pcts[1].toFixed(0)}%</span>
+            </div>
+            <div class="vert-seg vseg-mql" style="height:${Math.max(pcts[0],2)}%">
+              <span class="vert-seg-num">${vals[0]}</span>
+              <span class="vert-seg-pct">${pcts[0].toFixed(0)}%</span>
+            </div>
+          </div>
+          <div class="vert-conv-col">
+            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv5}%</span></div>
+            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv4}%</span></div>
+            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv3}%</span></div>
+            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv2}%</span></div>
+            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv1}%</span></div>
+          </div>
+        </div>
+        <div class="vert-agent-info">
+          <div class="vert-avatar" style="border-color:var(--teal)">IA</div>
+          <div class="vert-name">SDR-IA</div>
+          <div class="vert-fat">${fmtInt(d.contato_ia)} contatos</div>
+          <div class="vert-noshow">
+            <span class="vert-noshow-label">No-show</span>
+            <span class="vert-noshow-val ${noshowClass}">${d.noshow||0}%</span>
+          </div>
+        </div>
+      </div>`;
+
+      chart.innerHTML = html;
+    }
+
+    // ─── renderAQRC ──────────────────────────────────────────
+    function renderAQRC(data) {
+      if (!data?.ok) return;
+
+      // --- Diario ---
+      const tbodyD = document.querySelector('#aqrc-diario tbody');
+      if (tbodyD && data.daily && data.daily.length) {
+        let rowsD = '';
+        data.daily.forEach(d => {
+          const total = (d.A||0)+(d.Q||0)+(d.R||0)+(d.C||0);
+          const pA = total > 0 ? (d.A/total*100).toFixed(0) : '0';
+          const pQ = total > 0 ? (d.Q/total*100).toFixed(0) : '0';
+          const pR = total > 0 ? (d.R/total*100).toFixed(0) : '0';
+          const conv = (d.A||0) > 0 ? (d.C/d.A*100).toFixed(1) : '0.0';
+          const dateStr = d.date.split('-').reverse().join('/');
+          rowsD += `<tr>
+            <td class="date">${dateStr}</td>
+            <td class="num">${d.A||0}</td><td>${pA}%</td>
+            <td class="num">${d.Q||0}</td><td>${pQ}%</td>
+            <td class="num">${d.R||0}</td><td>${pR}%</td>
+            <td class="num">${d.C||0}</td>
+            <td class="${parseFloat(conv)>10?'ok':'warn'}">${conv}%</td>
+          </tr>`;
+        });
+        tbodyD.innerHTML = rowsD;
+      }
+
+      // --- Semanal ---
+      const tbodyW = document.querySelector('#aqrc-semanal tbody');
+      if (tbodyW && data.weekly && data.weekly.length) {
+        let rowsW = '';
+        data.weekly.forEach(w => {
+          const conv = (w.A||0) > 0 ? (w.C/w.A*100).toFixed(1) : '0.0';
+          rowsW += `<tr class="week-row">
+            <td class="date">${w.week}</td>
+            <td class="num">${w.A||0}</td>
+            <td class="num">${w.Q||0}</td>
+            <td class="num">${w.R||0}</td>
+            <td class="num">${w.C||0}</td>
+            <td class="${parseFloat(conv)>10?'ok':'warn'}">${conv}%</td>
+          </tr>`;
+        });
+        tbodyW.innerHTML = rowsW;
+      }
+
+      // --- Mensal ---
+      const tbodyM = document.querySelector('#aqrc-mensal tbody');
+      if (tbodyM && data.monthly && data.monthly.length) {
+        let rowsM = '';
+        data.monthly.forEach(m => {
+          const conv = (m.A||0) > 0 ? (m.C/m.A*100).toFixed(1) : '0.0';
+          rowsM += `<tr>
+            <td class="date">${m.month}</td>
+            <td class="num">${m.A||0}</td>
+            <td class="num">${m.Q||0}</td>
+            <td class="num">${m.R||0}</td>
+            <td class="num">${m.C||0}</td>
+            <td class="${parseFloat(conv)>10?'ok':'warn'}">${conv}%</td>
+          </tr>`;
+        });
+        tbodyM.innerHTML = rowsM;
+      }
+    }
+
+    // ─── renderMetaFunnels ───────────────────────────────────
+    function renderMetaFunnels(lpData, formData) {
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+
+      // --- Funil Landing Page ---
+      if (lpData?.ok) {
+        set('meta-lp-imp',   fmtInt(lpData.impressions));
+        set('meta-lp-cli',   fmtInt(lpData.clicks));
+        set('meta-lp-view',  fmtInt(lpData.view_page));
+        set('meta-lp-lead',  fmtInt(lpData.leads));
+        // MQL nao vem do funnel-lp, pode ficar '--'
+        set('meta-lp-mql',   lpData.mql ? fmtInt(lpData.mql) : '--');
+        // conversoes
+        set('meta-lp-ctr',   lpData.conv_ctr || '--');
+        set('meta-lp-viewr', lpData.conv_view || '--');
+        set('meta-lp-leadr', lpData.conv_lead || '--');
+        set('meta-lp-mqlr',  lpData.conv_mql || '--');
+      }
+
+      // --- Funil Form Nativo ---
+      if (formData?.ok) {
+        set('meta-fn-imp',   fmtInt(formData.impressions));
+        set('meta-fn-cli',   fmtInt(formData.clicks));
+        set('meta-fn-lead',  fmtInt(formData.leads));
+        set('meta-fn-mql',   formData.mql ? fmtInt(formData.mql) : '--');
+        // conversoes
+        set('meta-fn-ctr',   formData.conv_ctr || '--');
+        set('meta-fn-leadr', formData.conv_lead || '--');
+        set('meta-fn-mqlr',  formData.conv_mql || '--');
+      }
+    }
+
+    // ─── renderMetaDaily ─────────────────────────────────────
+    function renderMetaDaily(data) {
+      if (!data?.ok || !data.days || !data.days.length) return;
+
+      const days = data.days;
+      const labels = days.map(d => {
+        const parts = d.date.split('-');
+        return parts[2] + '/' + parts[1];
+      });
+      const spendData = days.map(d => d.spend || 0);
+      const leadsData = days.map(d => d.leads || 0);
+
+      // Update Meta invest chart
+      if (chartMetaInvest) {
+        chartMetaInvest.data.labels = labels;
+        chartMetaInvest.data.datasets[0].data = spendData;
+        chartMetaInvest.update();
+      } else {
+        // chart may not be rendered yet, schedule
+        setTimeout(() => {
+          const ctx = document.getElementById('chart-meta-invest');
+          if (!ctx) return;
+          if (chartMetaInvest) chartMetaInvest.destroy();
+          chartMetaInvest = new Chart(ctx.getContext('2d'), {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Investimento Meta (R$)',
+                data: spendData,
+                backgroundColor: 'rgba(200,168,75,0.4)',
+                borderColor: '#C8A84B',
+                borderWidth: 1,
+              }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false } },
+              scales: {
+                x: { grid: { color: 'rgba(45,45,45,0.5)' } },
+                y: { grid: { color: 'rgba(45,45,45,0.5)' }, ticks: { callback: v => 'R$'+(v/1000).toFixed(1)+'k' } }
+              }
+            }
+          });
+        }, 200);
+      }
+
+      // Also update Visao Geral chart-linha with real data
+      if (chartLinha) {
+        chartLinha.data.labels = labels;
+        chartLinha.data.datasets[0].data = spendData;
+        chartLinha.data.datasets[1].data = leadsData;
+        chartLinha.update();
+      }
     }
 
   </script>
