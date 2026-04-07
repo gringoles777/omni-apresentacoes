@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia AIOX — OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --dark: #0D0D0D;
+  --dark-elevated: #1A1A1A;
+  --dark-texture: #2D2D2D;
+  --gold: #C8A84B;
+  --gold-light: #E8C86A;
+  --gold-deep: #9A7A2E;
+  --cream: #F5F0E8;
+  --cream-70: rgba(245, 240, 232, 0.70);
+  --cream-50: rgba(245, 240, 232, 0.50);
+  --teal: #2A9D8F;
+  --rosa: #C4707A;
+  --lavanda: #7B68AE;
+  --gray: #6B6B6B;
+  --gray-dark: #242424;
+  --gold-10: rgba(200, 168, 75, 0.10);
+  --gold-15: rgba(200, 168, 75, 0.15);
+  --gold-20: rgba(200, 168, 75, 0.20);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5, 5, 5, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-dark);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.header .subtitle {
+  color: var(--cream-50);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.6rem;
+  margin-top: 2px;
+}
+
+/* ── NAV LATERAL ── */
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: calc(100vh - 60px);
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+
+.sidebar {
+  background: var(--dark);
+  border-right: 1px solid var(--gray-dark);
+  padding: 24px 0;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  padding: 0 20px;
+  margin-bottom: 24px;
+}
+
+.sidebar-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gold-20);
+}
+
+.sidebar a {
+  display: block;
+  color: var(--cream-50);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 200ms;
+  margin-bottom: 2px;
+}
+
+.sidebar a:hover {
+  color: var(--gold);
+  background: var(--gold-10);
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  padding: 48px 64px;
+  max-width: 900px;
+}
+
+@media (max-width: 900px) {
+  .main { padding: 24px 20px; }
+}
+
+/* ── TIPOGRAFIA ── */
+.section-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  background: var(--gold-10);
+  border: 1px solid var(--gold-20);
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  color: var(--cream);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-top: 36px;
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+p {
+  color: var(--cream-70);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.section {
+  margin-bottom: 64px;
+  padding-top: 20px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-20), transparent);
+  margin: 48px 0;
+}
+
+/* ── CARDS ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+@media (max-width: 700px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--dark-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 6px;
+  padding: 20px;
+  transition: border-color 300ms;
+}
+
+.card:hover {
+  border-color: var(--gold-deep);
+}
+
+.card-icon {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--cream-50);
+  line-height: 1.6;
+}
+
+/* ── CARD FULL WIDTH ── */
+.card-full {
+  background: var(--dark-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 6px;
+  padding: 24px;
+  margin: 12px 0;
+}
+
+.card-full:hover {
+  border-color: var(--gold-deep);
+}
+
+/* ── STEPS ── */
+.step {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+  align-items: flex-start;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-title {
+  font-weight: 600;
+  color: var(--cream);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 0.82rem;
+  color: var(--cream-50);
+  line-height: 1.6;
+}
+
+/* ── CODE ── */
+.code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--dark);
+  border: 1px solid var(--gray-dark);
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  margin: 12px 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.inline-code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: var(--gold-10);
+  border: 1px solid var(--gold-20);
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 0.78rem;
+  color: var(--gold-light);
+}
+
+/* ── TABELA ── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gold-20);
+  background: var(--dark);
+}
+
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-dark);
+  color: var(--cream-70);
+  vertical-align: top;
+}
+
+tr:hover td {
+  background: var(--gold-10);
+}
+
+/* ── DICAS ── */
+.tip {
+  background: rgba(42, 157, 143, 0.08);
+  border-left: 3px solid var(--teal);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.tip-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.tip p {
+  color: var(--cream-70);
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.warning {
+  background: rgba(196, 112, 122, 0.08);
+  border-left: 3px solid var(--rosa);
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.warning .tip-title {
+  color: var(--rosa);
+}
+
+/* ── EXEMPLO PRATICO ── */
+.example {
+  background: var(--dark);
+  border: 1px solid var(--gold-20);
+  border-radius: 6px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.example-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.example-chat {
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.chat-you {
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.chat-ai {
+  color: var(--cream-50);
+  font-style: italic;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 60px 0 40px;
+}
+
+.hero h2 {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 0 auto 24px;
+  font-size: 1rem;
+  color: var(--cream-50);
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  background: rgba(42, 157, 143, 0.1);
+  border: 1px solid rgba(42, 157, 143, 0.25);
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+/* ── ACCORDION ── */
+.accordion { margin: 8px 0; }
+
+.accordion-header {
+  background: var(--dark-elevated);
+  border: 1px solid var(--gray-dark);
+  border-radius: 6px;
+  padding: 14px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 200ms;
+  margin-bottom: 4px;
+}
+
+.accordion-header:hover {
+  border-color: var(--gold-deep);
+}
+
+.accordion-header .label {
+  font-size: 0.85rem;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.accordion-header .tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  background: var(--gold-10);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.accordion-header .arrow {
+  color: var(--gold);
+  font-size: 0.7rem;
+  transition: transform 200ms;
+}
+
+.accordion-body {
+  display: none;
+  padding: 16px 18px;
+  background: var(--dark);
+  border: 1px solid var(--gray-dark);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  margin-top: -5px;
+  margin-bottom: 4px;
+}
+
+.accordion-body p {
+  font-size: 0.82rem;
+  margin-bottom: 8px;
+}
+
+.accordion.open .accordion-body { display: block; }
+.accordion.open .arrow { transform: rotate(90deg); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--gray-dark);
+  font-size: 0.7rem;
+  color: var(--cream-50);
+}
+
+/* ── TAG COLORS ── */
+.tag-teal { color: var(--teal); background: rgba(42, 157, 143, 0.1); }
+.tag-rosa { color: var(--rosa); background: rgba(196, 112, 122, 0.1); }
+.tag-lavanda { color: var(--lavanda); background: rgba(123, 104, 174, 0.1); }
+.tag-gold { color: var(--gold); background: var(--gold-10); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ HEADER ══════════════════════════════════════════════ -->
+<header class="header">
+  <div>
+    <h1>OMNI BRASIL</h1>
+    <div class="subtitle">Guia Completo do AIOX — Para Iniciantes</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ══════════════════════════════════════════════ SIDEBAR ══════════════════════════════════════════════ -->
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-title">Inicio</div>
+    <a href="#intro">O que e o AIOX?</a>
+    <a href="#analogia">Analogia simples</a>
+    <a href="#como-usar">Como usar na pratica</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">Agentes Principais</div>
+    <a href="#master">Master (Orquestrador)</a>
+    <a href="#pm">PM (Gerente de Produto)</a>
+    <a href="#dev">Dev (Desenvolvedor)</a>
+    <a href="#architect">Arquiteto</a>
+    <a href="#analyst">Analista</a>
+    <a href="#outros-agentes">QA, DevOps e mais</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">Squads Especializados</div>
+    <a href="#squad-copy">Copy (Textos Persuasivos)</a>
+    <a href="#squad-ads">Ads (Trafego Pago)</a>
+    <a href="#squad-design">Design (Visual)</a>
+    <a href="#squad-sop">SOP (Processos)</a>
+    <a href="#squad-workspace">Workspace (Empresa)</a>
+    <a href="#squad-brand">Brand (Marca)</a>
+    <a href="#squad-creator">Squad Creator</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">Na Pratica</div>
+    <a href="#exemplos">Exemplos do dia a dia</a>
+    <a href="#comandos-especiais">Comandos especiais e skills</a>
+    <a href="#cheatsheet">Lista rapida</a>
+    <a href="#dicas">Dicas importantes</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════ MAIN ══════════════════════════════════════════════ -->
+<main class="main">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-badge">Guia para iniciantes</div>
+  <h2>Seu time de IA completo</h2>
+  <p>O AIOX e como ter uma empresa inteira de especialistas dentro do Claude Code. Este guia vai te ensinar a usar cada um deles — do zero, sem termos tecnicos.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 1: O QUE E O AIOX
+     ══════════════════════════════════════════════ -->
+<div class="section" id="intro">
+  <span class="section-badge">Capitulo 1</span>
+  <h2>O que e o AIOX?</h2>
+  <p>Imagine que voce pudesse contratar uma equipe inteira de profissionais — copywriter, designer, analista de negocios, gerente de produto, desenvolvedor — e todos eles trabalhassem juntos, 24 horas por dia, dentro do seu computador.</p>
+  <p><strong style="color:var(--gold);">Isso e o AIOX.</strong></p>
+  <p>AIOX e um sistema que organiza varios "agentes" de inteligencia artificial em times especializados. Cada agente tem uma personalidade, um cargo e habilidades especificas. Voce chama quem precisa, pede o que quer, e eles fazem.</p>
+
+  <h3 id="analogia">Analogia: O AIOX e um predio comercial</h3>
+  <p>Pense no AIOX como um predio de escritorios. Cada andar tem um departamento diferente:</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">&#x1F3E2;</div>
+      <div class="card-title">Terreo — Recepcao</div>
+      <div class="card-desc">O <strong>Master</strong> (orquestrador). Ele sabe quem faz o que e te direciona para o especialista certo.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#x1F4DD;</div>
+      <div class="card-title">1o andar — Redacao</div>
+      <div class="card-desc">O <strong>Squad de Copy</strong>. 24 copywriters especializados em textos de venda, emails, anuncios.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#x1F4CA;</div>
+      <div class="card-title">2o andar — Marketing</div>
+      <div class="card-desc">O <strong>Squad de Ads</strong>. Especialistas em trafego pago (Meta, Google, YouTube).</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#x1F3A8;</div>
+      <div class="card-title">3o andar — Design</div>
+      <div class="card-desc">O <strong>Squad de Design</strong>. Criam sistemas visuais, componentes, paginas.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#x1F4CB;</div>
+      <div class="card-title">4o andar — Processos</div>
+      <div class="card-desc">O <strong>Squad de SOP</strong>. Documentam e organizam processos da empresa.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#x1F4BC;</div>
+      <div class="card-title">5o andar — Diretoria</div>
+      <div class="card-desc">O <strong>Squad Workspace</strong>. Estrategia, perfil da empresa, dados do negocio.</div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica rapida</div>
+    <p>Voce nao precisa saber programar para usar o AIOX. Basta conversar em portugues e pedir o que precisa.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 2: COMO USAR NA PRATICA
+     ══════════════════════════════════════════════ -->
+<div class="section" id="como-usar">
+  <span class="section-badge">Capitulo 2</span>
+  <h2>Como usar na pratica</h2>
+  <p>Usar o AIOX e simples: voce "chama" o especialista que precisa e conversa com ele. Existem duas formas de chamar:</p>
+
+  <h3>Forma 1: Usando @ (mais rapido)</h3>
+  <p>Basta digitar <span class="inline-code">@</span> seguido do nome do agente:</p>
+  <div class="code">@dev          (chama o desenvolvedor)
+@pm           (chama o gerente de produto)
+@architect    (chama o arquiteto)
+@analyst      (chama o analista)</div>
+
+  <h3>Forma 2: Usando / (para squads)</h3>
+  <p>Para chamar agentes de squads especializados, use a barra:</p>
+  <div class="code">/aiox-copy:copy-chief       (chefe do time de copy)
+/aiox-ads:ad-midas          (chefe do time de ads)
+/aiox-design:design-chief   (chefe do time de design)
+/aiox-sop:sop-chief         (chefe do time de processos)</div>
+
+  <h3>Forma 3: Usando /AIOX:agents: (agentes principais)</h3>
+  <div class="code">/AIOX:agents:master         (orquestrador geral)
+/AIOX:agents:dev            (desenvolvedor)
+/AIOX:agents:pm             (gerente de produto)</div>
+
+  <h3>Depois de chamar o agente</h3>
+  <p>Quando um agente esta ativo, voce pode usar comandos com <span class="inline-code">*</span> (asterisco):</p>
+  <div class="code">*help         (mostra todos os comandos disponiveis)
+*exit         (sai do modo agente)</div>
+
+  <div class="tip">
+    <div class="tip-title">Resumo</div>
+    <p>1. Chame o agente (<span class="inline-code">@nome</span> ou <span class="inline-code">/squad:nome</span>). 2. Converse normalmente em portugues. 3. Use <span class="inline-code">*help</span> se nao souber o que pedir.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 3: AGENTES PRINCIPAIS
+     ══════════════════════════════════════════════ -->
+<div class="section" id="agentes">
+  <span class="section-badge">Capitulo 3</span>
+  <h2>Os agentes principais</h2>
+  <p>Esses sao os 11 "funcionarios" que estao sempre disponiveis. Cada um tem um cargo e uma especialidade bem definida.</p>
+
+  <!-- MASTER -->
+  <div class="card-full" id="master">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">&#x1F451;</span>
+      <div>
+        <div class="card-title">Master (Orquestrador Geral)</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">@aiox-master</span> ou <span class="inline-code">/AIOX:agents:master</span></div>
+      </div>
+    </div>
+    <p>E o "gerente geral". Sabe tudo sobre todos os outros agentes. Use quando nao souber pra quem pedir algo — ele direciona pro especialista certo.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando voce nao sabe por onde comecar, quando precisa de algo que envolve varios departamentos, ou quando quer uma visao geral do que e possivel fazer.</p>
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> @aiox-master preciso melhorar os emails de venda do curso Master, quem pode me ajudar?<br>
+        <span class="chat-ai">Master:</span> Para emails de venda, recomendo o squad de copy. Vou acionar o copy-chief que vai direcionar pro especialista certo. Use /aiox-copy:copy-chief
+      </div>
+    </div>
+  </div>
+
+  <!-- PM -->
+  <div class="card-full" id="pm">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">&#x1F4CA;</span>
+      <div>
+        <div class="card-title">PM — Gerente de Produto</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">@pm</span></div>
+      </div>
+    </div>
+    <p>E quem planeja produtos e funcionalidades. Ele cria documentos de requisitos (PRDs), prioriza o que deve ser feito primeiro e define a estrategia do produto.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando voce quer planejar um produto novo, definir funcionalidades, priorizar o que fazer primeiro, ou criar um plano de lancamento.</p>
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> @pm quero criar uma area de membros para os alunos do FPH, me ajuda a planejar?<br>
+        <span class="chat-ai">PM:</span> Vou criar um PRD (documento de requisitos) com as funcionalidades necessarias, prioridades e cronograma...
+      </div>
+    </div>
+  </div>
+
+  <!-- DEV -->
+  <div class="card-full" id="dev">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">&#x1F4BB;</span>
+      <div>
+        <div class="card-title">Dev — Desenvolvedor</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">@dev</span></div>
+      </div>
+    </div>
+    <p>E quem escreve codigo e constroi coisas. Cria paginas, automacoes, ferramentas, corrige bugs e implementa funcionalidades.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando precisa construir algo tecnico — uma pagina HTML, um script, uma automacao, corrigir um problema no codigo.</p>
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> @dev cria uma pagina de obrigado para quem comprar o HypnoFlash<br>
+        <span class="chat-ai">Dev:</span> Vou criar a pagina seguindo o design system da OMNI. Vou incluir mensagem de boas-vindas, proximos passos e link de acesso...
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHITECT -->
+  <div class="card-full" id="architect">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">&#x1F3D7;&#xFE0F;</span>
+      <div>
+        <div class="card-title">Architect — Arquiteto</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">@architect</span></div>
+      </div>
+    </div>
+    <p>E quem planeja a "planta" dos sistemas. Antes de construir, ele desenha como tudo vai funcionar, que tecnologias usar e como as pecas se conectam.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando precisa decidir como montar um sistema complexo, escolher ferramentas, ou planejar a estrutura de algo grande.</p>
+  </div>
+
+  <!-- ANALYST -->
+  <div class="card-full" id="analyst">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.5rem;">&#x1F50D;</span>
+      <div>
+        <div class="card-title">Analyst — Analista de Negocios</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">@analyst</span></div>
+      </div>
+    </div>
+    <p>E o pesquisador. Faz analise de mercado, pesquisa concorrentes, estuda tendencias e ajuda a entender o cenario antes de tomar decisoes.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quer pesquisar concorrentes, entender o mercado, fazer brainstorm de ideias, ou analisar viabilidade de algo.</p>
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> @analyst faz uma pesquisa sobre o mercado de hipnoterapia online no Brasil — concorrentes, precos, diferenciais<br>
+        <span class="chat-ai">Analyst:</span> Vou estruturar uma analise completa com: panorama do mercado, principais players, faixa de precos, gaps de oportunidade...
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTROS -->
+  <h3 id="outros-agentes">Outros agentes importantes</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Agente</th>
+        <th>Comando</th>
+        <th>O que faz</th>
+        <th>Quando usar</th>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">QA</td>
+        <td><span class="inline-code">@qa</span></td>
+        <td>Revisor de qualidade. Verifica se o que foi feito esta correto e completo.</td>
+        <td>Depois que algo foi construido, para revisar antes de publicar.</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">DevOps</td>
+        <td><span class="inline-code">@devops</span></td>
+        <td>Publicacao e deploy. E o UNICO que pode fazer "git push" (subir codigo pro servidor).</td>
+        <td>Quando precisa publicar algo, subir pro GitHub, fazer deploy.</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">PO</td>
+        <td><span class="inline-code">@po</span></td>
+        <td>Dono do produto. Valida se as tarefas estao bem definidas e prioriza o backlog.</td>
+        <td>Para validar e priorizar o que deve ser feito.</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">SM</td>
+        <td><span class="inline-code">@sm</span></td>
+        <td>Scrum Master. Cria historias de usuario (tarefas bem definidas).</td>
+        <td>Para transformar uma ideia vaga em uma tarefa clara e executavel.</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">Data Engineer</td>
+        <td><span class="inline-code">@data-engineer</span></td>
+        <td>Especialista em banco de dados. Cria estruturas de dados, consultas, migracoes.</td>
+        <td>Quando precisar mexer com banco de dados (Supabase, etc).</td>
+      </tr>
+      <tr>
+        <td style="color:var(--gold);">UX Designer</td>
+        <td><span class="inline-code">@ux-design-expert</span></td>
+        <td>Designer de experiencia. Cria wireframes, design systems, fluxos de usuario.</td>
+        <td>Quando precisar pensar na experiencia visual e usabilidade.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 4: SQUADS ESPECIALIZADOS
+     ══════════════════════════════════════════════ -->
+<div class="section" id="squads">
+  <span class="section-badge">Capitulo 4</span>
+  <h2>Squads especializados</h2>
+  <p>Squads sao "times" com varios agentes focados em uma area. E como ter um departamento inteiro a sua disposicao. Cada squad tem um "chefe" que voce chama primeiro, e ele direciona pro especialista certo.</p>
+
+  <!-- COPY -->
+  <div class="card-full" id="squad-copy">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x270D;&#xFE0F;</span>
+      <div>
+        <div class="card-title">Squad de Copy — Textos Persuasivos</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/aiox-copy:copy-chief</span></div>
+      </div>
+    </div>
+    <p>Um time de <strong style="color:var(--gold);">24 copywriters</strong> baseados nos maiores nomes da historia do marketing direto. Cada um tem um estilo e especialidade diferente.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Criar textos que vendem: paginas de venda, emails, anuncios, headlines, sequencias de email, VSLs (videos de venda), cartas de venda.</p>
+
+    <h4>Principais copywriters disponiveis</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Copywriter</th><th>Comando</th><th>Especialidade</th></tr>
+        <tr>
+          <td style="color:var(--gold);">Gary Halbert</td>
+          <td><span class="inline-code">/aiox-copy:gary-halbert</span></td>
+          <td>Cartas de venda poderosas, narrativa emocional direta</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Dan Kennedy</td>
+          <td><span class="inline-code">/aiox-copy:dan-kennedy</span></td>
+          <td>Marketing direto, urgencia, ofertas irresistiveis</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Russell Brunson</td>
+          <td><span class="inline-code">/aiox-copy:russell-brunson</span></td>
+          <td>Funis de venda, lancamentos, webinarios</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Eugene Schwartz</td>
+          <td><span class="inline-code">/aiox-copy:eugene-schwartz</span></td>
+          <td>Niveis de consciencia, headlines matadoras</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Jeff Walker</td>
+          <td><span class="inline-code">/aiox-copy:jeff-walker</span></td>
+          <td>Lancamentos (Product Launch Formula)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Frank Kern</td>
+          <td><span class="inline-code">/aiox-copy:frank-kern</span></td>
+          <td>Branding + venda direta, autenticidade</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Jon Benson</td>
+          <td><span class="inline-code">/aiox-copy:jon-benson</span></td>
+          <td>VSL (Video Sales Letter) — roteiros de video de venda</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Ben Settle</td>
+          <td><span class="inline-code">/aiox-copy:ben-settle</span></td>
+          <td>Email diario, infotainment (educar + entreter)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">Andre Chaperon</td>
+          <td><span class="inline-code">/aiox-copy:andre-chaperon</span></td>
+          <td>Sequencias de email tipo novela (Soap Opera Sequences)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold);">David Ogilvy</td>
+          <td><span class="inline-code">/aiox-copy:david-ogilvy</span></td>
+          <td>Publicidade classica, marca + resposta direta</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="tip">
+      <div class="tip-title">Dica</div>
+      <p>Nao sabe qual copywriter usar? Chame o <span class="inline-code">/aiox-copy:copy-chief</span> e explique o que precisa. Ele vai escolher o melhor especialista pra voce.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /aiox-copy:copy-chief preciso de uma sequencia de 5 emails para vender o curso FPH para hipnoterapeutas que ja fizeram o CHC<br>
+        <span class="chat-ai">Copy Chief:</span> Para essa sequencia, vou acionar o Andre Chaperon (soap opera sequences) com apoio do Dan Kennedy (urgencia). Vou montar o briefing...
+      </div>
+    </div>
+  </div>
+
+  <!-- ADS -->
+  <div class="card-full" id="squad-ads">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x1F4B0;</span>
+      <div>
+        <div class="card-title">Squad de Ads — Trafego Pago</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/aiox-ads:ad-midas</span></div>
+      </div>
+    </div>
+    <p>Time de <strong style="color:var(--gold);">10 especialistas</strong> em anuncios pagos. Cobrem Meta (Facebook/Instagram), Google, YouTube, TikTok e mais.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Planejar campanhas, criar estrutura de anuncios, analisar desempenho, otimizar orcamento, configurar pixels de rastreamento, escalar campanhas.</p>
+
+    <h4>O que cada agente faz</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Agente</th><th>Especialidade</th></tr>
+        <tr><td style="color:var(--gold);">Ad Midas</td><td>Concierge — recebe seu pedido e direciona pro especialista certo</td></tr>
+        <tr><td style="color:var(--gold);">Campaign Manager</td><td>Cria e gerencia campanhas</td></tr>
+        <tr><td style="color:var(--gold);">Performance Analyst</td><td>Analisa resultados e sugere otimizacoes</td></tr>
+        <tr><td style="color:var(--gold);">Creative Analyst</td><td>Avalia criativos (imagens/videos dos anuncios)</td></tr>
+        <tr><td style="color:var(--gold);">Pixel Specialist</td><td>Configura rastreamento e conversoes</td></tr>
+        <tr><td style="color:var(--gold);">Fiscal</td><td>Analise financeira e alocacao de orcamento</td></tr>
+        <tr><td style="color:var(--gold);">BR Traffic Operator</td><td>Especialista em trafego no mercado brasileiro</td></tr>
+      </table>
+    </div>
+
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /aiox-ads:ad-midas quero lancar uma campanha no Meta Ads pro curso Master, orcamento R$5.000/mes<br>
+        <span class="chat-ai">Ad Midas:</span> Vou montar a estrutura da campanha. Preciso de algumas informacoes: qual o publico-alvo, qual a pagina de destino, quais criativos voce tem disponiveis...
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN -->
+  <div class="card-full" id="squad-design">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x1F3A8;</span>
+      <div>
+        <div class="card-title">Squad de Design — Visual e Componentes</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/aiox-design:design-chief</span></div>
+      </div>
+    </div>
+    <p>Time de <strong style="color:var(--gold);">9 especialistas</strong> em design, desde tokens visuais ate geracao de imagens com IA.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Criar e manter o visual da marca, design systems, componentes reutilizaveis, gerar imagens com IA, compor paginas.</p>
+
+    <h4>Destaques</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Agente</th><th>O que faz</th></tr>
+        <tr><td style="color:var(--gold);">Design Chief</td><td>Coordena o time e direciona demandas</td></tr>
+        <tr><td style="color:var(--gold);">Nano Banana Generator</td><td>Gera imagens com IA (Gemini). Cria variacoes, ajusta estilos.</td></tr>
+        <tr><td style="color:var(--gold);">Page Composer</td><td>Compoe layouts de paginas completas</td></tr>
+        <tr><td style="color:var(--gold);">Brad Frost</td><td>Atomic Design — organiza componentes do menor ao maior</td></tr>
+      </table>
+    </div>
+
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /aiox-design:nano-banana-generator preciso de uma imagem para o Instagram sobre o poder da hipnoterapia, estilo profissional, cores da OMNI<br>
+        <span class="chat-ai">Nano Banana:</span> Vou gerar a imagem usando as cores do design system OMNI (preto, dourado, creme)...
+      </div>
+    </div>
+  </div>
+
+  <!-- SOP -->
+  <div class="card-full" id="squad-sop">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x1F4CB;</span>
+      <div>
+        <div class="card-title">Squad de SOP — Processos e Procedimentos</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/aiox-sop:sop-chief</span></div>
+      </div>
+    </div>
+    <p>Time de <strong style="color:var(--gold);">6 especialistas</strong> em documentar processos. Transformam o "jeito que a gente faz as coisas" em procedimentos claros e replicaveis.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Criar manuais de procedimento, documentar processos, auditar qualidade, extrair processos de conversas ou videos, e criar versoes que a IA consegue executar automaticamente.</p>
+
+    <h4>Principais capacidades</h4>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">Criar SOP</div>
+        <div class="card-desc">Documenta um processo passo a passo, com checklists, decisoes e responsaveis.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Extrair de Video</div>
+        <div class="card-desc">Assiste um video/transcricao e transforma em procedimento documentado.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Auditar</div>
+        <div class="card-desc">Revisa processos existentes e aponta melhorias, gaps e riscos.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Mapear Backlog</div>
+        <div class="card-desc">Analisa toda a empresa e sugere quais processos precisam de SOP primeiro.</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /aiox-sop:sop-chief quero documentar o processo de onboarding de um novo aluno do Black Mentoring<br>
+        <span class="chat-ai">SOP Chief:</span> Vou criar um SOP completo com: etapas do processo, responsaveis, prazos, checklists e criterios de sucesso...
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE -->
+  <div class="card-full" id="squad-workspace">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x1F4BC;</span>
+      <div>
+        <div class="card-title">Squad Workspace — Perfil da Empresa</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/aiox-workspace:workspace-chief</span></div>
+      </div>
+    </div>
+    <p>Time de <strong style="color:var(--gold);">6 executivos virtuais</strong> (CEO, CMO, CTO, CIO, CAIO, COO) que cuidam dos dados estrategicos da empresa.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Preencher e manter o perfil completo da empresa — dados, marca, ICP (cliente ideal), posicionamento, equipe, precos, KPIs. Todos os outros squads usam esses dados como base.</p>
+
+    <h4>Por que e importante?</h4>
+    <div class="tip">
+      <div class="tip-title">Conceito-chave</div>
+      <p>O Workspace e a "memoria da empresa". Quando ele esta bem preenchido, todos os outros agentes (copy, ads, design) ja sabem quem e a OMNI, quem e o publico, qual o tom de voz, etc. Isso faz tudo ficar mais preciso.</p>
+    </div>
+
+    <h4>O que ele cria/organiza</h4>
+    <p>Perfil da empresa, DNA do fundador, cliente ideal (ICP), estrategia de marca, precificacao, estrutura do time, KPIs, estrategia de IA.</p>
+  </div>
+
+  <!-- BRAND -->
+  <div class="card-full" id="squad-brand">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x2728;</span>
+      <div>
+        <div class="card-title">Squad Brand — Marca e Posicionamento</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/Design:brand-me</span></div>
+      </div>
+    </div>
+    <p>Time de <strong style="color:var(--gold);">16 especialistas</strong> em branding. Combinam metodologias brasileiras (Ana Couto, Igor Pinterich) com globais (Aaker, Ries).</p>
+
+    <h4>Para que serve?</h4>
+    <p>Definir posicionamento da marca, tom de voz, naming (nomes de produtos), arquitetura de marca, brandbook, identidade visual estrategica.</p>
+  </div>
+
+  <!-- SQUAD CREATOR -->
+  <div class="card-full" id="squad-creator">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+      <span style="font-size:1.8rem;">&#x1F9EC;</span>
+      <div>
+        <div class="card-title">Squad Creator — Criar Novos Times</div>
+        <div style="font-size:0.7rem;color:var(--cream-50);">Comando: <span class="inline-code">/SquadCreator:agents:squad-chief</span></div>
+      </div>
+    </div>
+    <p>O "criador de times". Pode criar novos squads especializados para qualquer area que voce precisar — atendimento, financeiro, RH, etc.</p>
+
+    <h4>Para que serve?</h4>
+    <p>Quando voce precisa de um time de IA que ainda nao existe. Exemplo: quer um squad especializado em atendimento ao cliente? O Squad Creator monta pra voce.</p>
+
+    <div class="example">
+      <div class="example-title">Exemplo de uso</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /SquadCreator:agents:squad-chief quero criar um squad de Customer Success para acompanhar os alunos<br>
+        <span class="chat-ai">Squad Chief:</span> Vou criar o squad com agentes especializados em onboarding, retencao, health score e sucesso do cliente...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 5: EXEMPLOS DO DIA A DIA
+     ══════════════════════════════════════════════ -->
+<div class="section" id="exemplos">
+  <span class="section-badge">Capitulo 5</span>
+  <h2>Exemplos do dia a dia</h2>
+  <p>Aqui estao situacoes reais que voce pode resolver com o AIOX na OMNI Brasil.</p>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Preciso de uma pagina de venda pro curso novo"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Chame o Copy Chief para o texto</div>
+          <div class="step-desc"><span class="inline-code">/aiox-copy:copy-chief</span> — Peca a copy da pagina de venda. Ele vai escolher o melhor copywriter pro tipo de produto.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">Chame o Dev para construir</div>
+          <div class="step-desc"><span class="inline-code">@dev</span> — Peca para transformar o texto em uma pagina HTML bonita, seguindo o design system da OMNI.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-title">Publique</div>
+          <div class="step-desc">Peca para subir a pagina no Cloudflare Pages ou no repositorio.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Quero melhorar os emails de nutricao dos leads"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Chame o especialista em email</div>
+          <div class="step-desc"><span class="inline-code">/aiox-copy:andre-chaperon</span> — Especialista em sequencias de email tipo novela, que prendem a atencao ao longo de varios dias.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">Ou para emails diarios</div>
+          <div class="step-desc"><span class="inline-code">/aiox-copy:ben-settle</span> — Especialista em email diario que educa e vende ao mesmo tempo (infotainment).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Quero documentar como funciona o processo de matricula"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Chame o SOP Chief</div>
+          <div class="step-desc"><span class="inline-code">/aiox-sop:sop-chief</span> — Explique o processo de matricula e ele vai criar um SOP completo com etapas, responsaveis e checklists.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Quero analisar o que os concorrentes estao fazendo"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Chame o Analista</div>
+          <div class="step-desc"><span class="inline-code">@analyst</span> — Peca uma analise competitiva. Ele pesquisa concorrentes, precos, posicionamento, gaps de mercado.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Quero criar um time de IA para uma area nova"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Chame o Squad Creator</div>
+          <div class="step-desc"><span class="inline-code">/SquadCreator:agents:squad-chief</span> — Descreva a area (ex: "atendimento ao cliente", "financeiro", "RH") e ele cria um time completo com agentes especializados.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Quero planejar o lancamento de um produto"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Comece com o PM</div>
+          <div class="step-desc"><span class="inline-code">@pm</span> — Ele vai criar um PRD (plano do produto) com funcionalidades, publico-alvo, cronograma.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <div class="step-title">Copy para o lancamento</div>
+          <div class="step-desc"><span class="inline-code">/aiox-copy:jeff-walker</span> — Especialista em lancamentos (Product Launch Formula). Cria sequencia de PLF.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <div class="step-title">Ads para o trafego</div>
+          <div class="step-desc"><span class="inline-code">/aiox-ads:ad-midas</span> — Planeja as campanhas de trafego pago para o lancamento.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="label">"Onde devo salvar este arquivo?"</span>
+      <span class="arrow">&#x25B6;</span>
+    </div>
+    <div class="accordion-body">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <div class="step-title">Use o assistente de organizacao</div>
+          <div class="step-desc"><span class="inline-code">/onde-salvar</span> — Um comando especial que analisa o tipo de arquivo e diz exatamente onde ele deve ficar na estrutura do projeto.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 6: COMANDOS ESPECIAIS E SKILLS
+     ══════════════════════════════════════════════ -->
+<div class="section" id="comandos-especiais">
+  <span class="section-badge">Capitulo 6</span>
+  <h2>Comandos Especiais e Skills</h2>
+  <p>Alem dos agentes, existem <strong style="color:var(--gold);">comandos especiais</strong> que fazem coisas especificas sem precisar ativar nenhum agente. Sao atalhos poderosos.</p>
+
+  <h3>Comandos Especiais do Projeto</h3>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F4C2;</span>
+      <div class="card-title">/onde-salvar</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Assistente de organizacao de arquivos. Voce descreve o arquivo e ele diz exatamente onde salvar — se vai no Git (repositorio) ou no Google Drive, em qual pasta, com qual nome.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Sempre que nao souber onde colocar um arquivo. Funciona para documentos, videos, planilhas, imagens, contratos, etc.</p>
+    <div class="example">
+      <div class="example-title">Exemplo</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /onde-salvar tenho um video de depoimento de aluno do Master<br>
+        <span class="chat-ai">Assistente:</span> Arquivo pesado (video) → Google Drive → OMNI/04_ENTREGA/Produtos/Master/Depoimentos/
+      </div>
+    </div>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F3A8;</span>
+      <div class="card-title">/Design:brand-me</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Cria um brandbook completo conversando com voce. Ele pergunta nome, cores, fontes, logo, conteudo — e monta tudo automaticamente. Voce nao precisa mexer em nada tecnico.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser criar ou personalizar a identidade visual de um produto, marca ou sub-marca da OMNI.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F4CB;</span>
+      <div class="card-title">/Sop:map-core-sop-backlog</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Analisa TODA a empresa e gera uma lista priorizada de quais processos precisam de SOP (procedimento documentado) primeiro. Separa os processos "burros" (repetitivos) dos processos "core" (que geram receita).</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser organizar a empresa e nao souber por onde comecar a documentar processos.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F9EC;</span>
+      <div class="card-title">/SquadCreator:create-from-sop</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Transforma SOPs ja documentados em squads operacionais automaticamente. Ou seja, pega um processo que voce ja documentou e cria um time de IA que executa aquele processo.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando ja tiver SOPs prontos e quiser automatizar a execucao deles com agentes de IA.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F4B0;</span>
+      <div class="card-title">/Hormozi:agents:hormozi-chief</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Especialista na metodologia Alex Hormozi ($100M Offers). Constroi e diagnostica ofertas de alto ticket, monta a "equacao de valor" do seu produto, cria ofertas irresistiveis.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser criar ou melhorar a oferta de um produto usando a metodologia Hormozi — valor percebido, bonus, garantia, urgencia, escassez.</p>
+    <div class="example">
+      <div class="example-title">Exemplo</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /Hormozi:agents:hormozi-chief quero reestruturar a oferta do curso FPH pra aumentar o ticket<br>
+        <span class="chat-ai">Hormozi Chief:</span> Vou analisar a oferta atual usando a Value Equation (Dream Outcome x Perceived Likelihood / Time Delay x Effort)...
+      </div>
+    </div>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F44B;</span>
+      <div class="card-title">/greet</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Gera uma saudacao contextual do agente ativo, mostrando comandos disponiveis e status do projeto.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser ver o "menu" do agente atual de forma organizada.</p>
+  </div>
+
+  <h3>Skills Avancadas (Ferramentas Automaticas)</h3>
+  <p>Skills sao ferramentas que rodam de forma mais automatizada. Algumas sao ativadas por voce, outras funcionam nos bastidores.</p>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F9E0;</span>
+      <div class="card-title">/deep-strategic-planning</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Planejamento estrategico profundo. Analisa um problema sob 12 perspectivas diferentes (lentes), cria de 7 a 10 cenarios possiveis, e pontua cada um. E como ter 12 consultores analisando seu problema ao mesmo tempo.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando tiver uma decisao grande pra tomar — lancar um produto novo, entrar em um mercado, mudar posicionamento, reestruturar a empresa.</p>
+    <div class="example">
+      <div class="example-title">Exemplo</div>
+      <div class="example-chat">
+        <span class="chat-you">Voce:</span> /deep-strategic-planning devemos expandir a OMNI para o mercado de hipnoterapia infantil?<br>
+        <span class="chat-ai">Skill:</span> Vou analisar sob 12 lentes: mercado, financeira, competitiva, operacional, risco, timing...
+      </div>
+    </div>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F50D;</span>
+      <div class="card-title">/tech-research</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Pesquisa tecnica profunda. Voce faz uma pergunta e ele pesquisa na web, avalia as fontes, e entrega um relatorio estruturado com tudo documentado.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando precisar pesquisar algo a fundo — uma ferramenta, uma tecnologia, uma integracao, uma tendencia.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F504;</span>
+      <div class="card-title">/simplify</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Revisa o codigo que acabou de ser escrito e procura oportunidades de simplificar, reutilizar e melhorar a qualidade. Depois corrige automaticamente.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Depois que o @dev termina de construir algo, para garantir que o codigo ficou limpo.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x23F0;</span>
+      <div class="card-title">/loop</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Executa um comando repetidamente em intervalos (ex: a cada 5 minutos). Util para monitorar algo.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando precisar monitorar algo periodicamente — ex: "verifica se o deploy terminou a cada 5 minutos".</p>
+    <div class="code">/loop 5m "verifique o status do deploy"</div>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F4C5;</span>
+      <div class="card-title">/schedule</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Agenda tarefas automaticas que rodam em horarios programados (tipo um alarme que executa uma acao).</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser que algo rode automaticamente em dias/horarios especificos — ex: "todo dia as 9h, verifica o backlog".</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F6E0;&#xFE0F;</span>
+      <div class="card-title">/update-config</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Configura comportamentos automaticos do Claude Code. Tipo: "sempre que eu fizer X, execute Y".</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser criar automacoes e regras permanentes de comportamento.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F5D1;&#xFE0F;</span>
+      <div class="card-title">/doc-rot</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Encontra documentacao velha, desatualizada ou mentirosa no codigo — comentarios que nao fazem mais sentido, TODOs ja feitos, referencias que nao existem mais.</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Para limpar e manter o codigo organizado.</p>
+  </div>
+
+  <div class="card-full">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <span style="font-size:1.3rem;">&#x1F916;</span>
+      <div class="card-title">/claude-api</div>
+    </div>
+    <p><strong style="color:var(--cream);">O que faz:</strong> Ajuda a construir aplicacoes que usam a API do Claude (inteligencia artificial da Anthropic).</p>
+    <p><strong style="color:var(--gold);">Quando usar:</strong> Quando quiser criar um bot, automacao ou app que usa IA por tras.</p>
+  </div>
+
+  <h3>Todos os Agentes dos Squads (Referencia Completa)</h3>
+  <p>Aqui esta a lista COMPLETA de todos os agentes disponiveis em cada squad, para referencia.</p>
+
+  <h4>Squad de Copy — 24 Copywriters</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Copy Chief</td><td><span class="inline-code">/aiox-copy:copy-chief</span></td><td>Orquestrador — direciona pro copywriter certo</td></tr>
+      <tr><td>Claude Hopkins</td><td><span class="inline-code">/aiox-copy:claude-hopkins</span></td><td>Publicidade cientifica, testes e dados</td></tr>
+      <tr><td>Eugene Schwartz</td><td><span class="inline-code">/aiox-copy:eugene-schwartz</span></td><td>5 niveis de consciencia, headlines longas</td></tr>
+      <tr><td>Robert Collier</td><td><span class="inline-code">/aiox-copy:robert-collier</span></td><td>Conversa mental, cartas persuasivas</td></tr>
+      <tr><td>Gary Halbert</td><td><span class="inline-code">/aiox-copy:gary-halbert</span></td><td>Cartas de venda, narrativa emocional</td></tr>
+      <tr><td>Gary Bencivenga</td><td><span class="inline-code">/aiox-copy:gary-bencivenga</span></td><td>Engenharia de persuasao</td></tr>
+      <tr><td>David Ogilvy</td><td><span class="inline-code">/aiox-copy:david-ogilvy</span></td><td>Publicidade classica, marca + resposta</td></tr>
+      <tr><td>Clayton Makepeace</td><td><span class="inline-code">/aiox-copy:clayton-makepeace</span></td><td>Copy visceral, amplificacao emocional</td></tr>
+      <tr><td>Parris Lampropoulos</td><td><span class="inline-code">/aiox-copy:parris-lampropoulos</span></td><td>Fascinations e bullets irresistiveis</td></tr>
+      <tr><td>John Carlton</td><td><span class="inline-code">/aiox-copy:john-carlton</span></td><td>Escrita simples e direta</td></tr>
+      <tr><td>Jim Rutz</td><td><span class="inline-code">/aiox-copy:jim-rutz</span></td><td>Magalogs e mala direta</td></tr>
+      <tr><td>David Deutsch</td><td><span class="inline-code">/aiox-copy:david-deutsch</span></td><td>Mala direta e cartas de venda</td></tr>
+      <tr><td>Dan Kennedy</td><td><span class="inline-code">/aiox-copy:dan-kennedy</span></td><td>Marketing magnetico, urgencia, No B.S.</td></tr>
+      <tr><td>Todd Brown</td><td><span class="inline-code">/aiox-copy:todd-brown</span></td><td>Metodo E5, Big Idea</td></tr>
+      <tr><td>Jeff Walker</td><td><span class="inline-code">/aiox-copy:jeff-walker</span></td><td>Product Launch Formula (lancamentos)</td></tr>
+      <tr><td>Frank Kern</td><td><span class="inline-code">/aiox-copy:frank-kern</span></td><td>Branding intencional + venda direta</td></tr>
+      <tr><td>Stefan Georgi</td><td><span class="inline-code">/aiox-copy:stefan-georgi</span></td><td>Metodo RMBC para copy estruturada</td></tr>
+      <tr><td>Russell Brunson</td><td><span class="inline-code">/aiox-copy:russell-brunson</span></td><td>Funis, lancamentos, Expert Secrets</td></tr>
+      <tr><td>Jon Benson</td><td><span class="inline-code">/aiox-copy:jon-benson</span></td><td>VSL (Video Sales Letter)</td></tr>
+      <tr><td>Dan Koe</td><td><span class="inline-code">/aiox-copy:dan-koe</span></td><td>Escrita digital, one-person business</td></tr>
+      <tr><td>Andre Chaperon</td><td><span class="inline-code">/aiox-copy:andre-chaperon</span></td><td>Soap Opera Sequences (email novela)</td></tr>
+      <tr><td>Ben Settle</td><td><span class="inline-code">/aiox-copy:ben-settle</span></td><td>Email diario, infotainment</td></tr>
+      <tr><td>Ry Schwartz</td><td><span class="inline-code">/aiox-copy:ry-schwartz</span></td><td>Email copywriting e sequencias</td></tr>
+      <tr><td>Joe Sugarman</td><td><span class="inline-code">/aiox-copy:joe-sugarman</span></td><td>Gatilhos mentais e analise de qualidade</td></tr>
+    </table>
+  </div>
+
+  <h4>Squad de Ads — 12 Especialistas</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Ad Midas</td><td><span class="inline-code">/aiox-ads:ad-midas</span></td><td>Concierge — recebe e direciona demandas</td></tr>
+      <tr><td>Ads Traffic Chief</td><td><span class="inline-code">/aiox-ads:ads-traffic-chief</span></td><td>Estrategia geral de trafego</td></tr>
+      <tr><td>Campaign Manager</td><td><span class="inline-code">/aiox-ads:campaign-manager</span></td><td>Criacao e gestao de campanhas</td></tr>
+      <tr><td>Performance Analyst</td><td><span class="inline-code">/aiox-ads:performance-analyst</span></td><td>Analise de resultados e otimizacao</td></tr>
+      <tr><td>Creative Analyst</td><td><span class="inline-code">/aiox-ads:creative-analyst</span></td><td>Avaliacao de criativos e hooks</td></tr>
+      <tr><td>Pixel Specialist</td><td><span class="inline-code">/aiox-ads:pixel-specialist</span></td><td>Rastreamento, pixels, conversoes</td></tr>
+      <tr><td>Fiscal</td><td><span class="inline-code">/aiox-ads:fiscal</span></td><td>Financeiro e alocacao de orcamento</td></tr>
+      <tr><td>BR Traffic Operator</td><td><span class="inline-code">/aiox-ads:br-traffic-operator</span></td><td>Trafego especifico para Brasil</td></tr>
+      <tr><td>Audit Orchestrator</td><td><span class="inline-code">/aiox-ads:audit-orchestrator</span></td><td>Auditoria completa de campanhas</td></tr>
+      <tr><td>Kasim Aslam</td><td><span class="inline-code">/aiox-ads:kasim-aslam</span></td><td>Expert em Google Ads</td></tr>
+      <tr><td>Ralph Burns</td><td><span class="inline-code">/aiox-ads:ralph-burns</span></td><td>Expert em Meta Ads e escala</td></tr>
+      <tr><td>Tom Breeze</td><td><span class="inline-code">/aiox-ads:tom-breeze</span></td><td>Expert em YouTube Ads</td></tr>
+    </table>
+  </div>
+
+  <h4>Squad de Design — 9 Agentes</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Design Chief</td><td><span class="inline-code">/aiox-design:design-chief</span></td><td>Orquestrador do time de design</td></tr>
+      <tr><td>Nano Banana Generator</td><td><span class="inline-code">/aiox-design:nano-banana-generator</span></td><td>Geracao de imagens com IA (Gemini)</td></tr>
+      <tr><td>Page Composer</td><td><span class="inline-code">/aiox-design:page-composer</span></td><td>Composicao de layouts de paginas</td></tr>
+      <tr><td>Brad Frost</td><td><span class="inline-code">/aiox-design:brad-frost</span></td><td>Atomic Design (componentes)</td></tr>
+      <tr><td>Dan Mall</td><td><span class="inline-code">/aiox-design:dan-mall</span></td><td>Design e estrategia</td></tr>
+      <tr><td>Dave Malouf</td><td><span class="inline-code">/aiox-design:dave-malouf</span></td><td>Design Systems</td></tr>
+      <tr><td>DS Foundations Lead</td><td><span class="inline-code">/aiox-design:ds-foundations-lead</span></td><td>Fundacoes (cores, tipografia, espacamento)</td></tr>
+      <tr><td>DS Token Architect</td><td><span class="inline-code">/aiox-design:ds-token-architect</span></td><td>Tokens de design (variaveis visuais)</td></tr>
+      <tr><td>Storybook Expert</td><td><span class="inline-code">/aiox-design:storybook-expert</span></td><td>Documentacao de componentes</td></tr>
+    </table>
+  </div>
+
+  <h4>Squad SOP — 6 Agentes</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">SOP Chief</td><td><span class="inline-code">/aiox-sop:sop-chief</span></td><td>Coordenador do time de processos</td></tr>
+      <tr><td>SOP Creator</td><td><span class="inline-code">/aiox-sop:sop-creator</span></td><td>Cria SOPs do zero</td></tr>
+      <tr><td>SOP Extractor</td><td><span class="inline-code">/aiox-sop:sop-extractor</span></td><td>Extrai processos de videos/textos/conversas</td></tr>
+      <tr><td>SOP Analyst</td><td><span class="inline-code">/aiox-sop:sop-analyst</span></td><td>Analisa processos e identifica oportunidades</td></tr>
+      <tr><td>SOP Auditor</td><td><span class="inline-code">/aiox-sop:sop-auditor</span></td><td>Audita SOPs existentes</td></tr>
+      <tr><td>SOP ML Architect</td><td><span class="inline-code">/aiox-sop:sop-ml-architect</span></td><td>Cria versoes automatizaveis dos processos</td></tr>
+    </table>
+  </div>
+
+  <h4>Squad Workspace — 6 Executivos</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Workspace Chief (COO)</td><td><span class="inline-code">/aiox-workspace:workspace-chief</span></td><td>Coordenador geral do workspace</td></tr>
+      <tr><td>Vision Chief (CEO)</td><td><span class="inline-code">/aiox-workspace:vision-chief</span></td><td>Missao, visao, valores, direcao estrategica</td></tr>
+      <tr><td>CMO Architect</td><td><span class="inline-code">/aiox-workspace:cmo-architect</span></td><td>Marketing, ICP, marca, posicionamento</td></tr>
+      <tr><td>CTO Architect</td><td><span class="inline-code">/aiox-workspace:cto-architect</span></td><td>Tecnologia, roadmap, decisoes tecnicas</td></tr>
+      <tr><td>CIO Engineer</td><td><span class="inline-code">/aiox-workspace:cio-engineer</span></td><td>Infraestrutura, codigo, operacoes tech</td></tr>
+      <tr><td>CAIO Architect</td><td><span class="inline-code">/aiox-workspace:caio-architect</span></td><td>Estrategia de IA, orquestracao de agentes</td></tr>
+      <tr><td>COO Orchestrator</td><td><span class="inline-code">/aiox-workspace:coo-orchestrator</span></td><td>Operacoes, processos, eficiencia</td></tr>
+    </table>
+  </div>
+
+  <h4>Squad Creator — Criacao de Times</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Squad Chief</td><td><span class="inline-code">/SquadCreator:agents:squad-chief</span></td><td>Cria novos squads</td></tr>
+      <tr><td>Squad Chief PRO</td><td><span class="inline-code">/SquadCreatorPro:agents:squad-chief</span></td><td>Criacao avancada com benchmarking</td></tr>
+      <tr><td>Oala Nicolas</td><td><span class="inline-code">/SquadCreatorPro:agents:oalanicolas</span></td><td>Clonagem de mentes e extracao de DNA</td></tr>
+      <tr><td>Pedro Valerio</td><td><span class="inline-code">/SquadCreatorPro:agents:pedro-valerio</span></td><td>Pesquisa e benchmarking</td></tr>
+      <tr><td>Thiago Finch</td><td><span class="inline-code">/SquadCreatorPro:agents:thiago_finch</span></td><td>Orquestracao multi-agente</td></tr>
+    </table>
+  </div>
+
+  <h4>Agentes Especiais</h4>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agente</th><th>Comando</th><th>Especialidade</th></tr>
+      <tr><td style="color:var(--gold);">Hormozi Chief</td><td><span class="inline-code">/Hormozi:agents:hormozi-chief</span></td><td>Ofertas de alto ticket (metodologia $100M Offers)</td></tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Total de recursos disponiveis</div>
+    <p><strong style="color:var(--gold);">80+ agentes</strong> + <strong style="color:var(--teal);">7 comandos especiais</strong> + <strong style="color:var(--lavanda);">7 skills automaticas</strong> = tudo que voce precisa para qualquer area da empresa.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 7: CHEATSHEET
+     ══════════════════════════════════════════════ -->
+<div class="section" id="cheatsheet">
+  <span class="section-badge">Capitulo 7</span>
+  <h2>Lista rapida de comandos</h2>
+  <p>Copie e cole qualquer comando abaixo diretamente no Claude Code.</p>
+
+  <h3>Agentes Principais</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>O que voce quer</th><th>Comando</th></tr>
+      <tr><td>Ajuda geral / nao sei por onde comecar</td><td><span class="inline-code">@aiox-master</span></td></tr>
+      <tr><td>Planejar um produto / funcionalidade</td><td><span class="inline-code">@pm</span></td></tr>
+      <tr><td>Construir algo (codigo, pagina, ferramenta)</td><td><span class="inline-code">@dev</span></td></tr>
+      <tr><td>Planejar arquitetura de sistema</td><td><span class="inline-code">@architect</span></td></tr>
+      <tr><td>Pesquisar mercado / concorrentes</td><td><span class="inline-code">@analyst</span></td></tr>
+      <tr><td>Revisar qualidade</td><td><span class="inline-code">@qa</span></td></tr>
+      <tr><td>Publicar / subir pro servidor</td><td><span class="inline-code">@devops</span></td></tr>
+      <tr><td>Mexer com banco de dados</td><td><span class="inline-code">@data-engineer</span></td></tr>
+      <tr><td>Design e experiencia do usuario</td><td><span class="inline-code">@ux-design-expert</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Squads (Times Especializados)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>O que voce quer</th><th>Comando</th></tr>
+      <tr><td>Textos de venda, emails, copy</td><td><span class="inline-code">/aiox-copy:copy-chief</span></td></tr>
+      <tr><td>Trafego pago, campanhas, Meta/Google Ads</td><td><span class="inline-code">/aiox-ads:ad-midas</span></td></tr>
+      <tr><td>Design, visual, componentes</td><td><span class="inline-code">/aiox-design:design-chief</span></td></tr>
+      <tr><td>Documentar processos (SOP)</td><td><span class="inline-code">/aiox-sop:sop-chief</span></td></tr>
+      <tr><td>Dados da empresa, perfil, estrategia</td><td><span class="inline-code">/aiox-workspace:workspace-chief</span></td></tr>
+      <tr><td>Marca e posicionamento</td><td><span class="inline-code">/Design:brand-me</span></td></tr>
+      <tr><td>Criar um time novo de IA</td><td><span class="inline-code">/SquadCreator:agents:squad-chief</span></td></tr>
+      <tr><td>Gerar imagem com IA</td><td><span class="inline-code">/aiox-design:nano-banana-generator</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Copywriters Favoritos (atalhos)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Tipo de texto</th><th>Copywriter</th><th>Comando</th></tr>
+      <tr><td>Pagina de venda</td><td>Gary Halbert</td><td><span class="inline-code">/aiox-copy:gary-halbert</span></td></tr>
+      <tr><td>Email diario</td><td>Ben Settle</td><td><span class="inline-code">/aiox-copy:ben-settle</span></td></tr>
+      <tr><td>Sequencia de email</td><td>Andre Chaperon</td><td><span class="inline-code">/aiox-copy:andre-chaperon</span></td></tr>
+      <tr><td>VSL (video de venda)</td><td>Jon Benson</td><td><span class="inline-code">/aiox-copy:jon-benson</span></td></tr>
+      <tr><td>Lancamento</td><td>Jeff Walker</td><td><span class="inline-code">/aiox-copy:jeff-walker</span></td></tr>
+      <tr><td>Funil completo</td><td>Russell Brunson</td><td><span class="inline-code">/aiox-copy:russell-brunson</span></td></tr>
+      <tr><td>Headline matadora</td><td>Eugene Schwartz</td><td><span class="inline-code">/aiox-copy:eugene-schwartz</span></td></tr>
+      <tr><td>Urgencia e oferta</td><td>Dan Kennedy</td><td><span class="inline-code">/aiox-copy:dan-kennedy</span></td></tr>
+      <tr><td>Branding + venda</td><td>Frank Kern</td><td><span class="inline-code">/aiox-copy:frank-kern</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Comandos Uteis (dentro de qualquer sessao)</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Comando</th><th>O que faz</th></tr>
+      <tr><td><span class="inline-code">*help</span></td><td>Mostra todos os comandos disponiveis do agente ativo</td></tr>
+      <tr><td><span class="inline-code">*exit</span></td><td>Sai do modo agente</td></tr>
+      <tr><td><span class="inline-code">/onde-salvar</span></td><td>Ajuda a decidir onde salvar um arquivo</td></tr>
+      <tr><td><span class="inline-code">/greet</span></td><td>Saudacao contextual</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 7: DICAS
+     ══════════════════════════════════════════════ -->
+<div class="section" id="dicas">
+  <span class="section-badge">Capitulo 8</span>
+  <h2>Dicas importantes</h2>
+
+  <div class="tip">
+    <div class="tip-title">Dica 1 — Sempre comece pelo chefe do squad</div>
+    <p>Se nao sabe qual agente especifico usar, chame o "chief" do squad (copy-chief, design-chief, sop-chief, ad-midas). Ele vai direcionar pro melhor especialista.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica 2 — Converse em portugues normal</div>
+    <p>Voce nao precisa usar termos tecnicos. Fale naturalmente: "quero um texto bonito pra vender o curso" funciona perfeitamente.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica 3 — Quanto mais contexto, melhor</div>
+    <p>Ao pedir algo, inclua: pra quem e (publico), qual o objetivo (vender, informar, engajar), qual o produto, e qualquer detalhe relevante. Quanto mais info, melhor o resultado.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica 4 — Use *help quando estiver perdida</div>
+    <p>Dentro de qualquer agente, digite <span class="inline-code">*help</span> para ver tudo que ele pode fazer. E o "menu" do agente.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica 5 — O Workspace alimenta tudo</div>
+    <p>Se o perfil da empresa estiver bem preenchido (workspace), todos os agentes ja vao saber sobre a OMNI, o publico, o tom de voz, os produtos. Vale investir tempo nisso.</p>
+  </div>
+
+  <div class="warning">
+    <div class="tip-title">Atencao</div>
+    <p>So o <span class="inline-code">@devops</span> pode fazer "git push" (subir codigo pro servidor). Se outro agente tentar, ele vai ser bloqueado. Isso e uma regra de seguranca.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-title">Dica 6 — Salve o trabalho frequentemente</div>
+    <p>Depois de fazer varias mudancas, peca para commitar e subir. Isso protege seu trabalho caso algo de errado.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════
+     SECAO 8: RESUMO VISUAL
+     ══════════════════════════════════════════════ -->
+<div class="section" id="resumo">
+  <span class="section-badge">Resumo</span>
+  <h2>Tudo em um olhar</h2>
+
+  <div class="card-grid">
+    <div class="card" style="border-left: 3px solid var(--gold);">
+      <div class="card-title">11 Agentes Principais</div>
+      <div class="card-desc">Master, PM, Dev, Architect, Analyst, QA, DevOps, PO, SM, Data Engineer, UX Designer</div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--teal);">
+      <div class="card-title">7 Squads Especializados</div>
+      <div class="card-desc">Copy (24 agentes), Ads (10), Design (9), SOP (6), Workspace (6), Brand (16), Squad Creator</div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--rosa);">
+      <div class="card-title">100+ Agentes no Total</div>
+      <div class="card-desc">Cada um com personalidade, especialidade e comandos proprios</div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--lavanda);">
+      <div class="card-title">Tudo em Portugues</div>
+      <div class="card-desc">Converse naturalmente. Sem precisar saber programar ou usar termos tecnicos.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  OMNI Brasil — Guia AIOX — Criado para Julia<br>
+  Atualizado em 06/04/2026
+</div>
+
+</main>
+</div>
+
+<script>
+function toggleAccordion(header) {
+  const accordion = header.parentElement;
+  accordion.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
