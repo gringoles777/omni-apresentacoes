@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Ads Report — OMNI Brasil | Abril 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-black: #050505;
+      --color-dark: #0D0D0D;
+      --color-dark-elevated: #1A1A1A;
+      --color-dark-texture: #2D2D2D;
+      --color-gold: #C8A84B;
+      --color-gold-light: #E8C86A;
+      --color-gold-deep: #9A7A2E;
+      --color-cream: #F5F0E8;
+      --color-cream-70: rgba(245, 240, 232, 0.70);
+      --color-cream-50: rgba(245, 240, 232, 0.50);
+      --color-teal: #2A9D8F;
+      --color-gray: #6B6B6B;
+      --color-gold-10: rgba(200, 168, 75, 0.10);
+      --color-gold-15: rgba(200, 168, 75, 0.15);
+      --color-gold-20: rgba(200, 168, 75, 0.20);
+      --color-teal-10: rgba(42, 157, 143, 0.10);
+      --color-teal-20: rgba(42, 157, 143, 0.20);
+      --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+      --font-display: 'Oswald', 'Arial Black', sans-serif;
+      --font-serif: 'DM Serif Display', 'Georgia', serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+      --font-body: 'Inter', 'Open Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--color-black);
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--color-dark);
+      border-bottom: 2px solid var(--color-gold);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-brand {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+    .header-date {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-gray);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 40px 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-dark-texture);
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: 42px;
+      color: var(--color-cream);
+      margin-bottom: 8px;
+    }
+    .hero h1 span {
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .subtitle {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--color-gray);
+      font-weight: 300;
+    }
+
+    /* Container */
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+    /* Summary Cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    .summary-card {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-dark-texture);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .summary-card:hover { border-color: var(--color-gold); }
+    .summary-card .label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      margin-bottom: 8px;
+    }
+    .summary-card .value {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      color: var(--color-gold-light);
+    }
+    .summary-card .detail {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-cream-50);
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section { margin-bottom: 50px; }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-gold-20);
+    }
+
+    /* Campaign Cards */
+    .campaign-card {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-dark-texture);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 24px;
+      transition: border-color 0.3s;
+    }
+    .campaign-card:hover { border-color: var(--color-gold); }
+    .campaign-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .campaign-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--color-cream);
+      flex: 1;
+    }
+    .campaign-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+    .badge-search { background: var(--color-teal-20); color: var(--color-teal); border: 1px solid var(--color-teal); }
+    .badge-demand { background: var(--color-gold-15); color: var(--color-gold-light); border: 1px solid var(--color-gold); }
+    .badge-enabled { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid #2ecc71; }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .metric {
+      background: var(--color-dark);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .metric .metric-label {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      margin-bottom: 6px;
+    }
+    .metric .metric-value {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-cream);
+    }
+    .metric .metric-value.gold { color: var(--color-gold-light); }
+    .metric .metric-value.teal { color: var(--color-teal); }
+
+    /* Chart placeholder */
+    .chart-area {
+      background: var(--color-dark);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .chart-title {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      margin-bottom: 12px;
+    }
+    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 80px; }
+    .bar {
+      flex: 1;
+      background: var(--gradient-gold);
+      border-radius: 2px 2px 0 0;
+      min-width: 6px;
+      position: relative;
+      transition: opacity 0.3s;
+    }
+    .bar:hover { opacity: 0.8; }
+    .bar-teal { background: var(--color-teal); }
+
+    /* Diagnostic */
+    .diagnostic {
+      background: var(--color-dark);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 0 8px 8px 0;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .diagnostic-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+    .diagnostic p {
+      font-size: 14px;
+      color: var(--color-cream-70);
+      line-height: 1.7;
+    }
+    .diagnostic .highlight { color: var(--color-gold-light); font-weight: 600; }
+    .diagnostic .alert { color: #e74c3c; font-weight: 600; }
+    .diagnostic .success { color: #2ecc71; font-weight: 600; }
+
+    /* Recommendations */
+    .reco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .reco-card {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-gold-20);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .reco-card .reco-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .reco-card h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: var(--color-gold);
+      margin-bottom: 8px;
+    }
+    .reco-card p {
+      font-size: 14px;
+      color: var(--color-cream-70);
+      line-height: 1.6;
+    }
+    .reco-card .priority {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+    .priority-high { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+    .priority-medium { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+    .priority-low { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--color-dark-texture);
+      padding: 30px 40px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .footer p {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-gray);
+    }
+    .footer .gold { color: var(--color-gold); }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 28px; }
+      .container { padding: 20px 16px; }
+      .campaign-card { padding: 20px; }
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .header { padding: 16px 20px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-brand">OMNI Hypnosis Brasil</div>
+    <div class="header-date">Relatorio Google Ads — 07 Abr 2026</div>
+  </div>
+
+  <div class="hero">
+    <h1>Google Ads <span>Performance Report</span></h1>
+    <p class="subtitle">Analise estrategica das campanhas ativas — Ultimos 30 dias</p>
+  </div>
+
+  <div class="container">
+
+    <!-- SUMMARY -->
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="label">Investimento Total</div>
+        <div class="value">R$ 5.514</div>
+        <div class="detail">4 campanhas ativas</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Conversoes Totais</div>
+        <div class="value">165,7</div>
+        <div class="detail">leads gerados</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">CPL Medio</div>
+        <div class="value">R$ 33,26</div>
+        <div class="detail">custo por lead</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Cliques Totais</div>
+        <div class="value">1.058</div>
+        <div class="detail">CTR medio 11,4%</div>
+      </div>
+      <div class="summary-card">
+        <div class="label">Budget Diario</div>
+        <div class="value">R$ 330</div>
+        <div class="detail">R$300 Search + R$30 DGen</div>
+      </div>
+    </div>
+
+    <!-- CAMPAIGN 1: CURSO-HIPNOSE -->
+    <div class="section">
+      <div class="section-title">Campanhas Ativas — Detalhamento</div>
+
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div class="campaign-name">Curso de Hipnose — Search Frio</div>
+          <span class="campaign-badge badge-search">SEARCH</span>
+          <span class="campaign-badge badge-enabled">ATIVA</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-label">Impressoes</div>
+            <div class="metric-value">2.293</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Cliques</div>
+            <div class="metric-value">340</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CTR</div>
+            <div class="metric-value teal">14,83%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Custo Total</div>
+            <div class="metric-value gold">R$ 1.755</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Conversoes</div>
+            <div class="metric-value">52,9</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPL</div>
+            <div class="metric-value gold">R$ 33,17</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPC Medio</div>
+            <div class="metric-value">R$ 5,16</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Budget/dia</div>
+            <div class="metric-value">R$ 100</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-title">Custo Diario (14 dias)</div>
+          <div class="bar-chart">
+            <div class="bar" style="height:28%"></div>
+            <div class="bar" style="height:16%"></div>
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:61%"></div>
+            <div class="bar" style="height:23%"></div>
+            <div class="bar" style="height:17%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:77%"></div>
+            <div class="bar" style="height:27%"></div>
+            <div class="bar" style="height:43%"></div>
+            <div class="bar" style="height:65%"></div>
+            <div class="bar" style="height:76%"></div>
+            <div class="bar" style="height:100%"></div>
+            <div class="bar" style="height:90%"></div>
+          </div>
+        </div>
+        <div class="diagnostic">
+          <div class="diagnostic-title">DIAGNOSTICO MIDAS</div>
+          <p>
+            CTR de <span class="highlight">14,83%</span> e excelente para Search frio — indica boa relevancia dos anuncios com a intencao de busca.
+            CPL de <span class="highlight">R$ 33,17</span> esta dentro de margem aceitavel para curso de hipnose.
+            <strong>Tendencia:</strong> CPC subindo de R$2-3 para R$7-8 na ultima semana — <span class="alert">monitorar creative fatigue e frequency</span>.
+            Budget diario sendo consumido consistentemente, campanha em fase de aprendizado.
+          </p>
+        </div>
+      </div>
+
+      <!-- CAMPAIGN 2: CURSO-HIPNOTERAPEUTA -->
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div class="campaign-name">Curso de Hipnoterapeuta — Search Frio</div>
+          <span class="campaign-badge badge-search">SEARCH</span>
+          <span class="campaign-badge badge-enabled">ATIVA</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-label">Impressoes</div>
+            <div class="metric-value">1.729</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Cliques</div>
+            <div class="metric-value">211</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CTR</div>
+            <div class="metric-value teal">12,20%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Custo Total</div>
+            <div class="metric-value gold">R$ 998</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Conversoes</div>
+            <div class="metric-value">38,8</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPL</div>
+            <div class="metric-value gold">R$ 25,72</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPC Medio</div>
+            <div class="metric-value">R$ 4,73</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Budget/dia</div>
+            <div class="metric-value">R$ 100</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-title">Custo Diario (14 dias)</div>
+          <div class="bar-chart">
+            <div class="bar" style="height:49%"></div>
+            <div class="bar" style="height:43%"></div>
+            <div class="bar" style="height:34%"></div>
+            <div class="bar" style="height:18%"></div>
+            <div class="bar" style="height:14%"></div>
+            <div class="bar" style="height:5%"></div>
+            <div class="bar" style="height:38%"></div>
+            <div class="bar" style="height:26%"></div>
+            <div class="bar" style="height:15%"></div>
+            <div class="bar" style="height:29%"></div>
+            <div class="bar" style="height:44%"></div>
+            <div class="bar" style="height:78%"></div>
+            <div class="bar" style="height:77%"></div>
+            <div class="bar" style="height:100%"></div>
+          </div>
+        </div>
+        <div class="diagnostic">
+          <div class="diagnostic-title">DIAGNOSTICO MIDAS</div>
+          <p>
+            <span class="success">Melhor CPL da conta: R$ 25,72</span> — campanha mais eficiente.
+            CTR de 12,20% solido. CPC medio de R$4,73 abaixo da media da conta.
+            Um dia zerou conversoes (31/mar) mas se recuperou.
+            <strong>Veredicto:</strong> Campanha saudavel, <span class="highlight">candidata a escalar primeiro</span>.
+          </p>
+        </div>
+      </div>
+
+      <!-- CAMPAIGN 3: SEARCH QUENTE -->
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div class="campaign-name">Search Quente — Branded/Retargeting</div>
+          <span class="campaign-badge badge-search">SEARCH</span>
+          <span class="campaign-badge badge-enabled">ATIVA</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-label">Impressoes</div>
+            <div class="metric-value">2.026</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Cliques</div>
+            <div class="metric-value">373</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CTR</div>
+            <div class="metric-value teal">18,41%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Custo Total</div>
+            <div class="metric-value gold">R$ 2.591</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Conversoes</div>
+            <div class="metric-value">64,0</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPL</div>
+            <div class="metric-value gold">R$ 40,49</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPC Medio</div>
+            <div class="metric-value">R$ 6,95</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Budget/dia</div>
+            <div class="metric-value">R$ 100</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-title">Custo Diario (27 dias)</div>
+          <div class="bar-chart">
+            <div class="bar" style="height:4%"></div>
+            <div class="bar" style="height:34%"></div>
+            <div class="bar" style="height:29%"></div>
+            <div class="bar" style="height:13%"></div>
+            <div class="bar" style="height:10%"></div>
+            <div class="bar" style="height:50%"></div>
+            <div class="bar" style="height:47%"></div>
+            <div class="bar" style="height:66%"></div>
+            <div class="bar" style="height:28%"></div>
+            <div class="bar" style="height:61%"></div>
+            <div class="bar" style="height:76%"></div>
+            <div class="bar" style="height:95%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:31%"></div>
+            <div class="bar" style="height:30%"></div>
+            <div class="bar" style="height:33%"></div>
+            <div class="bar" style="height:29%"></div>
+            <div class="bar" style="height:51%"></div>
+            <div class="bar" style="height:89%"></div>
+            <div class="bar" style="height:74%"></div>
+            <div class="bar" style="height:80%"></div>
+            <div class="bar" style="height:20%"></div>
+            <div class="bar" style="height:14%"></div>
+            <div class="bar" style="height:57%"></div>
+            <div class="bar" style="height:75%"></div>
+            <div class="bar" style="height:100%"></div>
+            <div class="bar" style="height:66%"></div>
+          </div>
+        </div>
+        <div class="diagnostic">
+          <div class="diagnostic-title">DIAGNOSTICO MIDAS</div>
+          <p>
+            Maior volume de conversoes (<span class="highlight">64 leads</span>) porem maior CPL da conta (<span class="alert">R$ 40,49</span>).
+            CTR excelente de 18,41% — publico quente responde bem. CPC mais alto (R$6,95) indica concorrencia forte nos termos quentes.
+            <strong>Tendencia preocupante:</strong> dias sem conversao (31/mar, 03/abr) com custo alto — <span class="alert">possivel desperdicio de budget</span>.
+            Recomendacao: revisar termos de busca e negativar irrelevantes.
+          </p>
+        </div>
+      </div>
+
+      <!-- CAMPAIGN 4: DEMAND GEN -->
+      <div class="campaign-card">
+        <div class="campaign-header">
+          <div class="campaign-name">Demand Gen — Quente BR (YouTube/Discovery)</div>
+          <span class="campaign-badge badge-demand">DEMAND GEN</span>
+          <span class="campaign-badge badge-enabled">ATIVA</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric">
+            <div class="metric-label">Impressoes</div>
+            <div class="metric-value">5.849</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Cliques</div>
+            <div class="metric-value">134</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CTR</div>
+            <div class="metric-value">2,29%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Custo Total</div>
+            <div class="metric-value gold">R$ 170</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Conversoes</div>
+            <div class="metric-value">10,0</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPL</div>
+            <div class="metric-value gold">R$ 17,05</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">CPC Medio</div>
+            <div class="metric-value">R$ 1,27</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Budget/dia</div>
+            <div class="metric-value">R$ 30</div>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-title">Custo Diario (22 dias)</div>
+          <div class="bar-chart">
+            <div class="bar bar-teal" style="height:2%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:2%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:3%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:2%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:0.5%"></div>
+            <div class="bar bar-teal" style="height:1%"></div>
+            <div class="bar bar-teal" style="height:12%"></div>
+            <div class="bar bar-teal" style="height:65%"></div>
+            <div class="bar bar-teal" style="height:54%"></div>
+            <div class="bar bar-teal" style="height:100%"></div>
+            <div class="bar bar-teal" style="height:62%"></div>
+          </div>
+        </div>
+        <div class="diagnostic">
+          <div class="diagnostic-title">DIAGNOSTICO MIDAS</div>
+          <p>
+            <span class="success">CPL mais baixo da conta: R$ 17,05</span> com CPC de apenas R$1,27.
+            Campanha ficou praticamente inativa ate 01/abr (budget R$30, gastando centavos).
+            <strong>A partir de 02/abr voltou a performar</strong> com ~R$35-55/dia e 2-3 conversoes/dia.
+            <span class="highlight">Oportunidade clara de escalar:</span> se dobrar o budget para R$60/dia, potencial de 6+ leads/dia a CPL baixo.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="section">
+      <div class="section-title">Recomendacoes Estrategicas — Midas</div>
+      <div class="reco-grid">
+        <div class="reco-card">
+          <div class="reco-icon">1</div>
+          <h4>Escalar Demand Gen</h4>
+          <p>CPL de R$17 e o melhor da conta. Aumentar budget de R$30 para R$60-100/dia gradualmente (+30% por semana). Monitorar se CPL se mantem abaixo de R$25.</p>
+          <span class="priority priority-high">PRIORIDADE ALTA</span>
+        </div>
+        <div class="reco-card">
+          <div class="reco-icon">2</div>
+          <h4>Escalar Hipnoterapeuta</h4>
+          <p>Segunda melhor campanha (CPL R$25,72). Testar aumento de budget de R$100 para R$150/dia. CPC estavel indica margem para crescer.</p>
+          <span class="priority priority-high">PRIORIDADE ALTA</span>
+        </div>
+        <div class="reco-card">
+          <div class="reco-icon">3</div>
+          <h4>Otimizar Search Quente</h4>
+          <p>CPL de R$40 e alto para publico quente. Revisar termos de busca, negativar irrelevantes. Dias sem conversao indicam desperdicio — ajustar scheduling.</p>
+          <span class="priority priority-medium">PRIORIDADE MEDIA</span>
+        </div>
+        <div class="reco-card">
+          <div class="reco-icon">4</div>
+          <h4>Monitorar CPC Rising</h4>
+          <p>CPC da campanha Hipnose subiu de R$2-3 para R$7-8. Pode indicar fadiga de criativo ou aumento de concorrencia. Renovar anuncios responsivos.</p>
+          <span class="priority priority-medium">PRIORIDADE MEDIA</span>
+        </div>
+        <div class="reco-card">
+          <div class="reco-icon">5</div>
+          <h4>Audit de Conversoes</h4>
+          <p>Valores fracionados de conversao (ex: 2.994105) indicam modelo de atribuicao data-driven. Verificar se as conversoes estao configuradas corretamente no Google Ads.</p>
+          <span class="priority priority-low">PRIORIDADE BAIXA</span>
+        </div>
+        <div class="reco-card">
+          <div class="reco-icon">6</div>
+          <h4>Reativar PMax</h4>
+          <p>A campanha PMax pausada teve 444 conversoes historicas com CPL ~R$5,40. Avaliar reativacao com budget controlado de R$50/dia como teste.</p>
+          <span class="priority priority-medium">PRIORIDADE MEDIA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXECUTIVE SUMMARY TABLE -->
+    <div class="section">
+      <div class="section-title">Resumo Executivo — 30 dias</div>
+      <div style="overflow-x: auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-gold-20);">
+              <th style="text-align:left; padding:12px 8px; color:var(--color-gold); font-family:var(--font-display); letter-spacing:1px; font-size:11px;">CAMPANHA</th>
+              <th style="text-align:right; padding:12px 8px; color:var(--color-gold);">CUSTO</th>
+              <th style="text-align:right; padding:12px 8px; color:var(--color-gold);">LEADS</th>
+              <th style="text-align:right; padding:12px 8px; color:var(--color-gold);">CPL</th>
+              <th style="text-align:right; padding:12px 8px; color:var(--color-gold);">CTR</th>
+              <th style="text-align:right; padding:12px 8px; color:var(--color-gold);">CPC</th>
+              <th style="text-align:center; padding:12px 8px; color:var(--color-gold);">STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--color-dark-texture);">
+              <td style="padding:12px 8px; color:var(--color-cream);">Hipnose (Search Frio)</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold-light);">R$ 1.755</td>
+              <td style="text-align:right; padding:12px 8px;">52,9</td>
+              <td style="text-align:right; padding:12px 8px;">R$ 33,17</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-teal);">14,83%</td>
+              <td style="text-align:right; padding:12px 8px;">R$ 5,16</td>
+              <td style="text-align:center; padding:12px 8px; color:#f1c40f;">WATCH</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--color-dark-texture);">
+              <td style="padding:12px 8px; color:var(--color-cream);">Hipnoterapeuta (Search Frio)</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold-light);">R$ 998</td>
+              <td style="text-align:right; padding:12px 8px;">38,8</td>
+              <td style="text-align:right; padding:12px 8px; color:#2ecc71;">R$ 25,72</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-teal);">12,20%</td>
+              <td style="text-align:right; padding:12px 8px;">R$ 4,73</td>
+              <td style="text-align:center; padding:12px 8px; color:#2ecc71;">SCALE</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--color-dark-texture);">
+              <td style="padding:12px 8px; color:var(--color-cream);">Search Quente</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold-light);">R$ 2.591</td>
+              <td style="text-align:right; padding:12px 8px;">64,0</td>
+              <td style="text-align:right; padding:12px 8px; color:#e74c3c;">R$ 40,49</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-teal);">18,41%</td>
+              <td style="text-align:right; padding:12px 8px;">R$ 6,95</td>
+              <td style="text-align:center; padding:12px 8px; color:#e74c3c;">OPTIMIZE</td>
+            </tr>
+            <tr>
+              <td style="padding:12px 8px; color:var(--color-cream);">Demand Gen Quente</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold-light);">R$ 170</td>
+              <td style="text-align:right; padding:12px 8px;">10,0</td>
+              <td style="text-align:right; padding:12px 8px; color:#2ecc71;">R$ 17,05</td>
+              <td style="text-align:right; padding:12px 8px;">2,29%</td>
+              <td style="text-align:right; padding:12px 8px;">R$ 1,27</td>
+              <td style="text-align:center; padding:12px 8px; color:#2ecc71;">SCALE</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top:2px solid var(--color-gold-20);">
+              <td style="padding:12px 8px; color:var(--color-gold); font-weight:600;">TOTAL</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold); font-weight:600;">R$ 5.514</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold); font-weight:600;">165,7</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold); font-weight:600;">R$ 33,26</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold);">11,4%</td>
+              <td style="text-align:right; padding:12px 8px; color:var(--color-gold);">R$ 5,21</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Gerado por <span class="gold">Midas</span> — AIOX Ads Squad | OMNI Hypnosis Brasil</p>
+    <p style="margin-top:4px;">Google Ads Account: 671-323-7463 | Dados: ultimos 30 dias | 07/04/2026</p>
+  </div>
+
+</body>
+</html>
