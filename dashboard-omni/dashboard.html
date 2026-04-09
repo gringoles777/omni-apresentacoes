@@ -1105,8 +1105,8 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      min-width: 200px;
-      max-width: 260px;
+      min-width: 260px;
+      max-width: 420px;
     }
 
     .tree-toggle {
@@ -1146,7 +1146,29 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 200px;
+      max-width: 380px;
+      position: relative;
+      cursor: default;
+    }
+    .tree-name[title]:hover::after {
+      content: attr(title);
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      top: auto;
+      bottom: 20px;
+      z-index: 9999;
+      background: #1A1A1A;
+      border: 1px solid rgba(200,168,75,0.5);
+      color: var(--cream);
+      padding: 6px 10px;
+      font-size: 0.63rem;
+      white-space: nowrap;
+      border-radius: 3px;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7);
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.02em;
     }
     .tree-name.lv0 { color: var(--cream); font-weight: 600; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.04em; }
     .tree-name.lv1 { color: var(--cream-70); font-size: 0.68rem; }
@@ -1499,7 +1521,7 @@
             <table class="data-table" id="gerenciador-table">
               <thead>
                 <tr>
-                  <th style="min-width:320px;text-align:left">Fonte / Campanha</th>
+                  <th style="min-width:440px;text-align:left">Fonte / Campanha</th>
                   <th>Invest. Total</th>
                   <th>Leads</th>
                   <th>CPL</th>
@@ -2699,7 +2721,7 @@
               ${hasAdsets
                 ? `<span class="tree-toggle" onclick="toggleTree('${cId}',this)">+</span>`
                 : `<span class="tree-toggle" style="visibility:hidden">+</span>`}
-              <span class="tree-name lv1" title="${camp.campaign}">${truncateStr(camp.campaign, 65)}</span>
+              <span class="tree-name lv1" title="${camp.campaign}">${truncateStr(camp.campaign, 85)}</span>
             </div></td>
             ${cells(camp, cSpend)}
           </tr>`);
@@ -2716,7 +2738,7 @@
                 ${hasAds
                   ? `<span class="tree-toggle" onclick="toggleTree('${aId}',this)">+</span>`
                   : `<span class="tree-toggle" style="visibility:hidden">+</span>`}
-                <span class="tree-name lv2" title="${adset.adset}">${truncateStr(adset.adset, 52)}</span>
+                <span class="tree-name lv2" title="${adset.adset}">${truncateStr(adset.adset, 65)}</span>
               </div></td>
               ${cells(adset, aSpend)}
             </tr>`);
@@ -2728,7 +2750,7 @@
               rows.push(`<tr class="tree-row tree-lv3" data-parent="${aId}" style="display:none">
                 <td><div class="tree-cell">
                   <span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span>
-                  <span class="tree-name lv3" title="${ad.ad}">${truncateStr(ad.ad, 48)}</span>
+                  <span class="tree-name lv3" title="${ad.ad}">${truncateStr(ad.ad, 60)}</span>
                 </div></td>
                 ${cells(ad, adSpend)}
               </tr>`);
