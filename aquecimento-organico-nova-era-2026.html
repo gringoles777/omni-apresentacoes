@@ -1928,8 +1928,13 @@ function initApp(){
 var sections=document.querySelectorAll('section');
 var obs=new IntersectionObserver(function(entries){
 entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible')}});
-},{threshold:0.1});
+},{threshold:0.01,rootMargin:'200px 0px'});
 sections.forEach(function(s){if(s.id!=='hero')obs.observe(s)});
+// Fallback: reveal any section already in viewport
+setTimeout(function(){sections.forEach(function(s){
+var r=s.getBoundingClientRect();
+if(r.top<window.innerHeight+200)s.classList.add('visible');
+})},300);
 
 // PROGRESS BAR
 window.addEventListener('scroll',function(){
