@@ -168,7 +168,7 @@
     .main {
       margin-left: var(--sidebar-w);
       flex: 1;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
@@ -1632,11 +1632,11 @@
                 <thead>
                   <tr>
                     <th style="text-align:left">Semana</th>
-                    <th>A</th><th>Q</th><th>R</th><th>C</th><th>Conv.</th>
+                    <th>A</th><th>% A</th><th>Q</th><th>% Q</th><th>R</th><th>% R</th><th>C</th><th>Conv.</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="6" style="color:var(--gray);padding:20px;text-align:center;font-size:0.65rem">Carregando...</td></tr>
+                  <tr><td colspan="9" style="color:var(--gray);padding:20px;text-align:center;font-size:0.65rem">Carregando...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1647,11 +1647,11 @@
                 <thead>
                   <tr>
                     <th style="text-align:left">Mês</th>
-                    <th>A</th><th>Q</th><th>R</th><th>C</th><th>Conv.</th>
+                    <th>A</th><th>% A</th><th>Q</th><th>% Q</th><th>R</th><th>% R</th><th>C</th><th>Conv.</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="6" style="color:var(--gray);padding:20px;text-align:center;font-size:0.65rem">Carregando...</td></tr>
+                  <tr><td colspan="9" style="color:var(--gray);padding:20px;text-align:center;font-size:0.65rem">Carregando...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -2427,7 +2427,7 @@
         const qs = `from=${from}&to=${to}`;
 
         const [rGerenciador, rFunnel, rKPIs, rMeta, rClosers, rSDRs, rSDRIA, rAQRC, rMetaLP, rMetaFN, rMetaDaily,
-               rGoogleOv, rGoogleFunnel, rGoogleDaily, rGoogleCamp, rMetaCamp] = await Promise.allSettled([
+               rGoogleOv, rGoogleFunnel, rGoogleDaily, rGoogleCamp, rMetaCamp, rPages] = await Promise.allSettled([
           fetch(`${API}/api/pipedrive/gerenciador?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/funnel?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/kpis?${qs}`).then(r => r.json()),
@@ -2444,6 +2444,7 @@
           fetch(`${API}/api/google/daily?${qs}`).then(r => r.json()),
           fetch(`${API}/api/google/campaigns?${qs}`).then(r => r.json()),
           fetch(`${API}/api/meta/campaigns?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/pipedrive/pages?${qs}`).then(r => r.json()),
         ]);
 
         const gerenciador = rGerenciador.status === 'fulfilled' ? rGerenciador.value : null;
@@ -2462,8 +2463,10 @@
         const googleDaily = rGoogleDaily.status  === 'fulfilled' ? rGoogleDaily.value  : null;
         const googleCamp  = rGoogleCamp.status   === 'fulfilled' ? rGoogleCamp.value   : null;
         const metaCamp    = rMetaCamp.status     === 'fulfilled' ? (rMetaCamp.value?.campaigns || []) : [];
+        const pages       = rPages.status        === 'fulfilled' ? (rPages.value?.pages || []) : [];
 
         renderGerenciador(gerenciador, metaCamp, googleCamp?.campaigns || []);
+        renderPorPagina(pages);
         if (kpis) renderKPIs(kpis);
         if (meta) renderMetaOverview(meta);
         if (funnel) renderVisaoGeralFunnels(funnel, meta);
@@ -2540,6 +2543,32 @@
           if (btn) btn.textContent = '+';
         }
       });
+    }
+
+    // ─── renderPorPagina ─────────────────────────────────────
+    function renderPorPagina(pages) {
+      const tbody = document.querySelector('#pagina-table tbody');
+      if (!tbody) return;
+      if (!pages || pages.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;color:var(--text-secondary)">Sem dados no período</td></tr>';
+        return;
+      }
+      tbody.innerHTML = pages.map(p => {
+        const label = p.pagina.length > 50 ? '…' + p.pagina.slice(-48) : p.pagina;
+        const convMQL = p.leads > 0 ? (p.mql / p.leads * 100).toFixed(1) + '%' : '—';
+        return `<tr>
+          <td title="${p.pagina}" style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${label}</td>
+          <td>—</td>
+          <td>${p.leads}</td>
+          <td>—</td>
+          <td>${p.mql}</td>
+          <td>${convMQL}</td>
+          <td>—</td>
+          <td>—</td>
+          <td>${p.ganho}</td>
+          <td>—</td>
+        </tr>`;
+      }).join('');
     }
 
     // ─── renderGerenciador ───────────────────────────────────
@@ -3127,12 +3156,16 @@
       if (tbodyW && data.weekly && data.weekly.length) {
         let rowsW = '';
         data.weekly.forEach(w => {
+          const total = (w.A||0)+(w.Q||0)+(w.R||0)+(w.C||0);
+          const pA = total > 0 ? (w.A/total*100).toFixed(0) : '0';
+          const pQ = total > 0 ? (w.Q/total*100).toFixed(0) : '0';
+          const pR = total > 0 ? (w.R/total*100).toFixed(0) : '0';
           const conv = (w.A||0) > 0 ? (w.C/w.A*100).toFixed(1) : '0.0';
           rowsW += `<tr class="week-row">
             <td class="date">${w.week}</td>
-            <td class="num">${w.A||0}</td>
-            <td class="num">${w.Q||0}</td>
-            <td class="num">${w.R||0}</td>
+            <td class="num">${w.A||0}</td><td>${pA}%</td>
+            <td class="num">${w.Q||0}</td><td>${pQ}%</td>
+            <td class="num">${w.R||0}</td><td>${pR}%</td>
             <td class="num">${w.C||0}</td>
             <td class="${parseFloat(conv)>10?'ok':'warn'}">${conv}%</td>
           </tr>`;
@@ -3145,12 +3178,16 @@
       if (tbodyM && data.monthly && data.monthly.length) {
         let rowsM = '';
         data.monthly.forEach(m => {
+          const total = (m.A||0)+(m.Q||0)+(m.R||0)+(m.C||0);
+          const pA = total > 0 ? (m.A/total*100).toFixed(0) : '0';
+          const pQ = total > 0 ? (m.Q/total*100).toFixed(0) : '0';
+          const pR = total > 0 ? (m.R/total*100).toFixed(0) : '0';
           const conv = (m.A||0) > 0 ? (m.C/m.A*100).toFixed(1) : '0.0';
           rowsM += `<tr>
             <td class="date">${m.month}</td>
-            <td class="num">${m.A||0}</td>
-            <td class="num">${m.Q||0}</td>
-            <td class="num">${m.R||0}</td>
+            <td class="num">${m.A||0}</td><td>${pA}%</td>
+            <td class="num">${m.Q||0}</td><td>${pQ}%</td>
+            <td class="num">${m.R||0}</td><td>${pR}%</td>
             <td class="num">${m.C||0}</td>
             <td class="${parseFloat(conv)>10?'ok':'warn'}">${conv}%</td>
           </tr>`;
