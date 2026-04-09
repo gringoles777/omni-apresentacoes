@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatorio de Potencial de Mercado — OMNI Brasil 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
+
+  :root {
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --gold-soft: rgba(200,168,75,0.12);
+    --offwhite: #F5F0E8;
+    --text: #e8e8e8;
+    --muted: #888;
+    --green: #22c55e;
+    --green-soft: rgba(34,197,94,0.08);
+    --red: #ef4444;
+    --red-soft: rgba(239,68,68,0.08);
+    --orange: #f97316;
+    --orange-soft: rgba(249,115,22,0.08);
+    --blue: #3b82f6;
+    --blue-soft: rgba(59,130,246,0.08);
+    --purple: #a855f7;
+    --purple-soft: rgba(168,85,247,0.08);
+    --gray: #6B6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ─── PASSWORD SCREEN ─── */
+  #password-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+  }
+  #password-screen .logo { font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  #password-screen .sub { font-size: 12px; letter-spacing: 3px; color: rgba(245,240,232,0.4); text-transform: uppercase; margin-bottom: 16px; }
+  #password-screen input {
+    background: var(--dark); border: 1px solid rgba(200,168,75,0.3); border-radius: 8px;
+    color: var(--offwhite); font-size: 16px; padding: 14px 24px; width: 280px; text-align: center;
+    outline: none; transition: border-color 0.2s;
+  }
+  #password-screen input:focus { border-color: var(--gold); }
+  #password-screen button {
+    background: var(--gold); color: var(--black); font-weight: 700; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 12px 40px; border: none;
+    border-radius: 8px; cursor: pointer; transition: background 0.2s;
+  }
+  #password-screen button:hover { background: var(--gold-light); }
+  #password-screen .error { color: var(--red); font-size: 13px; display: none; }
+
+  #content { display: none; }
+
+  /* ─── HEADER ─── */
+  .page-header {
+    position: sticky; top: 0; z-index: 100;
+    background: #050505; border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-header .logo-text { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  .page-header .page-label { font-size: 13px; color: rgba(245,240,232,0.5); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; padding: 80px 40px 60px; text-align: center; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; background: var(--gold-soft); border: 1px solid rgba(200,168,75,0.3);
+    color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px; color: var(--offwhite);
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle-italic {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+    font-size: 22px; color: rgba(245,240,232,0.7); margin-bottom: 24px;
+  }
+  .hero p { font-size: 14px; color: var(--muted); max-width: 600px; margin: 0 auto; }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-bottom: 1px solid rgba(200,168,75,0.1); }
+  section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  h2 small { font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; }
+  h3 {
+    font-size: 17px; font-weight: 700; color: var(--offwhite); margin: 32px 0 12px;
+    padding-bottom: 6px; border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+
+  p, li { font-size: 15px; line-height: 1.7; color: var(--text); }
+  p + p { margin-top: 12px; }
+
+  .gold { color: var(--gold); font-weight: 600; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .orange { color: var(--orange); }
+
+  /* ─── CARDS ─── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+  .card {
+    background: var(--dark); border: 1px solid var(--border); border-radius: 8px;
+    padding: 24px; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(200,168,75,0.3); }
+  .card .label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .card .value { font-size: 28px; font-weight: 800; color: var(--offwhite); margin-bottom: 4px; }
+  .card .detail { font-size: 13px; color: var(--muted); }
+
+  .card-accent { border-color: rgba(200,168,75,0.4); }
+  .card-green { border-color: rgba(34,197,94,0.3); background: var(--green-soft); }
+  .card-red { border-color: rgba(239,68,68,0.3); background: var(--red-soft); }
+
+  /* ─── TABLES ─── */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th {
+    text-align: left; padding: 10px 14px; background: var(--dark);
+    border-bottom: 2px solid rgba(200,168,75,0.3); font-size: 11px;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(200,168,75,0.03); }
+
+  /* ─── QUOTES ─── */
+  blockquote {
+    border-left: 3px solid var(--gold); padding: 16px 24px; margin: 20px 0;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px;
+    color: rgba(245,240,232,0.8); background: rgba(200,168,75,0.04); border-radius: 0 8px 8px 0;
+  }
+
+  /* ─── SWOT ─── */
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  @media (max-width: 700px) { .swot-grid { grid-template-columns: 1fr; } }
+  .swot-card { border-radius: 8px; padding: 24px; }
+  .swot-card h4 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .swot-card ul { list-style: none; padding: 0; }
+  .swot-card li { font-size: 13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); line-height: 1.5; }
+  .swot-card li:last-child { border-bottom: none; }
+  .swot-s { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); }
+  .swot-s h4 { color: var(--green); }
+  .swot-w { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); }
+  .swot-w h4 { color: var(--red); }
+  .swot-o { background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.2); }
+  .swot-o h4 { color: var(--blue); }
+  .swot-t { background: rgba(249,115,22,0.06); border: 1px solid rgba(249,115,22,0.2); }
+  .swot-t h4 { color: var(--orange); }
+
+  /* ─── SCENARIO ─── */
+  .scenario { background: var(--dark); border-radius: 8px; padding: 24px; margin: 16px 0; border-left: 4px solid var(--gold); }
+  .scenario.conservative { border-left-color: var(--muted); }
+  .scenario .title { font-size: 16px; font-weight: 700; color: var(--offwhite); margin-bottom: 12px; }
+
+  /* ─── VERDICT ─── */
+  .verdict-box {
+    background: linear-gradient(135deg, rgba(200,168,75,0.08) 0%, rgba(200,168,75,0.02) 100%);
+    border: 2px solid rgba(200,168,75,0.4); border-radius: 12px; padding: 40px;
+    margin: 32px 0; text-align: center;
+  }
+  .verdict-box .verdict-label { font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .verdict-box .verdict-text { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; color: var(--green); letter-spacing: 2px; text-transform: uppercase; }
+  .verdict-box .verdict-condition { font-size: 14px; color: var(--orange); margin-top: 12px; font-weight: 600; }
+
+  /* ─── LIST ─── */
+  .check-list { list-style: none; padding: 0; }
+  .check-list li { padding: 8px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .check-list li::before { content: '✓ '; color: var(--green); font-weight: 700; }
+  .risk-list { list-style: none; padding: 0; }
+  .risk-list li { padding: 8px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .risk-list li::before { content: '⚠ '; color: var(--orange); }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    text-align: center; padding: 40px 24px; border-top: 1px solid rgba(200,168,75,0.1);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,240,232,0.25);
+  }
+
+  @media (max-width: 600px) {
+    .card-grid { grid-template-columns: 1fr; }
+    table { font-size: 12px; }
+    th, td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PASSWORD SCREEN ═══════════ -->
+<div id="password-screen">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Documento Estrategico Confidencial</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeypress="if(event.key==='Enter')checkPwd()">
+  <button onclick="checkPwd()">ACESSAR</button>
+  <div class="error" id="pwd-error">Senha incorreta</div>
+</div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div id="content">
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="logo-text">OMNI BRASIL</div>
+  <div class="page-label">Relatorio Estrategico // Abril 2026</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Vision Chief // Confidencial</div>
+  <h1>POTENCIAL DE <span>MERCADO</span></h1>
+  <div class="subtitle-italic">Analise para tomada de decisao estrategica</div>
+  <p>Dados internos + pesquisa de mercado externa. Preparado como se voce fosse um investidor decidindo apostar nesta empresa.</p>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ 1. A EMPRESA EM NUMEROS ═══════════ -->
+<section>
+  <h2>1. A Empresa em Numeros</h2>
+
+  <div class="card-grid">
+    <div class="card card-accent">
+      <div class="label">Faturamento Pico</div>
+      <div class="value">R$770k<span style="font-size:16px;color:var(--muted)">/mes</span></div>
+      <div class="detail">Q4 2025 — ~R$9,2M/ano</div>
+    </div>
+    <div class="card card-red">
+      <div class="label">Faturamento Atual</div>
+      <div class="value">R$240k<span style="font-size:16px;color:var(--muted)">/mes</span></div>
+      <div class="detail">Q1 2026 — em reestruturacao (-69%)</div>
+    </div>
+    <div class="card">
+      <div class="label">Margem Operacional</div>
+      <div class="value">40%+</div>
+      <div class="detail">Estimada nos meses de R$600-700k</div>
+    </div>
+    <div class="card">
+      <div class="label">Mentorandos Black</div>
+      <div class="value">~80</div>
+      <div class="detail">R$39.900 cada — North Star Metric</div>
+    </div>
+    <div class="card">
+      <div class="label">Alunos Formados</div>
+      <div class="value">4.000+</div>
+      <div class="detail">Master em Hipnoterapia (todas as versoes)</div>
+    </div>
+    <div class="card">
+      <div class="label">Presenca Global</div>
+      <div class="value">26 paises</div>
+      <div class="detail">Franquia fundada em 1979</div>
+    </div>
+  </div>
+
+  <h3>Esteira de Produtos</h3>
+  <table>
+    <tr><th>Produto</th><th>Ticket</th><th>Papel no Funil</th></tr>
+    <tr><td>HypnoFlash</td><td>R$47</td><td>Captacao / low ticket</td></tr>
+    <tr><td>AHA/CHC</td><td>R$2.000</td><td>Produto de entrada</td></tr>
+    <tr><td>FPH (Formacao)</td><td>R$7.000-9.900</td><td>Downsell do Master</td></tr>
+    <tr><td class="gold">Master em Hipnoterapia</td><td class="gold">R$12.900-14.900</td><td class="gold">Produto principal</td></tr>
+    <tr><td>Legacy (imersao 5 dias)</td><td>R$7.997-9.997</td><td>High-ticket presencial</td></tr>
+    <tr><td class="gold">Black Mentoring</td><td class="gold">R$39.900</td><td class="gold">Topo da esteira — 12 meses</td></tr>
+  </table>
+
+  <div class="card card-accent" style="margin-top:16px;">
+    <div class="label">LTV Potencial por Aluno</div>
+    <div class="value">R$64.797</div>
+    <div class="detail">Master (R$14.900) + Legacy (R$9.997) + Black (R$39.900) — se percorre a esteira completa</div>
+  </div>
+</section>
+
+<!-- ═══════════ 2. O MERCADO ═══════════ -->
+<section>
+  <h2>2. Tamanho e Tendencia do Mercado</h2>
+
+  <h3>Burnout e Insatisfacao Profissional no Brasil</h3>
+  <div class="card-grid">
+    <div class="card card-red">
+      <div class="label">Burnout no Brasil</div>
+      <div class="value">30%</div>
+      <div class="detail">dos trabalhadores — 2o no ranking mundial (USP 2025)</div>
+    </div>
+    <div class="card card-red">
+      <div class="label">Afastamentos 2025</div>
+      <div class="value">546 mil</div>
+      <div class="detail">por transtornos mentais (INSS/ANAMT)</div>
+    </div>
+    <div class="card card-red">
+      <div class="label">Crescimento Burnout</div>
+      <div class="value">+493%</div>
+      <div class="detail">afastamentos entre 2021-2024 (AMATRA1)</div>
+    </div>
+    <div class="card">
+      <div class="label">Querem Mudar de Carreira</div>
+      <div class="value">42%</div>
+      <div class="detail">dos profissionais brasileiros (Catho 2025)</div>
+    </div>
+    <div class="card">
+      <div class="label">Querem Mudar de Emprego</div>
+      <div class="value">61%</div>
+      <div class="detail">em 2026 (Robert Half)</div>
+    </div>
+    <div class="card">
+      <div class="label">Preocupados com IA</div>
+      <div class="value">47%</div>
+      <div class="detail">temem substituicao profissional (2025)</div>
+    </div>
+  </div>
+
+  <h3>Mercado Enderecavel da OMNI</h3>
+  <table>
+    <tr><th>Camada</th><th>Estimativa</th><th>Nota</th></tr>
+    <tr><td>Populacao economicamente ativa</td><td>~100 milhoes</td><td>Brasil</td></tr>
+    <tr><td>Profissionais 35-55 anos, renda &gt;R$10k</td><td>~8 milhoes</td><td>ICP demografico</td></tr>
+    <tr><td>Insatisfeitos querendo mudar (42%)</td><td>~3,4 milhoes</td><td>Mercado potencial</td></tr>
+    <tr><td>Dispostos a investir em formacao (10%)</td><td>~340 mil</td><td>Mercado enderecavel</td></tr>
+    <tr><td class="gold">Com awareness de hipnoterapia (5%)</td><td class="gold">~17 mil</td><td class="gold">Mercado imediato</td></tr>
+    <tr><td>OMNI forma/ano</td><td>~400-500</td><td class="orange">Penetracao: ~3%</td></tr>
+  </table>
+
+  <h3>Mercado Global de Hipnoterapia</h3>
+  <table>
+    <tr><th>Ano</th><th>Valor</th><th>Crescimento</th></tr>
+    <tr><td>2025</td><td>USD 20,35 bilhoes</td><td>—</td></tr>
+    <tr><td>2026</td><td>USD 26,46 bilhoes</td><td class="green">+30%</td></tr>
+    <tr><td>2032 (proj.)</td><td>USD 45+ bilhoes</td><td class="green">~11,5%/ano</td></tr>
+  </table>
+
+  <h3>Ventos Favoraveis (Tendencias Macro)</h3>
+  <ul class="check-list">
+    <li><strong>PICs no SUS +70% em 2024</strong> — governo legitimando terapias integrativas, incluindo hipnose</li>
+    <li><strong>84% dos municipios</strong> ja oferecem praticas integrativas na atencao primaria</li>
+    <li><strong>Epidemia de burnout</strong> — crescendo exponencialmente, sem sinal de reversao</li>
+    <li><strong>IA ameacando profissoes tradicionais</strong> — Omniterapia e intrinsecamente "a prova de IA"</li>
+    <li><strong>Mercado de infoprodutos high-ticket crescendo</strong> — tickets acima de R$50k em alta</li>
+  </ul>
+
+  <h3>Ventos Contrarios (Riscos Macro)</h3>
+  <ul class="risk-list">
+    <li><strong>Falta de regulamentacao</strong> — qualquer pessoa pode abrir "escola de hipnose"</li>
+    <li><strong>Fadiga de infoprodutos</strong> — ceticismo crescente do consumidor</li>
+    <li><strong>Commoditizacao por preco baixo</strong> — Romanni a R$99/mes empurra percepcao de "qualquer curso serve"</li>
+  </ul>
+</section>
+
+<!-- ═══════════ 3. CENARIO COMPETITIVO ═══════════ -->
+<section>
+  <h2>3. Cenario Competitivo</h2>
+
+  <table>
+    <tr><th>Concorrente</th><th>Escala</th><th>Preco</th><th>Ameaca</th><th>Posicionamento</th></tr>
+    <tr><td>Unihipnose</td><td>40.000 alunos</td><td>N/D</td><td class="orange">ALTA (escala)</td><td>"Maior da America Latina"</td></tr>
+    <tr><td>SBH</td><td>10.000+</td><td>N/D</td><td class="orange">ALTA (ISO)</td><td>Hipnose cientifica, ISO 9001 (gestao)</td></tr>
+    <tr><td>Romanni</td><td>100.000+ impactados</td><td>R$99/mes</td><td>MEDIA</td><td>Acessivel, psico + neuro</td></tr>
+    <tr><td>Bravo Hipnose</td><td>N/D</td><td>N/D</td><td>BAIXA</td><td>Pratica com clientes reais</td></tr>
+    <tr><td>IBH</td><td>N/D</td><td>N/D</td><td>BAIXA</td><td>Pos-graduacao, hipnose + TCC</td></tr>
+  </table>
+
+  <h3>O que ninguem mais tem (Moats Reais)</h3>
+  <div class="card-grid">
+    <div class="card card-accent">
+      <div class="label">Moat #1</div>
+      <div class="value" style="font-size:18px;">ISO 9001 para o METODO</div>
+      <div class="detail">Nao para gestao da escola (distincao crucial vs SBH). Unico metodo terapeutico certificado no mundo.</div>
+    </div>
+    <div class="card card-accent">
+      <div class="label">Moat #2</div>
+      <div class="value" style="font-size:18px;">Linhagem Verificavel</div>
+      <div class="detail">Dave Elman → Gerald F. Kein → Michael Arruda. Pendulo pessoal de Jerry. 3 geracoes.</div>
+    </div>
+    <div class="card card-accent">
+      <div class="label">Moat #3</div>
+      <div class="value" style="font-size:18px;">Metodo Proprietario</div>
+      <div class="detail">Omniterapia = hipnoterapia + constelacao + PNL + gestalt sob ISO 9001. Ninguem integra isso.</div>
+    </div>
+    <div class="card card-accent">
+      <div class="label">Moat #4</div>
+      <div class="value" style="font-size:18px;">15M+ Livros Vendidos</div>
+      <div class="detail">Autoridade do fundador incomparavel no mercado brasileiro. Best-seller Editora Gente.</div>
+    </div>
+  </div>
+
+  <h3>Preco vs Valor — Alternativas do ICP</h3>
+  <table>
+    <tr><th>Alternativa</th><th>Investimento</th><th>Tempo</th><th>Resultado</th></tr>
+    <tr><td>Faculdade de Psicologia</td><td>R$60.000</td><td>5 anos</td><td>CRP, pode atender</td></tr>
+    <tr><td>Coaching (ICF)</td><td>R$15-30k</td><td>6-12 meses</td><td>Certificacao, sem tecnica clinica</td></tr>
+    <tr><td>Romanni (hipnose barata)</td><td>R$1.200/ano</td><td>Auto-estudo</td><td>Conhecimento teorico</td></tr>
+    <tr style="background:var(--gold-soft);"><td class="gold"><strong>OMNI Master</strong></td><td class="gold"><strong>R$14.900</strong></td><td class="gold"><strong>~2 meses</strong></td><td class="gold"><strong>Profissional formado, 1o cliente em ~2 semanas</strong></td></tr>
+  </table>
+</section>
+
+<!-- ═══════════ 4. PROVA DE RESULTADO ═══════════ -->
+<section>
+  <h2>4. Prova de Resultado <small>Depoimentos Documentados</small></h2>
+
+  <table>
+    <tr><th>Perfil</th><th>Antes</th><th>Depois</th><th>Tempo</th></tr>
+    <tr><td>Roberto Monfort (Dir. Vendas)</td><td>Exausto, quase divorciou</td><td class="green">R$20.000+/mes</td><td>3 meses</td></tr>
+    <tr><td>Nicolas Oliveira (18 anos)</td><td>Sem direcao profissional</td><td class="green">R$20.000+/mes, casado, 3 filhos</td><td>4 anos</td></tr>
+    <tr><td>Psicologa (anon.)</td><td>R$2.700/mes fixo</td><td class="green">R$30.000+/mes</td><td>—</td></tr>
+    <tr><td>Mae (anon.)</td><td>Buscava renda extra</td><td class="green">R$50.000+/mes, ROI em 45 dias</td><td>45 dias</td></tr>
+    <tr><td>Padre (anon.)</td><td>Queria ampliar impacto</td><td class="green">R$20.000+/mes, referencia</td><td>—</td></tr>
+    <tr><td>Advogada (anon.)</td><td>Luto, sem direcao</td><td class="green">R$30.000+/mes</td><td>—</td></tr>
+  </table>
+
+  <blockquote>Padrao: profissionais de R$3k-10k/mes que passam para R$20k-50k/mes apos a formacao. ROI do investimento de R$14.900 em 1-3 meses na maioria dos casos.</blockquote>
+</section>
+
+<!-- ═══════════ 5. SWOT ═══════════ -->
+<section>
+  <h2>5. SWOT — Medio e Longo Prazo <small>2026-2030</small></h2>
+
+  <div class="swot-grid">
+    <div class="swot-card swot-s">
+      <h4>Forcas</h4>
+      <ul>
+        <li><strong>ISO 9001 para o metodo</strong> — unico no mundo, barreira intransponivel</li>
+        <li><strong>Linhagem 3 geracoes</strong> — Dave Elman → Jerry Kein → Michael (permanente)</li>
+        <li><strong>15M+ livros</strong> — autoridade do fundador incomparavel</li>
+        <li><strong>Omniterapia como categoria propria</strong> — quem cria, lidera (CRESCENTE)</li>
+        <li><strong>Esteira R$47 a R$39.900</strong> — LTV de R$64k por aluno</li>
+        <li><strong>Indicacao organica ja funciona</strong> — motor da Direcao B existe</li>
+        <li><strong>Garantia incondicional</strong> — reduz objecao de compra</li>
+        <li><strong>Reconhecimento MEC</strong> — extensao universitaria (credencial academica)</li>
+        <li><strong>Depoimentos R$20k-50k/mes</strong> — prova social com resultado financeiro</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-w">
+      <h4>Fraquezas</h4>
+      <ul>
+        <li><strong>Faturamento -69%</strong> — crise de transicao Q4→Q1 (corrigivel, funil em reparo)</li>
+        <li><strong>Dependencia de trafego pago ~80%</strong> — Direcao B reduz para ~40% (6-12 meses)</li>
+        <li><strong>Omniterapia nao registrada no INPI</strong> — CRITICO, em providencia</li>
+        <li><strong>45% no-show</strong> — plano de correcao ja em execucao</li>
+        <li><strong>Analytics de alunos vazio</strong> — sem dados de taxa de sucesso/churn</li>
+        <li><strong>Equipe em transicao 16→6-10</strong> — risco operacional temporario</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-o">
+      <h4>Oportunidades</h4>
+      <ul>
+        <li><strong>Criar categoria "Omniterapia"</strong> — sair da guerra de comparacao, liderar (2026-2027)</li>
+        <li><strong>Epidemia de burnout crescente</strong> — 546k afastados/ano, demanda explosiva (JA)</li>
+        <li><strong>"Profissao a prova de IA"</strong> — 47% preocupados, narrativa poderosa (2026)</li>
+        <li><strong>Legiao como motor de crescimento</strong> — indicacao sistematizada, CAC→zero (2026-2028)</li>
+        <li><strong>PICs no SUS +70%</strong> — governo legitimando hipnoterapia (2025-2030)</li>
+        <li><strong>Romanni/Unihipnose evangelizam o mercado</strong> — OMNI colhe o premium</li>
+        <li><strong>Pos-graduacao MEC</strong> — empilhamento de credenciais (2026-2027)</li>
+        <li><strong>Escala via IA operacional</strong> — margem sobe para 50-60%+ (2026-2027)</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-t">
+      <h4>Ameacas</h4>
+      <ul>
+        <li><strong>SBH comunicar ISO de forma confusa</strong> — mitigar com "unico METODO com ISO" (MEDIA)</li>
+        <li><strong>Unihipnose dominar por volume SEO</strong> — nao competir em volume, competir em categoria (ALTA)</li>
+        <li><strong>Regulamentacao futura excluindo nao-psicologos</strong> — ISO + MEC como escudo (BAIXA)</li>
+        <li><strong>Fadiga de infoprodutos high-ticket</strong> — posicionar como "formacao profissional" (MEDIA)</li>
+        <li><strong>Marca Omniterapia copiada antes do registro</strong> — REGISTRAR JA (MEDIA)</li>
+        <li><strong>Dependencia do Michael como figura central</strong> — fortalecer marca > pessoa (ALTA)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. PROJECAO DE CENARIOS ═══════════ -->
+<section>
+  <h2>6. Projecao de Cenarios <small>2026-2030</small></h2>
+
+  <div class="scenario conservative">
+    <div class="title">Cenario Conservador — "Reconstruir o que era" (Direcao A)</div>
+    <table>
+      <tr><th>Ano</th><th>Faturamento</th><th>Margem</th><th>Equipe</th><th>Motor</th></tr>
+      <tr><td>2026</td><td>R$4-5M</td><td>35%</td><td>8-10</td><td>Trafego pago 80%</td></tr>
+      <tr><td>2027</td><td>R$6-7M</td><td>40%</td><td>8-10</td><td>Trafego pago 70%</td></tr>
+      <tr><td>2028</td><td>R$7-8M</td><td>40%</td><td>8-10</td><td>Trafego pago 65%</td></tr>
+    </table>
+    <p style="margin-top:12px;color:var(--muted);font-size:13px;">Teto natural: ~R$8-10M/ano. Limitado pelo orcamento de trafego e capacidade do inside sales.</p>
+  </div>
+
+  <div class="scenario">
+    <div class="title" style="color:var(--gold);">Cenario Ambicioso — "Movimento + Oferta" (Direcao B)</div>
+    <table>
+      <tr><th>Ano</th><th>Faturamento</th><th>Margem</th><th>Equipe</th><th>Motor</th></tr>
+      <tr><td>2026</td><td>R$4-5M</td><td>35%</td><td>6-10</td><td>Funil consertado + inicio Legiao</td></tr>
+      <tr><td>2027</td><td>R$8-10M</td><td>45%</td><td>8-12</td><td>Legiao 30% + trafego 50% + Omniterapia</td></tr>
+      <tr><td>2028</td><td>R$12-15M</td><td>50%</td><td>10-15</td><td>Legiao 40%+ + marca dominante</td></tr>
+      <tr><td class="gold">2029</td><td class="gold">R$18-22M</td><td class="gold">50%+</td><td class="gold">12-18</td><td class="gold">Categoria consolidada + multiplos canais</td></tr>
+      <tr><td class="gold">2030</td><td class="gold">R$25-30M</td><td class="gold">55%</td><td class="gold">15-20</td><td class="gold">Omniterapia = profissao reconhecida</td></tr>
+    </table>
+    <p style="margin-top:12px;font-size:13px;">Crescimento <span class="gold">composto</span> — cada formado que atende bem gera o proximo aluno. Na Direcao A, crescimento e <span style="color:var(--muted);">linear</span> — proporcional ao orcamento de trafego.</p>
+  </div>
+
+  <h3>O que justifica o cenario ambicioso</h3>
+  <ul class="check-list">
+    <li>Mercado enderecavel de ~340 mil pessoas — penetracao atual de apenas 3%</li>
+    <li>LTV de R$64.797 por aluno se percorrer a esteira completa</li>
+    <li>Custo marginal proximo de zero quando vem por indicacao (vs R$2.307 via trafego)</li>
+    <li>80 mentorandos Black a R$39.900 = R$3,2M so em mentoria</li>
+    <li>Depoimentos de R$20k-50k/mes sao maquina de conversao que se auto-alimenta</li>
+  </ul>
+</section>
+
+<!-- ═══════════ 7. VEREDITO ═══════════ -->
+<section>
+  <h2>7. Veredito</h2>
+
+  <h3>5 Motivos para Apostar</h3>
+  <ol style="padding-left:20px;font-size:14px;line-height:2;">
+    <li><strong>O mercado esta em tempestade perfeita</strong> — burnout epidemico + 42% querendo mudar + governo legitimando + IA assustando profissoes tradicionais. A demanda vai explodir, nao diminuir.</li>
+    <li><strong>Os moats sao reais e verificaveis</strong> — ISO 9001 para o metodo, linhagem de 3 geracoes, 15M+ livros, reconhecimento MEC. Nao se copia. Nao se improvisa.</li>
+    <li><strong>Omniterapia como categoria propria</strong> — quem cria a categoria, lidera para sempre. A OMNI tem todos os ingredientes.</li>
+    <li><strong>O ciclo virtuoso ja funciona sem sistema</strong> — formados ja indicam, ja geram conteudo, ja voltam para a esteira. Sistematizar e multiplicar algo que existe.</li>
+    <li><strong>Operacao enxuta com IA e viavel</strong> — margem sobe de 40% para 50-55%. Lucro por real faturado aumenta antes do faturamento crescer.</li>
+  </ol>
+
+  <h3>3 Riscos que Podem Matar a Aposta</h3>
+  <ul class="risk-list">
+    <li><strong>Marca "Omniterapia" nao registrada</strong> — se alguem registrar antes, a estrategia inteira cai. Prioridade #1 absoluta.</li>
+    <li><strong>Dependencia do Michael</strong> — a Legiao e a marca Omniterapia precisam ser maiores que qualquer pessoa. Construcao de medio prazo.</li>
+    <li><strong>Execucao da transicao</strong> — R$240k/mes enquanto reestrutura. Se o funil nao voltar em Q2-Q3, a crise de caixa pode comprometer a Direcao B.</li>
+  </ul>
+
+  <div class="verdict-box">
+    <div class="verdict-label">Veredito do Vision Chief</div>
+    <div class="verdict-text">APOSTA FORTE</div>
+    <div class="verdict-condition">Condicao: registrar Omniterapia no INPI esta semana</div>
+  </div>
+
+  <blockquote>A OMNI Brasil nao e uma escola de hipnose tentando sobreviver. E uma empresa que acidentalmente ja construiu todos os ativos necessarios para criar e liderar uma categoria profissional nova no Brasil — e agora precisa executar essa transicao com disciplina.</blockquote>
+
+</section>
+
+</div><!-- container -->
+
+<div class="page-footer">
+  Vision Chief // OMNI Brasil // Abril 2026 // Confidencial
+</div>
+
+</div><!-- content -->
+
+<script>
+function checkPwd(){
+  var p=document.getElementById('pwd').value;
+  if(p==='omni2026'){
+    document.getElementById('password-screen').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd').value='';
+    setTimeout(function(){document.getElementById('pwd-error').style.display='none';},2000);
+  }
+}
+</script>
+</body>
+</html>
