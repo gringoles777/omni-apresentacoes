@@ -752,6 +752,64 @@
     .vert-noshow-val.warn { color: var(--warn); }
     .vert-noshow-val.bad  { color: var(--error); }
 
+    /* ── Agent Horizontal Cards ───────────────────────────── */
+    .agent-cards { display:flex; flex-direction:column; gap:10px; }
+    .agent-card {
+      display:flex; align-items:center; gap:18px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--border); border-radius:10px;
+      padding:14px 18px; min-height:88px;
+    }
+    .agent-card-left {
+      display:flex; flex-direction:column; align-items:center;
+      gap:5px; min-width:82px; text-align:center; flex-shrink:0;
+    }
+    .agent-avatar-lg {
+      width:50px; height:50px; border-radius:50%;
+      background:rgba(212,175,55,0.12); border:2px solid var(--gold);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'IBM Plex Mono',monospace; font-size:0.82rem;
+      font-weight:700; color:var(--gold); overflow:hidden; flex-shrink:0;
+    }
+    .agent-avatar-lg img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .agent-card-name {
+      font-family:'IBM Plex Mono',monospace; font-size:0.58rem;
+      font-weight:600; color:var(--text); letter-spacing:0.03em; white-space:nowrap;
+    }
+    .agent-card-fat { font-family:'IBM Plex Mono',monospace; font-size:0.58rem; color:var(--gold); font-weight:600; }
+    .agent-card-noshow {
+      font-family:'IBM Plex Mono',monospace; font-size:0.5rem;
+      padding:2px 8px; border-radius:10px; letter-spacing:0.04em; white-space:nowrap;
+    }
+    .agent-card-noshow.ok   { background:rgba(42,157,143,0.15); color:var(--teal); }
+    .agent-card-noshow.warn { background:rgba(233,196,106,0.15); color:#e9c46a; }
+    .agent-card-noshow.bad  { background:rgba(231,111,81,0.15); color:var(--error); }
+    .agent-card-funnel { display:flex; align-items:center; flex:1; overflow-x:auto; gap:0; }
+    .fstep {
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      padding:9px 12px; border-radius:8px; min-width:66px; text-align:center; flex-shrink:0;
+    }
+    .fstep-label {
+      font-family:'IBM Plex Mono',monospace; font-size:0.44rem;
+      letter-spacing:0.07em; text-transform:uppercase; color:var(--gray); white-space:nowrap;
+    }
+    .fstep-val { font-family:'IBM Plex Mono',monospace; font-size:1.3rem; font-weight:700; line-height:1; color:var(--text); }
+    .fstep.vseg-venda { background:rgba(154,122,46,0.18); }
+    .fstep.vseg-neg   { background:rgba(200,168,75,0.13); }
+    .fstep.vseg-opor  { background:rgba(232,200,106,0.10); }
+    .fstep.vseg-real  { background:rgba(245,224,144,0.07); }
+    .fstep.vseg-mql   { background:rgba(29,110,100,0.18); }
+    .fstep.vseg-con   { background:rgba(42,157,143,0.13); }
+    .fstep.vseg-aval  { background:rgba(77,196,181,0.10); }
+    .fstep.vseg-agend { background:rgba(131,217,207,0.08); }
+    .fstep.vseg-rreal { background:rgba(184,237,232,0.07); }
+    .fstep.vseg-ia    { background:rgba(130,100,230,0.13); }
+    .farrow { display:flex; flex-direction:column; align-items:center; gap:1px; padding:0 5px; flex-shrink:0; }
+    .farrow-icon { font-size:0.9rem; color:var(--gray); line-height:1; }
+    .farrow-pct { font-family:'IBM Plex Mono',monospace; font-size:0.52rem; font-weight:700; color:var(--teal); white-space:nowrap; }
+    .farrow-pct.warn { color:#e9c46a; }
+    .farrow-pct.bad  { color:var(--error); }
+
     /* toggle modo absoluto / conversão */
     .chart-mode-toggle {
       display: flex;
@@ -1034,7 +1092,14 @@
     .data-table td.num.est  { color: rgba(42,157,143,0.55); font-style: italic; }
     .data-table th { text-align: right; }
     .data-table th:first-child,
-    .data-table td:first-child { text-align: left; }
+    .data-table td:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: var(--dark);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.4);
+    }
 
     .tree-cell {
       display: flex;
@@ -1425,8 +1490,7 @@
         <div class="section-header" style="margin-bottom:20px">
           <div class="section-title">Gerenciador — Fonte → Campanha → Conjunto → Anúncio</div>
           <div style="display:flex;gap:10px;align-items:center">
-            <div class="tag tag-gray">Scroll → para mais colunas</div>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:0.5rem;color:rgba(42,157,143,0.6);font-style:italic">* valores em itálico = estimativa proporcional por leads</span>
+            <div class="tag tag-gray">Pipedrive · UTM</div>
           </div>
         </div>
 
@@ -1435,25 +1499,25 @@
             <table class="data-table" id="gerenciador-table">
               <thead>
                 <tr>
-                  <th style="min-width:260px;text-align:left">Fonte / Campanha</th>
-                  <th>Invest.</th>
+                  <th style="min-width:320px;text-align:left">Fonte / Campanha</th>
+                  <th>Invest. Total</th>
                   <th>Leads</th>
                   <th>CPL</th>
                   <th>MQL</th>
                   <th>CP MQL</th>
-                  <th>Tentativa</th>
-                  <th>CP Tent.</th>
+                  <th>Tent. Conectar</th>
+                  <th>CP Tentativa</th>
                   <th>Conectado</th>
                   <th>CP Conect.</th>
                   <th>Avaliado</th>
                   <th>CP Aval.</th>
-                  <th>R.Agend.</th>
-                  <th>CP R.Ag.</th>
-                  <th>R.Real.</th>
-                  <th>CP R.Re.</th>
-                  <th>Opor.</th>
+                  <th>R. Agendada</th>
+                  <th>CP R. Agend.</th>
+                  <th>R. Realizada</th>
+                  <th>CP R. Real.</th>
+                  <th>Oportunidade</th>
                   <th>CP Opor.</th>
-                  <th>Negoc.</th>
+                  <th>Negociação</th>
                   <th>CP Negoc.</th>
                   <th>Ganho</th>
                   <th>CAC</th>
@@ -1586,72 +1650,11 @@
         <div class="panel">
           <div class="section-header" style="margin-bottom:16px">
             <div class="section-title">Por Closer</div>
-            <div class="chart-mode-toggle" id="closer-mode-toggle">
-              <button class="mode-btn active" onclick="setChartMode('closer','abs',this)">Absoluto</button>
-              <button class="mode-btn" onclick="setChartMode('closer','conv',this)">Conversão</button>
-            </div>
           </div>
-          <div class="vert-chart-wrap">
-            <div class="vert-chart mode-abs" id="closer-vert-chart">
-
-              <!-- CLOSER 1 (placeholder — preenchido via API) -->
-              <div class="vert-col">
-                <div class="vert-bar-wrap">
-                  <div class="vert-bar" style="height:260px">
-                    <div class="vert-seg vseg-venda" style="height:15%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-neg" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-opor" style="height:30%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-real" style="height:35%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                  </div>
-                  <!-- coluna de conversões (ativa no modo "Conversão") -->
-                  <div class="vert-conv-col" id="closer-conv-col-1">
-                    <div class="vert-conv-badge">
-                      <span class="conv-arrow">↑</span>
-                      <span>—%</span>
-                    </div>
-                    <div class="vert-conv-badge">
-                      <span class="conv-arrow">↑</span>
-                      <span>—%</span>
-                    </div>
-                    <div class="vert-conv-badge">
-                      <span class="conv-arrow">↑</span>
-                      <span>—%</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="vert-agent-info">
-                  <div class="vert-avatar">—</div>
-                  <div class="vert-name">—</div>
-                  <div class="vert-fat">R$ —</div>
-                  <div class="vert-noshow">
-                    <span class="vert-noshow-label">No-show</span>
-                    <span class="vert-noshow-val warn">—%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:16px">
-                Conectando ao Pipedrive...
-              </div>
+          <div class="agent-cards" id="closer-vert-chart">
+            <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:20px">
+              Conectando ao Pipedrive...
             </div>
-          </div>
-          <div class="stack-legend">
-            <div class="legend-item"><div class="legend-dot vseg-real" style="width:10px;height:10px"></div>R. Realizadas</div>
-            <div class="legend-item"><div class="legend-dot vseg-opor" style="width:10px;height:10px"></div>Oportunidades</div>
-            <div class="legend-item"><div class="legend-dot vseg-neg" style="width:10px;height:10px"></div>Negociação</div>
-            <div class="legend-item"><div class="legend-dot vseg-venda" style="width:10px;height:10px"></div>Vendas</div>
           </div>
         </div>
 
@@ -1678,68 +1681,11 @@
         <div class="panel">
           <div class="section-header" style="margin-bottom:16px">
             <div class="section-title">Por SDR</div>
-            <div class="chart-mode-toggle" id="sdr-mode-toggle">
-              <button class="mode-btn active" onclick="setChartMode('sdr','abs',this)">Absoluto</button>
-              <button class="mode-btn" onclick="setChartMode('sdr','conv',this)">Conversão</button>
-            </div>
           </div>
-          <div class="vert-chart-wrap">
-            <div class="vert-chart mode-abs" id="sdr-vert-chart">
-
-              <!-- SDR 1 (placeholder) -->
-              <div class="vert-col">
-                <div class="vert-bar-wrap">
-                  <div class="vert-bar" style="height:260px">
-                    <div class="vert-seg vseg-mql" style="height:15%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-con" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-aval" style="height:25%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-agend" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-rreal" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                  </div>
-                  <div class="vert-conv-col">
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                  </div>
-                </div>
-                <div class="vert-agent-info">
-                  <div class="vert-avatar">—</div>
-                  <div class="vert-name">—</div>
-                  <div class="vert-fat">R$ —</div>
-                  <div class="vert-noshow">
-                    <span class="vert-noshow-label">No-show</span>
-                    <span class="vert-noshow-val warn">—%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:16px">
-                Conectando ao Pipedrive...
-              </div>
+          <div class="agent-cards" id="sdr-vert-chart">
+            <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:20px">
+              Conectando ao Pipedrive...
             </div>
-          </div>
-          <div class="stack-legend">
-            <div class="legend-item"><div class="legend-dot vseg-rreal" style="width:10px;height:10px"></div>R. Realizadas</div>
-            <div class="legend-item"><div class="legend-dot vseg-agend" style="width:10px;height:10px"></div>R. Agendadas</div>
-            <div class="legend-item"><div class="legend-dot vseg-aval" style="width:10px;height:10px"></div>Avaliados</div>
-            <div class="legend-item"><div class="legend-dot vseg-con" style="width:10px;height:10px"></div>Conectados</div>
-            <div class="legend-item"><div class="legend-dot vseg-mql" style="width:10px;height:10px"></div>MQL Recebidos</div>
           </div>
         </div>
       </section>
@@ -1762,75 +1708,12 @@
 
         <div class="panel">
           <div class="section-header" style="margin-bottom:16px">
-            <div class="section-title">Por SDR-IA</div>
-            <div class="chart-mode-toggle" id="sdr-ia-mode-toggle">
-              <button class="mode-btn active" onclick="setChartMode('sdr-ia','abs',this)">Absoluto</button>
-              <button class="mode-btn" onclick="setChartMode('sdr-ia','conv',this)">Conversão</button>
-            </div>
+            <div class="section-title">Funil SDR-IA</div>
           </div>
-          <div class="vert-chart-wrap">
-            <div class="vert-chart mode-abs" id="sdr-ia-vert-chart">
-
-              <!-- SDR-IA (placeholder) -->
-              <div class="vert-col">
-                <div class="vert-bar-wrap">
-                  <div class="vert-bar" style="height:260px">
-                    <div class="vert-seg vseg-mql" style="height:10%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-con" style="height:15%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-aval" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg vseg-agend" style="height:20%">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg" style="height:20%;background:var(--teal)">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                    <div class="vert-seg" style="height:15%;background:#1d6e64">
-                      <span class="vert-seg-num">—</span>
-                      <span class="vert-seg-pct">—%</span>
-                    </div>
-                  </div>
-                  <div class="vert-conv-col">
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                    <div class="vert-conv-badge teal"><span class="conv-arrow">↑</span><span>—%</span></div>
-                  </div>
-                </div>
-                <div class="vert-agent-info">
-                  <div class="vert-avatar" style="border-color:var(--teal)">IA</div>
-                  <div class="vert-name">SDR-IA</div>
-                  <div class="vert-fat">R$ —</div>
-                  <div class="vert-noshow">
-                    <span class="vert-noshow-label">No-show</span>
-                    <span class="vert-noshow-val warn">—%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;align-self:center;padding-left:16px">
-                Conectando ao Pipedrive...
-              </div>
+          <div class="agent-cards" id="sdr-ia-vert-chart">
+            <div style="color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:20px">
+              Conectando ao Pipedrive...
             </div>
-          </div>
-          <div class="stack-legend">
-            <div class="legend-item"><div class="legend-dot" style="width:10px;height:10px;background:#1d6e64"></div>Total Leads</div>
-            <div class="legend-item"><div class="legend-dot" style="width:10px;height:10px;background:var(--teal)"></div>Contato IA</div>
-            <div class="legend-item"><div class="legend-dot vseg-agend" style="width:10px;height:10px"></div>MQL Recebidos</div>
-            <div class="legend-item"><div class="legend-dot vseg-aval" style="width:10px;height:10px"></div>Conectados</div>
-            <div class="legend-item"><div class="legend-dot vseg-con" style="width:10px;height:10px"></div>Avaliados</div>
-            <div class="legend-item"><div class="legend-dot vseg-mql" style="width:10px;height:10px"></div>R. Agendadas</div>
           </div>
         </div>
       </section>
@@ -2157,14 +2040,38 @@
       if (screen === 'visao-geral') renderChartLinha();
       if (screen === 'closer') renderChartCloserConv();
       if (screen === 'meta') renderChartMetaInvest();
-      if (screen === 'google') renderChartGoogleInvest();
+      if (screen === 'google') renderChartGoogleInvest(_lastGoogleDaily);
     }
 
     // ═══════════════════════ PERIOD TOGGLE ═══════════════════════
     function setPeriod(btn, panel, period) {
       btn.closest('.period-toggle').querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      console.log('Period changed:', panel, period);
+
+      const today = new Date();
+      let from, to = today;
+
+      if (period === 'semanal') {
+        const diff = today.getDay() === 0 ? 6 : today.getDay() - 1; // dias desde segunda
+        from = new Date(today);
+        from.setDate(today.getDate() - diff);
+      } else {
+        // mensal = 1º do mês atual até hoje
+        from = new Date(today.getFullYear(), today.getMonth(), 1);
+      }
+
+      const qs = `from=${from.toISOString().split('T')[0]}&to=${to.toISOString().split('T')[0]}`;
+
+      if (panel === 'closer') {
+        fetch(`${API}/api/pipedrive/closers?${qs}`).then(r => r.json())
+          .then(data => { if (data) renderClosers(data); }).catch(() => {});
+      } else if (panel === 'sdr') {
+        fetch(`${API}/api/pipedrive/sdrs?${qs}`).then(r => r.json())
+          .then(data => { if (data) renderSDRs(data); }).catch(() => {});
+      } else if (panel === 'sdr-ia') {
+        fetch(`${API}/api/pipedrive/sdr-ia?${qs}`).then(r => r.json())
+          .then(data => { if (data) renderSDRIA(data); }).catch(() => {});
+      }
     }
 
     // ═══════════════════════ CHART MODE TOGGLE (abs / conv) ═══════════════════════
@@ -2352,16 +2259,18 @@
       });
     }
 
-    function renderChartGoogleInvest() {
+    function renderChartGoogleInvest(dailyData) {
       const ctx = document.getElementById('chart-google-invest').getContext('2d');
       if (chartGoogleInvest) chartGoogleInvest.destroy();
+      const labels = dailyData ? dailyData.map(d => d.date.substring(5)) : [];
+      const values = dailyData ? dailyData.map(d => d.spend) : [];
       chartGoogleInvest = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: mockDates,
+          labels,
           datasets: [{
             label: 'Investimento Google (R$)',
-            data: mockInvest.map(v => v * 0.25),
+            data: values,
             backgroundColor: 'rgba(42,157,143,0.4)',
             borderColor: '#2A9D8F',
             borderWidth: 1,
@@ -2382,6 +2291,70 @@
       });
     }
 
+    // ─── renderGoogleData ─────────────────────────────────────
+    function renderGoogleData(overview, funnel, daily, campaigns) {
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      const err = overview?.error || (!overview && 'sem dados');
+
+      if (err) {
+        // Windsor indisponível — mostra aviso e para por aqui
+        set('google-invest', 'Indisponível');
+        set('google-leads',  '—');
+        set('google-cpl',    '—');
+        set('google-cpm',    '—');
+        set('google-cpc',    '—');
+        set('google-ctr',    '—');
+        const tbody = document.querySelector('#google-campanhas-table tbody');
+        if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:32px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">Windsor.ai indisponível — reconecte a conta Google Ads em windsor.ai/dashboard</td></tr>`;
+        renderChartGoogleInvest(null);
+        return;
+      }
+
+      // KPIs overview
+      set('google-invest', 'R$ ' + fmtBRL(parseFloat(overview.spend || 0)));
+      set('google-leads',  fmtInt(overview.leads || 0));
+      set('google-cpl',    overview.cpl && parseFloat(overview.cpl) > 0 ? 'R$ ' + fmtBRL(parseFloat(overview.cpl)) : '—');
+      set('google-cpm',    'R$ ' + fmtBRL(parseFloat(overview.cpm || 0)));
+      set('google-cpc',    'R$ ' + fmtBRL(parseFloat(overview.cpc || 0)));
+      set('google-ctr',    parseFloat(overview.ctr || 0).toFixed(2) + '%');
+
+      // Funil
+      if (funnel) {
+        set('google-f-imp',    fmtInt(funnel.impressions));
+        set('google-f-cli',    fmtInt(funnel.clicks));
+        set('google-f-lead',   fmtInt(funnel.leads));
+        set('google-f-ctr',    funnel.conv_ctr   || '—');
+        set('google-f-leadr',  funnel.conv_lead  || '—');
+        set('google-f-mqlr',   '—');
+        set('google-f-mql',    '—');
+      }
+
+      // Gráfico diário
+      _lastGoogleOv    = overview || null;
+      _lastGoogleDaily = daily || [];
+      renderChartGoogleInvest(_lastGoogleDaily);
+
+      // Tabela de campanhas
+      const tbody = document.querySelector('#google-campanhas-table tbody');
+      if (!tbody) return;
+      if (!campaigns || !campaigns.length) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:32px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">Nenhuma campanha no período.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = campaigns
+        .sort((a, b) => parseFloat(b.spend) - parseFloat(a.spend))
+        .map(c => `<tr>
+          <td>${truncateStr(c.campaign, 40)}</td>
+          <td>R$ ${fmtBRL(parseFloat(c.spend || 0))}</td>
+          <td>${fmtInt(c.clicks || 0)}</td>
+          <td>${fmtInt(c.impressions || 0)}</td>
+          <td>${c.ctr !== '—' ? c.ctr + '%' : '—'}</td>
+          <td>${c.cpc !== '—' ? 'R$ ' + fmtBRL(parseFloat(c.cpc)) : '—'}</td>
+          <td>${fmtInt(c.leads || 0)}</td>
+          <td>${c.cpl !== '—' ? 'R$ ' + fmtBRL(parseFloat(c.cpl)) : '—'}</td>
+        </tr>`).join('');
+    }
+
     // Init chart for default screen
     window.addEventListener('load', () => {
       setTimeout(() => renderChartLinha(), 100);
@@ -2399,6 +2372,15 @@
         return {
           from: document.getElementById('date-from')?.value,
           to:   document.getElementById('date-to')?.value,
+        };
+      }
+      if (v === 'mes-ant') {
+        const today = new Date();
+        const firstDay = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const lastDay  = new Date(today.getFullYear(), today.getMonth(), 0);
+        return {
+          from: firstDay.toISOString().split('T')[0],
+          to:   lastDay.toISOString().split('T')[0],
         };
       }
       const to   = new Date();
@@ -2422,8 +2404,9 @@
         const { from, to } = getDateRange();
         const qs = `from=${from}&to=${to}`;
 
-        const [rCampaigns, rFunnel, rKPIs, rMeta, rClosers, rSDRs, rSDRIA, rAQRC, rMetaLP, rMetaFN, rMetaDaily] = await Promise.allSettled([
-          fetch(`${API}/api/meta/campaigns?${qs}`).then(r => r.json()),
+        const [rGerenciador, rFunnel, rKPIs, rMeta, rClosers, rSDRs, rSDRIA, rAQRC, rMetaLP, rMetaFN, rMetaDaily,
+               rGoogleOv, rGoogleFunnel, rGoogleDaily, rGoogleCamp, rMetaCamp] = await Promise.allSettled([
+          fetch(`${API}/api/pipedrive/gerenciador?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/funnel?${qs}`).then(r => r.json()),
           fetch(`${API}/api/pipedrive/kpis?${qs}`).then(r => r.json()),
           fetch(`${API}/api/meta/overview?${qs}`).then(r => r.json()),
@@ -2434,21 +2417,31 @@
           fetch(`${API}/api/meta/funnel-lp?${qs}`).then(r => r.json()),
           fetch(`${API}/api/meta/funnel-form?${qs}`).then(r => r.json()),
           fetch(`${API}/api/meta/daily?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/google/overview?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/google/funnel?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/google/daily?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/google/campaigns?${qs}`).then(r => r.json()),
+          fetch(`${API}/api/meta/campaigns?${qs}`).then(r => r.json()),
         ]);
 
-        const campaigns = rCampaigns.status === 'fulfilled' ? (rCampaigns.value?.campaigns || []) : [];
-        const funnel    = rFunnel.status    === 'fulfilled' ? rFunnel.value    : null;
-        const kpis      = rKPIs.status      === 'fulfilled' ? rKPIs.value      : null;
-        const meta      = rMeta.status      === 'fulfilled' ? rMeta.value      : null;
-        const closers   = rClosers.status   === 'fulfilled' ? rClosers.value   : null;
-        const sdrs      = rSDRs.status      === 'fulfilled' ? rSDRs.value      : null;
-        const sdrIA     = rSDRIA.status     === 'fulfilled' ? rSDRIA.value     : null;
-        const aqrc      = rAQRC.status      === 'fulfilled' ? rAQRC.value      : null;
-        const metaLP    = rMetaLP.status    === 'fulfilled' ? rMetaLP.value    : null;
-        const metaFN    = rMetaFN.status    === 'fulfilled' ? rMetaFN.value    : null;
-        const metaDaily = rMetaDaily.status === 'fulfilled' ? rMetaDaily.value : null;
+        const gerenciador = rGerenciador.status === 'fulfilled' ? rGerenciador.value : null;
+        const funnel      = rFunnel.status    === 'fulfilled' ? rFunnel.value    : null;
+        const kpis        = rKPIs.status      === 'fulfilled' ? rKPIs.value      : null;
+        const meta        = rMeta.status      === 'fulfilled' ? rMeta.value      : null;
+        const closers     = rClosers.status   === 'fulfilled' ? rClosers.value   : null;
+        const sdrs        = rSDRs.status      === 'fulfilled' ? rSDRs.value      : null;
+        const sdrIA       = rSDRIA.status     === 'fulfilled' ? rSDRIA.value     : null;
+        const aqrc        = rAQRC.status      === 'fulfilled' ? rAQRC.value      : null;
+        const metaLP      = rMetaLP.status    === 'fulfilled' ? rMetaLP.value    : null;
+        const metaFN      = rMetaFN.status    === 'fulfilled' ? rMetaFN.value    : null;
+        const metaDaily   = rMetaDaily.status === 'fulfilled' ? rMetaDaily.value : null;
+        const googleOv    = rGoogleOv.status    === 'fulfilled' ? rGoogleOv.value    : null;
+        const googleFn    = rGoogleFunnel.status === 'fulfilled' ? rGoogleFunnel.value : null;
+        const googleDaily = rGoogleDaily.status  === 'fulfilled' ? rGoogleDaily.value  : null;
+        const googleCamp  = rGoogleCamp.status   === 'fulfilled' ? rGoogleCamp.value   : null;
+        const metaCamp    = rMetaCamp.status     === 'fulfilled' ? (rMetaCamp.value?.campaigns || []) : [];
 
-        renderGerenciador(campaigns, funnel);
+        renderGerenciador(gerenciador, metaCamp, googleCamp?.campaigns || []);
         if (kpis) renderKPIs(kpis);
         if (meta) renderMetaOverview(meta);
         if (funnel) renderVisaoGeralFunnels(funnel, meta);
@@ -2458,6 +2451,7 @@
         if (aqrc) renderAQRC(aqrc);
         if (metaLP || metaFN) renderMetaFunnels(metaLP, metaFN);
         if (metaDaily) renderMetaDaily(metaDaily);
+        renderGoogleData(googleOv, googleFn, googleDaily, googleCamp);
 
       } catch (e) {
         console.error('[loadAll]', e);
@@ -2483,6 +2477,8 @@
     // ─── renderKPIs ──────────────────────────────────────────
     // Store kpis globally for use in renderVisaoGeralFunnels
     let _lastKpis = null;
+    let _lastGoogleDaily = null;
+    let _lastGoogleOv = null;
     function renderKPIs(d) {
       if (!d?.ok) return;
       _lastKpis = d;
@@ -2525,201 +2521,225 @@
     }
 
     // ─── renderGerenciador ───────────────────────────────────
-    function renderGerenciador(campaigns, funnelData) {
+    // Dados do Pipedrive por UTM + spend do Meta/Google onde disponível
+    function renderGerenciador(data, metaCampaigns, googleCampaigns) {
       const tbody = document.getElementById('gerenciador-tbody');
       if (!tbody) return;
+      const COLS = 24;
 
-      if (!campaigns || !campaigns.length) {
-        tbody.innerHTML = `<tr><td colspan="24" style="text-align:center;color:var(--gray);padding:40px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">Sem dados para o período selecionado.</td></tr>`;
+      if (!data?.ok || !data.sources || !data.sources.length) {
+        tbody.innerHTML = `<tr><td colspan="${COLS}" style="text-align:center;color:var(--gray);padding:40px;font-family:'IBM Plex Mono',monospace;font-size:0.65rem">Sem dados para o período selecionado.</td></tr>`;
         return;
       }
 
-      // ── Build tree: fonte → campaign → adset → ad ──
-      const tree = {};
-      for (const ad of campaigns) {
-        const fonte  = 'Facebook';
-        const camp   = ad.campaign || '(sem campanha)';
-        const adset  = ad.adset   || '(sem conjunto)';
+      // ── Mapas de spend: fonte / campanha / conjunto / anúncio ──
+      const K = s => (s || '').trim().toLowerCase();
 
-        if (!tree[fonte]) tree[fonte] = { spend: 0, leads: 0, clicks: 0, impressions: 0, campaigns: {} };
-        tree[fonte].spend       += ad.spend       || 0;
-        tree[fonte].leads       += ad.leads       || 0;
-        tree[fonte].clicks      += ad.clicks      || 0;
-        tree[fonte].impressions += ad.impressions || 0;
+      const metaBySource  = { spend: 0, clicks: 0, impressions: 0, leads: 0 };
+      const metaByCamp    = {};   // key = campaign
+      const metaByAdset   = {};   // key = campaign + '|||' + adset
+      const metaByAd      = {};   // key = campaign + '|||' + adset + '|||' + ad
 
-        if (!tree[fonte].campaigns[camp]) tree[fonte].campaigns[camp] = { spend: 0, leads: 0, clicks: 0, impressions: 0, adsets: {} };
-        tree[fonte].campaigns[camp].spend       += ad.spend       || 0;
-        tree[fonte].campaigns[camp].leads       += ad.leads       || 0;
-        tree[fonte].campaigns[camp].clicks      += ad.clicks      || 0;
-        tree[fonte].campaigns[camp].impressions += ad.impressions || 0;
+      for (const c of (metaCampaigns || [])) {
+        const sp = parseFloat(c.spend || 0);
+        const cl = parseInt(c.clicks || 0, 10);
+        const im = parseInt(c.impressions || 0, 10);
+        const ld = parseInt(c.leads || 0, 10);
+        metaBySource.spend += sp; metaBySource.clicks += cl;
+        metaBySource.impressions += im; metaBySource.leads += ld;
 
-        if (!tree[fonte].campaigns[camp].adsets[adset]) tree[fonte].campaigns[camp].adsets[adset] = { spend: 0, leads: 0, clicks: 0, impressions: 0, ads: [] };
-        tree[fonte].campaigns[camp].adsets[adset].spend       += ad.spend       || 0;
-        tree[fonte].campaigns[camp].adsets[adset].leads       += ad.leads       || 0;
-        tree[fonte].campaigns[camp].adsets[adset].clicks      += ad.clicks      || 0;
-        tree[fonte].campaigns[camp].adsets[adset].impressions += ad.impressions || 0;
-        tree[fonte].campaigns[camp].adsets[adset].ads.push(ad);
+        const ck = K(c.campaign);
+        if (!metaByCamp[ck]) metaByCamp[ck] = { spend:0, clicks:0, impressions:0, leads:0 };
+        metaByCamp[ck].spend += sp; metaByCamp[ck].clicks += cl;
+        metaByCamp[ck].impressions += im; metaByCamp[ck].leads += ld;
+
+        if (c.adset) {
+          const ask = ck + '|||' + K(c.adset);
+          if (!metaByAdset[ask]) metaByAdset[ask] = { spend:0, clicks:0, impressions:0, leads:0 };
+          metaByAdset[ask].spend += sp; metaByAdset[ask].clicks += cl;
+          metaByAdset[ask].impressions += im; metaByAdset[ask].leads += ld;
+
+          if (c.ad) {
+            const adk = ask + '|||' + K(c.ad);
+            if (!metaByAd[adk]) metaByAd[adk] = { spend:0, clicks:0, impressions:0, leads:0 };
+            metaByAd[adk].spend += sp; metaByAd[adk].clicks += cl;
+            metaByAd[adk].impressions += im; metaByAd[adk].leads += ld;
+          }
+        }
       }
 
-      const pdSdr    = funnelData?.sdr    || {};
-      const pdCloser = funnelData?.closer || {};
+      // Google
+      const googleBySource = { spend: 0, clicks: 0, impressions: 0 };
+      const googleByCamp   = {};
+      for (const c of (googleCampaigns || [])) {
+        const sp = parseFloat(c.spend || 0);
+        const cl = parseInt(c.clicks || 0, 10);
+        const im = parseInt(c.impressions || 0, 10);
+        googleBySource.spend += sp; googleBySource.clicks += cl; googleBySource.impressions += im;
+        const ck = K(c.campaign);
+        if (!googleByCamp[ck]) googleByCamp[ck] = { spend:0, clicks:0, impressions:0 };
+        googleByCamp[ck].spend += sp; googleByCamp[ck].clicks += cl; googleByCamp[ck].impressions += im;
+      }
 
-      // ── Cell helpers ──
-      const NC  = (v, cls='') => `<td class="num${cls?' '+cls:''}">${v}</td>`;
-      const NM  = (v, cls='') => NC(v !== null && v !== undefined && v !== 0 && !isNaN(v) ? fmtInt(v) : '—', cls);
-      const NB  = (v, cls='') => NC(v && !isNaN(v) ? 'R$ '+fmtBRL(v) : '—', cls);
-      const CP  = (spend, cnt) => cnt > 0 ? NC('R$ '+Math.round(spend/cnt).toLocaleString('pt-BR')) : NC('—','dim');
-      const DIM = () => NC('—','dim');
+      // Determina plataforma a partir do utm_source
+      function platform(source) {
+        const s = (source || '').toLowerCase();
+        if (s === 'social' || s === 'facebookads' || s.includes('instagram') || s.includes('facebook')) return 'meta';
+        if (s === 'google') return 'google';
+        return null;
+      }
 
-      // Estimado (atribuição proporcional por leads) — mesma formatação mas em teal suave
-      const EST = (total, share) => {
-        if (!total || !share || isNaN(total) || isNaN(share)) return NC('—','dim');
-        const v = Math.round(total * share);
-        return v > 0 ? NC(fmtInt(v), 'est') : NC('—','dim');
-      };
-      const CPA_EST = (spend, total, share) => {
-        if (!total || !share || !spend) return NC('—','dim');
-        const v = total * share;
-        return v > 0 ? NC('R$ '+Math.round(spend/v).toLocaleString('pt-BR'), 'est') : NC('—','dim');
-      };
-
-      const metaCols = (d) => {
-        const cpl = d.leads > 0 ? d.spend / d.leads : null;
-        const ctr = d.impressions > 0 ? (d.clicks / d.impressions * 100).toFixed(2) + '%' : '—';
-        const cpc = d.clicks > 0 ? 'R$ '+fmtBRL(d.spend / d.clicks) : '—';
-        return { cpl, ctr, cpc };
-      };
-
-      // Função que gera 18 células PD (MQL→Ganho + CPs) para qualquer nível
-      const pdCells = (spend, share, isExact) => {
-        if (isExact) {
-          return [
-            NM(pdSdr.mql),          CP(spend, pdSdr.mql),
-            NM(pdSdr.tentativa),    CP(spend, pdSdr.tentativa),
-            NM(pdSdr.conectado),    CP(spend, pdSdr.conectado),
-            NM(pdSdr.avaliado),     CP(spend, pdSdr.avaliado),
-            NM(pdCloser.r_agendada),CP(spend, pdCloser.r_agendada),
-            NM(pdCloser.r_realizada),CP(spend, pdCloser.r_realizada),
-            NM(pdCloser.oportunidade),CP(spend, pdCloser.oportunidade),
-            NM(pdCloser.negociacao),CP(spend, pdCloser.negociacao),
-            NM(pdCloser.venda,'teal'),
-            NB(pdCloser.venda > 0 ? spend/pdCloser.venda : null,'gold'),
-          ].join('');
-        } else {
-          // Proporcional — share = fração do total de leads
-          return [
-            EST(pdSdr.mql, share),          CPA_EST(spend, pdSdr.mql, share),
-            EST(pdSdr.tentativa, share),    CPA_EST(spend, pdSdr.tentativa, share),
-            EST(pdSdr.conectado, share),    CPA_EST(spend, pdSdr.conectado, share),
-            EST(pdSdr.avaliado, share),     CPA_EST(spend, pdSdr.avaliado, share),
-            EST(pdCloser.r_agendada, share),CPA_EST(spend, pdCloser.r_agendada, share),
-            EST(pdCloser.r_realizada, share),CPA_EST(spend, pdCloser.r_realizada, share),
-            EST(pdCloser.oportunidade, share),CPA_EST(spend, pdCloser.oportunidade, share),
-            EST(pdCloser.negociacao, share),CPA_EST(spend, pdCloser.negociacao, share),
-            EST(pdCloser.venda, share, 'teal'),
-            CPA_EST(spend, pdCloser.venda, share),
-          ].join('');
+      // Lookup de spend: nível source, campaign, adset ou ad
+      function getSpend(src, campName, adsetName, adName) {
+        const plt = platform(src);
+        if (!plt) return null;
+        if (plt === 'google') {
+          if (!campName) return googleBySource;
+          return googleByCamp[K(campName)] || null;
         }
+        // Meta
+        if (!campName) return metaBySource;
+        const ck = K(campName);
+        if (!adsetName) return metaByCamp[ck] || null;
+        const ask = ck + '|||' + K(adsetName);
+        if (!adName) return metaByAdset[ask] || null;
+        return metaByAd[ask + '|||' + K(adName)] || null;
+      }
+
+      // ── Helpers de célula ──
+      const DIM = () => `<td class="num dim">—</td>`;
+      const NM  = (v, cls='') => v > 0 ? `<td class="num${cls?' '+cls:''}">${fmtInt(v)}</td>` : DIM();
+      const NB  = (v, cls='') => v > 0 ? `<td class="num${cls?' '+cls:''}">${'R$ '+fmtBRL(v, 0)}</td>` : DIM();
+      // CP = spend / count (custo por lead nessa etapa)
+      const CP  = (spend, cnt) => {
+        if (!spend || !cnt) return DIM();
+        return `<td class="num">R$ ${fmtBRL(spend / cnt, 0)}</td>`;
+      };
+      const CTRcell = (clicks, imp) => {
+        if (!clicks || !imp) return DIM();
+        return `<td class="num">${(clicks / imp * 100).toFixed(2)}%</td>`;
+      };
+      const CPCcell = (spend, clicks) => {
+        if (!spend || !clicks) return DIM();
+        return `<td class="num">R$ ${fmtBRL(spend / clicks)}</td>`;
+      };
+
+      const cells = (d, spendData) => {
+        const sp = spendData?.spend || 0;
+        const cl = spendData?.clicks || 0;
+        const im = spendData?.impressions || 0;
+        const mqlLeads = d.mql || 0;
+        return [
+          NB(sp, 'gold'),                      // Invest. Total
+          NM(mqlLeads),                         // Leads (= MQL)
+          CP(sp, mqlLeads),                     // CPL
+          NM(d.mql),                            // MQL
+          CP(sp, d.mql),                        // CP MQL
+          NM(d.tentativas),                     // Tent. Conectar
+          CP(sp, d.tentativas),                 // CP Tentativa
+          NM(d.conectados),                     // Conectado
+          CP(sp, d.conectados),                 // CP Conect.
+          NM(d.avaliados),                      // Avaliado
+          CP(sp, d.avaliados),                  // CP Aval.
+          NM(d.agendadas),                      // R. Agendada
+          CP(sp, d.agendadas),                  // CP R. Agend.
+          NM(d.realizadas),                     // R. Realizada
+          CP(sp, d.realizadas),                 // CP R. Real.
+          NM(d.oportunidades),                  // Oportunidade
+          CP(sp, d.oportunidades),              // CP Opor.
+          NM(d.negociacoes),                    // Negociação
+          CP(sp, d.negociacoes),                // CP Negoc.
+          NM(d.vendas, 'teal'),                 // Ganho
+          sp && d.vendas ? NB(sp / d.vendas) : DIM(), // CAC
+          CTRcell(cl, im),                      // CTR
+          CPCcell(sp, cl),                      // CPC
+        ].join('');
       };
 
       const rows = [];
-      let totSpend = 0, totLeads = 0, idSeq = 0;
+      const tot  = { mql:0, tentativas:0, conectados:0, avaliados:0, agendadas:0, realizadas:0, oportunidades:0, negociacoes:0, vendas:0, faturamento:0 };
+      const totSpend = { spend:0, clicks:0, impressions:0 };
+      let idSeq = 0;
 
-      for (const [fonteName, fd] of Object.entries(tree)) {
-        totSpend += fd.spend;
-        totLeads += fd.leads;
-        const fId  = 'tn' + (++idSeq);
-        const { cpl: fCpl, ctr: fCtr, cpc: fCpc } = metaCols(fd);
+      for (const src of data.sources) {
+        for (const k of Object.keys(tot)) tot[k] += src[k] || 0;
+        // Bottom-up: soma spend das campanhas desta fonte
+        const srcSpend = (() => {
+          const plt = platform(src.source);
+          if (!plt) return null;
+          if (plt === 'google') return googleBySource;
+          const agg = { spend: 0, clicks: 0, impressions: 0, leads: 0 };
+          for (const camp of (src.campaigns || [])) {
+            const cs = metaByCamp[K(camp.campaign)];
+            if (cs) { agg.spend += cs.spend; agg.clicks += cs.clicks; agg.impressions += cs.impressions; agg.leads += (cs.leads || 0); }
+          }
+          return agg.spend > 0 ? agg : null;
+        })();
+        if (srcSpend) { totSpend.spend += srcSpend.spend; totSpend.clicks += srcSpend.clicks; totSpend.impressions += srcSpend.impressions; }
 
-        // Fonte row — dados Pipedrive EXATOS (totais do período)
+        const fId = 'tn' + (++idSeq);
+        // Nível 0: Fonte (começa aberto)
         rows.push(`<tr class="tree-row tree-lv0" data-id="${fId}">
           <td><div class="tree-cell">
             <span class="tree-toggle" onclick="toggleTree('${fId}',this)">−</span>
-            <span class="tree-name lv0">▶ ${fonteName}</span>
+            <span class="tree-name lv0">▶ ${src.source}</span>
           </div></td>
-          ${NB(fd.spend,'gold')}
-          ${NM(fd.leads)}
-          ${NB(fCpl)}
-          ${pdCells(fd.spend, null, true)}
-          ${NC(fCtr)}
-          ${NC(fCpc)}
+          ${cells(src, srcSpend)}
         </tr>`);
 
-        // Campaign rows — Pipedrive ESTIMADO por proporção de leads
-        for (const [campName, cd] of Object.entries(fd.campaigns)) {
-          const cId = 'tn' + (++idSeq);
-          const { cpl: cCpl, ctr: cCtr, cpc: cCpc } = metaCols(cd);
-          const cShare = fd.leads > 0 ? cd.leads / fd.leads : 0;
+        for (const camp of (src.campaigns || [])) {
+          const cId    = 'tn' + (++idSeq);
+          const cSpend = getSpend(src.source, camp.campaign);
+          const hasAdsets = camp.adsets && camp.adsets.length > 0;
 
-          rows.push(`<tr class="tree-row tree-lv1" data-id="${cId}" data-parent="${fId}">
+          // Nível 1: Campanha
+          rows.push(`<tr class="tree-row tree-lv1" data-id="${cId}" data-parent="${fId}" style="display:none">
             <td><div class="tree-cell">
               <span class="tree-indent"></span>
-              <span class="tree-toggle" onclick="toggleTree('${cId}',this)">+</span>
-              <span class="tree-name lv1" title="${campName}">${truncateStr(campName, 45)}</span>
+              ${hasAdsets
+                ? `<span class="tree-toggle" onclick="toggleTree('${cId}',this)">+</span>`
+                : `<span class="tree-toggle" style="visibility:hidden">+</span>`}
+              <span class="tree-name lv1" title="${camp.campaign}">${truncateStr(camp.campaign, 65)}</span>
             </div></td>
-            ${NB(cd.spend)}
-            ${NM(cd.leads)}
-            ${NB(cCpl)}
-            ${pdCells(cd.spend, cShare, false)}
-            ${NC(cCtr)}
-            ${NC(cCpc)}
+            ${cells(camp, cSpend)}
           </tr>`);
 
-          // Adset rows — Pipedrive ESTIMADO por proporção de leads
-          for (const [adsetName, asd] of Object.entries(cd.adsets)) {
-            const asId = 'tn' + (++idSeq);
-            const { cpl: aCpl, ctr: aCtr, cpc: aCpc } = metaCols(asd);
-            const aShare = fd.leads > 0 ? asd.leads / fd.leads : 0;
+          for (const adset of (camp.adsets || [])) {
+            const aId    = 'tn' + (++idSeq);
+            const aSpend = getSpend(src.source, camp.campaign, adset.adset);
+            const hasAds = adset.ads && adset.ads.length > 0;
 
-            rows.push(`<tr class="tree-row tree-lv2" data-id="${asId}" data-parent="${cId}" style="display:none">
+            // Nível 2: Conjunto de anúncio
+            rows.push(`<tr class="tree-row tree-lv2" data-id="${aId}" data-parent="${cId}" style="display:none">
               <td><div class="tree-cell">
-                <span class="tree-indent"></span>
-                <span class="tree-indent"></span>
-                <span class="tree-toggle" onclick="toggleTree('${asId}',this)">+</span>
-                <span class="tree-name lv2" title="${adsetName}">${truncateStr(adsetName, 40)}</span>
+                <span class="tree-indent"></span><span class="tree-indent"></span>
+                ${hasAds
+                  ? `<span class="tree-toggle" onclick="toggleTree('${aId}',this)">+</span>`
+                  : `<span class="tree-toggle" style="visibility:hidden">+</span>`}
+                <span class="tree-name lv2" title="${adset.adset}">${truncateStr(adset.adset, 52)}</span>
               </div></td>
-              ${NB(asd.spend)}
-              ${NM(asd.leads)}
-              ${NB(aCpl)}
-              ${pdCells(asd.spend, aShare, false)}
-              ${NC(aCtr)}
-              ${NC(aCpc)}
+              ${cells(adset, aSpend)}
             </tr>`);
 
-            // Ad rows (leaf)
-            for (const ad of asd.ads) {
-              const adCpl = ad.leads > 0 ? ad.spend / ad.leads : null;
-              const adShare = fd.leads > 0 ? (ad.leads || 0) / fd.leads : 0;
-              rows.push(`<tr class="tree-row tree-lv3" data-parent="${asId}" style="display:none">
+            for (const ad of (adset.ads || [])) {
+              const adSpend = getSpend(src.source, camp.campaign, adset.adset, ad.ad);
+
+              // Nível 3: Anúncio (folha — sem toggle)
+              rows.push(`<tr class="tree-row tree-lv3" data-parent="${aId}" style="display:none">
                 <td><div class="tree-cell">
-                  <span class="tree-indent"></span>
-                  <span class="tree-indent"></span>
-                  <span class="tree-indent"></span>
-                  <span class="tree-leaf">›</span>
-                  <span class="tree-name lv3" title="${ad.ad || ''}">${truncateStr(ad.ad, 35)}</span>
+                  <span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span>
+                  <span class="tree-name lv3" title="${ad.ad}">${truncateStr(ad.ad, 48)}</span>
                 </div></td>
-                ${NB(ad.spend)}
-                ${NM(ad.leads)}
-                ${NB(adCpl)}
-                ${pdCells(ad.spend, adShare, false)}
-                ${NC(ad.ctr && ad.ctr !== '0.00' ? ad.ctr+'%' : '—')}
-                ${NC(ad.cpc && ad.cpc !== '0.00' ? 'R$ '+ad.cpc : '—')}
+                ${cells(ad, adSpend)}
               </tr>`);
             }
           }
         }
       }
 
-      // Total row
-      const totCpl = totLeads > 0 ? totSpend / totLeads : null;
-      const totCac  = pdCloser.venda > 0 ? totSpend / pdCloser.venda : null;
       rows.push(`<tr class="tree-row tree-total">
         <td><div class="tree-cell"><span class="tree-name lv0" style="color:var(--gold)">TOTAL</span></div></td>
-        ${NB(totSpend,'gold')}
-        ${NM(totLeads)}
-        ${NB(totCpl)}
-        ${pdCells(totSpend, null, true)}
-        ${DIM()}${DIM()}
+        ${cells(tot, totSpend)}
       </tr>`);
 
       tbody.innerHTML = rows.join('');
@@ -2806,7 +2826,9 @@
       set('funil-closer-conv-total', 'Conv. total: ' + clConvTotal + '%');
 
       // --- Visao Geral KPIs ---
-      const totalSpend = meta?.spend || 0;
+      const metaSpend   = parseFloat(meta?.spend   || 0);
+      const googleSpend = parseFloat(_lastGoogleOv?.spend || 0);
+      const totalSpend  = metaSpend + googleSpend;
       const fat = _lastKpis?.faturamento || 0;
       set('kpi-fat',     'R$ ' + fmtBRL(fat, 0));
       set('kpi-inv',     'R$ ' + fmtBRL(totalSpend, 0));
@@ -2834,6 +2856,19 @@
       set('mt-leads',     fmtInt(meta?.leads));
     }
 
+    // ─── helper: seta cor da conversão por limiar ──────────────
+    function convClass(pct) {
+      if (pct >= 50) return '';
+      if (pct >= 25) return 'warn';
+      return 'bad';
+    }
+
+    // ─── helper: gera bloco farrow ────────────────────────────
+    function farrow(pct) {
+      const cls = convClass(parseFloat(pct));
+      return `<div class="farrow"><span class="farrow-icon">→</span><span class="farrow-pct ${cls}">${pct}%</span></div>`;
+    }
+
     // ─── renderClosers ───────────────────────────────────────
     function renderClosers(data) {
       if (!data?.ok || !data.closers) return;
@@ -2842,79 +2877,63 @@
 
       const closers = data.closers.filter(c => (c.r_realizadas || 0) + (c.r_agendadas || 0) > 0);
       if (!closers.length) {
-        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de closers para o periodo.</div>';
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;padding:20px">Sem dados de closers para o periodo.</div>';
         return;
       }
 
-      const maxTotal = Math.max(...closers.map(c => (c.r_realizadas||0) + (c.oportunidades||0) + (c.negociacoes||0) + (c.vendas||0)), 1);
-      const maxBarH = 280;
-
       let html = '';
-      closers.forEach((c, idx) => {
-        const total = (c.r_realizadas||0) + (c.oportunidades||0) + (c.negociacoes||0) + (c.vendas||0);
-        const barH = Math.max(total / maxTotal * maxBarH, 40);
-
-        const pctReal  = total > 0 ? (c.r_realizadas||0) / total * 100 : 0;
-        const pctOpor  = total > 0 ? (c.oportunidades||0) / total * 100 : 0;
-        const pctNeg   = total > 0 ? (c.negociacoes||0) / total * 100 : 0;
-        const pctVenda = total > 0 ? (c.vendas||0) / total * 100 : 0;
-
-        // conv rates
-        const convRealOpor = (c.r_realizadas||0) > 0 ? ((c.oportunidades||0)/(c.r_realizadas)*100).toFixed(0) : '0';
-        const convOporNeg  = (c.oportunidades||0) > 0 ? ((c.negociacoes||0)/(c.oportunidades)*100).toFixed(0) : '0';
-        const convNegVenda = (c.negociacoes||0) > 0 ? ((c.vendas||0)/(c.negociacoes)*100).toFixed(0) : '0';
-        // fallback: se negociacoes=0, conv direto de oportunidade pra venda
-        const convLastLabel = (c.negociacoes||0) > 0 ? convNegVenda : ((c.oportunidades||0) > 0 ? ((c.vendas||0)/(c.oportunidades)*100).toFixed(0) : '0');
-
+      closers.forEach(c => {
         const initials = c.name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
         const noshowClass = (c.noshow||0) <= 20 ? 'ok' : (c.noshow||0) <= 40 ? 'warn' : 'bad';
 
-        html += `<div class="vert-col">
-          <div class="vert-bar-wrap">
-            <div class="vert-bar" style="height:${barH}px">
-              <div class="vert-seg vseg-venda" style="height:${Math.max(pctVenda,2)}%">
-                <span class="vert-seg-num">${c.vendas||0}</span>
-                <span class="vert-seg-pct">${pctVenda.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-neg" style="height:${Math.max(pctNeg,2)}%">
-                <span class="vert-seg-num">${c.negociacoes||0}</span>
-                <span class="vert-seg-pct">${pctNeg.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-opor" style="height:${Math.max(pctOpor,2)}%">
-                <span class="vert-seg-num">${c.oportunidades||0}</span>
-                <span class="vert-seg-pct">${pctOpor.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-real" style="height:${Math.max(pctReal,2)}%">
-                <span class="vert-seg-num">${c.r_realizadas||0}</span>
-                <span class="vert-seg-pct">${pctReal.toFixed(0)}%</span>
-              </div>
-            </div>
-            <div class="vert-conv-col" id="closer-conv-col-${idx}">
-              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convLastLabel}%</span></div>
-              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convOporNeg}%</span></div>
-              <div class="vert-conv-badge"><span class="conv-arrow">+</span><span>${convRealOpor}%</span></div>
-            </div>
+        const convAgendReal = (c.r_agendadas||0) > 0 ? ((c.r_realizadas||0)/(c.r_agendadas)*100).toFixed(0) : '0';
+        const convRealOpor  = (c.r_realizadas||0) > 0 ? ((c.oportunidades||0)/(c.r_realizadas)*100).toFixed(0) : '0';
+        const convOporNeg   = (c.oportunidades||0) > 0 ? ((c.negociacoes||0)/(c.oportunidades)*100).toFixed(0) : '0';
+        const convLast      = (c.negociacoes||0) > 0
+          ? ((c.vendas||0)/(c.negociacoes)*100).toFixed(0)
+          : ((c.oportunidades||0) > 0 ? ((c.vendas||0)/(c.oportunidades)*100).toFixed(0) : '0');
+
+        html += `<div class="agent-card">
+          <div class="agent-card-left">
+            <div class="agent-avatar-lg">${c.avatar ? '<img src="'+c.avatar+'">' : initials}</div>
+            <div class="agent-card-name">${c.name.split(' ').slice(0,2).join(' ')}</div>
+            <div class="agent-card-fat">R$ ${fmtBRL(c.faturamento||0, 0)}</div>
+            <div class="agent-card-noshow ${noshowClass}">No-show ${c.noshow||0}%</div>
           </div>
-          <div class="vert-agent-info">
-            <div class="vert-avatar">${c.avatar ? '<img src="'+c.avatar+'">' : initials}</div>
-            <div class="vert-name">${c.name.split(' ').slice(0,2).join(' ')}</div>
-            <div class="vert-fat">R$ ${fmtBRL(c.faturamento||0, 0)}</div>
-            <div class="vert-noshow">
-              <span class="vert-noshow-label">No-show</span>
-              <span class="vert-noshow-val ${noshowClass}">${c.noshow||0}%</span>
+          <div class="agent-card-funnel">
+            <div class="fstep vseg-agend">
+              <div class="fstep-label">R. Agendadas</div>
+              <div class="fstep-val">${c.r_agendadas||0}</div>
+            </div>
+            ${farrow(convAgendReal)}
+            <div class="fstep vseg-real">
+              <div class="fstep-label">R. Realizadas</div>
+              <div class="fstep-val">${c.r_realizadas||0}</div>
+            </div>
+            ${farrow(convRealOpor)}
+            <div class="fstep vseg-opor">
+              <div class="fstep-label">Oportunidades</div>
+              <div class="fstep-val">${c.oportunidades||0}</div>
+            </div>
+            ${farrow(convOporNeg)}
+            <div class="fstep vseg-neg">
+              <div class="fstep-label">Negociação</div>
+              <div class="fstep-val">${c.negociacoes||0}</div>
+            </div>
+            ${farrow(convLast)}
+            <div class="fstep vseg-venda">
+              <div class="fstep-label">Vendas</div>
+              <div class="fstep-val">${c.vendas||0}</div>
             </div>
           </div>
         </div>`;
       });
 
       chart.innerHTML = html;
-
-      // Update closer conversion chart
       _updateCloserConvChart(closers);
     }
 
     function _updateCloserConvChart(closers) {
-      // Aggregate all closers
       let totReal=0, totOpor=0, totNeg=0, totVenda=0;
       closers.forEach(c => {
         totReal  += c.r_realizadas||0;
@@ -2925,7 +2944,6 @@
       const c1 = totReal > 0 ? (totOpor/totReal*100).toFixed(1) : 0;
       const c2 = totOpor > 0 ? (totNeg/totOpor*100).toFixed(1) : 0;
       const c3 = totNeg > 0 ? (totVenda/totNeg*100).toFixed(1) : (totOpor > 0 ? (totVenda/totOpor*100).toFixed(1) : 0);
-
       if (chartCloserConv) {
         chartCloserConv.data.datasets[0].data = [parseFloat(c1), parseFloat(c2), parseFloat(c3)];
         chartCloserConv.update();
@@ -2940,70 +2958,52 @@
 
       const sdrs = data.sdrs.filter(s => (s.mql||0) + (s.r_agendadas||0) > 0);
       if (!sdrs.length) {
-        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de SDRs para o periodo.</div>';
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;padding:20px">Sem dados de SDRs para o periodo.</div>';
         return;
       }
 
-      const maxTotal = Math.max(...sdrs.map(s => (s.mql||0)+(s.conectados||0)+(s.avaliados||0)+(s.r_agendadas||0)+(s.r_realizadas||0)), 1);
-      const maxBarH = 280;
-
       let html = '';
-      sdrs.forEach((s, idx) => {
-        const total = (s.mql||0)+(s.conectados||0)+(s.avaliados||0)+(s.r_agendadas||0)+(s.r_realizadas||0);
-        const barH = Math.max(total / maxTotal * maxBarH, 40);
-
-        const pctMql   = total > 0 ? (s.mql||0) / total * 100 : 0;
-        const pctCon   = total > 0 ? (s.conectados||0) / total * 100 : 0;
-        const pctAval  = total > 0 ? (s.avaliados||0) / total * 100 : 0;
-        const pctAgend = total > 0 ? (s.r_agendadas||0) / total * 100 : 0;
-        const pctReal  = total > 0 ? (s.r_realizadas||0) / total * 100 : 0;
-
-        const conv1 = (s.mql||0) > 0 ? ((s.conectados||0)/(s.mql)*100).toFixed(0) : '0';
-        const conv2 = (s.conectados||0) > 0 ? ((s.avaliados||0)/(s.conectados)*100).toFixed(0) : '0';
-        const conv3 = (s.avaliados||0) > 0 ? ((s.r_agendadas||0)/(s.avaliados)*100).toFixed(0) : ((s.mql||0) > 0 ? ((s.r_agendadas||0)/(s.mql)*100).toFixed(0) : '0');
-        const conv4 = (s.r_agendadas||0) > 0 ? ((s.r_realizadas||0)/(s.r_agendadas)*100).toFixed(0) : '0';
-
+      sdrs.forEach(s => {
         const initials = s.name.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
         const noshowClass = (s.noshow||0) <= 20 ? 'ok' : (s.noshow||0) <= 40 ? 'warn' : 'bad';
 
-        html += `<div class="vert-col">
-          <div class="vert-bar-wrap">
-            <div class="vert-bar" style="height:${barH}px">
-              <div class="vert-seg vseg-mql" style="height:${Math.max(pctMql,2)}%">
-                <span class="vert-seg-num">${s.mql||0}</span>
-                <span class="vert-seg-pct">${pctMql.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-con" style="height:${Math.max(pctCon,2)}%">
-                <span class="vert-seg-num">${s.conectados||0}</span>
-                <span class="vert-seg-pct">${pctCon.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-aval" style="height:${Math.max(pctAval,2)}%">
-                <span class="vert-seg-num">${s.avaliados||0}</span>
-                <span class="vert-seg-pct">${pctAval.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-agend" style="height:${Math.max(pctAgend,2)}%">
-                <span class="vert-seg-num">${s.r_agendadas||0}</span>
-                <span class="vert-seg-pct">${pctAgend.toFixed(0)}%</span>
-              </div>
-              <div class="vert-seg vseg-rreal" style="height:${Math.max(pctReal,2)}%">
-                <span class="vert-seg-num">${s.r_realizadas||0}</span>
-                <span class="vert-seg-pct">${pctReal.toFixed(0)}%</span>
-              </div>
-            </div>
-            <div class="vert-conv-col">
-              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv4}%</span></div>
-              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv3}%</span></div>
-              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv2}%</span></div>
-              <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv1}%</span></div>
-            </div>
+        const conv1 = (s.mql||0) > 0 ? ((s.conectados||0)/(s.mql)*100).toFixed(0) : '0';
+        const conv2 = (s.conectados||0) > 0 ? ((s.avaliados||0)/(s.conectados)*100).toFixed(0) : '0';
+        const conv3 = (s.avaliados||0) > 0 ? ((s.r_agendadas||0)/(s.avaliados)*100).toFixed(0)
+                    : ((s.mql||0) > 0 ? ((s.r_agendadas||0)/(s.mql)*100).toFixed(0) : '0');
+        const conv4 = (s.r_agendadas||0) > 0 ? ((s.r_realizadas||0)/(s.r_agendadas)*100).toFixed(0) : '0';
+
+        html += `<div class="agent-card">
+          <div class="agent-card-left">
+            <div class="agent-avatar-lg">${s.avatar ? '<img src="'+s.avatar+'">' : initials}</div>
+            <div class="agent-card-name">${s.name.split(' ').slice(0,2).join(' ')}</div>
+            <div class="agent-card-fat">R$ ${fmtBRL(s.faturamento||0, 0)}</div>
+            <div class="agent-card-noshow ${noshowClass}">No-show ${s.noshow||0}%</div>
           </div>
-          <div class="vert-agent-info">
-            <div class="vert-avatar">${s.avatar ? '<img src="'+s.avatar+'">' : initials}</div>
-            <div class="vert-name">${s.name.split(' ').slice(0,2).join(' ')}</div>
-            <div class="vert-fat">R$ ${fmtBRL(s.faturamento||0, 0)}</div>
-            <div class="vert-noshow">
-              <span class="vert-noshow-label">No-show</span>
-              <span class="vert-noshow-val ${noshowClass}">${s.noshow||0}%</span>
+          <div class="agent-card-funnel">
+            <div class="fstep vseg-mql">
+              <div class="fstep-label">MQL Recebidos</div>
+              <div class="fstep-val">${s.mql||0}</div>
+            </div>
+            ${farrow(conv1)}
+            <div class="fstep vseg-con">
+              <div class="fstep-label">Conectados</div>
+              <div class="fstep-val">${s.conectados||0}</div>
+            </div>
+            ${farrow(conv2)}
+            <div class="fstep vseg-aval">
+              <div class="fstep-label">Avaliados</div>
+              <div class="fstep-val">${s.avaliados||0}</div>
+            </div>
+            ${farrow(conv3)}
+            <div class="fstep vseg-agend">
+              <div class="fstep-label">R. Agendadas</div>
+              <div class="fstep-val">${s.r_agendadas||0}</div>
+            </div>
+            ${farrow(conv4)}
+            <div class="fstep vseg-rreal">
+              <div class="fstep-label">R. Realizadas</div>
+              <div class="fstep-val">${s.r_realizadas||0}</div>
             </div>
           </div>
         </div>`;
@@ -3020,74 +3020,57 @@
 
       const d = data;
       const vals = [d.total_leads||0, d.contato_ia||0, d.mql||0, d.conectados||0, d.avaliados||0, d.r_agendadas||0];
-      const total = vals.reduce((a,b)=>a+b, 0);
-      if (total === 0) {
-        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;align-self:center;padding:40px">Sem dados de SDR-IA para o periodo.</div>';
+      if (vals.reduce((a,b)=>a+b,0) === 0) {
+        chart.innerHTML = '<div style="color:var(--gray);font-family:\'IBM Plex Mono\',monospace;font-size:0.6rem;padding:20px">Sem dados de SDR-IA para o periodo.</div>';
         return;
       }
 
-      const maxVal = Math.max(...vals, 1);
-      const barH = 280;
-
-      const pcts = vals.map(v => total > 0 ? v / total * 100 : 0);
-
-      // convs
       const conv1 = vals[0] > 0 ? (vals[1]/vals[0]*100).toFixed(0) : '0';
       const conv2 = vals[1] > 0 ? (vals[2]/vals[1]*100).toFixed(0) : '0';
       const conv3 = vals[2] > 0 ? (vals[3]/vals[2]*100).toFixed(0) : '0';
       const conv4 = vals[3] > 0 ? (vals[4]/vals[3]*100).toFixed(0) : '0';
       const conv5 = vals[4] > 0 ? (vals[5]/vals[4]*100).toFixed(0) : '0';
-
       const noshowClass = (d.noshow||0) <= 20 ? 'ok' : (d.noshow||0) <= 40 ? 'warn' : 'bad';
 
-      const html = `<div class="vert-col">
-        <div class="vert-bar-wrap">
-          <div class="vert-bar" style="height:${barH}px">
-            <div class="vert-seg" style="height:${Math.max(pcts[5],2)}%;background:#1d6e64">
-              <span class="vert-seg-num">${vals[5]}</span>
-              <span class="vert-seg-pct">${pcts[5].toFixed(0)}%</span>
-            </div>
-            <div class="vert-seg" style="height:${Math.max(pcts[4],2)}%;background:var(--teal)">
-              <span class="vert-seg-num">${vals[4]}</span>
-              <span class="vert-seg-pct">${pcts[4].toFixed(0)}%</span>
-            </div>
-            <div class="vert-seg vseg-aval" style="height:${Math.max(pcts[3],2)}%">
-              <span class="vert-seg-num">${vals[3]}</span>
-              <span class="vert-seg-pct">${pcts[3].toFixed(0)}%</span>
-            </div>
-            <div class="vert-seg vseg-agend" style="height:${Math.max(pcts[2],2)}%">
-              <span class="vert-seg-num">${vals[2]}</span>
-              <span class="vert-seg-pct">${pcts[2].toFixed(0)}%</span>
-            </div>
-            <div class="vert-seg vseg-con" style="height:${Math.max(pcts[1],2)}%">
-              <span class="vert-seg-num">${vals[1]}</span>
-              <span class="vert-seg-pct">${pcts[1].toFixed(0)}%</span>
-            </div>
-            <div class="vert-seg vseg-mql" style="height:${Math.max(pcts[0],2)}%">
-              <span class="vert-seg-num">${vals[0]}</span>
-              <span class="vert-seg-pct">${pcts[0].toFixed(0)}%</span>
-            </div>
-          </div>
-          <div class="vert-conv-col">
-            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv5}%</span></div>
-            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv4}%</span></div>
-            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv3}%</span></div>
-            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv2}%</span></div>
-            <div class="vert-conv-badge teal"><span class="conv-arrow">+</span><span>${conv1}%</span></div>
-          </div>
+      chart.innerHTML = `<div class="agent-card">
+        <div class="agent-card-left">
+          <div class="agent-avatar-lg" style="border-color:var(--teal);color:var(--teal)">IA</div>
+          <div class="agent-card-name">SDR-IA</div>
+          <div class="agent-card-fat">${fmtInt(d.contato_ia)} contatos</div>
+          <div class="agent-card-noshow ${noshowClass}">No-show ${d.noshow||0}%</div>
         </div>
-        <div class="vert-agent-info">
-          <div class="vert-avatar" style="border-color:var(--teal)">IA</div>
-          <div class="vert-name">SDR-IA</div>
-          <div class="vert-fat">${fmtInt(d.contato_ia)} contatos</div>
-          <div class="vert-noshow">
-            <span class="vert-noshow-label">No-show</span>
-            <span class="vert-noshow-val ${noshowClass}">${d.noshow||0}%</span>
+        <div class="agent-card-funnel">
+          <div class="fstep vseg-mql">
+            <div class="fstep-label">Total Leads</div>
+            <div class="fstep-val">${vals[0]}</div>
+          </div>
+          ${farrow(conv1)}
+          <div class="fstep vseg-ia">
+            <div class="fstep-label">Contato IA</div>
+            <div class="fstep-val">${vals[1]}</div>
+          </div>
+          ${farrow(conv2)}
+          <div class="fstep vseg-con">
+            <div class="fstep-label">MQL</div>
+            <div class="fstep-val">${vals[2]}</div>
+          </div>
+          ${farrow(conv3)}
+          <div class="fstep vseg-aval">
+            <div class="fstep-label">Conectados</div>
+            <div class="fstep-val">${vals[3]}</div>
+          </div>
+          ${farrow(conv4)}
+          <div class="fstep vseg-agend">
+            <div class="fstep-label">Avaliados</div>
+            <div class="fstep-val">${vals[4]}</div>
+          </div>
+          ${farrow(conv5)}
+          <div class="fstep vseg-rreal">
+            <div class="fstep-label">R. Agendadas</div>
+            <div class="fstep-val">${vals[5]}</div>
           </div>
         </div>
       </div>`;
-
-      chart.innerHTML = html;
     }
 
     // ─── renderAQRC ──────────────────────────────────────────
