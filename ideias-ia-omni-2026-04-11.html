@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ideias de IA com Fit OMNI — 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
+
+  :root {
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --gold-soft: rgba(200,168,75,0.12);
+    --offwhite: #F5F0E8;
+    --text: #e8e8e8;
+    --muted: #888;
+    --green: #22c55e;
+    --green-soft: rgba(34,197,94,0.08);
+    --red: #ef4444;
+    --red-soft: rgba(239,68,68,0.08);
+    --orange: #f97316;
+    --orange-soft: rgba(249,115,22,0.08);
+    --blue: #3b82f6;
+    --blue-soft: rgba(59,130,246,0.08);
+    --purple: #a855f7;
+    --purple-soft: rgba(168,85,247,0.08);
+    --gray: #6B6B6B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ─── PASSWORD SCREEN ─── */
+  #password-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+  }
+  #password-screen .logo { font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  #password-screen .sub { font-size: 12px; letter-spacing: 3px; color: rgba(245,240,232,0.4); text-transform: uppercase; margin-bottom: 16px; }
+  #password-screen input {
+    background: var(--dark); border: 1px solid rgba(200,168,75,0.3); border-radius: 8px;
+    color: var(--offwhite); font-size: 16px; padding: 14px 24px; width: 280px; text-align: center;
+    outline: none; transition: border-color 0.2s;
+  }
+  #password-screen input:focus { border-color: var(--gold); }
+  #password-screen button {
+    background: var(--gold); color: var(--black); font-weight: 700; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 12px 40px; border: none;
+    border-radius: 8px; cursor: pointer; transition: background 0.2s;
+  }
+  #password-screen button:hover { background: var(--gold-light); }
+  #password-screen .error { color: var(--red); font-size: 13px; display: none; }
+
+  #content { display: none; }
+
+  /* ─── HEADER ─── */
+  .page-header {
+    position: sticky; top: 0; z-index: 100;
+    background: #050505; border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-header .logo-text { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  .page-header .page-label { font-size: 13px; color: rgba(245,240,232,0.5); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; padding: 80px 40px 60px; text-align: center; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; background: var(--gold-soft); border: 1px solid rgba(200,168,75,0.3);
+    color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px; color: var(--offwhite);
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle-italic {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+    font-size: 22px; color: rgba(245,240,232,0.7); margin-bottom: 24px;
+  }
+  .hero p { font-size: 14px; color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+  /* ─── LAYOUT ─── */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-bottom: 1px solid rgba(200,168,75,0.1); }
+  section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  h2 small { font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; display: block; margin-top: 6px; }
+  h3 {
+    font-size: 17px; font-weight: 700; color: var(--offwhite); margin: 32px 0 12px;
+    padding-bottom: 6px; border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+
+  p, li { font-size: 15px; line-height: 1.7; color: var(--text); }
+  p + p { margin-top: 12px; }
+  ul { padding-left: 20px; margin: 12px 0; }
+  li { margin: 6px 0; }
+
+  .gold { color: var(--gold); font-weight: 600; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .orange { color: var(--orange); }
+  .muted { color: var(--muted); }
+
+  /* ─── IDEIA CARD ─── */
+  .ideia {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 24px 0;
+    transition: border-color 0.2s;
+  }
+  .ideia:hover { border-color: rgba(200,168,75,0.3); }
+  .ideia.top { border-color: rgba(200,168,75,0.5); background: linear-gradient(135deg, rgba(200,168,75,0.04) 0%, transparent 100%); }
+  .ideia .codigo {
+    display: inline-block; font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--gold); background: var(--gold-soft);
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .ideia h3.titulo {
+    font-family: 'Oswald', sans-serif; font-size: 22px; letter-spacing: 1px;
+    color: var(--offwhite); margin: 0 0 16px; padding: 0; border: none; text-transform: uppercase;
+  }
+  .ideia .bloco { margin: 16px 0; }
+  .ideia .bloco .label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block;
+  }
+  .ideia .bloco p { font-size: 14px; color: var(--text); }
+  .ideia .exemplo {
+    border-left: 3px solid var(--gold);
+    background: rgba(200,168,75,0.04);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(245,240,232,0.85);
+  }
+  .ideia .exemplo::before {
+    content: 'EXEMPLO REAL';
+    display: block;
+    font-family: 'Inter', sans-serif; font-style: normal; font-size: 10px;
+    font-weight: 700; letter-spacing: 2px; color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* ─── TOP 3 ─── */
+  .top3-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 24px; }
+  .top3-card {
+    background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, rgba(200,168,75,0.01) 100%);
+    border: 2px solid rgba(200,168,75,0.4);
+    border-radius: 12px; padding: 32px;
+  }
+  .top3-card .rank {
+    display: inline-block; font-family: 'Oswald', sans-serif; font-size: 12px;
+    font-weight: 700; letter-spacing: 2px; color: var(--black); background: var(--gold);
+    padding: 6px 16px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .top3-card h3 {
+    font-family: 'Oswald', sans-serif; font-size: 24px; border: none; padding: 0;
+    margin: 0 0 12px; color: var(--offwhite); letter-spacing: 1px; text-transform: uppercase;
+  }
+  .top3-card .meta {
+    display: flex; gap: 24px; flex-wrap: wrap; margin: 16px 0;
+    padding: 16px 0; border-top: 1px solid rgba(200,168,75,0.15);
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+  .top3-card .meta .item { display: flex; flex-direction: column; gap: 2px; }
+  .top3-card .meta .item .k {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .top3-card .meta .item .v { font-size: 14px; color: var(--offwhite); font-weight: 600; }
+
+  /* ─── ALERTS ─── */
+  .alert {
+    border-left: 4px solid var(--orange);
+    background: var(--orange-soft);
+    padding: 16px 24px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+  .alert .label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 6px; display: block;
+  }
+  .alert p { font-size: 14px; color: var(--text); }
+
+  /* ─── INTRO BOX ─── */
+  .intro-box {
+    background: var(--dark); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px; margin: 16px 0;
+  }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    text-align: center; padding: 40px 24px; border-top: 1px solid rgba(200,168,75,0.1);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,240,232,0.25);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px 40px; }
+    .ideia { padding: 24px; }
+    .top3-card { padding: 24px; }
+    .top3-card .meta { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ PASSWORD SCREEN ═══════════ -->
+<div id="password-screen">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Documento Estrategico Confidencial</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeypress="if(event.key==='Enter')checkPwd()">
+  <button onclick="checkPwd()">ACESSAR</button>
+  <div class="error" id="pwd-error">Senha incorreta</div>
+</div>
+
+<!-- ═══════════ CONTENT ═══════════ -->
+<div id="content">
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="logo-text">OMNI BRASIL</div>
+  <div class="page-label">Ideias de IA // Abril 2026</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Alan Nicolas × Analyst // Pesquisa de Mercado</div>
+  <h1>IA COM FIT <span>OMNI</span></h1>
+  <div class="subtitle-italic">10 jogadas que quase ninguém está fazendo em 2026</div>
+  <p>Síntese de duas frentes de pesquisa — olhar criativo (Alan Nicolas) e análise de mercado rigorosa (Analyst) — sobre oportunidades de IA para alavancar o time interno da OMNI e gerar valor diferenciado para os clientes.</p>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ PANORAMA ═══════════ -->
+<section>
+  <h2>Panorama 2026 <small>O que mudou — e o que ninguém tá executando</small></h2>
+
+  <div class="intro-box">
+    <p>Gartner moveu GenAI pura para o <span class="gold">"Trough of Disillusionment"</span> — chatbot virou commodity. O dinheiro novo migrou para <span class="gold">AI agents</span> e <span class="gold">AI-ready data</span>. Sequoia e a16z convergem na tese: <strong>Vertical AI ataca a linha de "labor" do P&L</strong> (10x maior que a linha de IT).</p>
+
+    <p>Apenas <span class="gold">23%</span> das organizações escalaram sistemas agênticos e só <span class="gold">6%</span> extraem &gt;5% do EBIT de IA (McKinsey). O gap entre quem experimenta e quem captura valor real é gigantesco.</p>
+
+    <p>No Brasil: mercado digital de saúde saltará de <span class="gold">USD 12,4 bi (2025)</span> para <span class="gold">USD 44,6 bi (2034)</span>. IA em saúde BR cresce a <span class="gold">CAGR 46,22%</span>. Apesar disso, <strong>quase ninguém executando voice AI em português nativo para therapy/coaching, memory layers aplicados a educação transformacional, ou digital twins de experts em desenvolvimento humano</strong>. A janela está aberta.</p>
+
+    <p class="muted" style="font-size:13px;margin-top:16px;">Fontes: a16z, Sequoia, Gartner Hype Cycle 2025, McKinsey State of AI 2026, Brazil Digital Health Forecast.</p>
+  </div>
+</section>
+
+<!-- ═══════════ TOP 3 ═══════════ -->
+<section>
+  <h2>Top 3 Consolidado <small>Por onde começar — ordenado por impacto × viabilidade × tempo-para-valor</small></h2>
+
+  <div class="top3-grid">
+
+    <div class="top3-card">
+      <div class="rank">#1 — PRIORIDADE MÁXIMA</div>
+      <h3>Atlas da Voz + Mapa Vivo do Aluno</h3>
+      <p>As ideias <strong>B + A combinadas</strong>: a Prisma entrega áudios hipnóticos personalizados na sua voz, baseados no que o Mapa do Aluno sabe sobre bloqueios e crenças atuais daquele aluno específico. É o produto de continuidade que falta no ecossistema OMNI e o diferencial de formação que nenhum concorrente BR consegue copiar sem os seus dados.</p>
+      <div class="meta">
+        <div class="item"><span class="k">Tempo pra 1º valor</span><span class="v">60-90 dias</span></div>
+        <div class="item"><span class="k">Risco técnico</span><span class="v">Médio</span></div>
+        <div class="item"><span class="k">Monetização</span><span class="v">R$ 47-147/mês/aluno</span></div>
+        <div class="item"><span class="k">Uau factor</span><span class="v gold">5/5</span></div>
+      </div>
+      <p><strong>Primeiro passo (esta semana):</strong> clonar sua voz no ElevenLabs + rodar Claude nos exercícios da última turma pra gerar "mapa de crenças" manual. Testar em 5-10 alunos voluntários. Custo: ~R$ 100.</p>
+    </div>
+
+    <div class="top3-card">
+      <div class="rank">#2 — ALAVANCA OPERACIONAL</div>
+      <h3>Prisma 2.0 Agêntica</h3>
+      <p>Transformar a Prisma de <strong>ponte</strong> em <strong>doer</strong>: reengajamento de alunos frios, cobrança recorrente, qualificação de lead, agendamento automático, disparo de provas sociais. Alavanca infra que já existe (message-gateway, bots, AIOX squads). Reduz horas do time internas hoje e abre caminho pra virar <em>Prisma-as-a-Service</em> pra outros infoprodutores BR.</p>
+      <div class="meta">
+        <div class="item"><span class="k">Tempo pra 1º valor</span><span class="v">30-45 dias</span></div>
+        <div class="item"><span class="k">Risco técnico</span><span class="v">Médio</span></div>
+        <div class="item"><span class="k">Alavancagem</span><span class="v">6-10h/semana time</span></div>
+        <div class="item"><span class="k">Uau factor</span><span class="v gold">4/5</span></div>
+      </div>
+      <p><strong>Primeiro passo:</strong> listar as 3 operações repetitivas que mais consomem tempo do time. Transformar a Prisma de "avisa" pra "executa" cada uma.</p>
+    </div>
+
+    <div class="top3-card">
+      <div class="rank">#3 — MOAT COMPETITIVO</div>
+      <h3>Jerry — Digital Twin do Michael</h3>
+      <p>Treinar um twin com <strong>todo seu acervo</strong> (gravações, artigos, áudios, posts, decisões documentadas). Piloto fechado com 20-50 alunos premium como "tira-dúvidas 24/7 entre mentorias". Defende o ativo mais valioso da OMNI (método + autoridade). Concorrente pode copiar a tecnologia, mas <strong>não tem seus 10 anos de conteúdo</strong>.</p>
+      <div class="meta">
+        <div class="item"><span class="k">Tempo pra 1º valor</span><span class="v">90-120 dias</span></div>
+        <div class="item"><span class="k">Risco técnico</span><span class="v">Alto</span></div>
+        <div class="item"><span class="k">Monetização</span><span class="v">R$ 297-497/mês</span></div>
+        <div class="item"><span class="k">Uau factor</span><span class="v gold">5/5</span></div>
+      </div>
+      <p><strong>Primeiro passo:</strong> fazer inventário de todo o acervo (aulas, áudios, artigos, PDFs) — essa etapa resolve também a organização de dados que serve todas as outras ideias.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ CONVERGÊNCIAS ═══════════ -->
+<section>
+  <h2>Convergências <small>Onde Alan e Analyst bateram — sinal forte</small></h2>
+
+  <!-- IDEIA A -->
+  <div class="ideia top">
+    <span class="codigo">IDEIA A</span>
+    <h3 class="titulo">Memory Layer — Mapa do Aluno</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Hoje, quando um aluno entra na formação OMNI, o sistema "esquece" ele entre uma aula e outra. Cada interação é uma página em branco. A ideia é criar uma <strong>memória persistente</strong> — um perfil vivo que cresce a cada interação.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Como funciona</span>
+      <p>Toda vez que o aluno fala com a Prisma, escreve num exercício, manda áudio, responde um quiz — isso vira vetor num banco (pgvector/Mem0/Letta). Na aula 5, a Prisma já "lembra" do bloqueio que ele mencionou na aula 2. No final do curso, ele recebe um <strong>relatório visual</strong>: "veja como suas crenças mudaram entre o módulo 1 e o 8".</p>
+    </div>
+
+    <div class="exemplo">
+      Aluno diz no módulo 2: "não consigo me ver ganhando dinheiro sem sofrer". No módulo 6, ao fazer um exercício, ele escreve: "percebi que mereço receber bem". A IA cruza os dois momentos e entrega pro próprio aluno: "olha como você se transformou em 4 semanas". Isso vira prova social orgânica e senso de progresso tangível.
+    </div>
+
+    <div class="bloco">
+      <span class="label">O que muda</span>
+      <p><strong>Pra você:</strong> retenção altíssima (aluno sente que é visto).<br>
+      <strong>Pro cliente:</strong> experiência única, impossível de achar em outro curso.<br>
+      <strong>Pro time:</strong> mentoria fica 10x mais precisa — o mentor abre o perfil e já sabe onde o cara trava.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA B -->
+  <div class="ideia top">
+    <span class="codigo">IDEIA B</span>
+    <h3 class="titulo">Voice AI Hipnótica em PT-BR</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Clonar a sua voz (ou do terapeuta formador) no ElevenLabs e gerar <strong>áudios hipnóticos 100% personalizados</strong> pra cada aluno, com o nome dele, as crenças específicas dele, no ritmo certo de indução.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Por que ninguém fez ainda</span>
+      <p>As ferramentas globais são inglês-first. A velocidade de fala da hipnose é <span class="gold">~125 palavras/min</span> (vs. fala normal 150-180). Nenhuma voz TTS em português brasileiro calibra isso nativamente. Quem souber fazer, tem <strong>12-24 meses de vantagem</strong>.</p>
+    </div>
+
+    <div class="exemplo">
+      Maria entrou na formação, fez onboarding e falou que sofre com ansiedade social. Toda noite às 22h, a Prisma manda no WhatsApp um áudio de 8 minutos na sua voz, começando com "Maria, respire fundo...", abordando especificamente ansiedade social, com técnicas que você ensinou no módulo dela. No dia seguinte, ela pratica o que ouviu.
+    </div>
+
+    <div class="bloco">
+      <span class="label">O que muda</span>
+      <p><strong>Pra você:</strong> produto de continuidade recorrente (R$ 47-147/mês por aluno).<br>
+      <strong>Pro cliente:</strong> sensação de que o terapeuta está presente todos os dias.<br>
+      <strong>Interno:</strong> reduz custo de produção de material — você grava 1 voz, gera infinitos áudios.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA C -->
+  <div class="ideia top">
+    <span class="codigo">IDEIA C</span>
+    <h3 class="titulo">Prisma 2.0 Agêntica</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Hoje a Prisma <strong>manda mensagem</strong>. A ideia é ela <strong>executar tarefas</strong>. Sair do "mensageiro" e virar "agente que opera a empresa via WhatsApp".</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Fluxo real</span>
+      <ul>
+        <li><strong>Reengajamento de frio:</strong> Prisma detecta que Carlos não abre aula há 10 dias, manda áudio personalizado, oferece mentoria de 15min, e <strong>agenda no Google Calendar automaticamente</strong> quando ele aceita.</li>
+        <li><strong>Cobrança recorrente:</strong> cartão falhou? Prisma conversa, sugere outro meio, gera novo link, atualiza o CRM.</li>
+        <li><strong>Captura de prova social:</strong> aluna manda "mudou minha vida" no grupo. Prisma detecta, pede permissão educada, transforma em 3 versões de legenda + 1 script de vídeo + 1 template de carrossel, e manda pra aprovação no Slack do time de marketing.</li>
+        <li><strong>Qualificação de lead novo:</strong> lead chega, Prisma conversa 4 mensagens, classifica perfil, marca no CRM e passa pro closer certo.</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <span class="label">O que muda</span>
+      <p>Economia real de ~<span class="gold">6-10h/semana</span> de time operacional. Começa interno, depois vira produto SaaS (Prisma-as-a-Service) pra outros infoprodutores.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA D -->
+  <div class="ideia top">
+    <span class="codigo">IDEIA D</span>
+    <h3 class="titulo">Companion IA entre Sessões</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Um agente que fica 24/7 disponível pros alunos/pacientes <strong>entre as sessões</strong> com o terapeuta humano. <strong>Não faz terapia</strong> — faz <strong>contenção, ancoragem e escalonamento</strong>.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Diferença crítica</span>
+      <p>Não substitui o terapeuta. É o "cara que te segura às 3h da manhã quando bate a crise" e que <strong>avisa o terapeuta humano</strong> quando detecta algo sério.</p>
+    </div>
+
+    <div class="exemplo">
+      2h da manhã, aluna manda: "tô tendo crise de ansiedade de novo". O agente abre um protocolo de ancoragem (respiração, 5-4-3-2-1, técnica que foi trabalhada na última sessão dela), conversa 10-15 minutos, e se detecta sinais de risco, escala imediatamente pro terapeuta humano de plantão. Registra tudo no perfil (alimenta o Memory Layer — ideia A). Na próxima sessão, o terapeuta já abre a tela e sabe o que aconteceu.
+    </div>
+
+    <div class="alert">
+      <span class="label">⚠ Alerta regulatório</span>
+      <p>CFP tem posição dura sobre IA em terapia. <strong>Precisa consulta jurídica antes de MVP público.</strong> Pode começar só pra alunos em formação (interno), não pra clientes finais.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ APOSTAS ISOLADAS ═══════════ -->
+<section>
+  <h2>Apostas Isoladas <small>Insights únicos que não convergiram — mas valem</small></h2>
+
+  <!-- IDEIA E -->
+  <div class="ideia">
+    <span class="codigo">IDEIA E</span>
+    <h3 class="titulo">Diagnóstico via Análise de Escrita</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Quando um lead responde sua primeira mensagem no WhatsApp, um modelo analisa <strong>como ele escreve</strong>: extensão das frases, vocabulário emocional, uso de negações, tempo verbal, referências a si mesmo. Infere perfil psicológico de forma <strong>invisível</strong> — sem precisar fazer 10 perguntas de qualificação.</p>
+    </div>
+
+    <div class="exemplo">
+      Lead A escreve: "oi... queria saber sobre o curso... acho que não é pra mim mas... sei lá"<br>
+      Lead B escreve: "Quero mudar minha vida agora. Me manda tudo sobre a formação."<br><br>
+      O sistema lê: A = perfil resistente/autossabotador, abordagem consultiva. B = perfil ativador, abordagem direta e com urgência. A mesma Prisma responde os dois de forma diferente, e o closer também.
+    </div>
+
+    <div class="bloco">
+      <span class="label">Custo de validação</span>
+      <p><span class="green">Zero.</span> Pega 100 conversas antigas de leads, roda no Claude, compara quem comprou vs. quem não — vê se os padrões batem.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA F -->
+  <div class="ideia">
+    <span class="codigo">IDEIA F</span>
+    <h3 class="titulo">Sessão Hipnótica Adaptativa</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Hoje, áudio de hipnose é linear — roda do começo ao fim, igual pra todo mundo. A ideia é a sessão <strong>se adaptar</strong> conforme o aluno responde.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Fluxo real</span>
+      <ul>
+        <li>Minuto 0: Prisma manda o primeiro segmento (indução, 3 min)</li>
+        <li>Minuto 3: "De 1 a 5, o quanto você se sente relaxado agora?" → aluno responde 2</li>
+        <li>A IA escolhe o próximo segmento: "versão de aprofundamento extra"</li>
+        <li>Minuto 8: "algum lugar do corpo pede atenção?" → aluno responde "nuca"</li>
+        <li>Próximo segmento adapta a sugestão pra trabalhar tensão na nuca</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Por que é diferente</span>
+      <p>Todo app de meditação/hipnose hoje é "play e esquece". Aqui, a sessão <strong>é uma conversa estruturada</strong>. Cria sensação de presença real.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA G -->
+  <div class="ideia">
+    <span class="codigo">IDEIA G</span>
+    <h3 class="titulo">Espelho de Objeções — Treino de Vendas</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Pegar as <strong>conversas reais de vendas</strong> do seu WhatsApp dos últimos meses, extrair as 10 objeções mais frequentes, e construir um <strong>agente de roleplay</strong> que simula cliente real pra treinar o time.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Diferença</span>
+      <p>Não é "LLM genérico fingindo ser cliente". É <strong>cliente baseado em dados reais da OMNI</strong> — as objeções que realmente aparecem, com o tom que realmente aparece.</p>
+    </div>
+
+    <div class="exemplo">
+      Vendedor novo entra, faz 5 role-plays contra o agente (cada um com arquétipo diferente: "cético", "comprador serial de curso", "mãe com medo"). O agente grava, transcreve, devolve score com rubrica customizada — "você não tratou a objeção X, seu tom ficou defensivo no minuto 3, aqui está o que um closer sênior teria dito". Reduz rampa de 3 meses pra 3 semanas.
+    </div>
+  </div>
+
+  <!-- IDEIA H -->
+  <div class="ideia">
+    <span class="codigo">IDEIA H</span>
+    <h3 class="titulo">Jerry — Digital Twin do Michael</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Treinar um modelo com <strong>tudo que você já produziu</strong> — aulas gravadas, artigos, áudios no WhatsApp, posts, decisões documentadas — pra criar um "Michael digital" que responde na sua voz, com seu método, sua linguagem.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Como entregar</span>
+      <ul>
+        <li>Produto premium fechado: 20-50 alunos pagando R$ 297-497/mês</li>
+        <li>Acesso 24/7 via WhatsApp: "Jerry, tô travado com um cliente que X, como você resolveria?"</li>
+        <li>O twin responde com seu método, suas histórias, seu jeito</li>
+        <li>Quando detecta pergunta fora do escopo → escala pra você de verdade</li>
+      </ul>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Por que é defensável</span>
+      <p>Concorrente pode copiar a tecnologia, mas <strong>não tem seus 10 anos de conteúdo</strong>. Moat competitivo real.</p>
+    </div>
+  </div>
+
+  <!-- IDEIA I -->
+  <div class="ideia">
+    <span class="codigo">IDEIA I</span>
+    <h3 class="titulo">Vocal Biomarkers pra Rede de Formados</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>A voz humana carrega sinais de humor, ansiedade e ativação fisiológica que o ouvido humano não capta, mas IA capta. Empresas como <strong>Kintsugi</strong> e <strong>Hume AI</strong> já têm API pra isso.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">O produto OMNI</span>
+      <p>Cada terapeuta formado pela OMNI recebe uma ferramenta onde <strong>o cliente dele grava 60s de áudio antes da sessão</strong>. A IA analisa e entrega um dashboard pré-sessão pro terapeuta: "ansiedade elevada hoje, humor 30% abaixo da média, ativação autonômica alta".</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Por que é poderoso</span>
+      <ul>
+        <li>Vira produto B2B recorrente pra <strong>rede de formados</strong> — cada terapeuta paga R$ 97-197/mês</li>
+        <li>Transforma alunos formados em <strong>clientes vitalícios da OMNI</strong></li>
+        <li>Diferencial gigante na venda da formação</li>
+      </ul>
+    </div>
+
+    <div class="alert">
+      <span class="label">⚠ Alerta</span>
+      <p>Precisa parecer jurídico (CFP), parceria técnica (Hume AI / Kintsugi), e posicionamento cuidadoso ("auxílio pré-sessão", não "diagnóstico").</p>
+    </div>
+  </div>
+
+  <!-- IDEIA J -->
+  <div class="ideia">
+    <span class="codigo">IDEIA J</span>
+    <h3 class="titulo">OMNI Formation OS — AIOX como SaaS</h3>
+
+    <div class="bloco">
+      <span class="label">O que é na prática</span>
+      <p>Você <strong>já tem</strong> rodando internamente os squads AIOX (copy, ads, dev, design, qa, etc.) operando a OMNI. A ideia é <strong>empacotar isso como produto</strong> pra outros formadores/infoprodutores brasileiros.</p>
+    </div>
+
+    <div class="bloco">
+      <span class="label">Lógica</span>
+      <ul>
+        <li>Dogfood primeiro (você já faz isso)</li>
+        <li>Quando amadurecer, vira SaaS</li>
+        <li>Mercado = todo infoprodutor BR (Hotmart tem 500k+ produtores)</li>
+        <li>Sequoia aposta em multi-agent systems verticais como a próxima onda de SaaS</li>
+      </ul>
+    </div>
+
+    <div class="exemplo">
+      "Plug o OMNI Formation OS no seu negócio e ganhe um time completo de IA: copy, tráfego, design, operação, atendimento — tudo rodando na sua marca, no seu método, 24/7."
+    </div>
+
+    <div class="alert">
+      <span class="label">⚠ Complexidade</span>
+      <p>Produto é complexo. Exige time de suporte. Por isso é movimento #3-4, não o primeiro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ALERTAS FINAIS ═══════════ -->
+<section>
+  <h2>Alertas Honestos <small>O que o Analyst (Jerry-mode) puxou e você não pode ignorar</small></h2>
+
+  <div class="alert">
+    <span class="label">Regulatório</span>
+    <p><strong>CFP/CFM olha com lupa</strong> qualquer coisa que cheire a "IA fazendo terapia". Ideias D, I e similares precisam de parecer jurídico antes de MVP público.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">Reputacional</span>
+    <p><strong>Voice cloning + método clínico tem risco reputacional.</strong> Um áudio hipnótico mal gerado viraliza mal. Guardrails não são opcionais.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">Timing</span>
+    <p><strong>Janela de 12-24 meses não é infinita.</strong> Player internacional com capital vai chegar. O moat OMNI é: método proprietário + base instalada BR + AIOX já rodando. Use antes que vire commodity.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">Validação técnica</span>
+    <p>Essa é pesquisa de mercado, não validação técnica na stack OMNI. Antes de commitar qualquer uma, passar pelo <strong>@architect (Aria)</strong> pra avaliar fit técnico, e <strong>@pm (Morgan)</strong> pra virar PRD.</p>
+  </div>
+</section>
+
+<!-- ═══════════ PRÓXIMO PASSO ═══════════ -->
+<section>
+  <h2>Próximo Passo</h2>
+  <div class="intro-box">
+    <p>Qual dessas ideias vira <strong>plano de execução (PRD com escopo, stack, fases, métricas)</strong> primeiro?</p>
+    <p class="muted" style="font-size:13px;margin-top:12px;">Pode ser uma, duas ou as três do Top. Próxima fase: chamar <span class="gold">@pm (Morgan)</span> ou <span class="gold">@architect (Aria)</span> pra transformar em documento executável.</p>
+  </div>
+</section>
+
+</div><!-- container -->
+
+<div class="page-footer">
+  Alan Nicolas × Analyst // OMNI Brasil // 11 de Abril de 2026 // Confidencial
+</div>
+
+</div><!-- content -->
+
+<script>
+function checkPwd(){
+  var p=document.getElementById('pwd').value;
+  if(p==='omni777'){
+    document.getElementById('password-screen').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd').value='';
+    setTimeout(function(){document.getElementById('pwd-error').style.display='none';},2000);
+  }
+}
+</script>
+</body>
+</html>
