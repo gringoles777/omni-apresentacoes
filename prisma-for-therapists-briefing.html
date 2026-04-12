@@ -340,6 +340,7 @@
   <ol>
     <li><a href="#contexto">Contexto Estrategico — Por que essa feature existe</a></li>
     <li><a href="#produto">O que e o Prisma for Therapists</a></li>
+    <li><a href="#sdr">SDR Passivo — Triagem e Qualificacao de Leads</a></li>
     <li><a href="#fluxos">Fluxos na Pratica (como o terapeuta e o cliente usam)</a></li>
     <li><a href="#whitelabel">White Label — Como funciona por tras</a></li>
     <li><a href="#personalizacao">Personalizacao por Terapeuta</a></li>
@@ -350,6 +351,7 @@
     <li><a href="#mvp">MVP — Plano de 3 Semanas</a></li>
     <li><a href="#riscos">Riscos e Mitigacoes</a></li>
     <li><a href="#custos">Custos de Infra</a></li>
+    <li>Resumo Final</li>
   </ol>
 </nav>
 
@@ -365,12 +367,13 @@
 
   <h3>O argumento de venda</h3>
   <blockquote>
-    "Na Black Mentoring, voce nao sai so com conhecimento — sai com um consultorio inteligente. Sua secretaria virtual atende seus clientes pelo WhatsApp 24/7, sua IA analisa o estado emocional do paciente antes de cada sessao, e seu dashboard mostra a evolucao real de cada cliente ao longo do tratamento. Nenhum hipnoterapeuta no Brasil tem isso."
+    "Na Black Mentoring, voce nao sai so com conhecimento — sai com um consultorio inteligente. Seu WhatsApp ganha uma IA que qualifica leads automaticamente, agenda sessoes, analisa o estado emocional do paciente antes de cada atendimento, e mostra a evolucao real de cada cliente no seu painel. Nenhum hipnoterapeuta no Brasil tem isso."
   </blockquote>
 
   <h3>O que muda pra quem decide comprar a Black</h3>
   <table>
     <tr><th>Sem Prisma</th><th>Com Prisma (Black)</th></tr>
+    <tr><td>Lead manda mensagem e fica sem resposta</td><td>Bot qualifica o lead em 3 minutos e agenda se tiver fit</td></tr>
     <tr><td>Terapeuta atende WhatsApp manualmente</td><td>Bot atende, agenda, confirma, remarca 24/7</td></tr>
     <tr><td>Nao tem dados sobre estado emocional pre-sessao</td><td>Recebe leitura emocional automatica antes de cada sessao</td></tr>
     <tr><td>Nao consegue provar resultado pro cliente</td><td>Dashboard mostra evolucao emocional ao longo de semanas</td></tr>
@@ -386,13 +389,19 @@
 
 <!-- ═══════════ 2. O PRODUTO ═══════════ -->
 <section id="produto">
-  <h2>2. O que e o Prisma for Therapists <small>Tres capacidades empilhadas</small></h2>
+  <h2>2. O que e o Prisma for Therapists <small>Quatro capacidades empilhadas</small></h2>
 
-  <div class="grid-3">
+  <div class="grid-2">
+    <div class="box" style="border-color: rgba(168,85,247,0.4); background: linear-gradient(135deg, rgba(168,85,247,0.04) 0%, transparent 100%);">
+      <span class="tag purple">Camada 0 — Porta de entrada</span>
+      <h4>SDR Passivo (Triagem)</h4>
+      <p>Quando um <strong>lead novo</strong> manda mensagem pro numero do terapeuta (viu no Instagram, Google, indicacao), o bot faz a <strong>triagem e qualificacao automatica</strong>. Entende a dor, o perfil e a urgencia. Se tiver fit, passa pra secretaria agendar. Se nao tiver, responde educadamente.</p>
+      <p class="muted" style="font-size:13px;margin-top:8px;">O terapeuta so fala com lead qualificado. O bot filtra o resto.</p>
+    </div>
     <div class="box">
       <span class="tag">Camada 1</span>
       <h4>Secretaria Virtual</h4>
-      <p>Bot no WhatsApp <strong>do proprio terapeuta</strong> que responde clientes, agenda sessoes, confirma, remarca, envia lembretes e reengaja quem sumiu.</p>
+      <p>Depois que o lead foi qualificado e virou cliente, a secretaria assume: agenda sessoes, confirma, remarca, envia lembretes e reengaja quem sumiu.</p>
       <p class="muted" style="font-size:13px;margin-top:8px;">Funciona 24/7. O cliente acha que esta falando com a secretaria do terapeuta.</p>
     </div>
     <div class="box">
@@ -410,14 +419,194 @@
   </div>
 
   <div class="box gold-border" style="margin-top:24px;">
-    <span class="tag">Resumo em uma frase</span>
-    <p style="font-size:18px;"><strong>Um unico bot no WhatsApp do terapeuta que faz secretaria + leitura emocional + acompanhamento, com tudo visivel num dashboard dentro do portal ONNIterapeuta.</strong></p>
+    <span class="tag">Jornada completa em uma frase</span>
+    <p style="font-size:18px;"><strong>Lead chega no WhatsApp do terapeuta → bot qualifica (SDR) → se tem fit, secretaria agenda → antes da sessao, pede audio emocional → terapeuta ve tudo no dashboard. Tudo automatico, tudo no numero dele.</strong></p>
   </div>
 </section>
 
-<!-- ═══════════ 3. FLUXOS ═══════════ -->
+<!-- ═══════════ 2.5 SDR PASSIVO ═══════════ -->
+<section id="sdr">
+  <h2>3. SDR Passivo <small>Triagem e qualificacao automatica de leads</small></h2>
+
+  <div class="box" style="border-color: rgba(168,85,247,0.4); background: linear-gradient(135deg, rgba(168,85,247,0.04) 0%, transparent 100%);">
+    <span class="tag purple">O que e</span>
+    <p>Quando alguem <strong>que nao e cliente</strong> manda mensagem pro numero do terapeuta (viu no Instagram, achou no Google, recebeu indicacao), o bot nao agenda direto. Ele faz uma <strong>conversa de triagem</strong> primeiro — entende quem e a pessoa, qual a dor, e se tem fit pro trabalho do terapeuta.</p>
+    <p style="margin-top:12px;">Se tiver fit → passa pra <strong>secretaria agendar</strong>.<br>
+    Se nao tiver fit → responde educadamente e, se fizer sentido, indica outro caminho.</p>
+    <p style="margin-top:12px;"><strong>O terapeuta nunca fala com lead frio. So recebe quem ja foi filtrado.</strong></p>
+  </div>
+
+  <h3>Como funciona a triagem</h3>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="num">1</div>
+      <div class="content">
+        <div class="step-title">Lead manda primeira mensagem</div>
+        <p>Bot detecta que e um numero novo (nao esta cadastrado como cliente). Ativa modo SDR.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">2</div>
+      <div class="content">
+        <div class="step-title">Bot faz conversa de qualificacao (3-5 mensagens)</div>
+        <p>Conversa natural, no tom configurado pelo terapeuta. Faz perguntas como:</p>
+        <ul style="margin-top:8px;">
+          <li>"Como voce me encontrou?"</li>
+          <li>"O que voce ta buscando nesse momento?"</li>
+          <li>"Voce ja fez algum tipo de terapia antes?"</li>
+          <li>"Tem alguma urgencia ou pode aguardar uns dias pra primeira sessao?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">3</div>
+      <div class="content">
+        <div class="step-title">Bot classifica o lead</div>
+        <p>Com base nas respostas, classifica em:</p>
+        <table style="margin-top:8px;">
+          <tr><th>Classificacao</th><th>O que acontece</th></tr>
+          <tr><td><span class="green">Qualificado</span></td><td>Bot transiciona pra modo secretaria: "Que otimo! Vou verificar a agenda do(a) {terapeuta} pra voce..."</td></tr>
+          <tr><td><span class="orange">Incerto</span></td><td>Bot faz mais 1-2 perguntas pra clarear, ou oferece: "Quer que eu peca pro(a) {terapeuta} te ligue pra conversar antes?"</td></tr>
+          <tr><td><span class="red">Sem fit</span></td><td>Bot responde com educacao: "Entendo! Pelo que voce me contou, talvez um {outro tipo de profissional} seja mais indicado. Posso te mandar uma indicacao?"</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">4</div>
+      <div class="content">
+        <div class="step-title">Terapeuta recebe notificacao do lead qualificado</div>
+        <p>No dashboard (e opcionalmente no WhatsApp), o terapeuta ve:</p>
+        <ul style="margin-top:8px;">
+          <li>Nome do lead</li>
+          <li>Resumo da triagem (dor, contexto, urgencia)</li>
+          <li>Classificacao (qualificado/incerto)</li>
+          <li>Sessao ja agendada (se qualificado)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3>Exemplo real no WhatsApp</h3>
+
+  <div class="wpp-mock">
+    <div class="wpp-header">WhatsApp do Dr. Joao — numero novo (lead)</div>
+    <div class="wpp-bubble incoming">
+      Oi, vi seu perfil no Instagram. Voce atende online?
+      <div class="time">14:32</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia (assistente do Dr. Joao)</div>
+      Oi! Que bom que voce chegou aqui. Sim, o Dr. Joao atende online e presencial. Me conta um pouquinho: o que voce ta buscando nesse momento?
+      <div class="time">14:32</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      To com muita ansiedade, nao consigo dormir direito faz umas semanas. Uma amiga fez hipnose com ele e indicou
+      <div class="time">14:34</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia</div>
+      Entendo, obrigada por compartilhar. A hipnoterapia e muito eficaz pra ansiedade e insonia, o Dr. Joao trabalha bastante com isso. Mais uma pergunta: voce ja fez algum tipo de terapia ou acompanhamento antes?
+      <div class="time">14:34</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      Fiz psicologia por 1 ano mas parei. Nunca fiz hipnose
+      <div class="time">14:35</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia</div>
+      Perfeito! Pelo que voce me contou, faz total sentido uma conversa com o Dr. Joao. Vou verificar a agenda dele... Ele tem disponivel quinta as 15h ou sexta as 10h. Qual fica melhor pra voce?
+      <div class="time">14:35</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      Quinta as 15h
+      <div class="time">14:36</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia</div>
+      Agendado! Quinta as 15h com o Dr. Joao, online. Vou te enviar o link na vespera. Qual seu nome completo?
+      <div class="time">14:36</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;"><strong>O que o Dr. Joao recebe no dashboard:</strong></p>
+
+  <div class="dash-mock">
+    <div class="dash-header">
+      <div class="name">Novo lead qualificado</div>
+      <div class="status" style="color:var(--green);">Sessao agendada</div>
+    </div>
+    <div class="dash-row"><div class="k">Nome</div><div class="v">Camila (sobrenome pendente)</div></div>
+    <div class="dash-row"><div class="k">Origem</div><div class="v">Instagram (indicacao de amiga)</div></div>
+    <div class="dash-row"><div class="k">Queixa principal</div><div class="v">Ansiedade + insonia (~semanas)</div></div>
+    <div class="dash-row"><div class="k">Historico</div><div class="v">1 ano de psicologia, primeira vez com hipnose</div></div>
+    <div class="dash-row"><div class="k">Sessao</div><div class="v">Quinta 15h — online</div></div>
+    <div class="dash-row"><div class="k">Classificacao</div><div class="v" style="color:var(--green);">Qualificado</div></div>
+  </div>
+
+  <p class="muted" style="font-size:13px;margin-top:12px;">O Dr. Joao nao gastou 1 minuto nessa interacao. Quando abrir a agenda de quinta, ja sabe quem e a Camila, o que ela tem e que nunca fez hipnose.</p>
+
+  <h3>O que o terapeuta configura no portal (SDR)</h3>
+
+  <table>
+    <tr><th>Config</th><th>Opcoes</th><th>Default</th></tr>
+    <tr><td>Perguntas de triagem</td><td>Lista editavel (ate 5 perguntas)</td><td>3 perguntas padrao (dor, historico, urgencia)</td></tr>
+    <tr><td>Criterios de qualificacao</td><td>Checkboxes (ex: "ja fez terapia", "tem queixa clinica", "indicacao")</td><td>Qualquer queixa clinica = qualificado</td></tr>
+    <tr><td>Mensagem de sem-fit</td><td>Texto personalizado</td><td>"Pelo que voce me contou, talvez um {tipo} seja mais indicado"</td></tr>
+    <tr><td>Notificar terapeuta</td><td>Sempre / So qualificado / Nunca</td><td>So qualificado</td></tr>
+    <tr><td>Agendar direto se qualificado</td><td>Sim / Nao (so notificar)</td><td>Sim</td></tr>
+  </table>
+
+  <div class="alert info">
+    <span class="label">Diferenca entre SDR ativo e passivo</span>
+    <p><strong>SDR ativo</strong> = bot sai procurando leads, manda mensagem pra quem nao pediu (outbound). NAO e isso.<br>
+    <strong>SDR passivo</strong> = lead chega por conta propria (viu post, recebeu indicacao, achou no Google) e o bot faz a triagem. E um <strong>filtro inteligente</strong> na porta de entrada — nao um vendedor.</p>
+  </div>
+
+  <h3>Jornada completa do lead ate virar cliente</h3>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="num" style="background:var(--purple-soft);border-color:rgba(168,85,247,0.4);color:var(--purple);">1</div>
+      <div class="content">
+        <div class="step-title">Lead manda mensagem</div>
+        <p><strong>SDR passivo</strong> qualifica em 3-5 mensagens</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">2</div>
+      <div class="content">
+        <div class="step-title">Lead qualificado</div>
+        <p><strong>Secretaria</strong> assume: agenda primeira sessao</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num" style="background:var(--blue-soft);border-color:rgba(59,130,246,0.4);color:var(--blue);">3</div>
+      <div class="content">
+        <div class="step-title">Vespera da sessao</div>
+        <p><strong>Leitura emocional</strong>: bot pede audio de 1 min, analisa com Hume AI</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num" style="background:var(--green-soft);border-color:rgba(34,197,94,0.4);color:var(--green);">4</div>
+      <div class="content">
+        <div class="step-title">Terapeuta atende</div>
+        <p><strong>Dashboard</strong> mostra: quem e o cliente, dor, historico, leitura emocional</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num" style="background:var(--green-soft);border-color:rgba(34,197,94,0.4);color:var(--green);">5</div>
+      <div class="content">
+        <div class="step-title">Pos-sessao e continuidade</div>
+        <p><strong>Secretaria</strong> agenda proxima sessao, <strong>leitura emocional</strong> acompanha evolucao ao longo das semanas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. FLUXOS ═══════════ -->
 <section id="fluxos">
-  <h2>3. Fluxos na Pratica <small>Como o terapeuta e o cliente realmente usam</small></h2>
+  <h2>4. Fluxos na Pratica <small>Como o terapeuta e o cliente realmente usam</small></h2>
 
   <h3>Fluxo A — Secretaria Virtual (dia a dia)</h3>
 
@@ -511,7 +700,7 @@
 
 <!-- ═══════════ 4. WHITE LABEL ═══════════ -->
 <section id="whitelabel">
-  <h2>4. White Label <small>O terapeuta nunca ve a infra por tras</small></h2>
+  <h2>5. White Label <small>O terapeuta nunca ve a infra por tras</small></h2>
 
   <div class="box gold-border">
     <span class="tag">Principio fundamental</span>
@@ -597,7 +786,7 @@
 
 <!-- ═══════════ 5. PERSONALIZACAO ═══════════ -->
 <section id="personalizacao">
-  <h2>5. Personalizacao por Terapeuta <small>Cada um configura o "jeito" da secretaria dele</small></h2>
+  <h2>6. Personalizacao por Terapeuta <small>Cada um configura o "jeito" da secretaria dele</small></h2>
 
   <p>Um unico bot (mesma logica, mesmo codigo) atende todos os terapeutas. A diferenca e que ele <strong>carrega o perfil de cada terapeuta</strong> antes de responder. Funciona assim:</p>
 
@@ -676,7 +865,7 @@
 
 <!-- ═══════════ 6. LEITURA EMOCIONAL ═══════════ -->
 <section id="emocional">
-  <h2>6. Leitura Emocional por Voz <small>Hume AI — como funciona</small></h2>
+  <h2>7. Leitura Emocional por Voz <small>Hume AI — como funciona</small></h2>
 
   <h3>O que e o Hume AI</h3>
   <p>Hume AI e uma API que analisa <strong>caracteristicas acusticas da voz humana</strong> — tom, ritmo, energia, pausas, variacao de pitch — e retorna scores de 48 emocoes diferentes. Nao analisa o que a pessoa <strong>diz</strong> (semantica), mas <strong>como</strong> ela diz (prosody).</p>
@@ -765,7 +954,7 @@
 
 <!-- ═══════════ 7. DASHBOARD ═══════════ -->
 <section id="dashboard">
-  <h2>7. Dashboard do Terapeuta <small>Dentro do portal ONNIterapeuta</small></h2>
+  <h2>8. Dashboard do Terapeuta <small>Dentro do portal ONNIterapeuta</small></h2>
 
   <p>Nao e um app separado. E uma <strong>aba ou modulo</strong> dentro do portal que a Julia ja esta desenvolvendo. So aparece pra quem tem plano Black ativo.</p>
 
@@ -829,7 +1018,7 @@
 
 <!-- ═══════════ 8. ARQUITETURA ═══════════ -->
 <section id="arquitetura">
-  <h2>8. Arquitetura Tecnica <small>Como as pecas se conectam</small></h2>
+  <h2>9. Arquitetura Tecnica <small>Como as pecas se conectam</small></h2>
 
   <div class="code-block"><span class="comment">// DIAGRAMA DE FLUXO COMPLETO</span>
 
@@ -888,7 +1077,7 @@ SUPABASE (mensagens, clientes, config)                   terapeuta ve tudo aqui
 
 <!-- ═══════════ 9. BANCO ═══════════ -->
 <section id="banco">
-  <h2>9. Schema de Banco de Dados <small>Supabase — tabelas principais</small></h2>
+  <h2>10. Schema de Banco de Dados <small>Supabase — tabelas principais</small></h2>
 
   <div class="code-block"><span class="comment">-- Terapeutas (mentorandos Black com Prisma ativo)</span>
 <span class="keyword">CREATE TABLE</span> therapists (
@@ -998,7 +1187,7 @@ ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
 <!-- ═══════════ 10. MVP ═══════════ -->
 <section id="mvp">
-  <h2>10. MVP — Plano de 3 Semanas <small>O minimo pra validar com 3 terapeutas</small></h2>
+  <h2>11. MVP — Plano de 3 Semanas <small>O minimo pra validar com 3 terapeutas</small></h2>
 
   <div class="box gold-border">
     <span class="tag">Objetivo do MVP</span>
@@ -1058,7 +1247,7 @@ ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
 <!-- ═══════════ 11. RISCOS ═══════════ -->
 <section id="riscos">
-  <h2>11. Riscos e Mitigacoes</h2>
+  <h2>12. Riscos e Mitigacoes</h2>
 
   <div class="alert">
     <span class="label">LGPD — Dados sensiveis de saude</span>
@@ -1088,7 +1277,7 @@ ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
 <!-- ═══════════ 12. CUSTOS ═══════════ -->
 <section id="custos">
-  <h2>12. Custos de Infra <small>Quanto custa rodar pra 80 mentorandos Black</small></h2>
+  <h2>13. Custos de Infra <small>Quanto custa rodar pra 80 mentorandos Black</small></h2>
 
   <table>
     <tr><th>Item</th><th>Custo mensal</th><th>Notas</th></tr>
@@ -1112,8 +1301,9 @@ ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
   <h2>Resumo Final</h2>
 
   <div class="box gold-border">
-    <p><strong>O que e:</strong> Modulo no portal ONNIterapeuta que da ao terapeuta Black uma secretaria virtual no WhatsApp dele + leitura emocional por IA + dashboard com evolucao de clientes.</p>
+    <p><strong>O que e:</strong> Modulo no portal ONNIterapeuta que da ao terapeuta Black um SDR passivo que qualifica leads + secretaria virtual no WhatsApp dele + leitura emocional por IA + dashboard com evolucao de clientes.</p>
     <p style="margin-top:8px;"><strong>Pra que:</strong> Aumentar valor percebido do high ticket Black Mentoring (R$ 39.900). Nenhum formador no Brasil oferece isso.</p>
+    <p style="margin-top:8px;"><strong>Jornada:</strong> Lead chega no WhatsApp → SDR qualifica → secretaria agenda → leitura emocional pre-sessao → terapeuta ve tudo no dashboard. Tudo automatico.</p>
     <p style="margin-top:8px;"><strong>Como:</strong> Evolution API (ja temos) + Hume AI (API REST, $0,064/min) + Supabase (ja temos) + modulo no portal que a Julia ja esta desenvolvendo.</p>
     <p style="margin-top:8px;"><strong>Custo:</strong> ~R$ 2.300/mes pra 80 terapeutas. 0,86% da receita Black.</p>
     <p style="margin-top:8px;"><strong>MVP:</strong> 3 semanas, 3 terapeutas, R$ 275 de custo.</p>
