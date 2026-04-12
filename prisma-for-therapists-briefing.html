@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prisma for Therapists — Briefing Tecnico // Julia</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap');
+
+  :root {
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --border: #2a2a2a;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-soft: rgba(200,168,75,0.12);
+    --offwhite: #F5F0E8;
+    --text: #e8e8e8;
+    --muted: #888;
+    --green: #22c55e;
+    --green-soft: rgba(34,197,94,0.08);
+    --red: #ef4444;
+    --orange: #f97316;
+    --orange-soft: rgba(249,115,22,0.08);
+    --blue: #3b82f6;
+    --blue-soft: rgba(59,130,246,0.08);
+    --purple: #a855f7;
+    --purple-soft: rgba(168,85,247,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* PASSWORD */
+  #password-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 20px;
+  }
+  #password-screen .logo { font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  #password-screen .sub { font-size: 12px; letter-spacing: 3px; color: rgba(245,240,232,0.4); text-transform: uppercase; margin-bottom: 16px; }
+  #password-screen input {
+    background: var(--dark); border: 1px solid rgba(200,168,75,0.3); border-radius: 8px;
+    color: var(--offwhite); font-size: 16px; padding: 14px 24px; width: 280px; text-align: center;
+    outline: none; transition: border-color 0.2s;
+  }
+  #password-screen input:focus { border-color: var(--gold); }
+  #password-screen button {
+    background: var(--gold); color: var(--black); font-weight: 700; font-size: 13px;
+    letter-spacing: 2px; text-transform: uppercase; padding: 12px 40px; border: none;
+    border-radius: 8px; cursor: pointer; transition: background 0.2s;
+  }
+  #password-screen button:hover { background: var(--gold-light); }
+  #password-screen .error { color: var(--red); font-size: 13px; display: none; }
+  #content { display: none; }
+
+  /* HEADER */
+  .page-header {
+    position: sticky; top: 0; z-index: 100;
+    background: #050505; border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 14px 32px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-header .logo-text { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+  .page-header .page-label { font-size: 13px; color: rgba(245,240,232,0.5); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* HERO */
+  .hero {
+    position: relative; padding: 80px 40px 60px; text-align: center; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; background: var(--gold-soft); border: 1px solid rgba(200,168,75,0.3);
+    color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700; line-height: 1.1; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px; color: var(--offwhite);
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle-italic {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+    font-size: 22px; color: rgba(245,240,232,0.7); margin-bottom: 24px;
+  }
+  .hero p { font-size: 14px; color: var(--muted); max-width: 640px; margin: 0 auto; }
+
+  /* LAYOUT */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 56px 0; border-bottom: 1px solid rgba(200,168,75,0.1); }
+  section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  h2 small { font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; display: block; margin-top: 6px; }
+  h3 {
+    font-size: 17px; font-weight: 700; color: var(--offwhite); margin: 32px 0 12px;
+    padding-bottom: 6px; border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+  h4 { font-size: 15px; font-weight: 700; color: var(--gold-light); margin: 24px 0 8px; }
+
+  p, li { font-size: 15px; line-height: 1.7; color: var(--text); }
+  p + p { margin-top: 12px; }
+  ul, ol { padding-left: 20px; margin: 12px 0; }
+  li { margin: 6px 0; }
+  strong { color: var(--offwhite); }
+
+  .gold { color: var(--gold); font-weight: 600; }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .orange { color: var(--orange); }
+  .muted { color: var(--muted); }
+
+  /* BOXES */
+  .box {
+    background: var(--dark); border: 1px solid var(--border); border-radius: 12px;
+    padding: 32px; margin: 20px 0; transition: border-color 0.2s;
+  }
+  .box:hover { border-color: rgba(200,168,75,0.25); }
+  .box.gold-border { border-color: rgba(200,168,75,0.4); background: linear-gradient(135deg, rgba(200,168,75,0.04) 0%, transparent 100%); }
+  .box.blue-border { border-color: rgba(59,130,246,0.4); background: linear-gradient(135deg, rgba(59,130,246,0.04) 0%, transparent 100%); }
+  .box.green-border { border-color: rgba(34,197,94,0.4); background: linear-gradient(135deg, rgba(34,197,94,0.04) 0%, transparent 100%); }
+  .box .tag {
+    display: inline-block; font-family: 'Oswald', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; color: var(--gold); background: var(--gold-soft);
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .box .tag.blue { color: var(--blue); background: var(--blue-soft); }
+  .box .tag.green { color: var(--green); background: var(--green-soft); }
+  .box .tag.purple { color: var(--purple); background: var(--purple-soft); }
+  .box .tag.orange { color: var(--orange); background: var(--orange-soft); }
+
+  .label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block;
+  }
+
+  /* QUOTE */
+  blockquote {
+    border-left: 3px solid var(--gold); padding: 16px 24px; margin: 20px 0;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px;
+    color: rgba(245,240,232,0.8); background: rgba(200,168,75,0.04); border-radius: 0 8px 8px 0;
+  }
+
+  /* EXAMPLE */
+  .exemplo {
+    border-left: 3px solid var(--blue);
+    background: var(--blue-soft);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 14px;
+    color: rgba(245,240,232,0.9);
+  }
+  .exemplo::before {
+    content: attr(data-title);
+    display: block;
+    font-family: 'Inter', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 2px; color: var(--blue);
+    margin-bottom: 8px; text-transform: uppercase;
+  }
+
+  /* WHATSAPP MOCK */
+  .wpp-mock {
+    background: #0b141a; border-radius: 12px; padding: 20px; margin: 16px 0;
+    max-width: 420px; font-size: 14px; border: 1px solid #1f2c34;
+  }
+  .wpp-mock .wpp-header {
+    font-size: 12px; color: #8696a0; margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 1px solid #1f2c34;
+  }
+  .wpp-bubble {
+    max-width: 85%; padding: 8px 12px; border-radius: 8px; margin: 6px 0;
+    line-height: 1.5; font-size: 13px;
+  }
+  .wpp-bubble.incoming {
+    background: #1f2c34; color: #e9edef; border-top-left-radius: 0;
+    margin-right: auto;
+  }
+  .wpp-bubble.outgoing {
+    background: #005c4b; color: #e9edef; border-top-right-radius: 0;
+    margin-left: auto;
+  }
+  .wpp-bubble .sender { font-size: 11px; color: var(--gold); font-weight: 600; margin-bottom: 2px; }
+  .wpp-bubble .time { font-size: 10px; color: #8696a0; text-align: right; margin-top: 4px; }
+
+  /* CODE */
+  .code-block {
+    background: #111; border: 1px solid #333; border-radius: 8px;
+    padding: 20px; margin: 16px 0; font-family: 'Courier New', monospace;
+    font-size: 13px; color: #e8e8e8; overflow-x: auto; line-height: 1.6;
+    white-space: pre-wrap;
+  }
+  .code-block .comment { color: #6a9955; }
+  .code-block .keyword { color: #569cd6; }
+  .code-block .string { color: #ce9178; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  th {
+    text-align: left; padding: 10px 14px; background: var(--dark);
+    border-bottom: 2px solid rgba(200,168,75,0.3); font-size: 11px;
+    font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(200,168,75,0.03); }
+
+  /* ALERT */
+  .alert {
+    border-left: 4px solid var(--orange);
+    background: var(--orange-soft);
+    padding: 16px 24px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+  .alert .label { color: var(--orange); }
+  .alert p { font-size: 14px; }
+  .alert.info { border-left-color: var(--blue); background: var(--blue-soft); }
+  .alert.info .label { color: var(--blue); }
+  .alert.success { border-left-color: var(--green); background: var(--green-soft); }
+  .alert.success .label { color: var(--green); }
+
+  /* FLOW STEPS */
+  .flow-steps { margin: 20px 0; }
+  .flow-step {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-step .num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold-soft); border: 1px solid rgba(200,168,75,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold);
+  }
+  .flow-step .content { flex: 1; }
+  .flow-step .content .step-title { font-weight: 700; color: var(--offwhite); margin-bottom: 4px; }
+  .flow-step .content p { font-size: 14px; color: var(--muted); }
+
+  /* DASHBOARD MOCK */
+  .dash-mock {
+    background: #111; border: 1px solid #333; border-radius: 12px;
+    padding: 24px; margin: 16px 0; font-family: 'Inter', sans-serif;
+  }
+  .dash-mock .dash-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 16px; border-bottom: 1px solid #2a2a2a; margin-bottom: 16px;
+  }
+  .dash-mock .dash-header .name { font-weight: 700; color: var(--offwhite); }
+  .dash-mock .dash-header .status { font-size: 12px; color: var(--green); }
+  .dash-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px;
+  }
+  .dash-row .k { color: var(--muted); }
+  .dash-row .v { color: var(--offwhite); font-weight: 600; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media (max-width: 700px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* NAV */
+  .nav-toc {
+    background: var(--dark); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px 32px; margin: 24px 0;
+  }
+  .nav-toc .nav-title {
+    font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .nav-toc ol { padding-left: 20px; }
+  .nav-toc li { margin: 8px 0; }
+  .nav-toc a { color: var(--text); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .nav-toc a:hover { color: var(--gold); }
+
+  /* FOOTER */
+  .page-footer {
+    text-align: center; padding: 40px 24px; border-top: 1px solid rgba(200,168,75,0.1);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,240,232,0.25);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px 40px; }
+    .box { padding: 24px; }
+    .wpp-mock { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD -->
+<div id="password-screen">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Documento Interno — Equipe de IA</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeypress="if(event.key==='Enter')checkPwd()">
+  <button onclick="checkPwd()">ACESSAR</button>
+  <div class="error" id="pwd-error">Senha incorreta</div>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<div class="page-header">
+  <div class="logo-text">OMNI BRASIL</div>
+  <div class="page-label">Briefing Tecnico // Abril 2026</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Feature do Portal ONNIterapeuta // Black Mentoring</div>
+  <h1>PRISMA FOR <span>THERAPISTS</span></h1>
+  <div class="subtitle-italic">Secretaria virtual + leitura emocional por IA no WhatsApp do terapeuta</div>
+  <p>Briefing tecnico completo para implementacao no portal ONNIterapeuta. Feature exclusiva da Black Mentoring (R$ 39.900) — diferencial de alto valor percebido que justifica o high ticket.</p>
+</div>
+
+<div class="container">
+
+<!-- TOC -->
+<nav class="nav-toc">
+  <div class="nav-title">Indice deste documento</div>
+  <ol>
+    <li><a href="#contexto">Contexto Estrategico — Por que essa feature existe</a></li>
+    <li><a href="#produto">O que e o Prisma for Therapists</a></li>
+    <li><a href="#fluxos">Fluxos na Pratica (como o terapeuta e o cliente usam)</a></li>
+    <li><a href="#whitelabel">White Label — Como funciona por tras</a></li>
+    <li><a href="#personalizacao">Personalizacao por Terapeuta</a></li>
+    <li><a href="#emocional">Leitura Emocional por Voz (Hume AI)</a></li>
+    <li><a href="#dashboard">Dashboard do Terapeuta</a></li>
+    <li><a href="#arquitetura">Arquitetura Tecnica</a></li>
+    <li><a href="#banco">Schema de Banco de Dados</a></li>
+    <li><a href="#mvp">MVP — Plano de 3 Semanas</a></li>
+    <li><a href="#riscos">Riscos e Mitigacoes</a></li>
+    <li><a href="#custos">Custos de Infra</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════ 1. CONTEXTO ═══════════ -->
+<section id="contexto">
+  <h2>1. Contexto Estrategico <small>Por que essa feature existe</small></h2>
+
+  <div class="box gold-border">
+    <span class="tag">Premissa</span>
+    <p>Isso <strong>nao e um SaaS separado</strong> e <strong>nao e vendido avulso</strong>. E uma feature premium do <strong>portal ONNIterapeuta</strong>, exclusiva para quem e da <strong>Black Mentoring</strong> (R$ 39.900).</p>
+    <p style="margin-top:12px;">O objetivo e simples: <strong>aumentar o valor percebido do high ticket</strong>. O terapeuta que entra na Black nao ganha so mentoria — ganha ferramentas de IA que nenhum outro formador no Brasil oferece.</p>
+  </div>
+
+  <h3>O argumento de venda</h3>
+  <blockquote>
+    "Na Black Mentoring, voce nao sai so com conhecimento — sai com um consultorio inteligente. Sua secretaria virtual atende seus clientes pelo WhatsApp 24/7, sua IA analisa o estado emocional do paciente antes de cada sessao, e seu dashboard mostra a evolucao real de cada cliente ao longo do tratamento. Nenhum hipnoterapeuta no Brasil tem isso."
+  </blockquote>
+
+  <h3>O que muda pra quem decide comprar a Black</h3>
+  <table>
+    <tr><th>Sem Prisma</th><th>Com Prisma (Black)</th></tr>
+    <tr><td>Terapeuta atende WhatsApp manualmente</td><td>Bot atende, agenda, confirma, remarca 24/7</td></tr>
+    <tr><td>Nao tem dados sobre estado emocional pre-sessao</td><td>Recebe leitura emocional automatica antes de cada sessao</td></tr>
+    <tr><td>Nao consegue provar resultado pro cliente</td><td>Dashboard mostra evolucao emocional ao longo de semanas</td></tr>
+    <tr><td>Agenda manual, esquece lembrete</td><td>Lembretes automaticos, reengajamento de frio</td></tr>
+    <tr><td>Perde cliente que some</td><td>Bot detecta ausencia e reativa</td></tr>
+  </table>
+
+  <div class="alert info">
+    <span class="label">Nota para Julia</span>
+    <p>Essa feature se integra ao portal ONNIterapeuta que voce ja esta desenvolvendo. Nao e um sistema separado — e uma <strong>aba/modulo dentro do portal</strong> que so aparece pra quem tem plano Black ativo.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 2. O PRODUTO ═══════════ -->
+<section id="produto">
+  <h2>2. O que e o Prisma for Therapists <small>Tres capacidades empilhadas</small></h2>
+
+  <div class="grid-3">
+    <div class="box">
+      <span class="tag">Camada 1</span>
+      <h4>Secretaria Virtual</h4>
+      <p>Bot no WhatsApp <strong>do proprio terapeuta</strong> que responde clientes, agenda sessoes, confirma, remarca, envia lembretes e reengaja quem sumiu.</p>
+      <p class="muted" style="font-size:13px;margin-top:8px;">Funciona 24/7. O cliente acha que esta falando com a secretaria do terapeuta.</p>
+    </div>
+    <div class="box">
+      <span class="tag blue">Camada 2</span>
+      <h4>Leitura Emocional</h4>
+      <p>Antes de cada sessao, o bot pede um audio de 1 minuto ao cliente. A IA (Hume AI) analisa <strong>tom de voz, ritmo, energia, pausas</strong> e entrega scores emocionais pro terapeuta.</p>
+      <p class="muted" style="font-size:13px;margin-top:8px;">Ansiedade, tristeza, energia, calma — tudo em numeros.</p>
+    </div>
+    <div class="box">
+      <span class="tag green">Camada 3</span>
+      <h4>Dashboard + Evolucao</h4>
+      <p>Painel dentro do portal ONNIterapeuta com <strong>historico emocional de cada cliente</strong> ao longo de semanas e meses. Graficos de evolucao, alertas automaticos, metricas.</p>
+      <p class="muted" style="font-size:13px;margin-top:8px;">O terapeuta prova resultado com dados.</p>
+    </div>
+  </div>
+
+  <div class="box gold-border" style="margin-top:24px;">
+    <span class="tag">Resumo em uma frase</span>
+    <p style="font-size:18px;"><strong>Um unico bot no WhatsApp do terapeuta que faz secretaria + leitura emocional + acompanhamento, com tudo visivel num dashboard dentro do portal ONNIterapeuta.</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ 3. FLUXOS ═══════════ -->
+<section id="fluxos">
+  <h2>3. Fluxos na Pratica <small>Como o terapeuta e o cliente realmente usam</small></h2>
+
+  <h3>Fluxo A — Secretaria Virtual (dia a dia)</h3>
+
+  <div class="wpp-mock">
+    <div class="wpp-header">WhatsApp do Dr. Joao — conversa com Maria Silva (cliente)</div>
+    <div class="wpp-bubble incoming">
+      Oi, preciso remarcar minha sessao de quinta
+      <div class="time">10:23</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia (assistente do Dr. Joao)</div>
+      Oi Maria! Claro, sem problema. O Dr. Joao tem disponivel sexta as 14h ou sabado as 10h. Qual prefere?
+      <div class="time">10:23</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      Sexta
+      <div class="time">10:24</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia (assistente do Dr. Joao)</div>
+      Pronto! Remarcado pra sexta 14h. Vou te lembrar na quinta a noite. Ate la, Maria!
+      <div class="time">10:24</div>
+    </div>
+  </div>
+
+  <p>Maria acha que esta falando com a secretaria do Joao. Na verdade e o bot, configurado com o tom e nome que o Joao escolheu no painel dele.</p>
+
+  <h3>Fluxo B — Leitura Emocional Pre-Sessao</h3>
+
+  <div class="wpp-mock">
+    <div class="wpp-header">WhatsApp do Dr. Joao — conversa com Maria Silva</div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia (assistente do Dr. Joao)</div>
+      Oi Maria! Sua sessao e amanha as 14h. Pode me mandar um audio de 1 minuto contando como foi sua semana? O Dr. Joao vai ouvir antes de te atender.
+      <div class="time">21:00 (automatico)</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      [Audio 1:12]
+      <div class="time">21:15</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia</div>
+      Obrigada Maria! Registrado. Ate amanha as 14h!
+      <div class="time">21:15</div>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;"><strong>O que o Dr. Joao recebe (no WhatsApp dele, mensagem privada do bot):</strong></p>
+
+  <div class="wpp-mock">
+    <div class="wpp-header">WhatsApp do Dr. Joao — mensagem do sistema Prisma</div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Prisma</div>
+      Leitura emocional — Maria Silva<br>Sessao: amanha 14h<br><br>Ansiedade: elevada (0.72)<br>Tristeza: moderada (0.45)<br>Energia: baixa (0.31)<br>Calma: baixa (0.28)<br><br>vs. semana passada:<br>Ansiedade subiu 18%<br>Energia caiu 12%<br><br>Sugestao: focar em reducao de ansiedade
+      <div class="time">21:16</div>
+    </div>
+  </div>
+
+  <p class="muted" style="font-size:13px;margin-top:12px;">O Dr. Joao abre a sessao ja sabendo o que focar. Nao precisa gastar 15 minutos de anamnese — a IA ja fez a leitura.</p>
+
+  <h3>Fluxo C — Reengajamento de Cliente Frio</h3>
+
+  <div class="wpp-mock">
+    <div class="wpp-header">WhatsApp do Dr. Joao — conversa com Pedro Alves (sumiu ha 14 dias)</div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia (assistente do Dr. Joao)</div>
+      Oi Pedro! Faz um tempinho que nao nos falamos. Como voce esta? O Dr. Joao tem horarios disponiveis essa semana caso queira retomar.
+      <div class="time">10:00 (automatico)</div>
+    </div>
+    <div class="wpp-bubble incoming">
+      Oi Lia, to bem sim, tava meio corrido. Queria voltar sim, tem quinta?
+      <div class="time">10:42</div>
+    </div>
+    <div class="wpp-bubble outgoing">
+      <div class="sender">Lia</div>
+      Que bom Pedro! Quinta tem as 15h ou as 17h. Qual fica melhor?
+      <div class="time">10:42</div>
+    </div>
+  </div>
+
+  <p>Sem o bot, Pedro teria sumido pra sempre. O terapeuta nem perceberia ate olhar a agenda e ver o buraco.</p>
+
+  <h3>Fluxo D — Bot pausa quando terapeuta quer falar</h3>
+
+  <div class="box">
+    <span class="tag">Regra importante</span>
+    <p>Se o terapeuta <strong>mandar uma mensagem manualmente</strong> na conversa, o bot <strong>pausa automaticamente por 30 minutos</strong> naquela conversa. Isso evita o bot "atropelar" o terapeuta quando ele quer falar pessoalmente com o cliente.</p>
+    <p style="margin-top:8px;">Esse tempo de pausa e configuravel no dashboard (15min, 30min, 1h, ate desativar).</p>
+  </div>
+</section>
+
+<!-- ═══════════ 4. WHITE LABEL ═══════════ -->
+<section id="whitelabel">
+  <h2>4. White Label <small>O terapeuta nunca ve a infra por tras</small></h2>
+
+  <div class="box gold-border">
+    <span class="tag">Principio fundamental</span>
+    <p>O terapeuta <strong>nunca sabe</strong> que existe Evolution API, Hume AI, Supabase ou n8n. Pra ele, tudo e o <strong>portal ONNIterapeuta</strong>. A experiencia e 100% white label.</p>
+  </div>
+
+  <h3>Como o terapeuta conecta o WhatsApp dele</h3>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="num">1</div>
+      <div class="content">
+        <div class="step-title">Terapeuta acessa o portal ONNIterapeuta</div>
+        <p>Faz login normal, vai na aba "Meu WhatsApp" ou "Assistente Virtual"</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">2</div>
+      <div class="content">
+        <div class="step-title">Clica em "Conectar WhatsApp"</div>
+        <p>O portal mostra um QR code na tela. Por tras, o backend cria uma instancia na Evolution API (<code>POST /instance/create</code>) e pega o QR (<code>GET /instance/connect</code>)</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">3</div>
+      <div class="content">
+        <div class="step-title">Escaneia com o celular</div>
+        <p>Igual conectar WhatsApp Web. O terapeuta abre WhatsApp > Aparelhos conectados > Escaneia o QR</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">4</div>
+      <div class="content">
+        <div class="step-title">Tela muda pra "Conectado"</div>
+        <p>O webhook da Evolution API avisa o backend que a conexao foi feita. Frontend atualiza automaticamente.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">5</div>
+      <div class="content">
+        <div class="step-title">Pronto — bot ativo no numero dele</div>
+        <p>Terapeuta configura o tom, horarios e mensagens da secretaria virtual. O bot comeca a atender.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>O que acontece por tras (mapeamento de acoes)</h3>
+
+  <table>
+    <tr><th>O que o terapeuta ve no portal</th><th>O que o backend faz na Evolution API</th></tr>
+    <tr><td>Botao "Conectar WhatsApp"</td><td><code>POST /instance/create</code> + <code>GET /instance/connect</code></td></tr>
+    <tr><td>Status: Conectado / Desconectado</td><td><code>GET /instance/connectionState</code></td></tr>
+    <tr><td>Botao "Desconectar"</td><td><code>DELETE /instance/logout</code></td></tr>
+    <tr><td>Botao "Reconectar"</td><td>Novo <code>GET /instance/connect</code> (gera QR novo)</td></tr>
+    <tr><td>Ver mensagens recentes</td><td>Leitura do Supabase (nao da Evolution)</td></tr>
+    <tr><td>Enviar mensagem manual pelo portal</td><td><code>POST /message/sendText</code></td></tr>
+  </table>
+
+  <div class="code-block"><span class="comment">// Exemplo: backend cria instancia quando terapeuta clica "Conectar"</span>
+<span class="keyword">const</span> createInstance = <span class="keyword">async</span> (therapistId) => {
+  <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(<span class="string">'http://localhost:8080/instance/create'</span>, {
+    method: <span class="string">'POST'</span>,
+    headers: { <span class="string">'apikey'</span>: EVOLUTION_API_KEY },
+    body: JSON.stringify({
+      instanceName: <span class="string">`therapist-${therapistId}`</span>,
+      integration: <span class="string">'WHATSAPP-BAILEYS'</span>,
+      webhook: {
+        url: <span class="string">`https://portal.onniterapeuta.com/api/webhook/${therapistId}`</span>,
+        events: [<span class="string">'messages.upsert'</span>, <span class="string">'connection.update'</span>]
+      }
+    })
+  });
+  <span class="comment">// Retorna QR code pro frontend exibir</span>
+  <span class="keyword">const</span> qr = <span class="keyword">await</span> fetch(<span class="string">`http://localhost:8080/instance/connect/therapist-${therapistId}`</span>);
+  <span class="keyword">return</span> qr.json(); <span class="comment">// { base64: "data:image/png;base64,..." }</span>
+};</div>
+
+  <div class="alert info">
+    <span class="label">Nota para Julia</span>
+    <p>O portal ONNIterapeuta faz chamadas REST pra Evolution API no backend. O frontend <strong>nunca</strong> fala direto com a Evolution API. Toda a comunicacao passa pelo seu backend (Next.js API routes ou similar), que autentica o terapeuta antes de qualquer operacao.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 5. PERSONALIZACAO ═══════════ -->
+<section id="personalizacao">
+  <h2>5. Personalizacao por Terapeuta <small>Cada um configura o "jeito" da secretaria dele</small></h2>
+
+  <p>Um unico bot (mesma logica, mesmo codigo) atende todos os terapeutas. A diferenca e que ele <strong>carrega o perfil de cada terapeuta</strong> antes de responder. Funciona assim:</p>
+
+  <div class="code-block"><span class="comment">// Quando mensagem chega do WhatsApp:</span>
+1. Identificar o numero que mandou a mensagem
+2. Consultar: "esse numero e cliente de qual terapeuta?"
+3. Carregar as configuracoes daquele terapeuta
+4. Responder com o tom, nome e regras configurados
+
+<span class="comment">// SQL simplificado:</span>
+<span class="keyword">SELECT</span> t.config, t.name
+<span class="keyword">FROM</span> therapists t
+<span class="keyword">JOIN</span> clients c <span class="keyword">ON</span> c.therapist_id = t.id
+<span class="keyword">WHERE</span> c.phone = <span class="string">'5511999...'</span>
+<span class="comment">-- Tempo: &lt;100ms</span></div>
+
+  <h3>O que cada terapeuta configura no portal</h3>
+
+  <div class="grid-2">
+    <div class="box">
+      <span class="tag">Identidade da Secretaria</span>
+      <table>
+        <tr><th>Campo</th><th>Exemplo Dr. Joao</th></tr>
+        <tr><td>Nome da assistente</td><td>"Lia"</td></tr>
+        <tr><td>Tom de voz</td><td>Formal e acolhedor</td></tr>
+        <tr><td>Saudacao padrao</td><td>"Ola! Aqui e a Lia, assistente do Dr. Joao"</td></tr>
+        <tr><td>Usa emoji</td><td>Nao</td></tr>
+      </table>
+    </div>
+    <div class="box">
+      <span class="tag blue">Identidade da Secretaria</span>
+      <table>
+        <tr><th>Campo</th><th>Exemplo Dra. Ana</th></tr>
+        <tr><td>Nome da assistente</td><td>"Sol"</td></tr>
+        <tr><td>Tom de voz</td><td>Informal e descontraido</td></tr>
+        <tr><td>Saudacao padrao</td><td>"Oi! Sou a Sol, cuido da agenda da Ana"</td></tr>
+        <tr><td>Usa emoji</td><td>Sim</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Configuracoes operacionais</h3>
+
+  <table>
+    <tr><th>Config</th><th>Opcoes</th><th>Default</th></tr>
+    <tr><td>Horarios disponiveis</td><td>Tabela semanal (dia + horarios)</td><td>Seg-Sex 8h-18h</td></tr>
+    <tr><td>Duracao da sessao</td><td>30 / 45 / 60 / 90 min</td><td>60 min</td></tr>
+    <tr><td>Intervalo entre sessoes</td><td>0 / 15 / 30 min</td><td>15 min</td></tr>
+    <tr><td>Antecedencia min. pra remarcar</td><td>6h / 12h / 24h / 48h</td><td>24h</td></tr>
+    <tr><td>Lembrete pre-sessao</td><td>2h / 12h / 24h antes</td><td>24h</td></tr>
+    <tr><td>Pedir audio emocional</td><td>Sim / Nao</td><td>Sim</td></tr>
+    <tr><td>Reengajar cliente frio apos</td><td>7 / 14 / 21 / 30 dias</td><td>14 dias</td></tr>
+    <tr><td>Pausa do bot quando humano fala</td><td>15 / 30 / 60 min / desligar</td><td>30 min</td></tr>
+    <tr><td>Fora do horario</td><td>Mensagem personalizada</td><td>"Obrigado! Respondo no proximo dia util"</td></tr>
+  </table>
+
+  <h3>Mensagens personalizaveis</h3>
+
+  <div class="box">
+    <span class="tag">Templates que o terapeuta edita no portal</span>
+    <table>
+      <tr><th>Momento</th><th>Variavel disponivel</th><th>Exemplo padrao</th></tr>
+      <tr><td>Boas-vindas (cliente novo)</td><td><code>{nome}</code>, <code>{terapeuta}</code>, <code>{assistente}</code></td><td>"Ola {nome}! Seja bem-vindo(a). Sou a {assistente}, assistente virtual do(a) {terapeuta}."</td></tr>
+      <tr><td>Confirmacao de agendamento</td><td><code>{nome}</code>, <code>{data}</code>, <code>{hora}</code></td><td>"Pronto {nome}! Sua sessao esta confirmada pra {data} as {hora}."</td></tr>
+      <tr><td>Lembrete pre-sessao</td><td><code>{nome}</code>, <code>{data}</code>, <code>{hora}</code></td><td>"Oi {nome}, lembrando que sua sessao e amanha as {hora}."</td></tr>
+      <tr><td>Pedido de audio emocional</td><td><code>{nome}</code>, <code>{terapeuta}</code></td><td>"Pode me mandar um audio de 1 min contando como voce ta? O(a) {terapeuta} vai ouvir antes da sessao."</td></tr>
+      <tr><td>Reengajamento</td><td><code>{nome}</code>, <code>{dias}</code>, <code>{terapeuta}</code></td><td>"Oi {nome}, faz {dias} dias que nao nos falamos. Como voce esta?"</td></tr>
+      <tr><td>Fora do horario</td><td><code>{nome}</code></td><td>"Obrigada pela mensagem {nome}! Respondo no proximo dia util."</td></tr>
+    </table>
+  </div>
+
+  <h3>Onde isso fica salvo (banco)</h3>
+
+  <p>Tudo fica num campo <code>JSONB</code> na tabela <code>therapists</code> — ou numa tabela <code>therapist_config</code> separada. O bot le essa config a cada mensagem recebida (com cache de ~5 min pra performance).</p>
+</section>
+
+<!-- ═══════════ 6. LEITURA EMOCIONAL ═══════════ -->
+<section id="emocional">
+  <h2>6. Leitura Emocional por Voz <small>Hume AI — como funciona</small></h2>
+
+  <h3>O que e o Hume AI</h3>
+  <p>Hume AI e uma API que analisa <strong>caracteristicas acusticas da voz humana</strong> — tom, ritmo, energia, pausas, variacao de pitch — e retorna scores de 48 emocoes diferentes. Nao analisa o que a pessoa <strong>diz</strong> (semantica), mas <strong>como</strong> ela diz (prosody).</p>
+
+  <div class="alert info">
+    <span class="label">Por que prosody funciona em PT-BR</span>
+    <p>Prosody analysis e <strong>language-agnostic</strong> em grande parte. Uma pessoa ansiosa fala mais rapido, com mais variacao de pitch e menos pausas — independente do idioma. O Hume foi treinado em 200k+ horas de audio multilingual.</p>
+  </div>
+
+  <h3>Fluxo tecnico da leitura emocional</h3>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="num">1</div>
+      <div class="content">
+        <div class="step-title">Cliente manda audio no WhatsApp</div>
+        <p>Audio chega em formato OGG/OPUS (padrao WhatsApp). Evolution API captura via webhook.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">2</div>
+      <div class="content">
+        <div class="step-title">Backend converte OGG para WAV</div>
+        <p>Usa <code>ffmpeg</code> (ja instalado na VPS): <code>ffmpeg -i input.ogg -ar 16000 -ac 1 -f wav output.wav</code></p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">3</div>
+      <div class="content">
+        <div class="step-title">Envia pra Hume AI Expression Measurement</div>
+        <p><code>POST /v0/batch/jobs</code> com o arquivo WAV. Retorna em 2-5 segundos.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">4</div>
+      <div class="content">
+        <div class="step-title">Parse da resposta</div>
+        <p>Hume retorna JSON com 48 emocoes, cada uma com score de 0.0 a 1.0. O backend extrai as 6 principais: ansiedade, tristeza, raiva, alegria, calma, energia.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="num">5</div>
+      <div class="content">
+        <div class="step-title">Salva no Supabase + notifica terapeuta</div>
+        <p>Scores salvos na tabela <code>emotion_readings</code>. Terapeuta recebe resumo no WhatsApp e ve no dashboard.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Custo do Hume AI</h3>
+
+  <table>
+    <tr><th>Metrica</th><th>Valor</th></tr>
+    <tr><td>Custo por minuto de audio</td><td class="gold">$0,0639/min (~R$ 0,35)</td></tr>
+    <tr><td>Audio de 60 segundos</td><td>~R$ 0,35 por leitura</td></tr>
+    <tr><td>1 terapeuta, 20 clientes/semana</td><td>~R$ 28/mes</td></tr>
+    <tr><td>80 terapeutas Black, 15 clientes cada</td><td>~R$ 1.680/mes</td></tr>
+    <tr><td>Plano Growth (necessario pra producao)</td><td>$50/mes (~R$ 275)</td></tr>
+  </table>
+
+  <div class="alert success">
+    <span class="label">Custo vs. valor</span>
+    <p>80 mentorandos Black x R$ 39.900 = <strong>R$ 3.192.000 de receita</strong>. O custo de Hume AI pra todos eles seria ~R$ 1.680/mes (~R$ 20.160/ano). Ou seja: <strong>0,6% da receita</strong>. Custo irrelevante pro valor que agrega ao high ticket.</p>
+  </div>
+
+  <h3>Exemplo de resposta do Hume AI (simplificado)</h3>
+
+  <div class="code-block"><span class="comment">// Resposta do Hume AI (simplificada pra as 6 emocoes principais)</span>
+{
+  <span class="string">"client_phone"</span>: <span class="string">"5511999887766"</span>,
+  <span class="string">"duration_seconds"</span>: 62,
+  <span class="string">"emotions"</span>: {
+    <span class="string">"anxiety"</span>: 0.72,     <span class="comment">// elevada</span>
+    <span class="string">"sadness"</span>: 0.45,     <span class="comment">// moderada</span>
+    <span class="string">"anger"</span>: 0.12,       <span class="comment">// baixa</span>
+    <span class="string">"joy"</span>: 0.18,         <span class="comment">// baixa</span>
+    <span class="string">"calmness"</span>: 0.28,    <span class="comment">// baixa</span>
+    <span class="string">"energy"</span>: 0.31       <span class="comment">// baixa</span>
+  },
+  <span class="string">"vs_last_reading"</span>: {
+    <span class="string">"anxiety"</span>: <span class="string">"+18%"</span>,
+    <span class="string">"energy"</span>: <span class="string">"-12%"</span>
+  }
+}</div>
+</section>
+
+<!-- ═══════════ 7. DASHBOARD ═══════════ -->
+<section id="dashboard">
+  <h2>7. Dashboard do Terapeuta <small>Dentro do portal ONNIterapeuta</small></h2>
+
+  <p>Nao e um app separado. E uma <strong>aba ou modulo</strong> dentro do portal que a Julia ja esta desenvolvendo. So aparece pra quem tem plano Black ativo.</p>
+
+  <h3>Telas necessarias</h3>
+
+  <div class="box">
+    <span class="tag">Tela 1 — Meu WhatsApp</span>
+    <div class="dash-mock">
+      <div class="dash-header">
+        <div class="name">WhatsApp do Dr. Joao</div>
+        <div class="status">Conectado</div>
+      </div>
+      <div class="dash-row"><div class="k">Numero</div><div class="v">(11) 98765-4321</div></div>
+      <div class="dash-row"><div class="k">Conectado desde</div><div class="v">12/04/2026</div></div>
+      <div class="dash-row"><div class="k">Mensagens hoje</div><div class="v">47</div></div>
+      <div class="dash-row"><div class="k">Saude do numero</div><div class="v" style="color:var(--green);">Excelente</div></div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-top:8px;">Botoes: [Reconectar] [Desconectar]. Se desconectado, mostra QR code pra escanear.</p>
+  </div>
+
+  <div class="box">
+    <span class="tag blue">Tela 2 — Config da Secretaria</span>
+    <p>Formulario com todos os campos da secao 5 (nome da assistente, tom, horarios, mensagens personalizadas, regras de pausa, reengajamento).</p>
+    <p style="margin-top:8px;">Interface: campos editaveis com preview ao vivo do tipo "assim que sua assistente vai responder". Botao salvar no final.</p>
+  </div>
+
+  <div class="box">
+    <span class="tag green">Tela 3 — Meus Clientes</span>
+    <div class="dash-mock">
+      <div class="dash-header">
+        <div class="name">Clientes ativos: 18</div>
+        <div class="status">[+ Novo cliente]</div>
+      </div>
+      <div class="dash-row"><div class="k">Maria Silva</div><div class="v">Ansiedade: 0.72 — <span style="color:var(--orange);">Alerta</span></div></div>
+      <div class="dash-row"><div class="k">Pedro Alves</div><div class="v">Humor: estavel (0.55)</div></div>
+      <div class="dash-row"><div class="k">Ana Costa</div><div class="v">Calma: elevada (0.81) — <span style="color:var(--green);">Otimo</span></div></div>
+      <div class="dash-row"><div class="k">Carlos Lima</div><div class="v" style="color:var(--red);">Sem leitura ha 21 dias</div></div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-top:8px;">Cada linha e clicavel e abre o perfil do cliente.</p>
+  </div>
+
+  <div class="box">
+    <span class="tag purple">Tela 4 — Perfil do Cliente (com historico emocional)</span>
+    <p>Ao clicar num cliente, abre:</p>
+    <ul>
+      <li><strong>Dados basicos:</strong> nome, telefone, notas do terapeuta</li>
+      <li><strong>Grafico de evolucao:</strong> linha do tempo com scores emocionais das ultimas 4-12 semanas (Chart.js ou Recharts)</li>
+      <li><strong>Historico de leituras:</strong> lista de todas as leituras com data, scores e variacao</li>
+      <li><strong>Alertas:</strong> momentos em que thresholds foram ultrapassados</li>
+      <li><strong>Proxima sessao:</strong> data e horario agendado</li>
+    </ul>
+    <p style="margin-top:12px;">O grafico de evolucao e a feature "uau" — o terapeuta mostra pro cliente: <em>"olha, sua ansiedade caiu 40% em 8 semanas de tratamento"</em>. Isso vira prova de resultado e fideliza.</p>
+  </div>
+
+  <div class="box">
+    <span class="tag orange">Tela 5 — Agenda</span>
+    <p>Visao semanal/diaria das sessoes agendadas. Cada sessao mostra o nome do cliente + ultimo score emocional (se tiver leitura recente).</p>
+    <p style="margin-top:8px;">Integra com Google Calendar do terapeuta (opcional) via API que ja temos.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 8. ARQUITETURA ═══════════ -->
+<section id="arquitetura">
+  <h2>8. Arquitetura Tecnica <small>Como as pecas se conectam</small></h2>
+
+  <div class="code-block"><span class="comment">// DIAGRAMA DE FLUXO COMPLETO</span>
+
+CLIENTE (WhatsApp)
+    |
+    | manda mensagem ou audio
+    v
+EVOLUTION API (VPS 76.13.169.211, Docker)
+    |
+    | webhook por terapeuta
+    v
+BACKEND DO PORTAL ONNIterapeuta (Next.js API routes)
+    |
+    |--- mensagem de texto? ---> LLM processa com config do terapeuta ---> responde via Evolution API
+    |
+    |--- audio? ---> ffmpeg (OGG->WAV) ---> Hume AI API ---> scores emocionais
+    |                                                              |
+    |                                                              v
+    |                                                     SUPABASE (emotion_readings)
+    |                                                              |
+    |--- notifica terapeuta via WhatsApp (resumo da leitura)       |
+    |                                                              v
+    v                                                     DASHBOARD (frontend)
+SUPABASE (mensagens, clientes, config)                   terapeuta ve tudo aqui
+
+
+<span class="comment">// COMPONENTES</span>
+
+| Componente              | Onde roda         | Ja existe? |
+|-------------------------|-------------------|------------|
+| Evolution API           | VPS (Docker)      | SIM        |
+| ffmpeg                  | VPS               | SIM        |
+| Supabase                | Cloud             | SIM        |
+| Portal ONNIterapeuta    | Vercel/VPS        | EM DEV     |
+| Hume AI                 | Cloud (API REST)  | CRIAR CONTA|
+| n8n (orquestracao)      | VPS               | SIM        |</div>
+
+  <h3>Um numero por terapeuta — como escala</h3>
+
+  <p>A Evolution API suporta <strong>multiplas instancias</strong>. Cada instancia = 1 numero de WhatsApp conectado.</p>
+
+  <table>
+    <tr><th>Terapeutas</th><th>RAM estimada</th><th>Infra</th><th>Custo estimado</th></tr>
+    <tr><td>Ate 20</td><td>~3 GB</td><td>VPS atual (upgrade RAM)</td><td>~R$ 150/mes</td></tr>
+    <tr><td>20-80</td><td>~8-12 GB</td><td>VPS dedicada maior</td><td>~R$ 400/mes</td></tr>
+    <tr><td>80-200</td><td>~16-30 GB</td><td>Multiplas VPS ou Evolution Cloud</td><td>~R$ 800-1.500/mes</td></tr>
+  </table>
+
+  <p>Cada instancia consome ~100-150 MB de RAM porque mantem uma sessao WebSocket ativa com o WhatsApp.</p>
+
+  <div class="alert info">
+    <span class="label">Escalabilidade</span>
+    <p>Se a Black Mentoring tem ~80 mentorandos, precisamos de ~80 instancias. Uma VPS com 16 GB de RAM cobre isso tranquilamente. Custo: ~R$ 400-500/mes. Irrelevante perto da receita.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 9. BANCO ═══════════ -->
+<section id="banco">
+  <h2>9. Schema de Banco de Dados <small>Supabase — tabelas principais</small></h2>
+
+  <div class="code-block"><span class="comment">-- Terapeutas (mentorandos Black com Prisma ativo)</span>
+<span class="keyword">CREATE TABLE</span> therapists (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),  <span class="comment">-- login do portal</span>
+  name TEXT NOT NULL,
+  phone TEXT,                               <span class="comment">-- WhatsApp dele</span>
+  instance_name TEXT,                       <span class="comment">-- "therapist-{id}" na Evolution</span>
+  instance_status TEXT DEFAULT 'disconnected', <span class="comment">-- connected/disconnected</span>
+  config JSONB DEFAULT '{}',                <span class="comment">-- tudo: tom, horarios, msgs</span>
+  active BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+<span class="comment">-- Clientes dos terapeutas</span>
+<span class="keyword">CREATE TABLE</span> clients (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  therapist_id UUID REFERENCES therapists(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  notes TEXT,
+  active BOOLEAN DEFAULT true,
+  last_session_at TIMESTAMPTZ,
+  next_session_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(therapist_id, phone)
+);
+
+<span class="comment">-- Leituras emocionais</span>
+<span class="keyword">CREATE TABLE</span> emotion_readings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  client_id UUID REFERENCES clients(id) ON DELETE CASCADE,
+  therapist_id UUID REFERENCES therapists(id),
+  audio_duration_seconds SMALLINT,
+
+  <span class="comment">-- Scores principais (0.0 a 1.0)</span>
+  anxiety_score REAL,
+  sadness_score REAL,
+  anger_score REAL,
+  joy_score REAL,
+  calmness_score REAL,
+  energy_score REAL,
+
+  <span class="comment">-- JSON completo da API Hume (todos os 48 scores)</span>
+  raw_response JSONB,
+
+  alert_triggered BOOLEAN DEFAULT false,
+  recorded_at TIMESTAMPTZ,
+  analyzed_at TIMESTAMPTZ DEFAULT now()
+);
+
+<span class="comment">-- Sessoes agendadas</span>
+<span class="keyword">CREATE TABLE</span> sessions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  therapist_id UUID REFERENCES therapists(id),
+  client_id UUID REFERENCES clients(id),
+  scheduled_at TIMESTAMPTZ NOT NULL,
+  duration_minutes INT DEFAULT 60,
+  status TEXT DEFAULT 'scheduled', <span class="comment">-- scheduled/confirmed/completed/cancelled/no_show</span>
+  emotion_reading_id UUID REFERENCES emotion_readings(id), <span class="comment">-- leitura pre-sessao</span>
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+<span class="comment">-- Mensagens (historico de conversas)</span>
+<span class="keyword">CREATE TABLE</span> messages (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  therapist_id UUID REFERENCES therapists(id),
+  client_id UUID REFERENCES clients(id),
+  direction TEXT NOT NULL, <span class="comment">-- inbound / outbound</span>
+  content TEXT,
+  message_type TEXT DEFAULT 'text', <span class="comment">-- text / audio / image</span>
+  is_bot BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+<span class="comment">-- Indices</span>
+CREATE INDEX idx_readings_client ON emotion_readings(client_id, recorded_at DESC);
+CREATE INDEX idx_sessions_therapist ON sessions(therapist_id, scheduled_at);
+CREATE INDEX idx_messages_client ON messages(client_id, created_at DESC);
+
+<span class="comment">-- RLS: terapeuta so ve dados dos seus clientes</span>
+ALTER TABLE clients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE emotion_readings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
+
+<span class="keyword">CREATE POLICY</span> own_clients ON clients
+  FOR ALL USING (therapist_id = (
+    SELECT id FROM therapists WHERE user_id = auth.uid()
+  ));
+
+<span class="keyword">CREATE POLICY</span> own_readings ON emotion_readings
+  FOR ALL USING (therapist_id = (
+    SELECT id FROM therapists WHERE user_id = auth.uid()
+  ));
+
+<span class="keyword">CREATE POLICY</span> own_sessions ON sessions
+  FOR ALL USING (therapist_id = (
+    SELECT id FROM therapists WHERE user_id = auth.uid()
+  ));
+
+<span class="keyword">CREATE POLICY</span> own_messages ON messages
+  FOR ALL USING (therapist_id = (
+    SELECT id FROM therapists WHERE user_id = auth.uid()
+  ));</div>
+</section>
+
+<!-- ═══════════ 10. MVP ═══════════ -->
+<section id="mvp">
+  <h2>10. MVP — Plano de 3 Semanas <small>O minimo pra validar com 3 terapeutas</small></h2>
+
+  <div class="box gold-border">
+    <span class="tag">Objetivo do MVP</span>
+    <p>Validar com 3 mentorandos Black se a secretaria virtual + leitura emocional funciona na pratica e gera valor percebido. <strong>Nao precisa estar bonito — precisa funcionar.</strong></p>
+  </div>
+
+  <h3>Semana 1 — Backend + Integracao</h3>
+  <ul>
+    <li>Criar conta Hume AI (plano Growth $50/mes)</li>
+    <li>Criar tabelas no Supabase (schema acima, simplificado)</li>
+    <li>Workflow: Evolution API recebe audio → converte → Hume AI → salva Supabase</li>
+    <li>Workflow: bot responde mensagens de texto com base na config do terapeuta</li>
+    <li>Cadastrar 3 terapeutas de teste + seus clientes</li>
+    <li>Conectar o WhatsApp dos 3 terapeutas via Evolution API</li>
+  </ul>
+
+  <h3>Semana 2 — Dashboard minimo + UX</h3>
+  <ul>
+    <li>Modulo no portal ONNIterapeuta: "Meu WhatsApp" (status da conexao)</li>
+    <li>Modulo: "Meus Clientes" (lista com ultimo score emocional)</li>
+    <li>Modulo: "Perfil do Cliente" (historico de leituras, grafico basico)</li>
+    <li>Config da secretaria (nome, tom, horarios) — formulario simples</li>
+    <li>Mensagem automatica de confirmacao pro cliente apos enviar audio</li>
+  </ul>
+
+  <h3>Semana 3 — Teste real + Ajuste</h3>
+  <ul>
+    <li>3 terapeutas testam com clientes reais (minimo 5 leituras cada)</li>
+    <li>Benchmark: comparar score Hume com percepcao do terapeuta</li>
+    <li>Colher feedback: "a leitura bateu com o que voce sentiu na sessao?"</li>
+    <li>TCLE digital (consentimento LGPD) — formulario simples</li>
+    <li>Ajustar tom do bot, thresholds, timing de mensagens</li>
+  </ul>
+
+  <h3>O que fica FORA do MVP</h3>
+  <table>
+    <tr><th>Feature</th><th>Quando</th></tr>
+    <tr><td>Alertas automaticos (ansiedade persistente)</td><td>Apos validar os scores</td></tr>
+    <tr><td>Graficos sofisticados de evolucao</td><td>V2</td></tr>
+    <tr><td>Integracao com Google Calendar</td><td>V2</td></tr>
+    <tr><td>Cobranca automatica (PIX)</td><td>V3</td></tr>
+    <tr><td>App mobile</td><td>Futuro</td></tr>
+    <tr><td>Onboarding self-service (QR no portal)</td><td>V2 (MVP e manual)</td></tr>
+  </table>
+
+  <h3>Custo total do MVP</h3>
+  <table>
+    <tr><th>Item</th><th>Custo</th></tr>
+    <tr><td>Hume AI Growth (1 mes)</td><td>~R$ 275</td></tr>
+    <tr><td>Supabase</td><td>Ja tem (free tier cobre)</td></tr>
+    <tr><td>VPS</td><td>Ja tem</td></tr>
+    <tr><td>Evolution API</td><td>Ja tem</td></tr>
+    <tr><td>n8n</td><td>Ja tem</td></tr>
+    <tr><td><strong>Total</strong></td><td class="gold"><strong>~R$ 275</strong></td></tr>
+  </table>
+</section>
+
+<!-- ═══════════ 11. RISCOS ═══════════ -->
+<section id="riscos">
+  <h2>11. Riscos e Mitigacoes</h2>
+
+  <div class="alert">
+    <span class="label">LGPD — Dados sensiveis de saude</span>
+    <p>Audio de voz + analise emocional = dado sensivel (LGPD Art. 11). <strong>Mitigacao:</strong> TCLE digital antes do primeiro uso. Audio deletado apos analise (salvar so scores numericos). Hume tem certificacao SOC 2 Type II.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">PT-BR no Hume AI</span>
+    <p>Modelo multilingual mas otimizado pra ingles. <strong>Mitigacao:</strong> prosody (tom, ritmo, energia) e language-agnostic em grande parte. Validar com benchmark: 20 audios PT-BR comparados com avaliacao humana antes de lancar.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">Ban de WhatsApp</span>
+    <p>WhatsApp pode banir numeros com automacao. <strong>Mitigacao:</strong> volume baixo por numero (~20-50 msgs/dia), e o numero do terapeuta (ja tem historico), bot responde inbound (nao spam), delay humanizado entre mensagens.</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">Terapeuta perde conexao</span>
+    <p>Se o terapeuta desconectar o aparelho conectado, o bot para. <strong>Mitigacao:</strong> monitoramento de status + alerta no portal e por email: "Seu WhatsApp desconectou. Reconecte aqui."</p>
+  </div>
+
+  <div class="alert">
+    <span class="label">CFP / Regulatorio</span>
+    <p>CFP tem posicao dura sobre IA em terapia. <strong>Mitigacao:</strong> posicionar como "ferramenta de apoio ao terapeuta", nao "diagnostico". Leitura emocional e "indicador de bem-estar", nao "laudo clinico". Consultar juridico antes do lancamento oficial.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 12. CUSTOS ═══════════ -->
+<section id="custos">
+  <h2>12. Custos de Infra <small>Quanto custa rodar pra 80 mentorandos Black</small></h2>
+
+  <table>
+    <tr><th>Item</th><th>Custo mensal</th><th>Notas</th></tr>
+    <tr><td>Hume AI (80 terapeutas x 60 leituras/mes)</td><td>~R$ 1.680</td><td>$0,0639/min x 4.800 min</td></tr>
+    <tr><td>VPS (16 GB RAM pra 80 instancias)</td><td>~R$ 400-500</td><td>Upgrade da VPS atual</td></tr>
+    <tr><td>Supabase (Pro plan se necessario)</td><td>~R$ 140</td><td>$25/mes — ou free tier se volume baixo</td></tr>
+    <tr><td><strong>Total mensal</strong></td><td class="gold"><strong>~R$ 2.300</strong></td><td></td></tr>
+    <tr><td><strong>Total anual</strong></td><td class="gold"><strong>~R$ 27.600</strong></td><td></td></tr>
+  </table>
+
+  <div class="box gold-border" style="margin-top:24px;">
+    <span class="tag">Relacao custo x receita</span>
+    <p style="font-size:18px;">80 Blacks x R$ 39.900 = <strong>R$ 3.192.000</strong> de receita.</p>
+    <p style="font-size:18px;">Custo anual do Prisma: <strong>R$ 27.600</strong> (<span class="gold">0,86% da receita</span>).</p>
+    <p style="margin-top:12px;">Isso sem contar o impacto em <strong>conversao</strong> — quantos a mais vao entrar na Black porque essa feature existe. Se converter 5 mentorandos a mais por ano por causa do Prisma, ja sao <strong>R$ 199.500 a mais</strong> de receita vs. R$ 27.600 de custo.</p>
+  </div>
+</section>
+
+<!-- ═══════════ RESUMO FINAL ═══════════ -->
+<section>
+  <h2>Resumo Final</h2>
+
+  <div class="box gold-border">
+    <p><strong>O que e:</strong> Modulo no portal ONNIterapeuta que da ao terapeuta Black uma secretaria virtual no WhatsApp dele + leitura emocional por IA + dashboard com evolucao de clientes.</p>
+    <p style="margin-top:8px;"><strong>Pra que:</strong> Aumentar valor percebido do high ticket Black Mentoring (R$ 39.900). Nenhum formador no Brasil oferece isso.</p>
+    <p style="margin-top:8px;"><strong>Como:</strong> Evolution API (ja temos) + Hume AI (API REST, $0,064/min) + Supabase (ja temos) + modulo no portal que a Julia ja esta desenvolvendo.</p>
+    <p style="margin-top:8px;"><strong>Custo:</strong> ~R$ 2.300/mes pra 80 terapeutas. 0,86% da receita Black.</p>
+    <p style="margin-top:8px;"><strong>MVP:</strong> 3 semanas, 3 terapeutas, R$ 275 de custo.</p>
+    <p style="margin-top:8px;"><strong>Proximo passo:</strong> Julia + PM definem escopo do modulo no portal, criam as tabelas no Supabase, conectam com a Evolution API existente, e testam com 3 mentorandos Black.</p>
+  </div>
+</section>
+
+</div><!-- container -->
+
+<div class="page-footer">
+  Architect + AIOX // OMNI Brasil // 12 de Abril de 2026 // Uso Interno
+</div>
+
+</div><!-- content -->
+
+<script>
+function checkPwd(){
+  var p=document.getElementById('pwd').value;
+  if(p==='omni777'){
+    document.getElementById('password-screen').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('pwd-error').style.display='block';
+    document.getElementById('pwd').value='';
+    setTimeout(function(){document.getElementById('pwd-error').style.display='none';},2000);
+  }
+}
+</script>
+</body>
+</html>
