@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard OMNI Brasil — Especificação Técnica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #050505;
+      --dark:     #0D0D0D;
+      --dark-el:  #1A1A1A;
+      --dark-tx:  #2D2D2D;
+      --gold:     #C8A84B;
+      --gold-10:  rgba(200,168,75,0.10);
+      --gold-20:  rgba(200,168,75,0.20);
+      --cream:    #F5F0E8;
+      --cream-70: rgba(245,240,232,0.70);
+      --cream-40: rgba(245,240,232,0.40);
+      --cream-20: rgba(245,240,232,0.20);
+      --gray:     #6B6B6B;
+      --teal:     #2A9D8F;
+      --teal-10:  rgba(42,157,143,0.10);
+      --error:    #E05C5C;
+      --error-10: rgba(224,92,92,0.10);
+      --success:  #4CAF7D;
+      --success-10: rgba(76,175,125,0.10);
+      --warn:     #E8A24B;
+      --sidebar:  260px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar);
+      min-height: 100vh;
+      background: var(--black);
+      border-right: 1px solid var(--dark-tx);
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--dark-tx);
+    }
+
+    .sidebar-logo-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      line-height: 1.2;
+    }
+
+    .sidebar-logo-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.45rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      margin-top: 4px;
+    }
+
+    .sidebar-meta {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--dark-tx);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.06em;
+      color: var(--cream-40);
+      line-height: 1.8;
+    }
+
+    .sidebar-nav { padding: 12px 0; flex: 1; }
+
+    .nav-section-label {
+      padding: 16px 24px 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.42rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-20);
+    }
+
+    .nav-item {
+      display: block;
+      padding: 8px 24px;
+      color: var(--cream-40);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-left: 2px solid transparent;
+      transition: all 150ms;
+      cursor: pointer;
+    }
+
+    .nav-item:hover {
+      color: var(--cream-70);
+      background: var(--dark-el);
+    }
+
+    .nav-item.active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+      background: var(--gold-10);
+    }
+
+    /* ── MAIN ── */
+    .main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      padding: 48px 56px 80px;
+      max-width: 960px;
+    }
+
+    /* ── SECTIONS ── */
+    .spec-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 32px;
+    }
+
+    .spec-section-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .spec-section-title::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .page-subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 24px 0 12px;
+    }
+
+    p { color: var(--cream-70); margin-bottom: 12px; }
+
+    strong { color: var(--cream); font-weight: 600; }
+
+    /* ── STATUS BADGES ── */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid;
+    }
+
+    .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+
+    .status-ok    { color: var(--success); border-color: var(--success); background: var(--success-10); }
+    .status-ok::before { background: var(--success); }
+    .status-warn  { color: var(--warn);    border-color: var(--warn);    background: rgba(232,162,75,0.10); }
+    .status-warn::before { background: var(--warn); }
+    .status-error { color: var(--error);   border-color: var(--error);   background: var(--error-10); }
+    .status-error::before { background: var(--error); }
+
+    /* ── TABLES ── */
+    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+
+    .spec-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--dark-tx);
+      white-space: nowrap;
+    }
+
+    .spec-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(45,45,45,0.5);
+      color: var(--cream-70);
+      font-size: 0.82rem;
+      vertical-align: top;
+    }
+
+    .spec-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .spec-table td.mono { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--cream-70); }
+    .spec-table td.gold { color: var(--gold); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; }
+    .spec-table td.dim  { color: var(--gray); font-size: 0.78rem; }
+
+    /* ── CODE ── */
+    pre {
+      background: var(--black);
+      border: 1px solid var(--dark-tx);
+      border-left: 2px solid var(--gold-20);
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin-bottom: 16px;
+    }
+
+    code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--cream-70);
+      line-height: 1.6;
+    }
+
+    p code, li code, td code {
+      background: var(--dark-el);
+      padding: 1px 5px;
+      font-size: 0.75em;
+      color: var(--gold);
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+      margin-bottom: 10px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* ── TELA CARDS ── */
+    .tela-card {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      border-left: 3px solid var(--dark-tx);
+    }
+
+    .tela-card.ok   { border-left-color: var(--success); }
+    .tela-card.warn { border-left-color: var(--warn); }
+
+    .tela-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .tela-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      min-width: 24px;
+    }
+
+    .tela-name {
+      font-weight: 600;
+      color: var(--cream);
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    /* ── ARCH DIAGRAM ── */
+    .arch {
+      background: var(--black);
+      border: 1px solid var(--dark-tx);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .arch-node {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      padding: 12px 18px;
+      text-align: center;
+    }
+
+    .arch-node-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .arch-node-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.48rem;
+      color: var(--cream-40);
+    }
+
+    .arch-arrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--gold-20);
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .arch-sources {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .arch-source {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      border-left: 2px solid var(--teal);
+      padding: 8px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+    }
+
+    /* ── PENDENCIAS ── */
+    .pendencia {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      border-left: 3px solid var(--warn);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    .pendencia-title {
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pendencia-title .p-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      background: rgba(232,162,75,0.15);
+      color: var(--warn);
+      padding: 2px 7px;
+    }
+
+    .pendencia p { margin-bottom: 4px; font-size: 0.82rem; }
+
+    /* ── REGRAS ── */
+    .regra {
+      background: var(--dark-el);
+      border: 1px solid var(--dark-tx);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .regra-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .regra-text { color: var(--cream-70); font-size: 0.82rem; line-height: 1.6; }
+
+    .regra-text strong { color: var(--cream); }
+
+    /* ── PROIBIDO ── */
+    .proibido {
+      background: var(--error-10);
+      border: 1px solid var(--error);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+    }
+
+    .proibido-icon { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--error); flex-shrink: 0; padding-top: 2px; }
+    .proibido-text { color: var(--cream-70); font-size: 0.82rem; }
+
+    /* ── LIST ── */
+    ul, ol { padding-left: 20px; margin-bottom: 12px; color: var(--cream-70); }
+    li { margin-bottom: 4px; }
+
+    .divider { border: none; border-top: 1px solid var(--dark-tx); margin: 40px 0; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.95);
+      border-bottom: 1px solid var(--dark-tx);
+      padding: 12px 56px;
+      margin-left: var(--sidebar);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-40);
+    }
+
+    .topbar-title span { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-title">OMNI Brasil</div>
+      <div class="sidebar-logo-sub">Dashboard — Especificação Técnica</div>
+    </div>
+    <div class="sidebar-meta">
+      Atualizado: 2026-04-13<br>
+      Responsável: Rafa Mendes<br>
+      Status: 6/8 telas em produção
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Visão Geral</div>
+      <a class="nav-item" href="#arquitetura">Arquitetura</a>
+      <a class="nav-item" href="#infraestrutura">Infraestrutura</a>
+      <a class="nav-item" href="#arquivo">Arquivo Principal</a>
+      <a class="nav-item" href="#design">Design System</a>
+
+      <div class="nav-section-label">Telas</div>
+      <a class="nav-item" href="#tela-1">1. Visão Geral</a>
+      <a class="nav-item" href="#tela-2">2. Gerenciador</a>
+      <a class="nav-item" href="#tela-3">3. AQRC</a>
+      <a class="nav-item" href="#tela-4">4. Closer</a>
+      <a class="nav-item" href="#tela-5">5. SDR</a>
+      <a class="nav-item" href="#tela-6">6. SDR-IA</a>
+      <a class="nav-item" href="#tela-7">7. Tráfego Meta</a>
+      <a class="nav-item" href="#tela-8">8. Tráfego Google</a>
+
+      <div class="nav-section-label">Referência</div>
+      <a class="nav-item" href="#funcoes">Funções JS</a>
+      <a class="nav-item" href="#endpoints">Endpoints API</a>
+      <a class="nav-item" href="#pendencias">Pendências</a>
+      <a class="nav-item" href="#regras">Regras de Manutenção</a>
+    </nav>
+  </nav>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title">OMNI Brasil &nbsp;/&nbsp; <span>Dashboard — Spec Técnica</span></div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main" style="padding-top:80px">
+
+    <h1>Dashboard OMNI Brasil</h1>
+    <div class="page-subtitle">Especificação Técnica Completa — Fonte Única de Verdade</div>
+
+    <!-- ARQUITETURA -->
+    <section class="spec-section" id="arquitetura">
+      <div class="spec-section-title">1. Arquitetura</div>
+
+      <div class="arch">
+        <div class="arch-sources">
+          <div class="arch-source">Pipedrive API</div>
+          <div class="arch-source">Meta Ads API</div>
+          <div class="arch-source">Google Ads API</div>
+        </div>
+        <div class="arch-arrow">──►</div>
+        <div class="arch-node">
+          <div class="arch-node-title">API Express</div>
+          <div class="arch-node-sub">VPS · Porta 3030</div>
+        </div>
+        <div class="arch-arrow">──►</div>
+        <div class="arch-node">
+          <div class="arch-node-title">Nginx</div>
+          <div class="arch-node-sub">dash.omnihypnosis.com.br</div>
+        </div>
+        <div class="arch-arrow">──►</div>
+        <div class="arch-node">
+          <div class="arch-node-title">Browser</div>
+          <div class="arch-node-sub">dashboard.html</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Fluxo de dados</div>
+        <ol>
+          <li>Browser acessa <code>http://dash.omnihypnosis.com.br/dashboard-omni/dashboard.html</code></li>
+          <li>Após login, <code>loadAll()</code> dispara 15 requests simultâneos para a API</li>
+          <li>A API Express (porta 3030) busca dados em Pipedrive, Meta Ads e Google Ads</li>
+          <li>Cada endpoint tem cache em memória (TTL 5–15 min) para evitar rate limit</li>
+          <li>As funções <code>render*()</code> recebem os dados e atualizam o DOM</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- INFRAESTRUTURA -->
+    <section class="spec-section" id="infraestrutura">
+      <div class="spec-section-title">2. Infraestrutura</div>
+
+      <h3>VPS</h3>
+      <table class="spec-table">
+        <tr><td>Host</td><td class="mono">michael@76.13.169.211</td></tr>
+        <tr><td>SO</td><td>Linux (Ubuntu)</td></tr>
+        <tr><td>Processo API</td><td>Node.js direto (sem PM2)</td></tr>
+      </table>
+
+      <h3>Diretórios críticos no VPS</h3>
+      <table class="spec-table">
+        <thead><tr><th>Diretório</th><th>Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">/home/michael/omni_brasil/apps/dashboard-omni-api/</td><td>Código da API Express</td></tr>
+          <tr><td class="mono">/home/michael/omni_brasil/apps/dashboard-omni-api/public/</td><td>HTML servido pela API</td></tr>
+          <tr><td class="mono">/tmp/omni-apresentacoes/dashboard-omni/</td><td><strong>HTML servido pelo Nginx (URL principal)</strong></td></tr>
+          <tr><td class="mono">/home/michael/omni_brasil/apps/dashboard-omni-api/routes/</td><td>Rotas: pipedrive.js, meta.js, google.js</td></tr>
+          <tr><td class="mono">/home/michael/omni_brasil/apps/dashboard-omni-api/services/</td><td>Integrações com APIs externas</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Processo de Deploy</h3>
+      <pre><code># 1. Editar SEMPRE o arquivo local (fonte da verdade)
+apps/dashboard-omni/dashboard.html
+
+# 2. Commitar no repositório
+git add apps/dashboard-omni/dashboard.html
+git commit -m "fix/feat: descrição"
+
+# 3. Copiar para o Nginx (arquivo que o browser carrega)
+scp apps/dashboard-omni/dashboard.html \
+  michael@76.13.169.211:/tmp/omni-apresentacoes/dashboard-omni/dashboard.html</code></pre>
+
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text"><strong>Nunca editar diretamente no VPS.</strong> A fonte da verdade é sempre o arquivo local no repositório.</div>
+      </div>
+
+      <h3>SSL (pendente)</h3>
+      <div class="pendencia">
+        <div class="pendencia-title"><span class="p-label">Pendente</span> HTTPS inativo — certificado sem permissão</div>
+        <p><strong>Causa:</strong> Nginx não roda como root e não consegue ler o <code>privkey1.pem</code></p>
+        <p><strong>Solução (Michael, como sudo no VPS):</strong></p>
+        <pre style="margin-top:8px"><code>sudo chmod 644 /etc/letsencrypt/archive/go.omnihypnosis.com.br/privkey1.pem
+sudo systemctl restart nginx</code></pre>
+      </div>
+    </section>
+
+    <!-- ARQUIVO -->
+    <section class="spec-section" id="arquivo">
+      <div class="spec-section-title">3. Arquivo Principal</div>
+
+      <div class="card">
+        <div class="card-title">Localização</div>
+        <code>apps/dashboard-omni/dashboard.html</code> — único arquivo (~3.200 linhas)
+      </div>
+
+      <table class="spec-table">
+        <thead><tr><th>Linhas (aprox.)</th><th>Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1–11</td><td>Head — fontes Google, Chart.js CDN</td></tr>
+          <tr><td class="mono">12–980</td><td>Style — todo o CSS (variáveis, componentes, telas)</td></tr>
+          <tr><td class="mono">981–1986</td><td>Body — HTML das telas (sidebar, telas, modais)</td></tr>
+          <tr><td class="mono">1987–3240</td><td>Script — todo o JavaScript</td></tr>
+        </tbody>
+      </table>
+
+      <pre><code>// Constante da API (linha ~2270)
+const API = ''; // URL relativa — mesmo domínio em produção
+// Para desenvolvimento local com Live Server:
+// const API = 'http://76.13.169.211:3030';</code></pre>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="spec-section" id="design">
+      <div class="spec-section-title">4. Design System</div>
+
+      <h3>Variáveis de Cor</h3>
+      <table class="spec-table">
+        <thead><tr><th>Variável</th><th>Valor</th><th>Uso</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">--black</td><td><span style="display:inline-block;width:12px;height:12px;background:#050505;border:1px solid #333;vertical-align:middle;margin-right:6px"></span><code>#050505</code></td><td>Sidebar, fundos mais escuros</td></tr>
+          <tr><td class="mono">--dark</td><td><span style="display:inline-block;width:12px;height:12px;background:#0D0D0D;border:1px solid #333;vertical-align:middle;margin-right:6px"></span><code>#0D0D0D</code></td><td>Fundo principal</td></tr>
+          <tr><td class="mono">--gold</td><td><span style="display:inline-block;width:12px;height:12px;background:#C8A84B;vertical-align:middle;margin-right:6px"></span><code>#C8A84B</code></td><td>Cor primária OMNI — destaques, títulos</td></tr>
+          <tr><td class="mono">--cream</td><td><span style="display:inline-block;width:12px;height:12px;background:#F5F0E8;vertical-align:middle;margin-right:6px"></span><code>#F5F0E8</code></td><td>Texto principal</td></tr>
+          <tr><td class="mono">--teal</td><td><span style="display:inline-block;width:12px;height:12px;background:#2A9D8F;vertical-align:middle;margin-right:6px"></span><code>#2A9D8F</code></td><td>Cor secundária — SDR, SDR-IA</td></tr>
+          <tr><td class="mono">--success</td><td><span style="display:inline-block;width:12px;height:12px;background:#4CAF7D;vertical-align:middle;margin-right:6px"></span><code>#4CAF7D</code></td><td>Positivo / bom</td></tr>
+          <tr><td class="mono">--error</td><td><span style="display:inline-block;width:12px;height:12px;background:#E05C5C;vertical-align:middle;margin-right:6px"></span><code>#E05C5C</code></td><td>Erros, alertas</td></tr>
+          <tr><td class="mono">--warn</td><td><span style="display:inline-block;width:12px;height:12px;background:#E8A24B;vertical-align:middle;margin-right:6px"></span><code>#E8A24B</code></td><td>Atenção</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Componentes CSS reutilizáveis</h3>
+      <table class="spec-table">
+        <thead><tr><th>Classe</th><th>Uso</th><th>Gerado via JS?</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">.hfunnel</td><td>Funil horizontal escalonado — Closer, SDR, SDR-IA, Tráfego</td><td class="gold">Sim — buildHfunnel()</td></tr>
+          <tr><td class="mono">.kpi-card</td><td>Cards KPI com label, valor e delta</td><td>Não (HTML fixo)</td></tr>
+          <tr><td class="mono">.panel</td><td>Container padrão de seção com fundo dark-el e borda</td><td>Não</td></tr>
+          <tr><td class="mono">.aqrc-table</td><td>Tabela AQRC — usada com .table-scroll-v para scroll</td><td>Parcialmente</td></tr>
+          <tr><td class="mono">.table-scroll-v</td><td>Wrapper com scroll vertical (max-height: 420px) — AQRC diário</td><td>Não</td></tr>
+          <tr><td class="mono">.metric-mini</td><td>Métricas em linha — Tráfego Meta / Google</td><td>Não</td></tr>
+          <tr><td class="mono">.funnel-row</td><td>Funil vertical com barras horizontais — Visão Geral</td><td>Parcialmente</td></tr>
+          <tr><td class="mono">.tag</td><td>Badges: .tag-up .tag-down .tag-gold .tag-gray</td><td>Não</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="divider">
+
+    <!-- TELAS -->
+    <section class="spec-section" id="tela-1">
+      <div class="spec-section-title">5. Telas</div>
+
+      <div class="tela-card ok">
+        <div class="tela-header">
+          <span class="tela-num">01</span>
+          <span class="tela-name">Visão Geral</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-visao-geral</code> &nbsp;|&nbsp; <strong>Dados:</strong> Pipedrive + Meta Ads</p>
+        <h3>Endpoints consumidos</h3>
+        <table class="spec-table">
+          <thead><tr><th>Endpoint</th><th>O que alimenta</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">/api/pipedrive/kpis</td><td>5 KPI cards (faturamento, ROAS, CAC, etc.)</td></tr>
+            <tr><td class="mono">/api/pipedrive/funnel</td><td>Funis SDR e Closer</td></tr>
+            <tr><td class="mono">/api/meta/overview</td><td>Métricas de tráfego (clicks, CPM, CTR, leads)</td></tr>
+            <tr><td class="mono">/api/meta/daily</td><td>Gráfico de linha (investimento + leads por dia)</td></tr>
+          </tbody>
+        </table>
+        <h3>Funções JS</h3>
+        <p><code>renderKPIs(d)</code> · <code>renderMetaOverview(d)</code> · <code>renderVisaoGeralFunnels(funnel, meta)</code> · <code>renderMetaDaily(data)</code></p>
+      </div>
+
+      <div class="tela-card warn" id="tela-2">
+        <div class="tela-header">
+          <span class="tela-num">02</span>
+          <span class="tela-name">Gerenciador</span>
+          <span class="status status-warn">Parcial — só Meta Ads</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-gerenciador</code> &nbsp;|&nbsp; <strong>Dados:</strong> Meta Ads + Pipedrive</p>
+        <h3>Endpoints consumidos</h3>
+        <table class="spec-table">
+          <thead><tr><th>Endpoint</th><th>O que alimenta</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">/api/meta/campaigns</td><td>Tabela hierárquica (fonte → campanha → conjunto → anúncio)</td></tr>
+            <tr><td class="mono">/api/pipedrive/funnel</td><td>Métricas de funil cruzadas por origem</td></tr>
+          </tbody>
+        </table>
+        <h3>Payload da API (por anúncio)</h3>
+        <pre><code>{ "campaign": "Nome", "adset": "Nome", "ad": "Nome",
+  "spend": 32.19, "leads": 0, "cpl": "—",
+  "impressions": 428, "clicks": 7, "ctr": "1.64", "cpc": "4.60", "cpm": "75.21" }</code></pre>
+        <h3>Pendência</h3>
+        <p>Adicionar <strong>Google Ads</strong> e <strong>Orgânico</strong> como fontes. Requer incluir <code>/api/google/campaigns</code> no agrupamento e criar lógica de "Orgânico" (deals sem utm de mídia paga).</p>
+        <p><strong>Função JS:</strong> <code>renderGerenciador(campaigns, funnelData)</code></p>
+      </div>
+
+      <div class="tela-card ok" id="tela-3">
+        <div class="tela-header">
+          <span class="tela-num">03</span>
+          <span class="tela-name">AQRC</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-aqrc</code> &nbsp;|&nbsp; <strong>Endpoint:</strong> <code>/api/pipedrive/aqrc</code></p>
+        <h3>Mapeamento AQRC</h3>
+        <table class="spec-table">
+          <thead><tr><th>Letra</th><th>Campo Pipedrive</th><th>Significado</th></tr></thead>
+          <tbody>
+            <tr><td class="gold">A</td><td class="mono">[OBA] Data MQL</td><td>Leads que entraram (data de entrada na etapa MQL)</td></tr>
+            <tr><td class="gold">Q</td><td class="mono">[OBA] Data Reunião Agendada</td><td>Marcaram reunião</td></tr>
+            <tr><td class="gold">R</td><td class="mono">[OBA] Data Reunião Realizada</td><td>Realizaram reunião</td></tr>
+            <tr><td class="gold">C</td><td class="mono">[OBA] Data de Ganho</td><td>Compraram</td></tr>
+          </tbody>
+        </table>
+        <h3>Lógica de % (implementada)</h3>
+        <table class="spec-table">
+          <tbody>
+            <tr><td class="gold">% A</td><td>Exibe <code>—</code> (A é a base, sem denominador anterior)</td></tr>
+            <tr><td class="gold">% Q</td><td>Q ÷ A × 100 (conversão MQL → Reunião Agendada)</td></tr>
+            <tr><td class="gold">% R</td><td>R ÷ Q × 100 (conversão Agendada → Realizada)</td></tr>
+            <tr><td class="gold">Conv.</td><td>C ÷ A × 100 (conversão total MQL → Compra)</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Tabelas:</strong> <code>#aqrc-diario</code> (scroll vertical <code>.table-scroll-v</code>) · <code>#aqrc-semanal</code> · <code>#aqrc-mensal</code></p>
+      </div>
+
+      <div class="tela-card ok" id="tela-4">
+        <div class="tela-header">
+          <span class="tela-num">04</span>
+          <span class="tela-name">Painel Closer</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-closer</code> &nbsp;|&nbsp; <strong>Endpoint:</strong> <code>/api/pipedrive/closers</code> &nbsp;|&nbsp; <strong>Pipeline:</strong> 21</p>
+        <h3>Etapas do funil (Pipeline 21)</h3>
+        <table class="spec-table">
+          <thead><tr><th>Stage ID</th><th>Etapa</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">112</td><td>Reunião Agendada</td></tr>
+            <tr><td class="mono">113</td><td>Reunião Realizada</td></tr>
+            <tr><td class="mono">116</td><td>Oportunidade</td></tr>
+            <tr><td class="mono">114</td><td>Negociação</td></tr>
+            <tr><td class="mono">280</td><td>Venda</td></tr>
+          </tbody>
+        </table>
+        <h3>Payload da API (por closer)</h3>
+        <pre><code>{ "name": "Nome Closer", "avatar": null,
+  "r_agendadas": 31, "r_realizadas": 18,
+  "oportunidades": 10, "negociacoes": 2, "vendas": 2,
+  "faturamento": 27000, "noshow": 42 }</code></pre>
+        <p><strong>Funções:</strong> <code>renderClosers(data)</code> · <code>buildHfunnel(stages, color)</code> · <code>agentHeader(...)</code></p>
+        <p><strong>Pendência:</strong> Scroll vertical da tela completa — conteúdo inferior pode ficar cortado.</p>
+      </div>
+
+      <div class="tela-card ok" id="tela-5">
+        <div class="tela-header">
+          <span class="tela-num">05</span>
+          <span class="tela-name">Painel SDR</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-sdr</code> &nbsp;|&nbsp; <strong>Endpoint:</strong> <code>/api/pipedrive/sdrs</code> &nbsp;|&nbsp; <strong>Pipeline:</strong> 65</p>
+        <h3>Payload da API (por SDR)</h3>
+        <pre><code>{ "name": "Nome SDR", "avatar": null,
+  "mql": 584, "tentativas": 212, "conectados": 16,
+  "avaliados": 1, "r_agendadas": 0, "r_realizadas": 0,
+  "vendas": 0, "faturamento": 0, "noshow": 0 }</code></pre>
+        <p><strong>Campos opcionais</strong> (aparecem no funil quando > 0): <code>leads_gerais</code>, <code>conectado_ia</code> — precisam ser adicionados no backend.</p>
+        <p><strong>Pendência:</strong> Scroll da tela completa.</p>
+      </div>
+
+      <div class="tela-card ok" id="tela-6">
+        <div class="tela-header">
+          <span class="tela-num">06</span>
+          <span class="tela-name">Painel SDR-IA</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-sdr-ia</code> &nbsp;|&nbsp; <strong>Endpoint:</strong> <code>/api/pipedrive/sdr-ia</code> &nbsp;|&nbsp; <strong>Pipeline:</strong> 67</p>
+        <h3>Payload da API</h3>
+        <pre><code>{ "ok": true,
+  "total_leads": 715, "contato_ia": 402, "mql": 6,
+  "conectados": 0, "avaliados": 0,
+  "r_agendadas": 0, "r_realizadas": 0, "noshow": 0 }</code></pre>
+        <p><strong>Campos opcionais</strong> (aparecem quando > 0): <code>tentativas</code>, <code>oportunidades</code>, <code>negociacoes</code>, <code>vendas</code></p>
+        <p><strong>Pendência:</strong> Scroll da tela completa.</p>
+      </div>
+
+      <div class="tela-card ok" id="tela-7">
+        <div class="tela-header">
+          <span class="tela-num">07</span>
+          <span class="tela-name">Tráfego Meta Ads</span>
+          <span class="status status-ok">Funcionando</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-meta</code></p>
+        <h3>Endpoints</h3>
+        <table class="spec-table">
+          <thead><tr><th>Endpoint</th><th>O que alimenta</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">/api/meta/overview</td><td>KPIs — Investido, Leads, CPL, CPM, CPC, CTR</td></tr>
+            <tr><td class="mono">/api/meta/funnel-lp</td><td>Funil Landing Page (Impressões → Cliques → View Página → Leads)</td></tr>
+            <tr><td class="mono">/api/meta/funnel-form</td><td>Funil Form Nativo (Impressões → Cliques → Leads)</td></tr>
+            <tr><td class="mono">/api/meta/daily</td><td>Gráfico de investimento diário</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Pendência:</strong> Scroll da tela completa — parte inferior não visível.</p>
+      </div>
+
+      <div class="tela-card warn" id="tela-8">
+        <div class="tela-header">
+          <span class="tela-num">08</span>
+          <span class="tela-name">Tráfego Google Ads</span>
+          <span class="status status-warn">A verificar</span>
+        </div>
+        <p><strong>ID HTML:</strong> <code>#screen-google</code> &nbsp;|&nbsp; <strong>API:</strong> Google Ads direta</p>
+        <h3>Payload real da API (<code>/api/google/overview</code>)</h3>
+        <pre><code>{ "ok": true, "spend": "5494.50", "clicks": 1216,
+  "impressions": 23164, "leads": 142,
+  "cpc": "4.52", "cpm": "237.20", "ctr": "5.25", "cpl": "38.69" }</code></pre>
+        <p><strong>Atenção:</strong> Todos os campos numéricos chegam como <strong>string</strong>. A função <code>renderGoogleOverview</code> faz <code>parseFloat</code> e <code>parseInt</code> corretamente.</p>
+        <p><strong>Pendência:</strong> Verificar se a tela não renderiza por falta de scroll ou por erro JS. Checar console do browser.</p>
+      </div>
+    </section>
+
+    <!-- FUNÇÕES JS -->
+    <section class="spec-section" id="funcoes">
+      <div class="spec-section-title">6. Mapa de Funções JavaScript</div>
+      <table class="spec-table">
+        <thead><tr><th>Função</th><th>Linha</th><th>Entrada</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">loadAll()</td><td class="dim">~2295</td><td class="dim">—</td><td>Dispara 15 fetches, chama todas as render*</td></tr>
+          <tr><td class="mono">getDateRange()</td><td class="dim">~2272</td><td class="dim">—</td><td>Retorna {from, to} baseado no filtro</td></tr>
+          <tr><td class="mono">navigate(screen)</td><td class="dim">~2016</td><td class="dim">string ID</td><td>Ativa a tela correspondente</td></tr>
+          <tr><td class="mono">renderKPIs(d)</td><td class="dim">~2378</td><td class="dim">/kpis</td><td>Popula os 5 KPI cards</td></tr>
+          <tr><td class="mono">renderMetaOverview(d)</td><td class="dim">~2388</td><td class="dim">/meta/overview</td><td>Popula métricas Meta</td></tr>
+          <tr><td class="mono">renderGerenciador(...)</td><td class="dim">~2420</td><td class="dim">campaigns, funnel</td><td>Gera tabela hierárquica expansível</td></tr>
+          <tr><td class="mono">renderVisaoGeralFunnels(...)</td><td class="dim">~2675</td><td class="dim">funnel, meta</td><td>Popula funis SDR/Closer na Visão Geral</td></tr>
+          <tr><td class="mono gold">buildHfunnel(stages, color)</td><td class="dim">~2794</td><td class="dim">[{lbl,val}], cor</td><td>Retorna HTML do funil escalonado</td></tr>
+          <tr><td class="mono gold">agentHeader(...)</td><td class="dim">~2824</td><td class="dim">nome, fat, ns, avatar, cor</td><td>Retorna HTML do cabeçalho do agente</td></tr>
+          <tr><td class="mono">renderClosers(data)</td><td class="dim">~2840</td><td class="dim">/closers</td><td>Gera funis por closer em #closer-vert-chart</td></tr>
+          <tr><td class="mono">renderSDRs(data)</td><td class="dim">~2893</td><td class="dim">/sdrs</td><td>Gera funis por SDR em #sdr-vert-chart</td></tr>
+          <tr><td class="mono">renderSDRIA(data)</td><td class="dim">~2929</td><td class="dim">/sdr-ia</td><td>Gera funil único em #sdr-ia-vert-chart</td></tr>
+          <tr><td class="mono">renderAQRC(data)</td><td class="dim">~2975</td><td class="dim">/aqrc</td><td>Popula tabelas diário / semanal / mensal</td></tr>
+          <tr><td class="mono">renderMetaFunnels(...)</td><td class="dim">~3054</td><td class="dim">lpData, formData</td><td>Popula funis LP e Form Nativo</td></tr>
+          <tr><td class="mono">renderMetaDaily(data)</td><td class="dim">~3086</td><td class="dim">/meta/daily</td><td>Atualiza gráficos de linha</td></tr>
+          <tr><td class="mono">renderGoogleOverview(d)</td><td class="dim">~3168</td><td class="dim">/google/overview</td><td>Popula KPIs Google</td></tr>
+          <tr><td class="mono">renderGoogleDaily(data)</td><td class="dim">~3200</td><td class="dim">/google/daily</td><td>Atualiza gráfico Google</td></tr>
+          <tr><td class="mono">renderGoogleCampaigns(data)</td><td class="dim">~3220</td><td class="dim">/google/campaigns</td><td>Popula tabela de campanhas Google</td></tr>
+          <tr><td class="mono">fmtBRL(n, dec)</td><td class="dim">~2362</td><td class="dim">number</td><td>Formata como 1.234,56</td></tr>
+          <tr><td class="mono">fmtInt(n)</td><td class="dim">~2366</td><td class="dim">number</td><td>Formata inteiro com . como separador</td></tr>
+          <tr><td class="mono">noshowColor(ns)</td><td class="dim">~2785</td><td class="dim">number %</td><td>Retorna cor CSS por % de no-show</td></tr>
+          <tr><td class="mono">exportGerenciadorCSV()</td><td class="dim">~2640</td><td class="dim">—</td><td>Download CSV da tabela Gerenciador</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ENDPOINTS -->
+    <section class="spec-section" id="endpoints">
+      <div class="spec-section-title">7. Endpoints da API</div>
+      <p><strong>Base:</strong> <code>http://dash.omnihypnosis.com.br/api/</code> &nbsp;|&nbsp; <strong>Params:</strong> <code>?from=YYYY-MM-DD&amp;to=YYYY-MM-DD</code></p>
+      <p style="margin-bottom:16px">Limpar cache: <code>POST /cache/clear</code></p>
+      <table class="spec-table">
+        <thead><tr><th>Endpoint</th><th>Cache</th><th>O que retorna</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">/api/pipedrive/funnel</td><td class="dim">10 min</td><td>Funis SDR e Closer agregados</td></tr>
+          <tr><td class="mono">/api/pipedrive/kpis</td><td class="dim">5 min</td><td>Faturamento, vendas, ticket médio</td></tr>
+          <tr><td class="mono">/api/pipedrive/closers</td><td class="dim">10 min</td><td>Array de closers com métricas</td></tr>
+          <tr><td class="mono">/api/pipedrive/sdrs</td><td class="dim">10 min</td><td>Array de SDRs com métricas</td></tr>
+          <tr><td class="mono">/api/pipedrive/sdr-ia</td><td class="dim">10 min</td><td>Objeto único SDR-IA agregado</td></tr>
+          <tr><td class="mono">/api/pipedrive/aqrc</td><td class="dim">10 min</td><td>Arrays daily, weekly, monthly</td></tr>
+          <tr><td class="mono">/api/pipedrive/pages</td><td class="dim">10 min</td><td>Array de páginas com métricas</td></tr>
+          <tr><td class="mono">/api/meta/overview</td><td class="dim">10 min</td><td>KPIs Meta Ads agregados</td></tr>
+          <tr><td class="mono">/api/meta/campaigns</td><td class="dim">10 min</td><td>Array de anúncios com métricas</td></tr>
+          <tr><td class="mono">/api/meta/funnel-lp</td><td class="dim">10 min</td><td>Funil Landing Page</td></tr>
+          <tr><td class="mono">/api/meta/funnel-form</td><td class="dim">10 min</td><td>Funil Form Nativo</td></tr>
+          <tr><td class="mono">/api/meta/daily</td><td class="dim">10 min</td><td>Array diário {date, spend, leads}</td></tr>
+          <tr><td class="mono">/api/google/overview</td><td class="dim">10 min</td><td>KPIs Google (campos como string — usar parseFloat)</td></tr>
+          <tr><td class="mono">/api/google/campaigns</td><td class="dim">15 min</td><td>Array de campanhas Google</td></tr>
+          <tr><td class="mono">/api/google/daily</td><td class="dim">10 min</td><td>Array diário Google</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- PENDENCIAS -->
+    <section class="spec-section" id="pendencias">
+      <div class="spec-section-title">8. Pendências em Aberto</div>
+
+      <div class="pendencia">
+        <div class="pendencia-title"><span class="p-label">P1</span> Scroll nas telas Closer, SDR, SDR-IA, Meta, Google</div>
+        <p><strong>Problema:</strong> Conteúdo inferior não visível, sem scrollbar na tela inteira.</p>
+        <p><strong>Causa:</strong> A <code>.main</code> tem <code>overflow-y: auto</code> mas pode estar sendo cortada por <code>overflow: hidden</code> no body.</p>
+        <p><strong>Solução:</strong> Adicionar <code>overflow-y: auto</code> no <code>.content</code> ou garantir <code>min-height: auto</code> nas telas.</p>
+      </div>
+
+      <div class="pendencia">
+        <div class="pendencia-title"><span class="p-label">P2</span> Gerenciador: adicionar Google Ads e Orgânico</div>
+        <p><strong>Problema:</strong> Tabela só exibe Meta Ads.</p>
+        <p><strong>O que precisa:</strong></p>
+        <ol style="margin-top:8px">
+          <li>Incluir <code>/api/google/campaigns</code> no <code>loadAll()</code> e passar para <code>renderGerenciador</code></li>
+          <li>Adicionar agrupamento "Google Ads" na hierarquia Fonte → Campanha → Conjunto → Anúncio</li>
+          <li>"Orgânico" = deals Pipedrive sem <code>utm_source</code> de mídia paga — requer endpoint novo ou lógica adicional</li>
+        </ol>
+      </div>
+
+      <div class="pendencia">
+        <div class="pendencia-title"><span class="p-label">P3</span> SSL/HTTPS</div>
+        <p><strong>Causa:</strong> Nginx não roda como root, não consegue ler <code>privkey1.pem</code>.</p>
+        <p><strong>Solução (Michael, com sudo):</strong></p>
+        <pre style="margin-top:8px"><code>sudo chmod 644 /etc/letsencrypt/archive/go.omnihypnosis.com.br/privkey1.pem
+sudo systemctl restart nginx</code></pre>
+      </div>
+
+      <div class="pendencia">
+        <div class="pendencia-title"><span class="p-label">P4</span> Tela Google Ads — verificar renderização</div>
+        <p><strong>A investigar:</strong> API retorna dados corretos. Pode ser P1 (scroll) causando percepção de "não funciona", ou erro JS no console do browser.</p>
+      </div>
+    </section>
+
+    <!-- REGRAS -->
+    <section class="spec-section" id="regras">
+      <div class="spec-section-title">9. Regras de Manutenção</div>
+
+      <h3>Como fazer uma mudança segura</h3>
+
+      <div class="regra">
+        <div class="regra-icon">01</div>
+        <div class="regra-text"><strong>Identificar:</strong> usar Grep no arquivo para encontrar a função JS ou classe CSS afetada antes de qualquer edição. Ver Seção 6 (Mapa de Funções).</div>
+      </div>
+      <div class="regra">
+        <div class="regra-icon">02</div>
+        <div class="regra-text"><strong>Ler o bloco completo</strong> antes de editar — nunca editar código que não foi lido.</div>
+      </div>
+      <div class="regra">
+        <div class="regra-icon">03</div>
+        <div class="regra-text"><strong>Editar apenas o bloco identificado</strong> — não tocar no que está ao redor.</div>
+      </div>
+      <div class="regra">
+        <div class="regra-icon">04</div>
+        <div class="regra-text"><strong>Testar no browser</strong> antes do commit. Verificar todas as telas que poderiam ser afetadas.</div>
+      </div>
+      <div class="regra">
+        <div class="regra-icon">05</div>
+        <div class="regra-text"><strong>Commitar</strong> com mensagem descritiva, depois fazer deploy via <code>scp</code> para o Nginx.</div>
+      </div>
+
+      <h3>O que NUNCA fazer</h3>
+
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text">Editar diretamente no VPS — a fonte da verdade é sempre o repositório local.</div>
+      </div>
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text">Editar classes CSS globais (<code>.panel</code>, <code>.kpi-card</code>, <code>.hfunnel</code>) sem verificar o impacto em todas as 8 telas.</div>
+      </div>
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text">Editar funções helper (<code>buildHfunnel</code>, <code>agentHeader</code>, <code>fmtBRL</code>) sem rastrear todos os usos com Grep.</div>
+      </div>
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text">Criar backups inline no arquivo — backups ficam em <code>apps/dashboard-omni/backups/</code>.</div>
+      </div>
+      <div class="proibido">
+        <div class="proibido-icon">✕</div>
+        <div class="proibido-text">Editar em cima de um backup — confirmar sempre que o arquivo aberto é <code>apps/dashboard-omni/dashboard.html</code>.</div>
+      </div>
+
+      <h3>Quando adicionar campo novo da API</h3>
+      <div class="card">
+        <ol>
+          <li>Verificar o payload real: <code>curl -s 'http://76.13.169.211:3030/api/ROTA?from=...&amp;to=...'</code></li>
+          <li>Adicionar o campo na função <code>render*</code> correspondente com fallback: <code>data.campo_novo || 0</code></li>
+          <li><strong>Não alterar</strong> o <code>loadAll()</code> nem os endpoints — mudança só no render</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Highlight nav item on scroll
+    const sections = document.querySelectorAll('[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navItems.forEach(n => n.classList.remove('active'));
+          const active = document.querySelector(`.nav-item[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+</body>
+</html>
