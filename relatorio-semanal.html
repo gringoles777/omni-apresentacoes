@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Relatorio Semanal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245, 240, 232, 0.70);
+    --color-cream-50: rgba(245, 240, 232, 0.50);
+    --color-teal: #2A9D8F;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+  body { background: var(--color-black); color: var(--color-cream); font-family: var(--font-body); min-height: 100vh; }
+
+  /* Gate */
+  #gate { position:fixed; inset:0; background:var(--color-black); display:flex; align-items:center; justify-content:center; z-index:999; flex-direction:column; gap:24px; }
+  #gate.hidden { display:none; }
+  #gate .logo { font-family:var(--font-display); font-size:28px; letter-spacing:6px; color:var(--color-gold); text-transform:uppercase; }
+  #gate .sub { font-size:12px; letter-spacing:3px; color:var(--color-cream-50); text-transform:uppercase; }
+  #gate input { background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); color:var(--color-cream); padding:14px 20px; border-radius:8px; font-size:16px; text-align:center; width:280px; outline:none; }
+  #gate input:focus { border-color:var(--color-gold); }
+  #gate .error { color:#e74c3c; font-size:13px; display:none; }
+
+  #app { display:none; }
+  #app.visible { display:block; }
+
+  header { padding:40px 32px 24px; max-width:900px; margin:0 auto; }
+  header h1 { font-family:var(--font-display); font-size:32px; color:var(--color-gold); letter-spacing:4px; text-transform:uppercase; }
+  header .period { font-size:14px; color:var(--color-cream-50); margin-top:8px; letter-spacing:1px; }
+
+  .stats-bar { display:flex; gap:16px; flex-wrap:wrap; padding:0 32px 24px; max-width:900px; margin:0 auto; }
+  .stat-card { background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); border-radius:12px; padding:16px 20px; flex:1; min-width:120px; }
+  .stat-card .num { font-family:var(--font-display); font-size:28px; color:var(--color-gold); }
+  .stat-card .label { font-size:11px; color:var(--color-cream-50); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+  .authors-section { padding:0 32px 24px; max-width:900px; margin:0 auto; }
+  .authors-section h2 { font-family:var(--font-display); font-size:18px; color:var(--color-cream-70); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  .stat-author { font-size:14px; color:var(--color-cream-70); margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+  .stat-dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+
+  .entries { padding:0 32px 40px; max-width:900px; margin:0 auto; }
+  .entries h2 { font-family:var(--font-display); font-size:18px; color:var(--color-cream-70); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+
+  .entry { display:flex; gap:14px; padding:16px; background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); border-radius:12px; margin-bottom:10px; transition:border-color 0.2s; }
+  .entry:hover { border-color:var(--color-gold); }
+  .entry-avatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:#fff; flex-shrink:0; }
+  .entry-content { flex:1; }
+  .entry-header { display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap; }
+  .entry-badge { font-size:11px; padding:3px 10px; border-radius:20px; color:#fff; font-weight:500; }
+  .entry-scope { font-size:11px; color:var(--color-gold-light); background:rgba(200,168,75,0.15); padding:3px 8px; border-radius:4px; }
+  .entry-date { font-size:11px; color:var(--color-cream-50); margin-left:auto; }
+  .entry-msg { font-size:14px; color:var(--color-cream); line-height:1.5; }
+  .entry-author { font-size:12px; color:var(--color-cream-50); margin-top:4px; }
+
+  .footer { text-align:center; padding:32px; font-size:11px; color:var(--color-cream-50); letter-spacing:1px; }
+
+  @media (max-width:600px) {
+    header { padding:24px 16px 16px; }
+    .stats-bar, .authors-section, .entries { padding-left:16px; padding-right:16px; }
+    .stat-card { min-width:80px; padding:12px; }
+    .entry { padding:12px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Relatorio Semanal</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="error" id="err">Senha incorreta</div>
+</div>
+
+<div id="app">
+  <header>
+    <h1>Relatorio Semanal</h1>
+    <div class="period">Periodo: 06/04/2026 — 13/04/2026</div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-card"><div class="num">87</div><div class="label">Commits</div></div>
+    <div class="stat-card"><div class="num">26</div><div class="label">Novidades</div></div>
+    <div class="stat-card"><div class="num">10</div><div class="label">Correcoes</div></div>
+    <div class="stat-card"><div class="num">27</div><div class="label">Manutencao</div></div>
+    <div class="stat-card"><div class="num">14</div><div class="label">Docs</div></div>
+  </div>
+
+  <div class="authors-section">
+    <h2>Por Pessoa</h2>
+    <div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>36</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#2A9D8F'></span>Rafa Mendes: <strong>23</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#E87461'></span>Julia: <strong>13</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#6B6B6B'></span>AIOXsquad-bot: <strong>7</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>6</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#9B59B6'></span>Fernanda: <strong>1</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#6B6B6B'></span>AIOXsquad: <strong>1</strong> commits</div>
+  </div>
+
+  <div class="entries">
+    <h2>O Que Aconteceu</h2>
+            <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">13/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">13/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">13/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-omniterapeuta</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">aplicar spec v1.2 consolidada</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-omniterapeuta</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">fechar MOD-PAC reformulado + Area Admin + Caminho A</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-omniterapeuta</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">atualizar decisoes pendentes — modulo IG</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-omniterapeuta</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">salvar decisoes pendentes para spec v1.2</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-omniterapeuta</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">spec v1.1 + rename terapeuta -&gt; omniterapeuta</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (847d201 fix: restore claude-code-mastery validation (#2))</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (8fe867f fix: restore runner-lib for validate-squad)</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (915f834 feat(clickup-ops): add Claude Code slash commands for clickup-ops squad)</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>w0003</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">refatorar loop + corrigir modelo IA + validar primeiro disparo</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>gerenciador</span>
+              <span class="entry-date">10/04</span>
+            </div>
+            <div class="entry-msg">auto-expand campanhas/conjuntos + fallback share por clicks</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>dashboard</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">paginação completa Meta API + SDRs date filter + render functions</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              <span class=entry-scope>google</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">data(google): snapshot Google Ads abril 2026 (extraído por Michael)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              <span class=entry-scope>meta</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">audit(meta): auditoria UTM completa — 4 contas, 90 ads, 2 bugs críticos corrigidos</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>aiox</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">atualizar agents e settings do framework</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>meta</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">adicionar fbAds a META_SOURCES (legacy utm_source)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">registrar CAP-017 a CAP-025 + corrigir IDs duplicados</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>dashboard</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">AQRC conta todos os pipelines + Gerenciador com nível adset</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>dashboard</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">funil cumulativo + closer field + endpoint gerenciador</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#9B59B6">♻️ Refatoracao</span>
+              <span class=entry-scope>portal-terapeuta</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">mover docs para apps/portal-do-terapeuta/</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>calendar</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">scripts de Google Calendar para Prisma (multi-conta)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-terapeuta</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">breakdown da spec em 46 issues detalhadas</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>portal-terapeuta</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">especificação completa do Portal do Terapeuta v1</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>google</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">ativar Google Ads API direta com credenciais do vault</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>vault</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">centralizar chaves e configs na VPS</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>google</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">usar Windsor.ai diretamente — sem credenciais Google Ads diretas</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dashboard-api</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">MQL Meta via MySQL + Por Página + Google Ads Account ID</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dashboard-api</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">Google Ads API direta — sem dependência do Windsor.ai</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>telegram</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">setup MichaelArrudaBot na VPS com plugin oficial</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>prisma</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">instrucao cross-calendar para reunioes entre Michael e Rafa</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>prisma</span>
+              <span class="entry-date">09/04</span>
+            </div>
+            <div class="entry-msg">adicionar calendario do Michael e Agenda OMNI Brasil</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>ads</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">integração Google Ads API + relatório Ads×Pipedrive</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>w0003</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">corrigir tipo da credencial Google — oAuth2Api → googleOAuth2Api</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>monitor</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">watchdog sempre envia email — OK ou Alerta</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>monitor</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">documentação e atualização do watchdog n8n</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">registra CAP-012 Landing Page Generator no capabilities</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">skill /landing-page + webhook de opt-in + LP teste FPH</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>monitor</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">workflows watchdog para checagem diária do n8n</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>w0001</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">check de etapa antes de cada disparo — v4.0</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>w0003</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">atualizar documentação para arquitetura Drive-first</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>w0002</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">atualizar David para inbox 16 (oficial) — número trocado 2026-04-08</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#9B59B6">FA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>ads</span>
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">relatório Meta Ads Jan-Mar 2026 com dados da API</div>
+            <div class="entry-author">Fernanda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              
+              <span class="entry-date">08/04</span>
+            </div>
+            <div class="entry-msg">regras de branch e permissao para Fernanda Machado</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">add Fernanda Machado as CLI user</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>prisma</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">regras obrigatorias de contatos e onde-salvar</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">versao HTML do guia intermediario AIOX para Julia</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">guia intermediario AIOX + contatos centralizados da Prisma</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>ads</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">relatório análise Meta Ads conta Formação com CPR e cruzamento Pipedrive</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>workspace</span>
+              <span class="entry-date">01/04</span>
+            </div>
+            <div class="entry-msg">preencher campos críticos — CRM, modelo IA, Julia</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">31/03</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">31/03</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">31/03</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">31/03</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>organico</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">planos de aquecimento organico (Dan Koe + Frank Kern + Finch)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              
+              <span class="entry-date">25/03</span>
+            </div>
+            <div class="entry-msg">atualizar tutorial migração com design system OMNI Brasil</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>operations</span>
+              <span class="entry-date">25/03</span>
+            </div>
+            <div class="entry-msg">adicionar tutorial migração OneDrive → Google Drive</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dashboard</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">servir frontend via Node.js na porta 3030</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>w0003</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">alterar filtro de hoje para janela de 24h</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lancamento</span>
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">plano Nova Era OMNI 2026 — operacional + estrategia + apresentacao</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">remove sync-supabase workflow</div>
+            <div class="entry-author">AIOXsquad</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (fd7d14c feat(gateway): add cross-platform persistence (macOS/Linux/Windows) [Story 114.24])</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">guia AIOX completo para iniciantes</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (9d197c9 refactor: reorganize skills and update message gateway)</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (9bf2ae6 feat: add Telegram integration, message gateway, and Claude Mastery squad)</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              
+              <span class="entry-date">07/04</span>
+            </div>
+            <div class="entry-msg">sync: update from source (f5f4f10 feat(squads): update squad-creator and squad-creator-pro)</div>
+            <div class="entry-author">AIOXsquad-bot</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>whatsbot</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">backup audit log</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">limpar repo — remover .env do tracking, deletar scripts de cleanup, adicionar STRUCTURE.md</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">resolve merge conflicts in settings and generated CSS</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>w0003</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">ativar workflow — credencial Google configurada</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>page-builder</span>
+              <span class="entry-date">06/04</span>
+            </div>
+            <div class="entry-msg">editar pagina existente via slug</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+  </div>
+  <div class="footer">OMNI BRASIL — Gerado automaticamente pelo AIOX</div>
+</div>
+
+<script>
+function tryLogin() {
+  const pwd = document.getElementById('pwd').value;
+  if (pwd === 'omni777') {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
