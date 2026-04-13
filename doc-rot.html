@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Doc Rot Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --color-black:#050505; --color-dark:#0D0D0D; --color-dark-elevated:#1A1A1A;
+    --color-dark-texture:#2D2D2D; --color-gold:#C8A84B; --color-cream:#F5F0E8;
+    --color-cream-50:rgba(245,240,232,0.50); --color-teal:#2A9D8F;
+    --font-display:'Oswald',sans-serif; --font-body:'Inter',sans-serif;
+  }
+  body { background:var(--color-black); color:var(--color-cream); font-family:var(--font-body); min-height:100vh; }
+
+  #gate { position:fixed; inset:0; background:var(--color-black); display:flex; align-items:center; justify-content:center; z-index:999; flex-direction:column; gap:24px; }
+  #gate.hidden { display:none; }
+  #gate .logo { font-family:var(--font-display); font-size:28px; letter-spacing:6px; color:var(--color-gold); text-transform:uppercase; }
+  #gate .sub { font-size:12px; letter-spacing:3px; color:var(--color-cream-50); text-transform:uppercase; }
+  #gate input { background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); color:var(--color-cream); padding:14px 20px; border-radius:8px; font-size:16px; text-align:center; width:280px; outline:none; }
+  #gate input:focus { border-color:var(--color-gold); }
+  #gate .error { color:#e74c3c; font-size:13px; display:none; }
+
+  #app { display:none; }
+  #app.visible { display:block; }
+
+  header { padding:40px 32px 24px; max-width:900px; margin:0 auto; }
+  header h1 { font-family:var(--font-display); font-size:32px; color:var(--color-gold); letter-spacing:4px; text-transform:uppercase; }
+  header .date { font-size:14px; color:var(--color-cream-50); margin-top:8px; }
+
+  .stats-bar { display:flex; gap:16px; flex-wrap:wrap; padding:0 32px 24px; max-width:900px; margin:0 auto; }
+  .stat-card { background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); border-radius:12px; padding:16px 20px; flex:1; min-width:100px; }
+  .stat-card .num { font-family:var(--font-display); font-size:28px; color:var(--color-gold); }
+  .stat-card .label { font-size:11px; color:var(--color-cream-50); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+
+  .issues { padding:0 32px 40px; max-width:900px; margin:0 auto; }
+  .issues h2 { font-family:var(--font-display); font-size:18px; color:var(--color-cream); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+
+  .issue { display:flex; gap:12px; padding:14px; background:var(--color-dark-elevated); border:1px solid var(--color-dark-texture); border-radius:10px; margin-bottom:8px; }
+  .issue:hover { border-color:var(--color-gold); }
+  .issue-sev { font-size:18px; flex-shrink:0; }
+  .issue-body { flex:1; }
+  .issue-cat { font-size:11px; color:var(--color-gold); text-transform:uppercase; letter-spacing:1px; font-weight:600; }
+  .issue-file { font-size:13px; color:var(--color-cream); margin-top:4px; font-family:monospace; }
+  .issue-detail { font-size:12px; color:var(--color-cream-50); margin-top:4px; }
+
+  .footer { text-align:center; padding:32px; font-size:11px; color:var(--color-cream-50); }
+
+  .empty-state { text-align:center; padding:60px 20px; color:var(--color-teal); font-size:18px; }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Doc Rot Report</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="error" id="err">Senha incorreta</div>
+</div>
+
+<div id="app">
+  <header>
+    <h1>Doc Rot Report</h1>
+    <div class="date">Gerado em: 13/04/2026</div>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-card"><div class="num">0</div><div class="label">Criticos</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="label">Avisos</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="label">Info</div></div>
+  </div>
+
+  <div class="issues">
+    <h2>Problemas Encontrados</h2>
+    <div class=empty-state>Nenhum problema encontrado. Tudo limpo!</div>
+  </div>
+
+  <div class="footer">OMNI BRASIL — Doc Rot Detector automatico via AIOX</div>
+</div>
+
+<script>
+function tryLogin() {
+  if (document.getElementById('pwd').value === 'omni777') {
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
