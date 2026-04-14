@@ -334,6 +334,7 @@ function checkPwd() {
 // CHANGELOG DATA (auto-generated)
 // ═══════════════════════════════════════
 const DATA = [
+{"hash": "g0ads14a", "author": "Michael Arruda", "date": "2026-04-14", "type": "feat", "scope": "google-ads", "message": "renovar OAuth2 Google Ads — app publicado em producao, token permanente", "status": "novo", "friendly": "Google Ads API: novo OAuth2 permanente (app em producao, token nao expira)"},
 {"hash": "5bf12b6a", "author": "Michael Arruda", "date": "2026-04-14", "type": "merge", "scope": "", "message": "Google Ads OAuth2 renovado + capabilities atualizado", "status": "sincronizacao", "friendly": "Google Ads OAuth2 renovado + capabilities atualizado"},
 {"hash": "f983fd7f", "author": "Michael Arruda", "date": "2026-04-14", "type": "feat", "scope": "google-ads", "message": "renovar OAuth2 — app publicado em producao, token permanente", "status": "novo", "friendly": "Renovar OAuth2 — app publicado em producao, token permanente"},
 {"hash": "ae8b9b71", "author": "Michael Arruda", "date": "2026-04-14", "type": "chore", "scope": "whatsbot", "message": "backup audit log", "status": "manutencao", "friendly": "Backup audit log"},
@@ -1170,12 +1171,12 @@ const CAPABILITIES = [
     habilidades:["Armazenamento centralizado de todas as chaves","Consulta individual via SSH (vault-get.sh)","Sync local → VPS (sync-to-vault.sh)","Sync VPS → local (sync-from-vault.sh)","Sync seletivo por chaves","Comparacao local vs vault (vault-status.sh)"],
     apis:["SSH"],nota:null},
   {id:"CAP-018",nome:"Google Ads API Direta",categoria:"marketing",status:"ativo",statusLabel:"Ativo",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"07/04",atualizado:"08/04",
-    link:"Via Vault (credenciais)",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"2.0",inicio:"07/04",atualizado:"14/04",
+    link:"squads/aiox-ads/scripts/google-ads-api.js",
     depende:["CAP-017"],dependentes:["CAP-022"],
-    descricao:"Integracao direta com a Google Ads API usando credenciais do vault, sem depender de intermediarios como Windsor.ai.",
-    habilidades:["Consulta de metricas de campanhas Google Ads","Relatorios cruzados Ads x Pipedrive","Dados de custo, cliques, impressoes, conversoes","Account ID configurado no vault"],
-    apis:["Google Ads API","Vault"],nota:null},
+    descricao:"API Google Ads via gRPC (v23). OAuth2 em producao — token permanente. CLI com list-campaigns, get-insights, list-ad-groups, list-keywords.",
+    habilidades:["Consulta GAQL de campanhas, ad groups, keywords","Relatorios por periodo (7d, 30d, custom)","CPA, CTR, ROAS automatizados","Relatorios cruzados Ads x Pipedrive","Script OAuth para renovacao"],
+    apis:["Google Ads API v19","OAuth2 (OMNI Brasil Tools)","Vault"],nota:"App OAuth publicado em producao — token nao expira em 7 dias"},
   {id:"CAP-019",nome:"Google Calendar — Prisma (Multi-Conta)",categoria:"assistente-interno",status:"ativo",statusLabel:"Ativo",
     criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"08/04",atualizado:"09/04",
     link:"WhatsApp via Prisma",
