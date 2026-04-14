@@ -1202,7 +1202,14 @@ const CAPABILITIES = [
     depende:[],dependentes:[],
     descricao:"Geracao de imagens com IA via Pollinations.ai (gratuito, sem limite). Modelos: flux, turbo, flux-realism, flux-cablyai.",
     habilidades:["Geracao de imagens por texto","Modelos: flux, turbo, flux-realism, flux-cablyai","Resolucao configuravel (padrao 1024x1024)","100% gratuito, sem chave de API"],
-    apis:["Pollinations.ai (Flux / Stable Diffusion)"],nota:null}
+    apis:["Pollinations.ai (Flux / Stable Diffusion)"],nota:null},
+  {id:"CAP-026",nome:"Fathom Meeting Intelligence",categoria:"mcp-integracao",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"13/04",atualizado:"13/04",
+    link:"MCP: fathom-ai (Claude Code)",
+    depende:[],dependentes:[],
+    descricao:"MCP Server integrado ao Claude Code que acessa a API do Fathom AI para consultar reunioes gravadas, transcricoes com speaker e timestamps, resumos por IA e webhooks.",
+    habilidades:["Listar reunioes com filtros (data, participante, equipe)","Transcricoes completas com falante e timestamps","Resumos de reunioes gerados por IA","Listar equipes e membros","Criar/deletar webhooks de notificacao","Busca por palavras-chave nas transcricoes"],
+    apis:["Fathom AI API v1","FastMCP (Python)"],nota:null}
 ];
 
 const INFRA = [
@@ -1226,7 +1233,8 @@ const INFRA = [
   {nome:"Telegram Bots", detalhe:"@MichaelArrudaBot + @RafaMendesBot + @AlertaComercial2Bot — VPS", status:"ativo"},
   {nome:"Google Drive MCP", detalhe:"Drive Rafa + Shared Drive OMNI via Claude Code", status:"ativo"},
   {nome:"Gmail MCP", detalhe:"Leitura, envio, drafts, labels via Claude Code", status:"ativo"},
-  {nome:"Vault Centralizado", detalhe:"Cofre de chaves na VPS — /opt/omni-vault/.env.master", status:"ativo"}
+  {nome:"Vault Centralizado", detalhe:"Cofre de chaves na VPS — /opt/omni-vault/.env.master", status:"ativo"},
+  {nome:"Fathom AI MCP", detalhe:"Acesso a reunioes, transcricoes e resumos via Claude Code", status:"ativo"}
 ];
 
 // ═══════════════════════════════════════
