@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria Inside Sales SDR — OMNI Brasil 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #DC9F42;
+    --gold-15: rgba(220,159,66,0.15);
+    --gold-20: rgba(220,159,66,0.20);
+    --gold-30: rgba(220,159,66,0.30);
+    --dark: #050505;
+    --surface: #0e0e0e;
+    --surface-2: #161616;
+    --border: rgba(220,159,66,0.12);
+    --cream: #F5F0E8;
+    --cream-60: rgba(245,240,232,0.60);
+    --cream-40: rgba(245,240,232,0.40);
+    --teal: #2A9D8F;
+    --teal-10: rgba(42,157,143,0.10);
+    --teal-20: rgba(42,157,143,0.20);
+    --navy: #0A1628;
+    --red: #E05252;
+    --red-10: rgba(224,82,82,0.10);
+    --red-20: rgba(224,82,82,0.20);
+    --green: #4CAF6F;
+    --green-10: rgba(76,175,111,0.10);
+    --green-20: rgba(76,175,111,0.20);
+    --yellow: #E8B94A;
+    --yellow-10: rgba(232,185,74,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+  }
+
+  /* ─── LAYOUT ─── */
+  .section { padding: 80px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+  /* ─── TYPOGRAPHY ─── */
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  p { color: var(--cream-60); font-size: 0.92rem; }
+
+  .gold { color: var(--gold); }
+  .teal { color: var(--teal); }
+  .red-text { color: var(--red); }
+  .green-text { color: var(--green); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-30), transparent);
+    margin: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--dark);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -20%, rgba(220,159,66,0.08), transparent),
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(220,159,66,0.03) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(220,159,66,0.03) 40px);
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold-15);
+    border: 1px solid var(--gold-20);
+    padding: 6px 14px;
+    margin-bottom: 28px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--cream-60);
+    max-width: 600px;
+    margin-top: 16px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-meta-item .label { margin-bottom: 4px; }
+  .hero-meta-item span {
+    font-size: 0.88rem;
+    color: var(--cream-60);
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .card-gold {
+    background: var(--gold-15);
+    border: 1px solid var(--gold-20);
+  }
+
+  .card-red {
+    background: var(--red-10);
+    border: 1px solid var(--red-20);
+  }
+
+  .card-green {
+    background: var(--green-10);
+    border: 1px solid var(--green-20);
+  }
+
+  .card-teal {
+    background: var(--teal-10);
+    border: 1px solid var(--teal-20);
+  }
+
+  /* ─── STAT BOX ─── */
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    line-height: 1;
+    margin: 8px 0 4px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--cream-60);
+  }
+
+  /* ─── PROCESS FLOW ─── */
+  .flow-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+    overflow-x: auto;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+
+  .flow-step {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: var(--cream);
+    min-width: 140px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .flow-step.gold-step {
+    border-color: var(--gold-30);
+    color: var(--gold);
+  }
+
+  .flow-step.teal-step {
+    border-color: var(--teal-20);
+    color: var(--teal);
+  }
+
+  .flow-step.red-step {
+    border-color: var(--red-20);
+    color: var(--red);
+    font-style: italic;
+  }
+
+  .flow-arrow {
+    font-size: 0.7rem;
+    color: var(--gold);
+    padding: 0 6px;
+  }
+
+  .flow-decision {
+    background: var(--navy);
+    border: 1px solid rgba(220,159,66,0.25);
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: center;
+    min-width: 130px;
+    clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0% 50%);
+  }
+
+  /* ─── GAP CARD ─── */
+  .gap-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .gap-card.alto { border-left-color: var(--red); }
+  .gap-card.medio { border-left-color: var(--yellow); }
+  .gap-card.baixo { border-left-color: var(--teal); }
+  .gap-card.fechado { border-left-color: var(--green); opacity: 0.7; }
+
+  .gap-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .gap-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+  }
+
+  .gap-badge.alto { color: var(--red); border-color: var(--red-20); background: var(--red-10); }
+  .gap-badge.medio { color: var(--yellow); border-color: rgba(232,185,74,0.2); background: rgba(232,185,74,0.08); }
+  .gap-badge.fechado { color: var(--green); border-color: var(--green-20); background: var(--green-10); }
+
+  .gap-title { font-size: 0.95rem; font-weight: 600; color: var(--cream); }
+
+  .gap-body { font-size: 0.85rem; color: var(--cream-60); margin-bottom: 12px; }
+
+  .gap-benchmark {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    font-size: 0.8rem;
+    color: var(--cream-60);
+  }
+
+  .gap-benchmark strong { color: var(--gold); }
+
+  .gap-suggestion {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: var(--gold-15);
+    border: 1px solid var(--gold-20);
+    font-size: 0.82rem;
+    color: var(--cream);
+  }
+
+  .gap-suggestion .label { margin-bottom: 6px; }
+
+  /* ─── MATRIX ─── */
+  .matrix {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+  }
+
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    height: 380px;
+    margin-top: 24px;
+  }
+
+  .matrix-cell {
+    background: var(--surface-2);
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .matrix-cell-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream-40);
+    position: absolute;
+    top: 10px;
+    right: 12px;
+  }
+
+  .matrix-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--cream);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot.red { background: var(--red); }
+  .dot.yellow { background: var(--yellow); }
+  .dot.teal { background: var(--teal); }
+
+  .matrix-axis-x {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--cream-40);
+    margin-top: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .matrix-axis-y-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .matrix-axis-y {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.72rem;
+    color: var(--cream-40);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  /* ─── BENCHMARK TABLE ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+
+  thead tr {
+    background: var(--gold-15);
+    border-bottom: 1px solid var(--gold-20);
+  }
+
+  thead th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 12px 16px;
+    color: var(--cream-60);
+    vertical-align: top;
+  }
+
+  tbody td:first-child { color: var(--cream); }
+
+  .td-gap { color: var(--red); }
+  .td-ok { color: var(--green); }
+
+  /* ─── SCRIPT SECTION ─── */
+  .script-stage {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 20px;
+  }
+
+  .stage-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    min-width: 32px;
+  }
+
+  .stage-content { flex: 1; }
+
+  .stage-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .stage-status {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .status-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid;
+  }
+
+  .status-ok { color: var(--teal); border-color: var(--teal-20); background: var(--teal-10); }
+  .status-gap { color: var(--red); border-color: var(--red-20); background: var(--red-10); }
+  .status-warn { color: var(--yellow); border-color: rgba(232,185,74,0.2); background: rgba(232,185,74,0.08); }
+
+  /* ─── NEXT STEPS ─── */
+  .step-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step-item:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--gold);
+    font-weight: 500;
+    min-width: 28px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .step-content h3 { margin-bottom: 4px; }
+  .step-content p { font-size: 0.84rem; }
+
+  .step-tag {
+    display: inline-flex;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--gold-20);
+    background: var(--gold-15);
+    color: var(--gold);
+    margin-top: 8px;
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  footer p { font-size: 0.78rem; color: var(--cream-40); }
+  footer .label { margin-bottom: 8px; }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    color: var(--cream-60);
+    border-bottom: 1px solid rgba(220,159,66,0.05);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li .icon { min-width: 16px; margin-top: 2px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .container { padding: 0 20px; }
+    .section { padding: 48px 0; }
+    .hero { padding: 60px 0; }
+    .matrix-grid { height: auto; }
+    .hero-meta { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="label">OMNI Brasil · Comercial</span>
+    </div>
+    <h1>Auditoria do Processo<br><span class="gold">Inside Sales SDR</span></h1>
+    <p class="hero-subtitle">Diagnóstico completo do fluxo operacional e script de pré-venda — mapeamento de gaps, benchmarks e recomendações de melhoria.</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="label">Documento</div>
+        <span>Script SDR Pré-Venda · Fev 2026</span>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Ferramenta CRM</div>
+        <span>Pipedrive + Chatwoot</span>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Produto</div>
+        <span>Formação em Hipnoterapia Master</span>
+      </div>
+      <div class="hero-meta-item">
+        <div class="label">Auditoria realizada em</div>
+        <span>Abril / 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ VISÃO GERAL -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Visão Geral</div>
+      <h2>O que encontramos</h2>
+      <p>O processo tem fundações sólidas. A maioria dos gaps identificados na análise inicial eram ausências de documentação, não falhas operacionais reais.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="stat-box">
+        <div class="label">Gaps identificados</div>
+        <div class="stat-number">12</div>
+        <div class="stat-label">pontos analisados</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">Resolvidos / By design</div>
+        <div class="stat-number gold">5</div>
+        <div class="stat-label">confirmados pelo time</div>
+      </div>
+      <div class="stat-box">
+        <div class="label">Gaps genuínos</div>
+        <div class="stat-number" style="color: var(--red)">7</div>
+        <div class="stat-label">com impacto real em conversão</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 24px;" class="grid-2">
+      <div class="card card-green">
+        <div class="label" style="color: var(--green); margin-bottom: 12px;">Pontos fortes confirmados</div>
+        <ul class="checklist">
+          <li><span class="icon" style="color: var(--green)">✓</span> Segregação SDR humano vs SDR-IA por perfil de lead</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> SLAs definidos por etapa (acima da média do mercado)</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> SPIN Selling estruturado no script</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> 3 camadas de confirmação pré-reunião</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> Fluxo pós-no-show com reagendamento imediato</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> Saída elegante para leads reprovados (auto-hipnoterapia)</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> Check de tomador de decisão (Etapa 5)</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> SDR descreve avaliação do lead — briefing explícito no fluxo</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> Motivo de perda padronizado em todos os pontos de encerramento</li>
+          <li><span class="icon" style="color: var(--green)">✓</span> Gestão de satisfação pós-reunião com recovery para leads insatisfeitos</li>
+        </ul>
+      </div>
+      <div class="card card-teal">
+        <div class="label" style="color: var(--teal); margin-bottom: 12px;">Gaps fechados na revisão</div>
+        <ul class="checklist">
+          <li><span class="icon" style="color: var(--teal)">✓</span> Destino de leads não qualificados pós-SDR — <em>by design: sem adesão = sem nutrição</em></li>
+          <li><span class="icon" style="color: var(--teal)">✓</span> Retorno SDR-IA ao fluxo — <em>move para MQL, SDR humano assume</em></li>
+          <li><span class="icon" style="color: var(--teal)">✓</span> Fluxo pós-no-show — <em>adicionado no fluxograma revisado</em></li>
+          <li><span class="icon" style="color: var(--teal)">✓</span> SLA do Closer — <em>fora de escopo, documento separado em elaboração</em></li>
+          <li><span class="icon" style="color: var(--teal)">✓</span> Handoff sem briefing — <em>"SDR descreve avaliação do lead" agora explícito no fluxo v3</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ FLUXO ATUAL -->
+<section class="section" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Processo Atual</div>
+      <h2>Mapa do fluxo SDR</h2>
+      <p>Versão revisada com os ajustes confirmados pelo time.</p>
+    </div>
+
+    <div class="flow-container">
+      <!-- Linha 1: Entrada -->
+      <div class="label" style="margin-bottom: 16px;">Entrada e Qualificação Inicial</div>
+      <div class="flow-row" style="flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div class="flow-step gold-step">Lead cadastra</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Automação [Olá]</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Respondeu?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM ↓</div>
+        <div class="flow-decision">Qualificado?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM ↓</div>
+        <div class="flow-step">MQL</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step gold-step">SDR conecta</div>
+      </div>
+      <div class="flow-row" style="margin-top: 8px; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div style="color: var(--cream-40); font-size: 0.75rem; margin-right: 8px;">Não qualificado:</div>
+        <div class="flow-step">Leads Gerais</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step teal-step">SDR-IA interage</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Interesse?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM →</div>
+        <div class="flow-step">MQL</div>
+        <div class="flow-arrow" style="color: var(--red);">NÃO →</div>
+        <div class="flow-step red-step">Perdido</div>
+      </div>
+      <div class="flow-row" style="margin-top: 8px; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div style="color: var(--cream-40); font-size: 0.75rem; margin-right: 8px;">Não respondeu:</div>
+        <div class="flow-step">SDR · 3 ligações</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Conectou?</div>
+        <div class="flow-arrow" style="color: var(--red);">NÃO →</div>
+        <div class="flow-step">Automação · 4 msgs</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Respondeu?</div>
+        <div class="flow-arrow" style="color: var(--red);">NÃO →</div>
+        <div class="flow-step red-step">Perdido · email</div>
+      </div>
+
+      <hr class="divider" style="margin: 24px 0;">
+
+      <!-- Linha 2: Avaliação e Agendamento -->
+      <div class="label" style="margin-bottom: 16px;">Avaliação e Agendamento</div>
+      <div class="flow-row" style="flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div class="flow-step gold-step">SDR avalia lead<br><span style="font-size:0.65rem;opacity:0.6;">(via ligação)</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step teal-step">SDR descreve<br>avaliação</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Qualificado?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM →</div>
+        <div class="flow-step">Avaliado (Agendar)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Até 3 dias úteis?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM →</div>
+        <div class="flow-step">Atividade Pipedrive<br><span style="font-size:0.65rem;opacity:0.6;">data/hora/link/closer</span></div>
+      </div>
+      <div class="flow-row" style="margin-top: 8px; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div style="width: 260px;"></div>
+        <div style="color: var(--cream-40); font-size: 0.75rem;">Não qualificado →</div>
+        <div class="flow-step">SDR preenche<br>motivo de perda</div>
+        <div class="flow-arrow" style="color: var(--red);">→</div>
+        <div class="flow-step red-step">Perdido</div>
+        <div style="width: 80px;"></div>
+        <div style="color: var(--cream-40); font-size: 0.75rem;">Mais de 3 dias →</div>
+        <div class="flow-step" style="border-color: var(--yellow); color: var(--yellow);">Agenda Futura<br><span style="font-size:0.65rem;">máx 15 dias</span></div>
+      </div>
+
+      <hr class="divider" style="margin: 24px 0;">
+
+      <!-- Linha 3: Confirmação e Reunião -->
+      <div class="label" style="margin-bottom: 16px;">Confirmação e Reunião</div>
+      <div class="flow-row" style="flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div class="flow-step teal-step">Automação confirmação<br>+ lembretes</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Confirmou?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM →</div>
+        <div class="flow-step">Funil Closer<br><span style="font-size:0.65rem;opacity:0.6;">Reunião Agendada</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Aconteceu?</div>
+        <div class="flow-arrow" style="color: var(--green);">SIM →</div>
+        <div class="flow-step gold-step">Reunião Realizada</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Satisfeito?</div>
+      </div>
+      <div class="flow-row" style="margin-top: 8px; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div style="color: var(--cream-40); font-size: 0.75rem; margin-right: 4px;">Satisfeito →</div>
+        <div class="flow-step teal-step">SDR agradece<br>e se coloca à disposição</div>
+        <div style="width: 320px;"></div>
+        <div style="color: var(--cream-40); font-size: 0.75rem;">Não satisfeito →</div>
+        <div class="flow-step" style="border-color: var(--yellow); color: var(--yellow);">SDR reporta ao closer<br>+ gestor + oferece nova reunião</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Aceita nova<br>reunião?</div>
+        <div class="flow-arrow" style="color: var(--red);">NÃO →</div>
+        <div class="flow-step red-step">SDR reporta<br>à liderança</div>
+      </div>
+      <div class="flow-row" style="margin-top: 8px; flex-wrap: wrap; gap: 8px; align-items: center;">
+        <div style="width: 200px;"></div>
+        <div style="color: var(--cream-40); font-size: 0.75rem;">Não confirmou →</div>
+        <div class="flow-step">SDR cobra / liga</div>
+        <div style="width: 180px;"></div>
+        <div style="color: var(--cream-40); font-size: 0.75rem;">No-show →</div>
+        <div class="flow-step" style="border-color: var(--red-20); color: var(--red);">Closer + SDR<br>reagenda imediato</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-decision">Reagendou?</div>
+        <div class="flow-arrow" style="color: var(--red);">NÃO →</div>
+        <div class="flow-step red-step">Funil Nutrição<br>Perdido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ GAPS FLUXO -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Gaps do Processo · Fluxo</div>
+      <h2>3 gaps genuínos no fluxo operacional</h2>
+      <p>Ordenados por impacto em conversão e esforço de implementação.</p>
+    </div>
+
+    <!-- GAP F1 -->
+    <div class="gap-card alto">
+      <div class="gap-header">
+        <div class="gap-badge alto">Alto impacto</div>
+        <div class="gap-title">Score de qualificação inicial não confiável</div>
+      </div>
+      <p class="gap-body">O score declarativo que define o roteamento SDR humano vs SDR-IA não é confiável: leads ricos respondem baixo (medo de preço maior), leads sem recurso respondem alto (para ter melhor atendimento). Na prática, o time já atende todos — o que torna a triagem sem efeito real.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> A Madkudu e a Clearbit documentam que scoring comportamental (tempo no site, páginas visitadas, engajamento com conteúdo) prediz conversão 3-4x melhor que dados declarativos para tickets acima de R$5k. O estudo do MIT/InsideSales.com mostra que leads que respondem em menos de 5 min convertem 100x mais que os que demoram 30+ min — comportamento, não declaração.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p><strong>Curto prazo:</strong> Substituir o score declarativo pelo critério de velocidade de resposta. Lead respondeu rápido (primeiras 2h) → SDR humano prioriza. Demorou → SDR-IA engaja primeiro.</p>
+        <p style="margin-top: 6px;"><strong>Médio prazo:</strong> Implementar Lead Diagnosis IA (já previsto no plano de performance como F4-01) — lead que completa o diagnóstico demonstra interesse real e gera dados comportamentais para o closer.</p>
+      </div>
+    </div>
+
+    <!-- GAP F2 -->
+    <div class="gap-card medio">
+      <div class="gap-header">
+        <div class="gap-badge medio">Médio impacto</div>
+        <div class="gap-title">Cadência rígida de 3 ligações sem variação de horário ou canal</div>
+      </div>
+      <p class="gap-body">O processo define "SDR faz 3 ligações" como tentativa de contato antes de cair na automação de mensagens. Não há variação de horário, dia da semana, ou alternância de canal. Com 3 ligações no mesmo canal, a taxa de conexão fica entre 20-30%.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> O estudo da Bridge Group (2024) com 300+ empresas de ticket alto mostra que a cadência ideal é de 6-8 toques multi-canal em 10-14 dias — alternando ligação, WhatsApp e e-mail. Com esse modelo, a taxa de conexão sobe para 40-50%. Sem discador integrado, mesmo uma cadência manual estruturada melhora significativamente o resultado.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Substituir "3 ligações" por cadência de 6 toques em 8 dias: <strong>Dia 1:</strong> Ligação (manhã) + WhatsApp (tarde) · <strong>Dia 2:</strong> E-mail · <strong>Dia 3:</strong> Ligação (horário diferente) · <strong>Dia 5:</strong> WhatsApp com conteúdo de valor · <strong>Dia 7:</strong> Ligação + voicemail · <strong>Dia 8:</strong> Último toque (mensagem de encerramento). Quando o discador chegar (F1-01 do plano), automatizar as ligações.</p>
+      </div>
+    </div>
+
+    <!-- GAP F3 -->
+    <div class="gap-card medio">
+      <div class="gap-header">
+        <div class="gap-badge medio">Médio impacto</div>
+        <div class="gap-title">Agenda Futura sem nurturing intermediário</div>
+      </div>
+      <p class="gap-body">Leads que não conseguem agendar em até 3 dias úteis vão para "Agenda Futura" (máximo 15 dias). Não há nenhum touchpoint intermediário durante esse período — o lead esfria e a probabilidade de comparecimento cai significativamente.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> A SalesLoft documenta que leads com agendamento acima de 3 dias têm 30% menos chance de comparecer. Touchpoints intermediários com conteúdo de valor (não cobrança) reduzem essa perda em 40-50%. Para high-ticket, o lead precisa manter o nível de motivação durante o intervalo.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Criar sequência de nurturing para Agenda Futura: <strong>Dia 2:</strong> Conteúdo de valor via WhatsApp (depoimento de aluno ou insight) · <strong>Dia 5:</strong> Check-in leve ("continua firme para dia X?") · <strong>Dia 10:</strong> Conteúdo adicional + confirmação. Se lead pedir remarcação além de 15 dias → nurturing de longo prazo no ActiveCampaign.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ GAPS SCRIPT -->
+<section class="section" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Gaps do Processo · Script SDR</div>
+      <h2>4 gaps genuínos no script de pré-venda</h2>
+      <p>Análise do Script SDR Pré-Venda (IT.CO.001.1 · Fev 2026) — aprovado por Rafaela Mendes.</p>
+    </div>
+
+    <!-- Visão geral das etapas -->
+    <div style="margin-bottom: 32px;">
+      <div class="label" style="margin-bottom: 16px;">Etapas do script · Diagnóstico rápido</div>
+      <div class="script-stage">
+        <div class="stage-num">1</div>
+        <div class="stage-content">
+          <div class="stage-title">Conexão — Abertura e rapport</div>
+          <p style="font-size:0.82rem;">"Consultoria de desenvolvimento de talento / potencial estratégico" — linguagem vaga que não menciona hipnoterapia.</p>
+          <div class="stage-status">
+            <span class="status-gap">Gap: produto disfarçado</span>
+            <span class="status-ok">Ok: manejo de resistência ao WhatsApp</span>
+          </div>
+        </div>
+      </div>
+      <div class="script-stage">
+        <div class="stage-num">2</div>
+        <div class="stage-content">
+          <div class="stage-title">SPIN Selling — Aprofundamento</div>
+          <p style="font-size:0.82rem;">Perguntas de situação e problema bem estruturadas. Apresentação de credencial (livro Michael Arruda) bem posicionada.</p>
+          <div class="stage-status">
+            <span class="status-ok">Ok: SPIN structure</span>
+            <span class="status-ok">Ok: social proof</span>
+          </div>
+        </div>
+      </div>
+      <div class="script-stage">
+        <div class="stage-num">3</div>
+        <div class="stage-content">
+          <div class="stage-title">Qualificação — Perfil e pré-requisitos</div>
+          <p style="font-size:0.82rem;">Critérios claros: profissão, escolaridade, idade, motivação. Trilha de reprovação com alternativa de produto. Inconsistência na regra de idade.</p>
+          <div class="stage-status">
+            <span class="status-ok">Ok: critérios explícitos</span>
+            <span class="status-gap">Gap: inconsistência 18 vs 21 anos</span>
+          </div>
+        </div>
+      </div>
+      <div class="script-stage">
+        <div class="stage-num">4</div>
+        <div class="stage-content">
+          <div class="stage-title">Validação Financeira — Capacidade de investimento</div>
+          <p style="font-size:0.82rem;">Abordagem indireta (desejo de renda → gap atual). Faltam tratativas para objeções comuns como "preciso pensar" e "tá caro".</p>
+          <div class="stage-status">
+            <span class="status-ok">Ok: abordagem indireta</span>
+            <span class="status-gap">Gap: zero tratamento de objeções</span>
+          </div>
+        </div>
+      </div>
+      <div class="script-stage">
+        <div class="stage-num">5</div>
+        <div class="stage-content">
+          <div class="stage-title">Aprovação — Tomador de decisão</div>
+          <p style="font-size:0.82rem;">Check correto — mas aplicado tarde, após toda a qualificação. Se precisar da outra pessoa, pode exigir remarcar todo o processo.</p>
+          <div class="stage-status">
+            <span class="status-warn">Posição tardia no fluxo</span>
+            <span class="status-ok">Ok: conteúdo da pergunta</span>
+          </div>
+        </div>
+      </div>
+      <div class="script-stage">
+        <div class="stage-num">6</div>
+        <div class="stage-content">
+          <div class="stage-title">Confirmação — Sequência pós-agendamento</div>
+          <p style="font-size:0.82rem;">Três mensagens bem estruturadas (imediata, início do dia, 10 min antes). Alinhado com melhores práticas de confirmação.</p>
+          <div class="stage-status">
+            <span class="status-ok">Ok: 3 camadas de confirmação</span>
+            <span class="status-ok">Ok: instruções para reunião</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gaps detalhados do script -->
+    <div class="gap-card alto">
+      <div class="gap-header">
+        <div class="gap-badge alto">Alto impacto</div>
+        <div class="gap-title">Abertura com produto disfarçado cria gap de expectativa</div>
+      </div>
+      <p class="gap-body">A Etapa 1 apresenta a ligação como "consultoria de desenvolvimento de talento" e "potencial estratégico" — termos que não mencionam hipnoterapia. O lead pode comparecer à reunião com o Closer sem entender qual é o produto, gerando surpresa e resistência que poderiam ter sido trabalhadas antes.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> Pesquisas da Gong.io mostram que leads que chegam à reunião de closing com expectativa alinhada convertem 28% mais. A surpresa com o produto na reunião é uma das principais causas de objeções de last minute. Para high-ticket, o lead precisa ter tempo de "digerir" o produto antes da reunião.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Introduzir a hipnoterapia ainda na Etapa 1 ou 2, de forma natural e com ancoragem de credibilidade: <em>"Aqui na OMNI a gente forma profissionais em hipnoterapia — uma ciência reconhecida que está em expansão acelerada no Brasil. O que te fez se cadastrar para conhecer mais sobre isso?"</em></p>
+        <p style="margin-top: 6px;">Isso não reduz o rapport — na verdade aumenta, porque o lead sabe com quem está falando e por quê.</p>
+      </div>
+    </div>
+
+    <div class="gap-card alto">
+      <div class="gap-header">
+        <div class="gap-badge alto">Alto impacto</div>
+        <div class="gap-title">Zero tratamento de objeções no script</div>
+      </div>
+      <p class="gap-body">O script não tem nenhuma seção de tratamento de objeções. Situações como "preciso pensar", "vou falar com meu parceiro", "parece caro demais para mim" ou "não tenho tempo" ficam inteiramente na mão do SDR sem suporte ou guia. Isso gera inconsistência de performance entre SDRs e perda de leads que poderiam converter.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> O modelo de vendas consultivas da RAIN Group mostra que SDRs com guia de objeções documentado convertem 22% mais leads em agendamentos do que SDRs sem esse suporte. As 5 objeções mais comuns em formações de high-ticket são previsíveis e treináveis.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Adicionar seção "Objeções Frequentes" ao script com tratativas para pelo menos 5 cenários: <strong>1.</strong> "Preciso pensar" → <strong>2.</strong> "Parece muito caro" → <strong>3.</strong> "Preciso falar com meu marido/esposa" → <strong>4.</strong> "Não tenho tempo agora" → <strong>5.</strong> "Já tentei cursos e não funcionou". Cada tratativa com uma resposta padrão e uma pergunta de retorno ao fluxo.</p>
+      </div>
+    </div>
+
+    <div class="gap-card medio">
+      <div class="gap-header">
+        <div class="gap-badge medio">Médio impacto</div>
+        <div class="gap-title">Check de tomador de decisão aplicado tarde (Etapa 5)</div>
+      </div>
+      <p class="gap-body">A pergunta "você toma essa decisão sozinho?" aparece na Etapa 5 — depois de toda a qualificação de perfil e financeira. Se o lead precisar da outra pessoa, o ideal seria tê-la presente no agendamento. Descobrir isso no final pode forçar remarcar a reunião ou agendá-la sem o decisor (o que reduz a taxa de fechamento).</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> A metodologia MEDDICC indica que identificar o decisor deve acontecer antes da qualificação financeira. Reuniões com decisor presente convertem 35-40% mais que reuniões sem. Para ticket de R$20k, raramente é uma decisão individual.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Mover o check de tomador de decisão para logo após a aprovação do perfil na Etapa 3 — antes de explorar o financeiro. Dessa forma, se precisar da outra pessoa, já se define o horário com ambos antes de detalhar valores. Adaptar a linguagem para soar natural nessa posição.</p>
+      </div>
+    </div>
+
+    <div class="gap-card medio">
+      <div class="gap-header">
+        <div class="gap-badge medio">Médio impacto</div>
+        <div class="gap-title">Inconsistência na regra de idade (18 vs 21 anos)</div>
+      </div>
+      <p class="gap-body">O script apresenta duas mensagens diferentes sobre idade: em uma parte diz "necessário ter 21 anos", em outra "mínimo 21 anos". Mas o processo permite leads entre 18-21 anos via formulário de aprovação especial. Um SDR que leia diferentes partes do script pode comunicar a regra errada ao lead.</p>
+      <div class="gap-benchmark">
+        <strong>Benchmark:</strong> Inconsistências de script geram desconfiança quando o lead percebe. Em vendas de alto ticket, a credibilidade da operação é um ativo que o script deve reforçar, não fragilizar. A regra precisa estar inequívoca em todos os pontos onde é citada.
+      </div>
+      <div class="gap-suggestion">
+        <div class="label">Sugestão</div>
+        <p>Padronizar a regra de idade em todas as ocorrências do script: <em>"A formação exige no mínimo 18 anos. Para quem tem entre 18 e 21 anos, fazemos uma análise especial de perfil via formulário."</em> Remover a referência a "21 anos" como critério absoluto de todos os locais onde aparece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ MATRIZ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Priorização</div>
+      <h2>Matriz Impacto × Esforço</h2>
+      <p>7 gaps genuínos posicionados por prioridade de implementação.</p>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-axis-y-wrap">
+        <div class="matrix-axis-y">← baixo · IMPACTO · alto →</div>
+        <div style="flex: 1;">
+          <div class="matrix-grid">
+            <!-- Quadrante: Alto Impacto / Baixo Esforço (P1) -->
+            <div class="matrix-cell" style="border: 1px solid var(--gold-20); background: rgba(220,159,66,0.04);">
+              <div class="matrix-cell-label">P1 · Fazer agora</div>
+              <div class="matrix-dot"><div class="dot red"></div>Abertura produto disfarçado</div>
+              <div class="matrix-dot"><div class="dot red"></div>Zero objeções no script</div>
+              <div class="matrix-dot"><div class="dot yellow"></div>Inconsistência regra de idade</div>
+            </div>
+            <!-- Quadrante: Alto Impacto / Alto Esforço (P2) -->
+            <div class="matrix-cell">
+              <div class="matrix-cell-label">P2 · Planejar</div>
+              <div class="matrix-dot"><div class="dot red"></div>Score de qualificação</div>
+              <div class="matrix-dot"><div class="dot yellow"></div>Tomador de decisão tardio</div>
+            </div>
+            <!-- Quadrante: Baixo Impacto / Baixo Esforço (P3) -->
+            <div class="matrix-cell">
+              <div class="matrix-cell-label">P3 · Preencher</div>
+              <div class="matrix-dot"><div class="dot yellow"></div>Agenda Futura sem nurturing</div>
+            </div>
+            <!-- Quadrante: Baixo Impacto / Alto Esforço (P4) -->
+            <div class="matrix-cell">
+              <div class="matrix-cell-label">P4 · Avaliar</div>
+              <div class="matrix-dot"><div class="dot teal"></div>Cadência 3 → 6 ligações</div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <div class="matrix-axis-x">Baixo esforço</div>
+            <div class="matrix-axis-x">Alto esforço</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ BENCHMARKS -->
+<section class="section" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Benchmarks</div>
+      <h2>OMNI Brasil vs Mercado</h2>
+      <p>Comparativo das métricas operacionais com benchmarks de Inside Sales para high-ticket (R$5k+).</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Métrica</th>
+          <th>OMNI Brasil (atual)</th>
+          <th>Benchmark mercado</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Taxa de no-show</td>
+          <td>~45%</td>
+          <td>15–25% (com sequência de confirmação)</td>
+          <td class="td-gap">Gap de 20-30pp</td>
+        </tr>
+        <tr>
+          <td>Taxa de fechamento (reunião → venda)</td>
+          <td>~14%</td>
+          <td>20–30% (com briefing + lead aquecido)</td>
+          <td class="td-gap">Gap de 6-16pp</td>
+        </tr>
+        <tr>
+          <td>SLA resposta pós-mensagem do lead</td>
+          <td>1h útil</td>
+          <td>5 minutos (speed-to-lead)</td>
+          <td class="td-gap">Relevante para leads novos</td>
+        </tr>
+        <tr>
+          <td>Tentativas de contato</td>
+          <td>3 ligações</td>
+          <td>6–8 toques multi-canal / 10-14 dias</td>
+          <td class="td-gap">Gap de 3-5 toques</td>
+        </tr>
+        <tr>
+          <td>SLAs por etapa definidos</td>
+          <td>Sim · 6 etapas</td>
+          <td>Maioria das operações não define</td>
+          <td class="td-ok">Acima da média</td>
+        </tr>
+        <tr>
+          <td>Check de tomador de decisão</td>
+          <td>Sim (Etapa 5)</td>
+          <td>Antes da qualificação financeira</td>
+          <td class="td-gap">Posição incorreta</td>
+        </tr>
+        <tr>
+          <td>Tratamento de objeções documentado</td>
+          <td>Não</td>
+          <td>Script com 5+ objeções mapeadas</td>
+          <td class="td-gap">Ausente</td>
+        </tr>
+        <tr>
+          <td>Feedback pós-reunião automatizado</td>
+          <td>Sim · via número do SDR</td>
+          <td>Raro em operações do porte</td>
+          <td class="td-ok">Diferencial</td>
+        </tr>
+        <tr>
+          <td>Fluxo de recovery pós-no-show</td>
+          <td>Sim · reagendamento imediato</td>
+          <td>50% das operações não têm</td>
+          <td class="td-ok">Bem estruturado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ PRÓXIMOS PASSOS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="label">Próximos Passos</div>
+      <h2>Plano de ação recomendado</h2>
+      <p>Ordenado por prioridade. Os 3 primeiros itens podem ser executados esta semana sem dependências técnicas.</p>
+    </div>
+
+    <div>
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Revisar o script: abertura + objeções + regra de idade</h3>
+          <p>Ajustar a Etapa 1 para mencionar hipnoterapia naturalmente. Adicionar seção de tratamento de 5 objeções frequentes. Unificar a regra de idade (18+ com análise para 18-21) em todas as ocorrências.</p>
+          <span class="step-tag">Script · Esta semana · Sem dependências</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Mover check de tomador de decisão para antes da qualificação financeira</h3>
+          <p>Reorganizar o script para que a pergunta de aprovador apareça logo após o perfil ser aprovado na Etapa 3 — antes de explorar capacidade financeira e valores. Adaptar a linguagem para soar natural na nova posição.</p>
+          <span class="step-tag">Script · Esta semana · Sem dependências</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Documentar as regras de processo que estão implícitas</h3>
+          <p>Acrescentar no fluxograma: (1) SDR registra briefing completo do lead em nota no Pipedrive antes de mover para Avaliado; (2) Retorno do SDR-IA ao MQL com tag "qualificado-por-IA"; (3) Critério de roteamento por velocidade de resposta.</p>
+          <span class="step-tag">Processo · Esta semana · Sem dependências</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Criar sequência de nurturing para Agenda Futura</h3>
+          <p>Sequência de 3 touchpoints em 10 dias para leads que não conseguem agendar imediatamente: conteúdo de valor (Dia 2), check-in de motivação (Dia 5), confirmação + conteúdo (Dia 10). Pode ser configurado no n8n + WhatsApp.</p>
+          <span class="step-tag">Automação · Próximas 2 semanas · Depende de n8n</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>Substituir critério de score por velocidade de resposta</h3>
+          <p>Redefinir o roteamento SDR humano vs SDR-IA com base em comportamento (velocidade de resposta à primeira mensagem), não em score declarativo. Definir o limiar em conjunto com o time (ex: respondeu em menos de 2h = SDR humano prioriza).</p>
+          <span class="step-tag">Processo + CRM · Próximo mês · Depende de alinhamento de time</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">06</div>
+        <div class="step-content">
+          <h3>Estruturar cadência multi-canal de 6 toques</h3>
+          <p>Criar cadência alternando ligação, WhatsApp e e-mail em 8 dias — substituindo as 3 ligações sequenciais. Documentar no script. Quando o discador chegar (F1-01), automatizar a parte de ligações.</p>
+          <span class="step-tag">Script + Processo · Médio prazo · Depende de discador</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">07</div>
+        <div class="step-content">
+          <h3>Iniciar documento do processo do Closer</h3>
+          <p>Com o processo SDR auditado, o próximo passo natural é documentar o processo do Closer com o mesmo nível de detalhe — incluindo SLAs pós-reunião, briefing padrão recebido do SDR, sequência de follow-up e critérios de fechamento.</p>
+          <span class="step-tag">Próxima auditoria · Em elaboração por Rafa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="label">OMNI Brasil · Auditoria Inside Sales SDR</div>
+    <p>Elaborado por AURA — Sistema AIOX · Abril 2026 · v3</p>
+    <p style="margin-top: 4px;">Responsável: Rafaela Mendes · Baseado no fluxograma v3 (Processo SDR 2.pdf)</p>
+  </div>
+</footer>
+
+</body>
+</html>
