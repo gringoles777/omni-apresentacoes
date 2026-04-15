@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Novo Posicionamento 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #050505;
+    --dark: #0D0D0D;
+    --dark-elevated: #1A1A1A;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --cream: #F5F0E8;
+    --cream-50: rgba(245,240,232,0.5);
+    --cream-70: rgba(245,240,232,0.7);
+    --gray: #6B6B6B;
+    --gray-dark: #242424;
+    --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  }
+  html, body { height: 100%; overflow: hidden; background: var(--black); color: var(--cream); font-family: 'Inter', sans-serif; }
+
+  /* Slide engine */
+  .slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 80px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: all; }
+  .slide-inner { max-width: 1000px; width: 100%; }
+
+  /* Header */
+  .header-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(5,5,5,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 14px 32px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .header-bar .brand {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 14px;
+    letter-spacing: 5px; text-transform: uppercase; color: var(--gold);
+  }
+  .header-bar .nav {
+    font-family: 'Inter', sans-serif; font-size: 12px; color: var(--cream-50);
+    letter-spacing: 1px;
+  }
+
+  /* Footer nav */
+  .footer-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    padding: 16px 32px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(5,5,5,0.8);
+  }
+  .footer-nav .hint {
+    font-size: 11px; color: var(--gray); letter-spacing: 1px;
+  }
+  .footer-nav .counter {
+    font-family: 'Oswald', sans-serif; font-size: 13px; letter-spacing: 3px;
+    color: var(--gold-deep);
+  }
+  .progress-bar {
+    position: fixed; top: 52px; left: 0; height: 2px; z-index: 101;
+    background: var(--gradient-gold); transition: width 0.4s ease;
+  }
+
+  /* Tipografia */
+  .slide-label {
+    font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--gold-deep); margin-bottom: 28px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 56px);
+    color: var(--cream); line-height: 1.15; margin-bottom: 24px;
+  }
+  h1 .gold, h2 .gold, .gold { color: var(--gold); }
+  h2 {
+    font-family: 'DM Serif Display', serif; font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--cream); line-height: 1.2; margin-bottom: 20px;
+  }
+  .lead {
+    font-size: 18px; line-height: 1.7; color: var(--cream-70); max-width: 700px;
+  }
+  .quote {
+    font-family: 'DM Serif Display', serif; font-size: clamp(22px, 2.8vw, 32px);
+    color: var(--gold-light); line-height: 1.4; font-style: italic;
+    border-left: 3px solid var(--gold-deep); padding-left: 24px; margin: 32px 0;
+  }
+  .small-caps {
+    font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold-deep);
+  }
+  .divider { width: 60px; height: 2px; background: var(--gradient-gold); margin: 24px 0; }
+
+  /* Mundo cinza split */
+  .world-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 32px;
+    border-radius: 4px; overflow: hidden;
+  }
+  .world-gray {
+    background: #1a1a1a; padding: 32px; border-right: 2px solid var(--gray-dark);
+  }
+  .world-gray h3 {
+    font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gray); margin-bottom: 16px;
+  }
+  .world-gray ul { list-style: none; }
+  .world-gray li { font-size: 14px; color: #555; line-height: 2; padding-left: 16px; position: relative; }
+  .world-gray li::before { content:''; position:absolute; left:0; top:12px; width:6px; height:1px; background:#444; }
+  .world-color {
+    background: linear-gradient(135deg, rgba(200,168,75,0.08), rgba(200,168,75,0.02));
+    padding: 32px; border-left: 2px solid var(--gold-deep);
+  }
+  .world-color h3 {
+    font-family: 'Oswald', sans-serif; font-size: 16px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  }
+  .world-color ul { list-style: none; }
+  .world-color li { font-size: 14px; color: var(--cream-70); line-height: 2; padding-left: 16px; position: relative; }
+  .world-color li::before { content:''; position:absolute; left:0; top:12px; width:6px; height:2px; background:var(--gold); }
+
+  /* Tabela */
+  .tt { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  .tt td {
+    padding: 14px 18px; font-size: 15px; line-height: 1.5; color: var(--cream-70);
+    border-bottom: 1px solid rgba(200,168,75,0.08); vertical-align: top;
+  }
+  .tt .lbl {
+    font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold-deep); white-space: nowrap; width: 140px;
+  }
+
+  /* Timeline */
+  .tl-item { display: flex; gap: 20px; margin-bottom: 24px; align-items: flex-start; }
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--gold);
+    margin-top: 6px; flex-shrink: 0; box-shadow: 0 0 10px rgba(200,168,75,0.3);
+  }
+  .tl-item h3 {
+    font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+  }
+  .tl-item p { font-size: 14px; line-height: 1.5; color: var(--cream-70); }
+
+  /* Pilares numeros */
+  .pillar-row { display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+  .pillar {
+    flex: 1; min-width: 140px; padding: 20px; text-align: center;
+    border: 1px solid rgba(200,168,75,0.15); border-radius: 4px;
+  }
+  .pillar .num { font-family: 'DM Serif Display', serif; font-size: 40px; color: var(--gold); line-height: 1; }
+  .pillar .lbl2 {
+    font-family: 'Oswald', sans-serif; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--cream-50); margin-top: 6px;
+  }
+
+  /* Cards grid */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 24px; }
+  .card {
+    background: var(--dark-elevated); border: 1px solid rgba(200,168,75,0.12);
+    border-radius: 4px; padding: 28px;
+  }
+  .card h3 {
+    font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+  }
+  .card p { font-size: 14px; line-height: 1.6; color: var(--cream-70); }
+
+  /* Ratio bar */
+  .ratio-bar { display: flex; height: 44px; border-radius: 4px; overflow: hidden; margin: 20px 0; }
+  .seg-60 {
+    flex: 60; background: var(--gold); display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--black); font-weight: 700;
+  }
+  .seg-30 {
+    flex: 30; background: var(--gold-deep); display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--cream); font-weight: 500;
+  }
+  .seg-10 {
+    flex: 10; background: var(--dark-elevated); border: 1px solid var(--gold-deep);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 1px; color: var(--gold-deep);
+  }
+
+  /* Proibido/correto */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+
+  @media (max-width: 768px) {
+    .slide { padding: 60px 24px; }
+    .world-split, .two-col { grid-template-columns: 1fr; }
+    .pillar-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header-bar">
+  <div class="brand">OMNI BRASIL</div>
+  <div class="nav" id="subtitle">Novo Posicionamento 2026</div>
+</div>
+<div class="progress-bar" id="progress"></div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 1 — CAPA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide active" data-n="1">
+  <div class="slide-inner" style="text-align: center;">
+    <div class="small-caps" style="margin-bottom: 24px;">Apresentacao interna</div>
+    <h1 style="font-size: clamp(40px, 6vw, 64px);">
+      Quem somos.<br>Por que existimos.<br><span class="gold">Pra onde vamos.</span>
+    </h1>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p class="lead" style="margin: 0 auto; text-align: center;">
+      O novo posicionamento da OMNI Brasil.<br>Nao e rebrand. E a verdade que sempre esteve aqui.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 2 — O MUNDO CINZA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="2">
+  <div class="slide-inner">
+    <div class="slide-label">01 — O Problema</div>
+    <h2>Existe uma epidemia silenciosa. <span class="gold">Vidas cinza.</span></h2>
+    <p class="lead" style="margin-bottom: 24px;">
+      Profissionais experientes que se esforcam demais e sentem de menos. A cultura ensinou que isso e sucesso.
+    </p>
+    <div class="world-split">
+      <div class="world-gray">
+        <h3>O mundo cinza</h3>
+        <ul>
+          <li>Carreira estavel, mas sem proposito</li>
+          <li>Status e salario no lugar de significado</li>
+          <li>Acordar no piloto automatico</li>
+          <li>"Sera que e so isso?"</li>
+          <li>Medo de que seja tarde demais</li>
+        </ul>
+      </div>
+      <div class="world-color">
+        <h3>A vida com cor</h3>
+        <ul>
+          <li>Carreira com proposito e renda</li>
+          <li>Impactar vidas diretamente</li>
+          <li>Acordar sabendo por que faz o que faz</li>
+          <li>"Encontrei minha vocacao"</li>
+          <li>Maturidade como vantagem</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote">"Ninguem merece ter uma vida cinza."</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 3 — PROPOSITO -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="3">
+  <div class="slide-inner">
+    <div class="slide-label">02 — Proposito</div>
+    <h2>Por que a OMNI Brasil <span class="gold">existe</span></h2>
+    <div class="divider"></div>
+    <div class="quote" style="border-left-color: var(--gold);">
+      Porque ninguem deveria ter uma vida cinza.<br>A OMNI Brasil existe pra provar que toda vida pode ter cor de novo.
+    </div>
+    <table class="tt" style="margin-top: 32px;">
+      <tr><td class="lbl">Essencia</td><td>Somos instrumentos de Deus para devolver cor a vida de quem sofre.</td></tr>
+      <tr><td class="lbl">Missao</td><td>Transformar vidas formando um exercito de profissionais transformados.</td></tr>
+      <tr><td class="lbl">Visao</td><td>Tornar a Omniterapia referencia em transformacao emocional no Brasil.</td></tr>
+      <tr><td class="lbl">Tagline</td><td style="color: var(--gold);">Transformacao que se prova.</td></tr>
+      <tr><td class="lbl">Slogan</td><td style="color: var(--gold);">Omniterapia transforma vidas.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 4 — A ORIGEM -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="4">
+  <div class="slide-inner">
+    <div class="slide-label">03 — A Origem</div>
+    <h2><span class="gold">Tres geracoes.</span> Um legado.</h2>
+    <p class="lead" style="margin-bottom: 24px;">Metodo americano. Precisao suica. Proposito brasileiro.</p>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>1950 — Dave Elman</h3><p>O pai da hipnose clinica moderna. Ensinou mais de 10.000 medicos.</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>1979 — Gerald F. Kein funda a OMNI</h3><p>Ultimo discipulo de Dave Elman. Hansruedi Wipf refinou o metodo e conquistou a ISO 9001.</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>2013 — Michael da seu primeiro curso</h3><p>Numa garagem, com cadeiras de bar. Sem marca, sem estrutura. A conviccao de que vidas cinza precisam de cor.</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>2015 — OMNI chega ao Brasil</h3><p>Michael traz a franquia internacional. Mesmo metodo. Mesmo padrao. Proposito brasileiro.</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>2017 — O pendulo de Jerry Kein</h3><p>Jerry morreu em 2017. Antes, deixou para Michael seu pendulo pessoal — o simbolo da linhagem.</p></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gold-light); box-shadow:0 0 16px rgba(200,168,75,0.5);"></div><div><h3 style="color:var(--gold-light);">Hoje — A Legiao de Omniterapeutas</h3><p>Milhares de profissionais formados. 26 paises. Unico processo terapeutico com ISO 9001 do mundo.</p></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 5 — OMNITERAPIA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="5">
+  <div class="slide-inner">
+    <div class="slide-label">04 — O Metodo</div>
+    <h2>O que e <span class="gold">Omniterapia</span></h2>
+    <p class="lead" style="margin-bottom: 20px;">
+      Processo proprietario da OMNI Brasil, certificado ISO 9001, que integra hipnoterapia clinica, constelacao sistemica, PNL e abordagem gestaltica em um metodo unico de transformacao emocional profunda.
+    </p>
+    <div class="divider"></div>
+    <p style="font-size: 16px; color: var(--cream); line-height: 1.7; margin-top: 16px;">
+      <strong class="gold">Omniterapia e o metodo.</strong> Hipnoterapia e a categoria.
+    </p>
+    <div class="pillar-row">
+      <div class="pillar"><div class="num">ISO</div><div class="lbl2">Unico processo terapeutico<br>certificado no mundo</div></div>
+      <div class="pillar"><div class="num">26</div><div class="lbl2">Paises com<br>profissionais formados</div></div>
+      <div class="pillar"><div class="num">4+</div><div class="lbl2">Decadas de<br>evolucao</div></div>
+      <div class="pillar"><div class="num">15M</div><div class="lbl2">Copias vendidas<br>do livro</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 6 — TRUELINE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="6">
+  <div class="slide-inner">
+    <div class="slide-label">05 — Trueline</div>
+    <h2>O que dizemos. <span class="gold">O que somos.</span></h2>
+    <p class="lead" style="margin-bottom: 20px;">A verdade que sustenta tudo. Nao e slogan.</p>
+    <table class="tt">
+      <tr><td class="lbl">Trueline</td><td style="color:var(--gold); font-size:16px;">A unica formacao do mundo que transforma profissionais experientes em omniterapeutas de proposito. Com renda, metodo e resultados que se provam.</td></tr>
+      <tr><td class="lbl">Nivel 1 — Por que</td><td>Profissionais experientes que se esforcam demais e sentem de menos. A Omniterapia existe pra devolver o sentido da sua vida, com resultado financeiro.</td></tr>
+      <tr><td class="lbl">Nivel 2 — Como</td><td>Voce se transforma primeiro. Depois, usa o unico metodo validado do mundo pra transformar outros.</td></tr>
+      <tr><td class="lbl">Nivel 3 — O que</td><td>Formacao profissional em Omniterapia que te leva de profissional transformado a profissional que transforma e prospera.</td></tr>
+      <tr><td class="lbl">Promessa</td><td>Sua transformacao pessoal e o primeiro passo. Uma nova carreira com proposito e renda e a consequencia.</td></tr>
+      <tr><td class="lbl">Inimigo</td><td>A cultura que ensina profissionais a trocar a vida por status, cargo e salario — e chama isso de sucesso.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 7 — JORNADA -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="7">
+  <div class="slide-inner">
+    <div class="slide-label">06 — A Jornada</div>
+    <h2>Do <span style="color:var(--gray);">cinza</span> ao <span class="gold">omniterapeuta</span></h2>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gray);"></div><div><h3 style="color:var(--gray);">Piloto automatico</h3><p>Se esforca demais e sente de menos. A cultura ensinou que isso e sucesso.</p></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gray);"></div><div><h3 style="color:var(--cream-50);">A Descoberta</h3><p>Descobre a Omniterapia. Sente que pode ter cor de novo.</p></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gold-deep);"></div><div><h3 style="color:var(--cream-70);">As Duvidas</h3><p>"Sera que funciona pra mim?" / "Tenho idade pra mudar?" / "O que minha familia vai pensar?"</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>A Decisao</h3><p>Nao esta comprando um curso — esta decidindo por uma nova vida. O primeiro ato de coragem.</p></div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div><h3>A Forja</h3><p>A formacao comeca pela propria transformacao. Vivencia a Omniterapia antes de aplica-la.</p></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gold-light); box-shadow:0 0 16px rgba(200,168,75,0.5);"></div><div><h3 style="color:var(--gold-light);">O Omniterapeuta</h3><p>Sai transformado. Com metodo. Com certificacao. Com proposito. A vida voltou a ter cor.</p></div></div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--gold-light); box-shadow:0 0 16px rgba(200,168,75,0.5);"></div><div><h3 style="color:var(--gold-light);">O Ciclo Virtuoso</h3><p>A melhor maneira de colorir a propria vida e dando cor a outras vidas.</p></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 8 — 60/30/10 -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="8">
+  <div class="slide-inner">
+    <div class="slide-label">07 — Como Comunicamos</div>
+    <h2>A Regra <span class="gold">60 / 30 / 10</span></h2>
+    <p class="lead" style="margin-bottom: 16px;">Toda comunicacao da OMNI Brasil segue essa proporcao.</p>
+    <div class="ratio-bar">
+      <div class="seg-60">60% OFERTA</div>
+      <div class="seg-30">30% MOVIMENTO</div>
+      <div class="seg-10">10%</div>
+    </div>
+    <div class="card-grid">
+      <div class="card"><h3>60% — Oferta</h3><p>O que o profissional ganha: transformacao + renda + proposito. Quanto tempo leva. Garantia. Resultados concretos.</p></div>
+      <div class="card"><h3>30% — Movimento</h3><p>A narrativa da Legiao. O ciclo virtuoso. A missao de devolver cor a vidas cinza. Pertencimento.</p></div>
+      <div class="card"><h3>10% — Credenciais</h3><p>ISO 9001. Linhagem. 4+ decadas. 26 paises. 15M copias. Prova, nunca identidade primaria.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 9 — LINGUAGEM -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="9">
+  <div class="slide-inner">
+    <div class="slide-label">08 — Linguagem da Marca</div>
+    <h2>O que <span style="color:#ff4444;">nunca</span> dizemos</h2>
+    <div class="two-col">
+      <div class="card" style="border-color:rgba(255,68,68,0.2);">
+        <h3 style="color:#ff4444;">Proibido</h3>
+        <p style="line-height:2.2;">
+          "Hipnose" (isolado)<br>"Hipnose terapeutica"<br>Magico / Cura milagrosa<br>Rapido / Facil<br>Alternativo / Esoterismo<br>"OMNI Hypnosis Brasil"
+        </p>
+      </div>
+      <div class="card" style="border-color:rgba(200,168,75,0.3);">
+        <h3>Correto</h3>
+        <p style="line-height:2.2;">
+          <strong class="gold">Omniterapia</strong> (nosso metodo)<br>Hipnoterapia (para explicar a categoria)<br>Transformacao / Proposito<br>Formacao profissional<br>Metodo certificado ISO 9001<br><strong class="gold">OMNI Brasil</strong>
+        </p>
+      </div>
+    </div>
+    <div style="margin-top:24px; padding:20px; background:rgba(200,168,75,0.04); border:1px solid rgba(200,168,75,0.1); border-radius:4px;">
+      <p class="small-caps" style="margin-bottom:6px;">Regra de ouro</p>
+      <p style="font-size:15px; color:var(--cream); line-height:1.6;"><strong class="gold">Omniterapia e o metodo.</strong> Hipnoterapia e a categoria. O metodo e nosso. A categoria e do mercado.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SLIDE 10 — FECHAMENTO -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="slide" data-n="10">
+  <div class="slide-inner" style="text-align:center;">
+    <div class="small-caps" style="margin-bottom:32px;">O que somos de verdade</div>
+    <h1 style="font-size:clamp(32px, 4.5vw, 52px); max-width:800px; margin:0 auto 32px;">
+      Nao construimos uma escola.<br>Construimos uma <span class="gold">legiao</span>.
+    </h1>
+    <p class="lead" style="margin:0 auto 32px; text-align:center; max-width:600px;">
+      Cada profissional que se forma e alguem que se transformou primeiro, e agora devolve cor a outras vidas.
+    </p>
+    <div class="divider" style="margin:24px auto;"></div>
+    <div class="quote" style="border-left:none; text-align:center; padding-left:0; max-width:700px; margin:0 auto;">
+      A melhor maneira de colorir a propria vida<br>e dando cor a outras vidas.
+    </div>
+    <div style="margin-top:48px;"><p class="small-caps" style="color:var(--gold);">Transformacao que se prova.</p></div>
+  </div>
+</div>
+
+<!-- FOOTER NAV -->
+<div class="footer-nav">
+  <div class="hint">← → ou clique para navegar</div>
+  <div class="counter" id="counter">1 / 10</div>
+</div>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function go(n) {
+    if (n < 0 || n >= total) return;
+    slides[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current+1) + ' / ' + total;
+    document.getElementById('progress').style.width = ((current+1)/total*100) + '%';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); go(current+1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(current-1); }
+    if (e.key === 'Home') go(0);
+    if (e.key === 'End') go(total-1);
+  });
+
+  // Click left/right halves
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.footer-nav') || e.target.closest('.header-bar')) return;
+    if (e.clientX < window.innerWidth / 3) go(current-1);
+    else go(current+1);
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e){
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) { dx < 0 ? go(current+1) : go(current-1); }
+  });
+
+  go(0);
+})();
+</script>
+
+</body>
+</html>
