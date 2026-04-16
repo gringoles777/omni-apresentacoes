@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Pré-Vendas — SDR & Liderança | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #DC9F42;
+  --gold-15: rgba(220,159,66,0.15);
+  --gold-20: rgba(220,159,66,0.20);
+  --gold-30: rgba(220,159,66,0.30);
+  --gold-50: rgba(220,159,66,0.50);
+  --dark: #050505;
+  --surface: #0e0e0e;
+  --surface-2: #161616;
+  --surface-3: #1c1c1c;
+  --border: rgba(220,159,66,0.12);
+  --border-strong: rgba(220,159,66,0.25);
+  --cream: #F5F0E8;
+  --cream-60: rgba(245,240,232,0.60);
+  --cream-40: rgba(245,240,232,0.40);
+  --cream-20: rgba(245,240,232,0.20);
+  --teal: #2A9D8F;
+  --teal-15: rgba(42,157,143,0.15);
+  --navy: #0A1628;
+  --red: #E05252;
+  --red-15: rgba(224,82,82,0.15);
+  --green: #4CAF6F;
+  --green-15: rgba(76,175,111,0.15);
+  --yellow: #E8B94A;
+  --yellow-15: rgba(232,185,74,0.15);
+  --blue: #5B8DEF;
+  --blue-15: rgba(91,141,239,0.15);
+  --purple: #9B72CF;
+  --purple-15: rgba(155,114,207,0.15);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-gold: 0 0 30px rgba(220,159,66,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--dark);
+  color: var(--cream);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  color: var(--gold);
+  font-size: 16px;
+  white-space: nowrap;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.nav-link {
+  color: var(--cream-60);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.nav-link:hover { color: var(--cream); background: var(--gold-15); }
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+}
+
+section {
+  margin-bottom: 64px;
+}
+
+/* ── TYPOGRAPHY ── */
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--cream);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  color: var(--gold);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+p { margin-bottom: 16px; color: var(--cream-60); }
+strong { color: var(--cream); font-weight: 600; }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 100px 24px 60px;
+}
+.hero-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-15);
+  border: 1px solid var(--border-strong);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+.hero h1 { margin-bottom: 16px; }
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--cream-60);
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+.hero-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: var(--cream-40);
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero-meta span { white-space: nowrap; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-gold);
+}
+.card-accent {
+  border-left: 3px solid var(--gold);
+}
+.card-teal { border-left-color: var(--teal); }
+.card-red { border-left-color: var(--red); }
+.card-green { border-left-color: var(--green); }
+.card-blue { border-left-color: var(--blue); }
+
+/* ── TABLES ── */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+thead {
+  background: var(--gold-15);
+}
+th {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: left;
+  padding: 12px 16px;
+  white-space: nowrap;
+}
+td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  color: var(--cream-60);
+  vertical-align: top;
+}
+tr:hover td { background: rgba(220,159,66,0.03); }
+
+/* ── WHATSAPP MESSAGE BOXES ── */
+.wpp-box {
+  background: #1a2e1a;
+  border: 1px solid rgba(76,175,111,0.2);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 16px 0;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--cream);
+}
+.wpp-box::before {
+  content: attr(data-label);
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+.wpp-box .wpp-icon {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 18px;
+  opacity: 0.5;
+}
+.wpp-box p { color: var(--cream); margin-bottom: 8px; }
+.wpp-box p:last-child { margin-bottom: 0; }
+
+/* ── TIMELINE (horizontal pipeline) ── */
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  overflow-x: auto;
+  padding: 12px 0 20px;
+  scrollbar-width: thin;
+}
+.pipeline-step {
+  flex: 1;
+  min-width: 150px;
+  position: relative;
+  text-align: center;
+  padding: 20px 12px 16px;
+}
+.pipeline-step::after {
+  content: '';
+  position: absolute;
+  top: 38px;
+  right: -1px;
+  width: 24px;
+  height: 2px;
+  background: var(--gold-50);
+}
+.pipeline-step:last-child::after { display: none; }
+.pipeline-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--gold-20);
+  border: 2px solid var(--gold);
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.pipeline-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pipeline-desc {
+  font-size: 12px;
+  color: var(--cream-40);
+  line-height: 1.45;
+}
+.pipeline-auto {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--teal);
+  margin-top: 6px;
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--teal-15);
+  border-radius: 4px;
+}
+
+/* ── TIMELINE (vertical for cadencia) ── */
+.vtimeline {
+  position: relative;
+  padding-left: 36px;
+}
+.vtimeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-strong);
+}
+.vtimeline-item {
+  position: relative;
+  margin-bottom: 32px;
+}
+.vtimeline-item::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--dark);
+  z-index: 2;
+}
+.vtimeline-item:last-child { margin-bottom: 0; }
+.vtimeline-header {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.vtimeline-header .timing {
+  font-weight: 400;
+  color: var(--cream-40);
+  margin-left: 8px;
+}
+
+/* ── SLA HIGHLIGHT CARDS ── */
+.sla-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.sla-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+}
+.sla-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.sla-value {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.sla-label {
+  font-size: 12px;
+  color: var(--cream-40);
+  line-height: 1.4;
+}
+
+/* ── FLOWCHART ── */
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 24px 0;
+}
+.flow-node {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 14px 24px;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+  font-size: 13px;
+  color: var(--cream);
+  position: relative;
+}
+.flow-node.decision {
+  background: var(--gold-15);
+  border-color: var(--gold-50);
+  border-radius: var(--radius-sm);
+  transform: none;
+  padding: 14px 20px;
+}
+.flow-node.action { border-left: 3px solid var(--teal); }
+.flow-node.auto { border-left: 3px solid var(--blue); }
+.flow-node.sdr { border-left: 3px solid var(--green); }
+.flow-node.end { border-left: 3px solid var(--red); }
+.flow-node .node-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-40);
+  margin-bottom: 4px;
+}
+.flow-arrow {
+  width: 2px;
+  height: 28px;
+  background: var(--border-strong);
+  position: relative;
+}
+.flow-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--border-strong);
+}
+.flow-branch {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 760px;
+  justify-content: center;
+}
+.flow-branch-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.flow-branch-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--cream-40);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+.tag-gold { background: var(--gold-15); color: var(--gold); }
+.tag-teal { background: var(--teal-15); color: var(--teal); }
+.tag-red { background: var(--red-15); color: var(--red); }
+.tag-green { background: var(--green-15); color: var(--green); }
+.tag-blue { background: var(--blue-15); color: var(--blue); }
+.tag-yellow { background: var(--yellow-15); color: var(--yellow); }
+.tag-purple { background: var(--purple-15); color: var(--purple); }
+
+/* ── ALERT BOX ── */
+.alert {
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 13.5px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.alert-gold { border: 1px solid var(--gold-30); }
+.alert-red { border: 1px solid rgba(224,82,82,0.25); }
+.alert-green { border: 1px solid rgba(76,175,111,0.25); }
+.alert-blue { border: 1px solid rgba(91,141,239,0.25); }
+
+/* ── GOOGLE CHAT MOCK ── */
+.gchat-box {
+  background: #1a1a2e;
+  border: 1px solid rgba(91,141,239,0.2);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--cream-60);
+}
+.gchat-box::before {
+  content: 'ALERTA GOOGLE CHAT';
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+/* ── SECTION NUMBER ── */
+.section-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--gold-20);
+  line-height: 1;
+  margin-bottom: -8px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  color: var(--cream-40);
+  font-size: 12px;
+}
+.footer a { color: var(--gold); text-decoration: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .container { padding: 70px 16px 40px; }
+  .hero { padding: 80px 16px 40px; }
+  .card { padding: 20px; }
+  .pipeline { flex-direction: column; align-items: stretch; }
+  .pipeline-step::after { display: none; }
+  .pipeline-step { text-align: left; padding: 12px 0; display: flex; gap: 12px; align-items: center; }
+  .pipeline-dot { margin: 0; flex-shrink: 0; }
+  .flow-branch { flex-direction: column; align-items: center; }
+  .sla-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-inner { gap: 4px; }
+  .nav-link { font-size: 11px; padding: 4px 8px; }
+  table { font-size: 12px; }
+  th, td { padding: 10px 12px; }
+}
+
+@media (max-width: 480px) {
+  .sla-grid { grid-template-columns: 1fr; }
+  .hero-meta { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">OMNI Brasil</span>
+    <a href="#funil" class="nav-link">Funil</a>
+    <a href="#w0000" class="nav-link">W0000</a>
+    <a href="#w0001" class="nav-link">W0001</a>
+    <a href="#mon001" class="nav-link">MON001</a>
+    <a href="#lideranca" class="nav-link">Liderança</a>
+    <a href="#responsabilidades" class="nav-link">SDR</a>
+    <a href="#slas" class="nav-link">SLAs</a>
+    <a href="#google-chat" class="nav-link">Alertas</a>
+    <a href="#fluxograma" class="nav-link">Fluxo</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="hero" id="hero">
+  <div class="hero-badge">OMNI Brasil &middot; Comercial</div>
+  <h1>Manual de Pré-Vendas</h1>
+  <p class="hero-subtitle">Para SDRs e líderes comerciais — automações, SLAs, responsabilidades e métricas de gestão</p>
+  <div class="hero-meta">
+    <span>Versao 1.0</span>
+    <span>Abril 2026</span>
+    <span>Produto: Formacao em Omniterapia</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ═══════ 2. FUNIL ═══════ -->
+<section id="funil">
+  <div class="section-num">01</div>
+  <h2>Visao Geral do Funil de Pre-Vendas</h2>
+  <p>O funil de pre-vendas da OMNI Brasil opera no Pipedrive, com automacoes disparando em etapas-chave. Abaixo, o fluxo completo desde a entrada do lead ate a reuniao agendada com o Closer.</p>
+
+  <div class="pipeline">
+    <div class="pipeline-step">
+      <div>
+        <div class="pipeline-dot">1</div>
+      </div>
+      <div>
+        <div class="pipeline-label">MQL (480)</div>
+        <div class="pipeline-desc">Lead recem cadastrado</div>
+        <div class="pipeline-auto">W0000</div>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div>
+        <div class="pipeline-dot">2</div>
+      </div>
+      <div>
+        <div class="pipeline-label">Tentativa de Conectar (421)</div>
+        <div class="pipeline-desc">SDR em contato com lead</div>
+        <div class="pipeline-auto">W0001</div>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div>
+        <div class="pipeline-dot">3</div>
+      </div>
+      <div>
+        <div class="pipeline-label">Conectado (422)</div>
+        <div class="pipeline-desc">Lead engajado, SDR agenda reuniao</div>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div>
+        <div class="pipeline-dot">4</div>
+      </div>
+      <div>
+        <div class="pipeline-label">Avaliado (428)</div>
+        <div class="pipeline-desc">Reuniao agendada com Closer</div>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div>
+        <div class="pipeline-dot">5</div>
+      </div>
+      <div>
+        <div class="pipeline-label">Funil Closer</div>
+        <div class="pipeline-desc">Reuniao realizada</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-gold">
+    <span class="alert-icon">&#9889;</span>
+    <div><strong>Automacoes atuam nas etapas MQL e Tentativa de Conectar.</strong> A partir de Conectado, o processo e 100% manual do SDR.</div>
+  </div>
+</section>
+
+<!-- ═══════ 3. W0000 ═══════ -->
+<section id="w0000">
+  <div class="section-num">02</div>
+  <h2>W0000 &mdash; Automacao de Abertura</h2>
+
+  <div class="card card-accent">
+    <h4>Quando dispara</h4>
+    <p>Lead entra na etapa <strong>MQL (480)</strong> do Pipedrive</p>
+    <h4>Canal</h4>
+    <p>WhatsApp via Chatwoot (SDR responsavel pelo deal)</p>
+  </div>
+
+  <h3>Mapa SDR</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Owner ID Pipedrive</th><th>SDR</th><th>Canal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>20525394</code></td><td>David</td><td><span class="tag tag-yellow">WhatsApp unofficial</span></td></tr>
+        <tr><td><code>2872886</code></td><td>Rafaela</td><td><span class="tag tag-green">WhatsApp official</span></td></tr>
+        <tr><td><code>22894651</code></td><td>Layslla</td><td><span class="tag tag-green">WhatsApp official</span></td></tr>
+        <tr><td>Outros</td><td>Rafaela (fallback)</td><td><span class="tag tag-green">WhatsApp official</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Mensagem Disparada &mdash; Abertura (imediato)</h3>
+  <div class="wpp-box" data-label="&#128242; Mensagem WhatsApp &mdash; Abertura">
+    <span class="wpp-icon">&#128172;</span>
+    <p>Oi, [Nome]! Excelente dia &#127774;</p>
+    <p>Aqui e [seu nome], da OMNI.</p>
+    <p>Vi que voce se cadastrou pra saber mais sobre a Formacao em Hipnoterapia OMNI, e passar por nossa consultoria estrategica foi isso mesmo?</p>
+    <p>Posso te ligar rapidinho? Sao so 5 minutinhos para entender como posso te ajudar melhor &#128522;</p>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon">&#128203;</span>
+    <div>Atividade criada no Pipedrive: <strong>"WhatsApp Disparado: Abertura"</strong> + texto completo da mensagem.</div>
+  </div>
+
+  <h3>O que acontece com a resposta do lead</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Situacao</th><th>Acao da Automacao</th><th>Acao do SDR</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lead responde (engajado) &mdash; dentro do horario (10h&ndash;18h, seg&ndash;sab)</td>
+          <td>IA classifica &rarr; move para 422 se engajado</td>
+          <td><span class="tag tag-green">Alerta Google Chat</span> &rarr; SDR age imediatamente</td>
+        </tr>
+        <tr>
+          <td>Lead responde (baixo engajamento: "oi", emoji) &mdash; dentro do horario</td>
+          <td>IA classifica &rarr; mantém em MQL</td>
+          <td><span class="tag tag-green">Alerta Google Chat</span> &rarr; SDR prioriza ligacao</td>
+        </tr>
+        <tr>
+          <td>Lead responde fora do horario comercial</td>
+          <td>Automacao envia mensagem de fora do horario</td>
+          <td>SDR age ao abrir expediente</td>
+        </tr>
+        <tr>
+          <td>Lead nao responde</td>
+          <td>Nenhuma acao automatica</td>
+          <td><strong>SDR faz 3 ligacoes</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Mensagem Fora do Horario</h3>
+  <div class="wpp-box" data-label="&#128242; Mensagem WhatsApp &mdash; Fora do Horario">
+    <span class="wpp-icon">&#128172;</span>
+    <p>Oi, [Nome]! Recebemos sua mensagem e ficamos felizes com seu interesse &#128522;</p>
+    <p>Nosso atendimento e de segunda a sabado, das 10h as 18h.</p>
+    <p>Voce sera uma das primeiras pessoas que vou chamar ao abrir o expediente!</p>
+    <p>Ate logo &#128591;</p>
+  </div>
+</section>
+
+<!-- ═══════ 4. W0001 ═══════ -->
+<section id="w0001">
+  <div class="section-num">03</div>
+  <h2>W0001 &mdash; Automacao de Follow-up (Cadencia de 4 disparos)</h2>
+
+  <div class="card card-accent">
+    <h4>Quando dispara</h4>
+    <p>Lead entra ou permanece na etapa <strong>Tentativa de Conectar (421)</strong></p>
+    <h4>Canal</h4>
+    <p>WhatsApp via Chatwoot</p>
+  </div>
+
+  <div class="vtimeline">
+
+    <!-- D1 -->
+    <div class="vtimeline-item">
+      <div class="vtimeline-header">Disparo 1 <span class="timing">&mdash; Imediato</span></div>
+      <div class="wpp-box" data-label="&#128242; Disparo 1 &mdash; WhatsApp">
+        <span class="wpp-icon">&#128172;</span>
+        <p>Otimo dia, [Nome]!</p>
+        <p>Sei que a rotina pode estar corrida, por isso mesmo eu so preciso de 5 minutinhos do seu tempo pra falar sobre seu interesse na formacao &mdash; o objetivo da minha ligacao e poupar seu tempo e te ajudar de forma estrategica.</p>
+        <p>Posso te ligar agora ou prefere mais tarde?</p>
+        <p>Tudo bem, que horas e melhor pra voce?</p>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon">&#128203;</span>
+        <div>Atividade Pipedrive: <strong>"WhatsApp Disparado: Disparo 1"</strong></div>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="vtimeline-item">
+      <div class="vtimeline-header">Disparo 2 <span class="timing">&mdash; Dia 1 (24h uteis apos D1)</span></div>
+      <p style="font-size:12px; color:var(--cream-40); margin-bottom:8px;">Horario util = 8h&ndash;20h, seg&ndash;sab, exceto feriados</p>
+      <div class="wpp-box" data-label="&#128242; Disparo 2 &mdash; WhatsApp">
+        <span class="wpp-icon">&#128172;</span>
+        <p>Ola, [Nome], a hipnoterapia e o novo oceano azul do mercado atual. Infelizmente cada vez mais as pessoas tem adoecido emocionalmente e precisando de bons profissionais na area.</p>
+        <p>Considerando o avanco da inteligencia artificial sabemos que essa profissao sera cada vez mais importante e uma das poucas que vai prevalecer e fortalecer. &#128640;</p>
+        <p>Queremos formar um exercito de hipnoterapeutas de excelencia. Podemos falar?</p>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon">&#128203;</span>
+        <div>Atividade Pipedrive: <strong>"WhatsApp Disparado: Disparo 2"</strong></div>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="vtimeline-item">
+      <div class="vtimeline-header">Disparo 3 <span class="timing">&mdash; Dia 2 (24h uteis apos D2)</span></div>
+      <div class="wpp-box" data-label="&#128242; Disparo 3 &mdash; WhatsApp">
+        <span class="wpp-icon">&#128172;</span>
+        <p>Excelente dia, [Nome]! Espero que esteja bem! &#128522;</p>
+        <p>Quer um gostinho da nossa formacao, entao de so uma olhadinha aqui nesse video e me diz se e o que esta buscando:</p>
+        <p><a href="https://www.instagram.com/reel/Cwte2sDtA1o/?igsh=MTgzOWYyNHh3Z25pMQ==" target="_blank" style="color:var(--teal);">https://www.instagram.com/reel/Cwte2sDtA1o/</a></p>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon">&#128203;</span>
+        <div>Atividade Pipedrive: <strong>"WhatsApp Disparado: Disparo 3"</strong></div>
+      </div>
+    </div>
+
+    <!-- D4 -->
+    <div class="vtimeline-item">
+      <div class="vtimeline-header">Disparo 4 &mdash; Breakup <span class="timing">&mdash; Dia 4 (48h uteis apos D3)</span></div>
+      <div class="wpp-box" data-label="&#128242; Disparo 4 &mdash; WhatsApp (Breakup)">
+        <span class="wpp-icon">&#128172;</span>
+        <p>Otimo dia, [Nome]. Pela falta de resposta, acredito que transformar sua vida e sua carreira nao sao prioridades para voce agora. &#128533;</p>
+        <p>Se ainda for sera um prazer te atender! E isso mesmo ou me equivoquei?</p>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon">&#128203;</span>
+        <div>Atividade Pipedrive: <strong>"WhatsApp Disparado: Disparo 4"</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card card-red">
+    <h4>Se nao responder apos D4</h4>
+    <p><strong>1.</strong> Deal marcado como <strong>Perdido</strong> (motivo: "SEM CONEXAO")</p>
+    <p><strong>2.</strong> Novo deal criado no <strong>Funil de Nutricao</strong> (pipeline 72, etapa 487)</p>
+    <p style="color:var(--green);"><strong>SDR nao precisa fazer nada</strong> &mdash; automacao cuida de tudo.</p>
+  </div>
+
+  <h3>Resposta do Lead em qualquer Disparo</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Classificacao IA</th><th>Criterio</th><th>Acao</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-purple">automatico</span></td>
+          <td>Bot, operadora, OOO</td>
+          <td>Ignora. Cadencia continua.</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-yellow">humano_baixo</span></td>
+          <td>"oi", "sim", emoji, &lt;3 caracteres</td>
+          <td>Mantém em 421. <span class="tag tag-blue">Alerta Google Chat</span></td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-green">humano_engajado</span></td>
+          <td>Pergunta real, contexto, interesse</td>
+          <td>Move para Conectado (422). <span class="tag tag-blue">Alerta Google Chat</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Exemplo de Alerta no Google Chat</h3>
+  <div class="gchat-box">
+    <p>&#129302; <strong>Lead respondeu &mdash; baixo engajamento</strong></p>
+    <p>Lead: <strong>[Nome]</strong> | SDR: <strong>David</strong></p>
+    <p>Resposta: "oi"</p>
+    <p>&#128073; <a href="#" style="color:var(--blue);">Link da conversa no Chatwoot</a></p>
+  </div>
+</section>
+
+<!-- ═══════ 5. MON001 ═══════ -->
+<section id="mon001">
+  <div class="section-num">04</div>
+  <h2>MON001 &mdash; Monitor de SLA de Resposta (30 minutos uteis)</h2>
+
+  <div class="card card-teal">
+    <p>Esta e uma automacao <strong>independente</strong> que monitora <strong>todas as conversas</strong> no Chatwoot &mdash; nao apenas as de automacoes.</p>
+  </div>
+
+  <h3>Como Funciona</h3>
+  <div class="card">
+    <p><strong>1.</strong> Lead envia mensagem &rarr; relogio de <strong>30 minutos uteis</strong> comeca</p>
+    <p><strong>2.</strong> Horario util: <strong>10h&ndash;18h, segunda a sabado</strong> (exceto feriados)</p>
+    <p><strong>3.</strong> Apos 30 min uteis sem resposta do SDR &rarr; <strong>alerta no Google Chat</strong></p>
+  </div>
+
+  <h3>Alerta Google Chat</h3>
+  <div class="gchat-box">
+    <p>&#9200; <strong>Lead sem resposta ha 30min uteis</strong></p>
+    <p>Lead: <strong>[Nome]</strong> | SDR: <strong>David</strong></p>
+    <p>Ultima mensagem: "[texto da mensagem]"</p>
+    <p>&#128073; <a href="#" style="color:var(--blue);">Link da conversa no Chatwoot</a></p>
+  </div>
+
+  <div class="alert alert-gold">
+    <span class="alert-icon">&#9888;&#65039;</span>
+    <div>
+      <strong>Importante sobre o timer:</strong>
+      <br>O timer so conta em horario comercial (10h&ndash;18h). Se o lead mandar mensagem as 17h50, os 30 min contam: <strong>10 min ate 18h</strong> + <strong>20 min a partir das 10h do proximo dia util</strong>.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 6. VISÃO DO LÍDER ═══════ -->
+<section id="lideranca">
+  <div class="section-num">05</div>
+  <h2>Visão do Líder — O que Monitorar</h2>
+  <p style="color:var(--cream-60); margin-bottom:32px;">Esta seção é para líderes e coordenadores comerciais. Aqui está o que observar no dia a dia para garantir que o processo funciona e o time está performando.</p>
+
+  <!-- Métricas diárias -->
+  <h3 style="color:var(--gold); font-family:'DM Serif Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:16px;">Métricas-Chave para Acompanhar Diariamente</h3>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-bottom:40px;">
+    <div class="card" style="border-color:var(--gold-20);">
+      <div class="label" style="color:var(--gold); margin-bottom:8px;">Alerta</div>
+      <div style="font-size:1.8rem; font-family:'DM Serif Display',serif; color:var(--gold); margin-bottom:4px;">MON001</div>
+      <p style="font-size:0.85rem;">Volume de alertas de 30min disparados por SDR. Alto volume = SDR com agenda sobrecarregada ou ausente.</p>
+    </div>
+    <div class="card" style="border-color:rgba(91,141,239,0.25);">
+      <div class="label" style="color:var(--blue); margin-bottom:8px;">Travamento</div>
+      <div style="font-size:1.8rem; font-family:'DM Serif Display',serif; color:var(--blue); margin-bottom:4px;">421 +5d</div>
+      <p style="font-size:0.85rem;">Leads em Tentativa de Conectar há mais de 5 dias. Indica cadência parada ou lead sem follow-up.</p>
+    </div>
+    <div class="card" style="border-color:rgba(76,175,111,0.25);">
+      <div class="label" style="color:var(--green); margin-bottom:8px;">Conversão</div>
+      <div style="font-size:1.8rem; font-family:'DM Serif Display',serif; color:var(--green); margin-bottom:4px;">421→422</div>
+      <p style="font-size:0.85rem;">Taxa de conversão de Tentativa de Conectar para Conectado por SDR. Indica qualidade de abordagem.</p>
+    </div>
+    <div class="card" style="border-color:rgba(224,82,82,0.25);">
+      <div class="label" style="color:var(--red); margin-bottom:8px;">Breakup</div>
+      <div style="font-size:1.8rem; font-family:'DM Serif Display',serif; color:var(--red); margin-bottom:4px;">D4 s/ resp.</div>
+      <p style="font-size:0.85rem;">Leads que chegaram ao Disparo 4 sem nenhuma resposta. Indica qualidade do lead ou falha no contato.</p>
+    </div>
+  </div>
+
+  <!-- Sinais de alerta -->
+  <h3 style="color:var(--red); font-family:'DM Serif Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:16px;">⚠ Sinais de Alerta</h3>
+  <div class="card" style="border-color:rgba(224,82,82,0.2); background:var(--red-15); margin-bottom:40px;">
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div style="display:flex; align-items:flex-start; gap:12px; padding-bottom:14px; border-bottom:1px solid rgba(224,82,82,0.15);">
+        <span style="color:var(--red); font-size:1.1rem; flex-shrink:0;">⚡</span>
+        <div>
+          <div style="font-weight:600; color:var(--cream); font-size:0.9rem; margin-bottom:3px;">SDR com mais de 3 alertas MON001 no mesmo dia</div>
+          <p style="font-size:0.83rem;">Verificar agenda. O SDR pode estar em reunião, ausente ou com volume muito alto para conseguir responder.</p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:12px; padding-bottom:14px; border-bottom:1px solid rgba(224,82,82,0.15);">
+        <span style="color:var(--red); font-size:1.1rem; flex-shrink:0;">⚡</span>
+        <div>
+          <div style="font-weight:600; color:var(--cream); font-size:0.9rem; margin-bottom:3px;">Deal em 421 por mais de 7 dias sem nenhuma atividade</div>
+          <p style="font-size:0.83rem;">Escalar. A automação já fez a parte dela. O SDR precisava ter agido e não agiu, ou o lead está em uma etapa morta.</p>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:12px;">
+        <span style="color:var(--red); font-size:1.1rem; flex-shrink:0;">⚡</span>
+        <div>
+          <div style="font-weight:600; color:var(--cream); font-size:0.9rem; margin-bottom:3px;">Mais de 20% dos deals marcados "SEM CONEXÃO" em uma semana</div>
+          <p style="font-size:0.83rem;">Revisar qualidade dos leads que estão entrando. Pode ser problema na fonte de tráfego ou no formulário de cadastro.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- O que as automações nunca fazem -->
+  <h3 style="color:var(--teal); font-family:'DM Serif Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:16px;">O que as Automações NUNCA Fazem</h3>
+  <p style="color:var(--cream-60); font-size:0.85rem; margin-bottom:16px;">Como líder, é importante saber o que é responsabilidade humana — independente de quantas automações existam.</p>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-bottom:40px;">
+    <div class="card" style="border-color:var(--teal-20);">
+      <div style="font-size:1.4rem; margin-bottom:8px;">📞</div>
+      <div style="font-weight:600; color:var(--cream); font-size:0.88rem; margin-bottom:4px;">Fazer ligações</div>
+      <p style="font-size:0.82rem;">Automação só envia WhatsApp. As 3 ligações de primeiro contato são sempre responsabilidade do SDR.</p>
+    </div>
+    <div class="card" style="border-color:var(--teal-20);">
+      <div style="font-size:1.4rem; margin-bottom:8px;">🧠</div>
+      <div style="font-weight:600; color:var(--cream); font-size:0.88rem; margin-bottom:4px;">Qualificar o lead</div>
+      <p style="font-size:0.82rem;">A IA classifica a resposta (automático / baixo / engajado). Quem qualifica o fit real é o SDR na ligação.</p>
+    </div>
+    <div class="card" style="border-color:var(--teal-20);">
+      <div style="font-size:1.4rem; margin-bottom:8px;">📅</div>
+      <div style="font-weight:600; color:var(--cream); font-size:0.88rem; margin-bottom:4px;">Agendar reunião</div>
+      <p style="font-size:0.82rem;">A automação facilita o contato. O agendamento com o Closer é sempre decisão e responsabilidade do SDR.</p>
+    </div>
+    <div class="card" style="border-color:var(--teal-20);">
+      <div style="font-size:1.4rem; margin-bottom:8px;">⚖️</div>
+      <div style="font-weight:600; color:var(--cream); font-size:0.88rem; margin-bottom:4px;">Decidir casos ambíguos</div>
+      <p style="font-size:0.82rem;">Lead classificado como "baixo engajamento" pode virar venda. O SDR avalia e decide se aprofunda ou encerra.</p>
+    </div>
+  </div>
+
+  <!-- Checklist semanal -->
+  <h3 style="color:var(--gold); font-family:'DM Serif Display',serif; font-size:1.2rem; font-weight:400; margin-bottom:16px;">✓ Checklist Semanal do Líder</h3>
+  <div class="card" style="border-color:var(--gold-20);">
+    <p style="font-size:0.82rem; color:var(--cream-60); margin-bottom:16px;">Execute toda semana, preferencialmente segunda-feira pela manhã:</p>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Revisar execuções com erro no n8n — abrir a interface e verificar se W0000, W0001 ou MON001 têm falhas acumuladas</span>
+      </label>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Checar leads no pipeline de nutrição (pipeline 72) que voltaram a interagir — podem ser recuperados pelo SDR</span>
+      </label>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Validar no Google Chat se os alertas MON001 estão sendo respondidos em tempo — alerta sem resposta do SDR = lead perdido</span>
+      </label>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Conferir no Pipedrive se há deals em 421 com mais de 5 dias sem atividade — identificar por SDR e conversar individualmente</span>
+      </label>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Revisar taxa de "SEM CONEXÃO" da semana — se acima de 20%, investigar fonte dos leads</span>
+      </label>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" style="margin-top:3px; accent-color:var(--gold); flex-shrink:0;">
+        <span style="font-size:0.88rem; color:var(--cream-60);">Comparar conversão 421→422 por SDR — disparidade acima de 15pp entre SDRs indica necessidade de treinamento ou revisão de abordagem</span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 7. RESPONSABILIDADES ═══════ -->
+<section id="responsabilidades">
+  <div class="section-num">06</div>
+  <h2>Responsabilidades do SDR por Etapa</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Etapa</th><th>Automacao faz</th><th>SDR deve fazer</th><th>SLA</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lead entra no MQL (480)</strong></td>
+          <td>Dispara mensagem de abertura via WhatsApp</td>
+          <td>Aguardar resposta. Se nao responder em 2h &rarr; fazer 3 ligacoes</td>
+          <td><span class="tag tag-gold">2h uteis</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead responde (engajado)</strong></td>
+          <td>Classifica, move para 422, alerta</td>
+          <td>SDR agenda reuniao com Closer</td>
+          <td><span class="tag tag-red">Imediato</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead responde (baixo engajamento)</strong></td>
+          <td>Mantém em 421, alerta</td>
+          <td>SDR prioriza ligacao neste lead</td>
+          <td><span class="tag tag-yellow">&lt; 30min uteis</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead nao responde ao W0000</strong></td>
+          <td>Nenhuma acao</td>
+          <td>SDR faz 3 ligacoes. Sem conexao &rarr; move para 421</td>
+          <td><span class="tag tag-gold">Dia 1</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead entra em Tentativa Conectar (421)</strong></td>
+          <td>Dispara D1 &rarr; D2 &rarr; D3 &rarr; D4 automaticamente</td>
+          <td>SDR acompanha alertas. Se lead responder, age imediatamente</td>
+          <td><span class="tag tag-red">Imediato ao alerta</span></td>
+        </tr>
+        <tr>
+          <td><strong>Alerta MON001 (30min sem resposta)</strong></td>
+          <td>Alerta no Google Chat</td>
+          <td><strong>SDR responde ao lead IMEDIATAMENTE</strong></td>
+          <td><span class="tag tag-red">&lt; 5 min apos alerta</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lead engajado &rarr; Conectado (422)</strong></td>
+          <td>&mdash;</td>
+          <td>SDR qualifica, usa script SPIN, agenda reuniao</td>
+          <td><span class="tag tag-gold">&lt; 24h uteis</span></td>
+        </tr>
+        <tr>
+          <td><strong>Nenhuma resposta apos D4</strong></td>
+          <td>Marca perdido + cria deal nutricao</td>
+          <td>Nenhuma acao necessaria</td>
+          <td><span class="tag tag-teal">&mdash;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════ 7. SLAs ═══════ -->
+<section id="slas">
+  <div class="section-num">06</div>
+  <h2>Horarios e SLAs</h2>
+
+  <div class="card card-accent" style="text-align:center; margin-bottom:28px;">
+    <h4>Horario Comercial</h4>
+    <p style="font-family:'DM Serif Display',serif; font-size:1.6rem; color:var(--gold); margin:4px 0 0;">Segunda a Sabado &middot; 10h as 18h</p>
+  </div>
+
+  <div class="sla-grid">
+    <div class="sla-card">
+      <div class="sla-icon">&#9889;</div>
+      <div class="sla-value">5 min</div>
+      <div class="sla-label">Speed-to-Lead<br>Responder lead novo</div>
+    </div>
+    <div class="sla-card">
+      <div class="sla-icon">&#9200;</div>
+      <div class="sla-value">5 min</div>
+      <div class="sla-label">SLA MON001<br>Apos alerta de 30min</div>
+    </div>
+    <div class="sla-card">
+      <div class="sla-icon">&#128197;</div>
+      <div class="sla-value">3 dias</div>
+      <div class="sla-label">Agendamento<br>Apos qualificacao</div>
+    </div>
+    <div class="sla-card">
+      <div class="sla-icon">&#128198;</div>
+      <div class="sla-value">15 dias</div>
+      <div class="sla-label">Agenda Futura<br>Maximo para reuniao</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ 8. GOOGLE CHAT ═══════ -->
+<section id="google-chat">
+  <div class="section-num">07</div>
+  <h2>Google Chat &mdash; Canal de Alertas</h2>
+
+  <div class="card">
+    <p>Todos os alertas automaticos da operacao de pre-vendas chegam no <strong>Google Chat da equipe</strong>. Os SDRs devem manter o Google Chat aberto durante o expediente.</p>
+  </div>
+
+  <h3>Tipos de alerta</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Tipo</th><th>Quando chega</th><th>Acao do SDR</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag tag-green">Lead engajado</span></td>
+          <td>Lead responde com interesse real</td>
+          <td>Abrir conversa no Chatwoot e responder imediatamente</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-yellow">Baixo engajamento</span></td>
+          <td>Lead responde com "oi", emoji, etc.</td>
+          <td>Abrir conversa no Chatwoot e priorizar ligacao</td>
+        </tr>
+        <tr>
+          <td><span class="tag tag-red">30min sem resposta</span></td>
+          <td>MON001 detecta atraso na resposta</td>
+          <td>Abrir conversa no Chatwoot e responder em ate 5 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-green">
+    <span class="alert-icon">&#10003;</span>
+    <div><strong>Regra de ouro:</strong> ao receber qualquer alerta, abra o link da conversa no Chatwoot e responda o lead. Quanto mais rapido, maior a chance de conversao.</div>
+  </div>
+</section>
+
+<!-- ═══════ 9. FLUXOGRAMA ═══════ -->
+<section id="fluxograma">
+  <div class="section-num">08</div>
+  <h2>Fluxograma Visual do Processo Completo</h2>
+  <p>Diagrama de ponta a ponta mostrando o caminho do lead desde a entrada ate a reuniao ou perda.</p>
+
+  <div class="flow">
+
+    <div class="flow-node auto">
+      <div class="node-label">Entrada</div>
+      Lead entra no <strong>MQL (480)</strong>
+    </div>
+    <div class="flow-arrow"></div>
+
+    <div class="flow-node auto">
+      <div class="node-label">Automacao W0000</div>
+      WhatsApp de abertura disparado automaticamente
+    </div>
+    <div class="flow-arrow"></div>
+
+    <div class="flow-node decision">
+      <div class="node-label">Decisao</div>
+      Lead respondeu?
+    </div>
+    <div class="flow-arrow"></div>
+
+    <div class="flow-branch">
+      <div class="flow-branch-col">
+        <div class="flow-branch-label">Sim &mdash; Engajado</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node auto">
+          <div class="node-label">Automacao</div>
+          IA classifica &rarr; Move para <strong>Conectado (422)</strong>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node sdr">
+          <div class="node-label">SDR</div>
+          Qualifica com SPIN &rarr; Agenda reuniao com Closer
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node action">
+          <div class="node-label">Resultado</div>
+          <strong>Avaliado (428)</strong> &rarr; Funil Closer
+        </div>
+      </div>
+
+      <div class="flow-branch-col">
+        <div class="flow-branch-label">Sim &mdash; Baixo engajamento</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node auto">
+          <div class="node-label">Automacao</div>
+          IA classifica &rarr; Mantém em MQL
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node sdr">
+          <div class="node-label">SDR</div>
+          Prioriza ligacao para esse lead
+        </div>
+      </div>
+
+      <div class="flow-branch-col">
+        <div class="flow-branch-label">Nao respondeu</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node sdr">
+          <div class="node-label">SDR</div>
+          Faz 3 ligacoes. Sem conexao &rarr; move para 421
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node auto">
+          <div class="node-label">Automacao W0001</div>
+          Cadencia: D1 &rarr; D2 &rarr; D3 &rarr; D4
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node decision">
+          <div class="node-label">Decisao</div>
+          Lead respondeu durante cadencia?
+        </div>
+        <div class="flow-arrow"></div>
+        <div style="display:flex; gap:12px; width:100%;">
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+            <div class="flow-branch-label">Sim</div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node auto" style="font-size:12px;">
+              IA classifica &rarr; age conforme tipo
+            </div>
+          </div>
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+            <div class="flow-branch-label">Nao apos D4</div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node end" style="font-size:12px;">
+              Deal <strong>Perdido</strong> &rarr; Funil Nutricao
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Legenda</h3>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:8px;">
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:16px;height:4px;background:var(--blue);border-radius:2px;"></div>
+      <span style="font-size:12px; color:var(--cream-40);">Automacao</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:16px;height:4px;background:var(--green);border-radius:2px;"></div>
+      <span style="font-size:12px; color:var(--cream-40);">Acao do SDR</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:16px;height:4px;background:var(--gold);border-radius:2px;"></div>
+      <span style="font-size:12px; color:var(--cream-40);">Decisao</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:16px;height:4px;background:var(--teal);border-radius:2px;"></div>
+      <span style="font-size:12px; color:var(--cream-40);">Resultado</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="width:16px;height:4px;background:var(--red);border-radius:2px;"></div>
+      <span style="font-size:12px; color:var(--cream-40);">Perda</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- .container -->
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <p>OMNI Brasil &middot; Manual de Pré-Vendas — SDR &amp; Liderança &middot; v1.0 &middot; Abril 2026</p>
+  <p style="margin-top:4px;">Produto: Formação em Omniterapia | Documento interno — uso exclusivo da equipe comercial</p>
+  <p style="margin-top:4px; font-size:0.75rem; opacity:0.5;">Elaborado por AURA — Sistema AIOX</p>
+</footer>
+
+</body>
+</html>
