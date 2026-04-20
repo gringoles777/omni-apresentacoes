@@ -1256,6 +1256,10 @@ footer{
   z-index:1;
   pointer-events:none;
 }
+@keyframes pulse-logo{
+  0%,100%{opacity:.5;transform:scale(.88)}
+  50%{opacity:1;transform:scale(1)}
+}
 </style>
 </head>
 <body>
@@ -1287,7 +1291,11 @@ footer{
       Você já passou por grandes janelas de oportunidade que se fecharam antes. A diferença de agora, é que você não tinha sido avisado.<br>A Janela está aberta. Por quanto tempo, ninguém sabe.
     </p>
   </div>
-  <div class="hero-scroll-cue reveal reveal-delay-4"></div>
+  <div class="hero-scroll-cue reveal reveal-delay-4">
+    <img src="slides/_assets/alianca-logo.png"
+         alt="Aliança de Ouro"
+         style="width:52px;height:52px;object-fit:contain;animation:pulse-logo 2.6s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(200,168,75,.5));" />
+  </div>
 </section>
 
 <!-- =============== FLORIANÓPOLIS — A DECISÃO =============== -->
@@ -1512,8 +1520,8 @@ footer{
 
       <div class="requisito reveal reveal-delay-2">
         <div class="requisito-num">03 · Histórico</div>
-        <h3>Aluno ativo<br>da OMNI Brasil</h3>
-        <p>Não basta admirar o método. É preciso viver o método. Somente alunos ativos — com relacionamento construído, reputação preservada e confiança mútua — são considerados.</p>
+        <h3>Bom Histórico com<br>a OMNI Brasil</h3>
+        <p>Não basta ser aluno. É necessário ter boa reputação e confiança mútua. Afinal, abriremos nossos maiores segredos.</p>
       </div>
     </div>
 
