@@ -1261,6 +1261,10 @@ footer{
   0%,100%{opacity:.5;transform:scale(.88)}
   50%{opacity:1;transform:scale(1)}
 }
+@media(max-width:768px){
+  .flp-grid{grid-template-columns:1fr!important;gap:32px!important;}
+  .flp-grid>div:last-child{order:-1;}
+}
 </style>
 </head>
 <body>
@@ -1326,7 +1330,7 @@ footer{
       <p>Em março de 2026, recebi um convite que não era público. Não foi anunciado. Não tinha inscrições. Era um encontro fechado. Vinte empresários. Florianópolis. Cada um pagou R$ 100.000 para estar ali.</p>
       <p>Nas primeiras horas, honestidade total: parecia algo de outro mundo. Pensei que tinha jogado dinheiro fora. Que não era pra mim. Que as conversas eram boas mas eu não conseguia ver onde encaixavam no meu negócio.</p>
       <p>Depois as coisas foram dando clique na mente. Um clique depois do outro. E o que parecia distante se tornou o mapa mais claro que já tive na mão.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin:40px 0;">
+      <div class="flp-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin:40px 0;">
         <div>
           <p>Na sala estavam três nomes que mudaram permanentemente como eu enxergo negócios, IA e posicionamento.</p>
           <p><strong>Thiago Finch</strong> — o homem que executou um lançamento de R$ 125 milhões e, no auge, decidiu que o conhecimento do futuro não era mais o mesmo de antes: era Inteligência Artificial. Largou o óbvio para fazer sociedade com as duas pessoas certas e construir algo que ainda não tem nome no mercado.</p>
@@ -1334,7 +1338,7 @@ footer{
           <p><strong>Pedro Valério</strong> — construiu a maior empresa do seu setor operando com 200 funcionários a menos que o segundo colocado do mercado. Não é otimização. É uma filosofia diferente de como se constrói uma empresa.</p>
           <blockquote>Dois dias. Conversas que não existem em nenhum palco público. O tipo de troca que não volta — e que você não esquece.</blockquote>
         </div>
-        <div style="position:sticky;top:100px;">
+        <div>
           <div style="overflow:hidden;border:1px solid rgba(200,168,75,.12);aspect-ratio:4/5;">
             <img src="https://lh3.googleusercontent.com/d/1r8u0cOjhps5GS2KzKECC-FDtjikpLD3P"
                  alt="Encontro com os especialistas — Aliança de Ouro"
