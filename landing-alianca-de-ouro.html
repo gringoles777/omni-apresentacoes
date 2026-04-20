@@ -1261,6 +1261,39 @@ footer{
   .flp-grid{grid-template-columns:1fr!important;gap:32px!important;}
 }
 
+
+/* MODAL — CONFIRMAR PRESENÇA */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,5,5,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.16,1,.3,1);}
+.modal-overlay.active{opacity:1;pointer-events:all;}
+.modal-box{background:linear-gradient(180deg,var(--color-dark-elevated) 0%,var(--color-dark) 100%);border:1px solid rgba(200,168,75,.2);padding:56px 48px;max-width:600px;width:100%;position:relative;box-shadow:0 40px 100px rgba(0,0,0,.6);transform:translateY(24px);transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.modal-overlay.active .modal-box{transform:translateY(0);}
+.modal-box::before,.modal-box::after{content:"";position:absolute;width:32px;height:32px;border:1px solid var(--color-gold);}
+.modal-box::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+.modal-box::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+.modal-close{position:absolute;top:20px;right:20px;width:32px;height:32px;background:none;border:none;cursor:pointer;color:rgba(245,240,232,.4);font-size:1.4rem;line-height:1;transition:color .2s;}
+.modal-close:hover{color:var(--color-gold);}
+.modal-eyebrow{font-family:'Oswald',sans-serif;font-size:.75rem;letter-spacing:.4em;color:var(--color-gold);text-transform:uppercase;margin-bottom:20px;}
+.modal-title{font-family:'Oswald',sans-serif;font-weight:500;font-size:clamp(1.6rem,3vw,2.2rem);text-transform:uppercase;line-height:1.1;color:var(--color-cream);margin-bottom:32px;}
+.modal-form{display:flex;flex-direction:column;gap:16px;}
+.modal-field label{display:block;font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--color-gold);margin-bottom:8px;}
+.modal-field input,.modal-field textarea{width:100%;background:rgba(245,240,232,.05);border:1px solid rgba(200,168,75,.2);border-radius:2px;padding:14px 16px;color:var(--color-cream);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .3s;resize:none;}
+.modal-field input:focus,.modal-field textarea:focus{border-color:var(--color-gold);background:rgba(200,168,75,.05);}
+.modal-field input::placeholder,.modal-field textarea::placeholder{color:rgba(245,240,232,.3);font-style:italic;}
+.modal-checkbox{display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid rgba(200,168,75,.12);background:rgba(200,168,75,.04);margin-top:4px;}
+.modal-checkbox input[type=checkbox]{width:18px;height:18px;flex-shrink:0;accent-color:var(--color-gold);margin-top:2px;cursor:pointer;}
+.modal-checkbox span{font-size:.88rem;line-height:1.6;color:rgba(245,240,232,.75);}
+.modal-checkbox span strong{color:var(--color-gold-light);}
+.modal-submit{font-family:'Oswald',sans-serif;font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;padding:20px 40px;border:none;cursor:pointer;background:var(--gradient-gold);color:var(--color-black);font-weight:500;margin-top:8px;transition:all .3s cubic-bezier(.16,1,.3,1);}
+.modal-submit:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 20px 50px rgba(200,168,75,.3);}
+.modal-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.modal-success{display:none;flex-direction:column;align-items:center;text-align:center;gap:24px;padding:16px 0;}
+.modal-success.show{display:flex;}
+.modal-form.hide,.modal-title.hide,.modal-eyebrow.hide{display:none;}
+.modal-success img{width:80px;height:80px;object-fit:contain;filter:drop-shadow(0 0 20px rgba(200,168,75,.5));animation:pulse-logo 2.6s ease-in-out infinite;}
+.modal-success-title{font-family:'Oswald',sans-serif;font-weight:500;font-size:2rem;text-transform:uppercase;color:var(--color-cream);}
+.modal-success-sub{font-family:'DM Serif Display',serif;font-style:italic;color:rgba(200,168,75,.8);font-size:1.05rem;}
+@media(max-width:640px){.modal-box{padding:40px 24px;}}
+
 </style>
 </head>
 <body>
@@ -1753,6 +1786,102 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 </script>
+
+<script>
+
+/* MODAL — CONFIRMAR PRESENÇA */
+(function(){
+  var overlay  = document.getElementById('modal-confirmar');
+  var form     = document.getElementById('modal-form');
+  var btn      = document.getElementById('modal-btn');
+  var success  = document.getElementById('modal-success');
+  var closeBtn = document.getElementById('modal-close');
+  var ENDPOINT = 'http://webhook.hypnos.omnihypnosis.com.br/alianca-confirmar';
+
+  function openModal(){ overlay.classList.add('active'); document.body.style.overflow='hidden'; }
+  function closeModal(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
+
+  document.querySelectorAll('.btn-primary, .nav-cta').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  });
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var nome     = document.getElementById('m-nome').value.trim();
+    var whatsapp = document.getElementById('m-whatsapp').value.trim();
+    var check    = document.getElementById('m-check').checked;
+    if(!nome){ alert('Por favor, informe seu nome.'); return; }
+    if(!whatsapp){ alert('Por favor, informe seu WhatsApp.'); return; }
+    if(!check){ alert('Confirme que está ciente das informações do evento.'); return; }
+    btn.disabled=true; btn.textContent='Enviando...';
+    try {
+      var res = await fetch(ENDPOINT, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          nome: nome,
+          whatsapp: whatsapp,
+          restricao: document.getElementById('m-restricao').value.trim(),
+          ia_ideia: document.getElementById('m-ia').value.trim()
+        })
+      });
+      var data = await res.json();
+      if(!res.ok) throw new Error(data.error||'Erro');
+      document.getElementById('modal-ey').classList.add('hide');
+      document.getElementById('modal-tit').classList.add('hide');
+      form.classList.add('hide');
+      success.classList.add('show');
+    } catch(err){
+      btn.disabled=false;
+      btn.textContent='Confirmar minha presença';
+      alert('Erro ao confirmar. Tente novamente ou entre em contato pelo WhatsApp.');
+    }
+  });
+})();
+
+</script>
+
+
+
+<!-- =============== MODAL CONFIRMAR PRESENÇA =============== -->
+<div class="modal-overlay" id="modal-confirmar" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
+    <div class="modal-eyebrow" id="modal-ey">Aliança de Ouro &middot; Junho 2026</div>
+    <h2 class="modal-title" id="modal-tit">Confirmar<br><span class="gold-text">Presença</span></h2>
+    <form class="modal-form" id="modal-form" novalidate>
+      <div class="modal-field">
+        <label for="m-nome">Nome completo *</label>
+        <input type="text" id="m-nome" placeholder="Seu nome completo" required />
+      </div>
+      <div class="modal-field">
+        <label for="m-whatsapp">WhatsApp *</label>
+        <input type="tel" id="m-whatsapp" placeholder="(48) 9 9999-9999" required />
+      </div>
+      <div class="modal-field">
+        <label for="m-restricao">Restrição alimentar</label>
+        <input type="text" id="m-restricao" placeholder="Se houver, informe aqui" />
+      </div>
+      <div class="modal-field">
+        <label for="m-ia">Você já tem ideia do que gostaria de fazer com IA no seu negócio?</label>
+        <textarea id="m-ia" rows="3" placeholder="Se não tiver, deixe em branco"></textarea>
+      </div>
+      <div class="modal-checkbox">
+        <input type="checkbox" id="m-check" required />
+        <span><strong>Estou ciente</strong> que o encontro é nos dias 3, 4 e 5 de junho de 2026, <strong>das 9h às 19h</strong>, na Sede da OMNI Brasil, e que é <strong>obrigatório levar laptop</strong>.</span>
+      </div>
+      <button type="submit" class="modal-submit" id="modal-btn">Confirmar minha presença</button>
+    </form>
+    <div class="modal-success" id="modal-success">
+      <img src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro" />
+      <div class="modal-success-title">Presença confirmada.</div>
+      <div class="modal-success-sub">Até junho, na sede da OMNI Brasil.</div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
