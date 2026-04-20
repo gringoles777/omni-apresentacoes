@@ -1805,7 +1805,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
       </div>
       <div class="modal-field">
         <label for="m-whatsapp">WhatsApp *</label>
-        <input type="tel" id="m-whatsapp" placeholder="(48) 9 9999-9999" required />
+        <input type="tel" id="m-whatsapp" placeholder="(48) 9 9999-9999" inputmode="numeric" maxlength="15" required />
       </div>
       <div class="modal-field">
         <label for="m-restricao">Restrição alimentar</label>
@@ -1839,6 +1839,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   var success  = document.getElementById('modal-success');
   var closeBtn = document.getElementById('modal-close');
   var ENDPOINT = 'https://go.omnihypnosis.com.br/alianca-prox-encontro';
+  // Máscara WhatsApp
+  document.getElementById('m-whatsapp').addEventListener('input', function(){
+    var d = this.value.replace(/D/g,'').substring(0,11);
+    if(d.length > 10) d = d.replace(/(d{2})(d{1})(d{4})(d{0,4})/, '($1) $2 $3-$4');
+    else if(d.length > 6) d = d.replace(/(d{2})(d{4})(d{0,4})/, '($1) $2-$3');
+    else if(d.length > 2) d = d.replace(/(d{2})(d{0,5})/, '($1) $2');
+    else if(d.length > 0) d = '(' + d;
+    this.value = d;
+  });
 
   function openModal(){ overlay.classList.add('active'); document.body.style.overflow='hidden'; }
   function closeModal(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
@@ -1856,7 +1865,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     var whatsapp = document.getElementById('m-whatsapp').value.trim();
     var check    = document.getElementById('m-check').checked;
     if(!nome){ alert('Por favor, informe seu nome.'); return; }
-    if(!whatsapp){ alert('Por favor, informe seu WhatsApp.'); return; }
+    var wpD=whatsapp.replace(/D/g,''); if(!whatsapp||wpD.length<10||wpD.length>11){alert('WhatsApp inválido. Informe DDD + número (10 ou 11 dígitos).');return;}
     if(!check){ alert('Confirme que está ciente das informações do evento.'); return; }
     btn.disabled=true; btn.textContent='Enviando...';
     try {
