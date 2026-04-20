@@ -1839,15 +1839,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   var success  = document.getElementById('modal-success');
   var closeBtn = document.getElementById('modal-close');
   var ENDPOINT = 'https://go.omnihypnosis.com.br/alianca-prox-encontro';
-  // Máscara WhatsApp
-  document.getElementById('m-whatsapp').addEventListener('input', function(){
-    var d = this.value.replace(/D/g,'').substring(0,11);
-    if(d.length > 10) d = d.replace(/(d{2})(d{1})(d{4})(d{0,4})/, '($1) $2 $3-$4');
-    else if(d.length > 6) d = d.replace(/(d{2})(d{4})(d{0,4})/, '($1) $2-$3');
-    else if(d.length > 2) d = d.replace(/(d{2})(d{0,5})/, '($1) $2');
-    else if(d.length > 0) d = '(' + d;
-    this.value = d;
-  });
+  // Máscara WhatsApp — só dígitos, formato brasileiro
+  (function(){
+    var wp = document.getElementById("m-whatsapp");
+    wp.addEventListener("keydown", function(e){
+      var allowed = ["Backspace","Delete","ArrowLeft","ArrowRight","Tab","Home","End"];
+      if(allowed.indexOf(e.key) === -1 && !/^[0-9]$/.test(e.key) && !e.ctrlKey && !e.metaKey){
+        e.preventDefault();
+      }
+    });
+    wp.addEventListener("input", function(){
+      var d = this.value.replace(/[^0-9]/g, "").substring(0, 11);
+      var v = "";
+      if(d.length === 0) { this.value = ""; return; }
+      if(d.length <= 2)       v = "(" + d;
+      else if(d.length <= 6)  v = "(" + d.substring(0,2) + ") " + d.substring(2);
+      else if(d.length <= 10) v = "(" + d.substring(0,2) + ") " + d.substring(2,6) + "-" + d.substring(6);
+      else                    v = "(" + d.substring(0,2) + ") " + d.substring(2,3) + " " + d.substring(3,7) + "-" + d.substring(7);
+      this.value = v;
+    });
+  })();
 
   function openModal(){ overlay.classList.add('active'); document.body.style.overflow='hidden'; }
   function closeModal(){ overlay.classList.remove('active'); document.body.style.overflow=''; }
@@ -1865,7 +1876,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     var whatsapp = document.getElementById('m-whatsapp').value.trim();
     var check    = document.getElementById('m-check').checked;
     if(!nome){ alert('Por favor, informe seu nome.'); return; }
-    var wpD=whatsapp.replace(/D/g,''); if(!whatsapp||wpD.length<10||wpD.length>11){alert('WhatsApp inválido. Informe DDD + número (10 ou 11 dígitos).');return;}
+    var wpD=whatsapp.replace(/[^0-9]/g,""); if(!whatsapp||wpD.length<10||wpD.length>11){alert("WhatsApp inválido. Informe DDD + número (10 ou 11 dígitos).");return;}
     if(!check){ alert('Confirme que está ciente das informações do evento.'); return; }
     btn.disabled=true; btn.textContent='Enviando...';
     try {
