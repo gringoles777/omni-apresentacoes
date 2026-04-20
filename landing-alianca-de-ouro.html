@@ -968,6 +968,300 @@ section{position:relative;z-index:2}
   0%,100%{opacity:.5;transform:scale(.88)}
   50%{opacity:1;transform:scale(1)}
 }
+
+footer{
+  background:var(--color-dark);
+  border-top:1px solid rgba(200,168,75,.1);
+  padding:60px 32px 40px;
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+.footer-logo{
+  font-family:'Oswald',sans-serif;
+  font-weight:600;
+  font-size:1rem;
+  letter-spacing:.35em;
+  color:var(--color-gold);
+  margin-bottom:20px;
+  text-transform:uppercase;
+}
+.footer-tagline{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  color:rgba(245,240,232,.6);
+  margin-bottom:32px;
+  font-size:.95rem;
+}
+.footer-disclaimer{
+  font-size:.8rem;
+  color:rgba(245,240,232,.4);
+  max-width:720px;
+  margin:0 auto;
+  line-height:1.6;
+}
+.footer-copy{
+  margin-top:28px;
+  padding-top:28px;
+  border-top:1px solid rgba(200,168,75,.06);
+  font-size:.75rem;
+  letter-spacing:.15em;
+  color:rgba(245,240,232,.3);
+  text-transform:uppercase;
+  font-family:'Oswald',sans-serif;
+}
+
+/* ============================================================
+   TRANSFORMAÇÃO — Quem você é em 12 meses
+   ============================================================ */
+.transformacao-quote{
+  max-width:860px;
+  margin:0 auto;
+  text-align:center;
+}
+.transformacao-quote > p{
+  font-family:'DM Serif Display',serif;
+  font-style:italic;
+  font-size:clamp(1.15rem,1.8vw,1.45rem);
+  line-height:1.75;
+  color:rgba(245,240,232,.88);
+  margin-bottom:48px;
+}
+.transformacao-quote blockquote{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(.95rem,1.4vw,1.2rem);
+  line-height:1.6;
+  color:var(--color-gold-light);
+  letter-spacing:.05em;
+  padding:40px 52px;
+  border:1px solid rgba(200,168,75,.2);
+  background:rgba(200,168,75,.04);
+  margin:0;
+  text-transform:uppercase;
+}
+@media(max-width:640px){
+  .transformacao-quote blockquote{padding:28px 24px}
+}
+
+/* ============================================================
+   ONDAS — Seção narrativa histórica
+   ============================================================ */
+.ondas{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(200,168,75,.07),transparent 60%),
+    linear-gradient(180deg,var(--color-black) 0%,var(--color-dark) 50%,var(--color-black) 100%);
+  padding:140px 0;
+}
+.ondas-intro{
+  max-width:800px;
+  margin:0 auto 80px;
+  text-align:center;
+}
+.ondas-intro p{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(1rem,1.4vw,1.2rem);
+  line-height:1.8;
+  color:rgba(245,240,232,.75);
+  font-style:normal;
+  font-weight:300;
+  letter-spacing:.01em;
+}
+.ondas-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2px;
+  background:rgba(200,168,75,.08);
+  max-width:1100px;
+  margin:0 auto;
+}
+.onda-card{
+  background:var(--color-dark);
+  padding:56px 48px;
+  position:relative;
+  overflow:hidden;
+  transition:background .5s var(--ease-out);
+}
+.onda-card:hover{background:var(--color-dark-elevated)}
+.onda-ano{
+  font-family:'Oswald',sans-serif;
+  font-size:.75rem;
+  letter-spacing:.4em;
+  color:var(--color-gold);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.onda-card h3{
+  font-family:'Oswald',sans-serif;
+  font-weight:500;
+  font-size:1.6rem;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:28px;
+  color:var(--color-cream);
+  line-height:1.1;
+}
+.onda-stat{
+  font-family:'DM Serif Display',serif;
+  font-size:1.15rem;
+  color:var(--color-gold-light);
+  margin-bottom:20px;
+  font-style:italic;
+  line-height:1.5;
+  padding:18px 0;
+  border-top:1px solid rgba(200,168,75,.15);
+  border-bottom:1px solid rgba(200,168,75,.15);
+}
+.onda-card p{
+  font-size:.98rem;
+  line-height:1.7;
+  color:rgba(245,240,232,.7);
+  margin-top:20px;
+}
+.onda-card .onda-frase{
+  font-family:'Oswald',sans-serif;
+  font-size:.82rem;
+  letter-spacing:.08em;
+  color:rgba(200,168,75,.6);
+  text-transform:uppercase;
+  margin-top:28px;
+  padding-top:20px;
+  border-top:1px solid rgba(200,168,75,.1);
+}
+.onda-5{
+  max-width:1100px;
+  margin:60px auto 0;
+  background:linear-gradient(135deg,rgba(200,168,75,.08) 0%,rgba(154,122,46,.04) 100%);
+  border:1px solid rgba(200,168,75,.2);
+  padding:72px 64px;
+  position:relative;
+}
+.onda-5::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--gradient-gold);
+}
+.onda-5-eyebrow{
+  font-family:'Oswald',sans-serif;
+  font-size:.8rem;
+  letter-spacing:.4em;
+  color:var(--color-gold);
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+.onda-5 h3{
+  font-family:'Oswald',sans-serif;
+  font-weight:500;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  text-transform:uppercase;
+  line-height:1.05;
+  margin-bottom:36px;
+  letter-spacing:-.005em;
+}
+.onda-5 p{
+  font-family:'Inter',sans-serif;
+  font-size:1rem;
+  font-weight:300;
+  line-height:1.8;
+  color:rgba(245,240,232,.8);
+  max-width:860px;
+  margin-bottom:24px;
+  letter-spacing:.01em;
+}
+.onda-5 p strong{
+  color:var(--color-gold-light);
+  font-weight:500;
+}
+.onda-5-pilares{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:48px;
+}
+.onda-5-pilar{
+  padding:28px 24px;
+  background:rgba(200,168,75,.05);
+  border:1px solid rgba(200,168,75,.12);
+}
+.onda-5-pilar span{
+  display:block;
+  font-family:'Oswald',sans-serif;
+  font-size:.7rem;
+  letter-spacing:.3em;
+  color:var(--color-gold);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.onda-5-pilar p{
+  font-size:.92rem;
+  line-height:1.6;
+  color:rgba(245,240,232,.75);
+  margin-bottom:0;
+}
+@media (max-width:860px){
+  .ondas-grid{grid-template-columns:1fr}
+  .onda-5{padding:48px 32px}
+  .onda-5-pilares{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   ANIMATIONS — SCROLL REVEAL
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 1s var(--ease-out),transform 1s var(--ease-out);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:640px){
+  .container{padding:0 24px}
+  .section{padding:90px 0}
+  .hero{padding:160px 24px 100px}
+  .hero-cta-group{flex-direction:column;width:100%}
+  .hero-cta-group .btn{width:100%;justify-content:center}
+  .divider{padding:60px 24px}
+  .invest-card{padding:56px 28px}
+  .timeline::before{left:14px}
+  .timeline-item{padding-left:48px}
+  .timeline-item::before{left:6px}
+}
+/* Video background hero */
+#hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+  opacity:.45;
+  pointer-events:none;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(5,5,5,.45) 0%,rgba(5,5,5,.2) 40%,rgba(5,5,5,.75) 100%);
+  z-index:1;
+  pointer-events:none;
+}
+@keyframes pulse-logo{
+  0%,100%{opacity:.5;transform:scale(.88)}
+  50%{opacity:1;transform:scale(1)}
+}
+@media(max-width:768px){
+  .flp-grid{grid-template-columns:1fr!important;gap:32px!important;}
+  .flp-grid>div:last-child{order:-1;}
+}
+
 </style>
 </head>
 <body>
