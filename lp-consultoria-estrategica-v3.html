@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Consultoria Estratégica</title>
+<meta name="description" content="Uma conversa estratégica de 30 minutos pode ser o ponto de virada que você está procurando. Agende sua consultoria gratuita.">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A84B;
+    --gold-heritage: #DC9F42;
+    --gold-glow: rgba(200,168,75,0.25);
+    --bg-foundation: #050505;
+    --bg-surface: #0F1117;
+    --bg-navy: #0A1628;
+    --bg-card: #141820;
+    --text-cream: #F5F0E8;
+    --text-muted: #9a9080;
+    --white: #ffffff;
+    --teal: #2A9D8F;
+    --teal-glow: rgba(42,157,143,0.4);
+    --red: #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-foundation);
+    color: var(--text-cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TOP BAR */
+  .top-bar {
+    background: var(--gold-heritage);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg-surface);
+    padding: 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(200,168,75,0.12);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(180deg, rgba(5,5,5,0.4) 0%, rgba(5,5,5,0.7) 100%),
+                url('https://cursos.omnihypnosis.com.br/wp-content/uploads/2026/04/yoD28.jpg') center center / cover no-repeat;
+    padding: 80px 20px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(30px, 5.5vw, 58px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    max-width: 820px;
+    margin: 0 auto 24px;
+    text-transform: uppercase;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--white);
+    max-width: 600px;
+    margin: 0 auto 20px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .hero-text {
+    font-size: clamp(15px, 1.8vw, 17px);
+    color: rgba(245,240,232,0.8);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  /* BUTTONS */
+  .btn-cta {
+    display: inline-block;
+    background: linear-gradient(135deg, #228B7A 0%, #2A9D8F 50%, #228B7A 100%);
+    color: #fff !important;
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(15px, 2vw, 19px);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 20px 48px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 6px 40px var(--teal-glow), 0 2px 8px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    animation: pulse-cta 2.5s ease-in-out infinite;
+  }
+
+  .btn-cta::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    60%, 100% { left: 160%; }
+  }
+
+  @keyframes pulse-cta {
+    0%, 100% { box-shadow: 0 6px 40px var(--teal-glow), 0 2px 8px rgba(0,0,0,0.5); }
+    50% { box-shadow: 0 6px 60px rgba(42,157,143,0.65), 0 2px 8px rgba(0,0,0,0.5); }
+  }
+
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+
+  .btn-micro {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-micro span {
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0;
+    opacity: 0.3;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 70px 20px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    padding: 70px 20px;
+    width: 100%;
+  }
+
+  .section-full .inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  h2.section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(26px, 4vw, 44px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  h2.section-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .section-lead {
+    font-size: clamp(16px, 2vw, 18px);
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  /* PAIN SECTION */
+  .pain-section {
+    background: var(--bg-surface);
+  }
+
+  .pain-list {
+    list-style: none;
+    margin: 30px 0;
+  }
+
+  .pain-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 17px;
+    color: var(--text-cream);
+  }
+
+  .pain-list li:last-child { border-bottom: none; }
+
+  .pain-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  /* HIGHLIGHT BOX */
+  .highlight-box {
+    background: var(--gold-heritage);
+    border: none;
+    border-radius: 4px;
+    padding: 20px 26px;
+    margin: 28px 0;
+  }
+
+  .highlight-box p {
+    font-size: clamp(15px, 1.7vw, 17px);
+    font-weight: 700;
+    color: #000;
+    line-height: 1.6;
+  }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid rgba(200,168,75,0.15);
+    border-radius: 8px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+
+  .card-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .card-text {
+    font-size: 15px;
+    color: var(--text-cream);
+    line-height: 1.65;
+  }
+
+  /* CHECK LIST */
+  .check-list {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(42,157,143,0.2);
+    border-left: 3px solid var(--teal);
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .check-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: rgba(42,157,143,0.12);
+    border: 1.5px solid rgba(42,157,143,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* TWO COLUMNS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .col-bad, .col-good {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+
+  .col-bad { border: 1px solid rgba(192,57,43,0.2); }
+  .col-good { border: 1px solid rgba(42,157,143,0.25); }
+
+  .col-header {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .col-bad .col-header { color: var(--red); }
+  .col-good .col-header { color: var(--teal); }
+
+  .col-bad li, .col-good li {
+    font-size: 15px;
+    padding: 8px 0;
+    color: var(--text-cream);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .col-bad li::before { content: '✕'; color: var(--red); font-size: 12px; margin-top: 3px; }
+  .col-good li::before { content: '✓'; color: var(--teal); font-size: 12px; margin-top: 3px; }
+
+  /* TESTIMONIAL */
+  .testimonial {
+    background: var(--bg-card);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 8px;
+    padding: 32px;
+    margin: 40px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .testimonial-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    object-fit: cover;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .testimonial-content {
+    flex: 1;
+  }
+
+  .testimonial::before {
+    content: '"';
+    font-family: 'Oswald', sans-serif;
+    font-size: 80px;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    line-height: 1;
+  }
+
+  .testimonial p {
+    font-size: 17px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .testimonial cite {
+    font-style: normal;
+    font-size: 14px;
+    color: var(--gold);
+  }
+
+  /* CREDENTIALS GRID */
+  .cred-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .cred-item {
+    background: var(--bg-card);
+    border: 1px solid rgba(200,168,75,0.3);
+    border-radius: 6px;
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .cred-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .cred-label {
+    font-size: 13px;
+    color: var(--text-cream);
+    line-height: 1.4;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 0;
+  }
+
+  .faq-question {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+
+  .faq-answer {
+    font-size: 15px;
+    color: var(--text-cream);
+    line-height: 1.7;
+    padding-left: 20px;
+    border-left: 2px solid var(--teal);
+  }
+
+  /* FORM SECTION */
+  .form-section {
+    background: var(--bg-navy);
+    padding: 70px 20px;
+  }
+
+  .form-container {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--bg-foundation);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* MANIFESTO */
+  .manifesto {
+    background: var(--bg-surface);
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .manifesto-quote {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(22px, 3.5vw, 36px);
+    font-weight: 700;
+    color: var(--gold);
+    max-width: 700px;
+    margin: 0 auto 20px;
+    line-height: 1.3;
+  }
+
+  .manifesto-text {
+    font-size: 17px;
+    color: var(--text-cream);
+    max-width: 500px;
+    margin: 0 auto 8px;
+  }
+
+  .manifesto-sig {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-foundation);
+    border-top: 1px solid rgba(200,168,75,0.1);
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+  }
+
+  footer strong {
+    color: var(--gold);
+  }
+
+  /* UTILITIES */
+  .text-center { text-align: center; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 50px 16px 40px; }
+    .section { padding: 50px 16px; }
+    .section-full { padding: 50px 16px; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .cred-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonial { flex-direction: column; text-align: center; gap: 16px; padding: 40px 20px 30px; }
+    .testimonial::before { left: 50%; transform: translateX(-50%); top: -10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">Consultoria Estratégica — Vagas limitadas por semana</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="logo-sub">Consultoria Estratégica</div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>De uma vida que parecia certa<br>para <em>uma vida que faz sentido.</em></h1>
+  <p class="hero-sub">Uma conversa estratégica de 30 minutos pode ser o ponto de virada que você está procurando.</p>
+  <p class="hero-text">Se você se esforça demais e sente de menos, essa consultoria existe pra isso. Uma análise personalizada do seu momento — pra entender se existe um caminho com mais propósito, renda e sentido esperando por você.</p>
+  <a href="#formulario" class="btn-cta">QUERO AGENDAR MINHA CONSULTORIA</a>
+  <p class="btn-micro">
+    <span>✓ Sem compromisso de compra</span> &nbsp;|&nbsp;
+    <span>✓ Análise personalizada</span> &nbsp;|&nbsp;
+    <span>✓ Resposta em até 24h</span>
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 3 — DOR -->
+<div class="pain-section section-full">
+  <div class="inner">
+    <div class="section" style="padding-top:0; padding-bottom:0;">
+      <span class="section-eyebrow text-center" style="text-align:center;">Você se reconhece?</span>
+      <h2 class="section-title">Sucesso por fora. <em>Vazio por dentro.</em></h2>
+      <p class="section-lead" style="color:var(--text-cream);">
+        Você construiu uma carreira. Tem experiência. Tem salário. Tem responsabilidades.<br><br>
+        Mas quando o domingo à noite chega, o peito aperta. Quando alguém pergunta "você é feliz?", a resposta demora. Quando você se olha no espelho, não reconhece mais quem está ali.
+      </p>
+
+      <ul class="pain-list">
+        <li>
+          <span class="pain-icon"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#e74c3c" stroke-width="2"/><line x1="8" y1="2" x2="2" y2="8" stroke="#e74c3c" stroke-width="2"/></svg></span>
+          Acorda e dorme pra pagar contas — sem saber pra quê
+        </li>
+        <li>
+          <span class="pain-icon"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#e74c3c" stroke-width="2"/><line x1="8" y1="2" x2="2" y2="8" stroke="#e74c3c" stroke-width="2"/></svg></span>
+          Trabalha duro, faz dinheiro, mas não tem tempo pra família
+        </li>
+        <li>
+          <span class="pain-icon"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#e74c3c" stroke-width="2"/><line x1="8" y1="2" x2="2" y2="8" stroke="#e74c3c" stroke-width="2"/></svg></span>
+          Sente que trocou a vida por um cargo que não te representa mais
+        </li>
+        <li>
+          <span class="pain-icon"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#e74c3c" stroke-width="2"/><line x1="8" y1="2" x2="2" y2="8" stroke="#e74c3c" stroke-width="2"/></svg></span>
+          Já tentou cursos, livros, terapias — nada mudou de verdade
+        </li>
+        <li>
+          <span class="pain-icon"><svg viewBox="0 0 10 10"><line x1="2" y1="2" x2="8" y2="8" stroke="#e74c3c" stroke-width="2"/><line x1="8" y1="2" x2="2" y2="8" stroke="#e74c3c" stroke-width="2"/></svg></span>
+          Tem medo de chegar aos 50, 60 anos e perceber que viveu no piloto automático
+        </li>
+      </ul>
+
+      <div style="text-align:center;">
+        <div class="highlight-box">
+          <p>Nós chamamos isso de <strong>mundo cinza</strong>. E 546 mil profissionais se afastaram do trabalho por transtornos emocionais só em 2025. Você não está sozinho. Mas também não precisa continuar assim.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 4 — A VIRADA -->
+<section class="section">
+  <span class="section-eyebrow">Existe outro caminho</span>
+  <h2 class="section-title">E se uma conversa <em>pudesse mudar tudo?</em></h2>
+  <p class="section-lead" style="color:var(--text-cream);">
+    A maioria das pessoas que transformaram suas vidas não começaram com uma grande decisão.<br><br>
+    Começaram com uma conversa.<br><br>
+    Uma conversa honesta sobre onde estão, onde querem estar, e o que está no caminho. Uma conversa com alguém que já ajudou milhares de profissionais a saírem do mundo cinza.
+  </p>
+  <p style="font-size:17px; color:var(--text-cream); line-height:1.7; margin-bottom:32px;">
+    A Consultoria Estratégica da OMNI Brasil é exatamente isso: <strong style="color:var(--gold);">30 minutos de clareza</strong>. Sem julgamento. Sem pitch de vendas. Só uma análise real do seu momento — e, se fizer sentido, um mapa do próximo passo.
+  </p>
+
+  <div class="testimonial">
+    <img src="../../brand/rafa-oficial/rafa-oficial-brightened.png" class="testimonial-photo" alt="Rafaela Mendes">
+    <div class="testimonial-content">
+      <p>A Rafaela era Engenheira Civil. Tinha tudo que ensinaram que devia querer. Começou com uma conversa assim. Hoje, ela diz: "Não troquei a engenharia por outra coisa. Troquei uma vida que parecia certa por uma vida que faz sentido."</p>
+      <cite>— Rafaela Mendes, ex-Engenheira Civil</cite>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 5 — O QUE ACONTECE -->
+<section class="section-full" style="background: var(--bg-navy);">
+  <div class="inner">
+    <span class="section-eyebrow text-center" style="text-align:center;">Como funciona</span>
+    <h2 class="section-title text-center" style="text-align:center;">O que você recebe na <em>Consultoria Estratégica</em></h2>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title">Diagnóstico do seu momento</div>
+        <p class="card-text">Entendemos onde você está hoje — profissional, emocional, financeiramente. Sem formulários genéricos. Uma conversa real, personalizada.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title">Mapa de possibilidades</div>
+        <p class="card-text">Analisamos se o seu perfil, momento e objetivos se conectam com um caminho de transformação — e qual seria o próximo passo mais inteligente pra você.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title">Clareza sem compromisso</div>
+        <p class="card-text">Você sai da conversa com uma visão clara. Se fizer sentido continuar, ótimo. Se não fizer, você leva a clareza de graça. Zero pressão.</p>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:40px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--text-muted); letter-spacing:1px;">
+      Duração: ~30 minutos &nbsp;|&nbsp; Online &nbsp;|&nbsp; Gratuita &nbsp;|&nbsp; Personalizada
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 6 — PARA QUEM É -->
+<section class="section-full" style="background: var(--bg-surface);">
+  <div class="inner">
+    <span class="section-eyebrow text-center" style="text-align:center;">Essa consultoria é pra você se...</span>
+    <h2 class="section-title text-center" style="text-align:center;">Profissionais que já começaram <em>a questionar</em></h2>
+
+    <div class="two-col">
+      <div class="col-bad">
+        <div class="col-header">Isso não é pra você se:</div>
+        <ul>
+          <li>Quer uma fórmula mágica ou resultado sem esforço</li>
+          <li>Busca apenas mais um diploma pra pendurar na parede</li>
+          <li>Não está disposto a olhar pra dentro</li>
+          <li>Quer "ganhar dinheiro rápido" sem transformação real</li>
+          <li>Acha que sucesso é só financeiro</li>
+        </ul>
+      </div>
+      <div class="col-good">
+        <div class="col-header">Isso é pra você se:</div>
+        <ul>
+          <li>Quer uma vida com sentido, não só com status</li>
+          <li>Aceita que transformação real começa por dentro</li>
+          <li>Valoriza método, evidência e resultado comprovado</li>
+          <li>Quer ajudar outras pessoas como consequência natural</li>
+          <li>Está pronto pra dar o primeiro passo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 7 — PROVA SOCIAL -->
+<section class="section">
+  <span class="section-eyebrow text-center" style="text-align:center;">Transformação que se prova</span>
+  <h2 class="section-title text-center" style="text-align:center;">Milhares já fizeram <em>essa escolha.</em></h2>
+  <p class="section-lead" style="text-align:center; color:var(--text-cream);">
+    A OMNI Brasil não formou alunos. Formou uma Legião. Milhares de profissionais que estavam exatamente onde você está agora — esgotados, questionando, buscando sentido — e que hoje vivem o Ciclo Virtuoso: se transformaram primeiro, depois passaram a transformar outras vidas.
+  </p>
+
+
+
+  <div class="cred-grid">
+    <div class="cred-item">
+      <div class="cred-num">ISO 9001</div>
+      <div class="cred-label">Único método terapêutico certificado no mundo</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">26</div>
+      <div class="cred-label">Países com presença global</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">4+</div>
+      <div class="cred-label">Décadas de evolução contínua</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">15M+</div>
+      <div class="cred-label">Cópias do livro vendidas</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">95+</div>
+      <div class="cred-label">NPS de satisfação</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-num">4.000+</div>
+      <div class="cred-label">Profissionais transformados</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 8 — FAQ -->
+<section class="section-full" style="background: var(--bg-surface);">
+  <div class="inner">
+    <span class="section-eyebrow text-center" style="text-align:center;">Perguntas frequentes</span>
+    <h2 class="section-title text-center" style="text-align:center;">Talvez você esteja <em>pensando...</em></h2>
+
+    <div class="faq-item">
+      <div class="faq-question">"Não sei se tenho perfil pra fazer uma mudança dessas agora."</div>
+      <div class="faq-answer">É exatamente por isso que a consultoria existe. Não é pra quem já sabe — é pra quem precisa de clareza. A própria Rafaela não sabia se tinha perfil quando marcou a dela. Saia da consultoria sabendo.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">"Já comprei vários cursos sobre propósito e nenhum funcionou."</div>
+      <div class="faq-answer">A consultoria não é um curso. É uma conversa estratégica de 30 minutos. Você não compra nada. Você ganha clareza. Se depois fizer sentido explorar um caminho com método (o único com ISO 9001 do mundo), conversamos. Se não, você leva a clareza de graça.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">"Isso é sério ou é mais uma coisa alternativa/esotérica?"</div>
+      <div class="faq-answer">A OMNI Brasil opera com o único método terapêutico certificado ISO 9001 do planeta. Reconhecido pelo MEC como extensão universitária. Mais de 4 décadas de evolução. 26 países. Isso não é alternativo — é o que há de mais validado no mercado.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">"Vai ser uma consultoria ou um pitch de vendas disfarçado?"</div>
+      <div class="faq-answer">Consultoria real. Personalizada. Se ao final você quiser saber mais sobre o caminho da Omniterapia, explicamos. Se não quiser, sem problema. A gente acredita que clareza já é transformação.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">"Tenho medo de largar minha carreira e me frustrar."</div>
+      <div class="faq-answer">Ninguém está pedindo pra você largar nada — ainda. A consultoria é o primeiro passo: entender. Muitos omniterapeutas começaram atendendo nos fins de semana, mantendo o emprego. A transição é no seu ritmo.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEÇÃO 9 — CTA FINAL + FORMULÁRIO -->
+<section id="formulario" class="form-section">
+  <div class="form-container">
+    <span class="section-eyebrow text-center" style="text-align:center; display:block;">Próximo passo</span>
+    <h2 class="section-title text-center" style="text-align:center; font-size:clamp(24px,3.5vw,36px);">Sua transformação começa <em>com uma conversa.</em></h2>
+    <p style="text-align:center; color:var(--text-cream); font-size:16px; line-height:1.7; margin-bottom:36px;">
+      Você não precisa ter todas as respostas agora. Não precisa ter certeza. Precisa só de 30 minutos e a honestidade de admitir: não era pra ser assim.
+    </p>
+
+    <!-- ACTIVE CAMPAIGN FORM -->
+    <style>
+      #_form_194_{font-size:14px;line-height:1.6;font-family:'Inter', sans-serif;margin:0;box-shadow:none}
+      #_form_194_ input[type="text"],#_form_194_ input[type="tel"],#_form_194_ textarea{padding:12px 14px;height:auto;border:1px solid rgba(200,168,75,0.3);border-radius:6px;color:#fff !important;font-size:15px;background:rgba(255,255,255,0.05);transition:border-color 0.2s}
+      #_form_194_ input[type="text"]:focus,#_form_194_ input[type="tel"]:focus,#_form_194_ select:focus{border-color:var(--teal);outline:none}
+      #_form_194_ select{padding:12px 14px;height:auto;border:1px solid rgba(200,168,75,0.3);border-radius:6px;color:#fff;font-size:15px;background:rgba(255,255,255,0.05);appearance:auto}
+      #_form_194_ select option{background:#1a1a2e;color:#fff}
+      #_form_194_ ._form-label{font-weight:600;margin-bottom:6px;display:block;color:var(--text-cream);font-size:14px}
+      #_form_194_ ._submit{cursor:pointer;font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;background:linear-gradient(135deg, #228B7A 0%, #2A9D8F 50%, #228B7A 100%) !important;border:0 !important;border-radius:4px !important;color:#fff !important;padding:18px 36px !important;width:100%;box-shadow:0 6px 40px var(--teal-glow);transition:all 0.2s}
+      #_form_194_ ._submit:hover{transform:translateY(-2px);filter:brightness(1.1)}
+      #_form_194_ ._submit:disabled{cursor:not-allowed;opacity:0.4}
+      #_form_194_ ._form_element{position:relative;margin-bottom:16px;font-size:0;max-width:100%}
+      #_form_194_ ._form_element *{font-size:15px}
+      #_form_194_ .field-required{color:var(--gold)}
+      #_form_194_{position:relative;text-align:left;margin:0 auto;padding:28px;background:rgba(15,17,23,0.8) !important;border:1px solid rgba(200,168,75,0.15);border-radius:8px;max-width:100%;color:var(--text-cream)}
+      #_form_194_ ._form-thank-you{color:var(--teal);font-size:18px;font-weight:700;text-align:center;padding:20px}
+      #_form_194_ ._error-inner{padding:12px;background-color:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);border-radius:4px;font-size:13px;color:var(--red)}
+    </style>
+
+    <form method="POST" action="https://omnihypnosis42661.activehosted.com/proc.php" id="_form_194_" class="_form _form_194 _inline-form _dark" novalidate data-styles-version="5">
+      <input type="hidden" name="u" value="194" />
+      <input type="hidden" name="f" value="194" />
+      <input type="hidden" name="s" />
+      <input type="hidden" name="c" value="0" />
+      <input type="hidden" name="m" value="0" />
+      <input type="hidden" name="act" value="sub" />
+      <input type="hidden" name="v" value="2" />
+      <input type="hidden" name="or" value="61ca8a05-e765-408e-918d-44f7c75f7019" />
+      <div class="_form-content">
+        <div class="_form_element _full_width">
+          <label for="fullname" class="_form-label">Nome completo<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <input type="text" id="fullname" name="fullname" placeholder="Digite seu nome completo" required/>
+          </div>
+        </div>
+
+        <div class="_form_element _full_width">
+          <label for="email" class="_form-label">E-mail<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <input type="text" id="email" name="email" placeholder="seu@email.com" required/>
+          </div>
+        </div>
+
+        <div class="_form_element _full_width">
+          <label for="phone" class="_form-label">Telefone / WhatsApp<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <input type="tel" id="phone" name="phone" placeholder="(XX) 9XXXX-XXXX" required/>
+          </div>
+        </div>
+
+        <div class="_form_element _full_width">
+          <label for="field[263]" class="_form-label">O que te trouxe até aqui?<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <select name="field[263]" id="field[263]" required>
+              <option selected value="">Selecione uma opção</option>
+              <option value="Quero entender se existe um caminho com mais propósito pra mim">Quero entender se existe um caminho com mais propósito pra mim</option>
+              <option value="Sou profissional da saúde e quero agregar algo novo">Sou profissional da saúde e quero agregar algo novo</option>
+              <option value="Já conheço a OMNI e quero dar o próximo passo">Já conheço a OMNI e quero dar o próximo passo</option>
+              <option value="Estou apenas curioso por enquanto">Estou apenas curioso por enquanto</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="_form_element _full_width">
+          <label for="field[264]" class="_form-label">Nível de escolaridade<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <select name="field[264]" id="field[264]" required>
+              <option selected value="">Selecione</option>
+              <option value="Mestrado/Doutorado">Mestrado/Doutorado</option>
+              <option value="Pós Graduação">Pós-Graduação</option>
+              <option value="Superior Completo">Superior Completo</option>
+              <option value="Superior Incompleto">Superior Incompleto</option>
+              <option value="Ensino Médio">Ensino Médio</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="_form_element _full_width">
+          <label for="field[265]" class="_form-label">Quanto você investiu em desenvolvimento pessoal nos últimos 2 anos?<span class="field-required">*</span></label>
+          <div class="_field-wrapper">
+            <select name="field[265]" id="field[265]" required>
+              <option selected value="">Selecione</option>
+              <option value="Mais de R$20.000">Mais de R$20.000</option>
+              <option value="R$10.001 a R$20.000">R$10.001 a R$20.000</option>
+              <option value="R$5.001 a R$10.000">R$5.001 a R$10.000</option>
+              <option value="R$2.001 a R$5.000">R$2.001 a R$5.000</option>
+              <option value="Até R$2.000">Até R$2.000</option>
+              <option value="Nada">Nada</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- UTM HIDDEN FIELDS -->
+        <input type="hidden" name="field[101]" value="" />
+        <input type="hidden" name="field[102]" value="" />
+        <input type="hidden" name="field[103]" value="" />
+        <input type="hidden" name="field[104]" value="" />
+        <input type="hidden" name="field[105]" value="" />
+
+        <div class="_button-wrapper _full_width" style="margin-top:24px;">
+          <button id="_form_194_submit" class="_submit" type="submit">
+            Agendar minha consultoria estratégica
+          </button>
+        </div>
+        <p style="text-align:center; margin-top:12px; font-size:12px; color:var(--text-muted);">
+          Sem custo &nbsp;|&nbsp; Sem compromisso &nbsp;|&nbsp; Resposta em até 24h
+        </p>
+      </div>
+      <div class="_form-thank-you" style="display:none;">
+        Pronto! Seu pedido de consultoria foi recebido. Um consultor da OMNI vai entrar em contato em até 24h para marcar o melhor horário pra você.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <p class="manifesto-quote">"A melhor maneira de colorir a própria vida é dando cor a outras vidas."</p>
+  <p class="manifesto-text">Chega de mundo cinza. Somos milhares. E cada um de nós começou com uma conversa.</p>
+  <p class="manifesto-sig">Omniterapia Transforma Vidas.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>OMNI Hypnosis Training Center Brasil</strong><br>
+  omnihypnosis.com.br | @omnibr<br>
+  Transformação que se prova.
+</footer>
+
+<!-- UTM CAPTURE SCRIPT -->
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var fields = {
+    'utm_source': 'field[101]',
+    'utm_medium': 'field[102]',
+    'utm_campaign': 'field[103]',
+    'utm_term': 'field[104]',
+    'utm_content': 'field[105]'
+  };
+  Object.keys(fields).forEach(function(param) {
+    var value = params.get(param);
+    if (value) {
+      var input = document.querySelector('input[name="' + fields[param] + '"]');
+      if (input) input.value = value;
+    }
+  });
+})();
+</script>
+
+<!-- FORM VALIDATION SCRIPT -->
+<script>
+window.cfields = {"263":"qual_o_seu_principal_objetivo","264":"nvel_de_escolaridade_1","265":"quanto_investiu","101":"obasource","102":"obamedium","103":"obacampaign","104":"obaterm","105":"obacontent"};
+window._show_thank_you = function(id, message, trackcmp_url, email) {
+  var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
+  form.querySelector('._form-content').style.display = 'none';
+  thank_you.innerHTML = message;
+  thank_you.style.display = 'block';
+  if (typeof(trackcmp_url) != 'undefined' && trackcmp_url) { _load_script(trackcmp_url); }
+  if (typeof window._form_callback !== 'undefined') window._form_callback(id);
+};
+window._load_script = function(url, callback, isSubmit) {
+  var head = document.querySelector('head'), script = document.createElement('script'), r = false;
+  var submitButton = document.querySelector('#_form_194_submit');
+  script.charset = 'utf-8';
+  script.src = url;
+  if (callback) {
+    script.onload = script.onreadystatechange = function() {
+      if (!r && (!this.readyState || this.readyState == 'complete')) { r = true; callback(); }
+    };
+  }
+  script.onerror = function() {
+    if (isSubmit) {
+      _show_error("194", "Desculpe, seu envio falhou. Tente novamente.");
+      submitButton.disabled = false;
+      submitButton.classList.remove('processing');
+    }
+  }
+  head.appendChild(script);
+};
+window._show_error = function(id, message) {
+  var form = document.getElementById('_form_' + id + '_'),
+      err = document.createElement('div'),
+      button = form.querySelector('button[type="submit"]'),
+      old_error = form.querySelector('._form_error');
+  if (old_error) old_error.parentNode.removeChild(old_error);
+  err.innerHTML = message;
+  err.className = '_error-inner _form_error';
+  button.parentNode.insertBefore(err, button);
+  var submitButton = form.querySelector('[id^="_form"][id$="_submit"]');
+  submitButton.disabled = false;
+  submitButton.classList.remove('processing');
+};
+
+(function() {
+  if (window.location.search.search("excludeform") !== -1) return false;
+  var form_to_submit = document.getElementById('_form_194_');
+  var allInputs = form_to_submit.querySelectorAll('input, select, textarea');
+  var submitted = false;
+
+  var validate_field = function(elem) {
+    var value = elem.value, no_error = true;
+    if (elem.getAttribute('required') !== null) {
+      if (elem.tagName == 'SELECT') {
+        if (!value || value === '') { no_error = false; }
+      } else if (value === undefined || value === null || value === '') {
+        no_error = false;
+      }
+    }
+    if (no_error && elem.name == 'email') {
+      if (!value.match(/^[\+_a-z0-9-'&=]+(\.[\+_a-z0-9-']+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i)) {
+        no_error = false;
+      }
+    }
+    if (!no_error) {
+      elem.style.borderColor = 'var(--red)';
+    } else {
+      elem.style.borderColor = '';
+    }
+    return no_error;
+  };
+
+  var validate_form = function(e) {
+    var no_error = true;
+    for (var i = 0; i < allInputs.length; i++) {
+      var elem = allInputs[i];
+      if (elem.getAttribute('required') !== null || (elem.name === 'email' && elem.value !== '')) {
+        if (elem.tagName.toLowerCase() !== 'select') { elem.value = elem.value.trim(); }
+        validate_field(elem) ? true : no_error = false;
+      }
+    }
+    if (!no_error && e) { e.preventDefault(); }
+    return no_error;
+  };
+
+  var _form_serialize = function(form){if(!form||form.nodeName!=="FORM"){return}var i,j,q=[];for(i=0;i<form.elements.length;i++){if(form.elements[i].name===""){continue}switch(form.elements[i].nodeName){case"INPUT":switch(form.elements[i].type){case"text":case"tel":case"hidden":case"password":case"submit":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"checkbox":case"radio":if(form.elements[i].checked){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value))}break}break;case"TEXTAREA":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"SELECT":switch(form.elements[i].type){case"select-one":q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].value));break;case"select-multiple":for(j=0;j<form.elements[i].options.length;j++){if(form.elements[i].options[j].selected){q.push(form.elements[i].name+"="+encodeURIComponent(form.elements[i].options[j].value))}}break}break}}return q.join("&")};
+
+  var form_submit = function(e) {
+    e.preventDefault();
+    if (validate_form()) {
+      var submitButton = e.target.querySelector('#_form_194_submit');
+      submitButton.disabled = true;
+      submitButton.classList.add('processing');
+      var serialized = _form_serialize(document.getElementById('_form_194_')).replace(/%0A/g, '\\n');
+      _load_script('https://omnihypnosis42661.activehosted.com/proc.php?' + serialized + '&jsonp=true', null, true);
+    }
+    return false;
+  };
+
+  form_to_submit.addEventListener('submit', form_submit);
+})();
+</script>
+
+<!-- META PIXEL (substituir pelo ID real) -->
+<!--
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'SEU_PIXEL_ID');
+fbq('track', 'PageView');
+
+// ViewContent ao 50% scroll
+var fired50 = false;
+window.addEventListener('scroll', function() {
+  if (!fired50 && (window.scrollY + window.innerHeight) >= (document.body.scrollHeight * 0.5)) {
+    fbq('track', 'ViewContent');
+    fired50 = true;
+  }
+});
+</script>
+-->
+
+</body>
+</html>
