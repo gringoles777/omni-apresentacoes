@@ -1787,6 +1787,48 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 });
 </script>
 
+
+
+
+
+
+<!-- =============== MODAL CONFIRMAR PRESENÇA =============== -->
+<div class="modal-overlay" id="modal-confirmar" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
+    <div class="modal-eyebrow" id="modal-ey">Aliança de Ouro &middot; Junho 2026</div>
+    <h2 class="modal-title" id="modal-tit">Confirmar<br><span class="gold-text">Presença</span></h2>
+    <form class="modal-form" id="modal-form" novalidate>
+      <div class="modal-field">
+        <label for="m-nome">Nome completo *</label>
+        <input type="text" id="m-nome" placeholder="Seu nome completo" required />
+      </div>
+      <div class="modal-field">
+        <label for="m-whatsapp">WhatsApp *</label>
+        <input type="tel" id="m-whatsapp" placeholder="(48) 9 9999-9999" required />
+      </div>
+      <div class="modal-field">
+        <label for="m-restricao">Restrição alimentar</label>
+        <input type="text" id="m-restricao" placeholder="Se houver, informe aqui" />
+      </div>
+      <div class="modal-field">
+        <label for="m-ia">Você já tem ideia do que gostaria de fazer com IA no seu negócio?</label>
+        <textarea id="m-ia" rows="3" placeholder="Se não tiver, deixe em branco"></textarea>
+      </div>
+      <div class="modal-checkbox">
+        <input type="checkbox" id="m-check" required />
+        <span><strong>Estou ciente</strong> que o encontro é nos dias 3, 4 e 5 de junho de 2026, <strong>das 9h às 19h</strong>, na Sede da OMNI Brasil, e que é <strong>obrigatório levar laptop</strong>.</span>
+      </div>
+      <button type="submit" class="modal-submit" id="modal-btn">Confirmar minha presença</button>
+    </form>
+    <div class="modal-success" id="modal-success">
+      <img src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro" />
+      <div class="modal-success-title">Presença confirmada.</div>
+      <div class="modal-success-sub">Até junho, na sede da OMNI Brasil.</div>
+    </div>
+  </div>
+</div>
+
 <script>
 
 /* MODAL — CONFIRMAR PRESENÇA */
@@ -1843,45 +1885,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 })();
 
 </script>
-
-
-
-<!-- =============== MODAL CONFIRMAR PRESENÇA =============== -->
-<div class="modal-overlay" id="modal-confirmar" role="dialog" aria-modal="true">
-  <div class="modal-box">
-    <button class="modal-close" id="modal-close" aria-label="Fechar">&times;</button>
-    <div class="modal-eyebrow" id="modal-ey">Aliança de Ouro &middot; Junho 2026</div>
-    <h2 class="modal-title" id="modal-tit">Confirmar<br><span class="gold-text">Presença</span></h2>
-    <form class="modal-form" id="modal-form" novalidate>
-      <div class="modal-field">
-        <label for="m-nome">Nome completo *</label>
-        <input type="text" id="m-nome" placeholder="Seu nome completo" required />
-      </div>
-      <div class="modal-field">
-        <label for="m-whatsapp">WhatsApp *</label>
-        <input type="tel" id="m-whatsapp" placeholder="(48) 9 9999-9999" required />
-      </div>
-      <div class="modal-field">
-        <label for="m-restricao">Restrição alimentar</label>
-        <input type="text" id="m-restricao" placeholder="Se houver, informe aqui" />
-      </div>
-      <div class="modal-field">
-        <label for="m-ia">Você já tem ideia do que gostaria de fazer com IA no seu negócio?</label>
-        <textarea id="m-ia" rows="3" placeholder="Se não tiver, deixe em branco"></textarea>
-      </div>
-      <div class="modal-checkbox">
-        <input type="checkbox" id="m-check" required />
-        <span><strong>Estou ciente</strong> que o encontro é nos dias 3, 4 e 5 de junho de 2026, <strong>das 9h às 19h</strong>, na Sede da OMNI Brasil, e que é <strong>obrigatório levar laptop</strong>.</span>
-      </div>
-      <button type="submit" class="modal-submit" id="modal-btn">Confirmar minha presença</button>
-    </form>
-    <div class="modal-success" id="modal-success">
-      <img src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro" />
-      <div class="modal-success-title">Presença confirmada.</div>
-      <div class="modal-success-sub">Até junho, na sede da OMNI Brasil.</div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
