@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formacao Profissional em Omniterapia | OMNI Brasil</title>
+  <meta name="description" content="A unica formacao do mundo que transforma profissionais experientes em omniterapeutas de proposito. Com renda, metodo e resultados que se provam.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Oswald:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS (from design-system/tokens.css)
+       ═══════════════════════════════════════════ */
+    :root {
+      --color-black: #050505;
+      --color-dark: #0D0D0D;
+      --color-dark-elevated: #1A1A1A;
+      --color-dark-texture: #2D2D2D;
+      --color-gold: #C8A84B;
+      --color-gold-light: #E8C86A;
+      --color-gold-deep: #9A7A2E;
+      --color-cream: #F5F0E8;
+      --color-cream-70: rgba(245, 240, 232, 0.70);
+      --color-cream-50: rgba(245, 240, 232, 0.50);
+      --color-navy: #0A1628;
+      --color-teal: #2A9D8F;
+      --color-gray: #6B6B6B;
+      --color-gray-dark: #242424;
+      --color-gold-10: rgba(200, 168, 75, 0.10);
+      --color-gold-15: rgba(200, 168, 75, 0.15);
+      --color-gold-20: rgba(200, 168, 75, 0.20);
+      --color-gold-30: rgba(200, 168, 75, 0.30);
+      --color-teal-10: rgba(42, 157, 143, 0.10);
+      --color-teal-20: rgba(42, 157, 143, 0.20);
+      --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+      --gradient-gold-text: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 30%, #E8C86A 50%, #C8A84B 70%, #9A7A2E 100%);
+      --font-display: 'Oswald', 'Arial Black', sans-serif;
+      --font-serif: 'DM Serif Display', 'Georgia', serif;
+      --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+      --font-body: 'Inter', 'Open Sans', sans-serif;
+      --text-hero: clamp(2.8rem, 5.5vw, 4.5rem);
+      --text-section: clamp(1.75rem, 3.5vw, 2.75rem);
+      --text-card-title: clamp(1.25rem, 2vw, 1.75rem);
+      --text-label: 0.65rem;
+      --text-body: clamp(0.95rem, 1.2vw, 1.1rem);
+      --text-body-sm: clamp(0.8rem, 1vw, 0.9rem);
+      --section-padding: clamp(80px, 12vh, 140px);
+      --container-max: 1200px;
+      --content-max: 720px;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+      --space-4xl: 96px;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      line-height: 1.65;
+      color: var(--color-cream);
+      background: var(--color-black);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a { color: var(--color-gold); text-decoration: none; }
+    a:hover { color: var(--color-gold-light); }
+
+    /* ═══════════════════════════════════════════
+       LAYOUT
+       ═══════════════════════════════════════════ */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    .content-narrow {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      padding: var(--space-md) 0;
+      background: rgba(5, 5, 5, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-gray-dark);
+      transition: all 0.3s ease;
+    }
+
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .navbar-logo {
+      height: 42px;
+      width: auto;
+    }
+
+    .navbar-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-cream-70);
+    }
+
+    .navbar-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1.2rem;
+      background: var(--color-gold);
+      color: var(--color-dark);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .navbar-cta:hover {
+      background: var(--color-gold-light);
+      box-shadow: 0 0 24px rgba(200, 168, 75, 0.3);
+      color: var(--color-dark);
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      opacity: 0.35;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(5, 5, 5, 0.95) 0%,
+        rgba(5, 5, 5, 0.7) 50%,
+        rgba(5, 5, 5, 0.4) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      padding: var(--space-4xl) 0;
+    }
+
+    .hero-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-gold);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .hero-label::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-gold);
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: var(--text-hero);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--color-cream);
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: var(--gradient-gold-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--color-cream-70);
+      margin-bottom: var(--space-2xl);
+      max-width: 560px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 0.85rem 2rem;
+      background: var(--color-gold);
+      color: var(--color-dark);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-gold-light);
+      box-shadow: 0 0 32px rgba(200, 168, 75, 0.35);
+      color: var(--color-dark);
+      transform: translateY(-2px);
+    }
+
+    .hero-proof {
+      display: flex;
+      gap: var(--space-2xl);
+      margin-top: var(--space-3xl);
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-gray-dark);
+    }
+
+    .hero-proof-item {
+      text-align: left;
+    }
+
+    .hero-proof-number {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+
+    .hero-proof-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-cream-50);
+      margin-top: 4px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTIONS — GENERAL
+       ═══════════════════════════════════════════ */
+    .section {
+      padding: var(--section-padding) 0;
+      position: relative;
+    }
+
+    .section-dark { background: var(--color-black); }
+    .section-elevated { background: var(--color-dark); }
+    .section-navy { background: var(--color-navy); }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-label);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-gold);
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: var(--text-section);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--color-cream);
+      margin-bottom: var(--space-xl);
+    }
+
+    .section-text {
+      font-size: var(--text-body);
+      line-height: 1.75;
+      color: var(--color-cream-70);
+      max-width: var(--content-max);
+    }
+
+    .section-text p { margin-bottom: var(--space-lg); }
+    .section-text p:last-child { margin-bottom: 0; }
+
+    .divider-gold {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--color-gold-deep) 20%, var(--color-gold) 50%, var(--color-gold-deep) 80%, transparent 100%);
+      opacity: 0.4;
+      margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 2 — A CRISE (Split layout with photo)
+       ═══════════════════════════════════════════ */
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 400px;
+      filter: grayscale(60%) brightness(0.7);
+      transition: all 0.6s ease;
+    }
+
+    .split-image--color img {
+      filter: none;
+      border-left: 3px solid var(--color-gold);
+    }
+
+    .split-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--color-gray-dark);
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 4 — OMNITERAPEUTA (Full-width image band)
+       ═══════════════════════════════════════════ */
+    .image-band {
+      position: relative;
+      height: 50vh;
+      min-height: 350px;
+      overflow: hidden;
+    }
+
+    .image-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .image-band-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 5, 5, 0.6) 0%,
+        rgba(5, 5, 5, 0.3) 40%,
+        rgba(5, 5, 5, 0.8) 100%
+      );
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-3xl);
+    }
+
+    .image-band-text {
+      max-width: 600px;
+    }
+
+    .image-band-text h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--color-cream);
+      margin-bottom: var(--space-md);
+    }
+
+    .image-band-text p {
+      font-size: var(--text-body-sm);
+      color: var(--color-cream-70);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 5 — AREAS DE ATUACAO (Grid cards)
+       ═══════════════════════════════════════════ */
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    .area-card {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-gray-dark);
+      padding: var(--space-xl);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .area-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--color-gold);
+      transition: height 0.4s ease;
+    }
+
+    .area-card:hover::before { height: 100%; }
+    .area-card:hover { border-color: var(--color-gold-20); }
+
+    .area-card h4 {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-cream);
+      margin-bottom: var(--space-sm);
+    }
+
+    .area-card p {
+      font-size: var(--text-body-sm);
+      color: var(--color-cream-70);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 6 — FORMACAO (Modulos)
+       ═══════════════════════════════════════════ */
+    .modulo-card {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-gray-dark);
+      padding: var(--space-2xl);
+      margin-bottom: var(--space-xl);
+      position: relative;
+    }
+
+    .modulo-card--highlight {
+      border-color: var(--color-gold-20);
+      background: linear-gradient(135deg, var(--color-dark-elevated) 0%, rgba(200, 168, 75, 0.03) 100%);
+    }
+
+    .modulo-number {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--color-gold-10);
+      position: absolute;
+      top: var(--space-lg);
+      right: var(--space-xl);
+      line-height: 1;
+    }
+
+    .modulo-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .modulo-title {
+      font-family: var(--font-serif);
+      font-size: var(--text-card-title);
+      color: var(--color-cream);
+      margin-bottom: var(--space-md);
+    }
+
+    .modulo-format {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--color-gold-10);
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold-20);
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .modulo-text {
+      font-size: var(--text-body);
+      color: var(--color-cream-70);
+      line-height: 1.7;
+    }
+
+    /* Bonus grid */
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    .bonus-item {
+      padding: var(--space-lg);
+      border: 1px solid var(--color-gray-dark);
+      background: var(--color-dark);
+    }
+
+    .bonus-item h5 {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    .bonus-item p {
+      font-size: var(--text-body-sm);
+      color: var(--color-cream-70);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 7 — COMPARATIVO
+       ═══════════════════════════════════════════ */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: var(--space-2xl);
+      font-size: var(--text-body-sm);
+    }
+
+    .compare-table th,
+    .compare-table td {
+      padding: var(--space-md) var(--space-lg);
+      text-align: left;
+      border-bottom: 1px solid var(--color-gray-dark);
+    }
+
+    .compare-table th {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-cream-50);
+      font-weight: 500;
+    }
+
+    .compare-table td {
+      color: var(--color-cream-70);
+    }
+
+    .compare-table td:last-child {
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    /* ═══════════════════════════════════════════
+       SECTION 8 — FUNDADOR (Storytelling split)
+       ═══════════════════════════════════════════ */
+    .founder-section {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    .founder-image {
+      position: relative;
+      height: 100%;
+      min-height: 500px;
+    }
+
+    .founder-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .founder-image::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, var(--color-dark) 0%, transparent 100%);
+    }
+
+    .founder-story {
+      padding: var(--space-xl) 0;
+    }
+
+    .founder-story p {
+      color: var(--color-cream-70);
+      margin-bottom: var(--space-lg);
+      line-height: 1.8;
+    }
+
+    .founder-story p:first-of-type {
+      font-size: clamp(1.05rem, 1.3vw, 1.15rem);
+      color: var(--color-cream);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 9 — PROVA CICLO (Rafaela)
+       ═══════════════════════════════════════════ */
+    .testimonial-featured {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-gray-dark);
+      padding: var(--space-2xl);
+    }
+
+    .testimonial-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-left: 3px solid var(--color-gold);
+    }
+
+    .testimonial-content blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      font-style: italic;
+      color: var(--color-cream);
+      line-height: 1.6;
+      margin-bottom: var(--space-lg);
+    }
+
+    .testimonial-content cite {
+      font-family: var(--font-mono);
+      font-size: var(--text-label);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-gold);
+      font-style: normal;
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 10 — MANIFESTO
+       ═══════════════════════════════════════════ */
+    .manifesto {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .manifesto p {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      line-height: 1.7;
+      color: var(--color-cream);
+      margin-bottom: var(--space-xl);
+    }
+
+    .manifesto p.manifesto-highlight {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      color: var(--color-gold);
+      font-style: italic;
+    }
+
+    .manifesto p.manifesto-close {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--color-cream);
+      margin-top: var(--space-2xl);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 11 — LEGIAO (People grid)
+       ═══════════════════════════════════════════ */
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      margin: var(--space-2xl) 0;
+    }
+
+    .people-grid-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .people-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .people-grid-item:hover img { transform: scale(1.05); }
+
+    .people-grid-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5, 5, 5, 0.5) 0%, transparent 50%);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 12 — CREDENCIAIS
+       ═══════════════════════════════════════════ */
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    .credential-item {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .credential-value {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .credential-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-cream-70);
+    }
+
+    /* ═══════════════════════════════════════════
+       SECTION 13 — FORMULARIO
+       ═══════════════════════════════════════════ */
+    .form-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+
+    .form-image {
+      position: relative;
+      min-height: 500px;
+      overflow: hidden;
+    }
+
+    .form-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .form-container {
+      background: var(--color-dark-elevated);
+      border: 1px solid var(--color-gray-dark);
+      padding: var(--space-2xl);
+    }
+
+    .form-container h3 {
+      font-family: var(--font-serif);
+      font-size: var(--text-card-title);
+      color: var(--color-cream);
+      margin-bottom: var(--space-md);
+    }
+
+    .form-container p {
+      font-size: var(--text-body-sm);
+      color: var(--color-cream-70);
+      margin-bottom: var(--space-xl);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-cream-70);
+      margin-bottom: var(--space-sm);
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--color-dark);
+      border: 1px solid var(--color-gray-dark);
+      color: var(--color-cream);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-gold);
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23C8A84B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 0.85rem 2rem;
+      background: var(--color-gold);
+      color: var(--color-dark);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: var(--space-lg);
+    }
+
+    .form-submit:hover {
+      background: var(--color-gold-light);
+      box-shadow: 0 0 24px rgba(200, 168, 75, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ */
+    .footer {
+      padding: var(--space-3xl) 0;
+      border-top: 1px solid var(--color-gray-dark);
+      text-align: center;
+    }
+
+    .footer-phrase {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-style: italic;
+      color: var(--color-cream);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .footer-info {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-gray);
+      line-height: 2;
+    }
+
+    /* ═══════════════════════════════════════════
+       ANIMATIONS
+       ═══════════════════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+
+    /* ═══════════════════════════════════════════
+       PHOTO PLACEHOLDERS
+       ═══════════════════════════════════════════ */
+    .photo-placeholder {
+      background: var(--color-dark-texture);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      border: 1px dashed var(--color-gray-dark);
+      position: relative;
+    }
+
+    .photo-placeholder::after {
+      content: attr(data-label);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-gray);
+      position: absolute;
+      bottom: var(--space-md);
+      left: var(--space-md);
+    }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════ */
+    @media (max-width: 968px) {
+      .split-layout { grid-template-columns: 1fr; }
+      .founder-section { grid-template-columns: 1fr; }
+      .form-section { grid-template-columns: 1fr; }
+      .testimonial-featured { grid-template-columns: 1fr; }
+      .people-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-proof { flex-wrap: wrap; gap: var(--space-xl); }
+      .form-image { min-height: 300px; position: relative; }
+    }
+
+    @media (max-width: 600px) {
+      .navbar-tagline { display: none; }
+      .hero-proof { flex-direction: column; gap: var(--space-lg); }
+      .people-grid { grid-template-columns: repeat(2, 1fr); }
+      .credentials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <img src="../../brand/logos/logo-omni-institucional.png" alt="OMNI Brasil" class="navbar-logo">
+        <span class="navbar-tagline">Omniterapia Transforma Vidas</span>
+      </div>
+      <a href="#formulario" class="navbar-cta">Quero me transformar</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <!-- Foto real: Michael em silhueta dramatica — perfil na janela -->
+      <img src="../../design-system/assets/photos/IMG_7233-alta.jpg" alt="Michael Arruda — Fundador OMNI Brasil">
+    </div>
+    <div class="container">
+      <div class="hero-content fade-up">
+        <div class="hero-label">Formacao Profissional em Omniterapia</div>
+        <h1>Transforme-se primeiro.<br><em>Depois, transforme vidas.</em></h1>
+        <p class="hero-sub">A unica formacao do mundo que transforma profissionais experientes em omniterapeutas de proposito — com renda, metodo e resultados que se provam.</p>
+        <a href="#formulario" class="hero-cta">Quero iniciar minha transformacao</a>
+        <div class="hero-proof">
+          <div class="hero-proof-item">
+            <div class="hero-proof-number">4+</div>
+            <div class="hero-proof-label">Decadas de metodo</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-number">26</div>
+            <div class="hero-proof-label">Paises</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-number">ISO</div>
+            <div class="hero-proof-label">9001 Certificado</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-number">MEC</div>
+            <div class="hero-proof-label">Reconhecido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 2 — A CRISE REAL ═══════════ -->
+  <section class="section section-dark" id="crise">
+    <div class="container">
+      <div class="split-layout">
+        <div class="fade-up">
+          <div class="section-label">A Crise Real</div>
+          <h2 class="section-title">Se esforca demais e sente de menos?</h2>
+          <div class="section-text">
+            <p>Voce construiu uma carreira. Tem experiencia de sobra. Mas algo nao faz sentido.</p>
+            <p>Acorda e dorme para pagar contas. Trabalha duro, faz dinheiro, mas nao tem tempo para a familia. A cultura ensinou que trocar a vida por status, cargo e salario e sucesso — e voce acreditou.</p>
+            <p>Nos chamamos isso de <strong style="color: var(--color-cream);">mundo cinza.</strong></p>
+            <p>Milhoes de profissionais vivem assim. No piloto automatico. Estressados, ansiosos, sem ver um sentido maior naquilo que fazem.</p>
+            <p>E voce sabe disso. Sente que algo esta errado. Sente que nao era pra ser assim.</p>
+          </div>
+        </div>
+        <div class="split-image fade-up stagger-2">
+          <!-- PLACEHOLDER: Foto de profissional exausto/pensativo — pessoa real, nao stock -->
+          <div class="photo-placeholder" data-label="Foto: profissional em momento de reflexao" style="min-height: 450px;">
+            <img src="../../design-system/assets/photos/IMG_7215-alta.jpg" alt="Momento de reflexao" style="filter: grayscale(70%) brightness(0.6); min-height: 450px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-gold">
+
+  <!-- ═══════════ SECAO 3 — CICLO VIRTUOSO ═══════════ -->
+  <section class="section section-elevated" id="ciclo">
+    <div class="container">
+      <div class="split-layout">
+        <div class="split-image split-image--color fade-up">
+          <!-- Foto: Michael sorrindo — warmth + autoridade -->
+          <img src="../../design-system/assets/photos/IMG_7046-alta.jpg" alt="Michael — acolhimento e confianca" style="min-height: 450px;">
+        </div>
+        <div class="fade-up stagger-2">
+          <div class="section-label">O Ciclo Virtuoso</div>
+          <h2 class="section-title">A melhor maneira de colorir a propria vida e dando cor a outras vidas.</h2>
+          <div class="section-text">
+            <p>Nos nos recusamos a aceitar que o mundo cinza e normal.</p>
+            <p>Nao vendemos autoajuda. Nao vendemos motivacao que dura ate domingo. Nos acreditamos em transformacao que se prova. Em metodo.</p>
+            <p>A Omniterapia muda quem pratica tanto quanto quem recebe. Voce se transforma primeiro. Depois, usa o unico metodo validado do mundo para transformar outros.</p>
+            <p>Esse e o ciclo virtuoso: sua transformacao pessoal e o primeiro passo. Uma nova carreira com proposito e renda e a consequencia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 4 — O QUE E UM OMNITERAPEUTA (Image band) ═══════════ -->
+  <div class="image-band">
+    <!-- PLACEHOLDER: Foto de turma formada / comunidade de omniterapeutas — pessoas reais celebrando -->
+    <div class="photo-placeholder" data-label="Foto: turma de omniterapeutas formados celebrando" style="min-height: 100%; position: absolute; inset: 0; width: 100%;">
+      <!-- Usar foto real de formatura quando disponivel -->
+      <img src="../../design-system/assets/photos/IMG_7374-alta.jpg" alt="Comunidade OMNI" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+    </div>
+    <div class="image-band-overlay">
+      <div class="image-band-text fade-up">
+        <div class="section-label">O Omniterapeuta</div>
+        <h3>De profissional esgotado a omniterapeuta de proposito.</h3>
+        <p>O omniterapeuta nao e um terapeuta comum. E um profissional que viveu a transformacao em si mesmo antes de transforma-la em carreira.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SECAO 4 CONTINUACAO ═══════════ -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="content-narrow fade-up">
+        <div class="section-text">
+          <p>Com dominio da Omniterapia — o unico metodo terapeutico certificado ISO 9001 do mundo — o omniterapeuta atua diretamente no subconsciente, onde 95% das decisoes acontecem, para promover transformacao emocional profunda em poucas sessoes.</p>
+          <p>Nao e mais um diploma na parede. E uma vida nova — com proposito, metodo e resultado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 5 — AREAS DE ATUACAO ═══════════ -->
+  <section class="section section-elevated" id="areas">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Areas de atuacao</div>
+        <h2 class="section-title">O que a Omniterapia transforma</h2>
+      </div>
+      <div class="areas-grid">
+        <div class="area-card fade-up stagger-1">
+          <h4>Questoes emocionais profundas</h4>
+          <p>Ansiedade, estresse cronico, insonia — a Omniterapia atua na raiz, nao nos sintomas.</p>
+        </div>
+        <div class="area-card fade-up stagger-2">
+          <h4>Alta performance pessoal e profissional</h4>
+          <p>Foco, clareza mental, produtividade — resultados que se medem.</p>
+        </div>
+        <div class="area-card fade-up stagger-3">
+          <h4>Habitos e padroes limitantes</h4>
+          <p>Procrastinacao, compulsoes, auto-sabotagem — transformacao que se mantem.</p>
+        </div>
+        <div class="area-card fade-up stagger-4">
+          <h4>Traumas e fobias</h4>
+          <p>Resolucao rapida e permanente — poucas sessoes, nao anos de tratamento.</p>
+        </div>
+        <div class="area-card fade-up stagger-5">
+          <h4>Relacionamentos e familia</h4>
+          <p>Comunicacao, conexao, presenca — o legado comeca em casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-gold">
+
+  <!-- ═══════════ SECAO 6 — A FORMACAO ═══════════ -->
+  <section class="section section-dark" id="formacao">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">A Formacao</div>
+        <h2 class="section-title">Formacao Profissional em Omniterapia</h2>
+        <p class="section-text" style="margin-bottom: var(--space-2xl);">Da insatisfacao profissional a uma carreira com proposito e renda solida. Formamos voce em 2 meses com metodologia ISO 9001 validada ha mais de 4 decadas — para que voce atenda clientes pagos desde a primeira semana.</p>
+      </div>
+
+      <!-- Modulo 1 -->
+      <div class="modulo-card fade-up">
+        <div class="modulo-number">01</div>
+        <div class="modulo-label">Modulo 1</div>
+        <h3 class="modulo-title">Alta Performance Pessoal e Profissional</h3>
+        <div class="modulo-format">100% Online, no seu ritmo (~30 dias)</div>
+        <p class="modulo-text">Antes de transformar outros, voce passa pela propria transformacao. Reprogramacao subconsciente completa. Eliminacao de dores e fobias. Controle da sua saude fisica e emocional. Voce vivencia a Omniterapia antes de aplica-la.</p>
+      </div>
+
+      <!-- Modulo 2 -->
+      <div class="modulo-card modulo-card--highlight fade-up">
+        <div class="modulo-number">02</div>
+        <div class="modulo-label">Modulo 2</div>
+        <h3 class="modulo-title">Omniterapia Profissional</h3>
+        <div class="modulo-format">7 dias ao vivo online (Ter-Sex 19h-23h + Sab 9h-18h + Dom 9h-12h)</div>
+        <p class="modulo-text">Dominio completo do metodo. Confianca para atender e cobrar. Prova obrigatoria + certificado enviado em casa. Voce sai pronto para o primeiro cliente.</p>
+      </div>
+
+      <!-- Bonus -->
+      <div class="fade-up" style="margin-top: var(--space-2xl);">
+        <div class="section-label">Bonus inclusos na formacao</div>
+        <div class="bonus-grid">
+          <div class="bonus-item">
+            <h5>Acelerador de Agenda</h5>
+            <p>Aulas ao vivo mensais com omniterapeutas de sucesso compartilhando caminhos praticos para lotar a agenda.</p>
+          </div>
+          <div class="bonus-item">
+            <h5>Os 12 Passos: Zero aos R$30 Mil</h5>
+            <p>Caminho completo para construir renda solida como omniterapeuta — estrategias comprovadas, passo a passo.</p>
+          </div>
+          <div class="bonus-item">
+            <h5>OMNI Flix</h5>
+            <p>Plataforma propria com formacoes e conteudos exclusivos — acesso imediato apos matricula.</p>
+          </div>
+          <div class="bonus-item">
+            <h5>omnIA — Inteligencia Artificial OMNI</h5>
+            <p>IA proprietaria disponivel 24h/dia para suporte, feedbacks e duvidas — acesso vitalicio.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificacao & ROI -->
+      <div class="fade-up" style="margin-top: var(--space-3xl);">
+        <div class="split-layout" style="gap: var(--space-2xl);">
+          <div>
+            <div class="section-label">Certificacao</div>
+            <p class="section-text">Certificado de Extensao Universitaria (100h) — reconhecido pelo MEC em parceria com a Faculdade do Conhecimento. Certificado fisico enviado em casa apos aprovacao.</p>
+          </div>
+          <div>
+            <div class="section-label">ROI Direto</div>
+            <p class="section-text">Um processo terapeutico completo vale R$1.500. Atendendo 4 clientes por mes nos fins de semana, sua renda extra e de R$6.000/mes (depende da dedicacao).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Garantia -->
+      <div class="fade-up" style="margin-top: var(--space-2xl); padding: var(--space-xl); border: 1px solid var(--color-gold-20); background: var(--color-gold-10);">
+        <div class="section-label">Garantia total</div>
+        <p style="font-family: var(--font-serif); font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--color-cream); margin-top: var(--space-sm);">Se ao final da formacao voce nao se sentir transformado, devolvemos 100% do seu investimento. Sem risco. Todo o risco e da OMNI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 7 — COMPARATIVO ═══════════ -->
+  <section class="section section-navy" id="comparativo">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Comparativo</div>
+        <h2 class="section-title">Por que a Omniterapia, e nao outro caminho?</h2>
+      </div>
+      <div class="fade-up" style="overflow-x: auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Faculdade de Psicologia</th>
+              <th>Coaching de Carreira</th>
+              <th>Formacao em Omniterapia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color: var(--color-cream-50); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">Primeiro cliente</td>
+              <td>Apos 5 anos</td>
+              <td>Sem formacao tecnica</td>
+              <td>Desde a 1a semana</td>
+            </tr>
+            <tr>
+              <td style="color: var(--color-cream-50); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">ISO 9001</td>
+              <td>Nao</td>
+              <td>Nao</td>
+              <td>Sim — unica no mundo</td>
+            </tr>
+            <tr>
+              <td style="color: var(--color-cream-50); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">Transformacao pessoal</td>
+              <td>Nao inclusa</td>
+              <td>Mentalidade, sem metodo</td>
+              <td>Modulo 1 completo</td>
+            </tr>
+            <tr>
+              <td style="color: var(--color-cream-50); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">Renda potencial</td>
+              <td>Apos anos de pratica</td>
+              <td>Incerta</td>
+              <td>R$5mil a R$40mil/mes*</td>
+            </tr>
+            <tr>
+              <td style="color: var(--color-cream-50); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;">Garantia</td>
+              <td>Nenhuma</td>
+              <td>Nenhuma</td>
+              <td>100% de volta</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.7rem; color: var(--color-gray); margin-top: var(--space-md);">*depende da dedicacao</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 8 — HISTORIA DO FUNDADOR ═══════════ -->
+  <section class="section section-dark" id="fundador">
+    <div class="container">
+      <div class="founder-section">
+        <div class="founder-story fade-up">
+          <div class="section-label">O Fundador</div>
+          <h2 class="section-title">Tres geracoes. Um legado.</h2>
+          <p>Michael descobriu o poder da mente aos 13 anos. Nao foi num curso ou numa universidade. Foi na necessidade de vencer sua fobia social.</p>
+          <p>Quando perdeu os pais ainda jovem, a hipnoterapia que era curiosidade virou ancora. A ferramenta que era intelectual virou sobrevivencia. Michael se reconstruiu com a mesma tecnica que depois dedicaria a vida a ensinar.</p>
+          <p>Em 2013, organizou o primeiro curso no Brasil. Sozinho. Numa garagem, com cadeiras de bar. Nao tinha marca, nao tinha estrutura. Tinha experiencia em um metodo de mais de 4 decadas e a conviccao de que profissionais com vidas cinza precisam se transformar primeiro para transformar os outros.</p>
+          <p>Antes de formar milhares, escreveu um livro. A surpresa: mais de 15 milhoes de copias vendidas. A garagem ficou pequena. E Michael entendeu que aquilo nao era sobre ele — era um chamado.</p>
+          <p>Jerry Kein — que fundou a OMNI em 1979 e foi o ultimo discipulo direto de Dave Elman — morreu em 2017. Antes de partir, deixou para Michael seu pendulo pessoal, o simbolo da linhagem.</p>
+          <p style="color: var(--color-gold); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem;">Metodo americano. Precisao suica. Proposito brasileiro.</p>
+        </div>
+        <div class="founder-image fade-up stagger-2">
+          <!-- Foto real: Michael na biblioteca — legado e autoridade -->
+          <img src="../../design-system/assets/photos/IMG_7186-alta.jpg" alt="Michael Arruda — legado e metodo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 9 — PROVA DO CICLO (RAFAELA) ═══════════ -->
+  <section class="section section-elevated" id="rafaela">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">Prova do Ciclo Virtuoso</div>
+        <h2 class="section-title">Sua transformacao e sua credencial.</h2>
+      </div>
+      <div class="testimonial-featured fade-up">
+        <!-- Foto oficial: Rafaela Mendes — versao com brilho ajustado -->
+        <img src="assets/rafa-oficial-brightened.png" alt="Rafaela Mendes — Prova viva do ciclo virtuoso" class="testimonial-photo">
+        <div class="testimonial-content">
+          <blockquote>Rafaela era Engenheira Civil pela UFJF. Carreira promissora. Mas nao estava feliz. Conheceu a Omniterapia, se transformou, e viu algo que nao conseguiu ignorar. Largou a engenharia. Junto com Michael, construiram uma operacao que ja formou milhares de profissionais em todo o Brasil.</blockquote>
+          <cite>Rafaela Mendes — Prova viva do ciclo virtuoso</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 10 — MANIFESTO ═══════════ -->
+  <section class="section section-dark" id="manifesto">
+    <div class="container">
+      <div class="manifesto fade-up">
+        <div class="section-label" style="text-align: center;">Manifesto</div>
+        <h2 class="section-title" style="text-align: center; margin-bottom: var(--space-2xl);">Chega de mundo cinza.</h2>
+        <p>Vivemos em um mundo de pessoas no piloto automatico. Acordando e dormindo apenas para pagar contas. Se esforcando demais e sentindo de menos.</p>
+        <p>A cultura ensinou que trocar a vida por status, cargo e salario e sucesso. E milhoes de profissionais acreditaram. Construiram carreiras admiraveis por fora e vazias por dentro.</p>
+        <p class="manifesto-highlight">Nos nos recusamos a aceitar que isso e normal.</p>
+        <p>Nao vendemos autoajuda. Nao vendemos motivacao que dura ate domingo. Nos acreditamos em transformacao que se prova. Em metodo.</p>
+        <p>Chega de acordar todos os dias para um trabalho que voce nao suporta mais. Chega de trabalhar duro, fazer dinheiro, e nao ter tempo para a familia. Chega de depender de remedios para viver.</p>
+        <p class="manifesto-close">Somos milhares. E cada um de nos fez a mesma escolha: <em style="color: var(--color-gold);">transformar vidas.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 11 — LEGIAO ═══════════ -->
+  <section class="section section-elevated" id="legiao">
+    <div class="container">
+      <div class="fade-up">
+        <div class="section-label">A Legiao</div>
+        <h2 class="section-title">Voce nao esta sozinho. Faz parte de um movimento.</h2>
+        <div class="section-text content-narrow">
+          <p>A OMNI nao formou alunos. Formou uma legiao. Milhares de omniterapeutas em todo o Brasil que fizeram a mesma escolha: transformar-se primeiro, depois devolver cor a outras vidas.</p>
+          <p>Cada profissional que se forma recebe uma pulseira com a frase: "Eu Transformo Vidas." Nao e um slogan. E uma identidade.</p>
+        </div>
+      </div>
+
+      <!-- Grid de rostos reais — PLACEHOLDERS para fotos de alunos formados -->
+      <div class="people-grid fade-up" style="margin-top: var(--space-2xl);">
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 1"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 2"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 3"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 4"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 5"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 6"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 7"></div>
+        <div class="people-grid-item photo-placeholder" data-label="Aluno(a) 8"></div>
+      </div>
+
+      <div class="fade-up" style="text-align: center; margin-top: var(--space-xl);">
+        <p style="color: var(--color-cream-70); font-size: var(--text-body-sm);">Quando voce entra na Legiao de Omniterapeutas, voce entra para uma rede de profissionais transformados que se apoiam, compartilham experiencias e crescem juntos. Com metodo. Com proposito. Com resultado.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider-gold">
+
+  <!-- ═══════════ SECAO 12 — CREDENCIAIS ═══════════ -->
+  <section class="section section-dark" id="credenciais">
+    <div class="container">
+      <div class="fade-up" style="text-align: center;">
+        <div class="section-label" style="text-align: center;">Credenciais</div>
+        <h2 class="section-title" style="text-align: center;">Transformacao que se prova.</h2>
+      </div>
+      <div class="credentials-grid fade-up">
+        <div class="credential-item">
+          <div class="credential-value">ISO</div>
+          <div class="credential-label">9001 — Unico metodo<br>terapeutico certificado</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-value">MEC</div>
+          <div class="credential-label">Extensao universitaria<br>reconhecida</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-value">26</div>
+          <div class="credential-label">Paises com<br>profissionais formados</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-value">4+</div>
+          <div class="credential-label">Decadas de<br>evolucao continua</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-value">15M+</div>
+          <div class="credential-label">Copias vendidas<br>do livro</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-value">1000+</div>
+          <div class="credential-label">Profissionais<br>ja formados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SECAO 13 — FORMULARIO ═══════════ -->
+  <section class="section section-elevated" id="formulario">
+    <div class="container">
+      <div class="form-section">
+        <div class="form-image fade-up">
+          <!-- Foto: Michael acessivel, sorrindo na poltrona -->
+          <img src="../../design-system/assets/photos/IMG_7093-alta.jpg" alt="Michael Arruda — autoridade e metodo">
+        </div>
+        <div class="form-container fade-up stagger-2">
+          <div class="section-label">Sua transformacao comeca aqui</div>
+          <h3>Fale com a OMNI</h3>
+          <p>Preencha o formulario e um consultor vai entrar em contato para conversar sobre o seu momento e como a Omniterapia pode transformar a sua vida e carreira.</p>
+
+          <form id="form-captura" action="#" method="POST">
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" required placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone (WhatsApp)</label>
+              <input type="tel" id="telefone" name="telefone" required placeholder="(11) 99999-9999">
+            </div>
+            <div class="form-group">
+              <label for="objetivo">Qual o seu objetivo com a formacao?</label>
+              <select id="objetivo" name="objetivo" required>
+                <option value="" disabled selected>Selecione uma opcao</option>
+                <option value="atuar">Atuar profissionalmente como Omniterapeuta</option>
+                <option value="saude">Sou profissional da saude e quero agregar a Omniterapia</option>
+                <option value="pessoal">Busco transformacao pessoal profunda</option>
+                <option value="entender">Quero entender se a Omniterapia e para mim</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="escolaridade">Nivel de escolaridade</label>
+              <select id="escolaridade" name="escolaridade" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="medio">Ensino Medio</option>
+                <option value="superior">Superior Completo</option>
+                <option value="pos">Pos-Graduacao</option>
+                <option value="mestrado">Mestrado/Doutorado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="investimento">Nos ultimos 2 anos, quanto investiu em formacoes?</label>
+              <select id="investimento" name="investimento" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="nada">Nao investi</option>
+                <option value="ate5k">Ate R$5.000</option>
+                <option value="5k-15k">R$5.000 a R$15.000</option>
+                <option value="15k+">Mais de R$15.000</option>
+              </select>
+            </div>
+            <button type="submit" class="form-submit">Quero fazer parte da Legiao</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer section-dark">
+    <div class="container">
+      <p class="footer-phrase">"A melhor maneira de colorir a propria vida e dando cor a outras vidas."</p>
+      <a href="#formulario" class="hero-cta" style="margin-bottom: var(--space-2xl); display: inline-flex;">Iniciar minha transformacao</a>
+      <div class="footer-info">
+        <p>OMNI Hypnosis Training Center Brasil</p>
+        <p>Rua dos Iris 150, Mirandopolis, Sao Paulo, SP</p>
+        <p>(11) 2577-3557 | omnihypnosis.com.br | @omnibr</p>
+        <p style="margin-top: var(--space-md); color: var(--color-gold);">Omniterapia Transforma Vidas.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════ SCROLL ANIMATIONS ═══════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.fade-up, .fade-in').forEach(function(el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+</body>
+</html>
