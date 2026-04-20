@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria — Automações Comerciais OMNI Brasil | Abril 2026</title>
+  <style>
+    /* ── Reset & Base ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0a0e1a;
+      --surface:   #111827;
+      --border:    #1f2d45;
+      --text:      #e8edf5;
+      --muted:     #6b7a99;
+      --gold:      #d4a843;
+      --gold-dim:  #8a6a22;
+      --green:     #22c55e;
+      --green-bg:  #052e16;
+      --yellow:    #eab308;
+      --yellow-bg: #1c1a07;
+      --red:       #ef4444;
+      --red-bg:    #1f0808;
+      --blue:      #3b82f6;
+      --blue-bg:   #0d1b3e;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Password Screen ─────────────────────────────── */
+    #pw-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 24px;
+    }
+    #pw-screen .logo-pw {
+      font-size: 13px; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; font-weight: 600;
+    }
+    #pw-screen h2 {
+      font-size: 22px; font-weight: 700; color: var(--text);
+      text-align: center;
+    }
+    #pw-screen p { font-size: 13px; color: var(--muted); text-align: center; }
+    #pw-wrap {
+      display: flex; gap: 10px; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 4px 4px 4px 16px;
+      width: 320px;
+    }
+    #pw-input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--text); font-size: 15px;
+    }
+    #pw-btn {
+      background: var(--gold); color: #000; border: none;
+      padding: 8px 18px; border-radius: 8px; font-weight: 700;
+      cursor: pointer; font-size: 13px; transition: opacity .2s;
+    }
+    #pw-btn:hover { opacity: .85; }
+    #pw-error {
+      font-size: 12px; color: var(--red); height: 16px; text-align: center;
+    }
+
+    /* ── Layout ──────────────────────────────────────── */
+    .main { max-width: 1060px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    /* ── Header ──────────────────────────────────────── */
+    .header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      border-bottom: 1px solid var(--border); padding-bottom: 28px; margin-bottom: 40px;
+    }
+    .header-left .eyebrow {
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 8px;
+    }
+    .header-left h1 {
+      font-size: 28px; font-weight: 800; color: var(--text); line-height: 1.2;
+    }
+    .header-left .subtitle {
+      font-size: 14px; color: var(--muted); margin-top: 6px;
+    }
+    .header-right { text-align: right; }
+    .header-right .date-label { font-size: 11px; color: var(--muted); }
+    .header-right .date-val { font-size: 15px; font-weight: 700; color: var(--text); }
+    .badge-live {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green-bg); border: 1px solid var(--green);
+      color: var(--green); font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px; margin-top: 8px;
+    }
+    .badge-live::before {
+      content: ''; width: 7px; height: 7px;
+      background: var(--green); border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.7); }
+    }
+
+    /* ── Summary Cards ───────────────────────────────── */
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 720px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px 22px;
+    }
+    .kpi-card .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .kpi-card .kpi-value { font-size: 32px; font-weight: 800; margin: 4px 0 2px; }
+    .kpi-card .kpi-sub { font-size: 12px; color: var(--muted); }
+    .kpi-green .kpi-value { color: var(--green); }
+    .kpi-yellow .kpi-value { color: var(--yellow); }
+    .kpi-red .kpi-value { color: var(--red); }
+    .kpi-gold .kpi-value { color: var(--gold); }
+
+    /* ── Section ─────────────────────────────────────── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; flex-shrink: 0;
+    }
+    .section-icon.green { background: var(--green-bg); }
+    .section-icon.yellow { background: var(--yellow-bg); }
+    .section-icon.red { background: var(--red-bg); }
+    .section-icon.blue { background: var(--blue-bg); }
+    .section-icon.gold { background: #1a1200; }
+    .section h2 { font-size: 18px; font-weight: 700; }
+
+    /* ── Workflow Status Table ───────────────────────── */
+    .wf-table { width: 100%; border-collapse: collapse; }
+    .wf-table th {
+      text-align: left; font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      border-bottom: 1px solid var(--border); padding: 10px 14px;
+    }
+    .wf-table td {
+      padding: 14px; border-bottom: 1px solid var(--border);
+      font-size: 14px; vertical-align: top;
+    }
+    .wf-table tr:last-child td { border-bottom: none; }
+    .wf-table tr:hover td { background: rgba(255,255,255,.025); }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    }
+    .pill-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+    .pill-yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow); }
+    .pill-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+    .pill-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue); }
+    .version-tag {
+      font-size: 11px; color: var(--muted); background: var(--border);
+      padding: 2px 7px; border-radius: 4px;
+    }
+    .wf-name { font-weight: 700; }
+    .wf-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Green Zone — O que está bom ──────────────────── */
+    .green-list { display: flex; flex-direction: column; gap: 12px; }
+    .green-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .green-item .icon { font-size: 20px; margin-top: 1px; flex-shrink: 0; }
+    .green-item .title { font-size: 14px; font-weight: 700; }
+    .green-item .desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Yellow Zone ─────────────────────────────────── */
+    .attention-list { display: flex; flex-direction: column; gap: 12px; }
+    .attention-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .attention-item .icon { font-size: 20px; margin-top: 1px; flex-shrink: 0; }
+    .attention-item .title { font-size: 14px; font-weight: 700; }
+    .attention-item .desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .attention-item .action {
+      font-size: 12px; color: var(--yellow); margin-top: 6px;
+      background: var(--yellow-bg); display: inline-block;
+      padding: 2px 8px; border-radius: 4px;
+    }
+
+    /* ── Red Zone ────────────────────────────────────── */
+    .critical-list { display: flex; flex-direction: column; gap: 12px; }
+    .critical-item {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .critical-item .icon { font-size: 20px; margin-top: 1px; flex-shrink: 0; }
+    .critical-item .title { font-size: 14px; font-weight: 700; }
+    .critical-item .desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .critical-item .action {
+      font-size: 12px; color: var(--red); margin-top: 6px;
+      background: var(--red-bg); display: inline-block;
+      padding: 2px 8px; border-radius: 4px;
+    }
+
+    /* ── Timeline ────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 22px; }
+    .tl-dot {
+      position: absolute; left: -24px; top: 5px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--surface); border: 2px solid var(--gold);
+    }
+    .tl-dot.green { border-color: var(--green); }
+    .tl-dot.red { border-color: var(--red); }
+    .tl-date { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .tl-title { font-size: 14px; font-weight: 700; }
+    .tl-desc { font-size: 13px; color: var(--muted); margin-top: 3px; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tl-tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 4px;
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .tl-tag.green { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+    .tl-tag.red { border-color: var(--red); color: var(--red); background: var(--red-bg); }
+    .tl-tag.yellow { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-bg); }
+
+    /* ── SDR Map ─────────────────────────────────────── */
+    .sdr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media (max-width: 600px) { .sdr-grid { grid-template-columns: 1fr; } }
+    .sdr-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 18px;
+    }
+    .sdr-name { font-size: 15px; font-weight: 700; }
+    .sdr-detail { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .sdr-inbox { font-size: 11px; color: var(--gold); margin-top: 5px; }
+
+    /* ── Next Steps ──────────────────────────────────── */
+    .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 18px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: #1a1200; border: 1px solid var(--gold-dim);
+      color: var(--gold); font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-title { font-size: 14px; font-weight: 700; }
+    .step-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
+    .step-priority {
+      font-size: 11px; padding: 1px 7px; border-radius: 4px;
+      display: inline-block; margin-top: 6px;
+    }
+    .prio-alta { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+    .prio-media { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow); }
+    .prio-baixa { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue); }
+
+    /* ── Footer ──────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--border); padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: var(--muted);
+    }
+    .footer strong { color: var(--gold); }
+
+    /* ── Divider ─────────────────────────────────────── */
+    .divider {
+      height: 1px; background: var(--border); margin: 0 0 48px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PASSWORD SCREEN ─────────────────────────────────────── -->
+<div id="pw-screen">
+  <div class="logo-pw">OMNI Brasil</div>
+  <h2>Relatório de Auditoria</h2>
+  <p>Automações Comerciais — Abril 2026<br>Acesso restrito à liderança</p>
+  <div id="pw-wrap">
+    <input id="pw-input" type="password" placeholder="Senha de acesso" autocomplete="off" />
+    <button id="pw-btn" onclick="checkPw()">Entrar</button>
+  </div>
+  <div id="pw-error"></div>
+</div>
+
+<!-- ── MAIN CONTENT ────────────────────────────────────────── -->
+<div id="main-content" style="display:none;">
+<div class="main">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">OMNI Brasil · Liderança</div>
+      <h1>Auditoria de Automações<br>Comerciais</h1>
+      <div class="subtitle">Estado operacional completo do funil automatizado</div>
+    </div>
+    <div class="header-right">
+      <div class="date-label">Última atualização</div>
+      <div class="date-val">20 de Abril, 2026</div>
+      <div class="badge-live">7 automações ao vivo</div>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">Automações ativas</div>
+      <div class="kpi-value">7</div>
+      <div class="kpi-sub">de 7 planejadas</div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div class="kpi-label">Pendências críticas</div>
+      <div class="kpi-value">3</div>
+      <div class="kpi-sub">templates + webhook morto</div>
+    </div>
+    <div class="kpi-card kpi-yellow">
+      <div class="kpi-label">Bugs corrigidos hoje</div>
+      <div class="kpi-value">5</div>
+      <div class="kpi-sub">3 críticos + 2 estruturais</div>
+    </div>
+    <div class="kpi-card kpi-gold">
+      <div class="kpi-label">Leads recuperados</div>
+      <div class="kpi-value">2</div>
+      <div class="kpi-sub">mensagens enviadas manualmente</div>
+    </div>
+  </div>
+
+  <!-- Workflow Status -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">⚡</div>
+      <h2>Status das Automações</h2>
+    </div>
+    <table class="wf-table">
+      <thead>
+        <tr>
+          <th>Automação</th>
+          <th>Versão</th>
+          <th>Status</th>
+          <th>Função</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="wf-name">W0000 — Abertura de Lead</div>
+            <div class="wf-desc">Disparado quando deal entra em "Tentativa de Conectar"</div>
+          </td>
+          <td><span class="version-tag">v1.3</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Cria contato + conversa no Chatwoot, envia mensagem de abertura, registra atividade no Pipedrive</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">W0001 — Follow-up WhatsApp</div>
+            <div class="wf-desc">4 disparos automáticos em dias úteis</div>
+          </td>
+          <td><span class="version-tag">v5.0</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>R1–R4 espaçados por horas úteis, classificação IA 3-vias, desfecho D4 (Perdido + Nutrição)</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">W0002 — Redução de No-Show</div>
+            <div class="wf-desc">5 sub-workflows + alerta Google Chat</div>
+          </td>
+          <td><span class="version-tag">v1.2</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Confirmação de reunião (M1–M5), alerta quando deal está sem reunião futura</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">W0003 — Feedback Diário</div>
+            <div class="wf-desc">Roda após reuniões do dia</div>
+          </td>
+          <td><span class="version-tag">v1.0</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Coleta feedback das closers via email automatizado após cada reunião realizada</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">SLA Monitor — Alertas por SDR</div>
+            <div class="wf-desc">Roda 2× ao dia (9h e 18h, seg–sex)</div>
+          </td>
+          <td><span class="version-tag">atual</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Verifica deals acima do SLA em cada etapa e envia alerta separado por SDR no Google Chat</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">A0003 — Criação de Deals</div>
+            <div class="wf-desc">ActiveCampaign → Pipedrive</div>
+          </td>
+          <td><span class="version-tag">atual</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Cria deal no Pipedrive automaticamente quando lead converte no ActiveCampaign (LIMIT=10)</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="wf-name">MON001 — Alerta 30min sem Resposta</div>
+            <div class="wf-desc">Webhook Chatwoot → alerta Google Chat</div>
+          </td>
+          <td><span class="version-tag">atual</span></td>
+          <td><span class="status-pill pill-green">● Live</span></td>
+          <td>Monitora mensagens do lead. Se SDR não responder em 30min úteis (10h–18h), dispara alerta</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SDR Map -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon gold">👥</div>
+      <h2>Mapeamento de SDRs</h2>
+    </div>
+    <div class="sdr-grid">
+      <div class="sdr-card">
+        <div class="sdr-name">David</div>
+        <div class="sdr-detail">Canal: WhatsApp Unofficial (Evolution)</div>
+        <div class="sdr-inbox">Inbox Chatwoot: 4 · WhatsApp: 5511972343492</div>
+      </div>
+      <div class="sdr-card">
+        <div class="sdr-name">Rafaela</div>
+        <div class="sdr-detail">Canal: WhatsApp Unofficial (Evolution)</div>
+        <div class="sdr-inbox">Inbox Chatwoot: 9</div>
+      </div>
+      <div class="sdr-card">
+        <div class="sdr-name">Layslla</div>
+        <div class="sdr-detail">Canal: WhatsApp Unofficial (Evolution)</div>
+        <div class="sdr-inbox">Inbox Chatwoot: 18</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- O que está bom -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">✅</div>
+      <h2>O que está funcionando bem</h2>
+    </div>
+    <div class="green-list">
+      <div class="green-item">
+        <div class="icon">🚀</div>
+        <div>
+          <div class="title">7 automações 100% ativas em produção</div>
+          <div class="desc">Todo o funil automatizado — da geração de lead ao follow-up de no-show — está rodando sem intervenção manual.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">💬</div>
+        <div>
+          <div class="title">Conversa Chatwoot reutilizada (fix estrutural — hoje)</div>
+          <div class="desc">W0000 e W0002a agora verificam se já existe uma conversa aberta antes de criar uma nova. Acabam os múltiplos threads por lead, que confundiam os SDRs e mascaravam mensagens não respondidas.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">🛡️</div>
+        <div>
+          <div class="title">Guards de estágio no W0000 e W0001</div>
+          <div class="desc">Um lead nunca retrocede de etapa no Pipedrive por ação da automação. Se já estiver em "Conectado" ou além, o workflow para sem sobrescrever o progresso do SDR.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">📊</div>
+        <div>
+          <div class="title">SLA Monitor com alerta por SDR</div>
+          <div class="desc">Cada SDR recebe sua própria mensagem no Google Chat às 9h e 18h (seg–sex) com os deals fora do prazo. SLAs calibrados: Tentativa de Conectar = 5 dias úteis, Conectado = 2 dias úteis.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">⏰</div>
+        <div>
+          <div class="title">Alerta de resposta em 30 minutos úteis (MON001)</div>
+          <div class="desc">Quando um lead manda mensagem e o SDR não responde em 30 minutos dentro do horário comercial (10h–18h), um alerta é enviado automaticamente no Google Chat.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">📱</div>
+        <div>
+          <div class="title">Normalização de telefone E.164</div>
+          <div class="desc">Todos os telefones são normalizados antes do envio. Problema histórico de DDI duplicado (+555511...) resolvido — números chegam corretamente ao Chatwoot e WhatsApp.</div>
+        </div>
+      </div>
+      <div class="green-item">
+        <div class="icon">🤖</div>
+        <div>
+          <div class="title">Classificação IA 3-vias no W0001</div>
+          <div class="desc">Cada resposta do lead é classificada automaticamente como: <strong>automático</strong> (bot pode responder), <strong>humano_baixo</strong> (urgência baixa) ou <strong>humano_engajado</strong> (SDR precisa agir agora).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- O que precisa atenção -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon yellow">⚠️</div>
+      <h2>O que precisa de atenção</h2>
+    </div>
+    <div class="attention-list">
+      <div class="attention-item">
+        <div class="icon">📨</div>
+        <div>
+          <div class="title">Templates Meta aguardando aprovação</div>
+          <div class="desc"><code>omni_disparo_1</code> e <code>omni_disparo_2</code> foram submetidos em 14/04. O prazo padrão do Meta é 24–72h, mas ainda constam como "em análise". Enquanto não aprovados, os disparos R1 e R2 do follow-up usam fallback.</div>
+          <div class="action">Ação: verificar status no Meta Business Manager e, se necessário, reenviar</div>
+        </div>
+      </div>
+      <div class="attention-item">
+        <div class="icon">🔚</div>
+        <div>
+          <div class="title">Template de encerramento (breakup_final) não submetido</div>
+          <div class="desc">O desfecho D4 — enviado quando o lead não responde após 4 tentativas — deveria usar o template <code>breakup_final</code>. Atualmente usa <code>saudacao_9</code> como fallback temporário, o que não transmite a mensagem correta de encerramento.</div>
+          <div class="action">Ação: redigir e submeter breakup_final ao Meta</div>
+        </div>
+      </div>
+      <div class="attention-item">
+        <div class="icon">🧪</div>
+        <div>
+          <div class="title">W0002 (no-show) não testado com conversa real</div>
+          <div class="desc">M1 foi validado. M2 com card de reunião e as mensagens M3/M4/M5 (enviadas próximo à hora da reunião) ainda não foram testados com uma conversa real de agendamento. O risco é baixo, mas existe.</div>
+          <div class="action">Ação: agendar teste com próxima reunião confirmada</div>
+        </div>
+      </div>
+      <div class="attention-item">
+        <div class="icon">📅</div>
+        <div>
+          <div class="title">Feriados 2027 não adicionados</div>
+          <div class="desc">Todos os nós de cálculo de horas úteis têm um array de feriados hardcoded que cobre apenas 2026. Se não atualizado antes de dezembro/2026, as automações poderão disparar em feriados nacionais do próximo ano.</div>
+          <div class="action">Ação: adicionar feriados 2027 até dezembro/2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pendências críticas -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">🔴</div>
+      <h2>Pendências críticas</h2>
+    </div>
+    <div class="critical-list">
+      <div class="critical-item">
+        <div class="icon">💀</div>
+        <div>
+          <div class="title">Webhook morto — Automação AC 335</div>
+          <div class="desc">A automação AC 335 ainda aponta para a URL antiga do servidor (<code>n8n.omnihypnosis.com.br</code>), que não existe mais. Se essa automação ainda estiver ativa no ActiveCampaign, todas as chamadas estão falhando silenciosamente.</div>
+          <div class="action">Ação urgente: confirmar se AC 335 ainda está em uso. Se sim, corrigir URL para n8n.hypnos.omnihypnosis.com.br</div>
+        </div>
+      </div>
+      <div class="critical-item">
+        <div class="icon">📉</div>
+        <div>
+          <div class="title">Windsor.ai desconectado (Google Ads)</div>
+          <div class="desc">A conta Google Ads no Windsor.ai está desconectada, gerando 6 erros por dia e interrompendo o fluxo de dados de performance de mídia paga para o dashboard.</div>
+          <div class="action">Ação: acessar onboard.windsor.ai com integracaoomnibrasilgmailcom e reconectar Google Ads</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline de correções -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">🔧</div>
+      <h2>Correções aplicadas — Histórico recente</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-date">20 de Abril de 2026 — hoje</div>
+        <div class="tl-title">Fix estrutural: reutilização de conversa Chatwoot</div>
+        <div class="tl-desc">W0000 e W0002a passaram a verificar se já existe uma conversa aberta antes de criar uma nova. Resolve o problema de múltiplos threads por lead no Chatwoot.</div>
+        <div class="tl-tags">
+          <span class="tl-tag green">W0000 v1.3</span>
+          <span class="tl-tag green">W0002a v1.2</span>
+          <span class="tl-tag">+4 nodes em cada workflow</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot red"></div>
+        <div class="tl-date">20 de Abril de 2026 — hoje</div>
+        <div class="tl-title">3 bugs críticos no W0000 identificados e corrigidos</div>
+        <div class="tl-desc">Bug A: ID do contato Chatwoot não era lido corretamente (lead sem abertura). Bug B: DDI do telefone sendo adicionado duas vezes (+5555...). Bug C: URL da conversa ficava vazia após o nó de espera (mensagens de follow-up sem destino).</div>
+        <div class="tl-tags">
+          <span class="tl-tag red">Bug A — contactId undefined</span>
+          <span class="tl-tag red">Bug B — DDI duplicado</span>
+          <span class="tl-tag red">Bug C — URL vazia após Wait</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-date">17 de Abril de 2026</div>
+        <div class="tl-title">SLA Monitor migrado para Google Chat + frequência ajustada</div>
+        <div class="tl-desc">Substituído Telegram por Google Chat. Alertas agora são separados por SDR (não mais uma mensagem agregada). Frequência ajustada de 1×/hora para 2×/dia.</div>
+        <div class="tl-tags">
+          <span class="tl-tag green">SLA Monitor</span>
+          <span class="tl-tag">Google Chat</span>
+          <span class="tl-tag">1 msg/SDR/rodada</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-date">17 de Abril de 2026</div>
+        <div class="tl-title">W0002f — Alerta Google Chat para deal sem reunião</div>
+        <div class="tl-desc">Novo sub-workflow detecta deals que deveriam ter reunião mas não têm nenhuma futura agendada. Dispara alerta direto no Google Chat com link para a conversa no Chatwoot.</div>
+        <div class="tl-tags">
+          <span class="tl-tag green">W0002f — novo</span>
+          <span class="tl-tag">4 nodes adicionados</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-date">14 de Abril de 2026</div>
+        <div class="tl-title">W0001 migrado para v5.0 com guards de estágio</div>
+        <div class="tl-desc">Follow-up reconstruído com 4 stages guards (nunca retroceder lead), desfecho D4 (Perdido + Nutrição), classificação IA 3-vias e sequência correta de atividades no Pipedrive.</div>
+        <div class="tl-tags">
+          <span class="tl-tag green">W0001 v5.0</span>
+          <span class="tl-tag">IA 3-vias</span>
+          <span class="tl-tag">Stage guards</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Próximos passos -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon gold">🎯</div>
+      <h2>Próximos passos</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Verificar aprovação dos templates Meta</div>
+          <div class="step-desc">Checar <code>omni_disparo_1</code> e <code>omni_disparo_2</code> no Meta Business Manager. Após aprovação, nenhuma alteração de código necessária — os disparos passam a funcionar automaticamente.</div>
+          <span class="step-priority prio-alta">Prioridade Alta</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Submeter template breakup_final</div>
+          <div class="step-desc">Redigir e enviar para aprovação o template de encerramento do D4. Substituir o fallback <code>saudacao_9</code> por uma mensagem de encerramento adequada.</div>
+          <span class="step-priority prio-alta">Prioridade Alta</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Resolver webhook morto (AC 335)</div>
+          <div class="step-desc">Confirmar se a automação AC 335 está em uso no ActiveCampaign. Se sim, atualizar URL para o novo servidor. Se não, desativar para parar os erros silenciosos.</div>
+          <span class="step-priority prio-alta">Prioridade Alta</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Reconectar Windsor.ai — Google Ads</div>
+          <div class="step-desc">Acessar Windsor.ai com a conta de integração e reconectar a conta Google Ads. Resolve os 6 erros diários e restaura o fluxo de dados de mídia paga.</div>
+          <span class="step-priority prio-media">Prioridade Média</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div>
+          <div class="step-title">Testar W0002 com reunião real</div>
+          <div class="step-desc">Validar os sub-workflows M2+card e M3/M4/M5 com uma conversa de agendamento real. M1 já está validado; os demais precisam de um teste end-to-end.</div>
+          <span class="step-priority prio-media">Prioridade Média</span>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <div>
+          <div class="step-title">Dashboard do funil</div>
+          <div class="step-desc">Construir visualização das métricas do funil: conversão por etapa, taxa de agendamento, reuniões realizadas vs. no-show e motivos de perda.</div>
+          <span class="step-priority prio-baixa">Prioridade Baixa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>Gerado por <strong>AURA</strong> · OMNI Brasil · Automações Comerciais</div>
+    <div>20 de Abril de 2026</div>
+  </div>
+
+</div><!-- /.main -->
+</div><!-- /#main-content -->
+
+<script>
+  // Password check
+  function checkPw() {
+    var val = document.getElementById('pw-input').value;
+    if (val === 'omni$rafa') {
+      document.getElementById('pw-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+    } else {
+      document.getElementById('pw-error').textContent = 'Senha incorreta. Tente novamente.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+  document.getElementById('pw-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPw();
+  });
+  document.getElementById('pw-input').focus();
+</script>
+</body>
+</html>
