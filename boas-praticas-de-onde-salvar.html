@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boas Práticas — Onde Salvar · OMNI Brasil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:        #C8A84B;
+      --gold-light:  #E8C86A;
+      --gold-deep:   #9A7A2E;
+      --gold-10:     rgba(200,168,75,0.10);
+      --gold-20:     rgba(200,168,75,0.20);
+      --gold-30:     rgba(200,168,75,0.30);
+      --black:       #050505;
+      --dark:        #0D0D0D;
+      --surface:     #141414;
+      --surface-2:   #1C1C1C;
+      --border:      rgba(200,168,75,0.15);
+      --cream:       #F5F0E8;
+      --cream-70:    rgba(245,240,232,0.70);
+      --cream-50:    rgba(245,240,232,0.50);
+      --cream-30:    rgba(245,240,232,0.30);
+      --teal:        #2A9D8F;
+      --teal-10:     rgba(42,157,143,0.10);
+      --teal-20:     rgba(42,157,143,0.20);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── Grid de fundo ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Container ── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
+    }
+
+    /* ── Header ── */
+    .header {
+      margin-bottom: 64px;
+    }
+
+    .label-mono {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .page-title span {
+      background: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-desc {
+      color: var(--cream-70);
+      max-width: 560px;
+      font-size: 0.95rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 48px 0;
+      opacity: 0.4;
+    }
+
+    /* ── Seções ── */
+    .section { margin-bottom: 56px; }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    /* ── Card de regra de ouro ── */
+    .rule-card {
+      background: var(--gold-10);
+      border: 1px solid var(--gold-30);
+      padding: 28px 32px;
+      margin-bottom: 28px;
+    }
+
+    .rule-card .rule-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .rule-card .rule-text {
+      font-size: 1.05rem;
+      color: var(--cream);
+      line-height: 1.55;
+    }
+
+    .rule-card .rule-text strong {
+      color: var(--gold-light);
+    }
+
+    /* ── Cards de decisão ── */
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 580px) {
+      .decision-grid { grid-template-columns: 1fr; }
+    }
+
+    .decision-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .decision-card:hover { border-color: var(--gold); }
+
+    .decision-card .dc-type {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .decision-card.git .dc-type  { color: var(--gold); }
+    .decision-card.drive .dc-type { color: var(--teal); }
+
+    .decision-card .dc-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .decision-card .dc-examples {
+      font-size: 0.8rem;
+      color: var(--cream-70);
+      line-height: 1.55;
+    }
+
+    .decision-card.git  { border-top: 2px solid var(--gold); }
+    .decision-card.drive { border-top: 2px solid var(--teal); }
+
+    /* ── Observação processos ── */
+    .obs-card {
+      background: var(--teal-10);
+      border: 1px solid var(--teal-20);
+      border-left: 3px solid var(--teal);
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .obs-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .obs-body { font-size: 0.88rem; color: var(--cream-70); line-height: 1.6; }
+    .obs-body strong { color: var(--cream); }
+
+    /* ── Estrutura de pastas ── */
+    .folder-tree {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px 28px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.9;
+      overflow-x: auto;
+    }
+
+    .ft-root   { color: var(--gold); font-weight: 500; }
+    .ft-dir    { color: var(--cream); }
+    .ft-sub    { color: var(--cream-70); }
+    .ft-hl     { color: var(--gold-light); font-weight: 500; }
+    .ft-note   { color: var(--cream-50); font-style: italic; }
+    .ft-obs    { color: var(--teal); }
+
+    /* ── Rotina diária ── */
+    .routine-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 0;
+      position: relative;
+    }
+
+    .step:not(:last-child) .step-line { background: var(--border); }
+
+    .step-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 4px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--gold-10);
+      border: 1px solid var(--gold-30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .step-line {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+      margin: 6px 0;
+    }
+
+    .step-body {
+      padding: 0 0 32px 20px;
+    }
+
+    .step-time {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: var(--cream-70);
+      line-height: 1.6;
+    }
+
+    .step-actions {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.83rem;
+      color: var(--cream-70);
+    }
+
+    .action-item::before {
+      content: '›';
+      color: var(--gold);
+      font-family: 'IBM Plex Mono', monospace;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Bloco de tempo total ── */
+    .time-summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .time-summary .ts-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-50);
+      margin-bottom: 4px;
+    }
+
+    .time-summary .ts-val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+    }
+
+    .time-summary .ts-desc {
+      font-size: 0.83rem;
+      color: var(--cream-70);
+      max-width: 420px;
+    }
+
+    /* ── Tag de princípio ── */
+    .principle-tag {
+      display: inline-block;
+      background: var(--gold-10);
+      border: 1px solid var(--gold-20);
+      padding: 4px 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 12px;
+    }
+
+    .footer-brand {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .footer-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--cream-30);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <div class="label-mono">OMNI Brasil · Operações Internas</div>
+      <h1 class="page-title">Boas Práticas de<br><span>Onde Salvar</span></h1>
+      <p class="page-desc">Regra do Git, estrutura de arquivos e rotina diária de organização para toda a equipe.</p>
+    </header>
+
+    <!-- ── SEÇÃO 1 — REGRA DO GIT ── -->
+    <section class="section">
+      <div class="section-label">Seção 01</div>
+      <h2 class="section-title">A Regra do Git</h2>
+
+      <div class="rule-card">
+        <div class="rule-icon">Regra de Ouro</div>
+        <div class="rule-text">
+          <strong>Texto e informação vivem no Git.</strong><br>
+          Tudo que é escrito, estruturado ou precisa de histórico e rastreabilidade vai para o repositório — sem exceção.
+        </div>
+      </div>
+
+      <div class="decision-grid">
+        <div class="decision-card git">
+          <div class="dc-type">→ Git · workspace/</div>
+          <div class="dc-title">Texto &amp; Informação</div>
+          <div class="dc-examples">
+            Scripts de venda · Processos operacionais<br>
+            Playbooks · Preços e ofertas<br>
+            Templates de mensagem · SOPs<br>
+            Briefings · Planos e estratégias<br>
+            Documentação técnica
+          </div>
+        </div>
+        <div class="decision-card drive">
+          <div class="dc-type">→ Google Drive</div>
+          <div class="dc-title">Arquivo &amp; Mídia</div>
+          <div class="dc-examples">
+            Vídeos · Apostilas em PDF<br>
+            Gravações de aulas · Imagens<br>
+            Contratos assinados · Notas fiscais<br>
+            Planilhas financeiras · Documentos legais
+          </div>
+        </div>
+      </div>
+
+      <div class="obs-card">
+        <div class="obs-icon">⚠ OBS</div>
+        <div class="obs-body">
+          <strong>Processos e documentação interna:</strong> ainda estamos analisando o melhor caminho dentro do workspace. Por enquanto, salve em <strong>workspace/businesses/omni_brasil/processos/</strong> até que o padrão seja definido e comunicado para a equipe.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── SEÇÃO 2 — ESTRUTURA DE PASTAS ── -->
+    <section class="section">
+      <div class="section-label">Seção 02</div>
+      <h2 class="section-title">Onde fica cada coisa no Git</h2>
+
+      <div class="folder-tree">
+        <div><span class="ft-root">workspace/businesses/omni_brasil/</span></div>
+        <div><span class="ft-dir">├── brand/</span>          <span class="ft-note">— identidade visual, guias de tom</span></div>
+        <div><span class="ft-dir">├── company/</span>        <span class="ft-note">— missão, valores, estrutura</span></div>
+        <div><span class="ft-dir">├── design-system/</span>  <span class="ft-note">— tokens, componentes, CSS</span></div>
+        <div><span class="ft-dir">├── inputs/</span>         <span class="ft-note">— arquivos brutos de entrada (não commitar)</span></div>
+        <div><span class="ft-dir">├── operations/</span>     <span class="ft-note">— SOPs, fluxos operacionais</span></div>
+        <div><span class="ft-dir">├── outputs/</span>        <span class="ft-note">— conteúdo gerado: copy, relatórios, HTMLs</span></div>
+        <div><span class="ft-hl">├── processos/</span>       <span class="ft-obs">← processos e docs (temporário até novo padrão)</span></div>
+        <div><span class="ft-dir">├── products/</span>       <span class="ft-note">— offerbooks, descrições, preços por produto</span></div>
+        <div><span class="ft-dir">└── tech/</span>           <span class="ft-note">— capabilities, contatos, vault manifest</span></div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── SEÇÃO 3 — ROTINA DIÁRIA ── -->
+    <section class="section">
+      <div class="section-label">Seção 03</div>
+      <h2 class="section-title">Rotina de Organização — 20 a 30 min por dia</h2>
+
+      <div class="principle-tag">Consistência bate perfeição</div>
+
+      <div class="time-summary" style="margin-bottom: 40px;">
+        <div>
+          <div class="ts-label">Tempo total</div>
+          <div class="ts-val">20–30 min</div>
+        </div>
+        <div class="ts-desc">
+          Feito todo dia, esse ritual elimina acúmulo, garante que o time encontra o que precisa e mantém o repositório como fonte confiável da verdade.
+        </div>
+      </div>
+
+      <div class="routine-steps">
+
+        <!-- Passo 1 -->
+        <div class="step">
+          <div class="step-left">
+            <div class="step-num">01</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-time">5 min · Abertura</div>
+            <div class="step-title">Revisar o que ficou pendente ontem</div>
+            <div class="step-desc">Antes de começar qualquer tarefa nova, olhe o que ficou pela metade. Arquivo aberto, mensagem não salva, processo escrito no bloco de notas.</div>
+            <div class="step-actions">
+              <div class="action-item">Abra o Git e rode <strong>git status</strong> para ver o que está modificado mas não commitado</div>
+              <div class="action-item">Verifique sua área de trabalho e Downloads — mova ou descarte o que estiver perdido</div>
+              <div class="action-item">Se tiver rascunho de texto útil em qualquer lugar: coloque no lugar certo agora</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="step">
+          <div class="step-left">
+            <div class="step-num">02</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-time">5 min · Git</div>
+            <div class="step-title">Salvar o que foi produzido no dia anterior</div>
+            <div class="step-desc">Qualquer texto, processo, script ou decisão que foi escrita ontem e não foi commitada — faz agora.</div>
+            <div class="step-actions">
+              <div class="action-item">Identifique os arquivos modificados com <strong>git status</strong></div>
+              <div class="action-item">Faça staging apenas dos arquivos relevantes — nunca <strong>git add .</strong></div>
+              <div class="action-item">Commit com mensagem descritiva: o que mudou e por quê</div>
+              <div class="action-item">Push para o repositório remoto</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="step">
+          <div class="step-left">
+            <div class="step-num">03</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-time">5 min · Drive</div>
+            <div class="step-title">Arquivos pesados e documentos do dia</div>
+            <div class="step-desc">PDFs, contratos, NFs, vídeos, imagens que chegaram ontem vão para o Drive agora — não deixe acumular.</div>
+            <div class="step-actions">
+              <div class="action-item">NF recebida → <strong>01_BACKOFFICE/Financeiro/Notas-Fiscais/</strong></div>
+              <div class="action-item">Criativo aprovado → <strong>02_MARKETING/Criativos/{produto}/</strong></div>
+              <div class="action-item">Gravação de aula → <strong>04_ENTREGA/Produtos/{produto}/Aulas/</strong></div>
+              <div class="action-item">Contrato assinado → <strong>01_BACKOFFICE/Contratos/{categoria}/</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 4 -->
+        <div class="step">
+          <div class="step-left">
+            <div class="step-num">04</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-time">5–10 min · Refinamento</div>
+            <div class="step-title">Atualizar um processo ou documento importante</div>
+            <div class="step-desc">Escolha uma coisa que ficou desatualizada — preço, SOP, script, offerbook — e corrija. Apenas uma. Pequeno e consistente ganha de grande e esporádico.</div>
+            <div class="step-actions">
+              <div class="action-item">Releia um processo que você usou recentemente — está correto e atual?</div>
+              <div class="action-item">Se houver divergência entre o que está escrito e o que é praticado, corrija agora</div>
+              <div class="action-item">Commite a atualização com a data no commit: <em>feat(processos): atualiza script SDR FPH — abr/26</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 5 -->
+        <div class="step">
+          <div class="step-left">
+            <div class="step-num">05</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-body">
+            <div class="step-time">5 min · Fechamento</div>
+            <div class="step-title">Deixar o ambiente limpo para amanhã</div>
+            <div class="step-desc">O objetivo é terminar o dia com o repositório sincronizado e sem arquivo "solto" esperando ser categorizado.</div>
+            <div class="step-actions">
+              <div class="action-item">Último <strong>git status</strong> — se houver algo modificado, commite ou descarte</div>
+              <div class="action-item">Feche abas de arquivos que não precisam mais estar abertas</div>
+              <div class="action-item">Se descobriu que falta uma pasta ou padrão: anote para propor ao Michael</div>
+              <div class="action-item">Nenhum arquivo no Desktop ou Downloads que deveria estar no Drive ou no Git</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /routine-steps -->
+
+      <!-- Bloco de princípio final -->
+      <div class="obs-card" style="margin-top: 32px; border-left-color: var(--gold); background: var(--gold-10); border-color: var(--gold-20);">
+        <div class="obs-icon" style="color: var(--gold);">→</div>
+        <div class="obs-body">
+          <strong>O repositório só é confiável se estiver vivo.</strong> Um arquivo que existe só no computador de uma pessoa não existe para a equipe. Cada commit é um ato de generosidade com quem vem depois.
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer">
+      <div class="footer-brand">OMNI Brasil · Operações Internas</div>
+      <div class="footer-date">Abril 2026</div>
+    </footer>
+
+  </div>
+</body>
+</html>
