@@ -42,7 +42,6 @@
       min-height: 100vh;
     }
 
-    /* ── Grid de fundo ── */
     body::before {
       content: '';
       position: fixed;
@@ -55,20 +54,35 @@
       z-index: 0;
     }
 
-    /* ── Container ── */
     .container {
       position: relative;
       z-index: 1;
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
       padding: clamp(40px, 8vw, 80px) clamp(20px, 5vw, 40px);
     }
 
-    /* ── Header ── */
-    .header {
-      margin-bottom: 64px;
+    /* ── Navegação rápida ── */
+    .nav-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 56px;
     }
+    .nav-index a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--cream-50);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-index a:hover { color: var(--gold); border-color: var(--gold-30); }
 
+    /* ── Header ── */
     .label-mono {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.6rem;
@@ -96,17 +110,13 @@
       background-clip: text;
     }
 
-    .page-desc {
-      color: var(--cream-70);
-      max-width: 560px;
-      font-size: 0.95rem;
-    }
+    .page-desc { color: var(--cream-70); max-width: 580px; font-size: 0.95rem; }
 
     .divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 48px 0;
-      opacity: 0.4;
+      margin: 52px 0;
+      opacity: 0.35;
     }
 
     /* ── Seções ── */
@@ -119,7 +129,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .section-title {
@@ -131,137 +141,178 @@
       margin-bottom: 24px;
     }
 
-    /* ── Card de regra de ouro ── */
-    .rule-card {
-      background: var(--gold-10);
-      border: 1px solid var(--gold-30);
-      padding: 28px 32px;
-      margin-bottom: 28px;
-    }
-
-    .rule-card .rule-icon {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .rule-card .rule-text {
-      font-size: 1.05rem;
-      color: var(--cream);
-      line-height: 1.55;
-    }
-
-    .rule-card .rule-text strong {
-      color: var(--gold-light);
-    }
-
-    /* ── Cards de decisão ── */
-    .decision-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    @media (max-width: 580px) {
-      .decision-grid { grid-template-columns: 1fr; }
-    }
-
-    .decision-card {
+    /* ── Nota lateral (regra de textos) ── */
+    .aside-note {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 24px;
-      transition: border-color 0.2s;
+      border-left: 3px solid var(--gold-deep);
+      padding: 18px 22px;
+      font-size: 0.85rem;
+      color: var(--cream-70);
+      line-height: 1.6;
     }
-
-    .decision-card:hover { border-color: var(--gold); }
-
-    .decision-card .dc-type {
+    .aside-note strong { color: var(--cream); }
+    .aside-note .note-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.55rem;
+      font-size: 0.52rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      color: var(--gold-deep);
+      margin-bottom: 6px;
     }
 
-    .decision-card.git .dc-type  { color: var(--gold); }
-    .decision-card.drive .dc-type { color: var(--teal); }
+    /* ── Princípios numerados ── */
+    .principles { display: flex; flex-direction: column; gap: 16px; }
 
-    .decision-card .dc-title {
-      font-size: 1rem;
+    .principle {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .principle:hover { border-color: var(--gold-30); }
+
+    .principle-num {
+      background: var(--gold-10);
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--gold);
+    }
+
+    .principle-body { padding: 18px 22px; }
+
+    .principle-title {
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--cream);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .decision-card .dc-examples {
-      font-size: 0.8rem;
-      color: var(--cream-70);
-      line-height: 1.55;
-    }
-
-    .decision-card.git  { border-top: 2px solid var(--gold); }
-    .decision-card.drive { border-top: 2px solid var(--teal); }
-
-    /* ── Observação processos ── */
-    .obs-card {
-      background: var(--teal-10);
-      border: 1px solid var(--teal-20);
-      border-left: 3px solid var(--teal);
-      padding: 20px 24px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .obs-icon {
+    .principle-desc { font-size: 0.83rem; color: var(--cream-70); line-height: 1.6; }
+    .principle-desc strong { color: var(--gold-light); }
+    .principle-desc code {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--teal);
-      flex-shrink: 0;
-      margin-top: 2px;
+      font-size: 0.75rem;
+      background: var(--gold-10);
+      color: var(--gold);
+      padding: 1px 6px;
     }
-
-    .obs-body { font-size: 0.88rem; color: var(--cream-70); line-height: 1.6; }
-    .obs-body strong { color: var(--cream); }
 
     /* ── Estrutura de pastas ── */
-    .folder-tree {
+    .drive-tree {
       background: var(--surface);
       border: 1px solid var(--border);
       padding: 24px 28px;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-      line-height: 1.9;
+      font-size: 0.77rem;
+      line-height: 2;
       overflow-x: auto;
     }
+    .ft-root   { color: var(--gold); font-weight: 500; font-size: 0.82rem; }
+    .ft-l1     { color: var(--cream); font-weight: 500; }
+    .ft-l2     { color: var(--cream-70); }
+    .ft-l3     { color: var(--cream-50); }
+    .ft-note   { color: rgba(245,240,232,0.30); font-style: italic; }
+    .ft-owner  { color: var(--teal); }
+    .ft-warn   { color: var(--gold-light); }
 
-    .ft-root   { color: var(--gold); font-weight: 500; }
-    .ft-dir    { color: var(--cream); }
-    .ft-sub    { color: var(--cream-70); }
-    .ft-hl     { color: var(--gold-light); font-weight: 500; }
-    .ft-note   { color: var(--cream-50); font-style: italic; }
-    .ft-obs    { color: var(--teal); }
+    /* ── Tabela de roteamento ── */
+    .route-table { width: 100%; border-collapse: collapse; }
+    .route-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: left;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--gold-20);
+    }
+    .route-table td {
+      font-size: 0.83rem;
+      color: var(--cream-70);
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(200,168,75,0.07);
+      vertical-align: top;
+    }
+    .route-table tr:last-child td { border-bottom: none; }
+    .route-table tr:hover td { background: var(--gold-10); color: var(--cream); }
+    .route-table td:first-child { color: var(--cream); font-weight: 500; }
+    .route-table td code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      background: var(--gold-10);
+      padding: 1px 6px;
+      white-space: nowrap;
+    }
+
+    /* ── Produtos ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+    .product-internal {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .product-full { font-size: 0.8rem; color: var(--cream-70); line-height: 1.4; }
+
+    /* ── Aviso nunca deletar ── */
+    .alert-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      border: 1px solid;
+    }
+    .alert-card.danger {
+      background: rgba(180, 60, 60, 0.08);
+      border-color: rgba(200, 80, 80, 0.25);
+    }
+    .alert-card.info {
+      background: var(--teal-10);
+      border-color: var(--teal-20);
+    }
+    .alert-icon {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .alert-card.danger .alert-icon { color: #E07070; }
+    .alert-card.info  .alert-icon  { color: var(--teal); }
+    .alert-body { font-size: 0.85rem; color: var(--cream-70); line-height: 1.6; }
+    .alert-body strong { color: var(--cream); }
+    .alert-body code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--teal);
+      background: var(--teal-10);
+      padding: 1px 6px;
+    }
 
     /* ── Rotina diária ── */
-    .routine-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .routine-steps { display: flex; flex-direction: column; gap: 0; }
 
-    .step {
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: 0;
-      position: relative;
-    }
-
-    .step:not(:last-child) .step-line { background: var(--border); }
+    .step { display: grid; grid-template-columns: 52px 1fr; }
 
     .step-left {
       display: flex;
@@ -269,7 +320,6 @@
       align-items: center;
       padding-top: 4px;
     }
-
     .step-num {
       width: 36px;
       height: 36px;
@@ -284,7 +334,6 @@
       color: var(--gold);
       flex-shrink: 0;
     }
-
     .step-line {
       width: 1px;
       flex: 1;
@@ -292,9 +341,7 @@
       margin: 6px 0;
     }
 
-    .step-body {
-      padding: 0 0 32px 20px;
-    }
+    .step-body { padding: 0 0 32px 20px; }
 
     .step-time {
       font-family: 'IBM Plex Mono', monospace;
@@ -304,102 +351,68 @@
       color: var(--gold);
       margin-bottom: 6px;
     }
+    .step-title { font-size: 1rem; font-weight: 600; color: var(--cream); margin-bottom: 8px; }
+    .step-desc  { font-size: 0.85rem; color: var(--cream-70); line-height: 1.6; }
 
-    .step-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 8px;
-    }
-
-    .step-desc {
-      font-size: 0.88rem;
-      color: var(--cream-70);
-      line-height: 1.6;
-    }
-
-    .step-actions {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
+    .step-actions { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
     .action-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       color: var(--cream-70);
     }
-
     .action-item::before {
       content: '›';
       color: var(--gold);
       font-family: 'IBM Plex Mono', monospace;
       flex-shrink: 0;
-      margin-top: 1px;
+    }
+    .action-item code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      background: var(--gold-10);
+      padding: 1px 5px;
     }
 
-    /* ── Bloco de tempo total ── */
-    .time-summary {
+    .time-bar {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 20px 24px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 36px;
     }
-
-    .time-summary .ts-label {
+    .time-bar .tb-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.55rem;
+      font-size: 0.52rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--cream-50);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
-
-    .time-summary .ts-val {
+    .time-bar .tb-val {
       font-family: 'DM Serif Display', serif;
       font-size: 1.4rem;
       color: var(--gold);
     }
-
-    .time-summary .ts-desc {
-      font-size: 0.83rem;
-      color: var(--cream-70);
-      max-width: 420px;
-    }
-
-    /* ── Tag de princípio ── */
-    .principle-tag {
-      display: inline-block;
-      background: var(--gold-10);
-      border: 1px solid var(--gold-20);
-      padding: 4px 10px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
+    .time-bar .tb-desc { font-size: 0.82rem; color: var(--cream-70); max-width: 420px; }
 
     /* ── Footer ── */
     .footer {
       margin-top: 80px;
-      padding-top: 32px;
+      padding-top: 28px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: gap;
+      flex-wrap: wrap;
       gap: 12px;
     }
-
     .footer-brand {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.6rem;
@@ -407,7 +420,6 @@
       text-transform: uppercase;
       color: var(--gold);
     }
-
     .footer-date {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.6rem;
@@ -417,213 +429,457 @@
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
 
-    <!-- ── HEADER ── -->
-    <header class="header">
-      <div class="label-mono">OMNI Brasil · Operações Internas</div>
-      <h1 class="page-title">Boas Práticas de<br><span>Onde Salvar</span></h1>
-      <p class="page-desc">Regra do Git, estrutura de arquivos e rotina diária de organização para toda a equipe.</p>
-    </header>
+  <!-- ── HEADER ── -->
+  <header style="margin-bottom: 48px;">
+    <div class="label-mono">OMNI Brasil · Operações Internas</div>
+    <h1 class="page-title">Onde Salvar<br><span>no Google Drive</span></h1>
+    <p class="page-desc">Regras de organização, estrutura de pastas, nomeação e rotina diária para toda a equipe.</p>
+  </header>
 
-    <!-- ── SEÇÃO 1 — REGRA DO GIT ── -->
-    <section class="section">
-      <div class="section-label">Seção 01</div>
-      <h2 class="section-title">A Regra do Git</h2>
+  <!-- ── NAVEGAÇÃO ── -->
+  <nav class="nav-index">
+    <a href="#regra-textos">Regra de Textos</a>
+    <a href="#principios">Princípios do Drive</a>
+    <a href="#estrutura">Estrutura de Pastas</a>
+    <a href="#roteamento">Onde Cada Arquivo Vai</a>
+    <a href="#produtos">Nomes dos Produtos</a>
+    <a href="#nomeacao">Regras de Nomeação</a>
+    <a href="#rotina">Rotina Diária</a>
+  </nav>
 
-      <div class="rule-card">
-        <div class="rule-icon">Regra de Ouro</div>
-        <div class="rule-text">
-          <strong>Texto e informação vivem no Git.</strong><br>
-          Tudo que é escrito, estruturado ou precisa de histórico e rastreabilidade vai para o repositório — sem exceção.
+  <!-- ── SEÇÃO 0 — REGRA DE TEXTOS ── -->
+  <section class="section" id="regra-textos">
+    <div class="section-label">Nota Importante</div>
+    <h2 class="section-title">Regra de Textos</h2>
+    <div class="aside-note">
+      <div class="note-label">Fora do escopo do Drive</div>
+      Tudo que é <strong>texto, processo, script, playbook ou documentação estruturada</strong> não vai para o Google Drive — vai para um <strong>repositório de arquivos de texto</strong>, que ainda está sendo definido pela liderança. Por enquanto, guarde esses arquivos em uma pasta local chamada <strong>processos/</strong> até que o padrão seja comunicado para a equipe.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 1 — PRINCÍPIOS ── -->
+  <section class="section" id="principios">
+    <div class="section-label">Seção 01</div>
+    <h2 class="section-title">Os 5 Princípios do Drive</h2>
+
+    <div class="principles">
+
+      <div class="principle">
+        <div class="principle-num">01</div>
+        <div class="principle-body">
+          <div class="principle-title">O arquivo mora onde é usado</div>
+          <div class="principle-desc">Salve o arquivo na pasta do time ou produto que o utiliza no dia a dia. <strong>NF de aluno do Master</strong> vai em Financeiro, não em Master. <strong>Criativo do FPH</strong> vai em Marketing/Criativos/FPH, não em Entrega.</div>
         </div>
       </div>
 
-      <div class="decision-grid">
-        <div class="decision-card git">
-          <div class="dc-type">→ Git · workspace/</div>
-          <div class="dc-title">Texto &amp; Informação</div>
-          <div class="dc-examples">
-            Scripts de venda · Processos operacionais<br>
-            Playbooks · Preços e ofertas<br>
-            Templates de mensagem · SOPs<br>
-            Briefings · Planos e estratégias<br>
-            Documentação técnica
-          </div>
+      <div class="principle">
+        <div class="principle-num">02</div>
+        <div class="principle-body">
+          <div class="principle-title">Máximo 3 níveis de profundidade</div>
+          <div class="principle-desc">A estrutura tem no máximo <strong>3 níveis</strong> abaixo do Shared Drive raiz. Exemplo válido: <code>02_MARKETING / Criativos / Master</code>. Nunca crie subpastas dentro de subpastas — se sentir necessidade, é sinal de que o arquivo está no lugar errado.</div>
         </div>
-        <div class="decision-card drive">
-          <div class="dc-type">→ Google Drive</div>
-          <div class="dc-title">Arquivo &amp; Mídia</div>
-          <div class="dc-examples">
-            Vídeos · Apostilas em PDF<br>
-            Gravações de aulas · Imagens<br>
-            Contratos assinados · Notas fiscais<br>
-            Planilhas financeiras · Documentos legais
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">03</div>
+        <div class="principle-body">
+          <div class="principle-title">00_PRODUTOS é só atalhos — nunca arquivos reais</div>
+          <div class="principle-desc">A pasta <code>00_PRODUTOS</code> existe para dar acesso rápido ao material de cada produto. <strong>Não salve arquivos originais lá.</strong> Crie um atalho (clique direito → Adicionar atalho) apontando para o arquivo que já está no lugar correto.</div>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">04</div>
+        <div class="principle-body">
+          <div class="principle-title">Nunca deletar — mover para 99_ARQUIVO</div>
+          <div class="principle-desc">Arquivos antigos, de turmas encerradas ou produtos descontinuados nunca são deletados. Mova para <code>99_ARQUIVO / {ano}</code> ou <code>99_ARQUIVO / Produtos-Descontinuados</code>. Deletar é irreversível; arquivar é seguro.</div>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">05</div>
+        <div class="principle-body">
+          <div class="principle-title">Nome do produto igual em toda a estrutura</div>
+          <div class="principle-desc">Use sempre o <strong>nome interno canônico</strong> (ver Seção Produtos). Nunca crie <em>MHO</em>, <em>Hipnoterapia Master</em> ou <em>Formação</em> — use <strong>Master</strong>, <strong>FPH</strong>, <strong>Legacy</strong>. Consistência é o que permite encontrar as coisas.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 2 — ESTRUTURA ── -->
+  <section class="section" id="estrutura">
+    <div class="section-label">Seção 02</div>
+    <h2 class="section-title">Estrutura do Shared Drive "OMNI Brasil"</h2>
+
+    <div class="drive-tree">
+      <div><span class="ft-root">OMNI Brasil/</span> <span class="ft-note">— Shared Drive principal</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 00_PRODUTOS/</span>           <span class="ft-warn">← só atalhos, nunca arquivos reais</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 01_BACKOFFICE/</span>          <span class="ft-owner">← Ítalo</span></div>
+      <div><span class="ft-l2">│   ├── Financeiro/</span></div>
+      <div><span class="ft-l3">│   │   ├── Contas-a-Pagar/ · Contas-a-Receber/ · DRE/</span></div>
+      <div><span class="ft-l3">│   │   ├── Notas-Fiscais/ · Cartao-Credito/ · Analises/</span></div>
+      <div><span class="ft-l3">│   │   └── Contabilidade-SERAC/ · Comissao-Parceiros/ · Royalties/</span></div>
+      <div><span class="ft-l2">│   ├── Contratos/</span>          <span class="ft-note">Instrutores/ · Colaboradores/ · Fornecedores/ · Agencia/</span></div>
+      <div><span class="ft-l2">│   ├── RH/</span>                 <span class="ft-note">Documentos-Admissao/ · Folha/ · CLT/</span></div>
+      <div><span class="ft-l2">│   ├── Juridico/</span>           <span class="ft-note">Certificado-Digital/ · Processos/</span></div>
+      <div><span class="ft-l2">│   └── Espaco/</span>             <span class="ft-note">Manutencao/ · Bombeiros-AVCB/ · Fornecedores/ · Planta-Layout/</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 02_MARKETING/</span>           <span class="ft-owner">← Fernanda + Agência</span></div>
+      <div><span class="ft-l2">│   ├── Criativos/</span>          <span class="ft-note">por produto: Master/ · FPH/ · Legacy/ · etc.</span></div>
+      <div><span class="ft-l2">│   ├── Paginas/</span>            <span class="ft-note">por produto</span></div>
+      <div><span class="ft-l2">│   ├── Trafego/</span>            <span class="ft-note">por produto</span></div>
+      <div><span class="ft-l2">│   ├── Conteudo/</span>           <span class="ft-note">Master/ · FPH/ · Institucional/</span></div>
+      <div><span class="ft-l2">│   └── Agencia-MKT/</span>        <span class="ft-note">Briefings/ · Aprovacoes/ · Relatorios/</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 03_COMERCIAL/</span>           <span class="ft-owner">← Rafa + SDRs + Closers</span></div>
+      <div><span class="ft-l2">│   ├── Materiais-Internos/SDR/</span>    <span class="ft-note">Geral/ + por produto</span></div>
+      <div><span class="ft-l2">│   ├── Materiais-Internos/Closer/</span> <span class="ft-note">Geral/ + por produto</span></div>
+      <div><span class="ft-l2">│   ├── Gestao-Comercial/</span></div>
+      <div><span class="ft-l2">│   └── Relatorios/</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 04_ENTREGA/</span></div>
+      <div><span class="ft-l2">│   ├── Produtos/</span>           <span class="ft-note">cada produto: Aulas/ · Materiais/ · Depoimentos/ · Turmas/</span></div>
+      <div><span class="ft-l2">│   ├── Bonus/</span></div>
+      <div><span class="ft-l2">│   └── CS/</span>                 <span class="ft-note">FAQs/ · Politicas/</span></div>
+      <div>&nbsp;</div>
+      <div><span class="ft-l1">├── 05_MARCA/</span>               <span class="ft-note">Logos/ · Fontes/ · Templates/ · Fotos-Institucionais/</span></div>
+      <div><span class="ft-l1">├── 06_SISTEMAS/</span>            <span class="ft-note">OMNIFlix/ · PlenaMente/ · SDR-IA/ · Docs/</span></div>
+      <div><span class="ft-l1">├── 07_GESTAO/</span>              <span class="ft-owner">← só Michael e Rafa</span></div>
+      <div><span class="ft-l1">└── 99_ARQUIVO/</span>             <span class="ft-warn">← destino de arquivos antigos (nunca deletar)</span></div>
+      <div><span class="ft-l2">    ├── 2024/ · 2025/</span></div>
+      <div><span class="ft-l2">    └── Produtos-Descontinuados/</span></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 3 — ROTEAMENTO ── -->
+  <section class="section" id="roteamento">
+    <div class="section-label">Seção 03</div>
+    <h2 class="section-title">Onde Cada Arquivo Vai</h2>
+
+    <div style="overflow-x: auto;">
+      <table class="route-table">
+        <thead>
+          <tr>
+            <th>Tipo de arquivo</th>
+            <th>Pasta destino</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nota fiscal de aluno / turma</td>
+            <td><code>01_BACKOFFICE/Financeiro/Notas-Fiscais/Turmas/</code></td>
+          </tr>
+          <tr>
+            <td>Nota fiscal de fornecedor / PJ</td>
+            <td><code>01_BACKOFFICE/Financeiro/Notas-Fiscais/PJs/</code></td>
+          </tr>
+          <tr>
+            <td>Fatura do cartão de crédito</td>
+            <td><code>01_BACKOFFICE/Financeiro/Cartao-Credito/</code></td>
+          </tr>
+          <tr>
+            <td>DRE de parceiro / clínica</td>
+            <td><code>01_BACKOFFICE/Financeiro/DRE/Parceiros/</code></td>
+          </tr>
+          <tr>
+            <td>Planilha de royalties</td>
+            <td><code>01_BACKOFFICE/Financeiro/Royalties/Pagar/</code> ou <code>Receber/</code></td>
+          </tr>
+          <tr>
+            <td>Contrato de instrutor</td>
+            <td><code>01_BACKOFFICE/Contratos/Instrutores/</code></td>
+          </tr>
+          <tr>
+            <td>Contrato de fornecedor</td>
+            <td><code>01_BACKOFFICE/Contratos/Fornecedores/</code></td>
+          </tr>
+          <tr>
+            <td>Documentos do bombeiro / AVCB</td>
+            <td><code>01_BACKOFFICE/Espaco/Bombeiros-AVCB/</code></td>
+          </tr>
+          <tr>
+            <td>Criativo de anúncio (imagem / vídeo)</td>
+            <td><code>02_MARKETING/Criativos/{Produto}/</code></td>
+          </tr>
+          <tr>
+            <td>Relatório de tráfego / Meta / Google</td>
+            <td><code>02_MARKETING/Agencia-MKT/Relatorios/</code></td>
+          </tr>
+          <tr>
+            <td>Briefing para agência</td>
+            <td><code>02_MARKETING/Agencia-MKT/Briefings/</code></td>
+          </tr>
+          <tr>
+            <td>Material de SDR (apresentação, PDF)</td>
+            <td><code>03_COMERCIAL/Materiais-Internos/SDR/{Produto}/</code></td>
+          </tr>
+          <tr>
+            <td>Gravação de aula</td>
+            <td><code>04_ENTREGA/Produtos/{Produto}/Aulas/</code></td>
+          </tr>
+          <tr>
+            <td>Depoimento de aluno (vídeo ou imagem)</td>
+            <td><code>04_ENTREGA/Produtos/{Produto}/Depoimentos/</code></td>
+          </tr>
+          <tr>
+            <td>Material de apoio de turma</td>
+            <td><code>04_ENTREGA/Produtos/{Produto}/Turmas/</code></td>
+          </tr>
+          <tr>
+            <td>Logo, fonte ou template de marca</td>
+            <td><code>05_MARCA/</code></td>
+          </tr>
+          <tr>
+            <td>Arquivo de produto descontinuado</td>
+            <td><code>99_ARQUIVO/Produtos-Descontinuados/</code></td>
+          </tr>
+          <tr>
+            <td>Arquivo antigo de turma encerrada</td>
+            <td><code>99_ARQUIVO/{ano}/</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert-card danger" style="margin-top: 20px;">
+      <div class="alert-icon">✕</div>
+      <div class="alert-body">
+        <strong>Nunca crie uma pasta nova</strong> sem verificar se já existe o lugar certo na estrutura acima. Pastas duplicadas (ex: "Marketing-Novo", "Criativos-2026") são o principal motivo de arquivos perdidos.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 4 — PRODUTOS ── -->
+  <section class="section" id="produtos">
+    <div class="section-label">Seção 04</div>
+    <h2 class="section-title">Nomes Internos dos Produtos</h2>
+    <p style="font-size: 0.85rem; color: var(--cream-70); margin-bottom: 20px;">Use sempre o nome interno ao criar pastas. Nunca use siglas, abreviações ou nomes completos.</p>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-internal">Master</div>
+        <div class="product-full">Master em Omniterapia</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">FPH</div>
+        <div class="product-full">Formação Profissional em Hipnoterapia</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">Legacy</div>
+        <div class="product-full">OMNI Legacy (imersão presencial)</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">Black-Mentoring</div>
+        <div class="product-full">Black Mentoring</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">AHA</div>
+        <div class="product-full">Auto Hipnoterapia Avançada</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">CHC</div>
+        <div class="product-full">Certificação em Hipnose Clássica</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">HypnoFlash</div>
+        <div class="product-full">HypnoFlash (low ticket)</div>
+      </div>
+      <div class="product-card">
+        <div class="product-internal">Alianca-de-Ouro</div>
+        <div class="product-full">Aliança de Ouro (mastermind)</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 5 — NOMEAÇÃO ── -->
+  <section class="section" id="nomeacao">
+    <div class="section-label">Seção 05</div>
+    <h2 class="section-title">Regras de Nomeação de Arquivos</h2>
+
+    <div class="principles">
+
+      <div class="principle">
+        <div class="principle-num">✓</div>
+        <div class="principle-body">
+          <div class="principle-title">Sem acentos e sem espaços</div>
+          <div class="principle-desc">Use hífen no lugar de espaço. Nunca use acentos, cedilhas ou caracteres especiais no nome do arquivo.<br>
+          <strong>Certo:</strong> <code>contrato-instrutor-joao-2026.pdf</code><br>
+          <strong>Errado:</strong> <code>contrato instrutor joão 2026.pdf</code></div>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">✓</div>
+        <div class="principle-body">
+          <div class="principle-title">Data no formato AAAA-MM ou AAAA-MM-DD</div>
+          <div class="principle-desc">Arquivos datados ficam ordenados automaticamente no Drive.<br>
+          <strong>Certo:</strong> <code>relatorio-trafego-2026-04.pdf</code><br>
+          <strong>Errado:</strong> <code>relatorio abril.pdf</code> · <code>relatorio-04-2026.pdf</code></div>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">✓</div>
+        <div class="principle-body">
+          <div class="principle-title">Versão no final, não no início</div>
+          <div class="principle-desc">Se o arquivo tem versões, coloque a versão no final.<br>
+          <strong>Certo:</strong> <code>script-sdr-fph-v3.pdf</code><br>
+          <strong>Errado:</strong> <code>v3-script-sdr.pdf</code> · <code>FINAL-script.pdf</code> · <code>script-DEFINITIVO.pdf</code></div>
+        </div>
+      </div>
+
+      <div class="principle">
+        <div class="principle-num">✕</div>
+        <div class="principle-body">
+          <div class="principle-title">Proibido: "final", "definitivo", "novo", "cópia"</div>
+          <div class="principle-desc">Esses termos perdem o significado em dias. Use versão numerada <code>v1</code>, <code>v2</code> ou data. O arquivo mais recente na pasta é, por definição, o atual.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert-card info" style="margin-top: 20px;">
+      <div class="alert-icon">→</div>
+      <div class="alert-body">
+        Arquivo desatualizado ou de turma encerrada? <strong>Não delete.</strong> Mova para <code>99_ARQUIVO/{ano}/</code>. Isso mantém o histórico e evita perda acidental de documentos importantes.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SEÇÃO 6 — ROTINA ── -->
+  <section class="section" id="rotina">
+    <div class="section-label">Seção 06</div>
+    <h2 class="section-title">Rotina de Organização — 20 a 30 min por dia</h2>
+
+    <div class="time-bar">
+      <div>
+        <div class="tb-label">Tempo total</div>
+        <div class="tb-val">20–30 min</div>
+      </div>
+      <div class="tb-desc">Feito todo dia, esse ritual elimina acúmulo e garante que o time encontra o que precisa sem depender de ninguém.</div>
+    </div>
+
+    <div class="routine-steps">
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">01</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-time">5 min · Abertura</div>
+          <div class="step-title">Verificar o que chegou ontem e não foi organizado</div>
+          <div class="step-desc">Olhe sua pasta de Downloads, e-mail e WhatsApp. Qualquer arquivo recebido ontem que ainda não foi para o Drive entra agora.</div>
+          <div class="step-actions">
+            <div class="action-item">NF recebida por e-mail → baixe e salve em <code>01_BACKOFFICE/Financeiro/Notas-Fiscais/</code></div>
+            <div class="action-item">Criativo aprovado pela agência → salve em <code>02_MARKETING/Criativos/{Produto}/</code></div>
+            <div class="action-item">Contrato assinado → salve em <code>01_BACKOFFICE/Contratos/{categoria}/</code></div>
           </div>
         </div>
       </div>
 
-      <div class="obs-card">
-        <div class="obs-icon">⚠ OBS</div>
-        <div class="obs-body">
-          <strong>Processos e documentação interna:</strong> ainda estamos analisando o melhor caminho dentro do workspace. Por enquanto, salve em <strong>workspace/businesses/omni_brasil/processos/</strong> até que o padrão seja definido e comunicado para a equipe.
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">02</div>
+          <div class="step-line"></div>
         </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ── SEÇÃO 2 — ESTRUTURA DE PASTAS ── -->
-    <section class="section">
-      <div class="section-label">Seção 02</div>
-      <h2 class="section-title">Onde fica cada coisa no Git</h2>
-
-      <div class="folder-tree">
-        <div><span class="ft-root">workspace/businesses/omni_brasil/</span></div>
-        <div><span class="ft-dir">├── brand/</span>          <span class="ft-note">— identidade visual, guias de tom</span></div>
-        <div><span class="ft-dir">├── company/</span>        <span class="ft-note">— missão, valores, estrutura</span></div>
-        <div><span class="ft-dir">├── design-system/</span>  <span class="ft-note">— tokens, componentes, CSS</span></div>
-        <div><span class="ft-dir">├── inputs/</span>         <span class="ft-note">— arquivos brutos de entrada (não commitar)</span></div>
-        <div><span class="ft-dir">├── operations/</span>     <span class="ft-note">— SOPs, fluxos operacionais</span></div>
-        <div><span class="ft-dir">├── outputs/</span>        <span class="ft-note">— conteúdo gerado: copy, relatórios, HTMLs</span></div>
-        <div><span class="ft-hl">├── processos/</span>       <span class="ft-obs">← processos e docs (temporário até novo padrão)</span></div>
-        <div><span class="ft-dir">├── products/</span>       <span class="ft-note">— offerbooks, descrições, preços por produto</span></div>
-        <div><span class="ft-dir">└── tech/</span>           <span class="ft-note">— capabilities, contatos, vault manifest</span></div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ── SEÇÃO 3 — ROTINA DIÁRIA ── -->
-    <section class="section">
-      <div class="section-label">Seção 03</div>
-      <h2 class="section-title">Rotina de Organização — 20 a 30 min por dia</h2>
-
-      <div class="principle-tag">Consistência bate perfeição</div>
-
-      <div class="time-summary" style="margin-bottom: 40px;">
-        <div>
-          <div class="ts-label">Tempo total</div>
-          <div class="ts-val">20–30 min</div>
-        </div>
-        <div class="ts-desc">
-          Feito todo dia, esse ritual elimina acúmulo, garante que o time encontra o que precisa e mantém o repositório como fonte confiável da verdade.
+        <div class="step-body">
+          <div class="step-time">5 min · Nomeação</div>
+          <div class="step-title">Renomear arquivos soltos com padrão correto</div>
+          <div class="step-desc">Qualquer arquivo que você salvou com nome genérico ("foto.jpg", "documento1.pdf") precisa de nome descritivo antes de ficar no Drive.</div>
+          <div class="step-actions">
+            <div class="action-item">Use o padrão: <code>{descricao}-{produto-ou-contexto}-{AAAA-MM}.ext</code></div>
+            <div class="action-item">Sem acentos, sem espaços, sem "final" ou "novo"</div>
+            <div class="action-item">Se tiver versões, adicione <code>-v1</code>, <code>-v2</code> no final</div>
+          </div>
         </div>
       </div>
 
-      <div class="routine-steps">
-
-        <!-- Passo 1 -->
-        <div class="step">
-          <div class="step-left">
-            <div class="step-num">01</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
-            <div class="step-time">5 min · Abertura</div>
-            <div class="step-title">Revisar o que ficou pendente ontem</div>
-            <div class="step-desc">Antes de começar qualquer tarefa nova, olhe o que ficou pela metade. Arquivo aberto, mensagem não salva, processo escrito no bloco de notas.</div>
-            <div class="step-actions">
-              <div class="action-item">Abra o Git e rode <strong>git status</strong> para ver o que está modificado mas não commitado</div>
-              <div class="action-item">Verifique sua área de trabalho e Downloads — mova ou descarte o que estiver perdido</div>
-              <div class="action-item">Se tiver rascunho de texto útil em qualquer lugar: coloque no lugar certo agora</div>
-            </div>
-          </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">03</div>
+          <div class="step-line"></div>
         </div>
-
-        <!-- Passo 2 -->
-        <div class="step">
-          <div class="step-left">
-            <div class="step-num">02</div>
-            <div class="step-line"></div>
+        <div class="step-body">
+          <div class="step-time">5–10 min · Organização</div>
+          <div class="step-title">Mover arquivos da raiz do Drive para as pastas certas</div>
+          <div class="step-desc">Arquivos jogados na raiz do Shared Drive ou na sua pasta pessoal precisam ir para o lugar correto. A raiz do Drive deve estar sempre vazia.</div>
+          <div class="step-actions">
+            <div class="action-item">Abra o Shared Drive e filtre por "sem pasta" ou visualize a raiz</div>
+            <div class="action-item">Para cada arquivo solto: identifique o tipo → use a tabela da Seção 03 → mova</div>
+            <div class="action-item">Nunca crie pastas novas sem verificar se o lugar já existe</div>
           </div>
-          <div class="step-body">
-            <div class="step-time">5 min · Git</div>
-            <div class="step-title">Salvar o que foi produzido no dia anterior</div>
-            <div class="step-desc">Qualquer texto, processo, script ou decisão que foi escrita ontem e não foi commitada — faz agora.</div>
-            <div class="step-actions">
-              <div class="action-item">Identifique os arquivos modificados com <strong>git status</strong></div>
-              <div class="action-item">Faça staging apenas dos arquivos relevantes — nunca <strong>git add .</strong></div>
-              <div class="action-item">Commit com mensagem descritiva: o que mudou e por quê</div>
-              <div class="action-item">Push para o repositório remoto</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Passo 3 -->
-        <div class="step">
-          <div class="step-left">
-            <div class="step-num">03</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
-            <div class="step-time">5 min · Drive</div>
-            <div class="step-title">Arquivos pesados e documentos do dia</div>
-            <div class="step-desc">PDFs, contratos, NFs, vídeos, imagens que chegaram ontem vão para o Drive agora — não deixe acumular.</div>
-            <div class="step-actions">
-              <div class="action-item">NF recebida → <strong>01_BACKOFFICE/Financeiro/Notas-Fiscais/</strong></div>
-              <div class="action-item">Criativo aprovado → <strong>02_MARKETING/Criativos/{produto}/</strong></div>
-              <div class="action-item">Gravação de aula → <strong>04_ENTREGA/Produtos/{produto}/Aulas/</strong></div>
-              <div class="action-item">Contrato assinado → <strong>01_BACKOFFICE/Contratos/{categoria}/</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Passo 4 -->
-        <div class="step">
-          <div class="step-left">
-            <div class="step-num">04</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
-            <div class="step-time">5–10 min · Refinamento</div>
-            <div class="step-title">Atualizar um processo ou documento importante</div>
-            <div class="step-desc">Escolha uma coisa que ficou desatualizada — preço, SOP, script, offerbook — e corrija. Apenas uma. Pequeno e consistente ganha de grande e esporádico.</div>
-            <div class="step-actions">
-              <div class="action-item">Releia um processo que você usou recentemente — está correto e atual?</div>
-              <div class="action-item">Se houver divergência entre o que está escrito e o que é praticado, corrija agora</div>
-              <div class="action-item">Commite a atualização com a data no commit: <em>feat(processos): atualiza script SDR FPH — abr/26</em></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Passo 5 -->
-        <div class="step">
-          <div class="step-left">
-            <div class="step-num">05</div>
-            <div class="step-line"></div>
-          </div>
-          <div class="step-body">
-            <div class="step-time">5 min · Fechamento</div>
-            <div class="step-title">Deixar o ambiente limpo para amanhã</div>
-            <div class="step-desc">O objetivo é terminar o dia com o repositório sincronizado e sem arquivo "solto" esperando ser categorizado.</div>
-            <div class="step-actions">
-              <div class="action-item">Último <strong>git status</strong> — se houver algo modificado, commite ou descarte</div>
-              <div class="action-item">Feche abas de arquivos que não precisam mais estar abertas</div>
-              <div class="action-item">Se descobriu que falta uma pasta ou padrão: anote para propor ao Michael</div>
-              <div class="action-item">Nenhum arquivo no Desktop ou Downloads que deveria estar no Drive ou no Git</div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /routine-steps -->
-
-      <!-- Bloco de princípio final -->
-      <div class="obs-card" style="margin-top: 32px; border-left-color: var(--gold); background: var(--gold-10); border-color: var(--gold-20);">
-        <div class="obs-icon" style="color: var(--gold);">→</div>
-        <div class="obs-body">
-          <strong>O repositório só é confiável se estiver vivo.</strong> Um arquivo que existe só no computador de uma pessoa não existe para a equipe. Cada commit é um ato de generosidade com quem vem depois.
         </div>
       </div>
 
-    </section>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">04</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-time">5 min · Arquivamento</div>
+          <div class="step-title">Arquivar o que está desatualizado</div>
+          <div class="step-desc">Uma vez por semana (ou quando sentir acúmulo), identifique arquivos de turmas encerradas, versões antigas ou materiais descontinuados e mova para <code>99_ARQUIVO</code>.</div>
+          <div class="step-actions">
+            <div class="action-item">Turma encerrada → mova a pasta da turma para <code>99_ARQUIVO/{ano}/</code></div>
+            <div class="action-item">Versão antiga de criativo → mova para <code>99_ARQUIVO/{ano}/</code></div>
+            <div class="action-item">Produto descontinuado → mova para <code>99_ARQUIVO/Produtos-Descontinuados/</code></div>
+          </div>
+        </div>
+      </div>
 
-    <!-- ── FOOTER ── -->
-    <footer class="footer">
-      <div class="footer-brand">OMNI Brasil · Operações Internas</div>
-      <div class="footer-date">Abril 2026</div>
-    </footer>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">05</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-time">5 min · Fechamento</div>
+          <div class="step-title">Confirmar que o Drive está limpo para o dia seguinte</div>
+          <div class="step-desc">O objetivo é terminar o dia com a raiz do Drive vazia, nenhum arquivo mal nomeado e nenhuma pasta fora do padrão.</div>
+          <div class="step-actions">
+            <div class="action-item">Raiz do Shared Drive vazia? ✓</div>
+            <div class="action-item">Nenhum arquivo com nome genérico nas pastas que você tocou hoje? ✓</div>
+            <div class="action-item">Se descobriu que falta uma pasta ou padrão na estrutura: anote e leve para o Michael</div>
+          </div>
+        </div>
+      </div>
 
-  </div>
+    </div>
+
+    <div class="alert-card info" style="margin-top: 32px;">
+      <div class="alert-icon">→</div>
+      <div class="alert-body">
+        <strong>Consistência bate perfeição.</strong> Um Drive organizado todo dia por 20 minutos vale mais do que uma grande faxina mensal que ninguém faz. O Drive só é confiável se o time confiar nele.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-brand">OMNI Brasil · Operações Internas</div>
+    <div class="footer-date">Abril 2026</div>
+  </footer>
+
+</div>
 </body>
 </html>
