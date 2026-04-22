@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Testes — Automações OMNI Brasil</title>
+<style>
+  :root {
+    --omni-dark: #0a0a0a;
+    --omni-card: #111111;
+    --omni-border: #1e1e1e;
+    --omni-gold: #c9a84c;
+    --omni-gold-light: #e2c47a;
+    --omni-white: #f5f5f0;
+    --omni-muted: #6b6b6b;
+    --omni-green: #2d7d46;
+    --omni-green-light: #3fa05c;
+    --omni-red: #8b2020;
+    --omni-red-light: #c0392b;
+    --omni-blue: #1a3a5c;
+    --omni-blue-light: #2980b9;
+    --omni-yellow: #7d6b1a;
+    --omni-yellow-light: #f39c12;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--omni-dark);
+    color: var(--omni-white);
+    font-family: 'Georgia', serif;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ─── HEADER ─────────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1400 100%);
+    border-bottom: 2px solid var(--omni-gold);
+    padding: 48px 40px 36px;
+    text-align: center;
+  }
+
+  .header .badge {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--omni-gold);
+    border: 1px solid var(--omni-gold);
+    padding: 4px 14px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: normal;
+    color: var(--omni-white);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .header h1 span { color: var(--omni-gold); }
+
+  .header .subtitle {
+    color: var(--omni-muted);
+    font-size: 0.95rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* ─── INTRO ──────────────────────────────────────── */
+  .intro {
+    max-width: 860px;
+    margin: 40px auto;
+    padding: 0 24px;
+  }
+
+  .intro-box {
+    background: #111800;
+    border: 1px solid var(--omni-gold);
+    border-left: 4px solid var(--omni-gold);
+    padding: 24px 28px;
+    border-radius: 2px;
+  }
+
+  .intro-box p {
+    color: #d4c89a;
+    font-size: 0.97rem;
+    margin-bottom: 10px;
+  }
+
+  .intro-box p:last-child { margin-bottom: 0; }
+
+  /* ─── LAYOUT ─────────────────────────────────────── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  /* ─── SECTION HEADER ─────────────────────────────── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 48px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--omni-border);
+  }
+
+  .section-num {
+    background: var(--omni-gold);
+    color: #000;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  .section-title h2 {
+    font-size: 1.25rem;
+    font-weight: normal;
+    color: var(--omni-white);
+  }
+
+  .section-title .tag {
+    margin-left: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--omni-muted);
+    background: var(--omni-border);
+    padding: 3px 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ─── CARDS ──────────────────────────────────────── */
+  .card {
+    background: var(--omni-card);
+    border: 1px solid var(--omni-border);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .card-body { padding: 20px 24px; }
+
+  /* ─── WHAT BOX ───────────────────────────────────── */
+  .what-box {
+    background: #0d1117;
+    border-left: 3px solid var(--omni-gold);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 0.92rem;
+    color: #c9c9b8;
+  }
+
+  .what-box .label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    color: var(--omni-gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ─── STEPS ──────────────────────────────────────── */
+  .steps-title {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--omni-muted);
+    margin-bottom: 12px;
+  }
+
+  .steps { list-style: none; margin-bottom: 20px; }
+
+  .steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 0.93rem;
+    color: #c9c9b8;
+  }
+
+  .steps li .step-num {
+    background: var(--omni-border);
+    color: var(--omni-gold);
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 3px 7px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ─── RESULTS ────────────────────────────────────── */
+  .results { display: grid; gap: 10px; margin-bottom: 4px; }
+
+  .result-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 16px;
+    border-radius: 3px;
+    font-size: 0.88rem;
+  }
+
+  .result-item.ok { background: #0a1f10; border: 1px solid #1e4a28; }
+  .result-item.fail { background: #1a0808; border: 1px solid #4a1818; }
+  .result-item.warn { background: #1a1500; border: 1px solid #4a3d00; }
+
+  .result-item .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .result-item .text { color: #c9c9b8; }
+  .result-item .text strong { color: var(--omni-white); }
+
+  /* ─── TIMING BADGE ───────────────────────────────── */
+  .timing {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--omni-border);
+    border: 1px solid #2a2a2a;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--omni-muted);
+    margin-top: 14px;
+  }
+
+  .timing .dot {
+    width: 6px; height: 6px;
+    background: var(--omni-gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── WHO BADGE ──────────────────────────────────── */
+  .who-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+
+  .who-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    color: #8a9fd4;
+  }
+
+  /* ─── NOTE BOX ───────────────────────────────────── */
+  .note {
+    background: #12100a;
+    border: 1px solid #3d3500;
+    border-left: 3px solid var(--omni-yellow-light);
+    padding: 12px 16px;
+    font-size: 0.84rem;
+    color: #c8bc8a;
+    margin-top: 14px;
+    border-radius: 2px;
+  }
+
+  .note .label {
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--omni-yellow-light);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ─── FIXED BADGE ────────────────────────────────── */
+  .fixed-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    color: #3fa05c;
+    background: #0a1f10;
+    border: 1px solid #1e4a28;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  /* ─── DIVIDER ────────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--omni-border);
+    margin: 28px 0;
+  }
+
+  /* ─── SUMMARY TABLE ──────────────────────────────── */
+  .summary {
+    background: var(--omni-card);
+    border: 1px solid var(--omni-border);
+    border-radius: 4px;
+    margin-top: 48px;
+    overflow: hidden;
+  }
+
+  .summary-header {
+    background: #111800;
+    border-bottom: 1px solid var(--omni-gold);
+    padding: 14px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--omni-gold);
+  }
+
+  .summary table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .summary td, .summary th {
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--omni-border);
+  }
+
+  .summary th {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--omni-muted);
+    background: #0d0d0d;
+    text-align: left;
+  }
+
+  .summary td:first-child { color: var(--omni-gold); font-family: 'Courier New', monospace; font-size: 0.8rem; }
+  .summary td:last-child { color: var(--omni-muted); font-size: 0.8rem; }
+  .summary tr:last-child td { border-bottom: none; }
+
+  .pill {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .pill.ok { background: #0a1f10; color: #3fa05c; border: 1px solid #1e4a28; }
+  .pill.critical { background: #1a0808; color: #e74c3c; border: 1px solid #4a1818; }
+  .pill.medium { background: #1a1500; color: #f39c12; border: 1px solid #4a3d00; }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--omni-border);
+    color: var(--omni-muted);
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 32px 20px; }
+    .header h1 { font-size: 1.6rem; }
+    .container { padding: 0 16px 48px; }
+    .intro { padding: 0 16px; }
+    .section-title .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="badge">OMNI Brasil — Automações Comerciais</div>
+  <h1>Guia de <span>Testes</span></h1>
+  <div class="subtitle">SDR · Abril 2026 · Versão de validação</div>
+</div>
+
+<!-- INTRO -->
+<div class="intro" style="margin-top:36px;">
+  <div class="intro-box">
+    <p>Este guia descreve <strong>o que cada automação faz</strong>, <strong>como acionar o teste</strong> e <strong>o que verificar</strong> para confirmar que está funcionando.</p>
+    <p>Se qualquer etapa não acontecer no prazo indicado, anote a hora, o nome do lead e o número de telefone e avise a Rafa imediatamente.</p>
+    <p>As automações marcadas com <span class="fixed-badge">✓ RECÉM CORRIGIDA</span> foram ajustadas esta semana e precisam de atenção especial no teste.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 1 — W0002a — M1 Confirmação de Agendamento -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">01</div>
+    <h2>Confirmação de Agendamento — M1</h2>
+    <div class="tag">W0002a</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        Assim que você cria uma atividade "Reunião Agendada" no Pipedrive, o sistema envia automaticamente uma mensagem de confirmação para o lead no WhatsApp perguntando se ele confirma presença.
+      </div>
+
+      <div class="steps-title">Como testar</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Abra um deal no Pipedrive com um lead real (ou número de teste).</span></li>
+        <li><div class="step-num">02</div> <span>Crie uma nova atividade: tipo <strong>"Reunião Agendada"</strong>, data e hora reais da próxima reunião.</span></li>
+        <li><div class="step-num">03</div> <span>No campo <strong>Nota</strong> da atividade, cole o link do Google Meet da consultoria.</span></li>
+        <li><div class="step-num">04</div> <span>Salve a atividade e aguarde até 2 minutos.</span></li>
+      </ul>
+
+      <div class="steps-title">O que deve acontecer</div>
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Lead recebe mensagem de confirmação no WhatsApp (M1) com data, hora e nome da especialista.</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">No Chatwoot, a conversa do lead aparece com a label <strong>"confirmacao_pendente"</strong>.</div>
+        </div>
+        <div class="result-item fail">
+          <div class="icon">🚫</div>
+          <div class="text"><strong>Erro:</strong> Se após 5 minutos a mensagem não chegou, ou se apareceu label mas sem mensagem, avise a Rafa.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> Prazo esperado: até 2 minutos após criar a atividade</div>
+
+      <div class="note">
+        <span class="label">⚠ Atenção — Remarcação</span>
+        Se o lead já tinha uma reunião marcada antes, o sistema cancela a conversa antiga automaticamente e começa uma nova. Não é necessário fazer nada manualmente.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 2 — W0002b — Resposta do Lead -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">02</div>
+    <h2>Resposta do Lead — M2 e Card <span class="fixed-badge">✓ RECÉM CORRIGIDA</span></h2>
+    <div class="tag">W0002b</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        Quando o lead responde ao M1, o sistema lê a resposta e age automaticamente: se for positiva, confirma presença, envia as instruções (M2) e o card de preparação. Se for negativa ou com dúvidas, mantém a conversa aberta para o SDR acompanhar.
+      </div>
+
+      <div class="steps-title">Teste A — Confirmação positiva</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Após receber o M1 no número do lead, responda com qualquer uma dessas palavras: <strong>"sim", "confirmado", "confirmo", "estarei lá", "pode deixar", "ok"</strong>.</span></li>
+        <li><div class="step-num">02</div> <span>Aguarde até 1 minuto.</span></li>
+      </ul>
+
+      <div class="steps-title">O que deve acontecer (confirmação positiva)</div>
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Lead recebe o M2 com link da reunião e confirmação de horário.</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Lead recebe o <strong>card de instruções</strong> (imagem com orientações de preparação para a consultoria).</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">No Chatwoot, a label muda de <strong>"confirmacao_pendente"</strong> para <strong>"confirmado"</strong>.</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">No Pipedrive, o deal é movido para o <strong>Funil Closer → etapa "Reunião Agendada"</strong> (se ainda não estava lá).</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="steps-title">Teste B — Resposta negativa ou com dúvida</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Responda com algo como: <strong>"não consigo", "preciso remarcar", "pode ser outro dia?"</strong>.</span></li>
+        <li><div class="step-num">02</div> <span>Aguarde 1 minuto.</span></li>
+      </ul>
+
+      <div class="steps-title">O que deve acontecer (resposta negativa)</div>
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Label <strong>"duvida"</strong> é adicionada à conversa — sinalizando para o SDR verificar.</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Label <strong>"confirmacao_pendente"</strong> continua — o lead ainda pode confirmar depois.</div>
+        </div>
+        <div class="result-item fail">
+          <div class="icon">🚫</div>
+          <div class="text"><strong>NÃO deve acontecer:</strong> M2 não deve ser enviado para resposta negativa.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> Prazo esperado: até 1 minuto após a resposta do lead</div>
+
+      <div class="note">
+        <span class="label">⚠ Importante — Esta automação foi corrigida esta semana</span>
+        Por um bug técnico, as confirmações de leads não estavam sendo processadas. O bug foi corrigido em 22/04. Qualquer lead que respondeu entre 17/04 e 22/04 não foi processado automaticamente — verifique manualmente esses casos.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 3 — W0002c — Alerta sem resposta -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">03</div>
+    <h2>Alerta de Lead Sem Resposta — 5 horas</h2>
+    <div class="tag">W0002c</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        A cada 30 minutos, o sistema verifica se existem conversas com a label <strong>"confirmacao_pendente"</strong> há mais de 5 horas. Se sim, remove essa label e adiciona <strong>"alerta"</strong> — sinalizando que o SDR deve entrar em contato manualmente.
+      </div>
+
+      <div class="steps-title">Como verificar (sem precisar esperar 5h)</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>No Chatwoot, filtre as conversas pela label <strong>"alerta"</strong>.</span></li>
+        <li><div class="step-num">02</div> <span>Verifique se as conversas ali já passaram de 5 horas desde o M1 e não tiveram resposta do lead.</span></li>
+        <li><div class="step-num">03</div> <span>Essas conversas precisam de ação manual — entre em contato com o lead por outro meio ou remarque.</span></li>
+      </ul>
+
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Conversas com "confirmacao_pendente" há mais de 5 horas devem aparecer com label <strong>"alerta"</strong>.</div>
+        </div>
+        <div class="result-item warn">
+          <div class="icon">⚠️</div>
+          <div class="text">Se alguma conversa com "confirmacao_pendente" for muito antiga (mais de 1 dia) e ainda não tiver "alerta", avise a Rafa.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> Roda automaticamente a cada 30 minutos</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 4 — W0002d — Lembretes M3, M4, M5 -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">04</div>
+    <h2>Lembretes Automáticos — M3, M4, M5</h2>
+    <div class="tag">W0002d</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        Para todos os leads que confirmaram presença (label "confirmado"), o sistema envia lembretes automáticos em 3 momentos:
+        <br><br>
+        <strong>M3</strong> → 24 horas antes da reunião (horário comercial 8h–20h)<br>
+        <strong>M4</strong> → 1 hora antes da reunião (horário comercial 8h–20h)<br>
+        <strong>M5</strong> → No horário exato da reunião (sempre, sem restrição de horário)
+      </div>
+
+      <div class="steps-title">Pré-requisito para receber os lembretes</div>
+      <div class="results" style="margin-bottom:16px;">
+        <div class="result-item warn">
+          <div class="icon">⚠️</div>
+          <div class="text">O lead <strong>precisa ter confirmado presença</strong> (label "confirmado" no Chatwoot). Leads que não passaram pelo M2 não recebem lembretes.</div>
+        </div>
+      </div>
+
+      <div class="steps-title">Como verificar</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Identifique um lead com label <strong>"confirmado"</strong> e reunião agendada nas próximas 24 horas.</span></li>
+        <li><div class="step-num">02</div> <span>Verifique no Chatwoot se o M3 chegou aproximadamente 24 horas antes. Obs: pode ter uma variação de até 30 minutos (o cron roda a cada 30min).</span></li>
+        <li><div class="step-num">03</div> <span>1 hora antes, verifique se chegou o M4.</span></li>
+        <li><div class="step-num">04</div> <span>No horário da reunião, verifique se chegou o M5.</span></li>
+      </ul>
+
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">M3 chega 24 horas antes (dentro de uma janela de ±30 min).</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">M4 chega 1 hora antes (dentro de uma janela de ±30 min).</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">M5 chega no horário exato da reunião (±30 min).</div>
+        </div>
+        <div class="result-item fail">
+          <div class="icon">🚫</div>
+          <div class="text"><strong>NÃO deve acontecer:</strong> Duplicação — cada mensagem deve chegar exatamente uma vez.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> Sistema verifica a cada 30 minutos — variação normal de até 30 min</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 5 — W0002e — Auditoria de Deals -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">05</div>
+    <h2>Auditoria — Deal no Closer sem Reunião</h2>
+    <div class="tag">W0002e</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        Duas vezes por dia (12h e 18h BRT), o sistema audita todos os deals que estão na etapa <strong>"Reunião Agendada" do Funil Closer</strong>. Se algum deal estiver nessa etapa mas <strong>sem nenhuma reunião futura marcada</strong>, dispara um alerta no Google Chat para que o SDR tome ação.
+      </div>
+
+      <div class="steps-title">Como verificar</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Fique atento ao Google Chat às 12h e às 18h BRT.</span></li>
+        <li><div class="step-num">02</div> <span>Se chegar um alerta com o nome de um lead, abra o Pipedrive e verifique se ele realmente está sem reunião futura.</span></li>
+        <li><div class="step-num">03</div> <span>Se o alerta for correto: agende a reunião ou mova o deal para a etapa adequada.</span></li>
+      </ul>
+
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Alerta chega no Google Chat com nome do lead + link direto para o Pipedrive e Chatwoot.</div>
+        </div>
+        <div class="result-item warn">
+          <div class="icon">⚠️</div>
+          <div class="text">Se o alerta chegou mas o lead TEM reunião futura no Pipedrive, avise a Rafa — pode ser um falso positivo.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> Executa às 12h00 e 18h00 BRT</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SEÇÃO 6 — MON001 — Resposta lenta SDR -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">06</div>
+    <h2>Alerta de Resposta Lenta — SDR <span class="fixed-badge">✓ RECÉM CORRIGIDA</span></h2>
+    <div class="tag">MON001</div>
+  </div>
+
+  <div class="who-badges">
+    <div class="who-badge">David</div>
+    <div class="who-badge">Rafaela</div>
+    <div class="who-badge">Layslla</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">O que faz</div>
+        Quando um lead manda mensagem no WhatsApp e o SDR responsável não responde em <strong>30 minutos durante o horário comercial (10h–18h)</strong>, o sistema envia um alerta no Google Chat com o nome do lead, o SDR responsável e o link direto para a conversa no Chatwoot.
+      </div>
+
+      <div class="steps-title">Como testar</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>Peça para alguém enviar uma mensagem para o WhatsApp de um SDR durante o horário comercial (10h–18h).</span></li>
+        <li><div class="step-num">02</div> <span>O SDR <strong>não deve responder</strong> durante os próximos 30 minutos úteis.</span></li>
+        <li><div class="step-num">03</div> <span>Após 30 minutos, verifique se chegou alerta no Google Chat.</span></li>
+      </ul>
+
+      <div class="results">
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Alerta chega no Google Chat com nome do lead, SDR responsável e link da conversa.</div>
+        </div>
+        <div class="result-item ok">
+          <div class="icon">✅</div>
+          <div class="text">Se o SDR responder antes dos 30 min, nenhum alerta deve chegar.</div>
+        </div>
+        <div class="result-item fail">
+          <div class="icon">🚫</div>
+          <div class="text"><strong>Fora do horário comercial (antes das 10h ou após 18h):</strong> O alerta não dispara — os 30 min são contados apenas dentro do horário útil. Isso é comportamento esperado.</div>
+        </div>
+      </div>
+
+      <div class="timing"><div class="dot"></div> 30 minutos úteis (10h–18h) após a mensagem do lead</div>
+
+      <div class="note">
+        <span class="label">⚠ Atenção — Esta automação foi corrigida esta semana</span>
+        Por um problema técnico de configuração, o MON001 não estava recebendo nenhum evento do Chatwoot. Corrigido em 22/04. Teste com atenção para confirmar que está ativo.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- CASOS URGENTES A VERIFICAR MANUALMENTE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="section-title">
+    <div class="section-num">07</div>
+    <h2>Verificação Manual Urgente</h2>
+    <div class="tag">PRIORIDADE</div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="what-box">
+        <div class="label">Por que isso é necessário</div>
+        O W0002b ficou com bug entre 17/04 e 22/04. Nesse período, nenhuma resposta de lead foi processada automaticamente. Leads que responderam "confirmado" podem não ter recebido o M2 e o card, e os lembretes M3/M4/M5 também podem não ter disparado.
+      </div>
+
+      <div class="steps-title">O que verificar</div>
+      <ul class="steps">
+        <li><div class="step-num">01</div> <span>No Chatwoot, filtre conversas pela label <strong>"confirmacao_pendente"</strong>.</span></li>
+        <li><div class="step-num">02</div> <span>Abra cada conversa e veja se o lead respondeu algo entre <strong>17/04 e 22/04</strong>.</span></li>
+        <li><div class="step-num">03</div> <span>Se o lead respondeu positivamente mas a conversa ainda está como "confirmacao_pendente" (sem label "confirmado"), o sistema não processou.</span></li>
+        <li><div class="step-num">04</div> <span>Para esses casos: adicione manualmente a label <strong>"confirmado"</strong>, envie o M2 manualmente se ainda for relevante, e verifique se a reunião ainda está no prazo para os lembretes.</span></li>
+      </ul>
+
+      <div class="results">
+        <div class="result-item warn">
+          <div class="icon">⚠️</div>
+          <div class="text">Leads com reuniões <strong>nas próximas horas</strong> que não receberam M4/M5 precisam ser contactados manualmente agora.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- RESUMO GERAL -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="summary">
+    <div class="summary-header">Resumo — O que testar e quando</div>
+    <table>
+      <tr>
+        <th>#</th>
+        <th>Automação</th>
+        <th>Quando testar</th>
+        <th>Prazo para resultado</th>
+        <th>Prioridade</th>
+      </tr>
+      <tr>
+        <td>W0002a</td>
+        <td>M1 — Confirmação de agendamento</td>
+        <td>Próxima reunião que agendar</td>
+        <td>2 minutos</td>
+        <td><span class="pill ok">Alta</span></td>
+      </tr>
+      <tr>
+        <td>W0002b</td>
+        <td>M2 + card — Resposta do lead</td>
+        <td>Após lead responder ao M1</td>
+        <td>1 minuto</td>
+        <td><span class="pill critical">Urgente</span></td>
+      </tr>
+      <tr>
+        <td>W0002c</td>
+        <td>Alerta 5h sem resposta</td>
+        <td>Verificar label "alerta" no Chatwoot</td>
+        <td>Passivo</td>
+        <td><span class="pill medium">Média</span></td>
+      </tr>
+      <tr>
+        <td>W0002d</td>
+        <td>M3/M4/M5 — Lembretes</td>
+        <td>Próxima reunião confirmada</td>
+        <td>24h / 1h / no horário</td>
+        <td><span class="pill ok">Alta</span></td>
+      </tr>
+      <tr>
+        <td>W0002e</td>
+        <td>Auditoria deals sem reunião</td>
+        <td>12h ou 18h BRT</td>
+        <td>Passivo</td>
+        <td><span class="pill medium">Média</span></td>
+      </tr>
+      <tr>
+        <td>MON001</td>
+        <td>Alerta SDR 30min sem resposta</td>
+        <td>Próxima mensagem de lead recebida</td>
+        <td>30 min úteis</td>
+        <td><span class="pill critical">Urgente</span></td>
+      </tr>
+    </table>
+  </div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  OMNI Brasil · Automações Comerciais · Gerado em Abril 2026<br>
+  Dúvidas ou inconsistências → Rafa Mendes
+</div>
+
+</body>
+</html>
