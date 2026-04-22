@@ -254,6 +254,63 @@
   .cap-meta { font-size: 12px; color: var(--color-cream-50); display: flex; gap: 16px; flex-wrap: wrap; }
   .cap-meta .responsavel { color: var(--color-gold); font-weight: 500; }
   .cap-note { font-size: 12px; color: #f39c12; margin-top: 8px; font-style: italic; }
+  .cap-note-box {
+    margin-top: 16px;
+    background: rgba(42,157,143,0.08);
+    border: 1px solid rgba(42,157,143,0.35);
+    border-left: 3px solid var(--color-teal);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--color-cream);
+  }
+  .cap-note-box .note-title {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .cap-note-box code {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--color-gold-light);
+  }
+  .cap-note-box .note-step {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+    align-items: flex-start;
+  }
+  .cap-note-box .note-num {
+    background: var(--color-teal);
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cap-note-box .note-ids {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(42,157,143,0.2);
+    font-size: 11px;
+    color: var(--color-cream-50);
+  }
+  .cap-note-box .note-ids span { color: var(--color-gold-deep); }
 
   /* ── INFRA SECTION ── */
   .infra-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
@@ -1480,7 +1537,36 @@ const CAPABILITIES = [
     depende:[],dependentes:[],
     descricao:"MCP Server integrado ao Claude Code que acessa a API do Fathom AI para consultar reunioes gravadas, transcricoes com speaker e timestamps, resumos por IA e webhooks.",
     habilidades:["Listar reunioes com filtros (data, participante, equipe)","Transcricoes completas com falante e timestamps","Resumos de reunioes gerados por IA","Listar equipes e membros","Criar/deletar webhooks de notificacao","Busca por palavras-chave nas transcricoes"],
-    apis:["Fathom AI API v1","FastMCP (Python)"],nota:null}
+    apis:["Fathom AI API v1","FastMCP (Python)"],nota:null},
+
+  {id:"CAP-029",nome:"Instagram MCP via Composio",categoria:"mcp-integracao",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"22/04",atualizado:"22/04",
+    link:"MCP: composio-instagram (.mcp.json)",
+    depende:[],dependentes:[],
+    descricao:"MCP Server do Composio conectado à conta Instagram Business da OMNI Brasil. Permite que qualquer instância do Claude Code leia posts, publique conteúdo, gerencie comentários, DMs, stories e obtenha insights — sem precisar de token Instagram manual.",
+    habilidades:[
+      "Publicar posts, carrosséis e stories",
+      "Ler posts, comentários e replies",
+      "Responder comentários e DMs",
+      "Enviar mensagens de texto e imagens via DM",
+      "Obter insights de mídia e da conta",
+      "Listar stories e live media",
+      "Buscar tags e menções da conta"
+    ],
+    apis:["Composio Platform (backend.composio.dev)","Instagram Graph API (gerenciado pelo Composio)","mcp-remote (proxy stdio → SSE)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como qualquer Claude / usuário acessa o Instagram</div>
+  <div class="note-step"><div class="note-num">1</div><div>O MCP já está configurado em <code>.mcp.json</code> no repo <code>omni_brasil</code>. Basta abrir o Claude Code dentro desse projeto — o servidor <code>composio-instagram</code> carrega automaticamente.</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Não é necessário nenhum token manual. A conta Instagram Business da OMNI Brasil está vinculada permanentemente via OAuth gerenciado pelo Composio.</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Se a <code>COMPOSIO_API_KEY</code> não estiver no <code>.env</code> local, buscar no vault da VPS:<br><code>ssh michael@76.13.169.211 "grep COMPOSIO_API_KEY /opt/omni-vault/.env.master"</code></div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Para usar: simplesmente peça ao Claude algo como <em>"liste os últimos posts do Instagram"</em> ou <em>"publique esse conteúdo no Instagram"</em> — as ferramentas MCP são invocadas automaticamente.</div></div>
+  <div class="note-ids">
+    IDs de referência (não alterar sem atualizar o vault):<br>
+    <span>Servidor MCP:</span> <code>488b6a03-ce9b-47bb-8284-6c134a798977</code> &nbsp;|&nbsp;
+    <span>Auth Config:</span> <code>ac_yMBfGL_vGlJb</code> &nbsp;|&nbsp;
+    <span>Conta conectada:</span> <code>ca_3AqvZhHz745L</code>
+  </div>
+</div>`}
 ];
 
 const INFRA = [
@@ -1505,7 +1591,8 @@ const INFRA = [
   {nome:"Google Drive MCP", detalhe:"Drive Rafa + Shared Drive OMNI via Claude Code", status:"ativo"},
   {nome:"Gmail MCP", detalhe:"Leitura, envio, drafts, labels via Claude Code", status:"ativo"},
   {nome:"Vault Centralizado", detalhe:"Cofre de chaves na VPS — /opt/omni-vault/.env.master", status:"ativo"},
-  {nome:"Fathom AI MCP", detalhe:"Acesso a reunioes, transcricoes e resumos via Claude Code", status:"ativo"}
+  {nome:"Fathom AI MCP", detalhe:"Acesso a reunioes, transcricoes e resumos via Claude Code", status:"ativo"},
+  {nome:"Composio Instagram MCP", detalhe:"Instagram Business OMNI via Composio — posts, DMs, insights, stories | .mcp.json", status:"ativo"}
 ];
 
 // ═══════════════════════════════════════
@@ -1582,7 +1669,7 @@ function renderCapCard(c) {
   const statusClass = getStatusClass(c.status);
   const abilities = c.habilidades.map(h => `<div class="cap-ability">${h}</div>`).join('');
   const apis = c.apis.map(a => `<span class="cap-tech-tag">${a}</span>`).join('');
-  const nota = c.nota ? `<div class="cap-note">${c.nota}</div>` : '';
+  const nota = c.nota ? (c.nota.includes('cap-note-box') ? c.nota : `<div class="cap-note">${c.nota}</div>`) : '';
   const isOpen = openCaps[c.id] || false;
   const ver = c.versao !== '0.0' ? `<span style="font-size:11px;color:var(--color-gray);margin-left:4px">v${c.versao}</span>` : '';
 
