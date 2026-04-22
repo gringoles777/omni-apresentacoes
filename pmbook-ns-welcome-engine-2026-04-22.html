@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMBook Brief — NS Welcome Engine | OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-teal: #2A9D8F;
+    --color-gray: #6B6B6B;
+    --color-gray-dark: #242424;
+    --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+    --font-display: 'Oswald', sans-serif;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --shadow-gold-glow: 0 0 24px rgba(200,168,75,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--color-black);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(180deg, #0A1628 0%, var(--color-dark) 100%);
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    padding: 60px 32px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 2px;
+    background: var(--gradient-gold);
+  }
+  .hero-label {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--color-cream);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .hero-title span {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    color: rgba(245,240,232,0.6);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .meta-badge {
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-gold-light);
+    letter-spacing: 0.05em;
+  }
+
+  /* CONTAINER */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-top: 56px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+  }
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-gold);
+    letter-spacing: 0.1em;
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(200,168,75,0.3); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  th {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    background: rgba(200,168,75,0.06);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: rgba(245,240,232,0.85);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td:first-child { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-gold-light); white-space: nowrap; }
+
+  /* FLOW DIAGRAM */
+  .flow {
+    background: var(--color-dark-elevated);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 8px;
+    padding: 28px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 2;
+    color: rgba(245,240,232,0.8);
+    white-space: pre-wrap;
+  }
+  .flow .flow-arrow { color: var(--color-gold); }
+  .flow .flow-node { color: var(--color-gold-light); font-weight: 500; }
+  .flow .flow-comment { color: var(--color-gray); }
+
+  /* LADDER */
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .ladder-item {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ladder-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .ladder-item.fase-1::before { background: var(--color-teal); }
+  .ladder-item.fase-2::before { background: var(--color-gold); }
+  .ladder-item.fase-3::before { background: var(--gradient-gold); }
+  .ladder-fase {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .fase-1 .ladder-fase { color: var(--color-teal); }
+  .fase-2 .ladder-fase { color: var(--color-gold); }
+  .fase-3 .ladder-fase { color: var(--color-gold-light); }
+  .ladder-desc { font-size: 0.88rem; color: rgba(245,240,232,0.8); margin-bottom: 10px; }
+  .ladder-gate {
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 10px;
+    margin-top: 4px;
+  }
+  .ladder-gate span { color: var(--color-gold); font-weight: 500; }
+
+  /* AGENTES */
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .agent-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: 8px;
+    padding: 18px;
+    transition: all 0.2s;
+  }
+  .agent-card:hover {
+    border-color: rgba(200,168,75,0.35);
+    box-shadow: var(--shadow-gold-glow);
+  }
+  .agent-id {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-gold);
+    margin-bottom: 6px;
+  }
+  .agent-role {
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.75);
+  }
+  .agent-rule {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 8px;
+  }
+
+  /* RESTRICOES */
+  .block-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .block-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.8);
+    padding: 10px 14px;
+    background: rgba(255,60,60,0.05);
+    border: 1px solid rgba(255,60,60,0.1);
+    border-radius: 6px;
+  }
+  .block-list li::before {
+    content: '✕';
+    color: #e05555;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* RISK */
+  .risk-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .risk-critico { background: rgba(220,60,60,0.15); color: #e07070; border: 1px solid rgba(220,60,60,0.3); }
+  .risk-alto    { background: rgba(200,130,40,0.15); color: #e0a050; border: 1px solid rgba(200,130,40,0.3); }
+  .risk-medio   { background: rgba(200,200,40,0.1);  color: #d0c060; border: 1px solid rgba(200,200,40,0.2); }
+
+  /* OBJETIVO BOX */
+  .objetivo-box {
+    background: linear-gradient(135deg, rgba(200,168,75,0.08) 0%, rgba(42,157,143,0.06) 100%);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 8px;
+    padding: 28px 28px;
+    margin-top: 40px;
+  }
+  .objetivo-box p {
+    font-size: 1.05rem;
+    color: rgba(245,240,232,0.9);
+    line-height: 1.7;
+  }
+  .objetivo-box p strong { color: var(--color-gold-light); }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 80px;
+    padding: 32px;
+    text-align: center;
+    border-top: 1px solid rgba(200,168,75,0.15);
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .footer-sub {
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">OMNI Brasil · Sidney-Method · Squad Design</div>
+  <h1 class="hero-title">PMBook Brief<br><span>NS Welcome Engine</span></h1>
+  <p class="hero-sub">Automação do Fluxo NS — Social Selling Instagram Michael Arruda</p>
+  <div class="hero-meta">
+    <span class="meta-badge">v1.0 · 2026-04-22</span>
+    <span class="meta-badge">Status: Aguardando Aprovação N8N</span>
+    <span class="meta-badge">Método: Sidney Fernandes</span>
+    <span class="meta-badge">Canal: ManyChat + N8N</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- OBJETIVO -->
+  <div class="objetivo-box">
+    <p>
+      <strong>Objetivo:</strong> Automatizar o Fluxo NS (Novo Seguidor) do Social Selling do @michaelarruda.
+      Ao detectar novo seguidor qualificado, a squad gera e envia mensagem de boas-vindas <strong>100% personalizada na voz do Michael</strong>,
+      via ManyChat — sem risco de ban, sem intervenção humana constante.
+    </p>
+  </div>
+
+  <!-- FLUXO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <span class="section-title">Fluxo Técnico</span>
+    </div>
+    <div class="flow"><span class="flow-node">[ManyChat]</span> novo seguidor detectado
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[N8N: ns-trigger]</span>
+  verifica horário (8h–21h) + limite diário (50 NS/dia)
+  chama scraper de perfil
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[ns-chief]</span> <span class="flow-comment">← orquestrador, só roteia</span>
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[ns-profile-reader]</span>  bio · profissão · posts · destaques · story
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[ns-cdp-qualifier]</span>   score: alta · média · baixa · zero
+  <span class="flow-arrow">↓  SE zero → encerrar (não ativar)</span>
+<span class="flow-node">[ns-message-writer]</span>  mensagem na voz do Michael
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[ns-quality-checker]</span>  5 gates · anti-spam · anti-genérico
+  <span class="flow-arrow">↓  SE reprovada → 1 retentativa → escalação Julia</span>
+<span class="flow-node">[N8N: ns-sender]</span>     envia DM via ManyChat API
+  <span class="flow-arrow">↓</span>
+<span class="flow-node">[ns-metrics-logger]</span>  registra em Google Sheets</div>
+  </div>
+
+  <!-- 6 AGENTES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">Os 6 Agentes — Um por Função</span>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-id">ns-chief</div>
+        <div class="agent-role">Orquestrador — roteia a sequência</div>
+        <div class="agent-rule">Nunca executa trabalho de especialista</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">ns-profile-reader</div>
+        <div class="agent-role">Busca dados do perfil via scraper/N8N</div>
+        <div class="agent-rule">Bio · posts · destaques · story ativo</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">ns-cdp-qualifier</div>
+        <div class="agent-role">Qualifica o perfil com critérios CDP</div>
+        <div class="agent-rule">Score: alta · média · baixa · zero</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">ns-message-writer</div>
+        <div class="agent-role">Gera mensagem na voz do Michael</div>
+        <div class="agent-rule">Ponto de conexão real e específico</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">ns-quality-checker</div>
+        <div class="agent-role">5 gates de validação anti-spam</div>
+        <div class="agent-rule">Rejeita genérico, aprova humano</div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-id">ns-metrics-logger</div>
+        <div class="agent-role">Registra na planilha de métricas</div>
+        <div class="agent-rule">Alerta Julia em falha ou escalação</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LADDER -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">Ladder de Automação</span>
+    </div>
+    <div class="ladder">
+      <div class="ladder-item fase-1">
+        <div class="ladder-fase">Fase 1 — Semanas 1–2</div>
+        <div class="ladder-desc">Squad gera mensagem → SS recebe para revisar antes do envio</div>
+        <div class="ladder-gate">Avança quando: <span>80%+ aprovações sem edição por 7 dias</span></div>
+      </div>
+      <div class="ladder-item fase-2">
+        <div class="ladder-fase">Fase 2 — Semanas 3–4</div>
+        <div class="ladder-desc">Envio automático → SS monitora log diário</div>
+        <div class="ladder-gate">Avança quando: <span>zero spam em 7 dias consecutivos</span></div>
+      </div>
+      <div class="ladder-item fase-3">
+        <div class="ladder-fase">Fase 3 — Mês 2+</div>
+        <div class="ladder-desc">100% automático com alertas de anomalia</div>
+        <div class="ladder-gate">Gatilho: <span>confiança validada + métricas estáveis</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOWS N8N -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">Workflows N8N a Criar</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Workflow</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td>ns-trigger</td><td>Recebe webhook ManyChat → valida horário/limite → chama scraper → aciona squad</td></tr>
+          <tr><td>ns-sender</td><td>Recebe resposta do squad → envia DM via ManyChat → registra resultado</td></tr>
+          <tr><td>ns-alert</td><td>Dispara alerta WhatsApp para Julia em falha ou escalação</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INTEGRAÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <span class="section-title">Integrações Necessárias</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Sistema</th><th>Uso</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>ManyChat</td><td>Webhook novo seguidor + envio de DM</td><td>Integração oficial — sem risco de ban</td></tr>
+          <tr><td>Scraper (Apify)</td><td>Dados públicos do perfil Instagram</td><td>Perfis privados → fallback automático</td></tr>
+          <tr><td>ns-welcome-engine</td><td>Processar e aprovar mensagem</td><td>Via webhook interno</td></tr>
+          <tr><td>Google Sheets</td><td>Métricas NS</td><td>Planilha "Métricas Social Seller (MICHAEL)"</td></tr>
+          <tr><td>WhatsApp (Prisma)</td><td>Alertas para Julia</td><td>Via send-whatsapp.js</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RESTRIÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <span class="section-title">Restrições — O que NÃO pode existir</span>
+    </div>
+    <ul class="block-list">
+      <li>Modificar qualquer workflow N8N existente</li>
+      <li>Usar Instagram Graph API direta — apenas ManyChat como canal oficial</li>
+      <li>Enviar fora do horário 8h–21h (America/Sao_Paulo)</li>
+      <li>Ultrapassar 50 envios NS/dia (limite inicial)</li>
+      <li>Mensagem genérica sem ponto de conexão real do perfil</li>
+      <li>Integração com Instagram dentro dos agentes — sempre via N8N</li>
+    </ul>
+  </div>
+
+  <!-- RISCOS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <span class="section-title">Matriz de Risco</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Risco</th><th>Impacto</th><th>Mitigação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Instagram ban por volume</td>
+            <td><span class="risk-badge risk-critico">CRÍTICO</span></td>
+            <td>Limite 50 NS/dia via ManyChat + monitorar rate limits</td>
+          </tr>
+          <tr>
+            <td>ManyChat limitar DMs</td>
+            <td><span class="risk-badge risk-alto">ALTO</span></td>
+            <td>Alerta antes de atingir limite + ajuste progressivo</td>
+          </tr>
+          <tr>
+            <td>Scraper retornar perfil vazio</td>
+            <td><span class="risk-badge risk-medio">MÉDIO</span></td>
+            <td>Fallback automático para template perfil fechado</td>
+          </tr>
+          <tr>
+            <td>Squad demorar +10s</td>
+            <td><span class="risk-badge risk-medio">MÉDIO</span></td>
+            <td>Timeout N8N → escalação humana automática</td>
+          </tr>
+          <tr>
+            <td>N8N fora do ar</td>
+            <td><span class="risk-badge risk-medio">MÉDIO</span></td>
+            <td>Fila de retry 3x antes de alertar Julia</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ENTREGÁVEIS N8N -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">08</span>
+      <span class="section-title">O que o @n8n-chief Entregará</span>
+    </div>
+    <div class="card"><strong style="color:var(--color-gold-light)">1.</strong> 3 workflows criados e documentados no N8N (ns-trigger · ns-sender · ns-alert)</div>
+    <div class="card"><strong style="color:var(--color-gold-light)">2.</strong> Credenciais configuradas: ManyChat + Scraper + Google Sheets</div>
+    <div class="card"><strong style="color:var(--color-gold-light)">3.</strong> Teste end-to-end com 1 perfil real antes de ativar</div>
+    <div class="card"><strong style="color:var(--color-gold-light)">4.</strong> Documentação do fluxo em <code style="font-family:var(--font-mono);color:var(--color-gold);font-size:0.85em">squads/n8n-integration/</code></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">OMNI BRASIL</div>
+  <div class="footer-sub">Sidney-Method · NS Welcome Engine · 2026-04-22</div>
+</div>
+
+</body>
+</html>
