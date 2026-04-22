@@ -553,6 +553,93 @@ a:hover { text-decoration: underline; }
   font-size: 18px;
 }
 
+/* Tráfego */
+.trafego-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.trafego-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 4px;
+}
+.trafego-stat {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+.trafego-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.campanha-card {
+  background: #111827;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.campanha-card h4 {
+  color: var(--gold);
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+.campanha-info {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.campanha-info strong { color: var(--cream); }
+.kpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+.kpi-table th {
+  background: rgba(220,159,66,0.05);
+  color: var(--gold);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+.kpi-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.kpi-table tr:last-child td { border-bottom: none; }
+.kpi-table tr:hover td { background: rgba(255,255,255,0.02); }
+.meta-badge {
+  background: #1A2A1A;
+  color: #2A9D8F;
+  border: 1px solid #2A9D8F;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.regra-item {
+  border-left: 3px solid var(--gold);
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  background: #111827;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: var(--cream);
+  line-height: 1.6;
+}
+.regra-item strong { color: var(--gold); }
+
 /* Responsive */
 @media (max-width: 640px) {
   h1 { font-size: 32px; }
@@ -581,6 +668,7 @@ a:hover { text-decoration: underline; }
       <button class="tab-btn" id="tab-btn-instagram" onclick="showTab('instagram')">Instagram <span class="tab-count" id="tab-count-instagram">0/20</span></button>
       <button class="tab-btn" id="tab-btn-whatsapp" onclick="showTab('whatsapp')">WhatsApp <span class="tab-count" id="tab-count-whatsapp">0/17</span></button>
       <button class="tab-btn" id="tab-btn-evento" onclick="showTab('evento')">Evento</button>
+      <button class="tab-btn" id="tab-btn-trafego" onclick="showTab('trafego')">Tráfego Pago <span class="tab-count" id="tab-count-trafego">0/8</span></button>
       <button class="tab-btn" id="tab-btn-checklist" onclick="showTab('checklist')">Checklist <span class="tab-count" id="tab-count-checklist">0/13</span></button>
     </div>
   </nav>
@@ -687,6 +775,7 @@ a:hover { text-decoration: underline; }
       <div class="inventory-card"><div class="inv-num gold">20</div><div>Posts Instagram</div></div>
       <div class="inventory-card"><div class="inv-num gold">17</div><div>Mensagens WhatsApp</div></div>
       <div class="inventory-card"><div class="inv-num gold">13</div><div>Itens checklist</div></div>
+      <div class="inventory-card"><div class="inv-num gold">8</div><div>Campanhas Meta</div></div>
     </div>
 
     <h2 class="section-title">Narrativa central</h2>
@@ -3401,6 +3490,339 @@ Bem-vindos à Nova Era OMNI.&quot;
       </div>
     </section>
 
+    <section class="section" id="section-trafego">
+      <h2 class="gold">Tráfego Pago &middot; R$ 45.000 &middot; 8 semanas</h2>
+      <p style="color: var(--text-muted); font-size: 14px;">Plano de investimento em Meta Ads por fase. Clique no card para ver as campanhas. Clique no badge para atualizar o status.</p>
+      <div class="section-tools">
+        <button class="btn" onclick="expandAll('trafego')">Expandir todos</button>
+        <button class="btn" onclick="collapseAll('trafego')">Recolher todos</button>
+      </div>
+      
+    <div class="trafego-summary">
+      <div class="trafego-summary-grid">
+        <div class="trafego-stat"><div class="trafego-stat-num gold">R$ 45.000</div><div>Budget Total</div></div>
+        <div class="trafego-stat"><div class="trafego-stat-num gold">8</div><div>Campanhas</div></div>
+        <div class="trafego-stat"><div class="trafego-stat-num">Meta Ads (Facebook + Instagram)</div><div>Plataforma</div></div>
+        <div class="trafego-stat"><div class="trafego-stat-num">8 semanas (07/04 a 13/06/2026)</div><div>Período</div></div>
+      </div>
+      <p style="color: var(--text-muted); font-size: 14px; margin: 16px 0 0 0;">Gerar 3.000 inscritos na lista de espera e converter 42 vendas no lançamento</p>
+    </div>
+  
+  <div class="card" data-id="trafego-fase-F0">
+    <div class="card-header" onclick="toggleCard('trafego-fase-F0')">
+      <div class="card-header-content">
+      <div class="item-meta">
+        <span class="pill pill-phase">F0</span>
+        <span class="pill pill-date">07/04 a 18/04</span>
+        <span class="pill pill-duration">R$ 0</span>
+      </div>
+      <div class="item-title">Fase 0 — Preparação</div>
+      <span id="badge-trafego-fase-F0" class="badge badge-concluido" data-status="concluido" onclick="toggleStatus(event, 'trafego-fase-F0')">Concluído</span>
+    </div>
+      <span class="chevron" id="chev-trafego-fase-F0">&#9662;</span>
+    </div>
+    <div class="card-body" id="body-trafego-fase-F0">
+      
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;">
+        
+        
+        
+      </div>
+      <p style="font-size: 14px; color: var(--cream); margin: 0 0 6px 0;"><strong>Objetivo:</strong> Nenhum investimento em tráfego. Foco em preparar criativos e configurar pixel/tracking.</p>
+      <div style="margin-bottom:16px;"></div>
+    
+      <ul style="color: var(--text-muted); font-size: 14px; margin: 0 0 16px 0; padding-left: 20px;">
+        <li style="margin-bottom: 6px;">Instalar pixel no novo site</li><li style="margin-bottom: 6px;">Configurar eventos de conversão (Lead, Purchase, ViewContent, InitiateCheckout)</li><li style="margin-bottom: 6px;">Criar públicos de lookalike da base de ex-alunos (upload CSV no Meta)</li><li style="margin-bottom: 6px;">Preparar 3 conjuntos de criativos com nova identidade OMNI</li>
+      </ul><p style="color: var(--text-muted); font-size: 14px;">Sem campanhas pagas nesta fase.</p>
+    </div>
+  </div>
+
+  <div class="card" data-id="trafego-fase-F1">
+    <div class="card-header" onclick="toggleCard('trafego-fase-F1')">
+      <div class="card-header-content">
+      <div class="item-meta">
+        <span class="pill pill-phase">F1</span>
+        <span class="pill pill-date">21/04 a 02/05</span>
+        <span class="pill pill-duration">R$ 5.000</span>
+      </div>
+      <div class="item-title">Fase 1 — Pré-lançamento</div>
+      <span id="badge-trafego-fase-F1" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-fase-F1')">A fazer</span>
+    </div>
+      <span class="chevron" id="chev-trafego-fase-F1">&#9662;</span>
+    </div>
+    <div class="card-body" id="body-trafego-fase-F1">
+      
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;">
+        <span class="pill pill-date">Diário: R$ 416/dia</span>
+        <span class="meta-badge">CPL alvo: &lt; R$ 10</span>
+        <span class="meta-badge">ROAS alvo: N/A (fase de awareness)</span>
+      </div>
+      <p style="font-size: 14px; color: var(--cream); margin: 0 0 6px 0;"><strong>Objetivo:</strong> Awareness e captura de leads para lista de espera</p>
+      <p style="font-size: 14px; color: var(--gold); margin: 0 0 16px 0;"><strong>Meta:</strong> 3.000 inscritos na lista de espera</p>
+    
+      <div class="campanha-card">
+        <h4>C1A &middot; Lista de Espera — Fria</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Lead)</div>
+          <div><strong>Budget:</strong> R$ 3.500</div>
+          
+          <div><strong>Público:</strong> Lookalike 1-3% de compradores anteriores + Interesses: hipnoterapia, desenvolvimento pessoal, PNL, burnout, transição de carreira. Idade 35-55.</div>
+          <div><strong>Criativo principal:</strong> Script VA — Teaser Garagem 2026 (vídeo 30-60s) + copy de curiosidade</div>
+          <div><strong>Criativo secundário:</strong> Carrossel estático &#39;3 coisas que você não sabe sobre a OMNI&#39;</div>
+          <div><strong>CTA:</strong> <em>Garanta seu lugar na lista de espera</em></div>
+        </div>
+        <span id="badge-trafego-C1A" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C1A')">A fazer</span>
+      </div>
+    
+      <div class="campanha-card">
+        <h4>C1B &middot; Reativação de Base</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Alcance / Engajamento</div>
+          <div><strong>Budget:</strong> R$ 1.500</div>
+          
+          <div><strong>Público:</strong> Público personalizado: e-mails de ex-alunos e leads do Pipedrive (upload de lista CSV)</div>
+          <div><strong>Criativo principal:</strong> Script V05 — Jerry Kein (vídeo emocional 90s) — reativa memória afetiva com a marca</div>
+          <div><strong>Criativo secundário:</strong> Script V01 — A Garagem (origin story 60s)</div>
+          <div><strong>CTA:</strong> <em>Algo novo está chegando. Fique por dentro.</em></div>
+        </div>
+        <span id="badge-trafego-C1B" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C1B')">A fazer</span>
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="card" data-id="trafego-fase-F2">
+    <div class="card-header" onclick="toggleCard('trafego-fase-F2')">
+      <div class="card-header-content">
+      <div class="item-meta">
+        <span class="pill pill-phase">F2</span>
+        <span class="pill pill-date">05/05 a 16/05</span>
+        <span class="pill pill-duration">R$ 25.000</span>
+      </div>
+      <div class="item-title">Fase 2 — Lançamento</div>
+      <span id="badge-trafego-fase-F2" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-fase-F2')">A fazer</span>
+    </div>
+      <span class="chevron" id="chev-trafego-fase-F2">&#9662;</span>
+    </div>
+    <div class="card-body" id="body-trafego-fase-F2">
+      
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;">
+        <span class="pill pill-date">Diário: R$ 2.083/dia</span>
+        
+        <span class="meta-badge">ROAS alvo: 3.0+</span>
+      </div>
+      <p style="font-size: 14px; color: var(--cream); margin: 0 0 6px 0;"><strong>Objetivo:</strong> Conversão direta — Master, FPH, Legacy, Black Mentoring</p>
+      <p style="font-size: 14px; color: var(--gold); margin: 0 0 16px 0;"><strong>Meta:</strong> 25 vendas em 2 semanas</p>
+    
+      <div class="campanha-card">
+        <h4>C2A &middot; Conversão Principal — Retargeting</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Compra)</div>
+          <div><strong>Budget:</strong> R$ 15.000</div>
+          
+          <div><strong>Público:</strong> Retargeting: assistiu ao evento ao vivo + visitou o site + está na lista de espera (janela 30 dias)</div>
+          <div><strong>Criativo principal:</strong> Script VD — Roteiro do Evento (replay editado 15-20 min como VSL)</div>
+          <div><strong>Criativo secundário:</strong> Script V08 — O Gerente de Banco (prova social 90s) + oferta Era Nova OMNI na legenda</div>
+          <div><strong>CTA:</strong> <em>Garanta sua vaga — condição especial até 16/05</em></div>
+        </div>
+        <span id="badge-trafego-C2A" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C2A')">A fazer</span>
+      </div>
+    
+      <div class="campanha-card">
+        <h4>C2B &middot; Lookalike Quente</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Compra)</div>
+          <div><strong>Budget:</strong> R$ 7.000</div>
+          
+          <div><strong>Público:</strong> Lookalike 1% de compradores do lançamento + exclusão de quem já comprou</div>
+          <div><strong>Criativo principal:</strong> Script V06 — A Mentira do Sucesso (60s) + copy de oferta</div>
+          <div><strong>Criativo secundário:</strong> Script V03 — A Pergunta (60s) + copy direta de produto</div>
+          <div><strong>CTA:</strong> <em>Conheça a Omniterapia. Formação certificada ISO 9001.</em></div>
+        </div>
+        <span id="badge-trafego-C2B" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C2B')">A fazer</span>
+      </div>
+    
+      <div class="campanha-card">
+        <h4>C2C &middot; Urgência — Últimos 3 Dias</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Compra)</div>
+          <div><strong>Budget:</strong> R$ 3.000</div>
+          <div><strong>Período:</strong> 14/05 a 16/05</div>
+          <div><strong>Público:</strong> Retargeting: clicou mas não comprou (janela 10 dias)</div>
+          <div><strong>Criativo principal:</strong> Script VB — Reel 5 Dias (60s) + countdown timer na imagem</div>
+          <div><strong>Criativo secundário:</strong> Script VC — Reel Honesto (90s) + copy último dia</div>
+          <div><strong>CTA:</strong> <em>Encerra hoje à meia-noite.</em></div>
+        </div>
+        <span id="badge-trafego-C2C" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C2C')">A fazer</span>
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="card" data-id="trafego-fase-F3">
+    <div class="card-header" onclick="toggleCard('trafego-fase-F3')">
+      <div class="card-header-content">
+      <div class="item-meta">
+        <span class="pill pill-phase">F3</span>
+        <span class="pill pill-date">19/05 a 13/06</span>
+        <span class="pill pill-duration">R$ 15.000</span>
+      </div>
+      <div class="item-title">Fase 3 — Pós-lançamento</div>
+      <span id="badge-trafego-fase-F3" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-fase-F3')">A fazer</span>
+    </div>
+      <span class="chevron" id="chev-trafego-fase-F3">&#9662;</span>
+    </div>
+    <div class="card-body" id="body-trafego-fase-F3">
+      
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px;">
+        <span class="pill pill-date">Diário: R$ 600/dia</span>
+        
+        <span class="meta-badge">ROAS alvo: 2.5+</span>
+      </div>
+      <p style="font-size: 14px; color: var(--cream); margin: 0 0 6px 0;"><strong>Objetivo:</strong> Retargeting de não-convertidos + lookalike para próxima turma</p>
+      <p style="font-size: 14px; color: var(--gold); margin: 0 0 16px 0;"><strong>Meta:</strong> +17 vendas incrementais</p>
+    
+      <div class="campanha-card">
+        <h4>C3A &middot; Nurture — Colheita Tardia</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Compra)</div>
+          <div><strong>Budget:</strong> R$ 8.000</div>
+          
+          <div><strong>Público:</strong> Leads que não compraram no lançamento (lista Pipedrive pós-evento)</div>
+          <div><strong>Criativo principal:</strong> Script VE — O que é Omniterapia? (versão editada 3-5 min para Meta)</div>
+          <div><strong>Criativo secundário:</strong> Depoimentos em vídeo de novos alunos que entraram no lançamento</div>
+          <div><strong>CTA:</strong> <em>Próxima turma com vagas limitadas.</em></div>
+        </div>
+        <span id="badge-trafego-C3A" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C3A')">A fazer</span>
+      </div>
+    
+      <div class="campanha-card">
+        <h4>C3B &middot; Reativação Ex-alunos</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Upsell)</div>
+          <div><strong>Budget:</strong> R$ 4.000</div>
+          
+          <div><strong>Público:</strong> Ex-alunos FPH sem Black Mentoring (upload de lista Pipedrive)</div>
+          <div><strong>Criativo principal:</strong> Script VF — Por que larguei tudo pela hipnoterapia (versão 3-5 min)</div>
+          <div><strong>Criativo secundário:</strong> Copy de Legacy com desconto fundador nova era</div>
+          <div><strong>CTA:</strong> <em>Oferta especial para quem já é da família OMNI.</em></div>
+        </div>
+        <span id="badge-trafego-C3B" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C3B')">A fazer</span>
+      </div>
+    
+      <div class="campanha-card">
+        <h4>C3C &middot; Escala Lookalike</h4>
+        <div class="campanha-info">
+          <div><strong>Objetivo Meta:</strong> Conversão (Lead)</div>
+          <div><strong>Budget:</strong> R$ 3.000</div>
+          
+          <div><strong>Público:</strong> Lookalike 1-2% baseado nos compradores do lançamento</div>
+          <div><strong>Criativo principal:</strong> Best performer da Fase 2 (reaproveitar criativo com maior ROAS)</div>
+          <div><strong>Criativo secundário:</strong> Script V02 — Tensão no Pescoço (Results In Advance, top-of-funnel)</div>
+          <div><strong>CTA:</strong> <em>Próxima turma — formação em Omniterapia.</em></div>
+        </div>
+        <span id="badge-trafego-C3C" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'trafego-C3C')">A fazer</span>
+      </div>
+    
+    </div>
+  </div>
+    <h3 class="subsection-title">KPIs de Performance</h3>
+    <div class="oferta-table-wrap">
+      <table class="kpi-table">
+        <thead>
+          <tr><th>Métrica</th><th>Meta</th><th>Frequência</th><th>Responsável</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="font-size:13px;">CPL — Fase 1 (pré-lançamento)</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">&lt; R$ 10</td>
+              <td style="font-size:13px; color: var(--text-muted);">Diário</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K1" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K1')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">ROAS — Fase 2 (lançamento)</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">3.0+</td>
+              <td style="font-size:13px; color: var(--text-muted);">Diário</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K2" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K2')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">ROAS — Fase 3 (pós-lançamento)</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">2.5+</td>
+              <td style="font-size:13px; color: var(--text-muted);">Semanal</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K3" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K3')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">Taxa conversão inscritos → compradores</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">1.4%+</td>
+              <td style="font-size:13px; color: var(--text-muted);">Semanal</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K4" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K4')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">CTR dos criativos de vídeo</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">&gt; 1.5%</td>
+              <td style="font-size:13px; color: var(--text-muted);">Diário</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K5" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K5')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">CPC médio</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">&lt; R$ 1,50</td>
+              <td style="font-size:13px; color: var(--text-muted);">Diário</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K6" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K6')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">Frequência dos anúncios</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">&lt; 3.5 (evitar fadiga)</td>
+              <td style="font-size:13px; color: var(--text-muted);">Semanal</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K7" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K7')">A fazer</span></td>
+            </tr>
+          
+            <tr>
+              <td style="font-size:13px;">Ticket médio via tráfego pago</td>
+              <td class="gold" style="font-size:13px; font-weight:600;">R$ 10.000+</td>
+              <td style="font-size:13px; color: var(--text-muted);">Semanal</td>
+              <td style="font-size:13px; color: var(--text-muted);">Fernanda</td>
+              <td><span id="badge-kpi-K8" class="badge badge-a_fazer" data-status="a_fazer" onclick="toggleStatus(event, 'kpi-K8')">A fazer</span></td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  
+    <h3 class="subsection-title">Regras Operacionais</h3>
+    <div>
+      
+        <div class="regra-item"><strong>1.</strong> Nunca pausar campanha inteira por performance ruim de 1 criativo — pausar o ad específico e testar novo criativo</div>
+      
+        <div class="regra-item"><strong>2.</strong> Decisões de tráfego baseadas em ROAS real com mínimo 3 dias de dados, não em feeling</div>
+      
+        <div class="regra-item"><strong>3.</strong> Rotacionar criativos a cada 7-10 dias ou quando frequência ultrapassar 3.5</div>
+      
+        <div class="regra-item"><strong>4.</strong> Budget da Fase 2 pode ser escalado +20% se ROAS for maior que 4.0 nos primeiros 3 dias</div>
+      
+        <div class="regra-item"><strong>5.</strong> Pixel deve registrar eventos: ViewContent, Lead, InitiateCheckout, Purchase</div>
+      
+        <div class="regra-item"><strong>6.</strong> Usar UTMs em todos os links: utm_source=meta, utm_medium=paid, utm_campaign=nova-era-omni</div>
+      
+        <div class="regra-item"><strong>7.</strong> Relatório diário de performance durante a Fase 2 — mínimo: gasto, leads, vendas, ROAS</div>
+      
+    </div>
+  
+    </section>
+
     <section class="section" id="section-checklist">
       <h2 class="gold">Checklist &middot; 13 itens</h2>
       <p style="color: var(--text-muted); font-size: 14px;">Marcação persiste no navegador (localStorage).</p>
@@ -3610,8 +4032,8 @@ Bem-vindos à Nova Era OMNI.&quot;
 
   <script>
 // Data injected by builder
-const PHASE_MAP = {"preparacao":["video-V01","video-V02","video-V03","video-V04","video-V05","chk-CK01","chk-CK02","chk-CK03","chk-CK04","chk-CK05","chk-CK06","chk-CK07","chk-CK08","chk-CK09","chk-CK10","chk-CK11","chk-CK12","chk-CK13"],"pre_lancamento":["video-V06","video-V07","video-V08","video-V09","video-V10","video-VA","email-E01","email-E02","email-E03","email-E04","email-E05","ig-IG01","ig-IG02","ig-IG03","ig-IG04","ig-IG05","ig-IG06","ig-IG07","ig-IG08","ig-IG09","ig-IG10","wa-WA01","wa-WA02","wa-WA04","wa-WA05","wa-WA08","wa-WA09","wa-WA10","wa-WA13","wa-WA14"],"lancamento":["video-VB","video-VC","video-VD","email-E06","email-E07","email-E08","email-E09","email-E10","email-E11","email-E12","ig-IG11","ig-IG12","ig-IG13","ig-IG14","ig-IG15","ig-IG16","ig-IG17","ig-IG18","ig-IG19","ig-IG20","wa-WA03","wa-WA06","wa-WA07","wa-WA11","wa-WA12","wa-WA15","wa-WA16","wa-WA17"],"pos_lancamento":["video-VE","video-VF"]};
-const INITIAL_STATUS = {"video-V01":"a_fazer","video-V02":"a_fazer","video-V03":"a_fazer","video-V04":"a_fazer","video-V05":"a_fazer","video-V06":"a_fazer","video-V07":"a_fazer","video-V08":"a_fazer","video-V09":"a_fazer","video-V10":"a_fazer","video-VA":"a_fazer","video-VB":"a_fazer","video-VC":"a_fazer","video-VD":"a_fazer","video-VE":"a_fazer","video-VF":"a_fazer","email-E01":"a_fazer","email-E02":"a_fazer","email-E03":"a_fazer","email-E04":"a_fazer","email-E05":"a_fazer","email-E06":"a_fazer","email-E07":"a_fazer","email-E08":"a_fazer","email-E09":"a_fazer","email-E10":"a_fazer","email-E11":"a_fazer","email-E12":"a_fazer","ig-IG01":"a_fazer","ig-IG02":"a_fazer","ig-IG03":"a_fazer","ig-IG04":"a_fazer","ig-IG05":"a_fazer","ig-IG06":"a_fazer","ig-IG07":"a_fazer","ig-IG08":"a_fazer","ig-IG09":"a_fazer","ig-IG10":"a_fazer","ig-IG11":"a_fazer","ig-IG12":"a_fazer","ig-IG13":"a_fazer","ig-IG14":"a_fazer","ig-IG15":"a_fazer","ig-IG16":"a_fazer","ig-IG17":"a_fazer","ig-IG18":"a_fazer","ig-IG19":"a_fazer","ig-IG20":"a_fazer","wa-WA01":"a_fazer","wa-WA02":"a_fazer","wa-WA03":"a_fazer","wa-WA04":"a_fazer","wa-WA05":"a_fazer","wa-WA06":"a_fazer","wa-WA07":"a_fazer","wa-WA08":"a_fazer","wa-WA09":"a_fazer","wa-WA10":"a_fazer","wa-WA11":"a_fazer","wa-WA12":"a_fazer","wa-WA13":"a_fazer","wa-WA14":"a_fazer","wa-WA15":"a_fazer","wa-WA16":"a_fazer","wa-WA17":"a_fazer","chk-CK01":"a_fazer","chk-CK02":"a_fazer","chk-CK03":"concluido","chk-CK04":"a_fazer","chk-CK05":"a_fazer","chk-CK06":"a_fazer","chk-CK07":"a_fazer","chk-CK08":"a_fazer","chk-CK09":"a_fazer","chk-CK10":"a_fazer","chk-CK11":"concluido","chk-CK12":"a_fazer","chk-CK13":"a_fazer"};
+const PHASE_MAP = {"preparacao":["video-V01","video-V02","video-V03","video-V04","video-V05","chk-CK01","chk-CK02","chk-CK03","chk-CK04","chk-CK05","chk-CK06","chk-CK07","chk-CK08","chk-CK09","chk-CK10","chk-CK11","chk-CK12","chk-CK13","trafego-fase-F0"],"pre_lancamento":["video-V06","video-V07","video-V08","video-V09","video-V10","video-VA","email-E01","email-E02","email-E03","email-E04","email-E05","ig-IG01","ig-IG02","ig-IG03","ig-IG04","ig-IG05","ig-IG06","ig-IG07","ig-IG08","ig-IG09","ig-IG10","wa-WA01","wa-WA02","wa-WA04","wa-WA05","wa-WA08","wa-WA09","wa-WA10","wa-WA13","wa-WA14","trafego-fase-F1","trafego-C1A","trafego-C1B"],"lancamento":["video-VB","video-VC","video-VD","email-E06","email-E07","email-E08","email-E09","email-E10","email-E11","email-E12","ig-IG11","ig-IG12","ig-IG13","ig-IG14","ig-IG15","ig-IG16","ig-IG17","ig-IG18","ig-IG19","ig-IG20","wa-WA03","wa-WA06","wa-WA07","wa-WA11","wa-WA12","wa-WA15","wa-WA16","wa-WA17","trafego-fase-F2","trafego-C2A","trafego-C2B","trafego-C2C","kpi-K1","kpi-K2","kpi-K3","kpi-K4","kpi-K5","kpi-K6","kpi-K7","kpi-K8"],"pos_lancamento":["video-VE","video-VF","trafego-fase-F3","trafego-C3A","trafego-C3B","trafego-C3C"]};
+const INITIAL_STATUS = {"video-V01":"a_fazer","video-V02":"a_fazer","video-V03":"a_fazer","video-V04":"a_fazer","video-V05":"a_fazer","video-V06":"a_fazer","video-V07":"a_fazer","video-V08":"a_fazer","video-V09":"a_fazer","video-V10":"a_fazer","video-VA":"a_fazer","video-VB":"a_fazer","video-VC":"a_fazer","video-VD":"a_fazer","video-VE":"a_fazer","video-VF":"a_fazer","email-E01":"a_fazer","email-E02":"a_fazer","email-E03":"a_fazer","email-E04":"a_fazer","email-E05":"a_fazer","email-E06":"a_fazer","email-E07":"a_fazer","email-E08":"a_fazer","email-E09":"a_fazer","email-E10":"a_fazer","email-E11":"a_fazer","email-E12":"a_fazer","ig-IG01":"a_fazer","ig-IG02":"a_fazer","ig-IG03":"a_fazer","ig-IG04":"a_fazer","ig-IG05":"a_fazer","ig-IG06":"a_fazer","ig-IG07":"a_fazer","ig-IG08":"a_fazer","ig-IG09":"a_fazer","ig-IG10":"a_fazer","ig-IG11":"a_fazer","ig-IG12":"a_fazer","ig-IG13":"a_fazer","ig-IG14":"a_fazer","ig-IG15":"a_fazer","ig-IG16":"a_fazer","ig-IG17":"a_fazer","ig-IG18":"a_fazer","ig-IG19":"a_fazer","ig-IG20":"a_fazer","wa-WA01":"a_fazer","wa-WA02":"a_fazer","wa-WA03":"a_fazer","wa-WA04":"a_fazer","wa-WA05":"a_fazer","wa-WA06":"a_fazer","wa-WA07":"a_fazer","wa-WA08":"a_fazer","wa-WA09":"a_fazer","wa-WA10":"a_fazer","wa-WA11":"a_fazer","wa-WA12":"a_fazer","wa-WA13":"a_fazer","wa-WA14":"a_fazer","wa-WA15":"a_fazer","wa-WA16":"a_fazer","wa-WA17":"a_fazer","chk-CK01":"a_fazer","chk-CK02":"a_fazer","chk-CK03":"concluido","chk-CK04":"a_fazer","chk-CK05":"a_fazer","chk-CK06":"a_fazer","chk-CK07":"a_fazer","chk-CK08":"a_fazer","chk-CK09":"a_fazer","chk-CK10":"a_fazer","chk-CK11":"concluido","chk-CK12":"a_fazer","chk-CK13":"a_fazer","trafego-fase-F0":"concluido","trafego-fase-F1":"a_fazer","trafego-C1A":"a_fazer","trafego-C1B":"a_fazer","trafego-fase-F2":"a_fazer","trafego-C2A":"a_fazer","trafego-C2B":"a_fazer","trafego-C2C":"a_fazer","trafego-fase-F3":"a_fazer","trafego-C3A":"a_fazer","trafego-C3B":"a_fazer","trafego-C3C":"a_fazer","kpi-K1":"a_fazer","kpi-K2":"a_fazer","kpi-K3":"a_fazer","kpi-K4":"a_fazer","kpi-K5":"a_fazer","kpi-K6":"a_fazer","kpi-K7":"a_fazer","kpi-K8":"a_fazer"};
 const STATUS_LABEL = { a_fazer: 'A fazer', em_progresso: 'Em progresso', concluido: 'Concluído' };
 const CHECKLIST_TOTAL = 13;
 
@@ -3737,6 +4159,7 @@ function updateAllCounters() {
   updateTabCount('emails', 'email-');
   updateTabCount('instagram', 'ig-');
   updateTabCount('whatsapp', 'wa-');
+  updateTabCount('trafego', 'trafego-');
 }
 
 function updateTabCount(tabName, prefix) {
