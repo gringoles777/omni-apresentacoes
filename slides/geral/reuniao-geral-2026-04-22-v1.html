@@ -287,6 +287,75 @@
     @media (max-width: 768px) {
       .slide-conteudo { padding: 100px 24px 80px; }
     }
+
+    /* ─────────────────────────────
+       SLIDE VALOR
+    ───────────────────────────── */
+    .slide-valor {
+      align-items: flex-start;
+      text-align: left;
+      padding-top: 130px;
+    }
+    .valor-nome {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+    .valor-body {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 660px;
+      width: 100%;
+    }
+    .valor-bloco {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .valor-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.45rem, 0.9vw, 0.55rem);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .valor-texto {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 1.7vw, 1.05rem);
+      color: var(--cream-70);
+      line-height: 1.55;
+    }
+    .valor-texto strong { color: var(--cream); font-weight: 600; }
+    .valor-pergunta {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(0.95rem, 1.9vw, 1.2rem);
+      color: var(--cream-70);
+      line-height: 1.5;
+      border-left: 2px solid var(--gold-deep);
+      padding-left: 16px;
+    }
+    .valor-oposto {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 1.4vw, 0.88rem);
+      color: rgba(245,240,232,0.35);
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .slide-valor { padding: 100px 24px 80px; }
+    }
   </style>
 </head>
 <body>
@@ -303,7 +372,7 @@
   <div id="footer">OMNI BRASIL // 2026</div>
 
   <!-- Counter -->
-  <div id="counter">1 / 6</div>
+  <div id="counter">1 / 11</div>
 
   <!-- ══════════════════════════════
        SLIDE 1 — CAPA
@@ -395,9 +464,105 @@
   </div>
 
   <!-- ══════════════════════════════
-       SLIDE 6 — OMNITERAPIA COLETIVA
+       SLIDE 6 — REFORÇO DOS NOSSOS VALORES
   ══════════════════════════════ -->
   <div class="slide slide-titulo-simples" data-index="5">
+    <div class="titulo-simples-pre">Pauta 04</div>
+    <div class="titulo-simples-main">Reforço dos<br><span>Nossos Valores</span></div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SLIDE 7 — VALOR: VIDAS
+  ══════════════════════════════ -->
+  <div class="slide slide-valor" data-index="6">
+    <div class="slide-section-label">Valor 01 / 04</div>
+    <div class="valor-nome">Vidas</div>
+    <div class="valor-body">
+      <div class="valor-bloco">
+        <div class="valor-label">No dia a dia</div>
+        <div class="valor-texto">Toda decisão que tomamos afeta uma pessoa real do outro lado. Quando o comercial monta uma proposta, quando o CS responde um ticket, quando o time de entrega faz uma aula — existe uma vida que vai ser impactada por esse trabalho.</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">Pergunta-guia</div>
+        <div class="valor-pergunta">A pessoa do outro lado dessa entrega — ela está sendo tratada como uma vida ou como um número?</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">O oposto</div>
+        <div class="valor-oposto">Tratar leads, alunos e clientes como métricas. Fazer o mínimo porque "ninguém vai perceber".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SLIDE 8 — VALOR: RESPONSABILIDADE
+  ══════════════════════════════ -->
+  <div class="slide slide-valor" data-index="7">
+    <div class="slide-section-label">Valor 02 / 04</div>
+    <div class="valor-nome">Responsabilidade</div>
+    <div class="valor-body">
+      <div class="valor-bloco">
+        <div class="valor-label">No dia a dia</div>
+        <div class="valor-texto">Resultado é seu. Se a conversão não aconteceu, não é culpa do lead. Se o prazo não foi cumprido, não é culpa do processo. Você assume o que está no seu perímetro, comunica quando vai escapar, e não espera que o problema resolva sozinho.</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">Pergunta-guia</div>
+        <div class="valor-pergunta">O que está no meu controle hoje e que eu ainda não assumi de verdade?</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">O oposto</div>
+        <div class="valor-oposto">Dar desculpa. Culpar a outra área. Escalar o que pode resolver.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SLIDE 9 — VALOR: 110%
+  ══════════════════════════════ -->
+  <div class="slide slide-valor" data-index="8">
+    <div class="slide-section-label">Valor 03 / 04</div>
+    <div class="valor-nome">110%</div>
+    <div class="valor-body">
+      <div class="valor-bloco">
+        <div class="valor-label">No dia a dia</div>
+        <div class="valor-texto">Não é sobre trabalhar mais horas. É sobre não entregar pela metade. <strong>Isso inclui pensar em usar IA para tudo o que você faz, para entregar com menos esforço, melhor e mais rápido.</strong></div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">Pergunta-guia</div>
+        <div class="valor-pergunta">Se eu fosse o cliente recebendo isso agora, eu ficaria muito satisfeito — ou só aliviado que foi enviado?</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">O oposto</div>
+        <div class="valor-oposto">"Tá bom assim." Entregar rascunho como entrega final.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SLIDE 10 — VALOR: INTEGRIDADE
+  ══════════════════════════════ -->
+  <div class="slide slide-valor" data-index="9">
+    <div class="slide-section-label">Valor 04 / 04</div>
+    <div class="valor-nome">Integridade</div>
+    <div class="valor-body">
+      <div class="valor-bloco">
+        <div class="valor-label">No dia a dia</div>
+        <div class="valor-texto">Integridade é o que você faz quando ninguém está olhando. É não prometer o que o produto não entrega. É consistência entre o que você diz e o que você faz — dentro e fora da empresa.</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">Pergunta-guia</div>
+        <div class="valor-pergunta">Se todos soubessem que eu agi assim, eu ficaria feliz ou envergonhado?</div>
+      </div>
+      <div class="valor-bloco">
+        <div class="valor-label">O oposto</div>
+        <div class="valor-oposto">Prometer algo que não sabe se pode cumprir. Fazer algo que sabe que não é o certo só porque "ninguém vai saber".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       SLIDE 11 — OMNITERAPIA COLETIVA
+  ══════════════════════════════ -->
+  <div class="slide slide-titulo-simples" data-index="10">
     <div class="titulo-simples-pre">encerramento</div>
     <div class="titulo-simples-main"><span>Omniterapia</span><br>Coletiva</div>
   </div>
