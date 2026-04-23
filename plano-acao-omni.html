@@ -578,10 +578,11 @@ footer {
 
 <footer>
   OMNI Brasil · Plano vivo · Atualizado em tempo real via Supabase · Prisma diaria 17h seg-sex
+  <br><span style="opacity:0.4;font-size:9px;">build v1.1 — 2026-04-23 21h</span>
 </footer>
 
-<!-- Supabase JS -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Supabase JS — versao fixa pra evitar cache de CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════
@@ -678,11 +679,30 @@ async function init() {
   const banner = document.getElementById('config-banner');
   const liveStatus = document.getElementById('live-status');
 
+  console.log('[plano-acao] init', {
+    version: 'v1.1-2026-04-23',
+    isSupabaseConfigured,
+    supabaseLib: typeof window.supabase,
+    url: SUPABASE_URL.substring(0, 40),
+    keyStart: SUPABASE_ANON_KEY.substring(0, 20)
+  });
+
   if (!isSupabaseConfigured) {
     banner.style.display = 'block';
+    banner.innerHTML = '<strong>MOTIVO OFFLINE:</strong> chaves Supabase nao preenchidas no HTML.';
     tasks = [...FALLBACK_DATA];
     liveStatus.className = 'status-pill offline';
     liveStatus.innerHTML = '<span>Offline · Estatico</span>';
+    render();
+    return;
+  }
+
+  if (typeof window.supabase === 'undefined' || !window.supabase.createClient) {
+    banner.style.display = 'block';
+    banner.innerHTML = '<strong>MOTIVO OFFLINE:</strong> biblioteca supabase-js nao carregou do CDN. Verifique conexao.';
+    tasks = [...FALLBACK_DATA];
+    liveStatus.className = 'status-pill offline';
+    liveStatus.innerHTML = '<span>Offline · CDN falhou</span>';
     render();
     return;
   }
@@ -697,6 +717,7 @@ async function init() {
     if (error) throw error;
     tasks = data || [];
 
+    console.log('[plano-acao] conectado. tasks:', tasks.length);
     liveStatus.className = 'status-pill live';
     liveStatus.innerHTML = '<span>Live · Supabase</span>';
 
@@ -721,9 +742,9 @@ async function init() {
 
     render();
   } catch (e) {
-    console.error('Erro Supabase:', e);
+    console.error('[plano-acao] Erro Supabase:', e);
     banner.style.display = 'block';
-    banner.innerHTML = '<strong>Erro ao conectar no Supabase:</strong> ' + e.message + '. Caiu pra modo estatico.';
+    banner.innerHTML = '<strong>Erro ao conectar no Supabase:</strong> ' + (e.message || JSON.stringify(e)) + '. Caiu pra modo estatico.';
     tasks = [...FALLBACK_DATA];
     liveStatus.className = 'status-pill offline';
     liveStatus.innerHTML = '<span>Offline · Erro</span>';
