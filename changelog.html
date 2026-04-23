@@ -1600,6 +1600,29 @@ const CAPABILITIES = [
     <span>Auth Config:</span> <code>ac_yMBfGL_vGlJb</code> &nbsp;|&nbsp;
     <span>Conta conectada:</span> <code>ca_3AqvZhHz745L</code>
   </div>
+</div>`},
+
+  {id:"CAP-030",nome:"Apify MCP (scraping IG/YT/TikTok)",categoria:"mcp-integracao",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"23/04",atualizado:"23/04",
+    link:"MCP: apify (Claude Code user scope)",
+    depende:[],dependentes:["Squad ns-welcome-engine","@analyst (Jerry)"],
+    descricao:"MCP oficial do Apify (@apify/actors-mcp-server) conectado à conta omnibrasil. Dá acesso a 5000+ Actors prontos para scraping de Instagram, YouTube, TikTok e qualquer site — alimenta ICP research, content intelligence e squads sociais.",
+    habilidades:[
+      "Buscar Actors no Apify Store (search-actors)",
+      "Rodar Actors sob demanda (call-actor)",
+      "Inspecionar schema/input de Actors (fetch-actor-details)",
+      "Ler outputs de runs e datasets (get-actor-output, storage)",
+      "Listar e gerenciar runs (runs)",
+      "Acesso a documentação Apify (docs)",
+      "Preview de resultados (preview)"
+    ],
+    apis:["Apify REST API v2","@apify/actors-mcp-server (stdio)","Claude Code user scope (~/.claude.json)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Actors prioritários já confirmados</div>
+  <div class="note-step"><div class="note-num">1</div><div><code>apify/instagram-comment-scraper</code> — oficial, 6.4M runs/mês</div></div>
+  <div class="note-step"><div class="note-num">2</div><div><code>apify/instagram-scraper</code> — posts e perfil</div></div>
+  <div class="note-step"><div class="note-num">3</div><div><code>streamers/youtube-scraper</code> — comentários YouTube</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Token <code>APIFY_TOKEN</code> disponível no vault VPS + <code>.env</code> local. Plano free tier (~5 USD/mês de créditos) na conta <code>omnibrasil</code>.</div></div>
 </div>`}
 ];
 
@@ -1626,7 +1649,8 @@ const INFRA = [
   {nome:"Gmail MCP", detalhe:"Leitura, envio, drafts, labels via Claude Code", status:"ativo"},
   {nome:"Vault Centralizado", detalhe:"Cofre de chaves na VPS — /opt/omni-vault/.env.master", status:"ativo"},
   {nome:"Fathom AI MCP", detalhe:"Acesso a reunioes, transcricoes e resumos via Claude Code", status:"ativo"},
-  {nome:"Composio Instagram MCP", detalhe:"Instagram Business OMNI via Composio — posts, DMs, insights, stories | .mcp.json", status:"ativo"}
+  {nome:"Composio Instagram MCP", detalhe:"Instagram Business OMNI via Composio — posts, DMs, insights, stories | .mcp.json", status:"ativo"},
+  {nome:"Apify MCP", detalhe:"Scraping IG/YT/TikTok via @apify/actors-mcp-server — conta omnibrasil | user scope", status:"ativo"}
 ];
 
 // ═══════════════════════════════════════
