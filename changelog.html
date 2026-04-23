@@ -1374,6 +1374,51 @@ function switchTab(tab) {
 }
 
 // ═══════════════════════════════════════
+// AUTO-ATUALIZADO: deriva "atualizado" do commit mais recente
+// Funciona para qualquer capability sem necessidade de update manual
+// ═══════════════════════════════════════
+function computeAtualizado(cap) {
+  // Keywords para busca: id do cap + palavras-chave do nome (≥4 chars)
+  const stopWords = new Set(['para','com','via','do','da','de','dos','das','em','no','na','nos','nas','um','uma','por','que','seu','sua']);
+  const idLower = cap.id.toLowerCase();
+  const nomeWords = cap.nome.toLowerCase().split(/[\s\-\_\/]+/).filter(w => w.length >= 4 && !stopWords.has(w));
+  // Scopes explícitos têm prioridade (ex: cap.scopes = ["prisma","whatsbot"])
+  const explicitScopes = cap.scopes || [];
+
+  let latestDate = null;
+
+  for (const commit of DATA) {
+    const scope = (commit.scope || '').toLowerCase();
+    const msg   = (commit.message || '').toLowerCase();
+
+    let match = false;
+
+    // 1. Scope explícito declarado no capability
+    if (explicitScopes.length && explicitScopes.some(s => scope === s || scope.includes(s))) {
+      match = true;
+    }
+    // 2. Commit menciona o ID do capability (ex: "CAP-001")
+    if (!match && (scope.includes(idLower) || msg.includes(idLower))) {
+      match = true;
+    }
+    // 3. Scope do commit bate com palavra-chave do nome
+    if (!match && nomeWords.some(w => scope.includes(w))) {
+      match = true;
+    }
+
+    if (match) {
+      if (!latestDate || commit.date > latestDate) latestDate = commit.date;
+    }
+  }
+
+  if (!latestDate) return cap.atualizado; // fallback para o valor hardcoded
+
+  // Formatar de YYYY-MM-DD para DD/MM
+  const parts = latestDate.split('-');
+  return parts[2] + '/' + parts[1];
+}
+
+// ═══════════════════════════════════════
 // BACKLOG
 // ═══════════════════════════════════════
 const BACKLOG_DATA = [
@@ -1423,7 +1468,7 @@ function renderBacklog() {
 // RECURSOS DATA
 // ═══════════════════════════════════════
 const CAPABILITIES = [
-  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"ativo",statusLabel:"Ativo",
+  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"ativo",statusLabel:"Ativo",scopes:["prisma","whatsbot","whatsapp-bridge","gateway"],
     criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.3",inicio:"28/03",atualizado:"23/04",
     link:"WhatsApp: +5511934366311 | VPS: 76.13.169.211:3001",
     depende:[],dependentes:["CAP-002"],
@@ -1789,7 +1834,7 @@ function renderCapCard(c) {
           <div class="cap-meta" style="margin-top:4px">
             <span class="responsavel">${c.responsavel}</span>
             <span>Inicio: ${c.inicio}</span>
-            <span>Atualizado: ${c.atualizado}</span>
+            <span>Atualizado: ${computeAtualizado(c)}</span>
           </div>
         </div>
         <span class="cap-status cap-status-${statusClass}">${c.statusLabel}</span>
