@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Incidente — Rate Limit Google Sheets | My workflow 15 | 22/04/2026</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #20243a;
+    --border: #2a2f47;
+    --accent: #6366f1;
+    --accent2: #818cf8;
+    --danger: #ef4444;
+    --danger-bg: #1f0f0f;
+    --danger-border: #7f1d1d;
+    --warning: #f59e0b;
+    --warning-bg: #1c1505;
+    --warning-border: #78350f;
+    --success: #22c55e;
+    --success-bg: #0a1f0e;
+    --success-border: #14532d;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --code-bg: #111827;
+    --code-border: #1e293b;
+    --mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #1a1d27 60%, #1e1b1b 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--warning), var(--accent), var(--accent2));
+  }
+  .badge-incident {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--warning-bg);
+    border: 1px solid var(--warning-border);
+    color: var(--warning);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .header h1 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+  .header .subtitle { color: var(--text-muted); font-size: 14px; }
+  .header-meta { display: flex; gap: 24px; margin-top: 20px; flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .meta-value { font-size: 14px; color: var(--text); font-weight: 500; }
+
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-danger { background: var(--danger-bg); border-color: var(--danger-border); }
+  .card-warning { background: var(--warning-bg); border-color: var(--warning-border); }
+  .card-success { background: var(--success-bg); border-color: var(--success-border); }
+  .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+  .card-danger h3 { color: var(--danger); }
+  .card-warning h3 { color: var(--warning); }
+  .card-success h3 { color: var(--success); }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-dot {
+    position: absolute;
+    left: -22px; top: 5px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+  }
+  .tl-dot.red { border-color: var(--danger); box-shadow: 0 0 8px rgba(239,68,68,.4); }
+  .tl-dot.yellow { border-color: var(--warning); box-shadow: 0 0 8px rgba(245,158,11,.4); }
+  .tl-dot.blue { border-color: var(--accent); }
+  .tl-dot.green { border-color: var(--success); }
+  .tl-time { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-bottom: 2px; }
+  .tl-text { font-size: 14px; line-height: 1.5; }
+  .tl-text strong { color: #fff; }
+
+  pre, code {
+    font-family: var(--mono);
+    font-size: 13px;
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+  }
+  pre { padding: 16px; overflow-x: auto; margin: 12px 0; line-height: 1.6; }
+  code { padding: 2px 6px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid rgba(42,47,71,.5); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  .tag { display: inline-block; font-size: 11px; font-family: var(--mono); padding: 2px 8px; border-radius: 4px; }
+  .tag-red { background: rgba(239,68,68,.15); color: var(--danger); border: 1px solid var(--danger-border); }
+  .tag-yellow { background: rgba(245,158,11,.15); color: var(--warning); border: 1px solid rgba(120,53,15,.5); }
+  .tag-blue { background: rgba(99,102,241,.15); color: var(--accent2); border: 1px solid rgba(99,102,241,.3); }
+  .tag-green { background: rgba(34,197,94,.15); color: var(--success); border: 1px solid rgba(20,83,45,.5); }
+
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 16px 0; }
+  .flow-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .flow-box.red { border-color: var(--danger-border); background: var(--danger-bg); color: var(--danger); }
+  .flow-box.yellow { border-color: rgba(120,53,15,.5); background: var(--warning-bg); color: var(--warning); }
+  .flow-box.blue { border-color: rgba(99,102,241,.3); background: rgba(99,102,241,.1); color: var(--accent2); }
+  .flow-box.green { border-color: rgba(20,83,45,.5); background: var(--success-bg); color: var(--success); }
+  .flow-box .label { font-size: 10px; color: var(--text-dim); display: block; margin-bottom: 2px; }
+  .flow-arrow { color: var(--text-dim); padding: 0 8px; font-size: 18px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+  ul, ol { padding-left: 20px; }
+  li { margin-bottom: 8px; color: var(--text-muted); font-size: 14px; }
+  li strong { color: var(--text); }
+
+  .highlight {
+    background: rgba(245,158,11,.07);
+    border-left: 3px solid var(--warning);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .highlight strong { color: var(--text); }
+
+  p { margin-bottom: 12px; color: var(--text-muted); font-size: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="badge-incident"><span class="dot"></span>Erro Recorrente — Fix Pendente</div>
+    <h1>Rate Limit Google Sheets no Loop<br>Workflow "My workflow 15" (ID: YC49ifRugN1izCuN)</h1>
+    <div class="subtitle">Relatório técnico para a equipe responsável pelo workflow</div>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Data</span>
+        <span class="meta-value">22/04/2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Workflow ID</span>
+        <span class="meta-value">YC49ifRugN1izCuN</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Node com Erro</span>
+        <span class="meta-value">Append or update row in sheet</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Frequência</span>
+        <span class="meta-value">Recorrente — múltiplas execuções/dia</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Impacto</span>
+        <span class="meta-value">Gravação no Google Sheets interrompida</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUMO EXECUTIVO -->
+  <div class="section">
+    <div class="section-title">Resumo executivo</div>
+    <div class="card">
+      <p>
+        O workflow <strong>"My workflow 15"</strong> (ID <code>YC49ifRugN1izCuN</code>) está falhando de forma
+        recorrente com o erro <strong>"The service is receiving too many requests from you"</strong> no nó
+        <code>Append or update row in sheet</code> (Google Sheets).
+      </p>
+      <p>
+        O workflow utiliza dois <strong>Schedule Triggers</strong> paralelos que consultam dados no MySQL,
+        iteram sobre os resultados em loop (<code>splitInBatches</code>) e tentam gravar cada item no Google Sheets
+        sem nenhum intervalo entre as requisições. Isso viola o limite de taxa da API do Google Sheets,
+        que aceita no máximo <strong>100 requisições por 100 segundos por usuário</strong>.
+      </p>
+      <p>
+        O fix é direto: adicionar um nó <strong>Wait</strong> de 1–2 segundos imediatamente antes do nó
+        Google Sheets dentro de cada loop. Não é necessário alterar a lógica de negócio.
+      </p>
+    </div>
+  </div>
+
+  <!-- ESTRUTURA DO WORKFLOW -->
+  <div class="section">
+    <div class="section-title">Estrutura do workflow</div>
+    <div class="card">
+      <p style="margin-bottom:16px;">O workflow possui dois fluxos paralelos com estrutura idêntica, cada um acionado por um Schedule Trigger independente.</p>
+
+      <div class="flow">
+        <div class="flow-box blue"><span class="label">Trigger</span>Schedule Trigger</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="label">MySQL</span>Execute SQL query</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="label">Loop</span>splitInBatches</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="label">Validação</span>Code / If / Filter</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box red"><span class="label">FALHA AQUI</span>Google Sheets</div>
+      </div>
+
+      <div class="highlight">
+        <strong>Problema:</strong> o loop itera sobre todos os registros do MySQL e dispara uma chamada à API do Google Sheets
+        para cada item <strong>sem nenhum intervalo</strong>. Quando o volume de registros é alto, as requisições chegam
+        ao Google em rajada e o rate limit é atingido imediatamente.
+      </div>
+
+      <table style="margin-top:16px;">
+        <tr>
+          <th>Nó</th>
+          <th>Tipo</th>
+          <th>Observação</th>
+        </tr>
+        <tr>
+          <td><code>Schedule Trigger</code> / <code>Schedule Trigger1</code></td>
+          <td>scheduleTrigger</td>
+          <td>Dois gatilhos paralelos, agendamento periódico</td>
+        </tr>
+        <tr>
+          <td><code>Execute a SQL query</code> / <code>Execute a SQL query1</code></td>
+          <td>mySql</td>
+          <td>Consulta banco MySQL — retorna N registros</td>
+        </tr>
+        <tr>
+          <td><code>LoopOverItems</code> / <code>LoopOverItems1</code></td>
+          <td>splitInBatches</td>
+          <td>Itera sobre cada registro retornado</td>
+        </tr>
+        <tr>
+          <td><code>verificaLead</code> / <code>verificaLead1</code></td>
+          <td>code</td>
+          <td>Validação/transformação de dados</td>
+        </tr>
+        <tr>
+          <td><code>Append or update row in sheet</code></td>
+          <td>googleSheets</td>
+          <td><span class="tag tag-red">FALHA</span> Rate limit atingido sem throttle</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- CAUSA RAIZ -->
+  <div class="section">
+    <div class="section-title">Causa raiz</div>
+    <div class="card card-warning">
+      <h3>Rate limit da Google Sheets API sem throttle no loop</h3>
+      <p style="margin-top:4px;">
+        A Google Sheets API impõe um limite de <strong>100 requisições por 100 segundos por usuário</strong> (1 req/seg em média).
+        O workflow não respeita esse limite ao iterar sobre os registros do MySQL — cada iteração do loop
+        dispara uma chamada à API imediatamente, sem aguardar.
+      </p>
+      <p>
+        Com volumes maiores de dados ou execuções simultâneas dos dois fluxos paralelos, o limite é
+        ultrapassado e o Google rejeita as requisições com HTTP 429 (Too Many Requests), que o n8n
+        mapeia como <code>"The service is receiving too many requests from you"</code>.
+      </p>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom:12px;"><strong style="color:var(--text);">Mensagem de erro exata (log n8n):</strong></p>
+      <pre>Node: Append or update row in sheet
+Error: The service is receiving too many requests from you
+Status: Recorrente em múltiplas execuções agendadas</pre>
+    </div>
+  </div>
+
+  <!-- HISTÓRICO DE ERROS -->
+  <div class="section">
+    <div class="section-title">Histórico de execuções recentes</div>
+    <div class="card">
+      <table>
+        <tr>
+          <th>Data/Hora (UTC)</th>
+          <th>Status</th>
+          <th>Observação</th>
+        </tr>
+        <tr>
+          <td><code>2026-04-22T16:45:00</code></td>
+          <td><span class="tag tag-red">error</span></td>
+          <td>Rate limit — Append or update row in sheet</td>
+        </tr>
+        <tr>
+          <td>Execuções anteriores</td>
+          <td><span class="tag tag-red">error</span></td>
+          <td>Padrão recorrente — mesmo nó, mesma causa</td>
+        </tr>
+        <tr>
+          <td>Execuções sem erro</td>
+          <td><span class="tag tag-yellow">intermitente</span></td>
+          <td>Sucesso quando volume de dados é baixo</td>
+        </tr>
+      </table>
+
+      <div class="highlight" style="margin-top:16px; background: rgba(99,102,241,.07); border-color: var(--accent);">
+        <strong>Padrão observado:</strong> o erro é intermitente — ocorre quando o volume de registros retornados
+        pelo MySQL é alto o suficiente para saturar o rate limit. Com poucos registros, a execução passa.
+        Isso indica que o fix de throttle resolverá o problema definitivamente.
+      </div>
+    </div>
+  </div>
+
+  <!-- FIX SOLICITADO -->
+  <div class="section">
+    <div class="section-title">Fix solicitado</div>
+    <div class="card card-success">
+      <h3>Adicionar nó Wait antes do Google Sheets em cada loop</h3>
+      <p style="margin-top:4px;">
+        Inserir um nó <strong>Wait</strong> (tipo <code>n8n-nodes-base.wait</code>) imediatamente antes do nó
+        <code>Append or update row in sheet</code> nos dois fluxos paralelos do workflow.
+      </p>
+    </div>
+
+    <div class="card">
+      <p style="margin-bottom: 12px;"><strong style="color:var(--text);">Configuração do nó Wait:</strong></p>
+      <table>
+        <tr>
+          <th>Parâmetro</th>
+          <th>Valor</th>
+        </tr>
+        <tr>
+          <td>Resume</td>
+          <td><code>timeInterval</code></td>
+        </tr>
+        <tr>
+          <td>Amount</td>
+          <td><code>1</code> (ou <code>2</code> se o volume for muito alto)</td>
+        </tr>
+        <tr>
+          <td>Unit</td>
+          <td><code>seconds</code></td>
+        </tr>
+      </table>
+
+      <p style="margin-top:16px;"><strong style="color:var(--text);">Posição no fluxo após o fix:</strong></p>
+      <div class="flow" style="margin-top:8px;">
+        <div class="flow-box"><span class="label">Loop</span>splitInBatches</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><span class="label">Validação</span>Code / If</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box green"><span class="label">NOVO</span>Wait 1s</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box green"><span class="label">OK</span>Google Sheets</div>
+      </div>
+
+      <div class="highlight">
+        <strong>Importante:</strong> o nó Wait deve ser adicionado nos <strong>dois fluxos paralelos</strong>
+        (antes de <code>Append or update row in sheet</code> em ambos). Se os dois fluxos executam simultaneamente,
+        considerar aumentar o wait para 2 segundos para evitar sobreposição de chamadas.
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLICITAÇÃO -->
+  <div class="section">
+    <div class="section-title">Ações solicitadas</div>
+    <div class="card card-success">
+      <h3>Ações solicitadas</h3>
+      <ol style="padding-left:20px; margin-top:12px;">
+        <li style="margin-bottom:12px;">
+          <strong>Adicionar nó Wait (1–2 segundos)</strong> antes do nó <code>Append or update row in sheet</code>
+          nos dois fluxos do workflow <code>YC49ifRugN1izCuN</code> ("My workflow 15").
+        </li>
+        <li style="margin-bottom:12px;">
+          <strong>Renomear o workflow</strong> para um nome descritivo (ex: "Sincroniza MySQL → Google Sheets")
+          para facilitar manutenção futura. O nome atual "My workflow 15" não identifica sua função.
+        </li>
+        <li style="margin-bottom:12px;">
+          <strong>Verificar se outros workflows</strong> que gravam no Google Sheets em loop possuem o mesmo problema
+          e aplicar o mesmo fix preventivamente.
+        </li>
+        <li>
+          <strong>Confirmar quando o fix estiver aplicado</strong> para que possamos monitorar e validar
+          que as execuções voltam a ter status de sucesso consistente.
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIA TÉCNICA -->
+  <div class="section">
+    <div class="section-title">Referência técnica</div>
+    <div class="card">
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Valor</th>
+          <th>Observação</th>
+        </tr>
+        <tr>
+          <td>Workflow ID</td>
+          <td><code>YC49ifRugN1izCuN</code></td>
+          <td>Nome exibido: "My workflow 15"</td>
+        </tr>
+        <tr>
+          <td>Instância n8n</td>
+          <td><code>n8n.hypnos.omnihypnosis.com.br</code></td>
+          <td>n8n OMNI Brasil</td>
+        </tr>
+        <tr>
+          <td>Node com erro</td>
+          <td><code>Append or update row in sheet</code></td>
+          <td>Tipo: <code>n8n-nodes-base.googleSheets</code></td>
+        </tr>
+        <tr>
+          <td>Erro exato</td>
+          <td><code>The service is receiving too many requests from you</code></td>
+          <td>HTTP 429 — Google Sheets API rate limit</td>
+        </tr>
+        <tr>
+          <td>Limite da API</td>
+          <td>100 req / 100 segundos / usuário</td>
+          <td><a href="https://developers.google.com/sheets/api/limits" style="color:var(--accent2);">Documentação Google</a></td>
+        </tr>
+        <tr>
+          <td>Criado em</td>
+          <td><code>2025-11-20</code></td>
+          <td>Última edição: 2026-04-13</td>
+        </tr>
+        <tr>
+          <td>Status atual</td>
+          <td><span class="tag tag-red">Ativo com erros</span></td>
+          <td>Workflow continua rodando mas falhando parcialmente</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Gerado em 22/04/2026 · OMNI Brasil · Análise de Erros n8n — Workflow YC49ifRugN1izCuN<br>
+    Contato técnico: Rafa Mendes — rafamendes@omnihypnosis.com.br
+  </div>
+
+</div>
+</body>
+</html>
