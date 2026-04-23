@@ -1412,13 +1412,13 @@ function renderBacklog() {
 // RECURSOS DATA
 // ═══════════════════════════════════════
 const CAPABILITIES = [
-  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"parcialmente_funcional",statusLabel:"Parcial",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"28/03",atualizado:"06/04",
+  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.3",inicio:"28/03",atualizado:"23/04",
     link:"WhatsApp: +5511934366311 | VPS: 76.13.169.211:3001",
     depende:[],dependentes:["CAP-002"],
-    descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, lembra o contexto por 10 minutos e executa operacoes com registro de auditoria.",
-    habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Lembra o contexto da conversa (5 min, max 20 msgs)","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
-    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],nota:"Bug — Claude consome todos os turnos no setup do CLAUDE.md"},
+    descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, envia imagens, lembra o contexto e executa operacoes com registro de auditoria.",
+    habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Envia imagens e anexos (suporte a --image)","Download de midia recebida","Lembra o contexto da conversa","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
+    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],nota:""},
   {id:"CAP-002",nome:"Backlog Inteligente via Prisma",categoria:"gestao",status:"em_desenvolvimento",statusLabel:"Em Dev",
     criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"29/03",atualizado:"29/03",
     link:"https://gringoles777.github.io/omni-apresentacoes/backlog.html",
