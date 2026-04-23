@@ -1370,7 +1370,8 @@ function switchTab(tab) {
 // BACKLOG
 // ═══════════════════════════════════════
 const BACKLOG_DATA = [
-  { id: "OMNI-007", titulo: "Dashboard completo do trafego ao comercial", autor: "Michael Arruda", data: "2026-03-30", prioridade: "alta", categoria: "gestao" }
+  { id: "OMNI-007", titulo: "Dashboard completo do trafego ao comercial", autor: "Michael Arruda", data: "2026-03-30", prioridade: "alta", categoria: "gestao" },
+  { id: "OMNI-009", titulo: "OMNI Content Studio — Maquina de Conteudo 360", autor: "Michael Arruda", data: "2026-04-23", prioridade: "alta", categoria: "produto", link: "https://drive.google.com/drive/folders/1a51EBOkFHYU5Y8Yxo4H5LywiEjTiQwhr", descricao: "Frontend de gestao e aprovacao de conteudo 360 (Instagram, TikTok, LinkedIn, YouTube, Blog, Email). Pipeline automatizado via Claude Code Routines + subagents. Epic completo com 37 stories, wireframes e API spec prontos para desenvolvimento externo." }
 ];
 
 function renderBacklog() {
@@ -1399,7 +1400,9 @@ function renderBacklog() {
           <span>${item.autor}</span>
           <span>${item.data}</span>
           <span style="color:var(--color-teal)">${item.categoria}</span>
+          ${item.link ? `<a href="${item.link}" target="_blank" style="color:var(--color-gold);text-decoration:none">📁 Ver especificação</a>` : ''}
         </div>
+        ${item.descricao ? `<div style="margin-top:8px;font-size:12px;color:var(--color-cream-50);line-height:1.5">${item.descricao}</div>` : ''}
       </div>`;
   });
   el.innerHTML = html;
