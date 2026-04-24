@@ -1797,6 +1797,34 @@ const CAPABILITIES = [
   <div class="note-step"><div class="note-num">4</div><div>Output: <code>gdrive-omni:06_SISTEMAS/video-editor/output/</code> — nomenclatura <code>YYYY-MM-DD_slug.mp4</code></div></div>
   <div class="note-step"><div class="note-num">5</div><div>Notificação: terminal (OSC 8 hyperlink clicável) + WhatsApp pro Michael (5511951360623) via Prisma</div></div>
   <div class="note-step"><div class="note-num">6</div><div>Apenas Michael por enquanto — Fase 4 abre multi-usuário + integração Prisma bidirecional (receber vídeo por WhatsApp)</div></div>
+</div>`},
+
+  {id:"CAP-034",nome:"Prisma + Squad video-editing (edição de vídeo via WhatsApp)",categoria:"bridge-integration",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"server.js + squads/video-editing/helpers/deliver_whatsapp.sh",
+    depende:["CAP-001 (Prisma)","CAP-033 (Squad video-editing)","CAP-032 (video-use + HyperFrames)"],dependentes:[],
+    descricao:"Fase 4 da edição de vídeo. Usuário manda vídeo pelo WhatsApp + texto pedindo edição (\"edita esse reels\", \"corta entre X e Y\", etc.) — bridge Prisma detecta automaticamente via detectVideoEditRequest(), estende timeout pra 15 min, injeta prompt com instruções da squad, Claude roda pipeline completa e responde com o vídeo editado anexado no WhatsApp + link do Drive como backup. Briefing numerado via WhatsApp (só modo REELS). Compressão automática pra caber no limite de 64MB do WhatsApp (720p crf 26 dá tipicamente 10x menor).",
+    habilidades:[
+      "Detecção automática de pedido de edição em mensagens WhatsApp (50+ keywords pt-BR)",
+      "Timeout expandido pra 15 min quando detecta edição (vs 5 min default)",
+      "MaxTurns expandido pra 50 — suporta pipeline longa + briefing interativo",
+      "Briefing numerado via WhatsApp: usuário escolhe legenda (1/2/3) e título (1/2/3/0)",
+      "Entrega automática: upload Drive + vídeo anexado no WhatsApp + link como backup",
+      "Compressão automática 720p crf 26 se > 64MB (ex: 517MB → 10MB)",
+      "Fallback: se mesmo comprimido > 64MB, envia só link do Drive",
+      "Modos REELS (com briefing) e GERAL (execução direta sem perguntar)",
+      "Status messages espaçadas em 60s durante render (evita spammar)",
+      "Qualquer usuário autorizado do Prisma pode usar (Rafa, Michael, Julia, Fernanda)"
+    ],
+    apis:["Evolution API (via bridge)","Google AI Studio (Gemini 2.5 Flash via CAP-033)","Groq Whisper (via CAP-032)","rclone gdrive-omni"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar pelo WhatsApp</div>
+  <div class="note-step"><div class="note-num">1</div><div>Manda o vídeo pela Prisma (sem texto — ela guarda silencioso)</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Em seguida manda: <em>"edita esse reels sobre precificação"</em> (modo REELS) ou <em>"corta entre 12:30 e 14:45"</em> (modo GERAL)</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Prisma detecta, avisa "Edição em andamento (10-15 min)", aciona a squad</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Modo REELS: squad pergunta legenda (1/2/3) e título (1/2/3/0). Modo GERAL: executa direto</div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Recebe o vídeo editado anexado no WhatsApp + link do Drive pra baixar em HD</div></div>
+  <div class="note-step"><div class="note-num">6</div><div>Se vídeo > 64MB: comprime automaticamente pra 720p. Se não couber mesmo comprimido, manda só link do Drive.</div></div>
 </div>`}
 ];
 
