@@ -1763,7 +1763,36 @@ const CAPABILITIES = [
   <div class="note-step"><div class="note-num">2</div><div>Pede em linguagem natural: <em>"edita raw.mp4 tirando filler words, legenda estilo nate-herk, formato vertical 9:16"</em></div></div>
   <div class="note-step"><div class="note-num">3</div><div>Claude ativa <code>/video-use</code>, gera <code>edit/final.mp4</code>. Para motion graphics: <code>/hyperframes</code></div></div>
   <div class="note-step"><div class="note-num">4</div><div>Guia completo em <code>workspace/businesses/omni_brasil/tech/video-editing-guide.md</code></div></div>
-  <div class="note-step"><div class="note-num">5</div><div>Integração Prisma WhatsApp: Fase 3 (não nesta versão)</div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Agora também orquestrado pela squad <code>video-editing</code> (CAP-033) com 2 modos REELS/GERAL</div></div>
+</div>`},
+
+  {id:"CAP-033",nome:"Squad video-editing (orquestrador da CAP-032)",categoria:"squad-aiox",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"squads/video-editing/ — 5 agentes",
+    depende:["CAP-032","Gemini 2.5 Flash","rclone gdrive-omni remote","Prisma Whatsbot (CAP-001)"],dependentes:[],
+    descricao:"Squad AIOX que orquestra a CAP-032 em 2 modos. REELS (opinativo): Gemini analisa o vídeo, squad propõe hook + 3 títulos, aplica crop 9:16 face-aware, aceleração 1.05x, remove filler/silêncio, queima legenda DM Sans Bold centralizada UPPERCASE — sem música, jamais. GERAL (cirúrgico): executa EXATAMENTE o pedido, sem defaults. Upload automático no Drive OMNI + notificação terminal (OSC 8 hyperlink) + WhatsApp pro Michael via Prisma.",
+    habilidades:[
+      "Detecção automática de modo REELS vs GERAL por palavras-chave",
+      "Análise narrativa via Gemini 2.5 Flash com input de vídeo nativo",
+      "Crop 9:16 face-aware via OpenCV Haar cascade (modo REELS)",
+      "Chunker de legenda pt-BR com stick-with-next (artigos, preposições, expressões fixas)",
+      "Aceleração 1.05x global (modo REELS)",
+      "Remoção de filler words pt-BR (hum, né, tipo, sabe etc.)",
+      "Proposta de hook + 3 títulos candidatos (modo REELS)",
+      "Slug automático YYYY-MM-DD_tema.mp4 com unidecode e stopwords pt-BR",
+      "Upload no Drive OMNI com detecção de colisão (-v2, -v3)",
+      "Notificação WhatsApp via Prisma",
+      "3 triggers: slash /video-editor, agente @video-chief, detecção natural em qualquer sessão Claude"
+    ],
+    apis:["Gemini 2.5 Flash (GOOGLE_AI_STUDIO_API_KEY)","Groq Whisper Turbo (via CAP-032)","rclone gdrive-omni","Python: unidecode/opencv-headless/mediapipe","Font DM Sans Bold"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">3 formas de usar</div>
+  <div class="note-step"><div class="note-num">1</div><div><strong>Slash direto:</strong> <code>/video-editor /tmp/raw.mp4 reels sobre precificação</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div><strong>Agente:</strong> <code>@video-chief edita /tmp/raw.mp4 como reels</code></div></div>
+  <div class="note-step"><div class="note-num">3</div><div><strong>Detecção natural:</strong> Qualquer sessão Claude detectando "edita esse vídeo", "faz um reels", "corta entre X e Y" aciona a squad automaticamente (via <code>.claude/rules/video-editing-policy.md</code>)</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Output: <code>gdrive-omni:06_SISTEMAS/video-editor/output/</code> — nomenclatura <code>YYYY-MM-DD_slug.mp4</code></div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Notificação: terminal (OSC 8 hyperlink clicável) + WhatsApp pro Michael (5511951360623) via Prisma</div></div>
+  <div class="note-step"><div class="note-num">6</div><div>Apenas Michael por enquanto — Fase 4 abre multi-usuário + integração Prisma bidirecional (receber vídeo por WhatsApp)</div></div>
 </div>`}
 ];
 
