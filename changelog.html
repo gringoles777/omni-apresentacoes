@@ -1736,6 +1736,32 @@ const CAPABILITIES = [
   <div class="note-step"><div class="note-num">2</div><div><code>apify/instagram-scraper</code> — posts e perfil</div></div>
   <div class="note-step"><div class="note-num">3</div><div><code>streamers/youtube-scraper</code> — comentários YouTube</div></div>
   <div class="note-step"><div class="note-num">4</div><div>Token <code>APIFY_TOKEN</code> disponível no vault VPS + <code>.env</code> local. Plano free tier (~5 USD/mês de créditos) na conta <code>omnibrasil</code>.</div></div>
+</div>`},
+
+  {id:"CAP-032",nome:"Edição de Vídeo via Claude Code (video-use + HyperFrames)",categoria:"skill-claude-code",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"Skills: ~/.claude/skills/ (7 symlinks)",
+    depende:["Groq Whisper API (CAP já existente)","ffmpeg 6.1.1","Chromium headless"],dependentes:[],
+    descricao:"Pipeline ponta-a-ponta de edição de vídeo orquestrado pelo Claude Code na VPS. Drop um .mp4 bruto numa pasta, abre Claude Code, pede \"edita isso com motion graphics estilo Nate Herk\" — o agente transcreve (Groq Whisper), corta filler words, queima legendas e adiciona motion graphics HTML+GSAP sincronizadas ao transcript. Baseado no vídeo \"Claude Just Destroyed Every Video Editing Tool\" (Nate Herk, abr/2026). ElevenLabs substituído por Groq Whisper Turbo para zerar custo de STT.",
+    habilidades:[
+      "Transcrição com timestamp por palavra (Groq Whisper Turbo)",
+      "Cortes automáticos de filler words, silêncios e retakes",
+      "Fades de áudio de 30ms em cada corte (sem pops)",
+      "6 presets de legenda (nate-herk, clássico, karaokê, minimalista, negrito-impacto, ptbr-legendagem)",
+      "Motion graphics HTML+CSS+GSAP sincronizadas ao transcript",
+      "Render determinístico via Chromium headless + ffmpeg",
+      "Auto-avaliação visual antes de mostrar preview",
+      "Persistência de sessão em project.md (retoma de onde parou)",
+      "Suporta 1080p/4K, 16:9, 9:16 vertical e 1:1"
+    ],
+    apis:["Groq Whisper Turbo (whisper-large-v3-turbo)","Chromium headless (Puppeteer)","ffmpeg 6.1.1","Node 22.22.1 + bun","Python 3.12 + librosa/matplotlib/pillow"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar (apenas Michael por enquanto — Fase 3 abre pra equipe)</div>
+  <div class="note-step"><div class="note-num">1</div><div><code>cd /pasta/com/videos && claude</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Pede em linguagem natural: <em>"edita raw.mp4 tirando filler words, legenda estilo nate-herk, formato vertical 9:16"</em></div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Claude ativa <code>/video-use</code>, gera <code>edit/final.mp4</code>. Para motion graphics: <code>/hyperframes</code></div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Guia completo em <code>workspace/businesses/omni_brasil/tech/video-editing-guide.md</code></div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Integração Prisma WhatsApp: Fase 3 (não nesta versão)</div></div>
 </div>`}
 ];
 
