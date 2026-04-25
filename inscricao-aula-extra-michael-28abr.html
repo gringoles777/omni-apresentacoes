@@ -37,20 +37,27 @@
       scroll-behavior: smooth;
     }
 
-    body {
+    /* Wrapper para garantir que a cor de fundo e as margens funcionem no Elementor */
+    .main-wrapper {
       font-family: var(--font-body);
-      background-color: var(--bg-primary);
+      background-color: #050505 !important;
       color: var(--text-primary);
       line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
       -webkit-font-smoothing: antialiased;
+      position: relative;
     }
+
+    body { background-color: #050505 !important; }
 
     /* ========== HEADER ========== */
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg-primary);
+      background-color: #050505 !important;
+      background: #050505 !important;
       border-bottom: 1px solid rgba(200, 168, 75, 0.15);
       padding: 14px 24px;
       display: flex;
@@ -60,7 +67,7 @@
     }
 
     .header svg {
-      height: 20px;
+      height: 32px;
       width: auto;
       flex-shrink: 0;
     }
@@ -78,9 +85,11 @@
     /* ========== HERO ========== */
     .hero {
       text-align: center;
-      padding: 80px 24px 60px;
-      max-width: 780px;
+      padding: 100px 40px 80px;
+      max-width: 1100px;
       margin: 0 auto;
+      background-color: #050505 !important;
+      background: #050505 !important;
     }
 
     .hero-badge {
@@ -109,12 +118,14 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 24px;
+      text-align: center;
     }
 
     .hero-sub {
       font-size: 18px;
       color: var(--text-secondary);
       margin-bottom: 12px;
+      text-align: center;
     }
 
     .hero-presenter {
@@ -122,6 +133,7 @@
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 32px;
+      text-align: center;
     }
 
     .hero-details {
@@ -146,22 +158,30 @@
       line-height: 1;
     }
 
-    .hero-cta {
+    .scroll-down {
       display: inline-block;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--bg-primary);
-      background: var(--gradient-gold);
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 16px 48px;
+      margin-top: 48px;
       cursor: pointer;
+      animation: smoothBounce 2s infinite ease-in-out;
       text-decoration: none;
-      box-shadow: var(--shadow-gold);
-      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 0 8px rgba(200, 168, 75, 0.3));
+    }
+
+    .scroll-down:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 15px rgba(200, 168, 75, 0.6));
+    }
+
+    .scroll-down svg {
+      display: block;
+      width: 44px;
+      height: auto;
+    }
+
+    @keyframes smoothBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(12px); opacity: 1; }
     }
 
     .hero-cta:hover {
@@ -171,9 +191,11 @@
 
     /* ========== CONTENT SECTION ========== */
     .section {
-      max-width: 780px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 80px 40px;
+      background-color: #050505 !important;
+      background: #050505 !important;
     }
 
     .section-title {
@@ -182,7 +204,7 @@
       font-size: clamp(22px, 4vw, 32px);
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--gold-primary);
+      color: #C8A84B !important;
       text-align: center;
       margin-bottom: 40px;
     }
@@ -247,33 +269,52 @@
       border-radius: var(--radius-card);
       padding: 40px 32px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .about-image {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      border: 3px solid var(--gold-primary);
+      overflow: hidden;
+      box-shadow: var(--shadow-gold);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .about-name {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 24px;
+      font-size: 28px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--gold-primary);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .about-role {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--text-tertiary);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 20px;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
     }
 
     .about-text {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.8;
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 680px;
+      margin: 0 auto 24px;
     }
 
     .about-stats {
@@ -281,8 +322,8 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 32px;
-      margin-top: 32px;
-      padding-top: 28px;
+      width: 100%;
+      padding-top: 24px;
       border-top: 1px solid rgba(200, 168, 75, 0.12);
     }
 
@@ -394,7 +435,7 @@
       font-size: 16px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--bg-primary);
+      color: #000000 !important;
       background: var(--gradient-gold);
       border: none;
       border-radius: var(--radius-pill);
@@ -486,6 +527,8 @@
       padding: 40px 24px;
       border-top: 1px solid rgba(200, 168, 75, 0.1);
       margin-top: 40px;
+      background-color: #050505 !important;
+      background: #050505 !important;
     }
 
     .footer-brand {
@@ -543,6 +586,7 @@
   </style>
 </head>
 <body>
+  <div class="main-wrapper">
 
   <!-- HEADER -->
   <header class="header">
@@ -572,7 +616,18 @@
         <span class="icon">&#9655;</span> 100% gratuita
       </span>
     </div>
-    <a href="#inscricao" class="hero-cta">Garantir Minha Vaga</a>
+    <a href="#inscricao" class="scroll-down" onclick="document.getElementById('inscricao').scrollIntoView({behavior: 'smooth'}); return false;" title="Ir para inscrição">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="url(#gold-gradient-arrow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="gold-gradient-arrow" x1="7" y1="10" x2="17" y2="15" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#9A7A2E"/>
+            <stop offset="0.5" stop-color="#C8A84B"/>
+            <stop offset="1" stop-color="#F8C86A"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </a>
   </section>
 
   <hr class="gold-divider">
@@ -608,6 +663,9 @@
   <section class="section">
     <h2 class="section-title">Sobre Michael Arruda</h2>
     <div class="about-content">
+      <div class="about-image">
+        <img src="https://cursos.omnihypnosis.com.br/wp-content/uploads/2025/12/img-hero-e1765911312802.png" alt="Michael Arruda">
+      </div>
       <div class="about-name">Michael Arruda</div>
       <div class="about-role">Fundador da OMNI Brasil</div>
       <p class="about-text">
@@ -635,8 +693,8 @@
   </section>
 
   <!-- FORMULARIO -->
-  <section class="section" id="inscricao">
-    <div class="form-section">
+  <section class="section">
+    <div class="form-section" id="inscricao">
       <h2>Garanta sua vaga agora</h2>
       <p class="form-subtitle">Vagas limitadas. Preencha seus dados abaixo.</p>
 
@@ -644,33 +702,33 @@
         <div class="form-group">
           <label for="fullname">Nome completo</label>
           <input type="text" id="fullname" name="fullname" placeholder="Seu nome completo" required autocomplete="name">
-          <div class="error-msg">Informe seu nome completo.</div>
+          <div class="error-msg" style="display:none;color:#ff6b6b;font-size:13px;margin-top:4px;">Informe seu nome completo.</div>
         </div>
 
         <div class="form-group">
           <label for="email">E-mail</label>
           <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
-          <div class="error-msg">Informe um e-mail válido.</div>
+          <div class="error-msg" style="display:none;color:#ff6b6b;font-size:13px;margin-top:4px;">Informe um e-mail válido.</div>
         </div>
 
         <div class="form-group">
-          <label for="whatsapp">WhatsApp</label>
-          <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required autocomplete="tel">
-          <div class="error-msg">Informe um número de WhatsApp válido.</div>
+          <label for="phone">WhatsApp</label>
+          <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" required autocomplete="tel">
+          <div class="error-msg" style="display:none;color:#ff6b6b;font-size:13px;margin-top:4px;">Informe um número de WhatsApp válido.</div>
         </div>
 
         <button type="submit" class="btn-submit" id="btn-submit">
           <span class="btn-text">Garantir Minha Vaga</span>
-          <span class="spinner"></span>
+          <span class="spinner" style="display:none;"></span>
         </button>
       </form>
 
-      <div class="form-message success" id="msg-success">
+      <div class="form-message success" id="msg-success" style="display:none; margin-top: 20px;">
         <h3>Inscrição confirmada!</h3>
         <p>Nos vemos na terça-feira, 28/04, às 18h. Fique de olho no seu e-mail para receber o link de acesso.</p>
       </div>
 
-      <div class="form-message error-message" id="msg-error">
+      <div class="form-message error-message" id="msg-error" style="display:none; margin-top: 20px; color:#ff6b6b;">
         Ocorreu um erro ao processar sua inscrição. Por favor, tente novamente em alguns instantes.
       </div>
     </div>
@@ -683,194 +741,105 @@
   </footer>
 
   <script>
-    // ========== WHATSAPP MASK ==========
     (function() {
-      var whatsappInput = document.getElementById('whatsapp');
+      var AC_URL = 'https://omnihypnosis42661.activehosted.com/admin/api.php';
+      var AC_KEY = '267b27e2d4978f5e3e5dd501f1342192e56ffea9f2d9677d0868935cfd6cb8e1449377ce';
+      var LIST_ID = '479';
 
-      whatsappInput.addEventListener('input', function(e) {
-        var value = e.target.value.replace(/\D/g, '');
-        if (value.length > 11) value = value.substring(0, 11);
-
-        var formatted = '';
-        if (value.length > 0) formatted = '(' + value.substring(0, 2);
-        if (value.length >= 2) formatted += ') ';
-        if (value.length > 2) formatted += value.substring(2, 7);
-        if (value.length > 7) formatted += '-' + value.substring(7, 11);
-
-        e.target.value = formatted;
-      });
-
-      whatsappInput.addEventListener('keydown', function(e) {
-        var allowed = ['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight', 'Home', 'End'];
-        if (allowed.indexOf(e.key) !== -1) return;
-        if (e.ctrlKey || e.metaKey) return;
-        if (!/\d/.test(e.key)) e.preventDefault();
-      });
-    })();
-
-    // ========== FORM VALIDATION & SUBMISSION ==========
-    (function() {
       var form = document.getElementById('signup-form');
-      var btnSubmit = document.getElementById('btn-submit');
+      var btn = document.getElementById('btn-submit');
+      var btnText = btn.querySelector('.btn-text');
+      var spinner = btn.querySelector('.spinner');
+      var phoneInput = document.getElementById('phone');
       var msgSuccess = document.getElementById('msg-success');
       var msgError = document.getElementById('msg-error');
 
-      var AC_BASE = 'https://omnihypnosis42661.api-us1.com';
-      var AC_KEY = '267b27e2d4978f5e3e5dd501f1342192e56ffea9f2d9677d0868935cfd6cb8e1449377ce';
-      var LIST_ID = 479;
-      var WHATSAPP_FIELD_ID = 34;
+      // Máscara WhatsApp
+      phoneInput.addEventListener('input', function(e) {
+        var v = e.target.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.substring(0, 11);
+        var f = '';
+        if (v.length > 0) f = '(' + v.substring(0, 2);
+        if (v.length >= 2) f += ') ';
+        if (v.length > 2) f += v.substring(2, 7);
+        if (v.length > 7) f += '-' + v.substring(7, 11);
+        e.target.value = f;
+      });
 
-      function validateEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      }
-
-      function validateWhatsapp(value) {
-        var digits = value.replace(/\D/g, '');
-        return digits.length >= 10 && digits.length <= 11;
-      }
-
-      function clearErrors() {
-        var inputs = form.querySelectorAll('input');
-        for (var i = 0; i < inputs.length; i++) {
-          inputs[i].classList.remove('error');
-        }
-      }
-
-      function setLoading(loading) {
-        if (loading) {
-          btnSubmit.classList.add('loading');
-          btnSubmit.disabled = true;
-        } else {
-          btnSubmit.classList.remove('loading');
-          btnSubmit.disabled = false;
-        }
-      }
-
-      function showMessage(type) {
-        msgSuccess.style.display = 'none';
-        msgError.style.display = 'none';
-        if (type === 'success') {
-          msgSuccess.style.display = 'block';
-          form.style.display = 'none';
-        } else if (type === 'error') {
-          msgError.style.display = 'block';
-        }
-      }
-
-      function splitName(fullName) {
-        var parts = fullName.trim().split(/\s+/);
-        var firstName = parts[0] || '';
-        var lastName = parts.length > 1 ? parts.slice(1).join(' ') : '';
-        return { firstName: firstName, lastName: lastName };
-      }
-
-      async function submitToActiveCampaign(data) {
-        var names = splitName(data.fullname);
-        var whatsappDigits = data.whatsapp.replace(/\D/g, '');
-
-        // Step 1: Create or update contact
-        var contactPayload = {
-          contact: {
-            email: data.email,
-            firstName: names.firstName,
-            lastName: names.lastName,
-            phone: whatsappDigits,
-            fieldValues: [
-              {
-                field: String(WHATSAPP_FIELD_ID),
-                value: whatsappDigits
-              }
-            ]
-          }
-        };
-
-        var syncResponse = await fetch(AC_BASE + '/api/3/contact/sync', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Api-Token': AC_KEY
-          },
-          body: JSON.stringify(contactPayload)
-        });
-
-        if (!syncResponse.ok) {
-          throw new Error('Erro ao criar contato: ' + syncResponse.status);
-        }
-
-        var syncData = await syncResponse.json();
-        var contactId = syncData.contact.id;
-
-        // Step 2: Add contact to list
-        var listPayload = {
-          contactList: {
-            list: String(LIST_ID),
-            contact: String(contactId),
-            status: 1
-          }
-        };
-
-        var listResponse = await fetch(AC_BASE + '/api/3/contactLists', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Api-Token': AC_KEY
-          },
-          body: JSON.stringify(listPayload)
-        });
-
-        if (!listResponse.ok) {
-          throw new Error('Erro ao adicionar a lista: ' + listResponse.status);
-        }
-
-        return true;
-      }
-
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        clearErrors();
-        msgError.style.display = 'none';
-
-        var fullname = document.getElementById('fullname');
+      // Validação
+      function validate() {
+        var ok = true;
+        var name = document.getElementById('fullname');
         var email = document.getElementById('email');
-        var whatsapp = document.getElementById('whatsapp');
+        var phone = phoneInput;
 
-        var valid = true;
+        document.querySelectorAll('.error-msg').forEach(function(el) { el.style.display = 'none'; });
 
-        if (!fullname.value.trim() || fullname.value.trim().length < 3) {
-          fullname.classList.add('error');
-          valid = false;
+        if (!name.value.trim() || name.value.trim().split(' ').length < 2) {
+          name.nextElementSibling.style.display = 'block'; ok = false;
         }
-
-        if (!validateEmail(email.value.trim())) {
-          email.classList.add('error');
-          valid = false;
+        if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+          email.nextElementSibling.style.display = 'block'; ok = false;
         }
-
-        if (!validateWhatsapp(whatsapp.value)) {
-          whatsapp.classList.add('error');
-          valid = false;
+        var digits = phone.value.replace(/\D/g, '');
+        if (digits.length < 10 || digits.length > 11) {
+          phone.nextElementSibling.style.display = 'block'; ok = false;
         }
+        return ok;
+      }
 
-        if (!valid) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        msgError.style.display = 'none';
 
-        setLoading(true);
+        if (!validate()) return;
 
-        try {
-          await submitToActiveCampaign({
-            fullname: fullname.value.trim(),
-            email: email.value.trim(),
-            whatsapp: whatsapp.value
-          });
-          showMessage('success');
-        } catch (err) {
-          console.error('ActiveCampaign error:', err);
-          showMessage('error');
-        } finally {
-          setLoading(false);
-        }
+        // Loading state
+        btn.disabled = true;
+        btnText.textContent = 'Enviando...';
+        if (spinner) spinner.style.display = 'inline-block';
+
+        var fullname = document.getElementById('fullname').value.trim();
+        var parts = fullname.split(' ');
+        var firstName = parts[0];
+        var lastName = parts.slice(1).join(' ');
+        var email = document.getElementById('email').value.trim();
+        var rawPhone = phoneInput.value.replace(/\D/g, '');
+        var phone = '+55' + rawPhone;
+
+        // Submeter via AC API v1 (form-encoded, sem CORS)
+        var params = new URLSearchParams();
+        params.append('email', email);
+        params.append('first_name', firstName);
+        params.append('last_name', lastName);
+        params.append('phone', phone);
+        params.append('p[' + LIST_ID + ']', LIST_ID);
+        params.append('status[' + LIST_ID + ']', '1');
+        params.append('field[34,0]', phone);
+
+        var endpoint = AC_URL + '?api_key=' + AC_KEY + '&api_action=contact_sync&api_output=json';
+
+        fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString()
+        }).then(function() {
+          // Com no-cors não lemos a resposta, mas o request foi enviado
+          form.style.display = 'none';
+          msgSuccess.style.display = 'block';
+          var target = document.getElementById('inscricao');
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }).catch(function() {
+          msgError.style.display = 'block';
+          btn.disabled = false;
+          btnText.textContent = 'Garantir Minha Vaga';
+          if (spinner) spinner.style.display = 'none';
+        });
       });
     })();
   </script>
 
+  </div> <!-- end main-wrapper -->
 </body>
 </html>
