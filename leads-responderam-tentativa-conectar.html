@@ -5,52 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leads com Resposta — Tentativa de Conectar</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Segoe UI',Arial,sans-serif; background:#0d0d0d; color:#e8e8e8; padding:32px 24px; }
-  .header { text-align:center; margin-bottom:36px; }
-  .header h1 { font-size:26px; font-weight:700; color:#fff; letter-spacing:-0.5px; }
-  .header p { color:#666; margin-top:8px; font-size:13px; }
-  .stats { display:flex; gap:14px; margin-bottom:40px; justify-content:center; flex-wrap:wrap; }
-  .stat-card { background:#141414; border:1px solid #222; border-radius:10px; padding:14px 24px; text-align:center; }
-  .stat-card .val { font-size:28px; font-weight:700; color:#fff; }
-  .stat-card .label { color:#555; font-size:11px; margin-top:4px; text-transform:uppercase; letter-spacing:0.5px; }
-  .section { margin-bottom:52px; }
-  .section-title { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-  .section-title h2 { font-size:18px; font-weight:600; color:#fff; }
-  .count-badge { padding:3px 12px; border-radius:20px; font-size:12px; font-weight:600; }
-  .layslla .count-badge { color:#f472b6; border:1px solid #f472b633; background:#f472b610; }
-  .david .count-badge { color:#60a5fa; border:1px solid #60a5fa33; background:#60a5fa10; }
-  .divider { width:36px; height:3px; border-radius:2px; margin-bottom:14px; }
-  .layslla .divider { background:#f472b6; }
-  .david .divider { background:#60a5fa; }
-  table { width:100%; border-collapse:collapse; font-size:13px; }
-  thead th { background:#111; color:#555; font-weight:600; text-transform:uppercase; font-size:10.5px; letter-spacing:0.7px; padding:11px 13px; text-align:left; border-bottom:1px solid #1e1e1e; }
-  tbody tr { border-bottom:1px solid #161616; transition:background 0.12s; }
-  tbody tr:hover { background:#141414; }
-  td { padding:10px 13px; vertical-align:middle; }
-  td.num { color:#444; width:36px; font-size:11px; }
-  td.phone { color:#888; font-size:12px; font-family:monospace; }
-  td strong { color:#fff; }
-  td a { text-decoration:none; font-size:12px; }
-  .layslla table td a { color:#f472b6; }
-  .layslla table td a.cw-link { color:#c084fc; }
-  .david table td a { color:#60a5fa; }
-  .david table td a.cw-link { color:#34d399; }
-  .badge.auto { background:#2a1010; color:#f87171; border:1px solid #f8717122; padding:2px 7px; border-radius:8px; font-size:10px; margin-left:4px; }
-  .footer { text-align:center; color:#333; font-size:11px; margin-top:36px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d0d0d; color: #e8e8e8; padding: 32px 24px; }
+  .header { text-align: center; margin-bottom: 40px; }
+  .header h1 { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .header p { color: #888; margin-top: 8px; font-size: 14px; }
+  .section { margin-bottom: 48px; }
+  .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .section-title h2 { font-size: 20px; font-weight: 600; color: #fff; }
+  .count-badge { background: #1a1a2e; border: 1px solid #333; color: #a78bfa; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+  .layslla .count-badge { color: #f472b6; border-color: #f472b633; background: #f472b610; }
+  .david .count-badge { color: #60a5fa; border-color: #60a5fa33; background: #60a5fa10; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th { background: #161616; color: #888; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.8px; padding: 12px 14px; text-align: left; border-bottom: 1px solid #222; }
+  tbody tr { border-bottom: 1px solid #1a1a1a; transition: background 0.15s; }
+  tbody tr:hover { background: #161616; }
+  td { padding: 11px 14px; vertical-align: middle; }
+  td.num { color: #555; width: 40px; font-size: 12px; }
+  td strong { color: #fff; font-weight: 600; }
+  td a { color: #60a5fa; text-decoration: none; font-size: 12px; white-space: nowrap; }
+  td a:hover { text-decoration: underline; }
+  .layslla-row td a { color: #f472b6; }
+  .badge.auto { background: #2a1a1a; color: #f87171; border: 1px solid #f8717133; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; white-space: nowrap; }
+  .stats { display: flex; gap: 16px; margin-bottom: 40px; justify-content: center; }
+  .stat-card { background: #161616; border: 1px solid #222; border-radius: 12px; padding: 16px 28px; text-align: center; }
+  .stat-card .val { font-size: 32px; font-weight: 700; color: #fff; }
+  .stat-card .label { color: #666; font-size: 12px; margin-top: 4px; }
+  .footer { text-align: center; color: #444; font-size: 12px; margin-top: 40px; }
+  .divider { width: 40px; height: 3px; border-radius: 2px; margin-bottom: 16px; }
+  .layslla .divider { background: #f472b6; }
+  .david .divider { background: #60a5fa; }
 </style>
 </head>
 <body>
+
 <div class="header">
   <h1>Leads com Resposta</h1>
-  <p>Tentativa de Conectar · SDR-Novo · 24/04/2026</p>
+  <p>Etapa: Tentativa de Conectar — SDR-Novo · Gerado em 24/04/2026</p>
 </div>
 
 <div class="stats">
-  <div class="stat-card"><div class="val">108</div><div class="label">Total</div></div>
-  <div class="stat-card"><div class="val" style="color:#f472b6">50</div><div class="label">Layslla</div></div>
-  <div class="stat-card"><div class="val" style="color:#60a5fa">58</div><div class="label">David</div></div>
-  <div class="stat-card"><div class="val" style="color:#34d399">99</div><div class="label">Com link Chatwoot</div></div>
+  <div class="stat-card">
+    <div class="val">108</div>
+    <div class="label">Total responderam</div>
+  </div>
+  <div class="stat-card">
+    <div class="val" style="color:#f472b6">50</div>
+    <div class="label">Layslla</div>
+  </div>
+  <div class="stat-card">
+    <div class="val" style="color:#60a5fa">58</div>
+    <div class="label">David</div>
+  </div>
 </div>
 
 <div class="section layslla">
@@ -60,408 +66,364 @@
     <span class="count-badge">50 leads</span>
   </div>
   <table>
-    <thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>Pipedrive</th><th>Chatwoot</th><th>Mensagem recebida</th></tr></thead>
-    <tbody>
+    <thead>
+      <tr>
+        <th>#</th><th>Nome</th><th>Telefone</th><th>Pipedrive</th><th>Mensagem recebida</th>
+      </tr>
+    </thead>
+    <tbody class="layslla-rows">
+      
         <tr>
           <td class="num">1</td>
           <td><strong>Charles</strong></td>
-          <td class="phone">5547997487373</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279877" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15768" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Oi, boa tarde.  Pode pensar dessa maneira. </td>
+          <td>5547997487373</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279877" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi, boa tarde.  Pode pensar dessa maneira.… </td>
         </tr>
         <tr>
           <td class="num">2</td>
           <td><strong>Ricardo</strong></td>
-          <td class="phone">5521979999800</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280080" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14691" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Bom dia,  sim. </td>
+          <td>5521979999800</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280080" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Bom dia,  sim.… </td>
         </tr>
         <tr>
           <td class="num">3</td>
           <td><strong>Ruty</strong></td>
-          <td class="phone">5511962164124</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280193" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14682" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Não conheço nenhuma Ruth </td>
+          <td>5511962164124</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280193" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Não conheço nenhuma Ruth… </td>
         </tr>
         <tr>
           <td class="num">4</td>
           <td><strong>Rômulo</strong></td>
-          <td class="phone">5535992345733</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280258" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15842" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Oi layslla eu desisti muito obrigado ! </td>
+          <td>5535992345733</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280258" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi layslla eu desisti muito obrigado !… </td>
         </tr>
         <tr>
           <td class="num">5</td>
           <td><strong>Gustavo Christo Hair</strong></td>
-          <td class="phone">5527995213447</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280330" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15851" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Oi layslla </td>
+          <td>5527995213447</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280330" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi layslla… </td>
         </tr>
         <tr>
           <td class="num">6</td>
           <td><strong>Claudio</strong></td>
-          <td class="phone">5553984748767</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280398" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15868" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Bom dia, vc poderia mandar o material por aqui para me inteirar do curso? </td>
+          <td>5553984748767</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280398" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Bom dia, vc poderia mandar o material por aqui para me inteirar do curso?… </td>
         </tr>
         <tr>
           <td class="num">7</td>
           <td><strong>Leomar</strong></td>
-          <td class="phone">5511940642099</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280445" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14561" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Como funciona isso? </td>
+          <td>5511940642099</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280445" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Como funciona isso?… </td>
         </tr>
         <tr>
           <td class="num">8</td>
           <td><strong>Reinaldo</strong></td>
-          <td class="phone">5585991550796</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280484" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14696" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Por que já sou terapeuta na área de psicanálise </td>
+          <td>5585991550796</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280484" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Por que já sou terapeuta na área de psicanálise… </td>
         </tr>
         <tr>
           <td class="num">9</td>
           <td><strong>Juliana</strong></td>
-          <td class="phone">5553981231165</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280513" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14823" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Seja bem-vindo(a) à Kaserah 🍕  Aqui você encontra pizza pré-assada artesanal, com … <span class="badge auto">auto-reply</span></td>
+          <td>5553981231165</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280513" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Seja bem-vindo(a) à Kaserah 🍕  Aqui você encontra pizza pré-assada artesanal, co… <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">10</td>
           <td><strong>João</strong></td>
-          <td class="phone">5518996917541</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280539" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14856" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5518996917541</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280539" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">11</td>
           <td><strong>Mario</strong></td>
-          <td class="phone">5521987950666</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280547" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14876" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5521987950666</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280547" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">12</td>
           <td><strong>Artemísia</strong></td>
-          <td class="phone">5511977337613</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280553" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14884" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Formação pedagogia Profissão coordenadora pedagogica  Superior completo  34 anos </td>
+          <td>5511977337613</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280553" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Formação pedagogia Profissão coordenadora pedagogica  Superior completo  34 anos… </td>
         </tr>
         <tr>
           <td class="num">13</td>
           <td><strong>Eliane Stoffel</strong></td>
-          <td class="phone">5561981172285</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280578" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14927" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5561981172285</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280578" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">14</td>
           <td><strong>Edson Luís Lourenço da Silva</strong></td>
-          <td class="phone">5521979025676</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280597" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15341" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa tarde  As 15 horas tenho médico marcado saindo do consultório mando mensagem s… </td>
+          <td>5521979025676</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280597" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde  As 15 horas tenho médico marcado saindo do consultório mando mensagem… </td>
         </tr>
         <tr>
           <td class="num">15</td>
           <td><strong>Max Serra</strong></td>
-          <td class="phone">5521989298198</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280606" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15344" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá layslla, tenho interesse, mas no momento não tenho como aprender, minha esposa… </td>
+          <td>5521989298198</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280606" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá layslla, tenho interesse, mas no momento não tenho como aprender, minha espo… </td>
         </tr>
         <tr>
           <td class="num">16</td>
           <td><strong>Álvaro</strong></td>
-          <td class="phone">5547991884991</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280607" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15298" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode falar por aqui semml problemas </td>
+          <td>5547991884991</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280607" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode falar por aqui semml problemas… </td>
         </tr>
         <tr>
           <td class="num">17</td>
           <td><strong>Ana Maria Oliveira da Silva</strong></td>
-          <td class="phone">5592995056025</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280630" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15329" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode ser mais tarde </td>
+          <td>5592995056025</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280630" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode ser mais tarde… </td>
         </tr>
         <tr>
           <td class="num">18</td>
           <td><strong>Lucas Silva</strong></td>
-          <td class="phone">5512991960822</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280641" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15317" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Sempre gostei desde infância </td>
+          <td>5512991960822</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280641" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Sempre gostei desde infância… </td>
         </tr>
         <tr>
           <td class="num">19</td>
           <td><strong>Amanda</strong></td>
-          <td class="phone">5569992320775</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280651" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15053" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5569992320775</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280651" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">20</td>
           <td><strong>Paulo Tomal</strong></td>
-          <td class="phone">5511916449893</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280657" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15225" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação Hipnoterapeuta OMNI </td>
+          <td>5511916449893</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280657" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">21</td>
           <td><strong>Viviane</strong></td>
-          <td class="phone">5569993492063</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280665" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15222" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>‎Viviane Urman agradece seu contato. Como podemos ajudar? Olá! Sou a Coach Vivi, s… <span class="badge auto">auto-reply</span></td>
+          <td>5569993492063</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280665" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>‎Viviane Urman agradece seu contato. Como podemos ajudar? Olá! Sou a Coach Vivi,… <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">22</td>
           <td><strong>Thais</strong></td>
-          <td class="phone">5519996823531</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280671" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15303" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5519996823531</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280671" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">23</td>
           <td><strong>Luiz</strong></td>
-          <td class="phone">5511971191121</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280685" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15215" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá! Seja muito bem-vindo(a) 😊 Recebemos sua mensagem e, em breve, nossa equipe en… <span class="badge auto">auto-reply</span></td>
+          <td>5511971191121</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280685" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá! Seja muito bem-vindo(a) 😊 Recebemos sua mensagem e, em breve, nossa equipe … <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">24</td>
           <td><strong>Juliana</strong></td>
-          <td class="phone">5521999466639</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280709" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15189" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>_Olá! Seja bem-vindo(a)._ _Sou Juliana Neves, Terapeuta TRG._ _Este é um espaço pr… <span class="badge auto">auto-reply</span></td>
+          <td>5521999466639</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280709" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>_Olá! Seja bem-vindo(a)._ _Sou Juliana Neves, Terapeuta TRG._ _Este é um espaço … <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">25</td>
           <td><strong>Taniafatima De Carvalho</strong></td>
-          <td class="phone">5521999893660</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280712" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15907" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>E sobre o que </td>
+          <td>5521999893660</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280712" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>E sobre o que… </td>
         </tr>
         <tr>
           <td class="num">26</td>
           <td><strong>Patrícia</strong></td>
-          <td class="phone">5517991652517</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280720" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15191" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Não consigo falar.por.ligacao </td>
+          <td>5517991652517</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280720" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Não consigo falar.por.ligacao… </td>
         </tr>
         <tr>
           <td class="num">27</td>
           <td><strong>Maryana</strong></td>
-          <td class="phone">5521972294250</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280729" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15176" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5521972294250</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280729" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">28</td>
           <td><strong>HERAFIELD</strong></td>
-          <td class="phone">5521990359882</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280732" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15163" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>HERAFIELD massoterapia e estética 💆🏼‍♂️💆🏻‍♂️💆🏾‍♀️💆🏿‍♂️💆🏼‍♀️ agradece seu contato. … <span class="badge auto">auto-reply</span></td>
+          <td>5521990359882</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280732" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>HERAFIELD massoterapia e estética 💆🏼‍♂️💆🏻‍♂️💆🏾‍♀️💆🏿‍♂️💆🏼‍♀️ agradece seu contato… <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">29</td>
           <td><strong>Priscila</strong></td>
-          <td class="phone">5511919122804</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280752" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15181" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5511919122804</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280752" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">30</td>
           <td><strong>Aline</strong></td>
-          <td class="phone">5561992954516</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280773" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15369" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Entendi e é quanto de treinamento pra se formar como hipnoterapeuta? </td>
+          <td>5561992954516</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280773" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Entendi e é quanto de treinamento pra se formar como hipnoterapeuta?… </td>
         </tr>
         <tr>
           <td class="num">31</td>
           <td><strong>Angélica Amodei</strong></td>
-          <td class="phone">5521997216917</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280786" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15450" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>E aplicar nos meus pacientes </td>
+          <td>5521997216917</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280786" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>E aplicar nos meus pacientes… </td>
         </tr>
         <tr>
           <td class="num">32</td>
           <td><strong>André</strong></td>
-          <td class="phone">5517996475737</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280790" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15417" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Agradecemos seu contato assim que possível entraremos em contato. </td>
+          <td>5517996475737</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280790" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Agradecemos seu contato assim que possível entraremos em contato.… </td>
         </tr>
         <tr>
           <td class="num">33</td>
           <td><strong>Andressa</strong></td>
-          <td class="phone">5511949926793</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280818" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15493" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, boa tarde!  O melhor horário pra mim é depois das 18h </td>
+          <td>5511949926793</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280818" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, boa tarde!  O melhor horário pra mim é depois das 18h… </td>
         </tr>
         <tr>
           <td class="num">34</td>
           <td><strong>Anderson</strong></td>
-          <td class="phone">5527999125423</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280819" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15538" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>hoje, só após às 17:40, aproximadamente. </td>
+          <td>5527999125423</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280819" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>hoje, só após às 17:40, aproximadamente.… </td>
         </tr>
         <tr>
           <td class="num">35</td>
           <td><strong>Murilo</strong></td>
-          <td class="phone">5548984352255</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280822" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15495" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>MS serviços agradece seu contato. Assim que disponível entrarei em contato 🙏 <span class="badge auto">auto-reply</span></td>
+          <td>5548984352255</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280822" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>MS serviços agradece seu contato. Assim que disponível entrarei em contato 🙏… <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">36</td>
           <td><strong>Fernanda</strong></td>
-          <td class="phone">5519989114664</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280842" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15578" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Nao consigo atender ligacao </td>
+          <td>5519989114664</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280842" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Nao consigo atender ligacao… </td>
         </tr>
         <tr>
           <td class="num">37</td>
           <td><strong>Gislaine</strong></td>
-          <td class="phone">5517992214490</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280845" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15571" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá! Estou no trabalho, depois das 17h30 eu posso </td>
+          <td>5517992214490</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280845" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá! Estou no trabalho, depois das 17h30 eu posso… </td>
         </tr>
         <tr>
           <td class="num">38</td>
           <td><strong>Alexandre</strong></td>
-          <td class="phone">5573999086235</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280891" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15926" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Mais tarde por favor </td>
+          <td>5573999086235</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280891" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Mais tarde por favor… </td>
         </tr>
         <tr>
           <td class="num">39</td>
           <td><strong>Beauty</strong></td>
-          <td class="phone">559591575176</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280898" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15543" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>*Oi! Que bom ter você por aqui* 😍 Aqui é a *Andreza Lima Beauty* – onde cada detal… <span class="badge auto">auto-reply</span></td>
+          <td>559591575176</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280898" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>*Oi! Que bom ter você por aqui* 😍 Aqui é a *Andreza Lima Beauty* – onde cada det… </td>
         </tr>
         <tr>
           <td class="num">40</td>
           <td><strong>Juliana</strong></td>
-          <td class="phone">5511976364926</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280917" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15947" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5511976364926</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280917" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">41</td>
           <td><strong>Leonardo Figueiredo</strong></td>
-          <td class="phone">5521987637777</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280919" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15950" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa noite! Pode me enviar informações por aqui? </td>
+          <td>5521987637777</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280919" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa noite! Pode me enviar informações por aqui?… </td>
         </tr>
         <tr>
           <td class="num">42</td>
           <td><strong>JACQUELINE</strong></td>
-          <td class="phone">5511992639823</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280922" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15954" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Oi boa noite </td>
+          <td>5511992639823</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280922" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi boa noite… </td>
         </tr>
         <tr>
           <td class="num">43</td>
           <td><strong>Chris</strong></td>
-          <td class="phone">5511971550445</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280933" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15965" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa noite  Posso agendar esta ligação para amanhã na parte da manhã? </td>
+          <td>5511971550445</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280933" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa noite  Posso agendar esta ligação para amanhã na parte da manhã?… </td>
         </tr>
         <tr>
           <td class="num">44</td>
           <td><strong>Ederluzia</strong></td>
-          <td class="phone">5511958708379</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280945" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15980" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5511958708379</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280945" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">45</td>
           <td><strong>Lf</strong></td>
-          <td class="phone">5515997263104</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280959" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15995" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Estou no trabalho </td>
+          <td>5515997263104</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280959" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Estou no trabalho… </td>
         </tr>
         <tr>
           <td class="num">46</td>
           <td><strong>Edson</strong></td>
-          <td class="phone">5534999167246</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280963" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16017" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>É presencial ou EAD? </td>
+          <td>5534999167246</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280963" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>É presencial ou EAD?… </td>
         </tr>
         <tr>
           <td class="num">47</td>
           <td><strong>Wquismar Ferreira</strong></td>
-          <td class="phone">5566999805451</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280965" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16019" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Agora estou em horário de Trabalho </td>
+          <td>5566999805451</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280965" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Agora estou em horário de Trabalho… </td>
         </tr>
         <tr>
           <td class="num">48</td>
           <td><strong>Jenny</strong></td>
-          <td class="phone">554796170102</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281005" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16069" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Não dá pra ligar, mas pode me enviar por aqui </td>
+          <td>554796170102</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281005" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Não dá pra ligar, mas pode me enviar por aqui… </td>
         </tr>
         <tr>
           <td class="num">49</td>
           <td><strong>Manoel</strong></td>
-          <td class="phone">5573991371249</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281017" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16087" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Saudações, aqui é o Fisioterapeuta Manoel, deixe sua mensagem assim que possível e… <span class="badge auto">auto-reply</span></td>
+          <td>5573991371249</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281017" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Saudações, aqui é o Fisioterapeuta Manoel, deixe sua mensagem assim que possível… <span class="badge auto">auto-reply</span></td>
         </tr>
         <tr>
           <td class="num">50</td>
           <td><strong>SOLANGE</strong></td>
-          <td class="phone">5531986048555</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281025" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16098" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Daqui 30 min pode. </td>
-        </tr></tbody>
+          <td>5531986048555</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281025" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Daqui 30 min pode.… </td>
+        </tr>
+    </tbody>
   </table>
 </div>
 
@@ -472,475 +434,423 @@
     <span class="count-badge">58 leads</span>
   </div>
   <table>
-    <thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>Pipedrive</th><th>Chatwoot</th><th>Mensagem recebida</th></tr></thead>
+    <thead>
+      <tr>
+        <th>#</th><th>Nome</th><th>Telefone</th><th>Pipedrive</th><th>Mensagem recebida</th>
+      </tr>
+    </thead>
     <tbody>
+      
         <tr>
           <td class="num">1</td>
           <td><strong>Gabriel</strong></td>
-          <td class="phone">5565992827639</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279527" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15693" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa tarde, pode me ligar sempre que você achar apropriado a qualquer momento </td>
+          <td>5565992827639</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279527" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde, pode me ligar sempre que você achar apropriado a qualquer momento… </td>
         </tr>
         <tr>
           <td class="num">2</td>
           <td><strong>Marcelino</strong></td>
-          <td class="phone">5527988867260</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279609" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15703" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Após 17h10m </td>
+          <td>5527988867260</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279609" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Após 17h10m… </td>
         </tr>
         <tr>
           <td class="num">3</td>
           <td><strong>Marcelo</strong></td>
-          <td class="phone">5521964167306</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279789" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15743" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Só que se trata </td>
+          <td>5521964167306</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279789" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Só que se trata… </td>
         </tr>
         <tr>
           <td class="num">4</td>
           <td><strong>Yasmin M. Secaf</strong></td>
-          <td class="phone">5519998683581</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279890" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15770" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Gostaria de saber informações sobre o curso .. e o custo </td>
+          <td>5519998683581</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279890" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Gostaria de saber informações sobre o curso .. e o custo… </td>
         </tr>
         <tr>
           <td class="num">5</td>
           <td><strong>Robson</strong></td>
-          <td class="phone">5553997059306</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279905" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15775" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Quando puder lhe retorno meu amigo... </td>
+          <td>5553997059306</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279905" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Quando puder lhe retorno meu amigo...… </td>
         </tr>
         <tr>
           <td class="num">6</td>
           <td><strong>wagnoantoniodasilva498</strong></td>
-          <td class="phone">554699777817</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279940" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14752" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá! Tenho interesse e queria mais informações, por favor. </td>
+          <td>554699777817</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279940" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá! Tenho interesse e queria mais informações, por favor.… </td>
         </tr>
         <tr>
           <td class="num">7</td>
           <td><strong>JAMES</strong></td>
-          <td class="phone">5581995221334</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/279958" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15786" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Ocupado agora </td>
+          <td>5581995221334</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/279958" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Ocupado agora… </td>
         </tr>
         <tr>
           <td class="num">8</td>
           <td><strong>Jorge</strong></td>
-          <td class="phone">5579999875500</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280073" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15811" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa tarde tdo bem ? </td>
+          <td>5579999875500</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280073" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde tdo bem ?… </td>
         </tr>
         <tr>
           <td class="num">9</td>
           <td><strong>Juliana Castelli Dos</strong></td>
-          <td class="phone">5549991292258</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280096" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15813" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>No momento não consigo te atender </td>
+          <td>5549991292258</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280096" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>No momento não consigo te atender… </td>
         </tr>
         <tr>
           <td class="num">10</td>
           <td><strong>TERAPEUTA / PALESTRANTE</strong></td>
-          <td class="phone">557581102552</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280108" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14751" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Fiz um curso recente .  Gostaria de saber sobre a flash e a formação completa </td>
+          <td>557581102552</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280108" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Fiz um curso recente .  Gostaria de saber sobre a flash e a formação completa… </td>
         </tr>
         <tr>
           <td class="num">11</td>
           <td><strong>Afonso</strong></td>
-          <td class="phone">5591991823130</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280117" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15821" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Quais horários vc tem disponível </td>
+          <td>5591991823130</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280117" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Quais horários vc tem disponível… </td>
         </tr>
         <tr>
           <td class="num">12</td>
           <td><strong>Guilherme</strong></td>
-          <td class="phone">5521983391696</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280131" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15826" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa tarde, Alexandre. Desculpa a falta de resposta, entrei de curiosidade. </td>
+          <td>5521983391696</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280131" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde, Alexandre. Desculpa a falta de resposta, entrei de curiosidade.… </td>
         </tr>
         <tr>
           <td class="num">13</td>
           <td><strong>Le</strong></td>
-          <td class="phone">5547996673949</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280137" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15828" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode ligar </td>
+          <td>5547996673949</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280137" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode ligar… </td>
         </tr>
         <tr>
           <td class="num">14</td>
           <td><strong>Cibelie</strong></td>
-          <td class="phone">5584999932999</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280213" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15834" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Desculpa mais no momento não tenho mais interesse </td>
+          <td>5584999932999</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280213" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Desculpa mais no momento não tenho mais interesse… </td>
         </tr>
         <tr>
           <td class="num">15</td>
           <td><strong>Walaz Alfredo</strong></td>
-          <td class="phone">5581999843072</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280231" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15838" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Mais tarde. </td>
+          <td>5581999843072</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280231" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Mais tarde.… </td>
         </tr>
         <tr>
           <td class="num">16</td>
           <td><strong>Eduardo</strong></td>
-          <td class="phone">5521976047136</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280455" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14583" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5521976047136</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280455" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">17</td>
           <td><strong>Mariana</strong></td>
-          <td class="phone">5522992354499</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280469" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14592" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5522992354499</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280469" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">18</td>
           <td><strong>Nayla</strong></td>
-          <td class="phone">5598983359159</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280486" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14709" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Nao da to na empresa </td>
+          <td>5598983359159</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280486" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Nao da to na empresa… </td>
         </tr>
         <tr>
           <td class="num">19</td>
           <td><strong>Henrique Almeida</strong></td>
-          <td class="phone">5521996760634</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280550" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Oi desculpa está ruim de falar !!! </td>
+          <td>5521996760634</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280550" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi desculpa está ruim de falar !!!… </td>
         </tr>
         <tr>
           <td class="num">20</td>
           <td><strong>Eliane Camargo</strong></td>
-          <td class="phone">5562991122832</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280560" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14878" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Estou no trabalho </td>
+          <td>5562991122832</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280560" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Estou no trabalho… </td>
         </tr>
         <tr>
           <td class="num">21</td>
           <td><strong>Luiz</strong></td>
-          <td class="phone">5515981095421</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280571" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Ainda nao conheço nada </td>
+          <td>5515981095421</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280571" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Ainda nao conheço nada… </td>
         </tr>
         <tr>
           <td class="num">22</td>
           <td><strong>Priscila</strong></td>
-          <td class="phone">5519999768304</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280605" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15019" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Ola, boa tarde. Nao quero me formar, quero fazer </td>
+          <td>5519999768304</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280605" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Ola, boa tarde. Nao quero me formar, quero fazer… </td>
         </tr>
         <tr>
           <td class="num">23</td>
           <td><strong>Luciane</strong></td>
-          <td class="phone">5571984265669</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280609" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15014" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, aqui é a Terapeuta Luciane Lima, que bom que me procurou.  Estou em atendimen… </td>
+          <td>5571984265669</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280609" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, aqui é a Terapeuta Luciane Lima, que bom que me procurou.  Estou em atendim… </td>
         </tr>
         <tr>
           <td class="num">24</td>
           <td><strong>Juliana Margoliano Mendes de</strong></td>
-          <td class="phone">5519991681079</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280666" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Olá tudo bem? Desculpe estou com alguns problemas na família e não consigo focar e… </td>
+          <td>5519991681079</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280666" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá tudo bem? Desculpe estou com alguns problemas na família e não consigo focar… </td>
         </tr>
         <tr>
           <td class="num">25</td>
           <td><strong>Nalva</strong></td>
-          <td class="phone">5511999924774</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280669" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Boa tarde, No momento estou no trabalho, não consigo atender ligação, consegue pas… </td>
+          <td>5511999924774</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280669" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde, No momento estou no trabalho, não consigo atender ligação, consegue p… </td>
         </tr>
         <tr>
           <td class="num">26</td>
           <td><strong>Juliermes</strong></td>
-          <td class="phone">5562981743971</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280673" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Pode me ligar mais tarde </td>
+          <td>5562981743971</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280673" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode me ligar mais tarde… </td>
         </tr>
         <tr>
           <td class="num">27</td>
           <td><strong>André</strong></td>
-          <td class="phone">5517992352918</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280698" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Boa tarde David </td>
+          <td>5517992352918</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280698" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa tarde David… </td>
         </tr>
         <tr>
           <td class="num">28</td>
           <td><strong>Roberval</strong></td>
-          <td class="phone">5531985326106</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280715" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Olá querido, Boa tarde! </td>
+          <td>5531985326106</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280715" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá querido, Boa tarde!… </td>
         </tr>
         <tr>
           <td class="num">29</td>
           <td><strong>Marina</strong></td>
-          <td class="phone">5561994378888</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280735" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Pode mandar as informações por aqui msm. Não quero receber ligações </td>
+          <td>5561994378888</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280735" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode mandar as informações por aqui msm. Não quero receber ligações… </td>
         </tr>
         <tr>
           <td class="num">30</td>
           <td><strong>DyDan</strong></td>
-          <td class="phone">5519996990690</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280766" target="_blank">Pipedrive ↗</a></td>
-          <td><span style="color:#444">—</span></td>
-          <td>Desculpe nao posso atender agora </td>
+          <td>5519996990690</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280766" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Desculpe nao posso atender agora… </td>
         </tr>
         <tr>
           <td class="num">31</td>
           <td><strong>Bryan</strong></td>
-          <td class="phone">5519999197878</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280776" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15379" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Oi, tudo bem?   TESTE da V4 aqui. </td>
+          <td>5519999197878</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280776" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Oi, tudo bem?   TESTE da V4 aqui.… </td>
         </tr>
         <tr>
           <td class="num">32</td>
           <td><strong>Bhrenda</strong></td>
-          <td class="phone">5511980730210</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280781" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15410" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Visitei o site e gostaria de mais informações sobre a Formação de Hipnoterapeuta O… </td>
+          <td>5511980730210</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280781" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Visitei o site e gostaria de mais informações sobre a Formação de Hipnoterapeuta… </td>
         </tr>
         <tr>
           <td class="num">33</td>
           <td><strong>Bárbara</strong></td>
-          <td class="phone">5521995937983</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280787" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15894" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Qual o assunto? </td>
+          <td>5521995937983</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280787" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Qual o assunto?… </td>
         </tr>
         <tr>
           <td class="num">34</td>
           <td><strong>Hugo Rafael</strong></td>
-          <td class="phone">5535997209303</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280791" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15890" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Mais tarde </td>
+          <td>5535997209303</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280791" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Mais tarde… </td>
         </tr>
         <tr>
           <td class="num">35</td>
           <td><strong>JUCELIA</strong></td>
-          <td class="phone">5527997301974</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280796" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15880" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode me ligar agora? </td>
+          <td>5527997301974</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280796" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode me ligar agora?… </td>
         </tr>
         <tr>
           <td class="num">36</td>
           <td><strong>Jôse Boa</strong></td>
-          <td class="phone">5571982026167</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280808" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15632" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>O que se refere? </td>
+          <td>5571982026167</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280808" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>O que se refere?… </td>
         </tr>
         <tr>
           <td class="num">37</td>
           <td><strong>Johne</strong></td>
-          <td class="phone">5531973010600</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280820" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15624" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Agradeço a sua mensagem. Assim que possível, entrarei em contato. Obrigado pela pr… </td>
+          <td>5531973010600</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280820" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Agradeço a sua mensagem. Assim que possível, entrarei em contato. Obrigado pela … </td>
         </tr>
         <tr>
           <td class="num">38</td>
           <td><strong>Douglas Alves | Motivando</strong></td>
-          <td class="phone">5521995885038</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280821" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15622" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Sobre o que seria ! </td>
+          <td>5521995885038</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280821" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Sobre o que seria !… </td>
         </tr>
         <tr>
           <td class="num">39</td>
           <td><strong>EDERSON Dias LOPES</strong></td>
-          <td class="phone">556781276206</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280827" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15617" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá! Tenho interesse e queria mais informações, por favor. </td>
+          <td>556781276206</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280827" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá! Tenho interesse e queria mais informações, por favor.… </td>
         </tr>
         <tr>
           <td class="num">40</td>
           <td><strong>Icaro</strong></td>
-          <td class="phone">5513978250729</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280861" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15528" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI </td>
+          <td>5513978250729</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280861" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI… </td>
         </tr>
         <tr>
           <td class="num">41</td>
           <td><strong>DOMICIANO</strong></td>
-          <td class="phone">5534988184685</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280870" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15519" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Vamos falando por mensagem </td>
+          <td>5534988184685</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280870" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Vamos falando por mensagem… </td>
         </tr>
         <tr>
           <td class="num">42</td>
           <td><strong>Maria</strong></td>
-          <td class="phone">554796582527</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280875" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15492" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Segunda-feira </td>
+          <td>554796582527</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280875" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Segunda-feira… </td>
         </tr>
         <tr>
           <td class="num">43</td>
           <td><strong>Felipe</strong></td>
-          <td class="phone">5532991976721</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280882" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15499" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode me ligar mais tarde </td>
+          <td>5532991976721</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280882" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode me ligar mais tarde… </td>
         </tr>
         <tr>
           <td class="num">44</td>
           <td><strong>Paulo</strong></td>
-          <td class="phone">5591984786921</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280889" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15478" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Ola perto das 16h30 por favor </td>
+          <td>5591984786921</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280889" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Ola perto das 16h30 por favor… </td>
         </tr>
         <tr>
           <td class="num">45</td>
           <td><strong>Marco</strong></td>
-          <td class="phone">558298013513</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280899" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15590" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Só as 20 horas </td>
+          <td>558298013513</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280899" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Só as 20 horas… </td>
         </tr>
         <tr>
           <td class="num">46</td>
           <td><strong>Márcia</strong></td>
-          <td class="phone">5521993559358</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280911" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16009" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Mais tarde, tô na rua indo pro dentista </td>
+          <td>5521993559358</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280911" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Mais tarde, tô na rua indo pro dentista… </td>
         </tr>
         <tr>
           <td class="num">47</td>
           <td><strong>Juliele</strong></td>
-          <td class="phone">5514997942111</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280915" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16008" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode me mandar por aqui msm </td>
+          <td>5514997942111</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280915" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode me mandar por aqui msm… </td>
         </tr>
         <tr>
           <td class="num">48</td>
           <td><strong>alessandra</strong></td>
-          <td class="phone">5561986410190</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280916" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16007" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>sou aluna da Dra proton </td>
+          <td>5561986410190</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280916" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>sou aluna da Dra proton… </td>
         </tr>
         <tr>
           <td class="num">49</td>
           <td><strong>Adriany</strong></td>
-          <td class="phone">5549991506657</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280920" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16016" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Isso, pode sim </td>
+          <td>5549991506657</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280920" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Isso, pode sim… </td>
         </tr>
         <tr>
           <td class="num">50</td>
           <td><strong>Priscila</strong></td>
-          <td class="phone">5516993051681</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280924" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16015" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode ser depois das 17:40 </td>
+          <td>5516993051681</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280924" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode ser depois das 17:40… </td>
         </tr>
         <tr>
           <td class="num">51</td>
           <td><strong>Juliana</strong></td>
-          <td class="phone">5548996873023</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280949" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15998" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Hoje não consigo </td>
+          <td>5548996873023</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280949" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Hoje não consigo… </td>
         </tr>
         <tr>
           <td class="num">52</td>
           <td><strong>Marcledson</strong></td>
-          <td class="phone">5519988496427</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280971" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16031" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Entao só amanhã mesmo, hoje não consigo </td>
+          <td>5519988496427</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280971" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Entao só amanhã mesmo, hoje não consigo… </td>
         </tr>
         <tr>
           <td class="num">53</td>
           <td><strong>Lilian</strong></td>
-          <td class="phone">5551984428769</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280976" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16039" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Estou em atendimento desculpa </td>
+          <td>5551984428769</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280976" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Estou em atendimento desculpa… </td>
         </tr>
         <tr>
           <td class="num">54</td>
           <td><strong>waldecy Gomes</strong></td>
-          <td class="phone">5595981066875</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280983" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16045" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Boa noite David! Essa ligação pode ser amanhã por volta das 13h mais ou menos? </td>
+          <td>5595981066875</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280983" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Boa noite David! Essa ligação pode ser amanhã por volta das 13h mais ou menos?… </td>
         </tr>
         <tr>
           <td class="num">55</td>
           <td><strong>Rafael</strong></td>
-          <td class="phone">5531984444442</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/280985" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16048" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Sim por favor </td>
+          <td>5531984444442</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/280985" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Sim por favor… </td>
         </tr>
         <tr>
           <td class="num">56</td>
           <td><strong>Viviane</strong></td>
-          <td class="phone">5511992945100</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281004" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16068" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Pode ser por aqui mesmo? </td>
+          <td>5511992945100</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281004" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Pode ser por aqui mesmo?… </td>
         </tr>
         <tr>
           <td class="num">57</td>
           <td><strong>Ricardo Lima | Terapeuta</strong></td>
-          <td class="phone">5585998371071</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281006" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16070" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Bom dia, estou em um treinamento e não posso atender o celular. Pode mandar mensag… </td>
+          <td>5585998371071</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281006" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Bom dia, estou em um treinamento e não posso atender o celular. Pode mandar mens… </td>
         </tr>
         <tr>
           <td class="num">58</td>
           <td><strong>Samuel</strong></td>
-          <td class="phone">5542999512345</td>
-          <td><a href="https://omnibrasil.pipedrive.com/deal/281020" target="_blank">Pipedrive ↗</a></td>
-          <td><a href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16091" target="_blank" class="cw-link">Abrir ↗</a></td>
-          <td>Opa tudo bem? </td>
-        </tr></tbody>
+          <td>5542999512345</td>
+          <td><a href="https://omnibrasil.pipedrive.com/deal/281020" target="_blank">Ver no Pipedrive ↗</a></td>
+          <td>Opa tudo bem?… </td>
+        </tr>
+    </tbody>
   </table>
 </div>
 
-<div class="footer">OMNI Brasil · Uso interno · 108 leads com resposta verificados em 487 da etapa</div>
+<div class="footer">OMNI Brasil · Uso interno · 108 leads com resposta de 487 verificados</div>
 </body>
 </html>
