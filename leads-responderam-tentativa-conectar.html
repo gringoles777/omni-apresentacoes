@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leads com Resposta — Etapa Conectado · OMNI Brasil</title>
+<title>Leads com Resposta — Tentativa de Conectar · OMNI Brasil</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -23,491 +23,616 @@
     --teal-20: rgba(42,157,143,0.20);
     --green: #4CAF6F;
     --green-10: rgba(76,175,111,0.10);
-    --green-20: rgba(76,175,111,0.20);
     --purple: #9B6FD4;
     --purple-10: rgba(155,111,212,0.10);
     --purple-20: rgba(155,111,212,0.20);
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--dark);
-    color: var(--cream);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.65;
-  }
-
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-
-  .label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-
-  h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    color: var(--cream);
-    line-height: 1.1;
-  }
-
-  h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    color: var(--cream);
-  }
-
-  /* HERO */
-  .hero {
-    padding: 72px 0 48px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .hero-eyebrow .dot {
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-
-  .hero-subtitle {
-    font-size: 0.95rem;
-    color: var(--cream-60);
-    margin-top: 10px;
-  }
-
-  /* STATS */
-  .stats-section {
-    padding: 48px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 24px;
-  }
-
-  .stat-number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 2.8rem;
-    color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    color: var(--cream-60);
-    font-family: 'IBM Plex Mono', monospace;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  /* SDR SECTION */
-  .sdr-section {
-    padding: 56px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sdr-section:last-child {
-    border-bottom: none;
-  }
-
-  .sdr-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 28px;
-  }
-
-  .sdr-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .badge-layslla {
-    background: var(--purple-10);
-    border: 1px solid var(--purple-20);
-    color: var(--purple);
-  }
-
-  .badge-david {
-    background: var(--teal-10);
-    border: 1px solid var(--teal-20);
-    color: var(--teal);
-  }
-
-  .sdr-count {
-    font-size: 0.8rem;
-    color: var(--cream-40);
-    font-family: 'IBM Plex Mono', monospace;
-  }
-
-  /* TABLE */
-  .table-wrap {
-    overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  thead {
-    background: var(--surface-2);
-  }
-
-  th {
-    padding: 14px 18px;
-    text-align: left;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border-bottom: 1px solid var(--border);
-    white-space: nowrap;
-  }
-
-  td {
-    padding: 14px 18px;
-    border-bottom: 1px solid rgba(220,159,66,0.06);
-    font-size: 0.875rem;
-    vertical-align: top;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-
-  tr {
-    background: var(--surface);
-    transition: background 0.15s;
-  }
-
-  tr:hover {
-    background: var(--gold-15);
-  }
-
-  .td-num {
-    color: var(--cream-40);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    width: 36px;
-  }
-
-  .td-name {
-    font-weight: 600;
-    color: var(--cream);
-    white-space: nowrap;
-  }
-
-  .td-phone {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--cream-60);
-    white-space: nowrap;
-  }
-
-  .link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-
-  .link-pipe {
-    background: var(--gold-15);
-    border: 1px solid var(--gold-30);
-    color: var(--gold);
-  }
-
-  .link-pipe:hover {
-    background: var(--gold-20);
-  }
-
-  .link-chat {
-    background: var(--teal-10);
-    border: 1px solid var(--teal-20);
-    color: var(--teal);
-  }
-
-  .link-chat:hover {
-    background: var(--teal-20);
-  }
-
-  .td-links {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    white-space: nowrap;
-  }
-
-  .td-msg {
-    color: var(--cream-60);
-    font-size: 0.83rem;
-    max-width: 420px;
-    line-height: 1.5;
-  }
-
-  /* FOOTER */
-  .footer {
-    padding: 40px 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--cream-40);
-    letter-spacing: 0.05em;
-  }
-
-  @media (max-width: 768px) {
-    .container { padding: 0 20px; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--cream); font-family:'Inter',sans-serif; line-height:1.65; }
+  .container { max-width:1200px; margin:0 auto; padding:0 40px; }
+  .label { font-family:'IBM Plex Mono',monospace; font-size:0.6rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
+  h1 { font-family:'DM Serif Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:400; letter-spacing:-0.02em; color:var(--cream); line-height:1.1; }
+  h2 { font-family:'DM Serif Display',serif; font-size:1.6rem; font-weight:400; letter-spacing:-0.01em; color:var(--cream); }
+  .hero { padding:72px 0 48px; border-bottom:1px solid var(--border); }
+  .hero-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .hero-eyebrow .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; }
+  .hero-subtitle { font-size:0.95rem; color:var(--cream-60); margin-top:10px; }
+  .stats-section { padding:48px 0; border-bottom:1px solid var(--border); }
+  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:28px 24px; }
+  .stat-number { font-family:'DM Serif Display',serif; font-size:2.8rem; color:var(--gold); line-height:1; margin-bottom:8px; }
+  .stat-label { font-size:0.8rem; color:var(--cream-60); font-family:'IBM Plex Mono',monospace; letter-spacing:0.05em; text-transform:uppercase; }
+  .sdr-section { padding:56px 0; border-bottom:1px solid var(--border); }
+  .sdr-section:last-of-type { border-bottom:none; }
+  .sdr-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+  .sdr-badge { display:inline-flex; align-items:center; padding:6px 14px; border-radius:6px; font-size:0.75rem; font-family:'IBM Plex Mono',monospace; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; }
+  .badge-layslla { background:var(--purple-10); border:1px solid var(--purple-20); color:var(--purple); }
+  .badge-david { background:var(--teal-10); border:1px solid var(--teal-20); color:var(--teal); }
+  .sdr-count { font-size:0.8rem; color:var(--cream-40); font-family:'IBM Plex Mono',monospace; }
+  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; }
+  thead { background:var(--surface-2); }
+  th { padding:14px 18px; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.65rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); white-space:nowrap; }
+  td { padding:14px 18px; border-bottom:1px solid rgba(220,159,66,0.06); font-size:0.875rem; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr { background:var(--surface); transition:background 0.15s; }
+  tr:hover { background:var(--gold-15); }
+  .td-num { color:var(--cream-40); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; width:36px; }
+  .td-name { font-weight:600; color:var(--cream); white-space:nowrap; max-width:180px; overflow:hidden; text-overflow:ellipsis; }
+  .td-phone { font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--cream-60); white-space:nowrap; }
+  .link-btn { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:6px; font-size:0.75rem; font-family:'IBM Plex Mono',monospace; font-weight:500; text-decoration:none; transition:all 0.15s; white-space:nowrap; }
+  .link-pipe { background:var(--gold-15); border:1px solid var(--gold-30); color:var(--gold); }
+  .link-pipe:hover { background:var(--gold-20); }
+  .link-chat { background:var(--teal-10); border:1px solid var(--teal-20); color:var(--teal); }
+  .link-chat:hover { background:var(--teal-20); }
+  .td-links { display:flex; flex-direction:column; gap:6px; white-space:nowrap; }
+  .td-msg { color:var(--cream-60); font-size:0.83rem; max-width:420px; line-height:1.5; }
+  .footer { padding:40px 0; border-top:1px solid var(--border); }
+  .footer-text { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--cream-40); letter-spacing:0.05em; }
+  @media(max-width:768px){.container{padding:0 20px;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="container">
-    <div class="hero-eyebrow">
-      <div class="dot"></div>
-      <span class="label">SDR-Novo · Pipeline Comercial · OMNI Brasil</span>
-    </div>
+    <div class="hero-eyebrow"><div class="dot"></div><span class="label">SDR-Novo · Pipeline Comercial · OMNI Brasil</span></div>
     <h1>Leads com Resposta</h1>
-    <p class="hero-subtitle">Etapa Conectado — leads que responderam com mensagem substancial (excluídos: automáticos, respostas únicas de "oi" e sem conteúdo) · Atualizado em 28/04/2026</p>
+    <p class="hero-subtitle">Etapa Tentativa de Conectar — leads que responderam com mensagem substancial (excluídos: automáticos, respostas de "oi" único e sem conteúdo) · Atualizado em 28/04/2026</p>
   </div>
 </div>
 
-<!-- STATS -->
 <div class="stats-section">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-number">39</div>
-        <div class="stat-label">Total na etapa</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">27</div>
-        <div class="stat-label">Com resposta real</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">14</div>
-        <div class="stat-label">Layslla</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">13</div>
-        <div class="stat-label">David</div>
-      </div>
+      <div class="stat-card"><div class="stat-number">569</div><div class="stat-label">Total na etapa</div></div>
+      <div class="stat-card"><div class="stat-number">90</div><div class="stat-label">Com resposta real</div></div>
+      <div class="stat-card"><div class="stat-number">53</div><div class="stat-label">Layslla</div></div>
+      <div class="stat-card"><div class="stat-number">37</div><div class="stat-label">David</div></div>
     </div>
   </div>
 </div>
 
-<!-- LAYSLLA -->
 <div class="sdr-section">
   <div class="container">
     <div class="sdr-header">
       <h2>Layslla Brenda</h2>
       <span class="sdr-badge badge-layslla">SDR</span>
-      <span class="sdr-count">14 leads</span>
+      <span class="sdr-count">53 leads</span>
     </div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Links</th>
-            <th>Mensagem recebida</th>
-          </tr>
-        </thead>
+        <thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>Links</th><th>Mensagem recebida</th></tr></thead>
         <tbody>
           <tr>
             <td class="td-num">01</td>
-            <td class="td-name">Leonardo</td>
-            <td class="td-phone">(12) 98154-0650</td>
+            <td class="td-name">Eli</td>
+            <td class="td-phone">(82) 99824-1521</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280316" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/13810" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279656" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/12424" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Atuo em mais de uma. Porém, para uma específica que é cuidar do desenvolvimento das pessoas em uma casa religiosa, é o que mais me motiva a entender dessa ciência. Pois acredito que independente da fé, deve haver racionalidade.</td>
+            <td class="td-msg">amanhã agente conversa estou um pouco ocupada no trabalho</td>
           </tr>
           <tr>
             <td class="td-num">02</td>
-            <td class="td-name">Reinaldo</td>
-            <td class="td-phone">(85) 99155-0796</td>
+            <td class="td-name">Marcos</td>
+            <td class="td-phone">(61) 98104-9581</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280484" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14696" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279931" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14449" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Redes sociais</td>
+            <td class="td-msg">Segundo plano atuar como terapeuta.</td>
           </tr>
           <tr>
             <td class="td-num">03</td>
-            <td class="td-name">Edson Luís Lourenço da Silva</td>
-            <td class="td-phone">(21) 97902-5676</td>
+            <td class="td-name">Marcos</td>
+            <td class="td-phone">(19) 98121-8983</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280597" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15341" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279933" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14450" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Boa tarde. Às 15h tenho médico marcado, saindo do consultório mando mensagem.</td>
+            <td class="td-msg">Boa noite, eu fiquei interessado em saber mais detalhes</td>
           </tr>
           <tr>
             <td class="td-num">04</td>
-            <td class="td-name">Daiane</td>
-            <td class="td-phone">(19) 97151-8831</td>
+            <td class="td-name">Paula</td>
+            <td class="td-phone">(11) 96598-8595</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280811" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15498" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280219" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/13761" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Vamos marcar pra vc me ligar amanhã às 10h</td>
+            <td class="td-msg">Ligação não consigo</td>
           </tr>
           <tr>
             <td class="td-num">05</td>
-            <td class="td-name">Andressa</td>
-            <td class="td-phone">(11) 94992-6793</td>
+            <td class="td-name">Luana</td>
+            <td class="td-phone">(47) 99750-8512</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280818" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15493" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280240" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14488" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Vou verificar e retorno.</td>
+            <td class="td-msg">Nas redes</td>
           </tr>
           <tr>
             <td class="td-num">06</td>
+            <td class="td-name">Cléo</td>
+            <td class="td-phone">(67) 99112-9614</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280292" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15847" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
+          </tr>
+          <tr>
+            <td class="td-num">07</td>
+            <td class="td-name">Claudio</td>
+            <td class="td-phone">(53) 98474-8767</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280398" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15868" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Bom dia, vc poderia mandar o material por aqui para me inteirar do curso?</td>
+          </tr>
+          <tr>
+            <td class="td-num">08</td>
+            <td class="td-name">Jacqueline Rangel</td>
+            <td class="td-phone">(41) 98433-5006</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280587" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14978" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Obrigada pelo contato! Como posso ajudar? 🙂</td>
+          </tr>
+          <tr>
+            <td class="td-num">09</td>
+            <td class="td-name">Ana Maria Oliveira da Silva</td>
+            <td class="td-phone">(92) 99505-6025</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280630" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15329" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode ser mais tarde</td>
+          </tr>
+          <tr>
+            <td class="td-num">10</td>
+            <td class="td-name">Amanda</td>
+            <td class="td-phone">(69) 99232-0775</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280651" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15053" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
+          </tr>
+          <tr>
+            <td class="td-num">11</td>
+            <td class="td-name">Taniafatima De Carvalho</td>
+            <td class="td-phone">(21) 99989-3660</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280712" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15907" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode ligar</td>
+          </tr>
+          <tr>
+            <td class="td-num">12</td>
+            <td class="td-name">Aline</td>
+            <td class="td-phone">(61) 99295-4516</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280773" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15369" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Uma outra dúvida, atende como cliente primeiro? Por sessão?</td>
+          </tr>
+          <tr>
+            <td class="td-num">13</td>
+            <td class="td-name">André</td>
+            <td class="td-phone">(17) 99647-5737</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280790" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15417" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Quero me aprimorar como ser humano</td>
+          </tr>
+          <tr>
+            <td class="td-num">14</td>
+            <td class="td-name">Anderson</td>
+            <td class="td-phone">(27) 99912-5423</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280819" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15538" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">quero saber o valor do inestimento.</td>
+          </tr>
+          <tr>
+            <td class="td-num">15</td>
+            <td class="td-name">Murilo</td>
+            <td class="td-phone">(48) 98435-2255</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280822" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15495" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">MS serviços agradece seu contato. Assim que disponível entrarei em contato 🙏</td>
+          </tr>
+          <tr>
+            <td class="td-num">16</td>
             <td class="td-name">Priscila</td>
             <td class="td-phone">(16) 99305-1681</td>
             <td class="td-links">
               <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280830" target="_blank">Pipedrive ↗</a>
               <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15537" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Amor deixa pra próxima, gosto de agilidade, sem rodeios, me interesso vou lá e pago, gosto assim, se não tivesse interesse não teria perdido meu tempo em procurar vcs. Grata querida.</td>
+            <td class="td-msg">Amor deixa pra próxima ,gosto de agilidade , sem rodeios , me interesso vou lá e pago , gosto assim , se não tivesse interesse não teria perdido meu tempo em procurar vcs , mais grata querida ...</td>
           </tr>
           <tr>
-            <td class="td-num">07</td>
-            <td class="td-name">Alexandre</td>
-            <td class="td-phone">(73) 99908-6235</td>
+            <td class="td-num">17</td>
+            <td class="td-name">Edson</td>
+            <td class="td-phone">(34) 99916-7246</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280891" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15926" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280963" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16017" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Obrigado</td>
+            <td class="td-msg">É presencial ou EAD?</td>
           </tr>
           <tr>
-            <td class="td-num">08</td>
-            <td class="td-name">Juliana</td>
-            <td class="td-phone">(11) 97636-4926</td>
+            <td class="td-num">18</td>
+            <td class="td-name">Wquismar Ferreira</td>
+            <td class="td-phone">(66) 99980-5451</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280917" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15947" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280965" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16019" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">sim, gostaria de informações</td>
+            <td class="td-msg">Pode fazer</td>
           </tr>
           <tr>
-            <td class="td-num">09</td>
-            <td class="td-name">Lf</td>
-            <td class="td-phone">(15) 99726-3104</td>
+            <td class="td-num">19</td>
+            <td class="td-name">Amanda</td>
+            <td class="td-phone">(41) 99905-4542</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280959" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15995" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280984" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16046" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Atualmente sou motoboy, tenho 30 anos ensino médio completo</td>
+            <td class="td-msg">Amanhã</td>
           </tr>
           <tr>
-            <td class="td-num">10</td>
-            <td class="td-name">Álvaro</td>
-            <td class="td-phone">(47) 99188-4991</td>
+            <td class="td-num">20</td>
+            <td class="td-name">Jenny</td>
+            <td class="td-phone">(47) 9617-0102</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280988" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15298" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281005" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16069" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Claro, tudo certo</td>
+            <td class="td-msg">Olha, eu sei q tu tens q cumprir os protocolos, mas eu trabalhando em três lugares diferentes, saio de casa às 7:30 da manhã e só retorno às 22:30, preferiria q vc fosse mais objetiva, se tiver algum vídeo de como fundido a o curso, se tem horários ou se posso fazer nos meus momentos livres e valores, quantas horas aulas, fica melhor pra mim</td>
           </tr>
           <tr>
-            <td class="td-num">11</td>
-            <td class="td-name">Radamedio</td>
-            <td class="td-phone">(89) 98802-4325</td>
+            <td class="td-num">21</td>
+            <td class="td-name">Luciano Eugênio</td>
+            <td class="td-phone">(33) 98711-8827</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280998" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16061" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281009" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16073" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Pode sim 👍</td>
+            <td class="td-msg">Pode sim</td>
           </tr>
           <tr>
-            <td class="td-num">12</td>
-            <td class="td-name">Renaser Marcenaria</td>
-            <td class="td-phone">(31) 97581-1266</td>
+            <td class="td-num">22</td>
+            <td class="td-name">Manoel Fisio</td>
+            <td class="td-phone">(73) 99137-1249</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281011" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16075" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281017" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16087" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">tem algum video, pdf ou outro material que contenha as informações que vc possa enviar?</td>
+            <td class="td-msg">Saudações, aqui é o Fisioterapeuta Manoel, deixe sua mensagem assim que possível entrarei em contato.</td>
           </tr>
           <tr>
-            <td class="td-num">13</td>
-            <td class="td-name">Solange</td>
-            <td class="td-phone">(31) 98604-8555</td>
+            <td class="td-num">23</td>
+            <td class="td-name">Luiz Vinicius Pereira</td>
+            <td class="td-phone">(62) 99446-0914</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281025" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16098" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281051" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16118" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Olá, boa noite! Estava na academia. Pode me dar as informações por aqui mesmo.</td>
+            <td class="td-msg">Olá, o curso é on-line?</td>
           </tr>
           <tr>
-            <td class="td-num">14</td>
-            <td class="td-name">Vivian</td>
-            <td class="td-phone">(21) 99889-3629</td>
+            <td class="td-num">24</td>
+            <td class="td-name">Adriana Lobo</td>
+            <td class="td-phone">(11) 98495-7392</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281148" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16230" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281055" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16122" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">no momento nao consigo atender mas pode deixar audio se for mais facil pra vc</td>
+            <td class="td-msg">Pode ser?</td>
+          </tr>
+          <tr>
+            <td class="td-num">25</td>
+            <td class="td-name">Paulo</td>
+            <td class="td-phone">(61) 99605-9045</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281066" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16134" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Amanhã a noite, estou em viagem</td>
+          </tr>
+          <tr>
+            <td class="td-num">26</td>
+            <td class="td-name">Ediney Castelo</td>
+            <td class="td-phone">(68) 99923-2976</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281068" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16137" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Envia áudio</td>
+          </tr>
+          <tr>
+            <td class="td-num">27</td>
+            <td class="td-name">Amarildo</td>
+            <td class="td-phone">(71) 99624-4766</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281073" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16141" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode</td>
+          </tr>
+          <tr>
+            <td class="td-num">28</td>
+            <td class="td-name">luciabrasil</td>
+            <td class="td-phone">(11) 97488-9823</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281090" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16159" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Estou no trabalho,se puder explicar por aqui,eu agradeço</td>
+          </tr>
+          <tr>
+            <td class="td-num">29</td>
+            <td class="td-name">Ana</td>
+            <td class="td-phone">(11) 98175-3845</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281094" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16167" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Poderia me falar o valor da formação?</td>
+          </tr>
+          <tr>
+            <td class="td-num">30</td>
+            <td class="td-name">Vânia</td>
+            <td class="td-phone">(83) 99943-6767</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281105" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16179" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Gratidão pelo seu contato. Essa é uma conta comercial. Nesse momento não é possível responder a sua mensagem. Assim que for possível farei contato com você. Bênçãos e paz!</td>
+          </tr>
+          <tr>
+            <td class="td-num">31</td>
+            <td class="td-name">Fabio E Paula</td>
+            <td class="td-phone">(21) 99814-4463</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281109" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16184" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Qual valor do curso</td>
+          </tr>
+          <tr>
+            <td class="td-num">32</td>
+            <td class="td-name">Flaviana</td>
+            <td class="td-phone">(77) 99900-1613</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281113" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16190" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Amanhã</td>
+          </tr>
+          <tr>
+            <td class="td-num">33</td>
+            <td class="td-name">Rosinaldo</td>
+            <td class="td-phone">(91) 98165-2887</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281124" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16201" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Mais tarde, pfv</td>
+          </tr>
+          <tr>
+            <td class="td-num">34</td>
+            <td class="td-name">Ana Alice</td>
+            <td class="td-phone">(62) 99188-5439</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281131" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16210" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Gostaria de saber valores e o plano de ensino/ grade.</td>
+          </tr>
+          <tr>
+            <td class="td-num">35</td>
+            <td class="td-name">Suzana Neves</td>
+            <td class="td-phone">(42) 99962-8031</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281132" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16415" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">‎Suzana Neves, psicanalista e hipnoterapeuta, agradece seu contato. Como posso ajudar?</td>
+          </tr>
+          <tr>
+            <td class="td-num">36</td>
+            <td class="td-name">Glauco</td>
+            <td class="td-phone">(85) 99402-0703</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281138" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16219" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Prefiro mensagem. Pode ser áudio.  obrigado</td>
+          </tr>
+          <tr>
+            <td class="td-num">37</td>
+            <td class="td-name">Ana</td>
+            <td class="td-phone">(79) 8822-1778</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281147" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16229" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Não posso atender</td>
+          </tr>
+          <tr>
+            <td class="td-num">38</td>
+            <td class="td-name">Danielly</td>
+            <td class="td-phone">(88) 98842-2055</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281161" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15098" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Eu ia trabalho com terapia</td>
+          </tr>
+          <tr>
+            <td class="td-num">39</td>
+            <td class="td-name">Hildon Luiz Correia</td>
+            <td class="td-phone">(88) 9612-7723</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281164" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16247" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá boa tarde, tudo bem? Deixa eu te dizer eu sou biomédico e alguns momentos eu não consigo tá no celular então se a gente puder conversar por mensagem pode ser por áudio, mas contanto que seja pelo Whatsapp porque tem alguns momentos que eu não consigo realmente atender o telefone.</td>
+          </tr>
+          <tr>
+            <td class="td-num">40</td>
+            <td class="td-name">Elizete</td>
+            <td class="td-phone">(47) 98825-7747</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281170" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16254" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Boa tarde prefiro que ligue mais tarde agora estou trabalhando</td>
+          </tr>
+          <tr>
+            <td class="td-num">41</td>
+            <td class="td-name">Eder</td>
+            <td class="td-phone">(31) 98419-5161</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281175" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16259" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode ligar agora</td>
+          </tr>
+          <tr>
+            <td class="td-num">42</td>
+            <td class="td-name">Lilian</td>
+            <td class="td-phone">(31) 97189-1783</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281179" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16263" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Só quero valor</td>
+          </tr>
+          <tr>
+            <td class="td-num">43</td>
+            <td class="td-name">Araújo</td>
+            <td class="td-phone">(71) 99259-2751</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281181" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16266" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Ligar agora</td>
+          </tr>
+          <tr>
+            <td class="td-num">44</td>
+            <td class="td-name">Luciane</td>
+            <td class="td-phone">(11) 94848-9057</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281189" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16277" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Apenas por ak mesmo… neste momento. Grata</td>
+          </tr>
+          <tr>
+            <td class="td-num">45</td>
+            <td class="td-name">Etiane</td>
+            <td class="td-phone">(66) 99224-2620</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281195" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16290" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Oi so posso falar via WhatsApp por mensagem e audio devido  ao meu horario de trabalho.</td>
+          </tr>
+          <tr>
+            <td class="td-num">46</td>
+            <td class="td-name">Audrey</td>
+            <td class="td-phone">(19) 98200-9000</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281197" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16292" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Gostaria de receber informações sobre o curso aqui no whats. É possível?</td>
+          </tr>
+          <tr>
+            <td class="td-num">47</td>
+            <td class="td-name">Luciana</td>
+            <td class="td-phone">(69) 9375-1794</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281204" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16303" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Drª Luciana Cristia- Doutora em Psicanalista/Psicopedagoga/Neuropsicopedagoga &amp; Esteticista 🧠 agradece seu contato, Como podemos ajudar? Agende a sua consulta presencial e on-line 😉Sábado: das 08:00 🕗 as 12:00 e das 13:00 as 17:00 hora. Atendimento presencial, atendimento on-line durante a semana das 18:00 às 21:00 h.😉Agenda aberta 😉</td>
+          </tr>
+          <tr>
+            <td class="td-num">48</td>
+            <td class="td-name">Doisze</td>
+            <td class="td-phone">(31) 98835-8798</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281214" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16313" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pensei bem aqui e vou aguardar um pouco mas agendei seu contato</td>
+          </tr>
+          <tr>
+            <td class="td-num">49</td>
+            <td class="td-name">Salão de Beleza Jaraguá Do</td>
+            <td class="td-phone">(47) 99264-5266</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281217" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16316" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Valor</td>
+          </tr>
+          <tr>
+            <td class="td-num">50</td>
+            <td class="td-name">Bruno</td>
+            <td class="td-phone">(31) 98805-3584</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281242" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16346" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">bom dia voce pode me enviar mais informações por escrito ou áudio?</td>
+          </tr>
+          <tr>
+            <td class="td-num">51</td>
+            <td class="td-name">Adri</td>
+            <td class="td-phone">(46) 99923-5215</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281249" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16353" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">No momento não posso atender,entrar em contato amanhã, agradeço</td>
+          </tr>
+          <tr>
+            <td class="td-num">52</td>
+            <td class="td-name">Marcelo</td>
+            <td class="td-phone">(11) 99658-0880</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281251" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16355" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">É online e qual o valor</td>
+          </tr>
+          <tr>
+            <td class="td-num">53</td>
+            <td class="td-name">Lilian</td>
+            <td class="td-phone">(16) 99234-4466</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281283" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16420" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Se possível por áudio, por favor</td>
           </tr>
         </tbody>
       </table>
@@ -515,155 +640,386 @@
   </div>
 </div>
 
-<!-- DAVID -->
 <div class="sdr-section">
   <div class="container">
     <div class="sdr-header">
       <h2>David Marques</h2>
       <span class="sdr-badge badge-david">SDR</span>
-      <span class="sdr-count">13 leads</span>
+      <span class="sdr-count">37 leads</span>
     </div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Links</th>
-            <th>Mensagem recebida</th>
-          </tr>
-        </thead>
+        <thead><tr><th>#</th><th>Nome</th><th>Telefone</th><th>Links</th><th>Mensagem recebida</th></tr></thead>
         <tbody>
           <tr>
             <td class="td-num">01</td>
-            <td class="td-name">Marcelino</td>
-            <td class="td-phone">(27) 98886-7260</td>
+            <td class="td-name">Graziela</td>
+            <td class="td-phone">(43) 99686-5085</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279609" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15703" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280391" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/13756" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">na quarta feira eu falei o horario que poderia me ligar... não fizeram. Hoje de 17hr até 17h20m ainda estarei disponivel</td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
             <td class="td-num">02</td>
-            <td class="td-name">Any</td>
-            <td class="td-phone">(51) 99670-7006</td>
+            <td class="td-name">Eduardo</td>
+            <td class="td-phone">(21) 97604-7136</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279722" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15726" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280455" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14527" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Podemos ver sobre na próxima semana? Estou na correria do meu estágio final e perdemos um familiar ontem. Obrigada!</td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
             <td class="td-num">03</td>
-            <td class="td-name">Jorge</td>
-            <td class="td-phone">(79) 99987-5500</td>
+            <td class="td-name">Mariana</td>
+            <td class="td-phone">(22) 99235-4499</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280073" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15811" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280469" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14592" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Mandei errado rsrs</td>
+            <td class="td-msg">Pode sim</td>
           </tr>
           <tr>
             <td class="td-num">04</td>
-            <td class="td-name">Matheus</td>
-            <td class="td-phone">(19) 99945-4855</td>
+            <td class="td-name">Marina</td>
+            <td class="td-phone">(61) 99437-8888</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280568" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14908" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280735" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15140" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Isso mesmo</td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
             <td class="td-num">05</td>
-            <td class="td-name">Mylara</td>
-            <td class="td-phone">(21) 96886-5157</td>
+            <td class="td-name">Bhrenda</td>
+            <td class="td-phone">(11) 98073-0210</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280572" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14911" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280781" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/10264" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">5mil reais</td>
+            <td class="td-msg">Gostaria de saber mais sobre a formação de hipnoterapia, por favor.</td>
           </tr>
           <tr>
             <td class="td-num">06</td>
-            <td class="td-name">Joseani</td>
-            <td class="td-phone">(11) 98497-5907</td>
+            <td class="td-name">Icaro</td>
+            <td class="td-phone">(13) 97825-0729</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280660" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15063" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280861" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15438" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Só gostaria de saber qual o valor do curso</td>
+            <td class="td-msg">Sim sim</td>
           </tr>
           <tr>
             <td class="td-num">07</td>
-            <td class="td-name">Ederson Dias Lopes</td>
-            <td class="td-phone">(67) 8127-6206</td>
+            <td class="td-name">Juliele</td>
+            <td class="td-phone">(14) 99794-2111</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280827" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15617" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280915" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15944" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Conseguiria para hoje ainda ou reagendando.</td>
+            <td class="td-msg">Pode me mandar por aqui msm! Estou em horário de trabalho</td>
           </tr>
           <tr>
             <td class="td-num">08</td>
-            <td class="td-name">Maria</td>
-            <td class="td-phone">(47) 96582-527</td>
+            <td class="td-name">alessandra</td>
+            <td class="td-phone">(61) 98641-0190</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280875" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15492" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280916" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/15945" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Pela manhã</td>
+            <td class="td-msg">Nesse sentido entendo que hoje descobri meu propósito</td>
           </tr>
           <tr>
             <td class="td-num">09</td>
-            <td class="td-name">Ricardo Lima</td>
-            <td class="td-phone">(85) 99837-1071</td>
+            <td class="td-name">Marcledson</td>
+            <td class="td-phone">(19) 98849-6427</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281006" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16070" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280971" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16031" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Bom dia, estou em um treinamento e não posso atender o celular. Pode mandar mensagem.</td>
+            <td class="td-msg">Entao só amanhã mesmo, hoje não consigo</td>
           </tr>
           <tr>
             <td class="td-num">10</td>
-            <td class="td-name">Priscila Duarte</td>
-            <td class="td-phone">(13) 99622-2460</td>
+            <td class="td-name">Lilian</td>
+            <td class="td-phone">(51) 98442-8769</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281230" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16333" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280976" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16039" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Bom dia! Sou terapeuta e até já utilizo algumas técnicas de hipnoterapia, só gostaria de receber as informações sobre carga horária, se é presencial e valor. Obrigada</td>
+            <td class="td-msg">Estou em atendimento desculpa</td>
           </tr>
           <tr>
             <td class="td-num">11</td>
-            <td class="td-name">Jairo</td>
-            <td class="td-phone">(55) 99711-7484</td>
+            <td class="td-name">Rafael</td>
+            <td class="td-phone">(31) 98444-4442</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281239" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16343" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280985" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16047" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Amanhã</td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
             <td class="td-num">12</td>
-            <td class="td-name">Dila</td>
-            <td class="td-phone">(51) 98199-1001</td>
+            <td class="td-name">Viviane</td>
+            <td class="td-phone">(11) 99294-5100</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281253" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16358" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281004" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16068" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Oi estou atendendo, assim que puder te chamo,</td>
+            <td class="td-msg">Porque estou no meu trabalho e não posso falar</td>
           </tr>
           <tr>
             <td class="td-num">13</td>
-            <td class="td-name">Mari</td>
-            <td class="td-phone">(31) 99718-1645</td>
+            <td class="td-name">Sueli</td>
+            <td class="td-phone">(22) 99101-7072</td>
             <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281261" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16366" target="_blank">Chatwoot ↗</a>
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281039" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16108" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">Mas pode ligar a hora que vc quiser</td>
+            <td class="td-msg">Daria pra ser por aqui mesmo ou prefere ligar por volta das 18 30 h?</td>
+          </tr>
+          <tr>
+            <td class="td-num">14</td>
+            <td class="td-name">RFreitas</td>
+            <td class="td-phone">(14) 99753-1470</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281044" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16110" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Amanha as 11h00  blz</td>
+          </tr>
+          <tr>
+            <td class="td-num">15</td>
+            <td class="td-name">Fernanda</td>
+            <td class="td-phone">(32) 98899-9679</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281049" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16115" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">agora vc é o Alexandre, David?</td>
+          </tr>
+          <tr>
+            <td class="td-num">16</td>
+            <td class="td-name">Fabiano</td>
+            <td class="td-phone">(14) 99708-0827</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281054" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16121" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Não estou podendo atender</td>
+          </tr>
+          <tr>
+            <td class="td-num">17</td>
+            <td class="td-name">Ricardo Fabiano Toledo</td>
+            <td class="td-phone">(32) 99136-8122</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281079" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16148" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">estou no trabalho so consigo atender por volta de 17:30</td>
+          </tr>
+          <tr>
+            <td class="td-num">18</td>
+            <td class="td-name">Amanda</td>
+            <td class="td-phone">(12) 98152-9401</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281083" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16152" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Sou psicóloga e gostaria de usar a hipnose hoje para trabalhar com alguns pacientes mais travados</td>
+          </tr>
+          <tr>
+            <td class="td-num">19</td>
+            <td class="td-name">Ana</td>
+            <td class="td-phone">(66) 99621-6148</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281085" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16154" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Não, obrigada</td>
+          </tr>
+          <tr>
+            <td class="td-num">20</td>
+            <td class="td-name">Guilherme Antonio Mellara</td>
+            <td class="td-phone">(45) 99845-1950</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281086" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16155" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Boa tarde, para mim fica melhor mais tarde</td>
+          </tr>
+          <tr>
+            <td class="td-num">21</td>
+            <td class="td-name">Renato</td>
+            <td class="td-phone">(51) 99637-0190</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281104" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16178" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode ligar</td>
+          </tr>
+          <tr>
+            <td class="td-num">22</td>
+            <td class="td-name">Pedro</td>
+            <td class="td-phone">(51) 98238-5000</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281107" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16181" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
+          </tr>
+          <tr>
+            <td class="td-num">23</td>
+            <td class="td-name">Juliano</td>
+            <td class="td-phone">(47) 99716-1476</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281111" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16187" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Bom dia, tudo bem, pode ser as 12:30 de hoje</td>
+          </tr>
+          <tr>
+            <td class="td-num">24</td>
+            <td class="td-name">Paulo</td>
+            <td class="td-phone">(11) 96810-1661</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281122" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16199" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Boa noite tudo bem? Poderíamos falar por mensagem ou áudio?</td>
+          </tr>
+          <tr>
+            <td class="td-num">25</td>
+            <td class="td-name">Nanda Campos| Terapeuta</td>
+            <td class="td-phone">(11) 96066-1090</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281141" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16222" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá, agradeço a sua mensagem, mas no momento não estou disponível. Me diz seu nome e como posso te ajudar? Assim que possível retorno, ok? ☺️🙏🩵</td>
+          </tr>
+          <tr>
+            <td class="td-num">26</td>
+            <td class="td-name">Michael</td>
+            <td class="td-phone">(21) 96959-7509</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281165" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16248" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Não dá pra atender</td>
+          </tr>
+          <tr>
+            <td class="td-num">27</td>
+            <td class="td-name">Tiago</td>
+            <td class="td-phone">(53) 99136-7444</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281178" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16262" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Por favor</td>
+          </tr>
+          <tr>
+            <td class="td-num">28</td>
+            <td class="td-name">Iracema</td>
+            <td class="td-phone">(85) 99232-2084</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281202" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16299" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Gostaria de saber valores e se é on-line ou presencial.</td>
+          </tr>
+          <tr>
+            <td class="td-num">29</td>
+            <td class="td-name">okdaskdoas</td>
+            <td class="td-phone">(19) 99609-5244</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281212" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16312" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Tem alguém para falar comigo?</td>
+          </tr>
+          <tr>
+            <td class="td-num">30</td>
+            <td class="td-name">Aure</td>
+            <td class="td-phone">(61) 98615-7922</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281216" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16314" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Bouuuaaa Noiiiiiteeeee</td>
+          </tr>
+          <tr>
+            <td class="td-num">31</td>
+            <td class="td-name">Elaine</td>
+            <td class="td-phone">(18) 99106-5000</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281220" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16322" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Bom dia!</td>
+          </tr>
+          <tr>
+            <td class="td-num">32</td>
+            <td class="td-name">Gabriela Nunes</td>
+            <td class="td-phone">(51) 99733-9472</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281223" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16328" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Estou trabalhando</td>
+          </tr>
+          <tr>
+            <td class="td-num">33</td>
+            <td class="td-name">Joelma Martins</td>
+            <td class="td-phone">(21) 97295-9066</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281231" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16334" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Vc quer me hipnotizar ?  Kkkkkk brincadeira</td>
+          </tr>
+          <tr>
+            <td class="td-num">34</td>
+            <td class="td-name">Wildyson Lemos</td>
+            <td class="td-phone">(92) 98582-9851</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281233" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16337" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode ser por msg estou em um estudo</td>
+          </tr>
+          <tr>
+            <td class="td-num">35</td>
+            <td class="td-name">Mestre Fred Fuchshuber / Bruxo Empresário  auto pecas</td>
+            <td class="td-phone">(21) 98390-7892</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281271" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/9193" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Superior incompleto psicologia  Empresário auto pecas 50 anos</td>
+          </tr>
+          <tr>
+            <td class="td-num">36</td>
+            <td class="td-name">Soraya</td>
+            <td class="td-phone">(41) 98851-0898</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281274" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16381" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Prefiro mensagem.</td>
+          </tr>
+          <tr>
+            <td class="td-num">37</td>
+            <td class="td-name">Pedro</td>
+            <td class="td-phone">(21) 99973-2038</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281280" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16416" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode sim</td>
           </tr>
         </tbody>
       </table>
@@ -671,10 +1027,9 @@
   </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   <div class="container">
-    <p class="footer-text">OMNI Brasil · Uso interno · 27 leads com resposta real de 39 na etapa Conectado · 28/04/2026</p>
+    <p class="footer-text">OMNI Brasil · Uso interno · 90 leads com resposta real de 569 na etapa Tentativa de Conectar · 28/04/2026</p>
   </div>
 </div>
 
