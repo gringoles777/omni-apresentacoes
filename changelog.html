@@ -391,6 +391,179 @@ function checkPwd() {
 // CHANGELOG DATA (auto-generated)
 // ═══════════════════════════════════════
 const DATA = [
+{"hash": "7e3d7920", "author": "Rafa Mendes", "date": "2026-04-28", "type": "fix", "scope": "w0002a", "message": "confirmacao de reuniao herdando inbox errado ao reagendar", "status": "correcao", "friendly": "Confirmacao de reuniao herdando inbox errado ao reagendar"},
+{"hash": "1f195075", "author": "Rafa Mendes", "date": "2026-04-28", "type": "chore", "scope": "n8n", "message": "w0001 v5 — changelog, backup pré-guard e inventário atualizado", "status": "manutencao", "friendly": "W0001 v5 — changelog, backup pré-guard e inventário atualizado"},
+{"hash": "77b89b5a", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "copiloto", "message": "substituir MediaRecorder iOS por webkitSpeechRecognition — MediaRecorder não dispara ondataavailable no Safari", "status": "correcao", "friendly": "Substituir MediaRecorder iOS por webkitSpeechRecognition — MediaRecorder não dispara ondataavailable no Safari"},
+{"hash": "4e1a536a", "author": "Julia", "date": "2026-04-28", "type": "debug", "scope": "copiloto", "message": "adicionar logs no endpoint /transcrever para diagnosticar Whisper", "status": "outro", "friendly": "Adicionar logs no endpoint /transcrever para diagnosticar Whisper"},
+{"hash": "121b0740", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "copiloto", "message": "corrigir segunda referência ws.close() no caminho desktop", "status": "correcao", "friendly": "Corrigir segunda referência ws.close() no caminho desktop"},
+{"hash": "169c6bc4", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "copiloto", "message": "corrigir referência ws.close() após refactor de reconexão", "status": "correcao", "friendly": "Corrigir referência ws.close() após refactor de reconexão"},
+{"hash": "644ca0aa", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "copiloto", "message": "corrigir chave Gemini no PM2 + tratamento de erro + reconexão automática do WS", "status": "correcao", "friendly": "Corrigir chave Gemini no PM2 + tratamento de erro + reconexão automática do WS"},
+{"hash": "3a00a45a", "author": "Julia", "date": "2026-04-28", "type": "feat", "scope": "portal/admin", "message": "formulário de cadastro de usuários com criação no Casdoor + banco", "status": "novo", "friendly": "Formulário de cadastro de usuários com criação no Casdoor + banco"},
+{"hash": "d00f8539", "author": "Julia", "date": "2026-04-28", "type": "feat", "scope": "portal/nav", "message": "adicionar Video Studio e Finanças como 'Em breve' no sidebar e bottom bar", "status": "novo", "friendly": "Adicionar Video Studio e Finanças como 'Em breve' no sidebar e bottom bar"},
+{"hash": "da0a5cf4", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "portal/ui", "message": "ButtonLink vazando prop 'as' para Next.js Link causando navegação para /link", "status": "correcao", "friendly": "ButtonLink vazando prop 'as' para Next.js Link causando navegação para /link"},
+{"hash": "bb9cb6c5", "author": "Julia", "date": "2026-04-28", "type": "fix", "scope": "portal/perfil", "message": "alterar senha via password grant + update-user admin", "status": "correcao", "friendly": "Alterar senha via password grant + update-user admin"},
+{"hash": "b9d96b40", "author": "Julia", "date": "2026-04-28", "type": "feat", "scope": "portal/perfil", "message": "formulário de alteração de senha via Casdoor API", "status": "novo", "friendly": "Formulário de alteração de senha via Casdoor API"},
+{"hash": "90b6b8af", "author": "Julia", "date": "2026-04-28", "type": "feat", "scope": "portal/perfil", "message": "exibir email de acesso + botão de logout no sidebar e perfil", "status": "novo", "friendly": "Exibir email de acesso + botão de logout no sidebar e perfil"},
+{"hash": "097504c4", "author": "Julia", "date": "2026-04-28", "type": "feat", "scope": "copiloto", "message": "fallback iOS via MediaRecorder + Whisper em chunks de 10s", "status": "novo", "friendly": "Fallback iOS via MediaRecorder + Whisper em chunks de 10s"},
+{"hash": "d8d4df1c", "author": "Rafa Mendes", "date": "2026-04-28", "type": "feat", "scope": "n8n", "message": "reestrutura fluxo confirmação — guard imediato + cancel path", "status": "novo", "friendly": "Reestrutura fluxo confirmação — guard imediato + cancel path"},
+{"hash": "99b39e33", "author": "Rafa Mendes", "date": "2026-04-28", "type": "docs", "scope": "n8n", "message": "registra workflow Pipedrive → Chatwoot Link (ZBSDy5CV08MNj2WO)", "status": "documentacao", "friendly": "Registra workflow Pipedrive → Chatwoot Link (ZBSDy5CV08MNj2WO)"},
+{"hash": "1ff7f0e3", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/design", "message": "centralizar frase e remover ponto final", "status": "correcao", "friendly": "Centralizar frase e remover ponto final"},
+{"hash": "f1438160", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/design", "message": "frase no sidebar + corrigir visibilidade no login", "status": "correcao", "friendly": "Frase no sidebar + corrigir visibilidade no login"},
+{"hash": "e69d67f1", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/design", "message": "mover frase para abaixo da logo", "status": "correcao", "friendly": "Mover frase para abaixo da logo"},
+{"hash": "98739db4", "author": "Julia", "date": "2026-04-27", "type": "feat", "scope": "portal/design", "message": "substituir logo pelo infinito do brandbook + tagline", "status": "novo", "friendly": "Substituir logo pelo infinito do brandbook + tagline"},
+{"hash": "a2754c4b", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "video-studio", "message": "squad completa de geração de vídeo com IA", "status": "novo", "friendly": "Squad completa de geração de vídeo com IA"},
+{"hash": "e26d0d3d", "author": "Julia", "date": "2026-04-27", "type": "feat", "scope": "portal/copiloto", "message": "suporte iOS via MediaRecorder + Whisper no servidor", "status": "novo", "friendly": "Suporte iOS via MediaRecorder + Whisper no servidor"},
+{"hash": "2aa5d4bc", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "usar idioma do sistema + mostrar idioma ativo", "status": "correcao", "friendly": "Usar idioma do sistema + mostrar idioma ativo"},
+{"hash": "cc3acd1a", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "status do microfone em tempo real + fix timing permissao", "status": "correcao", "friendly": "Status do microfone em tempo real + fix timing permissao"},
+{"hash": "03aad054", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "liberar microfone no Permissions-Policy do next.config", "status": "correcao", "friendly": "Liberar microfone no Permissions-Policy do next.config"},
+{"hash": "9a0b8fe8", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "liberar microfone no Permissions-Policy do middleware", "status": "correcao", "friendly": "Liberar microfone no Permissions-Policy do middleware"},
+{"hash": "dfe2b133", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "squad", "message": "CAP-036 — Squad Ads-high-ticket (Tiago Kiss) com 18 frameworks", "status": "novo", "friendly": "CAP-036 — Squad Ads-high-ticket (Tiago Kiss) com 18 frameworks"},
+{"hash": "b5f59b8b", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "tutorial completo Windows + Chrome para microfone bloqueado", "status": "correcao", "friendly": "Tutorial completo Windows + Chrome para microfone bloqueado"},
+{"hash": "13ea8af8", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "mostrar erro real do microfone em vez de assumir bloqueio", "status": "correcao", "friendly": "Mostrar erro real do microfone em vez de assumir bloqueio"},
+{"hash": "9006f21a", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "modal visual passo-a-passo para microfone bloqueado", "status": "correcao", "friendly": "Modal visual passo-a-passo para microfone bloqueado"},
+{"hash": "70400ca7", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "pedir permissao de mic explicitamente + mensagem clara de bloqueio", "status": "correcao", "friendly": "Pedir permissao de mic explicitamente + mensagem clara de bloqueio"},
+{"hash": "ecc1ed90", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "mensagem clara de mic bloqueado + fix stale closure", "status": "correcao", "friendly": "Mensagem clara de mic bloqueado + fix stale closure"},
+{"hash": "dca089e4", "author": "Julia", "date": "2026-04-27", "type": "feat", "scope": "portal/copiloto", "message": "sessao auto-detectada com campo editavel", "status": "novo", "friendly": "Sessao auto-detectada com campo editavel"},
+{"hash": "82291e07", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "remover seletor de fase — IA detecta automaticamente", "status": "correcao", "friendly": "Remover seletor de fase — IA detecta automaticamente"},
+{"hash": "4748cc27", "author": "Julia", "date": "2026-04-27", "type": "feat", "scope": "portal", "message": "integrar copiloto ao perfil do paciente", "status": "novo", "friendly": "Integrar copiloto ao perfil do paciente"},
+{"hash": "20731e45", "author": "Julia", "date": "2026-04-27", "type": "fix", "scope": "portal/copiloto", "message": "corrigir tipos SpeechRecognition para build TypeScript", "status": "correcao", "friendly": "Corrigir tipos SpeechRecognition para build TypeScript"},
+{"hash": "5259c704", "author": "Julia", "date": "2026-04-27", "type": "feat", "scope": "portal", "message": "copiloto de sessao OMNI", "status": "novo", "friendly": "Copiloto de sessao OMNI"},
+{"hash": "773e34db", "author": "Rafa Mendes", "date": "2026-04-27", "type": "fix", "scope": "n8n", "message": "W0002b keyword punctuation + W0002c last_activity_at", "status": "correcao", "friendly": "W0002b keyword punctuation + W0002c last_activity_at"},
+{"hash": "454d7059", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "research", "message": "benchmark externo OMNI — 9 players internacionais (parte 2)", "status": "novo", "friendly": "Benchmark externo OMNI — 9 players internacionais (parte 2)"},
+{"hash": "benchmark", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "research", "message": "benchmark externo OMNI — 9 players internacionais (parte 2 da pesquisa ICP-influencers)", "status": "novo", "friendly": "Benchmark Externo: 9 players internacionais — esteira proposta + projeção R$ 14,7M ARR + 7 big surprises"},
+{"hash": "bdcfe86f", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "video-editing", "message": "add_title_overlay — tarja preta com fade-out aprovada", "status": "novo", "friendly": "Add_title_overlay — tarja preta com fade-out aprovada"},
+{"hash": "17671e33", "author": "Rafa Mendes", "date": "2026-04-27", "type": "feat", "scope": "meta-templates", "message": "remove aprovação obrigatória da Rafa — Fernanda opera autonomamente", "status": "novo", "friendly": "Remove aprovação obrigatória da Rafa — Fernanda opera autonomamente"},
+{"hash": "cbf8d34e", "author": "Rafa Mendes", "date": "2026-04-24", "type": "chore", "scope": "", "message": "permissão executável no cli-router e .gitignore avaliacao-reunioes", "status": "manutencao", "friendly": "Permissão executável no cli-router e .gitignore avaliacao-reunioes"},
+{"hash": "d91dad52", "author": "Michael Arruda", "date": "2026-04-27", "type": "feat", "scope": "video-editing", "message": "estilo de legenda aprovado — blur=5, borda 5px, sombra difusa", "status": "novo", "friendly": "Estilo de legenda aprovado — blur=5, borda 5px, sombra difusa"},
+{"hash": "6d27f279", "author": "Michael Arruda", "date": "2026-04-26", "type": "fix", "scope": "video-editing", "message": "max 3 palavras por chunk (era 4)", "status": "correcao", "friendly": "Max 3 palavras por chunk (era 4)"},
+{"hash": "1c553fe8", "author": "Michael Arruda", "date": "2026-04-26", "type": "fix", "scope": "video-editing", "message": "subtitle_chunker — anti-letra-sozinha", "status": "correcao", "friendly": "Subtitle_chunker — anti-letra-sozinha"},
+{"hash": "31d67501", "author": "Michael Arruda", "date": "2026-04-26", "type": "fix", "scope": "video-editing", "message": "auto-analyst usa Gemini como fallback quando Sonnet rate-limited", "status": "correcao", "friendly": "Auto-analyst usa Gemini como fallback quando Sonnet rate-limited"},
+{"hash": "b7900d03", "author": "Michael Arruda", "date": "2026-04-26", "type": "feat", "scope": "video-editing", "message": "--auto-analyst — gera cut_recommendations.json via Sonnet automaticamente", "status": "novo", "friendly": "--auto-analyst — gera cut_recommendations.json via Sonnet automaticamente"},
+{"hash": "a23090ce", "author": "Michael Arruda", "date": "2026-04-26", "type": "fix", "scope": "video-editing", "message": "ajusta SEG_END_BUFFER de 200ms para 120ms", "status": "correcao", "friendly": "Ajusta SEG_END_BUFFER de 200ms para 120ms"},
+{"hash": "2ac19501", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "Gemini audio analysis + 200ms global buffer + MM.SS timestamp fix", "status": "novo", "friendly": "Gemini audio analysis + 200ms global buffer + MM.SS timestamp fix"},
+{"hash": "be0799ac", "author": "Michael Arruda", "date": "2026-04-25", "type": "fix", "scope": "video-editing", "message": "acoustic boundary refinement para forced cuts (anti-mid-word)", "status": "correcao", "friendly": "Acoustic boundary refinement para forced cuts (anti-mid-word)"},
+{"hash": "39cc88b7", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "tier 2 — very long filler detection + force_cut_before com timestamps", "status": "novo", "friendly": "Tier 2 — very long filler detection + force_cut_before com timestamps"},
+{"hash": "e86580ed", "author": "Michael Arruda", "date": "2026-04-25", "type": "fix", "scope": "video-editing", "message": "ciclo 10 — boundary fix + overlap revert + boundary-guard", "status": "correcao", "friendly": "Ciclo 10 — boundary fix + overlap revert + boundary-guard"},
+{"hash": "7967785f", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 10 — biased full-pass para fillers suprimidos", "status": "novo", "friendly": "Ciclo 10 — biased full-pass para fillers suprimidos"},
+{"hash": "2737d777", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 9 — short-gap fillers + contexto semântico no analyst", "status": "novo", "friendly": "Ciclo 9 — short-gap fillers + contexto semântico no analyst"},
+{"hash": "f5bf2a02", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 8 — ffmpeg crop + veryfast preset em etapas intermediárias", "status": "novo", "friendly": "Ciclo 8 — ffmpeg crop + veryfast preset em etapas intermediárias"},
+{"hash": "07f60826", "author": "Michael Arruda", "date": "2026-04-25", "type": "fix", "scope": "video-editing", "message": "ciclo 7 — remove entao/ai/bom/olha do SOFT_ACOUSTIC_SAFE", "status": "correcao", "friendly": "Ciclo 7 — remove entao/ai/bom/olha do SOFT_ACOUSTIC_SAFE"},
+{"hash": "80c93665", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 7 — acoustic isolation test para soft fillers", "status": "novo", "friendly": "Ciclo 7 — acoustic isolation test para soft fillers"},
+{"hash": "80e30f49", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 6 — Groq second-pass em gaps vocalizados (vícios de linguagem)", "status": "novo", "friendly": "Ciclo 6 — Groq second-pass em gaps vocalizados (vícios de linguagem)"},
+{"hash": "6ff1b9aa", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 5 final — offset 0.15s no boundary de corte do analyst", "status": "novo", "friendly": "Ciclo 5 final — offset 0.15s no boundary de corte do analyst"},
+{"hash": "b086232a", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 5 — boundary acústico exato via _find_exact_gap_boundaries", "status": "novo", "friendly": "Ciclo 5 — boundary acústico exato via _find_exact_gap_boundaries"},
+{"hash": "938a6f50", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 4 — fix mid-word cut + forced filler removal", "status": "novo", "friendly": "Ciclo 4 — fix mid-word cut + forced filler removal"},
+{"hash": "5bf18b69", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "analista v3.1 — micro-stutter + regra de boundary de corte", "status": "novo", "friendly": "Analista v3.1 — micro-stutter + regra de boundary de corte"},
+{"hash": "262dc0e0", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 3 — integração analyst→pipeline (cortes narrativos + acústicos)", "status": "novo", "friendly": "Ciclo 3 — integração analyst→pipeline (cortes narrativos + acústicos)"},
+{"hash": "d23c57d3", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "video-analyst v3 — substitui Gemini por Sonnet nativo", "status": "novo", "friendly": "Video-analyst v3 — substitui Gemini por Sonnet nativo"},
+{"hash": "98221aa9", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "video-analyst v2 — analise narrativa com Walter Murch + corte inteligente", "status": "novo", "friendly": "Video-analyst v2 — analise narrativa com Walter Murch + corte inteligente"},
+{"hash": "6a1a06b6", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 2 — noise floor calibrado, threshold adaptativo, soft filler com contexto prosódico", "status": "novo", "friendly": "Ciclo 2 — noise floor calibrado, threshold adaptativo, soft filler com contexto prosódico"},
+{"hash": "3bdcaa5a", "author": "Michael Arruda", "date": "2026-04-25", "type": "feat", "scope": "video-editing", "message": "ciclo 1 — filler detection v2 + ffmpeg-detect + threshold 0.7s", "status": "novo", "friendly": "Ciclo 1 — filler detection v2 + ffmpeg-detect + threshold 0.7s"},
+{"hash": "d2cbc55d", "author": "Michael Arruda", "date": "2026-04-24", "type": "fix", "scope": "video-editing", "message": "retry com backoff em rate limit no modo narrative", "status": "correcao", "friendly": "Retry com backoff em rate limit no modo narrative"},
+{"hash": "28e28c4c", "author": "Michael Arruda", "date": "2026-04-24", "type": "fix", "scope": "video-editing", "message": "usar OAuth token da assinatura Claude Code no modo narrative", "status": "correcao", "friendly": "Usar OAuth token da assinatura Claude Code no modo narrative"},
+{"hash": "19e40702", "author": "Michael Arruda", "date": "2026-04-24", "type": "fix", "scope": "video-editing", "message": "rodar claude CLI de /tmp para evitar carga do workspace", "status": "correcao", "friendly": "Rodar claude CLI de /tmp para evitar carga do workspace"},
+{"hash": "1b0efc51", "author": "Michael Arruda", "date": "2026-04-24", "type": "fix", "scope": "video-editing", "message": "modo narrative usa claude CLI (assinatura) em vez do SDK", "status": "correcao", "friendly": "Modo narrative usa claude CLI (assinatura) em vez do SDK"},
+{"hash": "73edec5d", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "video-editing", "message": "edicao narrativa via Claude Sonnet + nohup + timing", "status": "novo", "friendly": "Edicao narrativa via Claude Sonnet + nohup + timing"},
+{"hash": "9bdc3460", "author": "Julia", "date": "2026-04-24", "type": "fix", "scope": "portal/ig", "message": "voltar pra Instagram API with Instagram Login (api.instagram.com)", "status": "correcao", "friendly": "Voltar pra Instagram API with Instagram Login (api.instagram.com)"},
+{"hash": "ac1d6e4e", "author": "Julia", "date": "2026-04-24", "type": "fix", "scope": "portal/ig", "message": "mudar pra Facebook Business Login (facebook.com/dialog/oauth)", "status": "correcao", "friendly": "Mudar pra Facebook Business Login (facebook.com/dialog/oauth)"},
+{"hash": "8f4afabd", "author": "Julia", "date": "2026-04-24", "type": "fix", "scope": "portal/ig", "message": "usar Facebook App ID/Secret no OAuth (nao o Instagram App ID)", "status": "correcao", "friendly": "Usar Facebook App ID/Secret no OAuth (nao o Instagram App ID)"},
+{"hash": "89586190", "author": "Julia", "date": "2026-04-24", "type": "feat", "scope": "portal/ig", "message": "publicar no Instagram diretamente via Graph API", "status": "novo", "friendly": "Publicar no Instagram diretamente via Graph API"},
+{"hash": "75beadd3", "author": "Julia", "date": "2026-04-24", "type": "feat", "scope": "portal/perfil", "message": "componente de upload de foto de perfil na tela do terapeuta", "status": "novo", "friendly": "Componente de upload de foto de perfil na tela do terapeuta"},
+{"hash": "02c8d550", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "prisma+squad", "message": "integracao edicao de video via WhatsApp — Fase 4 (CAP-034)", "status": "novo", "friendly": "Integracao edicao de video via WhatsApp — Fase 4 (CAP-034)"},
+{"hash": "c6319cc0", "author": "Julia", "date": "2026-04-24", "type": "fix", "scope": "portal/ig", "message": "2 bugs de prod descobertos no teste Julia 2026-04-24", "status": "correcao", "friendly": "2 bugs de prod descobertos no teste Julia 2026-04-24"},
+{"hash": "88929da3", "author": "Julia", "date": "2026-04-24", "type": "fix", "scope": "portal/ig", "message": "renomeia toggle 'Com imagem/Só texto' pra 'Imagem com design/Imagem minimalista'", "status": "correcao", "friendly": "Renomeia toggle 'Com imagem/Só texto' pra 'Imagem com design/Imagem minimalista'"},
+{"hash": "d29f32d8", "author": "Julia", "date": "2026-04-24", "type": "chore", "scope": "portal", "message": "helper pra aplicar migrations SQL cruas via Prisma raw", "status": "manutencao", "friendly": "Helper pra aplicar migrations SQL cruas via Prisma raw"},
+{"hash": "8db15dee", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "squad", "message": "video-editing — squad AIOX orquestradora da CAP-032", "status": "novo", "friendly": "Video-editing — squad AIOX orquestradora da CAP-032"},
+{"hash": "dfa14584", "author": "Julia", "date": "2026-04-24", "type": "feat", "scope": "portal/ig", "message": "estilo \"texto\", variedade de fundos, stories 9:16, fluxo aprovar/regerar", "status": "novo", "friendly": "Estilo \"texto\", variedade de fundos, stories 9:16, fluxo aprovar/regerar"},
+{"hash": "ab46a048", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "capability", "message": "CAP-032 edicao de video via Claude Code (video-use + HyperFrames)", "status": "novo", "friendly": "CAP-032 edicao de video via Claude Code (video-use + HyperFrames)"},
+{"hash": "7d7ff294", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "research", "message": "revisao token identitario — reconsideracao Guerreiro/Guerreiro de Luz", "status": "novo", "friendly": "Revisao token identitario — reconsideracao Guerreiro/Guerreiro de Luz"},
+{"hash": "4645418c", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "research", "message": "analise token identitario audiencia — 5-7 opcoes com filtros Michael", "status": "novo", "friendly": "Analise token identitario audiencia — 5-7 opcoes com filtros Michael"},
+{"hash": "8b9cd573", "author": "Michael Arruda", "date": "2026-04-24", "type": "feat", "scope": "ns-welcome-engine", "message": "novas mensagens de boas-vindas (Joana, Alexandre, Rafael) e ajuste de saudacoes", "status": "novo", "friendly": "Novas mensagens de boas-vindas (Joana, Alexandre, Rafael) e ajuste de saudacoes"},
+{"hash": "1748c207", "author": "Rafa Mendes", "date": "2026-04-24", "type": "feat", "scope": "avaliacao-reunioes", "message": "routing doc, n8n workflow JSON e referência de ativação", "status": "novo", "friendly": "Routing doc, n8n workflow JSON e referência de ativação"},
+{"hash": "47b477b8", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal/ig", "message": "carrossel narrativo + parser tolerante a aspas duplas", "status": "correcao", "friendly": "Carrossel narrativo + parser tolerante a aspas duplas"},
+{"hash": "7445ea06", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "portal/ig", "message": "pipeline editorial Carrosseleiro pra todos os formatos", "status": "novo", "friendly": "Pipeline editorial Carrosseleiro pra todos os formatos"},
+{"hash": "d854413d", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "skill", "message": "adiciona /carrosseleiro com pipeline hibrido Gemini + Canvas", "status": "novo", "friendly": "Adiciona /carrosseleiro com pipeline hibrido Gemini + Canvas"},
+{"hash": "e63f523f", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "research", "message": "Workshop OMNI renomeado para DPSM Day — amarrado ao livro do Michael", "status": "novo", "friendly": "Workshop OMNI renomeado para DPSM Day — amarrado ao livro do Michael"},
+{"hash": "ebf58c9d", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "research", "message": "estrategia aquisicao players de imersao — blueprint Workshop OMNI", "status": "novo", "friendly": "Estrategia aquisicao players de imersao — blueprint Workshop OMNI"},
+{"hash": "e8dbdcf2", "author": "Julia", "date": "2026-04-23", "type": "refactor", "scope": "portal/ig", "message": "troca satori por @napi-rs/canvas (Skia) + carrossel multi-imagem", "status": "refatoracao", "friendly": "Troca satori por @napi-rs/canvas (Skia) + carrossel multi-imagem"},
+{"hash": "e771442d", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal/ig", "message": "usa fontes estaticas (Inter-Regular/Bold + Oswald-SB)", "status": "correcao", "friendly": "Usa fontes estaticas (Inter-Regular/Bold + Oswald-SB)"},
+{"hash": "14aac02b", "author": "Julia", "date": "2026-04-23", "type": "refactor", "scope": "portal/palettes", "message": "paletas com harmonia (areia, rose, solar, linha, indigo, jardim)", "status": "refatoracao", "friendly": "Paletas com harmonia (areia, rose, solar, linha, indigo, jardim)"},
+{"hash": "3a09e13f", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "portal", "message": "paletas visuais do terapeuta — IG + Landing Pages", "status": "novo", "friendly": "Paletas visuais do terapeuta — IG + Landing Pages"},
+{"hash": "30061780", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal/ig", "message": "fontes Inter e Oswald no repo + composer carrega do fs", "status": "correcao", "friendly": "Fontes Inter e Oswald no repo + composer carrega do fs"},
+{"hash": "34cab285", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal/ig", "message": "botao sugerir maior + log diagnostico", "status": "correcao", "friendly": "Botao sugerir maior + log diagnostico"},
+{"hash": "b4f959cc", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal", "message": "adiciona satori/resvg/sharp como serverExternalPackages", "status": "correcao", "friendly": "Adiciona satori/resvg/sharp como serverExternalPackages"},
+{"hash": "67ca9516", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "portal/ig", "message": "3 melhorias na Agência de Instagram", "status": "novo", "friendly": "3 melhorias na Agência de Instagram"},
+{"hash": "a6b3e642", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal", "message": "logIgCost quebrava por RLS sem app.current_user_id", "status": "correcao", "friendly": "LogIgCost quebrava por RLS sem app.current_user_id"},
+{"hash": "6991c95c", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal", "message": "contentId vazio quebrava logIgCost", "status": "correcao", "friendly": "ContentId vazio quebrava logIgCost"},
+{"hash": "510c84e8", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "research", "message": "insights Apify ICP V2 + raw data preservado", "status": "novo", "friendly": "Insights Apify ICP V2 + raw data preservado"},
+{"hash": "e2cd4beb", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "portal", "message": "redesign visual OMNI completo", "status": "novo", "friendly": "Redesign visual OMNI completo"},
+{"hash": "bea6004e", "author": "Rafa Mendes", "date": "2026-04-23", "type": "chore", "scope": "", "message": "remover backups CSV de conversas resolvidas da main", "status": "manutencao", "friendly": "Remover backups CSV de conversas resolvidas da main"},
+{"hash": "c359206d", "author": "Rafa Mendes", "date": "2026-04-23", "type": "merge", "scope": "Rafa→main", "message": "squads dash-omni + avaliacao-reunioes, scripts CRM, waba-registry", "status": "sincronizacao", "friendly": "Squads dash-omni + avaliacao-reunioes, scripts CRM, waba-registry"},
+{"hash": "923778d3", "author": "Rafa Mendes", "date": "2026-04-23", "type": "fix", "scope": "sessao", "message": "mover relatorio YC49 para outputs + squad avaliacao-reunioes completa", "status": "correcao", "friendly": "Mover relatorio YC49 para outputs + squad avaliacao-reunioes completa"},
+{"hash": "a9c16ba5", "author": "Michael Arruda", "date": "2026-04-23", "type": "fix", "scope": "prisma", "message": "suporte a Prisma remota via SSH + PRISMA_URL e PRISMA_SSH_HOST do .env", "status": "correcao", "friendly": "Suporte a Prisma remota via SSH + PRISMA_URL e PRISMA_SSH_HOST do .env"},
+{"hash": "db717e71", "author": "Michael Arruda", "date": "2026-04-23", "type": "chore", "scope": "session", "message": "permissoes Apify MCP + atualizar index influencers ICP", "status": "manutencao", "friendly": "Permissoes Apify MCP + atualizar index influencers ICP"},
+{"hash": "a638a9a4", "author": "Rafa Mendes", "date": "2026-04-23", "type": "merge", "scope": "", "message": "renomear dash-chief → dashomni-chief", "status": "sincronizacao", "friendly": "Renomear dash-chief → dashomni-chief"},
+{"hash": "47b1bdf4", "author": "Rafa Mendes", "date": "2026-04-23", "type": "refactor", "scope": "dash-omni", "message": "renomear dash-chief → dashomni-chief", "status": "refatoracao", "friendly": "Renomear dash-chief → dashomni-chief"},
+{"hash": "0d02e04d", "author": "Rafa Mendes", "date": "2026-04-23", "type": "merge", "scope": "rules", "message": "policy dash-omni na main", "status": "sincronizacao", "friendly": "Policy dash-omni na main"},
+{"hash": "25d74422", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "rules", "message": "policy dash-omni — toda operação no dashboard passa pela squad", "status": "novo", "friendly": "Policy dash-omni — toda operação no dashboard passa pela squad"},
+{"hash": "df5a46ae", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "task briefing-project + triagem no dash-chief", "status": "novo", "friendly": "Task briefing-project + triagem no dash-chief"},
+{"hash": "063a53fb", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "squad avaliacao-reunioes + outputs validação dash-omni", "status": "novo", "friendly": "Squad avaliacao-reunioes + outputs validação dash-omni"},
+{"hash": "8e9f2be5", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "squad dash-omni + aprovação template fora_horario Meta", "status": "novo", "friendly": "Squad dash-omni + aprovação template fora_horario Meta"},
+{"hash": "4e165710", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "meta-templates", "message": "atualizar waba-registry com novos dados", "status": "novo", "friendly": "Atualizar waba-registry com novos dados"},
+{"hash": "ec7004a8", "author": "Rafa Mendes", "date": "2026-04-22", "type": "chore", "scope": "sessao", "message": "backups conversas resolvidas, script chatwoot resolver 60d e relatorio bug YC49", "status": "manutencao", "friendly": "Backups conversas resolvidas, script chatwoot resolver 60d e relatorio bug YC49"},
+{"hash": "24f40d00", "author": "Rafa Mendes", "date": "2026-04-22", "type": "feat", "scope": "scripts", "message": "scripts de limpeza e repescagem CRM — Tentativa de Conectar", "status": "novo", "friendly": "Scripts de limpeza e repescagem CRM — Tentativa de Conectar"},
+{"hash": "c39fbc6c", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "task briefing-project + triagem no dash-chief", "status": "novo", "friendly": "Task briefing-project + triagem no dash-chief"},
+{"hash": "20b5d080", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "squad avaliacao-reunioes + outputs validação dash-omni", "status": "novo", "friendly": "Squad avaliacao-reunioes + outputs validação dash-omni"},
+{"hash": "04967f7f", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "squads", "message": "squad dash-omni + aprovação template fora_horario Meta", "status": "novo", "friendly": "Squad dash-omni + aprovação template fora_horario Meta"},
+{"hash": "fd8642e2", "author": "Rafa Mendes", "date": "2026-04-23", "type": "feat", "scope": "meta-templates", "message": "atualizar waba-registry com novos dados", "status": "novo", "friendly": "Atualizar waba-registry com novos dados"},
+{"hash": "b2e3b544", "author": "Rafa Mendes", "date": "2026-04-22", "type": "chore", "scope": "sessao", "message": "backups conversas resolvidas, script chatwoot resolver 60d e relatorio bug YC49", "status": "manutencao", "friendly": "Backups conversas resolvidas, script chatwoot resolver 60d e relatorio bug YC49"},
+{"hash": "5256d0fd", "author": "Rafa Mendes", "date": "2026-04-22", "type": "feat", "scope": "scripts", "message": "scripts de limpeza e repescagem CRM — Tentativa de Conectar", "status": "novo", "friendly": "Scripts de limpeza e repescagem CRM — Tentativa de Conectar"},
+{"hash": "bdf5cbd8", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "instagram", "message": "roteiro stories O Método + correção produto squad Kinshu", "status": "novo", "friendly": "Roteiro stories O Método + correção produto squad Kinshu"},
+{"hash": "bc5b5288", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "plano-acao", "message": "renomear prompt pra PLANO-DE-PRIORIZACAO + script plano-retomar.command", "status": "novo", "friendly": "Renomear prompt pra PLANO-DE-PRIORIZACAO + script plano-retomar.command"},
+{"hash": "5c277513", "author": "Michael Arruda", "date": "2026-04-23", "type": "fix", "scope": "supabase", "message": "audit trigger SECURITY DEFINER — corrige RLS 42501 em update via anon", "status": "correcao", "friendly": "Audit trigger SECURITY DEFINER — corrige RLS 42501 em update via anon"},
+{"hash": "f7a3d21e", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "research", "message": "22 arquivos restantes da pesquisa ICP Gestor Exausto", "status": "novo", "friendly": "22 arquivos restantes da pesquisa ICP Gestor Exausto"},
+{"hash": "d393d026", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "research", "message": "pesquisa ICP Gestor Exausto + shortlist 15 influencers (v2)", "status": "novo", "friendly": "Pesquisa ICP Gestor Exausto + shortlist 15 influencers (v2)"},
+{"hash": "17971226", "author": "Michael Arruda", "date": "2026-04-23", "type": "fix", "scope": "gateway", "message": "incluir ALLOWED_USER_2 no filtro do check-telegram", "status": "correcao", "friendly": "Incluir ALLOWED_USER_2 no filtro do check-telegram"},
+{"hash": "5f881b3e", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "capabilities", "message": "CAP-031 Plano de Acao — Supabase ativado (projeto gdizgxysttvhvuetesvn)", "status": "novo", "friendly": "CAP-031 Plano de Acao — Supabase ativado (projeto gdizgxysttvhvuetesvn)"},
+{"hash": "e270e8e5", "author": "Julia", "date": "2026-04-23", "type": "fix", "scope": "portal", "message": "modelo Gemini correto (gemini-2.5-flash-image, sem -preview)", "status": "correcao", "friendly": "Modelo Gemini correto (gemini-2.5-flash-image, sem -preview)"},
+{"hash": "04d21767", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "portal", "message": "mapa de sintomas com botao nova avaliacao + evolucao", "status": "novo", "friendly": "Mapa de sintomas com botao nova avaliacao + evolucao"},
+{"hash": "1d4c5023", "author": "Michael Arruda", "date": "2026-04-23", "type": "chore", "scope": "", "message": "salvar progresso — lancamento Nova Era, omni-site, dossiê Angola e scripts", "status": "manutencao", "friendly": "Salvar progresso — lancamento Nova Era, omni-site, dossiê Angola e scripts"},
+{"hash": "eebbc24a", "author": "Michael Arruda", "date": "2026-04-23", "type": "chore", "scope": "git", "message": "ignorar audit-log.jsonl auto-gerado pelo whatsbot", "status": "manutencao", "friendly": "Ignorar audit-log.jsonl auto-gerado pelo whatsbot"},
+{"hash": "4c542565", "author": "Michael Arruda", "date": "2026-04-23", "type": "docs", "scope": "content-studio", "message": "especificação técnica completa do OMNI Content Studio", "status": "documentacao", "friendly": "Especificação técnica completa do OMNI Content Studio"},
+{"hash": "cb4bc87b", "author": "Michael Arruda", "date": "2026-04-23", "type": "fix", "scope": "gateway", "message": "export CRM_ROOT so child processes inherit correct path", "status": "correcao", "friendly": "Export CRM_ROOT so child processes inherit correct path"},
+{"hash": "ea33e670", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "scripts", "message": "suporte a --image no send-whatsapp.js", "status": "novo", "friendly": "Suporte a --image no send-whatsapp.js"},
+{"hash": "b85c5c3d", "author": "Michael Arruda", "date": "2026-04-20", "type": "feat", "scope": "whatsapp-bridge", "message": "suporte a download de mídia recebida", "status": "novo", "friendly": "Suporte a download de mídia recebida"},
+{"hash": "d1e58c29", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "lancamento", "message": "central de gestão Nova Era OMNI — scripts, copies, tráfego e HTML interativo", "status": "novo", "friendly": "Central de gestão Nova Era OMNI — scripts, copies, tráfego e HTML interativo"},
+{"hash": "bac1631a", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "ceo-omni", "message": "plano de acao vigente + dashboard + Prisma automations", "status": "novo", "friendly": "Plano de acao vigente + dashboard + Prisma automations"},
+{"hash": "5f7dd402", "author": "Michael Arruda", "date": "2026-04-23", "type": "chore", "scope": "", "message": "resolver conflito settings.local.json (uniao de permissoes MCP)", "status": "manutencao", "friendly": "Resolver conflito settings.local.json (uniao de permissoes MCP)"},
+{"hash": "ead53101", "author": "Michael Arruda", "date": "2026-04-23", "type": "feat", "scope": "tech", "message": "register Apify MCP + vault sync — enables IG/YT scraping", "status": "novo", "friendly": "Register Apify MCP + vault sync — enables IG/YT scraping"},
+{"hash": "ab980293", "author": "Julia", "date": "2026-04-23", "type": "feat", "scope": "julia", "message": "apostila Academia Lendaria + scripts de extracao", "status": "novo", "friendly": "Apostila Academia Lendaria + scripts de extracao"},
+{"hash": "9218b1f1", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "IG — extrair caption parseado (nao raw) + parser mais tolerante", "status": "correcao", "friendly": "IG — extrair caption parseado (nao raw) + parser mais tolerante"},
+{"hash": "9ceb9475", "author": "Michael Arruda", "date": "2026-04-22", "type": "feat", "scope": "social-selling", "message": "squad ns-welcome-engine + scraper de perfil Instagram", "status": "novo", "friendly": "Squad ns-welcome-engine + scraper de perfil Instagram"},
+{"hash": "9d069a7c", "author": "Michael Arruda", "date": "2026-04-22", "type": "fix", "scope": "gateway", "message": "corrigir conflito 409 Telegram e path absoluto no reply_cmd", "status": "correcao", "friendly": "Corrigir conflito 409 Telegram e path absoluto no reply_cmd"},
+{"hash": "97d28a8b", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "POST /api/conteudo executa geracao real (Claude + Gemini)", "status": "correcao", "friendly": "POST /api/conteudo executa geracao real (Claude + Gemini)"},
+{"hash": "42d2ffe1", "author": "Julia", "date": "2026-04-22", "type": "docs", "scope": "portal", "message": "PT-052 — Claude CLI validado em prod", "status": "documentacao", "friendly": "PT-052 — Claude CLI validado em prod"},
+{"hash": "ba32cc79", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "remover --permission-mode deny (nao existe no CLI 2.x)", "status": "correcao", "friendly": "Remover --permission-mode deny (nao existe no CLI 2.x)"},
+{"hash": "fb909ac6", "author": "Julia", "date": "2026-04-22", "type": "docs", "scope": "portal", "message": "atualizar issues.md — ZAP 2x OK em prod + k6 smoke/full", "status": "documentacao", "friendly": "Atualizar issues.md — ZAP 2x OK em prod + k6 smoke/full"},
+{"hash": "9f2d76b6", "author": "Julia", "date": "2026-04-22", "type": "docs", "scope": "", "message": "atualizar executivo RIPD com retencao 1 ano", "status": "documentacao", "friendly": "Atualizar executivo RIPD com retencao 1 ano"},
+{"hash": "21c85ddc", "author": "Julia", "date": "2026-04-22", "type": "feat", "scope": "portal", "message": "reduzir retencao de 5 anos para 1 ano + aviso no arquivamento", "status": "novo", "friendly": "Reduzir retencao de 5 anos para 1 ano + aviso no arquivamento"},
+{"hash": "e51a07de", "author": "Julia", "date": "2026-04-22", "type": "feat", "scope": "portal", "message": "PM2 cluster mode com 2 instancias", "status": "novo", "friendly": "PM2 cluster mode com 2 instancias"},
+{"hash": "a78e5eb1", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "desabilitar ESLint durante build — warnings legados nao bloqueiam", "status": "correcao", "friendly": "Desabilitar ESLint durante build — warnings legados nao bloqueiam"},
+{"hash": "9b65b302", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "middleware — adicionar /api/cron, /api/metrics, /api/public a PUBLIC_PATHS", "status": "correcao", "friendly": "Middleware — adicionar /api/cron, /api/metrics, /api/public a PUBLIC_PATHS"},
+{"hash": "1b4263cf", "author": "Michael Arruda", "date": "2026-04-22", "type": "docs", "scope": "prisma", "message": "documentar suporte a anexos no envio de email", "status": "documentacao", "friendly": "Documentar suporte a anexos no envio de email"},
+{"hash": "10489fcf", "author": "Michael Arruda", "date": "2026-04-22", "type": "chore", "scope": "whatsbot", "message": "backup audit log", "status": "manutencao", "friendly": "Backup audit log"},
+{"hash": "663257c4", "author": "Michael Arruda", "date": "2026-04-22", "type": "chore", "scope": "whatsbot", "message": "backup audit log", "status": "manutencao", "friendly": "Backup audit log"},
+{"hash": "eab9ce49", "author": "Michael Arruda", "date": "2026-04-22", "type": "fix", "scope": "settings", "message": "resolver conflito de merge no settings.local.json", "status": "correcao", "friendly": "Resolver conflito de merge no settings.local.json"},
+{"hash": "14eeb944", "author": "Michael Arruda", "date": "2026-04-22", "type": "feat", "scope": "landing", "message": "ajustes em page, Hero e HeroImage da omni-formacao", "status": "novo", "friendly": "Ajustes em page, Hero e HeroImage da omni-formacao"},
+{"hash": "f06c38ee", "author": "Michael Arruda", "date": "2026-04-22", "type": "chore", "scope": "whatsbot", "message": "backup audit log", "status": "manutencao", "friendly": "Backup audit log"},
+{"hash": "d2bf19c8", "author": "Michael Arruda", "date": "2026-04-22", "type": "fix", "scope": "gateway", "message": "corrigir 3 bugs críticos no pipeline Telegram", "status": "correcao", "friendly": "Corrigir 3 bugs críticos no pipeline Telegram"},
+{"hash": "c4b30239", "author": "Michael Arruda", "date": "2026-04-19", "type": "chore", "scope": "whatsbot", "message": "backup audit log", "status": "manutencao", "friendly": "Backup audit log"},
+{"hash": "79b21f21", "author": "Michael Arruda", "date": "2026-04-22", "type": "feat", "scope": "squads", "message": "criar squad VSL-Kinshu com framework Kishuten Ketsu completo", "status": "novo", "friendly": "Criar squad VSL-Kinshu com framework Kishuten Ketsu completo"},
+{"hash": "8e9b2e36", "author": "Michael Arruda", "date": "2026-04-22", "type": "fix", "scope": "omni-site", "message": "servir vídeo hero via go.omnihypnosis.com.br", "status": "correcao", "friendly": "Servir vídeo hero via go.omnihypnosis.com.br"},
+{"hash": "7dfa0f5d", "author": "Michael Arruda", "date": "2026-04-22", "type": "feat", "scope": "omni-site", "message": "adicionar vídeo teaser no hero da home", "status": "novo", "friendly": "Adicionar vídeo teaser no hero da home"},
+{"hash": "e6e5b543", "author": "Rafa Mendes", "date": "2026-04-22", "type": "chore", "scope": "n8n", "message": "scripts auxiliares de fix e repescagem SDR", "status": "manutencao", "friendly": "Scripts auxiliares de fix e repescagem SDR"},
+{"hash": "fcf1f024", "author": "Rafa Mendes", "date": "2026-04-22", "type": "fix", "scope": "n8n", "message": "W0000 v1.4 — ExpressionError Verificar Conversa Existente + recuperação 11 leads", "status": "correcao", "friendly": "W0000 v1.4 — ExpressionError Verificar Conversa Existente + recuperação 11 leads"},
+{"hash": "ae2a2ca8", "author": "Rafa Mendes", "date": "2026-04-22", "type": "docs", "scope": "n8n", "message": "incidente V4AI 22/04 + infra n8n + mapa completo de pipelines/stages", "status": "documentacao", "friendly": "Incidente V4AI 22/04 + infra n8n + mapa completo de pipelines/stages"},
 {"hash": "c61dccab", "author": "Rafa Mendes", "date": "2026-04-22", "type": "chore", "scope": "workspace", "message": "outputs auditoria, guia de testes e scripts de limpeza SDR — sessao abr/2026", "status": "manutencao", "friendly": "Outputs auditoria, guia de testes e scripts de limpeza SDR — sessao abr/2026"},
 {"hash": "3c3c4d00", "author": "Julia", "date": "2026-04-22", "type": "feat", "scope": "portal", "message": "PT-052/053 — Claude CLI + Gemini Nano Banana (stack Michael)", "status": "novo", "friendly": "PT-052/053 — Claude CLI + Gemini Nano Banana (stack Michael)"},
 {"hash": "4d02344f", "author": "Julia", "date": "2026-04-22", "type": "fix", "scope": "portal", "message": "headers de seguranca globais — fix findings MEDIUM do ZAP", "status": "correcao", "friendly": "Headers de seguranca globais — fix findings MEDIUM do ZAP"},
@@ -1322,9 +1495,59 @@ function switchTab(tab) {
 }
 
 // ═══════════════════════════════════════
+// AUTO-ATUALIZADO: deriva "atualizado" do commit mais recente
+// Funciona para qualquer capability sem necessidade de update manual
+// ═══════════════════════════════════════
+function computeAtualizado(cap) {
+  // Keywords para busca: id do cap + palavras-chave do nome (≥4 chars)
+  const stopWords = new Set(['para','com','via','do','da','de','dos','das','em','no','na','nos','nas','um','uma','por','que','seu','sua']);
+  const idLower = cap.id.toLowerCase();
+  const nomeWords = cap.nome.toLowerCase().split(/[\s\-\_\/]+/).filter(w => w.length >= 4 && !stopWords.has(w));
+  // Scopes explícitos têm prioridade (ex: cap.scopes = ["prisma","whatsbot"])
+  const explicitScopes = cap.scopes || [];
+
+  let latestDate = null;
+
+  for (const commit of DATA) {
+    const scope = (commit.scope || '').toLowerCase();
+    const msg   = (commit.message || '').toLowerCase();
+
+    let match = false;
+
+    // 1. Scope explícito declarado no capability
+    if (explicitScopes.length && explicitScopes.some(s => scope === s || scope.includes(s))) {
+      match = true;
+    }
+    // 2. Commit menciona o ID do capability (ex: "CAP-001")
+    if (!match && (scope.includes(idLower) || msg.includes(idLower))) {
+      match = true;
+    }
+    // 3. Scope do commit bate com palavra-chave do nome
+    if (!match && nomeWords.some(w => scope.includes(w))) {
+      match = true;
+    }
+
+    if (match) {
+      if (!latestDate || commit.date > latestDate) latestDate = commit.date;
+    }
+  }
+
+  if (!latestDate) return cap.atualizado; // fallback para o valor hardcoded
+
+  // Formatar de YYYY-MM-DD para DD/MM
+  const parts = latestDate.split('-');
+  return parts[2] + '/' + parts[1];
+}
+
+// ═══════════════════════════════════════
 // BACKLOG
 // ═══════════════════════════════════════
 const BACKLOG_DATA = [
+  { id: "OMNI-013", titulo: "Instagram @michaelarruda — Fechar Story 6 do Roteiro O Método", autor: "Michael Arruda", data: "2026-04-23", prioridade: "alta", categoria: "conteudo", descricao: "Roteiro v2 salvo em outputs/roteiro-stories-o-metodo-v2.md. Story 6 pendente: completar antes/depois da Erika + definir 3º case real de aluno. Depois: gravar câmera frontal stories 1-3 e 5-7 (1h estúdio), gerar animação Veo 3 story 4 (linhagem Elman→Kein→Michael), editar + subir no destaque 'O Método' do perfil." },
+  { id: "OMNI-012", titulo: "Instagram @michaelarruda — Aplicar Bio e Reorganizar Destaques", autor: "Michael Arruda", data: "2026-04-23", prioridade: "alta", categoria: "conteudo", descricao: "Bio final definida (149 chars): '🧠 Trabalha muito e ainda não chegou onde merece? / 📖 +15M livros vendidos / 🌍 Método de 46 anos | ISO 9001 / De R$7k a R$40k/mês vivendo do seu propósito 👇'. Destaques: renomear 'É sobre isso' → 'De 0 a 20k', arquivar Angola/OMNI Pay/Aliança de Ouro/Infertilidade/É sobre isso atual, criar destaque 'O Método' com roteiro v2, unificar Ansiedade+Dores Crônicas em 'Dores', atualizar Depoimentos com stories recentes." },
+  { id: "OMNI-011", titulo: "Instagram @michaelarruda — Story 7 CTA: definir link do swipe up", autor: "Michael Arruda", data: "2026-04-23", prioridade: "media", categoria: "conteudo", descricao: "Definir para onde vai o swipe up do story 7 do destaque 'O Método': landing do Master em Omniterapia ou WhatsApp de convocação. Atualizar o roteiro v2 com o link definitivo antes de gravar." },
+  { id: "OMNI-010", titulo: "Plano de Acao Priorizado — Dashboard Vivo", autor: "Michael Arruda", data: "2026-04-23", prioridade: "alta", categoria: "gestao", link: "https://gringoles777.github.io/omni-apresentacoes/plano-acao-omni.html", descricao: "13 acoes priorizadas (CEO Advisor + Alan Nicolas — sessao de priorizacao abril 2026). Filtro por pessoa (Julia/Rafa/Michael/Fernanda), check em tempo real via Supabase, Prisma com ping diario 17h seg-sex (exceto Julia) + checkin semanal terca 08h. Para retomar o plano em nova sessao do Claude Code: duplo clique em scripts/plano-retomar.command." },
+  { id: "OMNI-009", titulo: "OMNI Content Studio — Maquina de Conteudo 360", autor: "Michael Arruda", data: "2026-04-23", prioridade: "alta", categoria: "produto", link: "https://drive.google.com/drive/folders/1a51EBOkFHYU5Y8Yxo4H5LywiEjTiQwhr", descricao: "Frontend de gestao e aprovacao de conteudo 360 (Instagram, TikTok, LinkedIn, YouTube, Blog, Email). Pipeline automatizado via Claude Code Routines + subagents. Epic completo com 37 stories, wireframes e API spec prontos para desenvolvimento externo." },
   { id: "OMNI-007", titulo: "Dashboard completo do trafego ao comercial", autor: "Michael Arruda", data: "2026-03-30", prioridade: "alta", categoria: "gestao" }
 ];
 
@@ -1354,7 +1577,9 @@ function renderBacklog() {
           <span>${item.autor}</span>
           <span>${item.data}</span>
           <span style="color:var(--color-teal)">${item.categoria}</span>
+          ${item.link ? `<a href="${item.link}" target="_blank" style="color:var(--color-gold);text-decoration:none">📁 Ver especificação</a>` : ''}
         </div>
+        ${item.descricao ? `<div style="margin-top:8px;font-size:12px;color:var(--color-cream-50);line-height:1.5">${item.descricao}</div>` : ''}
       </div>`;
   });
   el.innerHTML = html;
@@ -1364,13 +1589,13 @@ function renderBacklog() {
 // RECURSOS DATA
 // ═══════════════════════════════════════
 const CAPABILITIES = [
-  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"parcialmente_funcional",statusLabel:"Parcial",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"28/03",atualizado:"06/04",
+  {id:"CAP-001",nome:"Prisma Whatsbot",categoria:"assistente-interno",status:"ativo",statusLabel:"Ativo",scopes:["prisma","whatsbot","whatsapp-bridge","gateway"],
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.3",inicio:"28/03",atualizado:"23/04",
     link:"WhatsApp: +5511934366311 | VPS: 76.13.169.211:3001",
     depende:[],dependentes:["CAP-002"],
-    descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, lembra o contexto por 10 minutos e executa operacoes com registro de auditoria.",
-    habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Lembra o contexto da conversa (5 min, max 20 msgs)","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
-    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],nota:"Bug — Claude consome todos os turnos no setup do CLAUDE.md"},
+    descricao:"Assistente de IA interno da OMNI acessivel pelo WhatsApp. Responde texto e audio, envia imagens, lembra o contexto e executa operacoes com registro de auditoria.",
+    habilidades:["Responde mensagens de texto com IA (Claude)","Transcreve e entende mensagens de audio","Envia imagens e anexos (suporte a --image)","Download de midia recebida","Lembra o contexto da conversa","Mostra 'digitando...' ao processar resposta","Salva automaticamente no GitHub (auto-commit)","Comandos: /reset, /status, /log, /help","Registro de auditoria de tudo que faz","Controle de permissoes por usuario"],
+    apis:["Evolution API 2.3.7","OpenCloud","Claude AI (CLI)","Groq Whisper API","GitHub API"],nota:""},
   {id:"CAP-002",nome:"Backlog Inteligente via Prisma",categoria:"gestao",status:"em_desenvolvimento",statusLabel:"Em Dev",
     criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"29/03",atualizado:"29/03",
     link:"https://gringoles777.github.io/omni-apresentacoes/backlog.html",
@@ -1573,6 +1798,139 @@ const CAPABILITIES = [
     <span>Auth Config:</span> <code>ac_yMBfGL_vGlJb</code> &nbsp;|&nbsp;
     <span>Conta conectada:</span> <code>ca_3AqvZhHz745L</code>
   </div>
+</div>`},
+
+  {id:"CAP-030",nome:"Apify MCP (scraping IG/YT/TikTok)",categoria:"mcp-integracao",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"23/04",atualizado:"23/04",
+    link:"MCP: apify (Claude Code user scope)",
+    depende:[],dependentes:["Squad ns-welcome-engine","@analyst (Jerry)"],
+    descricao:"MCP oficial do Apify (@apify/actors-mcp-server) conectado à conta omnibrasil. Dá acesso a 5000+ Actors prontos para scraping de Instagram, YouTube, TikTok e qualquer site — alimenta ICP research, content intelligence e squads sociais.",
+    habilidades:[
+      "Buscar Actors no Apify Store (search-actors)",
+      "Rodar Actors sob demanda (call-actor)",
+      "Inspecionar schema/input de Actors (fetch-actor-details)",
+      "Ler outputs de runs e datasets (get-actor-output, storage)",
+      "Listar e gerenciar runs (runs)",
+      "Acesso a documentação Apify (docs)",
+      "Preview de resultados (preview)"
+    ],
+    apis:["Apify REST API v2","@apify/actors-mcp-server (stdio)","Claude Code user scope (~/.claude.json)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Actors prioritários já confirmados</div>
+  <div class="note-step"><div class="note-num">1</div><div><code>apify/instagram-comment-scraper</code> — oficial, 6.4M runs/mês</div></div>
+  <div class="note-step"><div class="note-num">2</div><div><code>apify/instagram-scraper</code> — posts e perfil</div></div>
+  <div class="note-step"><div class="note-num">3</div><div><code>streamers/youtube-scraper</code> — comentários YouTube</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Token <code>APIFY_TOKEN</code> disponível no vault VPS + <code>.env</code> local. Plano free tier (~5 USD/mês de créditos) na conta <code>omnibrasil</code>.</div></div>
+</div>`},
+
+  {id:"CAP-032",nome:"Edição de Vídeo via Claude Code (video-use + HyperFrames)",categoria:"skill-claude-code",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"Skills: ~/.claude/skills/ (7 symlinks)",
+    depende:["Groq Whisper API (CAP já existente)","ffmpeg 6.1.1","Chromium headless"],dependentes:[],
+    descricao:"Pipeline ponta-a-ponta de edição de vídeo orquestrado pelo Claude Code na VPS. Drop um .mp4 bruto numa pasta, abre Claude Code, pede \"edita isso com motion graphics estilo Nate Herk\" — o agente transcreve (Groq Whisper), corta filler words, queima legendas e adiciona motion graphics HTML+GSAP sincronizadas ao transcript. Baseado no vídeo \"Claude Just Destroyed Every Video Editing Tool\" (Nate Herk, abr/2026). ElevenLabs substituído por Groq Whisper Turbo para zerar custo de STT.",
+    habilidades:[
+      "Transcrição com timestamp por palavra (Groq Whisper Turbo)",
+      "Cortes automáticos de filler words, silêncios e retakes",
+      "Fades de áudio de 30ms em cada corte (sem pops)",
+      "6 presets de legenda (nate-herk, clássico, karaokê, minimalista, negrito-impacto, ptbr-legendagem)",
+      "Motion graphics HTML+CSS+GSAP sincronizadas ao transcript",
+      "Render determinístico via Chromium headless + ffmpeg",
+      "Auto-avaliação visual antes de mostrar preview",
+      "Persistência de sessão em project.md (retoma de onde parou)",
+      "Suporta 1080p/4K, 16:9, 9:16 vertical e 1:1"
+    ],
+    apis:["Groq Whisper Turbo (whisper-large-v3-turbo)","Chromium headless (Puppeteer)","ffmpeg 6.1.1","Node 22.22.1 + bun","Python 3.12 + librosa/matplotlib/pillow"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar (apenas Michael por enquanto — Fase 3 abre pra equipe)</div>
+  <div class="note-step"><div class="note-num">1</div><div><code>cd /pasta/com/videos && claude</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Pede em linguagem natural: <em>"edita raw.mp4 tirando filler words, legenda estilo nate-herk, formato vertical 9:16"</em></div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Claude ativa <code>/video-use</code>, gera <code>edit/final.mp4</code>. Para motion graphics: <code>/hyperframes</code></div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Guia completo em <code>workspace/businesses/omni_brasil/tech/video-editing-guide.md</code></div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Agora também orquestrado pela squad <code>video-editing</code> (CAP-033) com 2 modos REELS/GERAL</div></div>
+</div>`},
+
+  {id:"CAP-033",nome:"Squad video-editing (orquestrador da CAP-032)",categoria:"squad-aiox",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"squads/video-editing/ — 5 agentes",
+    depende:["CAP-032","Gemini 2.5 Flash","rclone gdrive-omni remote","Prisma Whatsbot (CAP-001)"],dependentes:[],
+    descricao:"Squad AIOX que orquestra a CAP-032 em 2 modos. REELS (opinativo): Gemini analisa o vídeo, squad propõe hook + 3 títulos, aplica crop 9:16 face-aware, aceleração 1.05x, remove filler/silêncio, queima legenda DM Sans Bold centralizada UPPERCASE — sem música, jamais. GERAL (cirúrgico): executa EXATAMENTE o pedido, sem defaults. Upload automático no Drive OMNI + notificação terminal (OSC 8 hyperlink) + WhatsApp pro Michael via Prisma.",
+    habilidades:[
+      "Detecção automática de modo REELS vs GERAL por palavras-chave",
+      "Análise narrativa via Gemini 2.5 Flash com input de vídeo nativo",
+      "Crop 9:16 face-aware via OpenCV Haar cascade (modo REELS)",
+      "Chunker de legenda pt-BR com stick-with-next (artigos, preposições, expressões fixas)",
+      "Aceleração 1.05x global (modo REELS)",
+      "Remoção de filler words pt-BR (hum, né, tipo, sabe etc.)",
+      "Proposta de hook + 3 títulos candidatos (modo REELS)",
+      "Slug automático YYYY-MM-DD_tema.mp4 com unidecode e stopwords pt-BR",
+      "Upload no Drive OMNI com detecção de colisão (-v2, -v3)",
+      "Notificação WhatsApp via Prisma",
+      "3 triggers: slash /video-editor, agente @video-chief, detecção natural em qualquer sessão Claude"
+    ],
+    apis:["Gemini 2.5 Flash (GOOGLE_AI_STUDIO_API_KEY)","Groq Whisper Turbo (via CAP-032)","rclone gdrive-omni","Python: unidecode/opencv-headless/mediapipe","Font DM Sans Bold"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">3 formas de usar</div>
+  <div class="note-step"><div class="note-num">1</div><div><strong>Slash direto:</strong> <code>/video-editor /tmp/raw.mp4 reels sobre precificação</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div><strong>Agente:</strong> <code>@video-chief edita /tmp/raw.mp4 como reels</code></div></div>
+  <div class="note-step"><div class="note-num">3</div><div><strong>Detecção natural:</strong> Qualquer sessão Claude detectando "edita esse vídeo", "faz um reels", "corta entre X e Y" aciona a squad automaticamente (via <code>.claude/rules/video-editing-policy.md</code>)</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Output: <code>gdrive-omni:06_SISTEMAS/video-editor/output/</code> — nomenclatura <code>YYYY-MM-DD_slug.mp4</code></div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Notificação: terminal (OSC 8 hyperlink clicável) + WhatsApp pro Michael (5511951360623) via Prisma</div></div>
+  <div class="note-step"><div class="note-num">6</div><div>Apenas Michael por enquanto — Fase 4 abre multi-usuário + integração Prisma bidirecional (receber vídeo por WhatsApp)</div></div>
+</div>`},
+
+  {id:"CAP-034",nome:"Prisma + Squad video-editing (edição de vídeo via WhatsApp)",categoria:"bridge-integration",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"24/04",atualizado:"24/04",
+    link:"server.js + squads/video-editing/helpers/deliver_whatsapp.sh",
+    depende:["CAP-001 (Prisma)","CAP-033 (Squad video-editing)","CAP-032 (video-use + HyperFrames)"],dependentes:[],
+    descricao:"Fase 4 da edição de vídeo. Usuário manda vídeo pelo WhatsApp + texto pedindo edição (\"edita esse reels\", \"corta entre X e Y\", etc.) — bridge Prisma detecta automaticamente via detectVideoEditRequest(), estende timeout pra 15 min, injeta prompt com instruções da squad, Claude roda pipeline completa e responde com o vídeo editado anexado no WhatsApp + link do Drive como backup. Briefing numerado via WhatsApp (só modo REELS). Compressão automática pra caber no limite de 64MB do WhatsApp (720p crf 26 dá tipicamente 10x menor).",
+    habilidades:[
+      "Detecção automática de pedido de edição em mensagens WhatsApp (50+ keywords pt-BR)",
+      "Timeout expandido pra 15 min quando detecta edição (vs 5 min default)",
+      "MaxTurns expandido pra 50 — suporta pipeline longa + briefing interativo",
+      "Briefing numerado via WhatsApp: usuário escolhe legenda (1/2/3) e título (1/2/3/0)",
+      "Entrega automática: upload Drive + vídeo anexado no WhatsApp + link como backup",
+      "Compressão automática 720p crf 26 se > 64MB (ex: 517MB → 10MB)",
+      "Fallback: se mesmo comprimido > 64MB, envia só link do Drive",
+      "Modos REELS (com briefing) e GERAL (execução direta sem perguntar)",
+      "Status messages espaçadas em 60s durante render (evita spammar)",
+      "Qualquer usuário autorizado do Prisma pode usar (Rafa, Michael, Julia, Fernanda)"
+    ],
+    apis:["Evolution API (via bridge)","Google AI Studio (Gemini 2.5 Flash via CAP-033)","Groq Whisper (via CAP-032)","rclone gdrive-omni"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar pelo WhatsApp</div>
+  <div class="note-step"><div class="note-num">1</div><div>Manda o vídeo pela Prisma (sem texto — ela guarda silencioso)</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Em seguida manda: <em>"edita esse reels sobre precificação"</em> (modo REELS) ou <em>"corta entre 12:30 e 14:45"</em> (modo GERAL)</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Prisma detecta, avisa "Edição em andamento (10-15 min)", aciona a squad</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Modo REELS: squad pergunta legenda (1/2/3) e título (1/2/3/0). Modo GERAL: executa direto</div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Recebe o vídeo editado anexado no WhatsApp + link do Drive pra baixar em HD</div></div>
+  <div class="note-step"><div class="note-num">6</div><div>Se vídeo > 64MB: comprime automaticamente pra 720p. Se não couber mesmo comprimido, manda só link do Drive.</div></div>
+</div>`},
+
+  {id:"CAP-036",nome:"Squad Ads-high-ticket (Tiago Kiss)",categoria:"squad-aiox",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"27/04",atualizado:"27/04",
+    link:"squads/ads-high-ticket/ + workspace/businesses/omni_brasil/inputs/thiago-kiss/",
+    depende:[],dependentes:[],
+    descricao:"Squad operacional especializada em geração de leads qualificados pra ofertas high ticket (R$10k+). Conhecimento extraído da palestra do Tiago Kiss (Diretor de Branding do Érico Rocha e Ladeira) no mastermind do Pedro Moura (~64min, abril/2026). Transcrição via Whisper local (large-v3-turbo, gratuito). Síntese estruturada em 18 frameworks. 2 agentes ativos: @ads-high-ticket-chief (orquestrador) e @tiago-kiss (especialista). Foco em: branding artístico + sessão 1-1 + anúncio raiz/Nutella + indicação oculta + lançamento das sobras via WhatsApp. Métricas-âncora do método: R$23 por reunião agendada (vs R$150-200 mercado), R$30k tráfego → R$450-550k receita constante, 6 em 7 todas as semanas.",
+    habilidades:[
+      "18 frameworks documentados (3 Avatares, Sub-nichos, Indicação Oculta, Anúncio Raiz/Nutella, etc.)",
+      "Agente persona @tiago-kiss com voz, frameworks e cases reais (Ladeira, Érico, DJ R$25k)",
+      "Agente orquestrador @ads-high-ticket-chief que roteia entre squads relacionadas",
+      "Knowledge base com transcrição completa (~64min, ~11k palavras)",
+      "Estrutura de copy raiz + Nutella aplicável a qualquer nicho",
+      "Script de Indicação Oculta pra closer aplicar em sessão 1-1",
+      "Roteiro de Lançamento das Sobras via WhatsApp API Oficial",
+      "Briefing de branding artístico (caso Ladeira: máquina de escrever + banheira)",
+      "Audit de copy \"Boteco vs Robô\" pra anúncios existentes",
+      "Variação de avatar (Novo, Acomodado, Cansado) em 3 camadas pra cada anúncio"
+    ],
+    apis:["Whisper.cpp local (large-v3-turbo, gratuito, Metal)","ffmpeg (m4a → wav 16kHz)","WebSearch + WebFetch (research)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar a squad</div>
+  <div class="note-step"><div class="note-num">1</div><div>Acionar pelo orquestrador: <em>@ads-high-ticket-chief</em></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Ou ir direto no especialista: <em>@tiago-kiss</em></div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Casos de uso: desenhar funil high ticket, escrever copy raiz/Nutella, criar variação de avatar, estruturar lançamento das sobras, briefing de branding artístico</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>NÃO usar pra: execução técnica em plataforma (use @aiox-ads), copy longa de e-mail/VSL (use @aiox-copy), edição final de vídeo (use @video-editing)</div></div>
+  <div class="note-step"><div class="note-num">5</div><div>Filosofia central: "Quem domina a qualidade da dor, domina a qualidade do lead. Para de focar nos caras de boleto, foca nos caras com cara de pix."</div></div>
 </div>`}
 ];
 
@@ -1599,7 +1957,8 @@ const INFRA = [
   {nome:"Gmail MCP", detalhe:"Leitura, envio, drafts, labels via Claude Code", status:"ativo"},
   {nome:"Vault Centralizado", detalhe:"Cofre de chaves na VPS — /opt/omni-vault/.env.master", status:"ativo"},
   {nome:"Fathom AI MCP", detalhe:"Acesso a reunioes, transcricoes e resumos via Claude Code", status:"ativo"},
-  {nome:"Composio Instagram MCP", detalhe:"Instagram Business OMNI via Composio — posts, DMs, insights, stories | .mcp.json", status:"ativo"}
+  {nome:"Composio Instagram MCP", detalhe:"Instagram Business OMNI via Composio — posts, DMs, insights, stories | .mcp.json", status:"ativo"},
+  {nome:"Apify MCP", detalhe:"Scraping IG/YT/TikTok via @apify/actors-mcp-server — conta omnibrasil | user scope", status:"ativo"}
 ];
 
 // ═══════════════════════════════════════
@@ -1706,7 +2065,7 @@ function renderCapCard(c) {
           <div class="cap-meta" style="margin-top:4px">
             <span class="responsavel">${c.responsavel}</span>
             <span>Inicio: ${c.inicio}</span>
-            <span>Atualizado: ${c.atualizado}</span>
+            <span>Atualizado: ${computeAtualizado(c)}</span>
           </div>
         </div>
         <span class="cap-status cap-status-${statusClass}">${c.statusLabel}</span>

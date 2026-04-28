@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Pesquisa ICP Gestor Exausto (Apify v2)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245, 240, 232, 0.70);
+    --color-cream-50: rgba(245, 240, 232, 0.50);
+    --color-cream-30: rgba(245, 240, 232, 0.30);
+    --color-teal: #2A9D8F;
+    --color-coral: #E76F51;
+    --color-gray: #6B6B6B;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  body {
+    background: var(--color-black);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    line-height: 1.55;
+  }
+
+  a { color: var(--color-gold-light); text-decoration: none; }
+  a:hover { color: var(--color-gold); }
+
+  /* PASSWORD GATE */
+  #gate {
+    position: fixed; inset: 0;
+    background: var(--color-black);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999;
+    flex-direction: column; gap: 24px;
+  }
+  #gate.hidden { display: none; }
+  #gate .logo { font-family: var(--font-display); font-size: 32px; letter-spacing: 8px; color: var(--color-gold); text-transform: uppercase; }
+  #gate .sub { font-size: 11px; letter-spacing: 4px; color: var(--color-cream-50); text-transform: uppercase; }
+  #gate input {
+    background: var(--color-dark-elevated); border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream); padding: 14px 20px; border-radius: 8px;
+    font-size: 16px; text-align: center; width: 280px; outline: none;
+    font-family: var(--font-body);
+  }
+  #gate input:focus { border-color: var(--color-gold); }
+  #gate .error { color: #e74c3c; font-size: 13px; display: none; }
+
+  /* MAIN */
+  #app { display: none; }
+  #app.visible { display: block; }
+
+  /* HERO */
+  .hero {
+    padding: 80px 32px 60px;
+    background: radial-gradient(ellipse at top, rgba(200, 168, 75, 0.08), transparent 60%), var(--color-black);
+    border-bottom: 1px solid var(--color-dark-texture);
+    text-align: center;
+  }
+  .hero .brand { font-family: var(--font-display); font-size: 18px; letter-spacing: 6px; color: var(--color-gold); text-transform: uppercase; margin-bottom: 14px; }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); text-transform: uppercase; letter-spacing: 1px; line-height: 1; color: var(--color-cream); }
+  .hero .tagline { font-size: 18px; color: var(--color-cream-70); margin-top: 20px; font-style: italic; max-width: 720px; margin-inline: auto; }
+  .hero .meta { display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
+  .hero .meta-item { text-align: center; }
+  .hero .meta-item .val { font-family: var(--font-display); font-size: 36px; color: var(--color-gold); }
+  .hero .meta-item .lbl { font-size: 11px; letter-spacing: 2px; color: var(--color-cream-50); text-transform: uppercase; margin-top: 4px; }
+
+  /* CONTAINER */
+  .container { max-width: 1200px; margin: 0 auto; padding: 60px 32px; }
+  section { border-bottom: 1px solid var(--color-dark-texture); }
+  section:last-child { border-bottom: none; }
+
+  /* SECTION HEADER */
+  .sec-head { margin-bottom: 40px; }
+  .sec-head .kicker { font-family: var(--font-display); font-size: 12px; letter-spacing: 4px; color: var(--color-gold); text-transform: uppercase; }
+  .sec-head h2 { font-family: var(--font-display); font-size: clamp(28px, 3.5vw, 42px); text-transform: uppercase; line-height: 1.1; margin-top: 8px; color: var(--color-cream); letter-spacing: 1px; }
+  .sec-head .lead { color: var(--color-cream-70); margin-top: 16px; max-width: 720px; }
+
+  /* TLDR CARDS */
+  .tldr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .tldr-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-dark-texture);
+    border-left: 3px solid var(--color-gold);
+    padding: 28px;
+    border-radius: 4px;
+    transition: transform 0.2s, border-left-color 0.2s;
+  }
+  .tldr-card:hover { transform: translateY(-2px); border-left-color: var(--color-gold-light); }
+  .tldr-card .num { font-family: var(--font-display); font-size: 32px; color: var(--color-gold); line-height: 1; }
+  .tldr-card h3 { font-family: var(--font-display); font-size: 18px; text-transform: uppercase; margin-top: 14px; color: var(--color-cream); letter-spacing: 0.5px; }
+  .tldr-card p { color: var(--color-cream-70); font-size: 14.5px; margin-top: 12px; line-height: 1.6; }
+
+  /* INFLUENCERS GRID */
+  .infl-filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .infl-filter {
+    background: transparent; border: 1px solid var(--color-dark-texture);
+    color: var(--color-cream-70); padding: 8px 16px; border-radius: 999px;
+    cursor: pointer; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    font-family: var(--font-body); transition: all 0.2s;
+  }
+  .infl-filter.active { background: var(--color-gold); color: var(--color-black); border-color: var(--color-gold); }
+  .infl-filter:hover:not(.active) { border-color: var(--color-gold); color: var(--color-cream); }
+
+  .infl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .infl-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-dark-texture);
+    padding: 20px;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+  .infl-card:hover { border-color: var(--color-gold); }
+  .infl-card .cat { font-size: 10px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase; }
+  .infl-card h4 { font-family: var(--font-display); font-size: 18px; text-transform: uppercase; margin-top: 6px; letter-spacing: 0.5px; }
+  .infl-card .handle { font-size: 13px; color: var(--color-cream-70); margin-top: 4px; }
+  .infl-card .foll { font-family: var(--font-display); font-size: 22px; color: var(--color-gold); margin-top: 10px; }
+  .infl-card .rel { font-size: 11px; color: var(--color-cream-50); margin-top: 8px; line-height: 1.5; }
+  .infl-card.new::after { content: 'NOVO V2'; display: inline-block; background: var(--color-teal); color: var(--color-black); font-size: 9px; padding: 2px 6px; border-radius: 2px; font-weight: 700; letter-spacing: 1px; margin-left: 8px; }
+
+  /* QUOTES */
+  .quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .quote {
+    background: var(--color-dark-elevated);
+    border-left: 3px solid var(--color-gold);
+    padding: 24px 28px;
+    border-radius: 0 4px 4px 0;
+    position: relative;
+  }
+  .quote:before {
+    content: '"'; position: absolute; top: -8px; left: 12px;
+    font-family: Georgia, serif; font-size: 64px;
+    color: var(--color-gold-deep); line-height: 1;
+  }
+  .quote .tag { font-size: 10px; letter-spacing: 2px; color: var(--color-gold); text-transform: uppercase; margin-bottom: 10px; display: block; }
+  .quote blockquote { font-size: 16px; line-height: 1.55; color: var(--color-cream); font-style: italic; margin: 0; }
+  .quote cite { display: block; font-size: 12px; color: var(--color-cream-50); margin-top: 14px; font-style: normal; }
+
+  /* HOOKS */
+  .hooks-list { display: flex; flex-direction: column; gap: 18px; }
+  .hook {
+    background: linear-gradient(180deg, var(--color-dark-elevated), var(--color-dark));
+    border: 1px solid var(--color-dark-texture);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .hook-head { padding: 18px 24px; background: var(--color-dark-texture); display: flex; align-items: center; gap: 14px; }
+  .hook-head .tag { background: var(--color-gold); color: var(--color-black); padding: 4px 10px; font-size: 10px; letter-spacing: 2px; font-weight: 700; border-radius: 2px; }
+  .hook-head .canal { font-size: 12px; letter-spacing: 2px; color: var(--color-cream-70); text-transform: uppercase; }
+  .hook-body { padding: 24px 28px; }
+  .hook-body .headline { font-family: var(--font-display); font-size: clamp(22px, 2.5vw, 30px); color: var(--color-gold-light); line-height: 1.2; letter-spacing: 0.5px; }
+  .hook-body .source { font-size: 12px; color: var(--color-cream-50); margin-top: 12px; font-style: italic; }
+  .hook-body .variacoes { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--color-dark-texture); }
+  .hook-body .variacoes .lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-gold); margin-bottom: 10px; }
+  .hook-body .variacoes ul { list-style: none; padding: 0; }
+  .hook-body .variacoes li { padding: 6px 0; color: var(--color-cream-70); font-size: 15px; font-style: italic; }
+  .hook-body .variacoes li:before { content: '→ '; color: var(--color-gold); font-style: normal; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 32px; }
+  .stat {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-dark-texture);
+    padding: 28px 24px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .stat .val { font-family: var(--font-display); font-size: 40px; color: var(--color-gold); line-height: 1; }
+  .stat .lbl { font-size: 11px; letter-spacing: 2px; color: var(--color-cream-70); text-transform: uppercase; margin-top: 10px; }
+
+  /* TABLE-LIKE */
+  .row {
+    display: grid; grid-template-columns: 60px 1fr 120px;
+    gap: 20px; padding: 16px 0;
+    border-bottom: 1px solid var(--color-dark-texture);
+    align-items: center;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .rank { font-family: var(--font-display); font-size: 24px; color: var(--color-gold); }
+  .row .item strong { color: var(--color-cream); font-weight: 600; }
+  .row .item .note { font-size: 13px; color: var(--color-cream-50); margin-top: 2px; }
+  .row .badge { text-align: right; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-gold); font-weight: 600; }
+
+  /* ACTIONS TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 24px; }
+  .phase { display: grid; grid-template-columns: 140px 1fr; gap: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--color-dark-texture); }
+  .phase:last-child { border-bottom: none; }
+  .phase .when { font-family: var(--font-display); font-size: 18px; color: var(--color-gold); text-transform: uppercase; letter-spacing: 2px; }
+  .phase .when .days { font-size: 32px; color: var(--color-cream); display: block; }
+  .phase .tasks { list-style: none; padding: 0; }
+  .phase .tasks li { padding: 8px 0; padding-left: 24px; position: relative; color: var(--color-cream-70); }
+  .phase .tasks li:before { content: '▸'; position: absolute; left: 0; color: var(--color-gold); }
+  .phase .tasks li strong { color: var(--color-cream); }
+
+  /* GAPS */
+  .gaps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .gap {
+    background: linear-gradient(135deg, var(--color-dark-elevated), var(--color-dark));
+    border: 1px solid var(--color-dark-texture);
+    padding: 24px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .gap .num { position: absolute; top: -12px; right: 20px; background: var(--color-gold); color: var(--color-black); width: 32px; height: 32px; border-radius: 50%; font-family: var(--font-display); font-size: 16px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+  .gap h4 { font-family: var(--font-display); font-size: 17px; text-transform: uppercase; color: var(--color-cream); letter-spacing: 0.5px; margin-bottom: 12px; }
+  .gap p { color: var(--color-cream-70); font-size: 14.5px; line-height: 1.55; }
+
+  /* FOOTER */
+  footer { padding: 60px 32px; text-align: center; border-top: 1px solid var(--color-dark-texture); background: var(--color-dark); }
+  footer .brand { font-family: var(--font-display); font-size: 14px; letter-spacing: 6px; color: var(--color-gold); text-transform: uppercase; }
+  footer .sub { font-size: 12px; color: var(--color-cream-50); margin-top: 8px; letter-spacing: 1px; }
+  footer .meta-line { font-size: 12px; color: var(--color-cream-30); margin-top: 20px; font-family: monospace; }
+
+  /* UTIL */
+  .highlight { color: var(--color-gold-light); font-weight: 600; }
+  .tag-inline { display: inline-block; background: var(--color-gold-deep); color: var(--color-cream); padding: 2px 8px; font-size: 11px; letter-spacing: 1px; border-radius: 2px; text-transform: uppercase; margin: 0 2px; }
+  .callout { background: rgba(200, 168, 75, 0.08); border-left: 3px solid var(--color-gold); padding: 20px 24px; margin: 24px 0; border-radius: 0 4px 4px 0; }
+  .callout strong { color: var(--color-gold-light); }
+
+  @media (max-width: 720px) {
+    .row { grid-template-columns: 40px 1fr; }
+    .row .badge { grid-column: 2; text-align: left; padding-top: 4px; }
+    .phase { grid-template-columns: 1fr; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate">
+  <div class="logo">OMNI Brasil</div>
+  <div class="sub">Pesquisa ICP · Confidencial</div>
+  <input id="pw" type="password" placeholder="Senha" autofocus>
+  <div class="error" id="err">Senha incorreta</div>
+</div>
+
+<div id="app">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="brand">OMNI Brasil · Intel ICP</div>
+  <h1>O Gestor Exausto<br>em Dados Reais</h1>
+  <div class="tagline">Pesquisa profunda do ICP + engenharia reversa da estratégia de aquisição dos 6 players de imersão. Com blueprint executável do Workshop OMNI para lançar em 60 dias.</div>
+  <div class="meta">
+    <div class="meta-item"><div class="val">14</div><div class="lbl">Influencers ICP</div></div>
+    <div class="meta-item"><div class="val">227</div><div class="lbl">Comments Apify</div></div>
+    <div class="meta-item"><div class="val">6+2</div><div class="lbl">Players imersão</div></div>
+    <div class="meta-item"><div class="val">R$131k</div><div class="lbl">Receita Workshop v1</div></div>
+    <div class="meta-item"><div class="val">60d</div><div class="lbl">Prazo de lançamento</div></div>
+  </div>
+</section>
+
+<!-- TL;DR -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">TL;DR — O que você precisa saber</div>
+    <h2>5 descobertas que mudam a estratégia</h2>
+    <div class="lead">Resumo extraído de 3h de pesquisa + mineração Apify de perfis premium.</div>
+  </div>
+
+  <div class="tldr-grid">
+    <div class="tldr-card">
+      <div class="num">01</div>
+      <h3>Shinyashiki é o mais alinhado ao ICP OMNI</h3>
+      <p>Mais que Tiago Brunet, mais que Geronimo. Caption <em>"fadiga que não aparece em exame"</em> (#burnout) é manual literal do Gestor Exausto. E ele NÃO vende hipnoterapia — gap óbvio para OMNI.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">02</div>
+      <h3>Ana Lisboa é o arquétipo de saída do ICP</h3>
+      <p>Ex-executiva com burnout que virou império: @altislisboa (universidade) + @feminino_moderno (comunidade) + livro LeYa Portugal + Davos + Forbes. Modelo de infraestrutura pra OMNI copiar.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">03</div>
+      <h3>Geronimo Theml NÃO é premium</h3>
+      <p>Post campeão (153 comments) fala de Neymar. Público broad-aspiracional, não Gestor Exausto com ticket 15-30k+. Revisar priorização de benchmark.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">04</div>
+      <h3>"Hipnoterapia" é oceano azul léxico</h3>
+      <p>ZERO menções em 227 comments de perfis massivos (1M+). Nenhum influencer premium usa o termo. OMNI pode dominar o significado público em 12-18 meses com consistência.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">05</div>
+      <h3>Preço não é objeção</h3>
+      <p>9 comments perguntando <em>"Qual valor?"</em> no mesmo post (Ana Lisboa). Zero reclamação de caro. <strong>Ads OMNI devem mostrar preço na landing.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- INFLUENCERS -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Shortlist V2</div>
+    <h2>Os 14 que falam com o ICP premium</h2>
+    <div class="lead">Os 5 hipnoterapeutas da V1 saíram (público deles ≠ Gestor com grana). Entraram 4 perfis que conversam direto com executivos 30-55 com capacidade de ticket alto.</div>
+  </div>
+
+  <div class="infl-filters">
+    <button class="infl-filter active" data-cat="all">Todos</button>
+    <button class="infl-filter" data-cat="saude">Saúde Mental Executiva</button>
+    <button class="infl-filter" data-cat="transicao">Transição / Propósito</button>
+    <button class="infl-filter" data-cat="burnout">Produtividade / Burnout</button>
+    <button class="infl-filter" data-cat="filosofia">Filosofia</button>
+    <button class="infl-filter" data-cat="espiritual">Espiritualidade</button>
+  </div>
+
+  <div class="infl-grid">
+
+    <div class="infl-card" data-cat="saude">
+      <div class="cat">Saúde Mental Executiva</div>
+      <h4>Ana Beatriz Barbosa</h4>
+      <div class="handle">@anabeatriz11</div>
+      <div class="foll">7M</div>
+      <div class="rel">Psiquiatra, autora "Mentes Ansiosas". Credibilidade científica que alimenta demanda.</div>
+    </div>
+
+    <div class="infl-card" data-cat="saude">
+      <div class="cat">Saúde Mental Executiva</div>
+      <h4>Augusto Cury</h4>
+      <div class="handle">@augustocuryoficial</div>
+      <div class="foll">7M</div>
+      <div class="rel">Criador da SPA — léxico nativo do ICP. 30M+ livros vendidos.</div>
+    </div>
+
+    <div class="infl-card" data-cat="saude">
+      <div class="cat">Saúde Mental Executiva</div>
+      <h4>Pedro Calabrez</h4>
+      <div class="handle">@pedro.calabrez</div>
+      <div class="foll">2M</div>
+      <div class="rel">PhD Neurociência UNIFESP, NeuroVox. Valida cientificamente território OMNI.</div>
+    </div>
+
+    <div class="infl-card" data-cat="transicao">
+      <div class="cat">Transição / Propósito</div>
+      <h4>Paulo Vieira</h4>
+      <div class="handle">@paulovcoach</div>
+      <div class="foll">6M</div>
+      <div class="rel">Master Coach Febracis. Modelo de negócio quase idêntico (alto ticket, 40k+ alunos).</div>
+    </div>
+
+    <div class="infl-card" data-cat="transicao">
+      <div class="cat">Transição / Propósito</div>
+      <h4>Flávio Augusto</h4>
+      <div class="handle">@geracaodevalor</div>
+      <div class="foll">2.2M + 5M</div>
+      <div class="rel">"Cama confortável x sono" é frase-oro do ICP que já tem grana mas não sono.</div>
+    </div>
+
+    <div class="infl-card" data-cat="transicao">
+      <div class="cat">Transição / Propósito</div>
+      <h4>Caio Carneiro</h4>
+      <div class="handle">@caiocarneiro</div>
+      <div class="foll">3M</div>
+      <div class="rel">"Seja Foda" — executivos comerciais querendo sair da CLT.</div>
+    </div>
+
+    <div class="infl-card new" data-cat="transicao">
+      <div class="cat">Transição / Propósito</div>
+      <h4>Tiago Brunet</h4>
+      <div class="handle">@tiagobrunet</div>
+      <div class="foll">7.5M</div>
+      <div class="rel">Validado Apify — maior que estimado. Público evangélico-devocional (segmento periférico).</div>
+    </div>
+
+    <div class="infl-card new" data-cat="burnout">
+      <div class="cat">Produtividade / Burnout</div>
+      <h4>Geronimo Theml</h4>
+      <div class="handle">@geronimotheml</div>
+      <div class="foll">1.64M</div>
+      <div class="rel">Apify revelou: é broad-aspiracional, não premium. Menos alinhado que estimado.</div>
+    </div>
+
+    <div class="infl-card new" data-cat="burnout">
+      <div class="cat">Produtividade / Burnout</div>
+      <h4>Roberto Shinyashiki ⭐</h4>
+      <div class="handle">@rshinyashiki</div>
+      <div class="foll">828k</div>
+      <div class="rel">O MAIS ALINHADO ao ICP OMNI. Copy dele é manual do Gestor Exausto. Não vende hipnoterapia — gap.</div>
+    </div>
+
+    <div class="infl-card" data-cat="filosofia">
+      <div class="cat">Filosofia Madura</div>
+      <h4>Mario Sergio Cortella</h4>
+      <div class="handle">@cortella</div>
+      <div class="foll">10M</div>
+      <div class="rel">Voz canônica do ICP 45+. Gestor maduro já consumiu Cortella.</div>
+    </div>
+
+    <div class="infl-card" data-cat="filosofia">
+      <div class="cat">Filosofia Madura</div>
+      <h4>Leandro Karnal</h4>
+      <div class="handle">@leandro_karnal</div>
+      <div class="foll">5M</div>
+      <div class="rel">Linguagem erudita, público executivo de alto poder aquisitivo.</div>
+    </div>
+
+    <div class="infl-card" data-cat="espiritual">
+      <div class="cat">Espiritualidade Premium</div>
+      <h4>Monja Coen</h4>
+      <div class="handle">@monjacoen</div>
+      <div class="foll">3M</div>
+      <div class="rel">Subsegmento que busca ferramenta espiritual prática contra exaustão executiva.</div>
+    </div>
+
+    <div class="infl-card" data-cat="espiritual">
+      <div class="cat">Espiritualidade Premium</div>
+      <h4>Pe. Fábio de Melo</h4>
+      <div class="handle">@pefabiodemelo_videos</div>
+      <div class="foll">18M</div>
+      <div class="rel">ICP católico com burnout. Nicho grande mas público amplo — validar foco.</div>
+    </div>
+
+    <div class="infl-card new" data-cat="transicao" style="border: 1px solid var(--color-gold);">
+      <div class="cat" style="color: var(--color-gold-light);">★ Arquétipo de Saída</div>
+      <h4>Ana Lisboa</h4>
+      <div class="handle">@analisboa</div>
+      <div class="foll">1.34M</div>
+      <div class="rel"><strong>Ex-executiva que virou império</strong>: CEO Altis + Feminino Moderno + livro LeYa + Davos + Forbes. <strong>O caminho literal que OMNI quer ativar nos leads.</strong></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FRASES-OURO -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Linguagem real do ICP</div>
+    <h2>Frases-ouro mineradas</h2>
+    <div class="lead">Comments reais e captions públicas — copy pronta pra usar em ads, headlines, VSL. Todas com fonte rastreável.</div>
+  </div>
+
+  <div class="quote-grid">
+
+    <div class="quote">
+      <span class="tag">Colapso físico</span>
+      <blockquote>Aconteceu comigo do meu corpo parar, dar pane mesmo, sempre carreguei muito peso desde criança, sempre precisei pegar muita coisa pra mim.</blockquote>
+      <cite>— @gabiii_fernandes · comment em post Ana Lisboa</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Sinal silencioso</span>
+      <blockquote>Não fomos ensinados a prestar atenção aos sinais, esperamos até o corpo parar, colapsar e nesse momento é que tudo começa fazer sentido.</blockquote>
+      <cite>— @lele_faes · comment em post Ana Lisboa</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Dark funnel masculino (raro)</span>
+      <blockquote>E quando o propósito é o salário? Conundrum difícil de resolver. Minha alma acorda num corpo cansado? Ou minh'alma cansa num corpo acordado?</blockquote>
+      <cite>— @andreluizphoto · comment em post Shinyashiki</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Ferida não pertencida</span>
+      <blockquote>Como é triste sentir essas dores, como dói! Eu quero me libertar e arrancar essas feridas que não me pertencem.</blockquote>
+      <cite>— @paularobertamasso · comment em post Ana Lisboa</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Caption original Shinyashiki</span>
+      <blockquote>Existe uma fadiga que não aparece em nenhum exame e que nenhuma semana de férias resolve completamente. É o cansaço de quem entrega tempo e energia pra algo que não move nada por dentro.</blockquote>
+      <cite>— caption post DXH72J2mlXi · hashtag #burnout</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Valor percebido extremo</span>
+      <blockquote>Vou escutar isso umas 200 vezes, obrigada.</blockquote>
+      <cite>— @elisah.lemes · comment em post Shinyashiki</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Jargão adotado</span>
+      <blockquote>IPTU afetivo é real. Vence todo mês, você sabe que está pagando, sabe que custa caro, e mesmo assim não consegue cancelar o débito automático. Não é paixão. É terceirização da alma.</blockquote>
+      <cite>— caption Shinyashiki · 361 comments, 11.7k likes, 193k views</cite>
+    </div>
+
+    <div class="quote">
+      <span class="tag">Bio hook Ana Lisboa</span>
+      <blockquote>Psicanalista e escritora best seller. Founder da maior universidade de saúde mental do Brasil @altislisboa e CEO do @feminino_moderno. <strong>Você está viva?</strong></blockquote>
+      <cite>— bio @analisboa · 3 linhas que são manual de posicionamento</cite>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOOKS HEADLINE -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Testar imediato</div>
+    <h2>3 Hooks-headline prontos</h2>
+    <div class="lead">Extraídos de frases exatas do público ou de captions que performaram. Cada um vem com canal sugerido, target e variações A/B.</div>
+  </div>
+
+  <div class="hooks-list">
+
+    <div class="hook">
+      <div class="hook-head">
+        <span class="tag">H1</span>
+        <span class="canal">LinkedIn · Google Search · Dark Funnel Masculino</span>
+      </div>
+      <div class="hook-body">
+        <div class="headline">"Sua alma acorda num corpo cansado?"</div>
+        <div class="source">Extraído de frase espontânea de usuário masculino (@andreluizphoto) em post do Shinyashiki sobre propósito × salário. Rara verbalização masculina no canal público — ouro para dark funnel.</div>
+        <div class="variacoes">
+          <div class="lbl">Variações A/B</div>
+          <ul>
+            <li>Você dorme 8 horas e acorda já cansado há quanto tempo?</li>
+            <li>Tem cansaço que nenhuma noite de sono apaga.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hook">
+      <div class="hook-head">
+        <span class="tag">H2</span>
+        <span class="canal">Instagram · Facebook · Landing Principal</span>
+      </div>
+      <div class="hook-body">
+        <div class="headline">"Existe uma fadiga que não aparece em nenhum exame — e que nenhuma semana de férias resolve."</div>
+        <div class="source">Caption original do Shinyashiki (DXH72J2mlXi, hashtag #burnout) que rendeu o maior engagement qualitativo dentre os 227 comments analisados.</div>
+        <div class="variacoes">
+          <div class="lbl">Variações A/B</div>
+          <ul>
+            <li>O cansaço que nenhum exame detecta é o mais perigoso.</li>
+            <li>Não é o seu corpo que está cansado. É a sua alma.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hook">
+      <div class="hook-head">
+        <span class="tag">H3</span>
+        <span class="canal">Reel · Carousel · CTA de Diagnóstico</span>
+      </div>
+      <div class="hook-body">
+        <div class="headline">"Não precisa esperar o corpo parar para ouvir os sinais."</div>
+        <div class="source">Adaptado de comment espontâneo (@lele_faes) em post Ana Lisboa. Perfeito para reel 20s com voiceover sério + carousel de 5 sinais de burnout silencioso.</div>
+        <div class="variacoes">
+          <div class="lbl">Variações A/B</div>
+          <ul>
+            <li>Você está esperando o corpo te dar a notícia?</li>
+            <li>O corpo fala antes de colapsar. Você está ouvindo?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 6 LIÇÕES DA ANA LISBOA -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Benchmark de funil</div>
+    <h2>6 Lições da Ana Lisboa</h2>
+    <div class="lead">Ela é o arquétipo literal do caminho que OMNI quer ativar: ex-executiva com burnout → autoridade → império. Cada lição é replicável.</div>
+  </div>
+
+  <div class="tldr-grid">
+    <div class="tldr-card">
+      <div class="num">01</div>
+      <h3>Tratamento identitário</h3>
+      <p>Ana chama a audiência de <strong>"senhora"</strong>. Cria clube + exclusividade + respeito à maturidade. Testar 3 variações em reels OMNI ("OMNER", "Desperta", etc).</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">02</div>
+      <h3>Infraestrutura dupla</h3>
+      <p>Ana opera <strong>@altislisboa</strong> (universidade hard) + <strong>@feminino_moderno</strong> (comunidade soft). OMNI tem universidade — falta a camada comunidade-lifestyle separada.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">03</div>
+      <h3>Workshop 4h itinerante</h3>
+      <p>Ana usa workshops de 4h em cidades-chave como front-door intermediário. Piloto OMNI: <strong>R$ 497-997</strong> em Florianópolis ou Porto Alegre.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">04</div>
+      <h3>Palavra-código CTA</h3>
+      <p><strong>"EU QUERO"</strong> é replicada literalmente por 15+ usuários. Escolher OMNI-equivalente ("EU ACORDEI" / "EU VOLTEI") e padronizar em TODAS as peças.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">05</div>
+      <h3>Reframe de eventos virais</h3>
+      <p>Ana capta Bieber, BBB, Serrado. Comitê editorial rápido (Rafa + Michael + copy) que publica 1 reel de reframe OMNI em 24h de qualquer evento viral.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">06</div>
+      <h3>Autoridade internacional</h3>
+      <p>Pedigree OMNI Global está sub-utilizado. Calendário de <strong>3-4 aparições internacionais/ano</strong> (Davos, podcasts americanos/portugueses) com cobertura premium.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PADRÕES EMERGENTES -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Estatística</div>
+    <h2>Padrões emergentes</h2>
+    <div class="lead">O que 227 comments reais revelam sobre o Gestor Exausto.</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="val">85%</div><div class="lbl">Comments femininos</div></div>
+    <div class="stat"><div class="val">22-00h</div><div class="lbl">Pico de dor aberta</div></div>
+    <div class="stat"><div class="val">75%</div><div class="lbl">Comments nas primeiras 24h</div></div>
+    <div class="stat"><div class="val">0</div><div class="lbl">Menções "hipnoterapia"</div></div>
+    <div class="stat"><div class="val">0</div><div class="lbl">Reclamações de preço</div></div>
+  </div>
+
+  <div class="callout">
+    <strong>Implicações acionáveis:</strong> agendar posts/ads em <strong>22h-00h</strong> (janela de ouro em que o Gestor desce a guarda). Estratégia masculina separada (dark funnel = LinkedIn outreach + podcasts business, não conversação pública). Preço visível na landing converte melhor. OMNI pode dominar o termo "hipnoterapia" em 12-18 meses.
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 40px 0 20px; color: var(--color-gold);">Top 10 palavras-gatilho por densidade ICP</h3>
+
+  <div class="row">
+    <div class="rank">01</div>
+    <div class="item"><strong>"Alma acorda num corpo cansado"</strong><div class="note">Comment espontâneo masculino — dark funnel puro</div></div>
+    <div class="badge">Densidade máxima</div>
+  </div>
+  <div class="row">
+    <div class="rank">02</div>
+    <div class="item"><strong>"Fadiga que não aparece em exame"</strong><div class="note">Caption Shinyashiki — headline principal</div></div>
+    <div class="badge">Densidade máxima</div>
+  </div>
+  <div class="row">
+    <div class="rank">03</div>
+    <div class="item"><strong>"Eu quero"</strong><div class="note">CTA padrão replicada pelo público</div></div>
+    <div class="badge">Conversão</div>
+  </div>
+  <div class="row">
+    <div class="rank">04</div>
+    <div class="item"><strong>"Qual valor?"</strong><div class="note">9 comments no mesmo post — hot lead signal</div></div>
+    <div class="badge">Conversão</div>
+  </div>
+  <div class="row">
+    <div class="rank">05</div>
+    <div class="item"><strong>"Corpo parar / dar pane"</strong><div class="note">Colapso físico antes do diagnóstico emocional</div></div>
+    <div class="badge">Alta</div>
+  </div>
+  <div class="row">
+    <div class="rank">06</div>
+    <div class="item"><strong>"Arrancar feridas que não me pertencem"</strong><div class="note">Copy emocional para reel</div></div>
+    <div class="badge">Alta</div>
+  </div>
+  <div class="row">
+    <div class="rank">07</div>
+    <div class="item"><strong>"IPTU afetivo" / "terceirização da alma"</strong><div class="note">Jargões Shinyashiki adotados pelo público</div></div>
+    <div class="badge">Alta (metáfora)</div>
+  </div>
+  <div class="row">
+    <div class="rank">08</div>
+    <div class="item"><strong>"Sair do automático"</strong><div class="note">CTA soft recorrente</div></div>
+    <div class="badge">Alta</div>
+  </div>
+  <div class="row">
+    <div class="rank">09</div>
+    <div class="item"><strong>"Sei o pesado que é"</strong><div class="note">Pareado com "admiro poucos homens" — dark funnel</div></div>
+    <div class="badge">Alta</div>
+  </div>
+  <div class="row">
+    <div class="rank">10</div>
+    <div class="item"><strong>"Senhora" (tratamento)</strong><div class="note">Código de clube — replica engagement</div></div>
+    <div class="badge">Identitário</div>
+  </div>
+</section>
+
+<!-- GAPS -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Espaço em branco</div>
+    <h2>3 Gaps que OMNI pode ocupar</h2>
+    <div class="lead">Territórios sem concorrência direta, validados pelos dados.</div>
+  </div>
+
+  <div class="gaps-grid">
+    <div class="gap">
+      <div class="num">1</div>
+      <h4>Homem executivo 45+ sem referência</h4>
+      <p>Ana Lisboa é quase 100% feminino. Shinyashiki é unissex-light. <strong>Ninguém ocupa o espaço do homem executivo maduro em saúde mental premium.</strong> Michael Arruda é candidato natural — tom clínico, LinkedIn, podcasts business.</p>
+    </div>
+    <div class="gap">
+      <div class="num">2</div>
+      <h4>Hipnoterapia para executivo premium</h4>
+      <p>Zero menções ao termo em 227 comments de 11M+ seguidores. OMNI pode dominar o significado público do termo em 12-18 meses com consistência de conteúdo + hooks testados.</p>
+    </div>
+    <div class="gap">
+      <div class="num">3</div>
+      <h4>Workshop intermediário R$ 497-997</h4>
+      <p>OMNI tem lead magnet grátis OU Formação cheia (R$ 15-30k). Falta front-door intermediário. Ana Lisboa validou o modelo com workshops 4h itinerantes de integração sistêmica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLANO DE AÇÃO -->
+<section class="container">
+  <div class="sec-head">
+    <div class="kicker">Execução</div>
+    <h2>Plano de ação 30-60-90</h2>
+    <div class="lead">Do que é ação imediata ao que é estrutural. Ordenado por urgência e dependências.</div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="phase">
+      <div class="when">Semana<span class="days">1-2</span></div>
+      <ul class="tasks">
+        <li><strong>Michael + Rafa:</strong> leitura dos arquivos <em>07-ana-lisboa-arquetipo-de-saida.md</em> e <em>08-insights-consolidados.md</em></li>
+        <li><strong>Conta de monitoramento</strong>: seguir @analisboa, @altislisboa, @feminino_moderno, @rshinyashiki</li>
+        <li><strong>Testar 3 hooks</strong> (H1, H2, H3) em reels rápidos com métrica de engagement</li>
+        <li><strong>Decidir palavra-código CTA OMNI</strong> — finalistas: "EU ACORDEI" / "EU VOLTEI" / "OMNI EU QUERO"</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="when">Semana<span class="days">3-4</span></div>
+      <ul class="tasks">
+        <li><strong>Landing</strong> <code>/fadiga-sem-exame</code> com copy inspirada em Shinyashiki (com atribuição)</li>
+        <li><strong>Ad LinkedIn dark funnel masculino</strong> com H1 (target: gerência sênior, 40+)</li>
+        <li><strong>Reel Michael Arruda</strong> ocupando o gap executivo 45+ premium</li>
+        <li><strong>Escolher cidade-piloto</strong> (Florianópolis OU Porto Alegre) para Workshop OMNI 4h</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="when">Semana<span class="days">5-8</span></div>
+      <ul class="tasks">
+        <li><strong>Workshop OMNI 4h lançado</strong> — data + página de vendas + funil "PALAVRA-CÓDIGO no comment"</li>
+        <li><strong>Comitê editorial rápido</strong> ativo (reframe de 1 evento viral por semana em 24h)</li>
+        <li><strong>Meta de validação:</strong> 50-100 leads qualificados do Workshop, 10-20 convertidos em Formação</li>
+        <li><strong>Preço visível</strong> na landing da Formação OMNI</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="when">Trimestre<span class="days">Q2</span></div>
+      <ul class="tasks">
+        <li><strong>Contato oficial com Ana Lisboa</strong> para podcast cruzado (OMNI recebe ou vice-versa)</li>
+        <li><strong>Upgrade Apify $49/mês</strong> — próxima rodada com 15-25k comments dos 10 perfis restantes da shortlist V2</li>
+        <li><strong>Calendário de aparições internacionais</strong> capitalizado (3-4/ano com cobertura premium)</li>
+        <li><strong>Canal YouTube "Hipnoterapia sem Enrolação"</strong> — Rafa + Michael, 1 vídeo/semana</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ESTRATÉGIA DE AQUISIÇÃO — CAMADA 2 -->
+<section class="container" style="background: linear-gradient(180deg, transparent, rgba(200, 168, 75, 0.03));">
+  <div class="sec-head">
+    <div class="kicker">Camada 2 — Engenharia reversa</div>
+    <h2>Estratégia de Aquisição<br>dos Players de Imersão</h2>
+    <div class="lead">Análise de 6 players que vendem imersão presencial + alto ticket no BR. Descobrir o funil exato que leva alguém do zero ao ticket 15-30k — e replicar pro Workshop OMNI.</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat"><div class="val">33k</div><div class="lbl">Paulo Vieira PDA 2023</div></div>
+    <div class="stat"><div class="val">7/8</div><div class="lbl">Cidades A Trinca esgotadas</div></div>
+    <div class="stat"><div class="val">5h</div><div class="lbl">Mentoria Caio esgotou em</div></div>
+    <div class="stat"><div class="val">R$250k</div><div class="lbl">FirstClass/ano top tier</div></div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 40px 0 20px; color: var(--color-gold);">Matriz dos 6 players analisados</h3>
+
+  <div class="infl-grid">
+    <div class="infl-card">
+      <div class="cat">⭐ Blueprint-ouro</div>
+      <h4>Paulo Vieira / Febracis</h4>
+      <div class="handle">PDA Experience 6h · CIS 268h</div>
+      <div class="foll">R$ 750 → R$ 15-30k</div>
+      <div class="rel">Lead magnet genial: palestra grátis + 1kg alimento. PDA é o Workshop OMNI de verdade funcionando.</div>
+    </div>
+    <div class="infl-card">
+      <div class="cat">⭐ Escada mais completa</div>
+      <h4>Roberto Shinyashiki</h4>
+      <div class="handle">NOW · The Power · Mentoria</div>
+      <div class="foll">R$ 24/mês → Diamond</div>
+      <div class="rel">8+ degraus. OMNI tem 2. Referência clara de como escalar produtos sem buracos na escada de valor.</div>
+    </div>
+    <div class="infl-card">
+      <div class="cat">★ Arquétipo de saída</div>
+      <h4>Ana Lisboa</h4>
+      <div class="handle">ENFM 3d · Workshop 4h</div>
+      <div class="foll">R$ 497-997 → R$ 15-30k</div>
+      <div class="rel">2.000+ empresárias no último ENFM. Modelo feminino premium perfeito pra adaptar ao ICP OMNI misto.</div>
+    </div>
+    <div class="infl-card">
+      <div class="cat">Transição / Propósito</div>
+      <h4>Tiago Brunet</h4>
+      <div class="handle">Método Destiny · Casa de Destino</div>
+      <div class="foll">R$ 80-250 → Israel/Dubai</div>
+      <div class="rel">Café com Destino: livro + 1kg alimento como ingresso. Compromisso duplo reduz no-show.</div>
+    </div>
+    <div class="infl-card">
+      <div class="cat">Mentoria executiva</div>
+      <h4>Caio Carneiro</h4>
+      <div class="handle">A Ordem · A Mentoria · FrstDay</div>
+      <div class="foll">R$ 297 → R$ 250k</div>
+      <div class="rel">A Mentoria R$ 4.997 esgotou em 5h. Modelo da mentoria online intermediária entre Workshop e Formação.</div>
+    </div>
+    <div class="infl-card">
+      <div class="cat">Ritual anual</div>
+      <h4>Flávio Augusto</h4>
+      <div class="handle">Power House · FrstClass</div>
+      <div class="foll">R$ 984 → R$ 250k/ano</div>
+      <div class="rel">1º sábado de janeiro, todo ano, na Vibra SP. Cria hábito no calendário do ICP — replicar como "último sábado de agosto OMNI".</div>
+    </div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 48px 0 20px; color: var(--color-gold);">Top 10 insights acionáveis</h3>
+
+  <div class="row">
+    <div class="rank">01</div>
+    <div class="item"><strong>Palestra presencial grátis + 1kg alimento = melhor lead magnet BR</strong><div class="note">Paulo Vieira usa isso pra encher PDA. Compromisso físico + social + caridade reduz no-show e qualifica.</div></div>
+    <div class="badge">Copiar imediato</div>
+  </div>
+  <div class="row">
+    <div class="rank">02</div>
+    <div class="item"><strong>Escada de valor sem buracos (Shinyashiki)</strong><div class="note">OMNI tem 2 degraus (lead magnet grátis + Formação 15-30k). Faltam 4+ entre eles: Workshop 697, Imersão 2d 1.997, Mentoria 4.997, Mastermind 25k.</div></div>
+    <div class="badge">Estratégico</div>
+  </div>
+  <div class="row">
+    <div class="rank">03</div>
+    <div class="item"><strong>Co-facilitador médico resolve objeção racional</strong><div class="note">Ana Lisboa + Dr. Felipe Trofino. OMNI pode levar Dra. Ana Beatriz ou outro psiquiatra de autoridade pro Workshop — corta ceticismo do executivo.</div></div>
+    <div class="badge">Diferencial</div>
+  </div>
+  <div class="row">
+    <div class="rank">04</div>
+    <div class="item"><strong>Tiers premium com gap 3-15x no mesmo evento</strong><div class="note">A Trinca vende R$ 297 padrão e R$ 4.500 VIP. Filtra ICP sem criar 2 eventos. OMNI pode fazer Explorador 697 / Aplicador 1.997 / Transformador 4.997.</div></div>
+    <div class="badge">Copiar imediato</div>
+  </div>
+  <div class="row">
+    <div class="rank">05</div>
+    <div class="item"><strong>Data fixa anual cria ritual de calendário</strong><div class="note">Power House sempre 1º sábado de janeiro. OMNI: estabelecer "último sábado de agosto" como data-âncora anual SP.</div></div>
+    <div class="badge">Longo prazo</div>
+  </div>
+  <div class="row">
+    <div class="rank">06</div>
+    <div class="item"><strong>Venue premium sinaliza ticket premium</strong><div class="note">FrstDay no Palácio Tangará vende R$ 25k. Coworking não. Tivoli Mofarrej / Grand Hyatt / Fasano pro Workshop OMNI.</div></div>
+    <div class="badge">Recomendado</div>
+  </div>
+  <div class="row">
+    <div class="rank">07</div>
+    <div class="item"><strong>Masterclass gratuita COM CERTIFICADO captura CPF</strong><div class="note">Paulo Vieira usa certificado pra transformar lead magnet grátis em dado fiscal qualificado — pipeline B2B.</div></div>
+    <div class="badge">Copiar imediato</div>
+  </div>
+  <div class="row">
+    <div class="rank">08</div>
+    <div class="item"><strong>Processo de aplicação em tiers altos</strong><div class="note">FrstDay seleciona quem entra. Cria exclusividade e filtra quem pode pagar 25k depois. Transformador OMNI pode ter aplicação.</div></div>
+    <div class="badge">Opcional</div>
+  </div>
+  <div class="row">
+    <div class="rank">09</div>
+    <div class="item"><strong>12 meses de plataforma pós-evento aumenta LTV</strong><div class="note">Power House incluso no ticket dá retention. OMNI já tem plataforma — incluir automaticamente.</div></div>
+    <div class="badge">Copiar imediato</div>
+  </div>
+  <div class="row">
+    <div class="rank">10</div>
+    <div class="item"><strong>Tour multi-cidade com 2-3 figuras (A Trinca)</strong><div class="note">Joel Jota + Caio + Flávio fazem tour 8 cidades. OMNI v2: Rafa + Michael + médico convidado em 3 cidades.</div></div>
+    <div class="badge">Escala</div>
+  </div>
+</section>
+
+<!-- BLUEPRINT WORKSHOP OMNI -->
+<section class="container" style="background: radial-gradient(ellipse at top, rgba(200, 168, 75, 0.06), transparent 70%);">
+  <div class="sec-head">
+    <div class="kicker">Proposta executável</div>
+    <h2>DPSM Day<br><span style="font-size: 0.5em; color: var(--color-gold-light); letter-spacing: 2px;">Desbloqueie O Poder da Sua Mente</span></h2>
+    <div class="lead">Primeira edição em 60 dias. Nome amarrado ao livro do Michael — livro físico vira lead magnet obrigatório (padrão Paulo Vieira, Brunet, Caio). Receita bruta R$ 131k / líquido R$ 40k + pipeline Formação R$ 120-360k em 90 dias pós-evento. Modelo conservador — nada inventado, tudo adaptado dos 6 players que já validaram.</div>
+  </div>
+
+  <div class="callout">
+    <strong>Nome oficial:</strong> "DPSM Day — Desbloqueie O Poder da Sua Mente"<br>
+    <strong>Amarrado ao livro</strong> do Michael (homônimo) — o livro vira lead magnet físico obrigatório, padrão usado por Paulo Vieira, Tiago Brunet e Caio Carneiro. Livro + 1kg de alimento pode ser o ingresso da palestra grátis de captação (mecânica Brunet validada).<br><br>
+    <strong>Subtítulo copy sugerido:</strong> "Um dia que desbloqueia o próximo capítulo da sua mente."
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 32px 0 20px; color: var(--color-gold);">3 tiers de ticket (padrão Ana Lisboa / Shinyashiki / A Trinca)</h3>
+
+  <div class="gaps-grid">
+    <div class="gap">
+      <div class="num">1</div>
+      <h4>Explorador — R$ 697</h4>
+      <p><strong>Lote 1:</strong> R$ 497 · <strong>Lote 2:</strong> R$ 697 · <strong>Lote 3:</strong> R$ 997<br><br>Workshop 8h + material digital + <strong>12 meses de plataforma OMNI</strong> (retenção).<br><br><em>Capacidade: 45 vagas</em></p>
+    </div>
+    <div class="gap">
+      <div class="num">2</div>
+      <h4>Aplicador — R$ 1.997</h4>
+      <p>Tudo do Explorador + <strong>almoço com Michael</strong> (mesa de 10) + 1 sessão individual em grupo (8 pessoas) pós-workshop + kit OMNI impresso (livro + caderno de protocolo).<br><br><em>Capacidade: 25 vagas</em></p>
+    </div>
+    <div class="gap">
+      <div class="num">3</div>
+      <h4>Transformador — R$ 4.997</h4>
+      <p>Tudo do Aplicador + <strong>jantar VIP</strong> + 2 sessões 1:1 de hipnose com terapeutas OMNI certificados + voucher 50% no próximo Workshop.<br><br><em>Capacidade: 10 vagas (aplicação seletiva opcional)</em></p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 32px;">
+    <strong>Receita bruta (cenário lote 2):</strong> 45×697 + 25×1.997 + 10×4.997 = <strong>R$ 131.260</strong><br>
+    <strong>Custo total estimado:</strong> ~R$ 90k (ads 45k + venue 25k + operação 20k) · <strong>Líquido:</strong> ~R$ 40k<br>
+    <strong>Pipeline pós-evento:</strong> 80 leads × 10-15% conversão Formação R$ 15-30k = <strong>R$ 120-360k em 90 dias</strong>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 48px 0 20px; color: var(--color-gold);">Estrutura do dia — 8h (9h às 17h)</h3>
+
+  <div class="timeline">
+    <div class="phase">
+      <div class="when">09h<span class="days">30'</span></div>
+      <ul class="tasks">
+        <li><strong>Abertura</strong> — Anfitrião acolhe, frase de abertura: "Você não está cansado. Você está bloqueado."</li>
+        <li><strong>Dinâmica</strong> — cada pessoa escreve em 1 frase "o que quero sair daqui sabendo/fazendo"</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">09h30<span class="days">90'</span></div>
+      <ul class="tasks">
+        <li><strong>Bloco 1 — Diagnóstico:</strong> palestra Michael "O mapa do burnout no inconsciente — por que força de vontade não resolve"</li>
+        <li><strong>Demonstração ao vivo:</strong> teste de sugestibilidade com 2-3 voluntários → prova social instantânea</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">11h15<span class="days">90'</span></div>
+      <ul class="tasks">
+        <li><strong>Bloco 2 — Ferramenta:</strong> co-facilitador médico (Dra. Ana Beatriz?) apresenta "o que a ciência já sabe sobre hipnose" — resolve objeção racional</li>
+        <li><strong>Michael:</strong> protocolo OMNI em profundidade</li>
+        <li><strong>Demonstração profunda:</strong> hipnose ao vivo com voluntário pré-selecionado (burnout) — 30 min frente ao público</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">12h45<span class="days">90'</span></div>
+      <ul class="tasks">
+        <li><strong>Almoço diferenciado por tier:</strong> Explorador livre · Aplicador com Michael (mesa 10) · Transformador VIP privativo</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">14h15<span class="days">105'</span></div>
+      <ul class="tasks">
+        <li><strong>Bloco 3 — Aplicação:</strong> auto-hipnose guiada coletiva</li>
+        <li><strong>Protocolo 30 dias:</strong> material físico entregue — "o que fazer em cada um dos próximos 30 dias"</li>
+        <li><strong>Q&A aberto</strong> — 30 min de perguntas</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">16h<span class="days">60'</span></div>
+      <ul class="tasks">
+        <li><strong>Encerramento:</strong> pitch estratégico Formação OMNI (15 min) + <strong>desconto exclusivo válido 48h</strong></li>
+        <li><strong>Cerimônia:</strong> certificado físico + foto coletiva + vídeo de ex-alunos</li>
+        <li><strong>Depoimentos ao vivo:</strong> 2-3 participantes compartilham — social proof em tempo real</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 48px 0 20px; color: var(--color-gold);">Funil de captação — 30 dias pré-evento</h3>
+
+  <div class="timeline">
+    <div class="phase">
+      <div class="when">Semana<span class="days">1</span></div>
+      <ul class="tasks">
+        <li><strong>D-30:</strong> Live no IG 90 min "Por que gestor exausto não cura com terapia convencional" → abre lista de espera Telegram</li>
+        <li><strong>D-23:</strong> Conteúdo orgânico diário (3 carrosséis + 3 reels + stories) sobre burnout + 1 podcast com médico</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Semana<span class="days">2</span></div>
+      <ul class="tasks">
+        <li><strong>D-22:</strong> <strong>Masterclass online gratuita COM CERTIFICADO</strong> — "Introdução à Hipnoterapia Científica" → captura CPF + email</li>
+        <li><strong>D-21:</strong> Ads Facebook/Instagram começam com 3 hooks testados — target SP executivo 30-55</li>
+        <li><strong>D-15:</strong> <strong>Lote 1 abre</strong> (R$ 497) — email + WhatsApp + Telegram broadcast</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Semana<span class="days">3</span></div>
+      <ul class="tasks">
+        <li><strong>D-14:</strong> <strong>Palestra presencial GRATUITA em SP</strong> (100 lugares, 1kg alimento de entrada) → captura WhatsApp + teaser</li>
+        <li><strong>D-10:</strong> Depoimentos em vídeo de alunos Formação OMNI em sequência</li>
+        <li><strong>D-8:</strong> Lote 1 fecha, <strong>lote 2 abre</strong> (R$ 697) com aviso de virada</li>
+      </ul>
+    </div>
+    <div class="phase">
+      <div class="when">Semana<span class="days">4</span></div>
+      <ul class="tasks">
+        <li><strong>D-7:</strong> Live com Michael + médico — "Últimas 7 vagas do Aplicador" (scarcity real)</li>
+        <li><strong>D-3:</strong> Countdown final + <strong>último lote</strong> (R$ 997)</li>
+        <li><strong>D-1:</strong> VSL + carta longa de objeções finais por email</li>
+        <li><strong>D-Day:</strong> evento</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family: var(--font-display); font-size: 22px; text-transform: uppercase; margin: 48px 0 20px; color: var(--color-gold);">8 decisões críticas pra Michael</h3>
+
+  <div class="tldr-grid">
+    <div class="tldr-card">
+      <div class="num">01</div>
+      <h3>Nome do Workshop</h3>
+      <p><strong>DPSM Day</strong> — Desbloqueie O Poder da Sua Mente. Amarrado ao livro do Michael (lead magnet físico + compromisso duplo).</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">02</div>
+      <h3>Co-facilitador médico</h3>
+      <p>Dra. Ana Beatriz Barbosa? Dr. Felipe Trofino? Outro psiquiatra de autoridade?</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">03</div>
+      <h3>Venue SP</h3>
+      <p>Premium R$ 20-30k/dia (Tivoli/Fasano) ou econômico R$ 8-12k (Expo Center Norte)?</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">04</div>
+      <h3>Data piloto</h3>
+      <p>Sugestão: sábado 29 de agosto de 2026. Ancoragem anual: "último sábado de agosto OMNI".</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">05</div>
+      <h3>Budget ads 30 dias</h3>
+      <p>Sugestão: R$ 30-60k. CAC esperado: R$ 250-500 por inscrito.</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">06</div>
+      <h3>Bordão-código</h3>
+      <p>Testar "DESBLOQUEIE" / "EU DESBLOQUEIO" / "DPSM" como palavra-código no comment (linha com a marca do livro).</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">07</div>
+      <h3>Aplicação pro Transformador?</h3>
+      <p>Aplicar filtro seletivo pro tier de R$ 4.997 (estilo FrstDay) ou venda aberta?</p>
+    </div>
+    <div class="tldr-card">
+      <div class="num">08</div>
+      <h3>Telegram "Sala de Espera"</h3>
+      <p>Lançar canal broadcast nos próximos <strong>7 dias</strong> pra ganhar tração antes do workshop.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">OMNI Brasil · Intel ICP + Aquisição</div>
+  <div class="sub">Pesquisa Gestor Exausto V2 + Estratégia de Aquisição — Validação Apify</div>
+  <div class="meta-line">
+    Pesquisa ICP: 2026-04-22 a 2026-04-23 · 227 comments · 83 posts · 14 influencers · $0.70 Apify<br>
+    Estratégia Aquisição: 6 players + 2 bônus · 1.922 linhas · 7 arquivos · Blueprint Workshop OMNI executável<br>
+    @analyst (Jerry Smith) + @devops (Gage) · OMNI Brasil 2026
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const GATE_PASS = 'omni777';
+  const gate = document.getElementById('gate');
+  const app = document.getElementById('app');
+  const pw = document.getElementById('pw');
+  const err = document.getElementById('err');
+
+  function unlock() { gate.classList.add('hidden'); app.classList.add('visible'); sessionStorage.setItem('omni_icp_ok', '1'); }
+
+  if (sessionStorage.getItem('omni_icp_ok') === '1') unlock();
+
+  pw.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      if (pw.value === GATE_PASS) { unlock(); err.style.display = 'none'; }
+      else { err.style.display = 'block'; pw.value = ''; }
+    }
+  });
+
+  // Filtros de influencers
+  document.querySelectorAll('.infl-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.infl-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      document.querySelectorAll('.infl-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
