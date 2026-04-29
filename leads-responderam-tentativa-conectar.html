@@ -7,74 +7,60 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #DC9F42;
-    --gold-15: rgba(220,159,66,0.15);
-    --gold-20: rgba(220,159,66,0.20);
-    --gold-30: rgba(220,159,66,0.30);
-    --dark: #050505;
-    --surface: #0e0e0e;
-    --surface-2: #161616;
-    --border: rgba(220,159,66,0.12);
-    --cream: #F5F0E8;
-    --cream-60: rgba(245,240,232,0.60);
-    --cream-40: rgba(245,240,232,0.40);
-    --teal: #2A9D8F;
-    --teal-10: rgba(42,157,143,0.10);
-    --teal-20: rgba(42,157,143,0.20);
-    --green: #4CAF6F;
-    --green-10: rgba(76,175,111,0.10);
-    --purple: #9B6FD4;
-    --purple-10: rgba(155,111,212,0.10);
-    --purple-20: rgba(155,111,212,0.20);
+    --gold:#DC9F42; --gold-15:rgba(220,159,66,0.15); --gold-20:rgba(220,159,66,0.20); --gold-30:rgba(220,159,66,0.30);
+    --dark:#050505; --surface:#0e0e0e; --surface-2:#161616; --border:rgba(220,159,66,0.12);
+    --cream:#F5F0E8; --cream-60:rgba(245,240,232,0.60); --cream-40:rgba(245,240,232,0.40);
+    --teal:#2A9D8F; --teal-10:rgba(42,157,143,0.10); --teal-20:rgba(42,157,143,0.20);
+    --purple:#9B6FD4; --purple-10:rgba(155,111,212,0.10); --purple-20:rgba(155,111,212,0.20);
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--dark); color:var(--cream); font-family:'Inter',sans-serif; line-height:1.65; }
-  .container { max-width:1200px; margin:0 auto; padding:0 40px; }
-  .label { font-family:'IBM Plex Mono',monospace; font-size:0.6rem; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); }
-  h1 { font-family:'DM Serif Display',serif; font-size:clamp(2rem,3.5vw,3rem); font-weight:400; letter-spacing:-0.02em; color:var(--cream); line-height:1.1; }
-  h2 { font-family:'DM Serif Display',serif; font-size:1.6rem; font-weight:400; letter-spacing:-0.01em; color:var(--cream); }
-  .hero { padding:72px 0 48px; border-bottom:1px solid var(--border); }
-  .hero-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
-  .hero-eyebrow .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; }
-  .hero-subtitle { font-size:0.95rem; color:var(--cream-60); margin-top:10px; }
-  .stats-section { padding:48px 0; border-bottom:1px solid var(--border); }
-  .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-  .stat-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:28px 24px; }
-  .stat-number { font-family:'DM Serif Display',serif; font-size:2.8rem; color:var(--gold); line-height:1; margin-bottom:8px; }
-  .stat-label { font-size:0.8rem; color:var(--cream-60); font-family:'IBM Plex Mono',monospace; letter-spacing:0.05em; text-transform:uppercase; }
-  .sdr-section { padding:56px 0; border-bottom:1px solid var(--border); }
-  .sdr-section:last-of-type { border-bottom:none; }
-  .sdr-header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
-  .sdr-badge { display:inline-flex; align-items:center; padding:6px 14px; border-radius:6px; font-size:0.75rem; font-family:'IBM Plex Mono',monospace; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; }
-  .badge-layslla { background:var(--purple-10); border:1px solid var(--purple-20); color:var(--purple); }
-  .badge-david { background:var(--teal-10); border:1px solid var(--teal-20); color:var(--teal); }
-  .sdr-count { font-size:0.8rem; color:var(--cream-40); font-family:'IBM Plex Mono',monospace; }
-  .table-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
-  table { width:100%; border-collapse:collapse; }
-  thead { background:var(--surface-2); }
-  th { padding:14px 18px; text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.65rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); border-bottom:1px solid var(--border); white-space:nowrap; }
-  td { padding:14px 18px; border-bottom:1px solid rgba(220,159,66,0.06); font-size:0.875rem; vertical-align:top; }
-  tr:last-child td { border-bottom:none; }
-  tr { background:var(--surface); transition:background 0.15s; }
-  tr:hover { background:var(--gold-15); }
-  .td-num { color:var(--cream-40); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; width:36px; }
-  .td-name { font-weight:600; color:var(--cream); white-space:nowrap; max-width:180px; overflow:hidden; text-overflow:ellipsis; }
-  .td-phone { font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--cream-60); white-space:nowrap; }
-  .link-btn { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; border-radius:6px; font-size:0.75rem; font-family:'IBM Plex Mono',monospace; font-weight:500; text-decoration:none; transition:all 0.15s; white-space:nowrap; }
-  .link-pipe { background:var(--gold-15); border:1px solid var(--gold-30); color:var(--gold); }
-  .link-pipe:hover { background:var(--gold-20); }
-  .link-chat { background:var(--teal-10); border:1px solid var(--teal-20); color:var(--teal); }
-  .link-chat:hover { background:var(--teal-20); }
-  .td-links { display:flex; flex-direction:column; gap:6px; white-space:nowrap; }
-  .td-msg { color:var(--cream-60); font-size:0.83rem; max-width:420px; line-height:1.5; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--dark);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.65}
+  .container{max-width:1200px;margin:0 auto;padding:0 40px}
+  h1{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;letter-spacing:-0.02em;color:var(--cream);line-height:1.1}
+  h2{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;letter-spacing:-0.01em;color:var(--cream)}
+  .hero{padding:72px 0 48px;border-bottom:1px solid var(--border)}
+  .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .hero-eyebrow .dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
+  .label{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold)}
+  .hero-subtitle{font-size:0.95rem;color:var(--cream-60);margin-top:10px}
+  .stats-section{padding:48px 0;border-bottom:1px solid var(--border)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 24px}
+  .stat-number{font-family:'DM Serif Display',serif;font-size:2.8rem;color:var(--gold);line-height:1;margin-bottom:8px}
+  .stat-label{font-size:0.8rem;color:var(--cream-60);font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em;text-transform:uppercase}
+  .sdr-section{padding:56px 0;border-bottom:1px solid var(--border)}
+  .sdr-section:last-of-type{border-bottom:none}
+  .sdr-header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+  .sdr-badge{display:inline-flex;align-items:center;padding:6px 14px;border-radius:6px;font-size:0.75rem;font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:0.06em;text-transform:uppercase}
+  .badge-layslla{background:var(--purple-10);border:1px solid var(--purple-20);color:var(--purple)}
+  .badge-david{background:var(--teal-10);border:1px solid var(--teal-20);color:var(--teal)}
+  .sdr-count{font-size:0.8rem;color:var(--cream-40);font-family:'IBM Plex Mono',monospace}
+  .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse}
+  thead{background:var(--surface-2)}
+  th{padding:14px 18px;text-align:left;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:14px 18px;border-bottom:1px solid rgba(220,159,66,0.06);font-size:0.875rem;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr{background:var(--surface);transition:background 0.15s}
+  tr:hover{background:var(--gold-15)}
+  .td-num{color:var(--cream-40);font-family:'IBM Plex Mono',monospace;font-size:0.7rem;width:36px}
+  .td-name{font-weight:600;color:var(--cream);white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+  .td-phone{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--cream-60);white-space:nowrap}
+  .link-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:6px;font-size:0.75rem;font-family:'IBM Plex Mono',monospace;font-weight:500;text-decoration:none;transition:all 0.15s;white-space:nowrap}
+  .link-pipe{background:var(--gold-15);border:1px solid var(--gold-30);color:var(--gold)}
+  .link-pipe:hover{background:var(--gold-20)}
+  .link-chat{background:var(--teal-10);border:1px solid var(--teal-20);color:var(--teal)}
+  .link-chat:hover{background:var(--teal-20)}
+  .td-links{display:flex;flex-direction:column;gap:6px;white-space:nowrap}
+  .td-msg{color:var(--cream-60);font-size:0.83rem;max-width:420px;line-height:1.5}
   .last-update{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;background:rgba(76,175,111,0.08);border:1px solid rgba(76,175,111,0.20);border-radius:8px}
   .last-update .dot-green{width:7px;height:7px;background:#4CAF6F;border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
   .last-update-label{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:rgba(76,175,111,0.7);margin-right:4px}
   .last-update-value{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;font-weight:500;color:#4CAF6F}
-  .footer { padding:40px 0; border-top:1px solid var(--border); }
-  .footer-text { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--cream-40); letter-spacing:0.05em; }
-  @media(max-width:768px){.container{padding:0 20px;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
+  .footer{padding:40px 0;border-top:1px solid var(--border)}
+  .footer-text{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--cream-40);letter-spacing:0.05em}
+  @media(max-width:768px){.container{padding:0 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -87,7 +73,7 @@
     <div class="last-update">
       <div class="dot-green"></div>
       <span class="last-update-label">Última atualização</span>
-      <span class="last-update-value">29/04/2026 às 16:50 (BRT)</span>
+      <span class="last-update-value">29/04/2026 às 11:47 (BRT)</span>
     </div>
   </div>
 </div>
@@ -95,10 +81,10 @@
 <div class="stats-section">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-number">569</div><div class="stat-label">Total na etapa</div></div>
-      <div class="stat-card"><div class="stat-number">90</div><div class="stat-label">Com resposta real</div></div>
+      <div class="stat-card"><div class="stat-number">576</div><div class="stat-label">Total na etapa</div></div>
+      <div class="stat-card"><div class="stat-number">93</div><div class="stat-label">Com resposta real</div></div>
       <div class="stat-card"><div class="stat-number">53</div><div class="stat-label">Layslla</div></div>
-      <div class="stat-card"><div class="stat-number">37</div><div class="stat-label">David</div></div>
+      <div class="stat-card"><div class="stat-number">40</div><div class="stat-label">David</div></div>
     </div>
   </div>
 </div>
@@ -116,26 +102,6 @@
         <tbody>
           <tr>
             <td class="td-num">01</td>
-            <td class="td-name">Eli</td>
-            <td class="td-phone">(82) 99824-1521</td>
-            <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279656" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/12424" target="_blank">Chatwoot ↗</a>
-            </td>
-            <td class="td-msg">amanhã agente conversa estou um pouco ocupada no trabalho</td>
-          </tr>
-          <tr>
-            <td class="td-num">02</td>
-            <td class="td-name">Marcos</td>
-            <td class="td-phone">(61) 98104-9581</td>
-            <td class="td-links">
-              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/279931" target="_blank">Pipedrive ↗</a>
-              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/14449" target="_blank">Chatwoot ↗</a>
-            </td>
-            <td class="td-msg">Segundo plano atuar como terapeuta.</td>
-          </tr>
-          <tr>
-            <td class="td-num">03</td>
             <td class="td-name">Marcos</td>
             <td class="td-phone">(19) 98121-8983</td>
             <td class="td-links">
@@ -145,7 +111,7 @@
             <td class="td-msg">Boa noite, eu fiquei interessado em saber mais detalhes</td>
           </tr>
           <tr>
-            <td class="td-num">04</td>
+            <td class="td-num">02</td>
             <td class="td-name">Paula</td>
             <td class="td-phone">(11) 96598-8595</td>
             <td class="td-links">
@@ -155,7 +121,7 @@
             <td class="td-msg">Ligação não consigo</td>
           </tr>
           <tr>
-            <td class="td-num">05</td>
+            <td class="td-num">03</td>
             <td class="td-name">Luana</td>
             <td class="td-phone">(47) 99750-8512</td>
             <td class="td-links">
@@ -165,7 +131,7 @@
             <td class="td-msg">Nas redes</td>
           </tr>
           <tr>
-            <td class="td-num">06</td>
+            <td class="td-num">04</td>
             <td class="td-name">Cléo</td>
             <td class="td-phone">(67) 99112-9614</td>
             <td class="td-links">
@@ -175,7 +141,7 @@
             <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
-            <td class="td-num">07</td>
+            <td class="td-num">05</td>
             <td class="td-name">Claudio</td>
             <td class="td-phone">(53) 98474-8767</td>
             <td class="td-links">
@@ -185,7 +151,7 @@
             <td class="td-msg">Bom dia, vc poderia mandar o material por aqui para me inteirar do curso?</td>
           </tr>
           <tr>
-            <td class="td-num">08</td>
+            <td class="td-num">06</td>
             <td class="td-name">Jacqueline Rangel</td>
             <td class="td-phone">(41) 98433-5006</td>
             <td class="td-links">
@@ -195,7 +161,7 @@
             <td class="td-msg">Obrigada pelo contato! Como posso ajudar? 🙂</td>
           </tr>
           <tr>
-            <td class="td-num">09</td>
+            <td class="td-num">07</td>
             <td class="td-name">Ana Maria Oliveira da Silva</td>
             <td class="td-phone">(92) 99505-6025</td>
             <td class="td-links">
@@ -205,7 +171,7 @@
             <td class="td-msg">Pode ser mais tarde</td>
           </tr>
           <tr>
-            <td class="td-num">10</td>
+            <td class="td-num">08</td>
             <td class="td-name">Amanda</td>
             <td class="td-phone">(69) 99232-0775</td>
             <td class="td-links">
@@ -215,7 +181,7 @@
             <td class="td-msg">Olá, Gostaria de mais informações sobre a Formação de Hipnoterapeuta OMNI</td>
           </tr>
           <tr>
-            <td class="td-num">11</td>
+            <td class="td-num">09</td>
             <td class="td-name">Taniafatima De Carvalho</td>
             <td class="td-phone">(21) 99989-3660</td>
             <td class="td-links">
@@ -225,7 +191,7 @@
             <td class="td-msg">Pode ligar</td>
           </tr>
           <tr>
-            <td class="td-num">12</td>
+            <td class="td-num">10</td>
             <td class="td-name">Aline</td>
             <td class="td-phone">(61) 99295-4516</td>
             <td class="td-links">
@@ -235,7 +201,7 @@
             <td class="td-msg">Uma outra dúvida, atende como cliente primeiro? Por sessão?</td>
           </tr>
           <tr>
-            <td class="td-num">13</td>
+            <td class="td-num">11</td>
             <td class="td-name">André</td>
             <td class="td-phone">(17) 99647-5737</td>
             <td class="td-links">
@@ -245,7 +211,7 @@
             <td class="td-msg">Quero me aprimorar como ser humano</td>
           </tr>
           <tr>
-            <td class="td-num">14</td>
+            <td class="td-num">12</td>
             <td class="td-name">Anderson</td>
             <td class="td-phone">(27) 99912-5423</td>
             <td class="td-links">
@@ -255,7 +221,7 @@
             <td class="td-msg">quero saber o valor do inestimento.</td>
           </tr>
           <tr>
-            <td class="td-num">15</td>
+            <td class="td-num">13</td>
             <td class="td-name">Murilo</td>
             <td class="td-phone">(48) 98435-2255</td>
             <td class="td-links">
@@ -265,7 +231,7 @@
             <td class="td-msg">MS serviços agradece seu contato. Assim que disponível entrarei em contato 🙏</td>
           </tr>
           <tr>
-            <td class="td-num">16</td>
+            <td class="td-num">14</td>
             <td class="td-name">Priscila</td>
             <td class="td-phone">(16) 99305-1681</td>
             <td class="td-links">
@@ -275,7 +241,7 @@
             <td class="td-msg">Amor deixa pra próxima ,gosto de agilidade , sem rodeios , me interesso vou lá e pago , gosto assim , se não tivesse interesse não teria perdido meu tempo em procurar vcs , mais grata querida ...</td>
           </tr>
           <tr>
-            <td class="td-num">17</td>
+            <td class="td-num">15</td>
             <td class="td-name">Edson</td>
             <td class="td-phone">(34) 99916-7246</td>
             <td class="td-links">
@@ -285,7 +251,7 @@
             <td class="td-msg">É presencial ou EAD?</td>
           </tr>
           <tr>
-            <td class="td-num">18</td>
+            <td class="td-num">16</td>
             <td class="td-name">Wquismar Ferreira</td>
             <td class="td-phone">(66) 99980-5451</td>
             <td class="td-links">
@@ -295,7 +261,7 @@
             <td class="td-msg">Pode fazer</td>
           </tr>
           <tr>
-            <td class="td-num">19</td>
+            <td class="td-num">17</td>
             <td class="td-name">Amanda</td>
             <td class="td-phone">(41) 99905-4542</td>
             <td class="td-links">
@@ -305,7 +271,17 @@
             <td class="td-msg">Amanhã</td>
           </tr>
           <tr>
-            <td class="td-num">20</td>
+            <td class="td-num">18</td>
+            <td class="td-name">PrTiago</td>
+            <td class="td-phone">(17) 99635-1312</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/280993" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16056" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">meu motivo é crescimento</td>
+          </tr>
+          <tr>
+            <td class="td-num">19</td>
             <td class="td-name">Jenny</td>
             <td class="td-phone">(47) 9617-0102</td>
             <td class="td-links">
@@ -315,7 +291,7 @@
             <td class="td-msg">Olha, eu sei q tu tens q cumprir os protocolos, mas eu trabalhando em três lugares diferentes, saio de casa às 7:30 da manhã e só retorno às 22:30, preferiria q vc fosse mais objetiva, se tiver algum vídeo de como fundido a o curso, se tem horários ou se posso fazer nos meus momentos livres e valores, quantas horas aulas, fica melhor pra mim</td>
           </tr>
           <tr>
-            <td class="td-num">21</td>
+            <td class="td-num">20</td>
             <td class="td-name">Luciano Eugênio</td>
             <td class="td-phone">(33) 98711-8827</td>
             <td class="td-links">
@@ -325,7 +301,7 @@
             <td class="td-msg">Pode sim</td>
           </tr>
           <tr>
-            <td class="td-num">22</td>
+            <td class="td-num">21</td>
             <td class="td-name">Manoel Fisio</td>
             <td class="td-phone">(73) 99137-1249</td>
             <td class="td-links">
@@ -335,7 +311,7 @@
             <td class="td-msg">Saudações, aqui é o Fisioterapeuta Manoel, deixe sua mensagem assim que possível entrarei em contato.</td>
           </tr>
           <tr>
-            <td class="td-num">23</td>
+            <td class="td-num">22</td>
             <td class="td-name">Luiz Vinicius Pereira</td>
             <td class="td-phone">(62) 99446-0914</td>
             <td class="td-links">
@@ -345,7 +321,7 @@
             <td class="td-msg">Olá, o curso é on-line?</td>
           </tr>
           <tr>
-            <td class="td-num">24</td>
+            <td class="td-num">23</td>
             <td class="td-name">Adriana Lobo</td>
             <td class="td-phone">(11) 98495-7392</td>
             <td class="td-links">
@@ -355,7 +331,7 @@
             <td class="td-msg">Pode ser?</td>
           </tr>
           <tr>
-            <td class="td-num">25</td>
+            <td class="td-num">24</td>
             <td class="td-name">Paulo</td>
             <td class="td-phone">(61) 99605-9045</td>
             <td class="td-links">
@@ -365,7 +341,7 @@
             <td class="td-msg">Amanhã a noite, estou em viagem</td>
           </tr>
           <tr>
-            <td class="td-num">26</td>
+            <td class="td-num">25</td>
             <td class="td-name">Ediney Castelo</td>
             <td class="td-phone">(68) 99923-2976</td>
             <td class="td-links">
@@ -375,7 +351,7 @@
             <td class="td-msg">Envia áudio</td>
           </tr>
           <tr>
-            <td class="td-num">27</td>
+            <td class="td-num">26</td>
             <td class="td-name">Amarildo</td>
             <td class="td-phone">(71) 99624-4766</td>
             <td class="td-links">
@@ -385,7 +361,7 @@
             <td class="td-msg">Pode</td>
           </tr>
           <tr>
-            <td class="td-num">28</td>
+            <td class="td-num">27</td>
             <td class="td-name">luciabrasil</td>
             <td class="td-phone">(11) 97488-9823</td>
             <td class="td-links">
@@ -395,7 +371,7 @@
             <td class="td-msg">Estou no trabalho,se puder explicar por aqui,eu agradeço</td>
           </tr>
           <tr>
-            <td class="td-num">29</td>
+            <td class="td-num">28</td>
             <td class="td-name">Ana</td>
             <td class="td-phone">(11) 98175-3845</td>
             <td class="td-links">
@@ -405,7 +381,7 @@
             <td class="td-msg">Poderia me falar o valor da formação?</td>
           </tr>
           <tr>
-            <td class="td-num">30</td>
+            <td class="td-num">29</td>
             <td class="td-name">Vânia</td>
             <td class="td-phone">(83) 99943-6767</td>
             <td class="td-links">
@@ -415,7 +391,7 @@
             <td class="td-msg">Gratidão pelo seu contato. Essa é uma conta comercial. Nesse momento não é possível responder a sua mensagem. Assim que for possível farei contato com você. Bênçãos e paz!</td>
           </tr>
           <tr>
-            <td class="td-num">31</td>
+            <td class="td-num">30</td>
             <td class="td-name">Fabio E Paula</td>
             <td class="td-phone">(21) 99814-4463</td>
             <td class="td-links">
@@ -425,7 +401,7 @@
             <td class="td-msg">Qual valor do curso</td>
           </tr>
           <tr>
-            <td class="td-num">32</td>
+            <td class="td-num">31</td>
             <td class="td-name">Flaviana</td>
             <td class="td-phone">(77) 99900-1613</td>
             <td class="td-links">
@@ -435,7 +411,7 @@
             <td class="td-msg">Amanhã</td>
           </tr>
           <tr>
-            <td class="td-num">33</td>
+            <td class="td-num">32</td>
             <td class="td-name">Rosinaldo</td>
             <td class="td-phone">(91) 98165-2887</td>
             <td class="td-links">
@@ -445,7 +421,7 @@
             <td class="td-msg">Mais tarde, pfv</td>
           </tr>
           <tr>
-            <td class="td-num">34</td>
+            <td class="td-num">33</td>
             <td class="td-name">Ana Alice</td>
             <td class="td-phone">(62) 99188-5439</td>
             <td class="td-links">
@@ -455,7 +431,7 @@
             <td class="td-msg">Gostaria de saber valores e o plano de ensino/ grade.</td>
           </tr>
           <tr>
-            <td class="td-num">35</td>
+            <td class="td-num">34</td>
             <td class="td-name">Suzana Neves</td>
             <td class="td-phone">(42) 99962-8031</td>
             <td class="td-links">
@@ -465,7 +441,7 @@
             <td class="td-msg">‎Suzana Neves, psicanalista e hipnoterapeuta, agradece seu contato. Como posso ajudar?</td>
           </tr>
           <tr>
-            <td class="td-num">36</td>
+            <td class="td-num">35</td>
             <td class="td-name">Glauco</td>
             <td class="td-phone">(85) 99402-0703</td>
             <td class="td-links">
@@ -475,7 +451,7 @@
             <td class="td-msg">Prefiro mensagem. Pode ser áudio.  obrigado</td>
           </tr>
           <tr>
-            <td class="td-num">37</td>
+            <td class="td-num">36</td>
             <td class="td-name">Ana</td>
             <td class="td-phone">(79) 8822-1778</td>
             <td class="td-links">
@@ -483,6 +459,16 @@
               <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16229" target="_blank">Chatwoot ↗</a>
             </td>
             <td class="td-msg">Não posso atender</td>
+          </tr>
+          <tr>
+            <td class="td-num">37</td>
+            <td class="td-name">Carla</td>
+            <td class="td-phone">(21) 97006-4610</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281152" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16234" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Olá, seja bem-vindo(a)! 🌷   É um prazer receber seu contato. Meu nome é Carla Santos, sou psicanalista, e este é um espaço de escuta, acolhimento e cuidado.  Se deseja informações sobre atendimentos, valores ou agendamentos, estou à disposição para te orientar. Será um prazer caminhar com você nesse processo.  Fique à vontade para me contar como posso te ajudar. 💛</td>
           </tr>
           <tr>
             <td class="td-num">38</td>
@@ -612,7 +598,7 @@
               <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281242" target="_blank">Pipedrive ↗</a>
               <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16346" target="_blank">Chatwoot ↗</a>
             </td>
-            <td class="td-msg">bom dia voce pode me enviar mais informações por escrito ou áudio?</td>
+            <td class="td-msg">prefiro que me mande por escrito, irei respondendo por aqui</td>
           </tr>
           <tr>
             <td class="td-num">51</td>
@@ -655,7 +641,7 @@
     <div class="sdr-header">
       <h2>David Marques</h2>
       <span class="sdr-badge badge-david">SDR</span>
-      <span class="sdr-count">37 leads</span>
+      <span class="sdr-count">40 leads</span>
     </div>
     <div class="table-wrap">
       <table>
@@ -1003,6 +989,16 @@
           </tr>
           <tr>
             <td class="td-num">35</td>
+            <td class="td-name">Célia Santos -</td>
+            <td class="td-phone">(19) 98420-9428</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281235" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16339" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">O Instituto Musicel agradece o seu contato. Como podemos te ajudar?</td>
+          </tr>
+          <tr>
+            <td class="td-num">36</td>
             <td class="td-name">Mestre Fred Fuchshuber / Bruxo Empresário  auto pecas</td>
             <td class="td-phone">(21) 98390-7892</td>
             <td class="td-links">
@@ -1012,7 +1008,7 @@
             <td class="td-msg">Superior incompleto psicologia  Empresário auto pecas 50 anos</td>
           </tr>
           <tr>
-            <td class="td-num">36</td>
+            <td class="td-num">37</td>
             <td class="td-name">Soraya</td>
             <td class="td-phone">(41) 98851-0898</td>
             <td class="td-links">
@@ -1022,12 +1018,32 @@
             <td class="td-msg">Prefiro mensagem.</td>
           </tr>
           <tr>
-            <td class="td-num">37</td>
+            <td class="td-num">38</td>
             <td class="td-name">Pedro</td>
             <td class="td-phone">(21) 99973-2038</td>
             <td class="td-links">
               <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281280" target="_blank">Pipedrive ↗</a>
               <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16416" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Pode sim</td>
+          </tr>
+          <tr>
+            <td class="td-num">39</td>
+            <td class="td-name">Marcos</td>
+            <td class="td-phone">(11) 95045-7987</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281303" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16462" target="_blank">Chatwoot ↗</a>
+            </td>
+            <td class="td-msg">Qual site? Ou ig</td>
+          </tr>
+          <tr>
+            <td class="td-num">40</td>
+            <td class="td-name">Maísa</td>
+            <td class="td-phone">(11) 94722-8503</td>
+            <td class="td-links">
+              <a class="link-btn link-pipe" href="https://app.pipedrive.com/deal/281313" target="_blank">Pipedrive ↗</a>
+              <a class="link-btn link-chat" href="https://conversas-web.server.omnihypnosis.com.br/app/accounts/1/conversations/16476" target="_blank">Chatwoot ↗</a>
             </td>
             <td class="td-msg">Pode sim</td>
           </tr>
@@ -1039,7 +1055,7 @@
 
 <div class="footer">
   <div class="container">
-    <p class="footer-text">OMNI Brasil · Uso interno · 90 leads com resposta real de 569 na etapa Tentativa de Conectar · 28/04/2026</p>
+    <p class="footer-text">OMNI Brasil · Uso interno · 93 leads com resposta real de 576 na etapa Tentativa de Conectar · 29/04/2026</p>
   </div>
 </div>
 
