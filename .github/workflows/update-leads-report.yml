@@ -1,4 +1,4 @@
-name: Atualizar Relatório de Leads
+name: Atualizar Relatório de Leads — Tentativa de Conectar
 
 on:
   schedule:
