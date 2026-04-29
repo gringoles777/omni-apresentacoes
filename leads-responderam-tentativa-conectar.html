@@ -67,6 +67,11 @@
   .link-chat:hover { background:var(--teal-20); }
   .td-links { display:flex; flex-direction:column; gap:6px; white-space:nowrap; }
   .td-msg { color:var(--cream-60); font-size:0.83rem; max-width:420px; line-height:1.5; }
+  .last-update{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;background:rgba(76,175,111,0.08);border:1px solid rgba(76,175,111,0.20);border-radius:8px}
+  .last-update .dot-green{width:7px;height:7px;background:#4CAF6F;border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .last-update-label{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:rgba(76,175,111,0.7);margin-right:4px}
+  .last-update-value{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;font-weight:500;color:#4CAF6F}
   .footer { padding:40px 0; border-top:1px solid var(--border); }
   .footer-text { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--cream-40); letter-spacing:0.05em; }
   @media(max-width:768px){.container{padding:0 20px;}.stats-grid{grid-template-columns:repeat(2,1fr);}}
@@ -78,7 +83,12 @@
   <div class="container">
     <div class="hero-eyebrow"><div class="dot"></div><span class="label">SDR-Novo · Pipeline Comercial · OMNI Brasil</span></div>
     <h1>Leads com Resposta</h1>
-    <p class="hero-subtitle">Etapa Tentativa de Conectar — leads que responderam com mensagem substancial (excluídos: automáticos, respostas de "oi" único e sem conteúdo) · Atualizado em 28/04/2026</p>
+    <p class="hero-subtitle">Etapa Tentativa de Conectar — leads que responderam com mensagem substancial (excluídos: automáticos, "oi" único e sem conteúdo)</p>
+    <div class="last-update">
+      <div class="dot-green"></div>
+      <span class="last-update-label">Última atualização</span>
+      <span class="last-update-value">29/04/2026 às 16:50 (BRT)</span>
+    </div>
   </div>
 </div>
 

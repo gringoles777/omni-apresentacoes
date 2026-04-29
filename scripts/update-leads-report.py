@@ -6,14 +6,18 @@ Roda via GitHub Actions todo dia útil às 16:50 BRT (19:50 UTC)
 """
 
 import json, os, re, urllib.request, time, sys
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 CHATWOOT_URL = "https://conversas-web.server.omnihypnosis.com.br"
 ACCOUNT_ID = "1"
 CW_TOKEN = os.environ["CHATWOOT_TOKEN"]
 PIPE_KEY = os.environ["PIPEDRIVE_API_KEY"]
 STAGE_ID = 421  # Tentativa de Conectar
-TODAY = datetime.utcnow().strftime("%d/%m/%Y")
+
+BRT = timezone(timedelta(hours=-3))
+now_brt = datetime.now(BRT)
+TODAY = now_brt.strftime("%d/%m/%Y")
+LAST_UPDATE = now_brt.strftime("%d/%m/%Y às %H:%M (BRT)")
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -250,6 +254,11 @@ html = f"""<!DOCTYPE html>
   .link-chat:hover{{background:var(--teal-20)}}
   .td-links{{display:flex;flex-direction:column;gap:6px;white-space:nowrap}}
   .td-msg{{color:var(--cream-60);font-size:0.83rem;max-width:420px;line-height:1.5}}
+  .last-update{{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 16px;background:rgba(76,175,111,0.08);border:1px solid rgba(76,175,111,0.20);border-radius:8px}}
+  .last-update .dot-green{{width:7px;height:7px;background:#4CAF6F;border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}}
+  @keyframes pulse{{0%,100%{{opacity:1}}50%{{opacity:0.4}}}}
+  .last-update-label{{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;text-transform:uppercase;color:rgba(76,175,111,0.7);margin-right:4px}}
+  .last-update-value{{font-family:'IBM Plex Mono',monospace;font-size:0.78rem;font-weight:500;color:#4CAF6F}}
   .footer{{padding:40px 0;border-top:1px solid var(--border)}}
   .footer-text{{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--cream-40);letter-spacing:0.05em}}
   @media(max-width:768px){{.container{{padding:0 20px}}.stats-grid{{grid-template-columns:repeat(2,1fr)}}}}
@@ -261,7 +270,12 @@ html = f"""<!DOCTYPE html>
   <div class="container">
     <div class="hero-eyebrow"><div class="dot"></div><span class="label">SDR-Novo · Pipeline Comercial · OMNI Brasil</span></div>
     <h1>Leads com Resposta</h1>
-    <p class="hero-subtitle">Etapa Tentativa de Conectar — leads que responderam com mensagem substancial (excluídos: automáticos, "oi" único e sem conteúdo) · Atualizado em {TODAY}</p>
+    <p class="hero-subtitle">Etapa Tentativa de Conectar — leads que responderam com mensagem substancial (excluídos: automáticos, "oi" único e sem conteúdo)</p>
+    <div class="last-update">
+      <div class="dot-green"></div>
+      <span class="last-update-label">Última atualização</span>
+      <span class="last-update-value">{LAST_UPDATE}</span>
+    </div>
   </div>
 </div>
 
