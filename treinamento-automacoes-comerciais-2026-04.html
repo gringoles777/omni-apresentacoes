@@ -519,6 +519,10 @@
           <div class="hero-stat-label">Workflows ativos</div>
         </div>
         <div class="hero-stat">
+          <div class="hero-stat-num">W0000</div>
+          <div class="hero-stat-label">Abertura de lead</div>
+        </div>
+        <div class="hero-stat">
           <div class="hero-stat-num">W0001</div>
           <div class="hero-stat-label">Follow-up conexão</div>
         </div>
@@ -595,7 +599,14 @@
       </div>
 
       <!-- MAPA DE AUTOMAÇÕES -->
-      <div class="card-grid card-grid-3" style="margin-bottom:24px;">
+      <div class="card-grid card-grid-4" style="margin-bottom:24px;">
+        <div class="card card-gold">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">W0000 — Abertura de Lead</div>
+          <div class="card-body">
+            Quando um lead entra no Pipedrive (stage MQL/480), dispara a mensagem de abertura via WhatsApp pelo SDR responsável. IA classifica a resposta e age: move para "Conectado" se engajado, cria atividade se fora do horário.
+          </div>
+        </div>
         <div class="card card-gold">
           <div class="card-icon">📡</div>
           <div class="card-title">W0001 — Conexão de Leads</div>
@@ -603,14 +614,14 @@
             Quando um lead entra na etapa "Tentativa de Conectar" (421), dispara sequência de 3 mensagens WhatsApp em até 48h úteis. IA classifica resposta e move o deal automaticamente.
           </div>
         </div>
-        <div class="card card-teal">
+        <div class="card">
           <div class="card-icon">📅</div>
           <div class="card-title">W0002 — Prevenção No-Show</div>
           <div class="card-body">
             5 sub-workflows que garantem confirmação de presença antes da reunião. M1 imediato + resposta do lead + alerta sem resposta + lembretes M3/M4/M5 + auditoria Closer 2x/dia.
           </div>
         </div>
-        <div class="card card-green">
+        <div class="card">
           <div class="card-icon">📊</div>
           <div class="card-title">W0003 — Feedback Reuniões</div>
           <div class="card-body">
@@ -657,6 +668,88 @@
       <div class="section-label">02 · Workflows</div>
       <h2 class="section-title">Detalhamento de cada automação</h2>
       <p class="section-intro">Clique em cada workflow para expandir os detalhes de funcionamento, guards e fluxo de execução.</p>
+
+      <!-- W0000 -->
+      <div class="wf-card" id="wf-w0000">
+        <div class="wf-header" onclick="toggleWF('wf-w0000')">
+          <span class="wf-code">W0000</span>
+          <span class="wf-name">Abertura de Lead — Disparo automático ao cadastro</span>
+          <span class="wf-status status-active">ATIVO v1.3</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">O QUE FAZ</div>
+              <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:12px;">
+                Disparado quando um lead entra no Pipedrive (stage <strong style="color:var(--color-cream)">MQL — stage 480</strong>). Envia a mensagem de abertura via WhatsApp pelo SDR responsável pelo deal.
+              </p>
+              <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Dedup:</strong> rejeita o mesmo deal se disparar 2x em 5 min</div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Mensagem de abertura:</strong> enviada imediatamente, qualquer horário</div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Lead responde?</strong> IA classifica a resposta em 3 categorias</div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Fora do horário comercial (10h–18h, seg–sáb):</strong> envia mensagem de fora do horário + cria atividade para SDR abrir expediente</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">CLASSIFICAÇÃO IA — 3 CATEGORIAS</div>
+              <div class="alert alert-gray" style="background:rgba(107,107,107,0.08);border:1px solid rgba(107,107,107,0.2);margin-bottom:8px;">
+                <div class="alert-icon">🤖</div>
+                <div class="alert-body"><strong style="color:var(--color-cream);">Automático</strong> — bot, OOO, operadora<br><span style="font-size:0.82rem;color:var(--color-gray);">Ignora. SDR age manualmente.</span></div>
+              </div>
+              <div class="alert alert-orange" style="margin-bottom:8px;">
+                <div class="alert-icon">💬</div>
+                <div class="alert-body"><strong>Humano — baixo engajamento</strong> — "oi", "sim", emoji<br><span style="font-size:0.82rem;">Mantém no stage. Atividade no Pipedrive + alerta Google Chat para SDR.</span></div>
+              </div>
+              <div class="alert alert-green">
+                <div class="alert-icon">🎯</div>
+                <div class="alert-body"><strong>Humano — engajado</strong> — pergunta real, interesse demonstrado<br><span style="font-size:0.82rem;">Move para <strong>stage 422 (Conectado)</strong> + alerta Google Chat para SDR.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;">MENSAGENS DISPARADAS</div>
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div class="card" style="padding:16px;">
+              <div class="card-title" style="font-size:0.75rem;margin-bottom:8px;">MENSAGEM 1 — Abertura (imediato)</div>
+              <div style="background:var(--color-dark);border-radius:6px;padding:12px;font-size:0.82rem;color:var(--color-cream-70);line-height:1.6;font-style:italic;">
+                "Oi, [Nome]! Excelente dia 🌞<br>
+                Aqui é [seu nome], da OMNI.<br>
+                Vi que você se cadastrou pra saber mais sobre a Formação em Hipnoterapia OMNI, e passar por nossa consultoria estratégica foi isso mesmo?<br>
+                Posso te ligar rapidinho? São só 5 minutinhos para entender como posso te ajudar melhor 😊"
+              </div>
+            </div>
+            <div class="card" style="padding:16px;">
+              <div class="card-title" style="font-size:0.75rem;margin-bottom:8px;">MENSAGEM 2 — Fora do Horário (se resposta após 18h ou antes das 10h)</div>
+              <div style="background:var(--color-dark);border-radius:6px;padding:12px;font-size:0.82rem;color:var(--color-cream-70);line-height:1.6;font-style:italic;">
+                "Oi, [Nome]! Recebemos sua mensagem e ficamos felizes com seu interesse 😊<br>
+                Nosso atendimento é de segunda a sábado, das 10h às 18h.<br>
+                Você será uma das primeiras pessoas que vou chamar ao abrir o expediente!<br>
+                Até logo 🙏"
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;">PROTEÇÕES</div>
+          <div class="alert alert-gold">
+            <div class="alert-icon">🛡️</div>
+            <div class="alert-body">
+              <strong>1. Dedup de webhook</strong> — rejeita mesmo deal em 5 min<br>
+              <strong>2. Guard de abertura</strong> — verifica atividade no Pipedrive antes de enviar (evita reenvio se deal voltar ao stage)<br>
+              <strong>3. Classificação IA</strong> — não move deal por resposta de bot ou automático<br>
+              <strong>4. Check de horário comercial</strong> — 10h–18h, seg–sáb
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
+            <code>rbMru9IlbTR2CBra</code>
+            &nbsp;&nbsp;
+            <div class="section-label" style="display:inline;margin-left:24px;">MODELO IA</div>
+            <code style="margin-left:8px;">google/gemini-flash-1.5 via OpenRouter</code>
+          </div>
+        </div>
+      </div>
 
       <!-- W0001 -->
       <div class="wf-card" id="wf-w0001">
