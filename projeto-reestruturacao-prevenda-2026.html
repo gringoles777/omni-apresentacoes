@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Projeto Reestruturacao da Pre-Venda OMNI Brasil 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  /* ============== RESET & BASE ============== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 300;
+    color: #E5E7EB;
+    background: #080B14;
+    background-image: radial-gradient(ellipse at center, rgba(75,0,130,0.15) 0%, rgba(8,11,20,1) 60%);
+    background-attachment: fixed;
+    line-height: 1.65;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ============== TYPOGRAPHY ============== */
+  h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #fff; line-height: 1.2; }
+  h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.01em; }
+  h3 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+  h4 { font-size: 1.15rem; font-weight: 400; color: #D4AF37; font-family: 'Inter', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; }
+  p { margin-bottom: 1rem; color: #C5C9D4; }
+  a { color: #9B6FDE; text-decoration: none; }
+  strong { color: #fff; font-weight: 600; }
+
+  /* ============== LAYOUT ============== */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 80px 0; position: relative; }
+
+  /* ============== TOP BAR (sticky confidential badge) ============== */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(140, 20, 30, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 100, 100, 0.3);
+    padding: 10px 24px;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #FFE5E5;
+  }
+  .top-bar::before { content: "\26A0"; margin-right: 8px; color: #FFD0D0; }
+
+  /* ============== HERO ============== */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    margin-bottom: 24px;
+  }
+  .hero h1 { margin-bottom: 18px; }
+  .hero .subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: #9B6FDE;
+    max-width: 720px;
+    margin: 0 auto 12px;
+    font-weight: 300;
+  }
+  .hero .start-date {
+    color: #6B7081;
+    font-size: 0.9rem;
+    margin-bottom: 50px;
+    letter-spacing: 0.05em;
+  }
+
+  /* KPI cards */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .kpi-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 16px;
+    padding: 24px 18px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .kpi-card:hover { transform: translateY(-3px); border-color: rgba(212,175,55,0.4); }
+  .kpi-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #D4AF37;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label { font-size: 0.82rem; color: #9B9FB0; letter-spacing: 0.04em; }
+
+  /* ============== SECTION HEADERS ============== */
+  .section-eyebrow {
+    display: block;
+    text-align: center;
+    color: #00D4AA;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title { text-align: center; margin-bottom: 14px; }
+  .section-subtitle {
+    text-align: center;
+    color: #9B9FB0;
+    font-size: 1.05rem;
+    max-width: 760px;
+    margin: 0 auto 60px;
+  }
+
+  /* ============== STATUS BADGES ============== */
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid;
+  }
+  .badge-concluida, .badge-implementado {
+    background: #00D4AA22; border-color: #00D4AA; color: #00D4AA;
+  }
+  .badge-andamento {
+    background: #D4AF3722; border-color: #D4AF37; color: #D4AF37;
+  }
+  .badge-aguardando {
+    background: #7B2FBE22; border-color: #7B2FBE; color: #9B6FDE;
+  }
+  .badge-pendente {
+    background: #FF444422; border-color: #FF6666; color: #FF6666;
+  }
+  .badge-proxima {
+    background: #D4AF3722; border-color: #D4AF37; color: #D4AF37;
+  }
+
+  /* ============== CARD GRIDS ============== */
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 18px;
+    padding: 28px 26px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(212,175,55,0.35); }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .card h3 { font-size: 1.2rem; }
+  .card p { font-size: 0.95rem; color: #C5C9D4; }
+  .card-emphasis { color: #D4AF37; font-weight: 600; }
+
+  /* ============== SECTION 1 — Ja foi feito ============== */
+  .gap-divider {
+    text-align: center;
+    margin: 50px 0 0;
+    color: #D4AF37;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    padding: 14px 0;
+    border-top: 1px dashed rgba(212,175,55,0.3);
+    border-bottom: 1px dashed rgba(212,175,55,0.3);
+  }
+
+  /* ============== SECTION 2 — Diagnostico (funis) ============== */
+  .funnel-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .funnel-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 18px;
+    padding: 30px 26px;
+  }
+  .funnel-card h3 {
+    color: #D4AF37;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+  .funnel-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .funnel-label {
+    font-size: 0.88rem;
+    color: #C5C9D4;
+    line-height: 1.4;
+  }
+  .funnel-label small { color: #6B7081; display: block; font-size: 0.75rem; margin-top: 2px; }
+  .funnel-bar-wrap {
+    grid-column: 1 / -1;
+    height: 28px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .funnel-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #00D4AA, #00B894);
+    width: 0;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+  }
+  .funnel-bar.warn { background: linear-gradient(90deg, #D4AF37, #B8932F); }
+  .funnel-bar.danger { background: linear-gradient(90deg, #FF4444, #CC2222); }
+  .funnel-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .funnel-status.ok { background: #00D4AA22; color: #00D4AA; }
+  .funnel-status.warn { background: #D4AF3722; color: #D4AF37; }
+  .funnel-status.danger { background: #FF444422; color: #FF6666; }
+
+  /* Bottleneck cards */
+  .bottleneck-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 22px;
+    margin: 30px 0;
+  }
+  .bottleneck-card {
+    background: rgba(255,68,68,0.06);
+    border: 1px solid rgba(255,100,100,0.2);
+    border-left: 4px solid #FF4444;
+    border-radius: 14px;
+    padding: 26px 26px 24px;
+  }
+  .bottleneck-card h4 {
+    color: #FF6666;
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .bottleneck-card .root-cause {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(255,100,100,0.2);
+    font-size: 0.9rem;
+  }
+  .bottleneck-card .root-cause strong { color: #FF8888; }
+
+  .insight-box {
+    background: linear-gradient(135deg, rgba(123,47,190,0.12), rgba(212,175,55,0.08));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.05rem;
+    color: #E5E7EB;
+  }
+  .insight-box::before {
+    content: "\1F4A1";
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  /* ============== SECTION 3 — ICP ============== */
+  .icp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 26px;
+  }
+  .icp-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 18px;
+    padding: 32px 28px;
+    position: relative;
+  }
+  .icp-card.primary { border-color: rgba(212,175,55,0.35); }
+  .icp-card.secondary { border-color: rgba(0,212,170,0.25); }
+  .icp-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .icp-card.primary .icp-badge { background: #D4AF3722; color: #D4AF37; border: 1px solid #D4AF37; }
+  .icp-card.secondary .icp-badge { background: #00D4AA22; color: #00D4AA; border: 1px solid #00D4AA; }
+  .icp-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    color: #fff;
+  }
+  .icp-card h3 em { font-style: italic; color: #D4AF37; }
+  .icp-card.secondary h3 em { color: #00D4AA; }
+  .icp-attr {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.92rem;
+  }
+  .icp-attr:last-child { border-bottom: none; }
+  .icp-attr-label {
+    color: #9B9FB0;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .icp-attr-value { color: #E5E7EB; }
+  .icp-flags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .flag {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .flag.green { background: #00D4AA22; color: #00D4AA; border: 1px solid rgba(0,212,170,0.3); }
+  .flag.red { background: #FF444422; color: #FF6666; border: 1px solid rgba(255,100,100,0.3); }
+  .icp-quick {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: rgba(0,212,170,0.08);
+    border-left: 3px solid #00D4AA;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-style: italic;
+  }
+
+  /* ============== SECTION 4 — TIMELINE ============== */
+  .timeline-wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    position: relative;
+  }
+  .timeline-step {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+  }
+  .timeline-step:hover { transform: translateY(-3px); border-color: rgba(212,175,55,0.4); }
+  .timeline-step.done { border-color: rgba(0,212,170,0.4); background: rgba(0,212,170,0.06); }
+  .timeline-step.next { border-color: rgba(212,175,55,0.5); background: rgba(212,175,55,0.06); }
+  .timeline-num {
+    display: inline-block;
+    width: 36px; height: 36px;
+    line-height: 36px;
+    border-radius: 50%;
+    background: rgba(123,47,190,0.2);
+    border: 1px solid rgba(180,120,255,0.4);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #D4AF37;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .timeline-step.done .timeline-num { background: rgba(0,212,170,0.2); border-color: #00D4AA; color: #00D4AA; }
+  .timeline-step.next .timeline-num { background: rgba(212,175,55,0.2); border-color: #D4AF37; color: #D4AF37; }
+  .timeline-step h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  .timeline-date { font-size: 0.78rem; color: #9B9FB0; margin-bottom: 6px; }
+  .timeline-week { font-size: 0.72rem; color: #6B7081; letter-spacing: 0.05em; text-transform: uppercase; }
+  .timeline-status { margin-top: 10px; }
+
+  /* ============== SECTION 5 — ACCORDION FASES ============== */
+  .accordion {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(180,120,255,0.15);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .accordion.open { border-color: rgba(212,175,55,0.35); }
+  .accordion-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+  .accordion-trigger:hover { background: rgba(255,255,255,0.02); }
+  .accordion-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .accordion-title h3 {
+    font-size: 1.15rem;
+    margin: 0;
+    color: #fff;
+  }
+  .accordion-arrow {
+    transition: transform 0.3s ease;
+    color: #D4AF37;
+    font-size: 1.2rem;
+  }
+  .accordion.open .accordion-arrow { transform: rotate(180deg); }
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .accordion.open .accordion-content { max-height: 3000px; }
+  .accordion-inner {
+    padding: 0 26px 26px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 22px;
+    margin-top: -1px;
+  }
+  .phase-block {
+    margin-bottom: 22px;
+  }
+  .phase-block h4 {
+    color: #D4AF37;
+    font-size: 0.78rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.12em;
+  }
+  .phase-block p { font-size: 0.95rem; }
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .checklist li {
+    padding: 8px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: #C5C9D4;
+    line-height: 1.5;
+  }
+  .checklist li ul {
+    list-style: none;
+    padding-left: 28px;
+    margin-top: 4px;
+    width: 100%;
+  }
+  .checklist li ul li {
+    padding: 4px 0;
+    font-size: 0.88rem;
+    color: #9B9FB0;
+  }
+  .checklist input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    min-width: 18px;
+    border: 1.5px solid rgba(180,120,255,0.4);
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  .checklist input[type="checkbox"]:checked {
+    background: #00D4AA;
+    border-color: #00D4AA;
+  }
+  .checklist input[type="checkbox"]:checked::after {
+    content: "\2713";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: #080B14;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .checklist input[type="checkbox"]:checked + label {
+    color: #6B7081;
+    text-decoration: line-through;
+  }
+  .checklist label { cursor: pointer; flex: 1; }
+
+  /* ============== SECTION 6 — RESULTADO (HEATMAP TABLE) ============== */
+  .impact-table-wrap {
+    overflow-x: auto;
+    margin: 30px 0;
+    border-radius: 14px;
+    border: 1px solid rgba(180,120,255,0.15);
+    background: rgba(255,255,255,0.03);
+  }
+  .impact-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93rem;
+    min-width: 600px;
+  }
+  .impact-table thead {
+    background: rgba(123,47,190,0.15);
+  }
+  .impact-table th {
+    padding: 16px 18px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #D4AF37;
+    font-weight: 600;
+  }
+  .impact-table th:not(:first-child) { text-align: center; }
+  .impact-table td {
+    padding: 14px 18px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #E5E7EB;
+  }
+  .impact-table td:first-child { font-weight: 500; }
+  .impact-table td:not(:first-child) { text-align: center; font-weight: 600; }
+  .impact-table .cell-baseline { background: rgba(255,68,68,0.08); color: #FF8888; }
+  .impact-table .cell-current { background: rgba(212,175,55,0.10); color: #D4AF37; }
+  .impact-table .cell-target { background: rgba(0,212,170,0.10); color: #00D4AA; }
+  .impact-table .cell-empty { color: #6B7081; }
+  .impact-note {
+    font-size: 0.82rem;
+    color: #6B7081;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ============== SECTION 7 — FORA DO ESCOPO ============== */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .scope-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 22px;
+    color: #9B9FB0;
+    font-size: 0.92rem;
+  }
+  .scope-card strong { color: #C5C9D4; display: block; margin-bottom: 6px; font-size: 0.95rem; }
+  .scope-note {
+    text-align: center;
+    color: #9B9FB0;
+    font-size: 0.92rem;
+    font-style: italic;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    border-top: 1px solid rgba(180,120,255,0.15);
+    padding: 50px 24px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  footer p { color: #9B9FB0; font-size: 0.88rem; margin-bottom: 6px; }
+  footer p.confidential { color: #FF8888; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 14px; }
+  .print-btn {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 26px;
+    background: linear-gradient(135deg, #7B2FBE, #5A1F8E);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(123,47,190,0.4);
+  }
+
+  /* ============== FAB ============== */
+  .fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #D4AF37, #B8932F);
+    color: #080B14;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+    z-index: 90;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 26px rgba(212,175,55,0.55);
+  }
+
+  /* ============== ANIMATIONS ============== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    animation: fadeInUp 0.7s ease forwards;
+  }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 700px) {
+    section { padding: 60px 0; }
+    .container { padding: 0 18px; }
+    .hero { padding: 60px 0 50px; }
+    .icp-attr { grid-template-columns: 1fr; gap: 4px; }
+    .icp-attr-label { font-size: 0.72rem; }
+    .top-bar { font-size: 0.68rem; letter-spacing: 0.1em; }
+  }
+
+  /* ============== PRINT ============== */
+  @media print {
+    body {
+      background: #fff !important;
+      color: #1a1a1a !important;
+      background-image: none !important;
+    }
+    h1, h2, h3, h4 { color: #1a1a1a !important; }
+    h4, .section-eyebrow { color: #5A1F8E !important; }
+    p, .icp-attr-value, .funnel-label, td { color: #2a2a2a !important; }
+    .top-bar { background: #8C141E !important; color: #fff !important; position: static; }
+    .fab, .print-btn, .accordion-arrow { display: none !important; }
+    .card, .funnel-card, .icp-card, .timeline-step, .accordion, .kpi-card, .bottleneck-card {
+      background: #fff !important;
+      border: 1px solid #ccc !important;
+      backdrop-filter: none !important;
+      page-break-inside: avoid;
+    }
+    .accordion-content { max-height: none !important; }
+    .accordion-content { display: block !important; }
+    .insight-box {
+      background: #f5f0ff !important;
+      border: 1px solid #7B2FBE !important;
+      color: #1a1a1a !important;
+    }
+    .funnel-bar { background: #7B2FBE !important; color: #fff !important; }
+    .funnel-bar.warn { background: #B8932F !important; }
+    .funnel-bar.danger { background: #CC2222 !important; }
+    .impact-table th { background: #f5f0ff !important; color: #5A1F8E !important; }
+    .impact-table td { color: #1a1a1a !important; }
+    .impact-table .cell-baseline { background: #ffe5e5 !important; color: #8C141E !important; }
+    .impact-table .cell-current { background: #fff5d6 !important; color: #8C7A1F !important; }
+    .impact-table .cell-target { background: #d6f5ee !important; color: #00876B !important; }
+    .scope-card { background: #f5f5f5 !important; color: #555 !important; border: 1px solid #ddd !important; }
+    section { padding: 30px 0 !important; page-break-inside: avoid; }
+    @page { margin: 18mm; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR CONFIDENTIAL -->
+<div class="top-bar">DOCUMENTO CONFIDENCIAL &mdash; USO INTERNO OMNI BRASIL</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="hero-eyebrow reveal">PROJETO ESTRATEGICO 2026</span>
+    <h1 class="reveal">Projeto Reestruturacao da Pre-Venda</h1>
+    <p class="subtitle reveal">Continuidade do Plano de Performance Comercial 2026 &mdash; Foco no Processo SDR</p>
+    <p class="start-date reveal">Inicio: 30 de abril de 2026</p>
+
+    <div class="kpi-grid">
+      <div class="kpi-card reveal">
+        <div class="kpi-icon">&#9678;</div>
+        <div class="kpi-value">6</div>
+        <div class="kpi-label">Fases</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-icon">&#9201;</div>
+        <div class="kpi-value">~8</div>
+        <div class="kpi-label">Semanas</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-icon">&#128101;</div>
+        <div class="kpi-value">2</div>
+        <div class="kpi-label">SDRs</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-icon">&#9650;</div>
+        <div class="kpi-value">2x</div>
+        <div class="kpi-label">Meta de vendas</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 1 — Ja foi feito -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 1</span>
+    <h2 class="section-title">Ponto de Partida &mdash; Plano de Marco/2026</h2>
+    <p class="section-subtitle">Tres iniciativas do plano original foram implementadas. Este projeto resolve a lacuna que restou.</p>
+
+    <div class="card-grid-3">
+      <div class="card">
+        <div class="card-header">
+          <h3>Discador api4com</h3>
+          <span class="badge badge-implementado">Implementado</span>
+        </div>
+        <p>Power dialer integrado ao processo SDR. Capacidade de ligacoes aumentada significativamente.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Automacao de No-Show (M1-M5)</h3>
+          <span class="badge badge-implementado">Implementado</span>
+        </div>
+        <p>Sequencia de confirmacao e lembretes pre-reuniao em funcionamento. Taxa de no-show em queda.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Documentacao de Processo SDR</h3>
+          <span class="badge badge-andamento">Em andamento</span>
+        </div>
+        <p>Script e processo de pre-venda sem documentacao validada. Equipe operando com scripts nao aprovados. <span class="card-emphasis">Este projeto resolve isso.</span></p>
+      </div>
+    </div>
+
+    <div class="gap-divider">&darr; O que este projeto resolve &darr;</div>
+  </div>
+</section>
+
+<!-- SECTION 2 — Diagnostico -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 2</span>
+    <h2 class="section-title">Diagnostico &mdash; Onde o dinheiro esta vazando</h2>
+    <p class="section-subtitle">Diagnostico Consolidado &mdash; Abril/2026<br>Analise de 39 conversas WhatsApp + dados do funil (27&ndash;29/abr/2026)</p>
+
+    <div class="funnel-grid">
+      <!-- Funil SDR -->
+      <div class="funnel-card">
+        <h3>Funil SDR</h3>
+
+        <div class="funnel-row">
+          <div class="funnel-label">MQL &rarr; Tentativa Conectar<small>1.274 &rarr; 1.236</small></div>
+          <span class="funnel-status ok">97% &nbsp;&#10004;</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" data-pct="97">97%</div></div>
+
+        <div class="funnel-row">
+          <div class="funnel-label">Tentativa &rarr; Conectado<small>1.236 &rarr; 448</small></div>
+          <span class="funnel-status danger">36% &nbsp;&#9888; GARGALO 1</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar danger" data-pct="36">36%</div></div>
+
+        <div class="funnel-row">
+          <div class="funnel-label">Conectado &rarr; Avaliado/Agendar<small>448 &rarr; 240</small></div>
+          <span class="funnel-status ok">54% &nbsp;&#10004;</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" data-pct="54">54%</div></div>
+      </div>
+
+      <!-- Funil Closer -->
+      <div class="funnel-card">
+        <h3>Funil Closer</h3>
+
+        <div class="funnel-row">
+          <div class="funnel-label">R. Agendada &rarr; R. Realizada<small>148 &rarr; 101</small></div>
+          <span class="funnel-status warn">68% &nbsp;&#9888;</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar warn" data-pct="68">68%</div></div>
+
+        <div class="funnel-row">
+          <div class="funnel-label">R. Realizada &rarr; Oportunidade<small>101 &rarr; 24</small></div>
+          <span class="funnel-status danger">24% &nbsp;&#9888; GARGALO 2</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar danger" data-pct="24">24%</div></div>
+
+        <div class="funnel-row">
+          <div class="funnel-label">Oportunidade &rarr; Negociacao<small>24 &rarr; 11</small></div>
+          <span class="funnel-status warn">46% &nbsp;&#9888;</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar warn" data-pct="46">46%</div></div>
+
+        <div class="funnel-row">
+          <div class="funnel-label">Negociacao &rarr; Venda<small>11 &rarr; 9</small></div>
+          <span class="funnel-status ok">82% &nbsp;&#10004; EXCELENTE</span>
+        </div>
+        <div class="funnel-bar-wrap"><div class="funnel-bar" data-pct="82">82%</div></div>
+      </div>
+    </div>
+
+    <!-- Bottleneck cards -->
+    <div class="bottleneck-grid">
+      <div class="bottleneck-card">
+        <h4>GARGALO 1 &mdash; 64% dos leads nunca sao alcancados</h4>
+        <p>Mesmo com o discador api4com implementado, 36% de taxa de conexao indica problema de timing, abordagem e protocolo de tentativas &mdash; nao de volume. Com 50 leads/dia, sao ~32 leads que desaparecem sem falar com ninguem.</p>
+        <div class="root-cause"><strong>Causa raiz:</strong> Script de 2&ordf; e 3&ordf; tentativa inexistente. Sem protocolo diferenciado para reativar leads.</div>
+      </div>
+
+      <div class="bottleneck-card">
+        <h4>GARGALO 2 &mdash; 76% das reunioes nao viram oportunidade</h4>
+        <p>Apenas 24 de 101 reunioes realizadas chegam a etapa Oportunidade. O closer recebe leads sem entender por que estao ali, sem urgencia, muitas vezes sem o decisor financeiro presente.</p>
+        <div class="root-cause"><strong>Causa raiz:</strong> Script atual perdeu toda a qualificacao financeira e de decisor que existia no script Fev/2026. Leads chegam frios.</div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <strong>O que FUNCIONA:</strong> quem conecta, agenda (54%). Quem entra em negociacao, fecha (82%).<br>O problema nao e o closer &mdash; e o que chega ate ele.
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — ICP -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 3</span>
+    <h2 class="section-title">Os Dois Perfis que o SDR Atende</h2>
+    <p class="section-subtitle">ICP &mdash; Dois Perfis, Duas Abordagens<br>O SDR precisa identificar o perfil nos primeiros 2 minutos e ajustar a conducao</p>
+
+    <div class="icp-grid">
+      <div class="icp-card primary">
+        <span class="icp-badge">Foco Principal</span>
+        <h3>Perfil Primario &mdash; <em>"O Gestor Exausto"</em></h3>
+
+        <div class="icp-attr">
+          <div class="icp-attr-label">Como chega</div>
+          <div class="icp-attr-value">Trafego pago (Meta/Google)</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Quem e</div>
+          <div class="icp-attr-value">Executivo, funcionario publico, pequeno empresario. 30-55 anos. Estabilidade financeira.</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Dor central</div>
+          <div class="icp-attr-value">Insatisfacao com carreira, burnout, falta de proposito, "mente que nao desliga"</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Potencial</div>
+          <div class="icp-attr-value">LTV completo &mdash; Formacao + Black Mentoring + esteira</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Acao SDR</div>
+          <div class="icp-attr-value">Qualificacao emocional profunda. Conexao com proposito. Identificar dor real. Filtrar capacidade de investimento.</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Sinais</div>
+          <div class="icp-attr-value">
+            <div class="icp-flags">
+              <span class="flag green">Green: ja investiu em cursos/terapia</span>
+              <span class="flag green">Green: insatisfacao com carreira</span>
+              <span class="flag green">Green: fala de proposito</span>
+              <span class="flag red">Red: busca cura rapida sem compromisso</span>
+              <span class="flag red">Red: instabilidade financeira evidente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="icp-card secondary">
+        <span class="icp-badge">Perfil Organico</span>
+        <h3>Perfil Secundario &mdash; <em>"O Terapeuta"</em></h3>
+
+        <div class="icp-attr">
+          <div class="icp-attr-label">Como chega</div>
+          <div class="icp-attr-value">Google (busca organica) &mdash; sem marketing ativo para este perfil</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Quem e</div>
+          <div class="icp-attr-value">Profissional de saude ou terapia. Psicologos, coaches, fisioterapeutas, terapeutas holisticos.</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Motivacao</div>
+          <div class="icp-attr-value">Ampliar ferramentas profissionais, adicionar hipnoterapia ao repertorio</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Potencial</div>
+          <div class="icp-attr-value">Compra a Formacao. Raramente compra a esteira completa.</div>
+        </div>
+        <div class="icp-attr">
+          <div class="icp-attr-label">Acao SDR</div>
+          <div class="icp-attr-value">Qualificacao mais rapida (ja entende o produto). Foco na aplicacao profissional. Caminho mais direto para agendamento.</div>
+        </div>
+
+        <div class="icp-quick">Identificador rapido: "Voce ja trabalha na area de saude ou terapia hoje?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 — Timeline -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 4</span>
+    <h2 class="section-title">As 6 Fases do Projeto</h2>
+    <p class="section-subtitle">Execucao em parceria: AURA analisa e produz &mdash; Rafa valida e implementa com o time</p>
+
+    <div class="timeline-wrap">
+      <div class="timeline-step done">
+        <div class="timeline-num">1</div>
+        <h4>Diagnostico</h4>
+        <div class="timeline-date">30/abr/2026</div>
+        <div class="timeline-week">Semana 1</div>
+        <div class="timeline-status"><span class="badge badge-concluida">Concluida</span></div>
+      </div>
+      <div class="timeline-step next">
+        <div class="timeline-num">2</div>
+        <h4>ICP e Qualificacao</h4>
+        <div class="timeline-date">05&ndash;08/mai</div>
+        <div class="timeline-week">Semana 2</div>
+        <div class="timeline-status"><span class="badge badge-proxima">Proxima</span></div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">3</div>
+        <h4>Scripts e Protocolos</h4>
+        <div class="timeline-date">12&ndash;16/mai</div>
+        <div class="timeline-week">Semanas 3-4</div>
+        <div class="timeline-status"><span class="badge badge-aguardando">Aguardando</span></div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">4</div>
+        <h4>Metricas e Gestao</h4>
+        <div class="timeline-date">19&ndash;23/mai</div>
+        <div class="timeline-week">Semana 5</div>
+        <div class="timeline-status"><span class="badge badge-aguardando">Aguardando</span></div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">5</div>
+        <h4>Treinamento</h4>
+        <div class="timeline-date">26&ndash;30/mai</div>
+        <div class="timeline-week">Semana 6</div>
+        <div class="timeline-status"><span class="badge badge-aguardando">Aguardando</span></div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-num">6</div>
+        <h4>Acompanhamento</h4>
+        <div class="timeline-date">02&ndash;13/jun</div>
+        <div class="timeline-week">Semanas 7-8</div>
+        <div class="timeline-status"><span class="badge badge-aguardando">Aguardando</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 — Accordion fases detalhadas -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 5</span>
+    <h2 class="section-title">Fases Detalhadas</h2>
+    <p class="section-subtitle">Clique em cada fase para expandir entregaveis, metodo e responsaveis. Marque os checkboxes para acompanhar o progresso &mdash; o estado fica salvo no seu navegador.</p>
+
+    <!-- FASE 1 -->
+    <div class="accordion" data-phase="1">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 1 &mdash; Diagnostico</h3>
+          <span class="badge badge-concluida">Concluida</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Entender a realidade atual do processo de pre-venda antes de qualquer intervencao.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis Concluidos</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f1-1" checked><label for="f1-1">39 conversas WhatsApp analisadas (27&ndash;29/abr &mdash; inboxes David, D.Desativada, Layslla)</label></li>
+              <li><input type="checkbox" id="f1-2" checked><label for="f1-2">3 scripts comparados (Jun/25, Fev/26, Abr/26)</label></li>
+              <li><input type="checkbox" id="f1-3" checked><label for="f1-3">Funil mapeado com dados reais (1.274 MQLs &rarr; 9 vendas)</label></li>
+              <li><input type="checkbox" id="f1-4" checked><label for="f1-4">2 gargalos criticos identificados com evidencias</label></li>
+              <li><input type="checkbox" id="f1-5" checked><label for="f1-5">Reuniao de treinamento 29/abr revisada</label></li>
+              <li><input type="checkbox" id="f1-6" checked><label for="f1-6">ICP primario e secundario validados</label></li>
+              <li><input type="checkbox" id="f1-7" checked><label for="f1-7">Documentacao existente (plano marco/26, icp.yaml, pesquisa influencers) revisada</label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Principais Achados</h4>
+            <p>Taxa de conexao 36% (gargalo 1) &middot; Taxa de oportunidade 24% (gargalo 2) &middot; Script atual perdeu qualificacao financeira e de decisor.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>Concluida em 30/abr/2026.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 2 -->
+    <div class="accordion" data-phase="2">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 2 &mdash; ICP e Criterios de Qualificacao</h3>
+          <span class="badge badge-proxima">Proxima</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Traduzir o ICP em criterios operacionais que o SDR usa na ligacao para qualificar e filtrar.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f2-1"><label for="f2-1">Scorecard de qualificacao SDR (o que capturar antes de mover para "Avaliado")</label></li>
+              <li><input type="checkbox" id="f2-2"><label for="f2-2">Criterios de identificacao rapida do perfil (Gestor Exausto vs. Terapeuta)</label></li>
+              <li><input type="checkbox" id="f2-3"><label for="f2-3">Perguntas de qualificacao validadas por perfil</label></li>
+              <li><input type="checkbox" id="f2-4"><label for="f2-4">Criterios de descarte (quem NAO deve ir para consultoria)</label></li>
+              <li><input type="checkbox" id="f2-5"><label for="f2-5">Criterio de "agenda futura" (leads que podem converter em 30-60 dias)</label></li>
+              <li><input type="checkbox" id="f2-6"><label for="f2-6">Filtro financeiro por comportamento (sem perguntar renda)</label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Metodo</h4>
+            <p>AURA consolida a documentacao existente (icp.yaml + pesquisa abr/26 + dados do funil) e propoe o scorecard. Rafa valida com base na experiencia real das consultorias.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>2-3 sessoes de trabalho.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 3 -->
+    <div class="accordion" data-phase="3">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 3 &mdash; Scripts e Protocolos</h3>
+          <span class="badge badge-aguardando">Aguardando</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Construir o playbook completo de comunicacao da pre-venda &mdash; script de ligacao, protocolo WhatsApp e tratamento de objecoes.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f3-1"><label for="f3-1">Script de ligacao reconstruido (abertura sem pitch OMNI, foco no cliente)
+                <ul>
+                  <li><input type="checkbox" id="f3-1a"><label for="f3-1a">Versao Gestor Exausto (qualificacao emocional + financeira + decisor)</label></li>
+                  <li><input type="checkbox" id="f3-1b"><label for="f3-1b">Versao Terapeuta (qualificacao profissional, caminho mais rapido)</label></li>
+                </ul>
+              </label></li>
+              <li><input type="checkbox" id="f3-2"><label for="f3-2">Protocolo WhatsApp &mdash; resposta para cada cenario:
+                <ul>
+                  <li><input type="checkbox" id="f3-2a"><label for="f3-2a">"Nao posso falar agora" / "me manda por escrito" / "qual e o preco?" / lead nao responde / lead ja agendado</label></li>
+                </ul>
+              </label></li>
+              <li><input type="checkbox" id="f3-3"><label for="f3-3">Script de 2&ordf; tentativa (angulo diferente da 1&ordf;)</label></li>
+              <li><input type="checkbox" id="f3-4"><label for="f3-4">Script de 3&ordf; tentativa (angulo diferente das anteriores)</label></li>
+              <li><input type="checkbox" id="f3-5"><label for="f3-5">Tratamento das 5 objecoes mais comuns na ligacao</label></li>
+              <li><input type="checkbox" id="f3-6"><label for="f3-6">Manejo da situacao: lead quer marcar sem passar pela ligacao</label></li>
+              <li><input type="checkbox" id="f3-7"><label for="f3-7">Protocolo pos-no-show (o que o SDR faz quando a reuniao nao acontece)</label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Metodo</h4>
+            <p>AURA rascunha o script completo com base no feedback da reuniao 29/abr e nos scripts anteriores. Rafa faz roleplay e da feedback. Revisao ate aprovacao. <strong>David e Layslla nao recebem o script sem aprovacao da Rafa.</strong></p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>3-4 sessoes de trabalho.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 4 -->
+    <div class="accordion" data-phase="4">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 4 &mdash; Metricas e Gestao</h3>
+          <span class="badge badge-aguardando">Aguardando</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Criar o sistema de acompanhamento da pre-venda &mdash; o que medir, como registrar e como revisar semanalmente.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f4-1"><label for="f4-1">7 KPIs semanais da pre-venda (taxa de conexao, agendamento, show-up, qualidade de lead)</label></li>
+              <li><input type="checkbox" id="f4-2"><label for="f4-2">Template de registro no Pipedrive (o que o SDR documenta apos cada ligacao)</label></li>
+              <li><input type="checkbox" id="f4-3"><label for="f4-3">Formato da reuniao semanal de performance com o time (30 min, estrutura fixa)</label></li>
+              <li><input type="checkbox" id="f4-4"><label for="f4-4">Scorecard individual David / Layslla (evolucao semana a semana)</label></li>
+              <li><input type="checkbox" id="f4-5"><label for="f4-5">Automacao de no-show pos-reuniao (substituir o processo manual atual)
+                <ul>
+                  <li><input type="checkbox" id="f4-5a"><label for="f4-5a">Trigger: reuniao nao aconteceu</label></li>
+                  <li><input type="checkbox" id="f4-5b"><label for="f4-5b">Acao automatica: SDR recebe alerta + template de remarcacao</label></li>
+                  <li><input type="checkbox" id="f4-5c"><label for="f4-5c">Prazo: SDR tem ate 24h para remarcar ou marcar como perdido</label></li>
+                </ul>
+              </label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Metodo</h4>
+            <p>AURA define os KPIs e o sistema. Rafa aprova. Implementacao tecnica via n8n (no-show automation) em parceria com o time de automacoes.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>2 sessoes + implementacao tecnica.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 5 -->
+    <div class="accordion" data-phase="5">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 5 &mdash; Treinamento</h3>
+          <span class="badge badge-aguardando">Aguardando</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Preparar David e Layslla para executar o novo processo com consistencia &mdash; sem depender de supervisao constante.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f5-1"><label for="f5-1">Material de treinamento: "A Pre-Venda OMNI &mdash; Guia do SDR" (documento visual)</label></li>
+              <li><input type="checkbox" id="f5-2"><label for="f5-2">Guia de internalizacao do script (como incorporar sem "ler em voz alta")</label></li>
+              <li><input type="checkbox" id="f5-3"><label for="f5-3">Estrutura de role play entre David e Layslla (como praticar entre si)</label></li>
+              <li><input type="checkbox" id="f5-4"><label for="f5-4">Guia de analise de transcricoes api4com (o que procurar, como avaliar)</label></li>
+              <li><input type="checkbox" id="f5-5"><label for="f5-5">PDI individual &mdash; David: pontos de desenvolvimento especificos</label></li>
+              <li><input type="checkbox" id="f5-6"><label for="f5-6">PDI individual &mdash; Layslla: pontos de desenvolvimento especificos</label></li>
+              <li><input type="checkbox" id="f5-7"><label for="f5-7">Sessao de apresentacao ao time (Rafa apresenta, AURA prepara o material)</label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Metodo</h4>
+            <p>AURA produz todos os materiais. Rafa revisa e apresenta em sessao ao vivo com David e Layslla. Primeiro role play documentado na sessao.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>1 semana de producao + 1 sessao de treinamento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FASE 6 -->
+    <div class="accordion" data-phase="6">
+      <button class="accordion-trigger">
+        <div class="accordion-title">
+          <h3>Fase 6 &mdash; Acompanhamento e Ajuste</h3>
+          <span class="badge badge-aguardando">Aguardando</span>
+        </div>
+        <span class="accordion-arrow">&#9662;</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-inner">
+          <div class="phase-block">
+            <h4>Objetivo</h4>
+            <p>Validar na pratica o que foi construido e ajustar com dados reais &mdash; primeira semana pos-implantacao e critica.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Entregaveis</h4>
+            <ul class="checklist">
+              <li><input type="checkbox" id="f6-1"><label for="f6-1">Revisao de 20+ conversas WhatsApp pos-implantacao (semana 1 com novo script)</label></li>
+              <li><input type="checkbox" id="f6-2"><label for="f6-2">Analise das primeiras transcricoes do api4com com novo script</label></li>
+              <li><input type="checkbox" id="f6-3"><label for="f6-3">Relatorio de impacto: comparativo vs. baseline (conexao, agendamento, show-up)</label></li>
+              <li><input type="checkbox" id="f6-4"><label for="f6-4">Ajustes no script com base nos dados reais</label></li>
+              <li><input type="checkbox" id="f6-5"><label for="f6-5">Reuniao de balanco do projeto (o que funcionou, o que ajustar, o que manter)</label></li>
+              <li><input type="checkbox" id="f6-6"><label for="f6-6">Plano de otimizacao continua (cadencia mensal de revisao)</label></li>
+            </ul>
+          </div>
+
+          <div class="phase-block">
+            <h4>Metodo</h4>
+            <p>AURA analisa os dados. Rafa e AURA revisam juntos. Time recebe os ajustes.</p>
+          </div>
+
+          <div class="phase-block">
+            <h4>Duracao</h4>
+            <p>2 semanas de acompanhamento + relatorio final.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 6 — Resultado esperado -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 6</span>
+    <h2 class="section-title">O que esperamos alcancar ao final do projeto</h2>
+    <p class="section-subtitle">Projecao conservadora baseada nos dados atuais do funil</p>
+
+    <div class="impact-table-wrap">
+      <table class="impact-table">
+        <thead>
+          <tr>
+            <th>Metrica</th>
+            <th>Baseline (mar/26)</th>
+            <th>Atual (abr/26)</th>
+            <th>Meta (jun/26)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Taxa de conexao</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-current">36%</td>
+            <td class="cell-target">50%+</td>
+          </tr>
+          <tr>
+            <td>Taxa de agendamento (conectados)</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-current">54%</td>
+            <td class="cell-target">60%+</td>
+          </tr>
+          <tr>
+            <td>Show-up</td>
+            <td class="cell-baseline">55%</td>
+            <td class="cell-current">68%</td>
+            <td class="cell-target">80%+</td>
+          </tr>
+          <tr>
+            <td>Taxa de oportunidade</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-current">24%</td>
+            <td class="cell-target">40%+</td>
+          </tr>
+          <tr>
+            <td>Vendas/ciclo</td>
+            <td class="cell-baseline">13/mes</td>
+            <td class="cell-current">~9*</td>
+            <td class="cell-target">20-25</td>
+          </tr>
+          <tr>
+            <td>Custo por venda</td>
+            <td class="cell-baseline">R$ 2.307</td>
+            <td class="cell-empty">&mdash;</td>
+            <td class="cell-target">&lt; R$ 1.800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="impact-note">* Nota: dados do dashboard atual podem ter erros de preenchimento (declarado pela diretora).</p>
+
+    <div class="insight-box">
+      <strong>O fechamento ja funciona</strong> &mdash; 82% de conversao em negociacao.<br>O investimento aqui e em fazer mais leads chegarem bem qualificados ate o closer.<br><strong>Cada 1% de melhoria na taxa de oportunidade = +1 venda por ciclo.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7 — Fora do escopo -->
+<section>
+  <div class="container">
+    <span class="section-eyebrow">SECAO 7</span>
+    <h2 class="section-title">Fora do Escopo deste Projeto</h2>
+    <p class="section-subtitle">O que fica para outra fase</p>
+
+    <div class="scope-grid">
+      <div class="scope-card">
+        <strong>Transcricoes &rarr; Sales Intelligence</strong>
+        Automacao de coaching com IA
+      </div>
+      <div class="scope-card">
+        <strong>Dashboard por qualidade de campanha</strong>
+        Custo por venda fechada, por campanha
+      </div>
+      <div class="scope-card">
+        <strong>SDR IA consolidado</strong>
+        Apos processos humanos documentados e validados
+      </div>
+      <div class="scope-card">
+        <strong>Lead Diagnosis IA</strong>
+        Diagnostico personalizado como isca de aquisicao
+      </div>
+    </div>
+
+    <p class="scope-note">Estes itens estao no backlog do Plano de Performance Comercial 2026 e serao enderecados apos a estabilizacao do processo humano.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>Projeto Reestruturacao da Pre-Venda OMNI Brasil &middot; Iniciado em 30/04/2026 &middot; Squad Comercial-Ops + AURA AIOX</p>
+    <p class="confidential">Documento de uso interno &mdash; nao compartilhar com terceiros</p>
+    <button class="print-btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+  </div>
+</footer>
+
+<!-- FAB -->
+<button class="fab" onclick="window.print()" aria-label="Imprimir documento" title="Imprimir / Salvar PDF">&#128424;</button>
+
+<script>
+  // ==================== ACCORDION ====================
+  document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const accordion = trigger.parentElement;
+      accordion.classList.toggle('open');
+      // Persist open state
+      const phase = accordion.dataset.phase;
+      const openSet = JSON.parse(localStorage.getItem('omni-proj-prevenda-open') || '[]');
+      if (accordion.classList.contains('open')) {
+        if (!openSet.includes(phase)) openSet.push(phase);
+      } else {
+        const idx = openSet.indexOf(phase);
+        if (idx > -1) openSet.splice(idx, 1);
+      }
+      localStorage.setItem('omni-proj-prevenda-open', JSON.stringify(openSet));
+    });
+  });
+
+  // Restore open accordions
+  (function restoreOpen() {
+    const openSet = JSON.parse(localStorage.getItem('omni-proj-prevenda-open') || '[]');
+    openSet.forEach(phase => {
+      const acc = document.querySelector('.accordion[data-phase="' + phase + '"]');
+      if (acc) acc.classList.add('open');
+    });
+    // Default: open Fase 1 and Fase 2 on first load if nothing saved
+    if (openSet.length === 0) {
+      const f1 = document.querySelector('.accordion[data-phase="1"]');
+      const f2 = document.querySelector('.accordion[data-phase="2"]');
+      if (f1) f1.classList.add('open');
+      if (f2) f2.classList.add('open');
+    }
+  })();
+
+  // ==================== CHECKBOXES ====================
+  const STORAGE_KEY = 'omni-proj-prevenda-checks';
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+  document.querySelectorAll('.checklist input[type="checkbox"]').forEach(cb => {
+    // Phase 1 stays checked by default (in HTML), but allow override from storage
+    if (saved.hasOwnProperty(cb.id)) {
+      cb.checked = saved[cb.id];
+    }
+    cb.addEventListener('change', () => {
+      const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      state[cb.id] = cb.checked;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    });
+  });
+
+  // ==================== FUNNEL BAR ANIMATION ====================
+  const animateBars = () => {
+    document.querySelectorAll('.funnel-bar').forEach((bar, i) => {
+      const pct = bar.dataset.pct || 0;
+      setTimeout(() => {
+        bar.style.width = pct + '%';
+      }, i * 120);
+    });
+  };
+
+  // Trigger when funnel section enters viewport
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateBars();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+    const target = document.querySelector('.funnel-grid');
+    if (target) obs.observe(target);
+  } else {
+    setTimeout(animateBars, 400);
+  }
+
+  // ==================== HERO REVEAL ANIMATION ====================
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.animationDelay = (i * 0.08) + 's';
+  });
+
+  // ==================== PRINT EXPANSION ====================
+  // Open all accordions before printing so all content is visible in PDF
+  window.addEventListener('beforeprint', () => {
+    window._wasOpen = [];
+    document.querySelectorAll('.accordion').forEach(acc => {
+      window._wasOpen.push(acc.classList.contains('open'));
+      acc.classList.add('open');
+    });
+  });
+  window.addEventListener('afterprint', () => {
+    if (window._wasOpen) {
+      document.querySelectorAll('.accordion').forEach((acc, i) => {
+        if (!window._wasOpen[i]) acc.classList.remove('open');
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
