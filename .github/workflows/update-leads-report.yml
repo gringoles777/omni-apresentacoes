@@ -2,8 +2,8 @@ name: Atualizar Relatório de Leads — Tentativa de Conectar
 
 on:
   schedule:
-    # 19:50 UTC = 16:50 Brasília (UTC-3), segunda a sexta
-    - cron: "50 19 * * 1-5"
+    # 18:50 UTC = 16:50 Brasília, segunda a sexta
+    - cron: "50 18 * * 1-5"
   workflow_dispatch:
     # Permite rodar manualmente pelo GitHub Actions
 
