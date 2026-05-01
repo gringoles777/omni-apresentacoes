@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portal do Omniterapeuta — Apresentação 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============= TOKENS ============= */
+  :root {
+    --dark: #050505;
+    --dark-elevated: #1A1A1A;
+    --dark-texture: #2D2D2D;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --cream: #F5F0E8;
+    --cream-70: rgba(245, 240, 232, 0.70);
+    --cream-50: rgba(245, 240, 232, 0.50);
+    --cream-30: rgba(245, 240, 232, 0.30);
+    --teal: #2A9D8F;
+    --gray-dark: #242424;
+    --gold-grad: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: var(--dark); color: var(--cream); font-family: 'Inter', sans-serif; }
+  body { -webkit-font-smoothing: antialiased; }
+
+  /* ============= LAYOUT BASE ============= */
+  .deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 64px 72px 80px; opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 380ms ease, transform 380ms ease;
+    pointer-events: none;
+    overflow-y: auto;
+  }
+  .slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+  .slide.prev { transform: translateX(-40px); }
+
+  /* Crosshair grid background (only on cover/closing) */
+  .grid-bg::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(200, 168, 75, 0.07) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(200, 168, 75, 0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  }
+  .grid-bg::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(200,168,75,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ============= HEADER (logo) ============= */
+  .deck-logo {
+    position: absolute; top: 24px; left: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold);
+    z-index: 10;
+  }
+  .deck-logo .dot { display: inline-block; width: 6px; height: 6px; background: var(--gold); margin-right: 8px; vertical-align: middle; }
+
+  /* ============= PROGRESS + COUNTER ============= */
+  .progress-bar {
+    position: absolute; top: 0; left: 0; height: 3px;
+    background: var(--gold-grad);
+    width: 0%; transition: width 380ms ease;
+    z-index: 100;
+  }
+  .counter {
+    position: absolute; bottom: 18px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.12em;
+    color: var(--cream-50);
+    z-index: 10;
+  }
+  .nav-hint {
+    position: absolute; bottom: 18px; right: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    color: var(--cream-30); text-transform: uppercase;
+    z-index: 10;
+  }
+
+  /* ============= TYPOGRAPHY ============= */
+  .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .title {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .title-xl { font-size: 64px; max-width: 1100px; }
+  .title-lg { font-size: 48px; max-width: 900px; margin-bottom: 12px; }
+  .title-md { font-size: 38px; max-width: 800px; margin-bottom: 12px; }
+  .sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px; color: var(--cream-70); font-weight: 300;
+    line-height: 1.55; max-width: 800px;
+    margin-top: 12px;
+  }
+
+  /* ============= COMPONENTS ============= */
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.06em;
+    text-transform: uppercase; padding: 3px 8px;
+    display: inline-block;
+  }
+  .badge-gold { background: rgba(200,168,75,0.15); color: var(--gold); border: 1px solid rgba(200,168,75,0.3); }
+  .badge-teal { background: rgba(42,157,143,0.15); color: var(--teal); border: 1px solid rgba(42,157,143,0.3); }
+  .badge-gray { background: rgba(255,255,255,0.05); color: var(--cream-30); border: 1px solid rgba(255,255,255,0.1); }
+  .badge-red  { background: rgba(255,59,48,0.15); color: #FF3B30; border: 1px solid rgba(255,59,48,0.3); }
+  .badge-green{ background: rgba(40,202,65,0.15); color: #28CA41; border: 1px solid rgba(40,202,65,0.3); }
+
+  .btn-primary {
+    background: var(--gold-grad);
+    color: var(--dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 28px; border: none; cursor: pointer;
+    font-weight: 600; border-radius: 0;
+    transition: box-shadow 200ms ease;
+  }
+  .btn-primary:hover { box-shadow: 0 0 24px rgba(200,168,75,0.35); }
+  .btn-secondary {
+    background: transparent; color: var(--teal);
+    border: 1px solid var(--teal);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 10px 20px; cursor: pointer; border-radius: 0;
+  }
+
+  /* ============= APP WINDOW MOCKUP ============= */
+  .app-window {
+    background: #0D0D0D;
+    border: 1px solid var(--gray-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.85);
+    display: flex; flex-direction: column;
+  }
+  .browser-chrome {
+    height: 32px; background: #1A1A1A;
+    display: flex; align-items: center;
+    padding: 0 12px; gap: 6px;
+    border-bottom: 1px solid var(--gray-dark);
+    flex-shrink: 0;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #FF5F57; }
+  .dot-y { background: #FFBD2E; }
+  .dot-g { background: #28CA41; }
+  .url-bar {
+    flex: 1; background: var(--gray-dark);
+    height: 18px; border-radius: 3px; margin: 0 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-30);
+  }
+  .app-body { display: flex; flex: 1; min-height: 0; background: #0A0A0A; }
+
+  /* sidebar */
+  .portal-sidebar {
+    width: 200px; min-width: 200px;
+    background: #111111;
+    border-right: 1px solid var(--gray-dark);
+    padding: 16px 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .sidebar-logo {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--gray-dark);
+    margin-bottom: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--gold);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .sidebar-logo .small { font-size: 8px; color: var(--cream-30); display: block; margin-top: 4px; letter-spacing: 0.18em; }
+  .nav-item {
+    padding: 8px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; color: var(--cream-50);
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer;
+  }
+  .nav-item.active {
+    color: var(--gold);
+    background: rgba(200,168,75,0.1);
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+  }
+  .nav-item .lock {
+    font-size: 9px; color: rgba(200,168,75,0.5);
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.06em;
+  }
+  .nav-item .ico { width: 12px; opacity: 0.7; }
+  .sidebar-foot {
+    margin-top: auto; padding: 12px 16px;
+    border-top: 1px solid var(--gray-dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px; color: var(--cream-30);
+    letter-spacing: 0.12em;
+  }
+
+  .app-content {
+    flex: 1;
+    padding: 24px 28px;
+    overflow: hidden;
+    color: var(--cream);
+  }
+  .page-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 22px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .page-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; font-weight: 400;
+  }
+  .page-header .crumb {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: var(--cream-30);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* INPUT */
+  .mock-input-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: rgba(200,168,75,0.7);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 4px; display: block;
+  }
+  .mock-input {
+    background: #1A1A1A;
+    border: 1px solid var(--gray-dark);
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; color: var(--cream);
+    width: 100%;
+    height: 36px;
+    display: flex; align-items: center;
+  }
+  .mock-input.area { height: auto; min-height: 60px; align-items: flex-start; padding: 10px 12px; line-height: 1.4; }
+  .mock-input .placeholder { color: var(--cream-30); }
+  .mock-input.select::after { content: "▼"; margin-left: auto; color: var(--cream-30); font-size: 9px; }
+
+  /* CARDS GENERIC */
+  .card-inst {
+    border: 1px solid rgba(200,168,75,0.4);
+    background: linear-gradient(180deg, rgba(200,168,75,0.04), rgba(200,168,75,0.01));
+    padding: 28px 26px;
+    border-radius: 0;
+  }
+  .card-inst h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: var(--cream);
+    margin-bottom: 12px; font-weight: 400;
+  }
+  .card-inst .label-mini {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: var(--gold);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .card-inst p {
+    color: var(--cream-70);
+    font-size: 13px; line-height: 1.6;
+  }
+
+  .card-soft {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  /* slide-content layout */
+  .body-row { display: flex; gap: 48px; flex: 1; min-height: 0; align-items: stretch; }
+  .body-row .col-left { width: 38%; display: flex; flex-direction: column; justify-content: center; }
+  .body-row .col-right { flex: 1; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .body-row .col-right.full { width: 100%; }
+
+  .bullets { list-style: none; margin-top: 24px; }
+  .bullets li {
+    position: relative; padding-left: 22px;
+    margin-bottom: 14px;
+    font-size: 14px; color: var(--cream-70);
+    line-height: 1.55;
+  }
+  .bullets li::before {
+    content: "→"; position: absolute; left: 0; top: 0;
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* ============= UTIL ============= */
+  .center-stack { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .row-center { display: flex; align-items: center; justify-content: center; }
+  .gap-12 { gap: 12px; } .gap-16 { gap: 16px; } .gap-24 { gap: 24px; }
+  .mt-12 { margin-top: 12px; } .mt-24 { margin-top: 24px; } .mt-32 { margin-top: 32px; } .mt-48 { margin-top: 48px; }
+  .gold-text { color: var(--gold); }
+  .divider-gold { width: 80px; height: 1px; background: var(--gold); margin: 28px auto; }
+
+  /* ============= SLIDE-SPECIFIC ============= */
+  /* ----- Slide 1 ----- */
+  .cover-cta { margin-top: 48px; display: flex; gap: 16px; justify-content: center; }
+
+  /* ----- Slide 2 (3 cols) ----- */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 12px; }
+
+  /* ----- Slide 3 (login mockup) ----- */
+  .login-card {
+    width: 360px; background: #0D0D0D;
+    border: 1px solid var(--gray-dark);
+    padding: 32px 28px;
+  }
+  .login-card .login-logo {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--gold); font-size: 12px;
+    letter-spacing: 0.18em; margin-bottom: 24px;
+  }
+  .login-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; text-align: center; margin-bottom: 22px;
+  }
+  .login-card .field { margin-bottom: 14px; }
+  .login-card .field-row { display: flex; align-items: center; gap: 8px; position: relative; }
+  .login-card .eye {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 12px; color: var(--cream-30); cursor: pointer;
+  }
+  .login-card .login-links {
+    display: flex; justify-content: space-between;
+    margin-top: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: var(--cream-50);
+    letter-spacing: 0.10em; text-transform: uppercase;
+  }
+  .login-card .login-links a { color: var(--gold); text-decoration: none; }
+
+  .login-area {
+    display: flex; align-items: center; justify-content: center;
+    background: #050505; padding: 40px 0;
+    flex: 1;
+  }
+
+  .annotation {
+    position: relative;
+    margin-top: 12px;
+    padding-left: 22px;
+    color: var(--cream-70);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .annotation::before {
+    content: "→"; position: absolute; left: 0;
+    color: var(--gold);
+  }
+
+  /* ----- Slide 4 (Dashboard module grid) ----- */
+  .dash-greet {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; margin-bottom: 22px;
+    color: var(--cream);
+  }
+  .module-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .module-card {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 16px 14px;
+    position: relative;
+    min-height: 100px;
+  }
+  .module-card.locked { opacity: 0.85; }
+  .module-card .mod-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px; color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .module-card .mod-sub {
+    font-size: 11px; color: var(--cream-50);
+    line-height: 1.5;
+  }
+  .module-card .mod-badge {
+    position: absolute; top: 10px; right: 10px;
+  }
+  .module-card.coming { opacity: 0.45; }
+
+  /* ----- Slide 5 (Profile form) ----- */
+  .profile-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .profile-photo {
+    width: 80px; height: 80px;
+    border: 1px dashed rgba(200,168,75,0.5);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 24px;
+    margin-bottom: 18px;
+  }
+  .palette { display: flex; gap: 10px; }
+  .swatch { width: 26px; height: 26px; border-radius: 50%; }
+  .swatch.active { box-shadow: 0 0 0 2px var(--dark), 0 0 0 4px var(--gold); }
+
+  /* ----- Slide 6 (Patients list + detail) ----- */
+  .patients-layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; height: 100%; }
+  .patient-card {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px;
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .patient-card.active {
+    border-color: var(--gold);
+    background: rgba(200,168,75,0.06);
+  }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--gold-grad);
+    color: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600;
+  }
+  .avatar.lg { width: 64px; height: 64px; font-size: 18px; }
+  .patient-card .info { flex: 1; min-width: 0; }
+  .patient-card .name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px; color: var(--cream);
+  }
+  .patient-card .since {
+    font-size: 10px; color: var(--cream-30);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.10em;
+    margin-top: 2px;
+  }
+  .patient-card .new {
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+  }
+
+  .patient-detail { padding: 0; }
+  .patient-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 18px;
+  }
+  .patient-header .name-block {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+  }
+  .patient-header .since {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-30);
+    letter-spacing: 0.10em; margin-top: 4px;
+  }
+  .patient-info-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 16px;
+  }
+  .info-pill {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 10px 12px;
+  }
+  .info-pill .key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px; color: var(--cream-30);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .info-pill .val {
+    font-size: 12px; color: var(--cream); margin-top: 4px;
+  }
+  .treatment-block {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 14px;
+    border-left: 2px solid var(--gold);
+  }
+  .treatment-block .row1 {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .treatment-block .row1 .ttl {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+  }
+  .treatment-meta {
+    font-size: 12px; color: var(--cream-70);
+    margin-bottom: 12px;
+  }
+
+  .secure-note {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border-top: 1px solid rgba(200,168,75,0.3);
+    padding-top: 10px;
+  }
+
+  /* ----- Slide 7 (Roda da Vida + history) ----- */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .radar-wrap {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 16px;
+    text-align: center;
+  }
+  .legend {
+    display: flex; justify-content: center; gap: 18px;
+    margin-top: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.10em;
+    color: var(--cream-70); text-transform: uppercase;
+  }
+  .legend .sw { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+  .session-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 12px;
+  }
+  .session-table th {
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .session-table td {
+    padding: 8px 6px;
+    border-bottom: 1px solid #1A1A1A;
+    color: var(--cream-70);
+  }
+  .session-table .delta-up { color: var(--teal); font-weight: 600; }
+
+  .alert-card {
+    margin-top: 14px;
+    background: rgba(42,157,143,0.08);
+    border: 1px solid rgba(42,157,143,0.3);
+    border-left: 2px solid var(--teal);
+    padding: 12px 14px;
+    font-size: 12px; color: var(--cream-70);
+    line-height: 1.5;
+  }
+  .alert-card .alert-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; color: var(--teal);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 4px; display: block;
+  }
+
+  /* ----- Slide 8 (Form vs Copilot) ----- */
+  .split-twocol { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; flex: 1; min-height: 0; }
+  .split-divider {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .split-divider::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 1px; background: var(--gray-dark);
+  }
+  .split-divider .or {
+    background: var(--dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--gold);
+    letter-spacing: 0.18em;
+    padding: 6px 12px;
+    border: 1px solid var(--gold);
+    z-index: 1;
+  }
+  .split-pane {
+    background: #0D0D0D;
+    border: 1px solid var(--gray-dark);
+    padding: 22px 22px;
+    display: flex; flex-direction: column;
+    gap: 12px;
+  }
+  .pane-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; margin-bottom: 4px;
+  }
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-track {
+    flex: 1; height: 4px; background: #1A1A1A; position: relative;
+    border-radius: 2px;
+  }
+  .slider-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 70%; background: var(--gold); border-radius: 2px;
+  }
+  .slider-thumb {
+    position: absolute; left: 70%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px; height: 12px;
+    background: var(--gold); border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(200,168,75,0.2);
+  }
+  .slider-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--gold);
+  }
+
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #FF3B30;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid rgba(255,59,48,0.4);
+    padding: 4px 10px;
+    align-self: flex-start;
+  }
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #FF3B30;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .waveform {
+    display: flex; align-items: center; gap: 3px;
+    height: 44px; padding: 4px 0;
+  }
+  .wave-bar {
+    width: 3px; background: var(--gold);
+    border-radius: 2px;
+    animation: wave 0.9s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.25); }
+  }
+
+  .transcript {
+    background: #1A1A1A;
+    border: 1px solid var(--gray-dark);
+    padding: 12px 14px;
+    font-size: 12px; color: var(--cream-70);
+    line-height: 1.6;
+    font-style: italic;
+    max-height: 90px; overflow: hidden;
+  }
+  .transcript .cursor {
+    display: inline-block; width: 2px; height: 12px;
+    background: var(--gold); vertical-align: middle;
+    animation: blink 1s steps(2) infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .ai-suggest {
+    background: rgba(42,157,143,0.08);
+    border: 1px solid rgba(42,157,143,0.3);
+    border-left: 2px solid var(--teal);
+    padding: 8px 12px;
+    font-size: 11px; color: var(--cream);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .ai-suggest .ai-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px; color: var(--teal);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    display: block; margin-bottom: 3px;
+  }
+
+  /* ----- Slide 9 (Landing pages) ----- */
+  .lp-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .lp-card {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 16px;
+    min-height: 130px;
+    position: relative;
+  }
+  .lp-card.new {
+    border: 1px dashed var(--gold);
+    background: transparent;
+    color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+  }
+  .lp-card .lp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 15px; margin-bottom: 6px;
+    padding-right: 70px;
+  }
+  .lp-card .lp-slug {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .lp-card .lp-stats {
+    display: flex; gap: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-50);
+    letter-spacing: 0.06em;
+  }
+  .lp-card .lp-stats strong { color: var(--cream); font-weight: 600; }
+  .lp-card .top-badge { position: absolute; top: 12px; right: 12px; }
+
+  .lp-modal {
+    margin-top: 18px;
+    background: #0D0D0D;
+    border: 1px solid var(--gold);
+    padding: 18px;
+  }
+  .lp-modal .ttl {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px; margin-bottom: 14px;
+  }
+  .progress-mini {
+    width: 100%; height: 4px; background: #1A1A1A;
+    margin-bottom: 14px; position: relative; overflow: hidden;
+  }
+  .progress-mini .fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 75%; background: var(--gold-grad);
+    animation: load 2.4s ease-in-out infinite;
+  }
+  @keyframes load {
+    0% { width: 0%; }
+    50% { width: 75%; }
+    100% { width: 100%; opacity: 0.6; }
+  }
+  .lp-step {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--cream-70);
+    letter-spacing: 0.08em;
+    margin: 4px 0;
+  }
+  .lp-step .check { color: var(--teal); margin-right: 6px; }
+  .lp-step.active { color: var(--gold); }
+
+  /* ----- Slide 10 (IG Agency) ----- */
+  .ig-status {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 14px;
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    margin-bottom: 16px;
+  }
+  .ig-status .conn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--cream);
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ig-status .conn::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: #28CA41;
+    box-shadow: 0 0 8px rgba(40,202,65,0.5);
+  }
+  .ig-tabs {
+    display: flex; gap: 0; margin-left: auto;
+    border-left: 1px solid var(--gray-dark);
+    padding-left: 14px;
+  }
+  .ig-tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-50);
+    letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 4px 12px; cursor: pointer;
+  }
+  .ig-tab.active { color: var(--gold); border-bottom: 1px solid var(--gold); }
+
+  .ig-cal-wrap {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .ig-cal-wrap .sub-ttl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .ig-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #1A1A1A;
+    font-size: 12px;
+  }
+  .ig-row:last-child { border-bottom: none; }
+  .ig-row .check-box {
+    width: 14px; height: 14px;
+    border: 1px solid var(--cream-30);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--gold);
+  }
+  .ig-row.checked .check-box { border-color: var(--gold); background: rgba(200,168,75,0.15); }
+  .ig-row .type-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    padding: 2px 6px;
+    border: 1px solid var(--gray-dark);
+    color: var(--cream-50);
+    letter-spacing: 0.10em;
+    min-width: 70px;
+    text-align: center;
+  }
+  .ig-row .ig-text { color: var(--cream-70); flex: 1; }
+
+  .ig-action {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 14px;
+  }
+  .ig-credits {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-50);
+    letter-spacing: 0.06em;
+  }
+
+  .ig-content-card {
+    background: #131313;
+    border: 1px solid var(--gray-dark);
+    padding: 14px;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .ig-content-card .ig-body { flex: 1; }
+  .ig-content-card .ig-ttl {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px; margin-bottom: 4px;
+  }
+  .ig-content-card .ig-preview {
+    font-size: 11px; color: var(--cream-70);
+    line-height: 1.5; margin-bottom: 6px;
+  }
+  .ig-content-card .ig-tags {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+  .ig-content-card .actions { display: flex; flex-direction: column; gap: 6px; }
+  .ig-content-card .actions .btn-mini {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; padding: 6px 12px;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .btn-mini.gold { background: var(--gold-grad); color: var(--dark); border: none; border-radius: 0; }
+  .btn-mini.teal { background: transparent; color: var(--teal); border: 1px solid var(--teal); border-radius: 0; }
+
+  /* ----- Slide 11 (Security 2x2) ----- */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 1100px; margin: 32px auto 0; }
+  .lgpd-foot {
+    margin-top: 32px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--cream-50);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border-top: 1px solid var(--gray-dark);
+    padding-top: 18px;
+    max-width: 800px; margin-left: auto; margin-right: auto;
+  }
+
+  /* ----- Slide 12 ----- */
+  .modules-3x3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1100px; margin-top: 24px; }
+
+  /* ----- Slide 13 ----- */
+  .url-big {
+    font-family: 'DM Serif Display', serif;
+    font-size: 56px;
+    color: var(--gold);
+    margin: 24px 0 16px;
+    letter-spacing: -0.01em;
+  }
+  .help-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--cream-50);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* small responsive guard */
+  @media (max-width: 1100px) {
+    .title-xl { font-size: 48px; }
+    .title-lg { font-size: 38px; }
+    .title-md { font-size: 30px; }
+    .body-row { gap: 28px; }
+    .body-row .col-left { width: 36%; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ============= SLIDE 1 — CAPA ============= -->
+  <section class="slide grid-bg active" data-slide="1">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="center-stack">
+      <div class="label">PORTAL DO OMNITERAPEUTA</div>
+      <h1 class="title title-xl">Sua plataforma completa para atender, evoluir e crescer.</h1>
+      <p class="sub">Gestão de pacientes &middot; Registros clínicos &middot; IA para conteúdo</p>
+      <div class="cover-cta">
+        <button class="btn-primary" onclick="goNext()">Iniciar apresentação →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 2 — O QUE É ============= -->
+  <section class="slide" data-slide="2">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">VISÃO GERAL</div>
+    <h2 class="title title-lg">Três pilares em uma plataforma</h2>
+    <p class="sub" style="margin-bottom: 36px;">O Portal do Omniterapeuta reúne tudo que um terapeuta OMNI precisa para conduzir sua prática clínica e expandir presença com inteligência artificial.</p>
+
+    <div class="grid-3">
+      <div class="card-inst">
+        <div class="label-mini">PILAR 01</div>
+        <h3>Clínico</h3>
+        <p>Pacientes, tratamentos, Roda da Vida e registros de sessão com criptografia ponta-a-ponta — toda a sua prática em um só lugar.</p>
+      </div>
+      <div class="card-inst">
+        <div class="label-mini">PILAR 02</div>
+        <h3>IA</h3>
+        <p>Copiloto ao vivo durante a sessão, Landing Pages geradas por IA e Agência de Instagram autônoma, treinada com seu perfil.</p>
+      </div>
+      <div class="card-inst">
+        <div class="label-mini">PILAR 03</div>
+        <h3>Insights</h3>
+        <p>Gráficos de evolução por dimensão, benchmarks contra a base OMNI e alertas inteligentes sobre piora ou estagnação.</p>
+      </div>
+    </div>
+
+    <p class="sub mt-32" style="font-size: 13px; color: var(--cream-50); border-top: 1px solid var(--gray-dark); padding-top: 18px;">
+      <span class="badge badge-gold">BLACK MENTORING</span> &nbsp; Módulos de IA disponíveis para alunos do programa Black Mentoring.
+    </p>
+  </section>
+
+  <!-- ============= SLIDE 3 — ACESSO ============= -->
+  <section class="slide" data-slide="3">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 01 &middot; ACESSO</div>
+    <h2 class="title title-lg">Login seguro e por convite</h2>
+
+    <div class="body-row mt-24">
+      <div class="col-left">
+        <p class="sub" style="margin-top: 0;">A entrada no Portal é restrita: apenas alunos OMNI autorizados recebem convite por email para criar sua conta.</p>
+        <ul class="bullets">
+          <li>Acesso restrito a alunos OMNI autorizados</li>
+          <li>Convite enviado por email após aprovação</li>
+          <li>Autenticação com 2FA opcional disponível</li>
+        </ul>
+      </div>
+
+      <div class="col-right">
+        <div class="app-window" style="height: 460px;">
+          <div class="browser-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <div class="url-bar">portal.omnihypnosis.com.br</div>
+          </div>
+          <div class="login-area">
+            <div class="login-card">
+              <div class="login-logo">&middot; OMNI &middot;</div>
+              <h3>Acessar Portal</h3>
+              <div class="field">
+                <label class="mock-input-label">Email</label>
+                <div class="mock-input"><span class="placeholder">ana@meuemail.com</span></div>
+              </div>
+              <div class="field">
+                <label class="mock-input-label">Senha</label>
+                <div class="field-row">
+                  <div class="mock-input"><span class="placeholder">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div>
+                  <span class="eye">&#128065;</span>
+                </div>
+              </div>
+              <div style="margin-top: 18px;">
+                <button class="btn-primary" style="width: 100%;">Entrar</button>
+              </div>
+              <div class="login-links">
+                <a>Criar minha conta</a>
+                <a>Solicitar Acesso</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 4 — DASHBOARD ============= -->
+  <section class="slide" data-slide="4">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 02 &middot; HUB DE MÓDULOS</div>
+    <h2 class="title title-lg">Tudo em um só lugar</h2>
+
+    <div style="margin-top: 18px;">
+      <div class="app-window" style="height: 540px;">
+        <div class="browser-chrome">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <div class="url-bar">portal.omnihypnosis.com.br/dashboard</div>
+        </div>
+        <div class="app-body">
+          <aside class="portal-sidebar">
+            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+            <div class="nav-item active">Dashboard</div>
+            <div class="nav-item">Perfil</div>
+            <div class="nav-item">Pacientes</div>
+            <div class="nav-item">Copiloto</div>
+            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
+            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
+            <div class="sidebar-foot">v1.4.2 &middot; ANA LIMA</div>
+          </aside>
+          <div class="app-content">
+            <div class="dash-greet">Olá, Ana — bem-vinda de volta</div>
+
+            <div class="module-grid">
+              <div class="module-card">
+                <span class="badge badge-gold mod-badge">ATIVO</span>
+                <div class="mod-title">Perfil Profissional</div>
+                <div class="mod-sub">Configure sua identidade, nicho e tom de voz.</div>
+              </div>
+              <div class="module-card">
+                <span class="badge badge-gold mod-badge">ATIVO</span>
+                <div class="mod-title">Área do Paciente</div>
+                <div class="mod-sub">12 pacientes ativos &middot; 3 sessões nesta semana</div>
+              </div>
+              <div class="module-card">
+                <span class="badge badge-gold mod-badge">ATIVO</span>
+                <div class="mod-title">Copiloto de Sessão</div>
+                <div class="mod-sub">IA ao vivo durante o atendimento.</div>
+              </div>
+              <div class="module-card">
+                <span class="badge badge-gold mod-badge">BLACK MENTORING</span>
+                <div class="mod-title">Landing Pages</div>
+                <div class="mod-sub">Páginas de captação geradas em minutos.</div>
+              </div>
+              <div class="module-card">
+                <span class="badge badge-gold mod-badge">BLACK MENTORING</span>
+                <div class="mod-title">Agência Instagram</div>
+                <div class="mod-sub">Conteúdo profissional toda semana.</div>
+              </div>
+              <div class="module-card coming">
+                <span class="badge badge-gray mod-badge">EM BREVE</span>
+                <div class="mod-title">Agenda &middot; Financeiro &middot; Vídeo</div>
+                <div class="mod-sub">Próximos módulos da plataforma.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="annotation" style="margin-top: 14px;">Módulos Black Mentoring desbloqueados automaticamente para alunos do programa.</p>
+  </section>
+
+  <!-- ============= SLIDE 5 — PERFIL ============= -->
+  <section class="slide" data-slide="5">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 03 &middot; IDENTIDADE</div>
+    <h2 class="title title-lg">Seu perfil alimenta toda a plataforma</h2>
+
+    <div class="body-row mt-24">
+      <div class="col-left">
+        <p class="sub" style="margin-top: 0;">Os dados do perfil são usados pela IA para gerar conteúdo no seu estilo e personalizar suas Landing Pages.</p>
+        <ul class="bullets">
+          <li>Dados usados automaticamente pela IA para gerar conteúdo no seu estilo</li>
+          <li>Conexão com Instagram para publicação automática</li>
+          <li>Paleta personaliza suas Landing Pages</li>
+          <li>Bio e nicho alimentam todos os módulos</li>
+        </ul>
+      </div>
+
+      <div class="col-right">
+        <div class="app-window" style="height: 540px;">
+          <div class="browser-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <div class="url-bar">portal.omnihypnosis.com.br/perfil</div>
+          </div>
+          <div class="app-body">
+            <aside class="portal-sidebar">
+              <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+              <div class="nav-item">Dashboard</div>
+              <div class="nav-item active">Perfil</div>
+              <div class="nav-item">Pacientes</div>
+              <div class="nav-item">Copiloto</div>
+              <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
+              <div class="nav-item">Agência IG <span class="lock">BM</span></div>
+            </aside>
+            <div class="app-content" style="overflow-y: auto;">
+              <div class="page-header">
+                <h2>Perfil Profissional</h2>
+              </div>
+
+              <div class="profile-photo">+</div>
+
+              <div class="profile-row" style="margin-bottom: 12px;">
+                <div>
+                  <label class="mock-input-label">Nome completo</label>
+                  <div class="mock-input">Ana Lima Carvalho</div>
+                </div>
+                <div>
+                  <label class="mock-input-label">Nicho profissional</label>
+                  <div class="mock-input">Hipnoterapia para Ansiedade</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 12px;">
+                <label class="mock-input-label">Bio profissional</label>
+                <div class="mock-input area">Hipnoterapeuta certificada OMNI, atendo profissionais que buscam quebrar padrões emocionais limitantes. Método R2C aplicado em mais de 200 casos.</div>
+              </div>
+
+              <div class="profile-row" style="margin-bottom: 12px;">
+                <div>
+                  <label class="mock-input-label">Modalidade</label>
+                  <div class="mock-input">Online &middot; Presencial</div>
+                </div>
+                <div>
+                  <label class="mock-input-label">Tom de voz</label>
+                  <div class="mock-input select">Empático</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 14px;">
+                <label class="mock-input-label">Endereço de atendimento</label>
+                <div class="mock-input">Rua Felipe Schmidt, 312 &middot; Florianópolis, SC</div>
+              </div>
+
+              <div style="border-top: 1px solid var(--gray-dark); padding-top: 14px; margin-bottom: 14px;">
+                <label class="mock-input-label">Instagram</label>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                  <button class="btn-secondary">Conectar Instagram</button>
+                  <span style="font-size: 11px; color: var(--cream-50);">Necessário para Agência IG</span>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid var(--gray-dark); padding-top: 14px; margin-bottom: 18px;">
+                <label class="mock-input-label">Paleta de cores</label>
+                <div class="palette">
+                  <div class="swatch" style="background:#C8A84B;"></div>
+                  <div class="swatch active" style="background:#2A9D8F;"></div>
+                  <div class="swatch" style="background:#264653;"></div>
+                  <div class="swatch" style="background:#E76F51;"></div>
+                  <div class="swatch" style="background:#9C6644;"></div>
+                </div>
+              </div>
+
+              <button class="btn-primary">Salvar Perfil</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 6 — PACIENTES ============= -->
+  <section class="slide" data-slide="6">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 04 &middot; PACIENTES</div>
+    <h2 class="title title-lg">Todos os seus pacientes, com segurança clínica</h2>
+
+    <div style="margin-top: 18px;">
+      <div class="app-window" style="height: 560px;">
+        <div class="browser-chrome">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <div class="url-bar">portal.omnihypnosis.com.br/pacientes</div>
+        </div>
+        <div class="app-body">
+          <aside class="portal-sidebar">
+            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+            <div class="nav-item">Dashboard</div>
+            <div class="nav-item">Perfil</div>
+            <div class="nav-item active">Pacientes</div>
+            <div class="nav-item">Copiloto</div>
+            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
+            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
+          </aside>
+          <div class="app-content">
+            <div class="page-header">
+              <h2>Pacientes</h2>
+              <button class="btn-primary">+ Novo Paciente</button>
+            </div>
+
+            <div class="patients-layout">
+              <div>
+                <div class="patient-card active">
+                  <div class="avatar">MC</div>
+                  <div class="info">
+                    <div class="name">Maria Clara</div>
+                    <div class="since">DESDE JAN/2026</div>
+                  </div>
+                  <span class="badge badge-gold">EM TRATAMENTO</span>
+                </div>
+                <div class="patient-card">
+                  <div class="avatar">JR</div>
+                  <div class="info">
+                    <div class="name">João Rafael</div>
+                    <div class="since">DESDE FEV/2026</div>
+                  </div>
+                  <span class="badge badge-gold">EM TRATAMENTO</span>
+                </div>
+                <div class="patient-card">
+                  <div class="avatar">LS</div>
+                  <div class="info">
+                    <div class="name">Luana Silva</div>
+                    <div class="since">DESDE MAR/2026</div>
+                  </div>
+                  <span class="badge badge-gray">ENCERRADO</span>
+                </div>
+                <div class="patient-card">
+                  <div class="avatar" style="background: #1A1A1A; color: var(--gold); border: 1px dashed rgba(200,168,75,0.4);">PT</div>
+                  <div class="info">
+                    <div class="name">Pedro Torres</div>
+                    <div class="new">+ INICIAR TRATAMENTO</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="patient-detail">
+                <div class="patient-header">
+                  <div class="avatar lg">MC</div>
+                  <div>
+                    <div class="name-block">Maria Clara Souza</div>
+                    <div class="since">PACIENTE DESDE 12/JAN/2026</div>
+                  </div>
+                </div>
+
+                <div class="patient-info-grid">
+                  <div class="info-pill">
+                    <div class="key">Telefone</div>
+                    <div class="val">+55 48 99932-4421</div>
+                  </div>
+                  <div class="info-pill">
+                    <div class="key">Email</div>
+                    <div class="val">maria.clara@email.com</div>
+                  </div>
+                  <div class="info-pill">
+                    <div class="key">Data nasc.</div>
+                    <div class="val">14/03/1987 &middot; 39 anos</div>
+                  </div>
+                </div>
+
+                <div class="treatment-block">
+                  <div class="row1">
+                    <span class="badge badge-gold">ATIVO</span>
+                    <div class="ttl">Tratamento de Ansiedade</div>
+                  </div>
+                  <div class="treatment-meta">Início em 14/JAN/2026 &middot; 8 sessões realizadas &middot; Próxima 22/MAI/2026</div>
+                  <button class="btn-secondary">Ver evolução</button>
+                </div>
+
+                <div class="secure-note">&#128274; Criptografia AES-256-GCM &middot; Dados nunca expostos em logs ou cache</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 7 — RODA DA VIDA ============= -->
+  <section class="slide" data-slide="7">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 05 &middot; TRATAMENTOS</div>
+    <h2 class="title title-lg">Acompanhe a evolução em 13 dimensões da vida</h2>
+
+    <div style="margin-top: 14px;">
+      <div class="app-window" style="height: 580px;">
+        <div class="browser-chrome">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <div class="url-bar">portal.omnihypnosis.com.br/pacientes/maria-clara/tratamento</div>
+        </div>
+        <div class="app-body">
+          <aside class="portal-sidebar">
+            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+            <div class="nav-item">Dashboard</div>
+            <div class="nav-item">Perfil</div>
+            <div class="nav-item active">Pacientes</div>
+            <div class="nav-item">Copiloto</div>
+            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
+            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
+          </aside>
+          <div class="app-content">
+            <div class="page-header">
+              <div>
+                <div class="crumb">PACIENTES &middot; MARIA CLARA &middot; TRATAMENTO</div>
+                <h2>Roda da Vida &middot; Evolução</h2>
+              </div>
+            </div>
+
+            <div class="twocol">
+              <div class="radar-wrap">
+                <svg viewBox="0 0 320 320" style="width: 100%; max-width: 320px;">
+                  <!-- 8 grid rings -->
+                  <g fill="none" stroke="rgba(200,168,75,0.12)" stroke-width="1">
+                    <polygon points="160,30 256.6,75.4 290,160 256.6,244.6 160,290 63.4,244.6 30,160 63.4,75.4" />
+                    <polygon points="160,55 233.9,89.6 265,160 233.9,230.4 160,265 86.1,230.4 55,160 86.1,89.6" />
+                    <polygon points="160,80 211.2,103.8 240,160 211.2,216.2 160,240 108.8,216.2 80,160 108.8,103.8" />
+                    <polygon points="160,105 188.5,118 215,160 188.5,202 160,215 131.5,202 105,160 131.5,118" />
+                  </g>
+                  <!-- 8 axes -->
+                  <g stroke="rgba(200,168,75,0.18)" stroke-width="1">
+                    <line x1="160" y1="160" x2="160" y2="30"/>
+                    <line x1="160" y1="160" x2="256.6" y2="75.4"/>
+                    <line x1="160" y1="160" x2="290" y2="160"/>
+                    <line x1="160" y1="160" x2="256.6" y2="244.6"/>
+                    <line x1="160" y1="160" x2="160" y2="290"/>
+                    <line x1="160" y1="160" x2="63.4" y2="244.6"/>
+                    <line x1="160" y1="160" x2="30" y2="160"/>
+                    <line x1="160" y1="160" x2="63.4" y2="75.4"/>
+                  </g>
+                  <!-- baseline polygon (teal) -->
+                  <polygon points="160,80 200,115 230,160 215,210 160,240 115,210 90,160 115,115"
+                    fill="rgba(42,157,143,0.18)" stroke="#2A9D8F" stroke-width="1.5"/>
+                  <!-- atual polygon (gold) -->
+                  <polygon points="160,55 220,95 260,160 230,215 160,250 105,220 70,160 100,95"
+                    fill="rgba(200,168,75,0.18)" stroke="#C8A84B" stroke-width="2"/>
+                  <!-- labels -->
+                  <g font-family="IBM Plex Mono, monospace" font-size="9" fill="rgba(245,240,232,0.7)" letter-spacing="0.5">
+                    <text x="160" y="20" text-anchor="middle">SAÚDE</text>
+                    <text x="265" y="72" text-anchor="middle">CARREIRA</text>
+                    <text x="298" y="163" text-anchor="start">FINANÇAS</text>
+                    <text x="265" y="258" text-anchor="middle">RELAC.</text>
+                    <text x="160" y="305" text-anchor="middle">FAMÍLIA</text>
+                    <text x="55" y="258" text-anchor="middle">LAZER</text>
+                    <text x="22" y="163" text-anchor="end">ESPIRIT.</text>
+                    <text x="55" y="72" text-anchor="middle">PROPÓSITO</text>
+                  </g>
+                  <!-- center dot -->
+                  <circle cx="160" cy="160" r="2" fill="#C8A84B"/>
+                </svg>
+                <div class="legend">
+                  <span><span class="sw" style="background:#2A9D8F"></span>BASELINE JAN</span>
+                  <span><span class="sw" style="background:#C8A84B"></span>ATUAL ABR</span>
+                </div>
+              </div>
+
+              <div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.18em; margin-bottom: 10px; text-transform: uppercase;">Histórico de Sessões</div>
+                <table class="session-table">
+                  <thead>
+                    <tr><th>Data</th><th>Técnica</th><th>Duração</th><th>Delta</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>15/04/2026</td><td>R2C</td><td>60 min</td><td class="delta-up">+3</td></tr>
+                    <tr><td>08/04/2026</td><td>EMD</td><td>90 min</td><td class="delta-up">+2</td></tr>
+                    <tr><td>01/04/2026</td><td>R2C</td><td>60 min</td><td class="delta-up">+1</td></tr>
+                    <tr><td>25/03/2026</td><td>Ressig.</td><td>60 min</td><td class="delta-up">+2</td></tr>
+                    <tr><td>18/03/2026</td><td>R2C</td><td>90 min</td><td class="delta-up">+1</td></tr>
+                  </tbody>
+                </table>
+
+                <div class="alert-card">
+                  <span class="alert-label">Alerta inteligente</span>
+                  Piora detectada na dimensão <strong style="color: var(--cream);">Saúde</strong> nas últimas 2 sessões. Verificar na próxima consulta.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 8 — SESSÃO + COPILOTO ============= -->
+  <section class="slide" data-slide="8">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">PASSO 06 &middot; SESSÕES</div>
+    <h2 class="title title-lg">Registre manualmente ou deixe a IA fazer por você</h2>
+
+    <div class="split-twocol mt-24">
+      <!-- LEFT: manual form -->
+      <div class="split-pane">
+        <div class="pane-title">Nova Sessão &middot; Maria Clara</div>
+
+        <div class="profile-row">
+          <div>
+            <label class="mock-input-label">Data</label>
+            <div class="mock-input">22/05/2026</div>
+          </div>
+          <div>
+            <label class="mock-input-label">Duração</label>
+            <div class="mock-input">60 min</div>
+          </div>
+        </div>
+
+        <div>
+          <label class="mock-input-label">Técnica aplicada</label>
+          <div class="mock-input select">R2C — Regressão à Causa</div>
+        </div>
+
+        <div>
+          <label class="mock-input-label">Delta percebido (1 → 10)</label>
+          <div class="slider-row">
+            <div class="slider-track">
+              <div class="slider-fill"></div>
+              <div class="slider-thumb"></div>
+            </div>
+            <span class="slider-val">7</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="mock-input-label">Observações da sessão</label>
+          <div class="mock-input area">Paciente trouxe memória da infância relacionada ao gatilho. Trabalhamos ressignificação com técnica R2C clássica.</div>
+        </div>
+
+        <div>
+          <label class="mock-input-label">Evolução do paciente</label>
+          <div class="mock-input area">Maior consciência corporal e respiração mais regulada ao final da sessão.</div>
+        </div>
+
+        <div>
+          <label class="mock-input-label">Homework</label>
+          <div class="mock-input area">Diário emocional diário por 7 dias e prática de respiração 4-7-8 ao acordar.</div>
+        </div>
+
+        <button class="btn-primary" style="align-self: flex-start; margin-top: 6px;">Salvar Sessão</button>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="split-divider"><span class="or">OU</span></div>
+
+      <!-- RIGHT: copilot live -->
+      <div class="split-pane">
+        <div class="pane-title">Copiloto de Sessão</div>
+        <div class="live-badge"><span class="live-dot"></span>AO VIVO</div>
+
+        <div class="waveform" id="wf">
+          <!-- 26 bars; heights & delays varied -->
+        </div>
+
+        <div>
+          <label class="mock-input-label">Transcrição em tempo real</label>
+          <div class="transcript">"...paciente relata melhora significativa no relacionamento com a mãe desde a última sessão. Apresenta resistência ao trabalhar questões de autoestima profissional, mas demonstra abertura para...<span class="cursor"></span>"</div>
+        </div>
+
+        <div style="margin-top: 4px;">
+          <label class="mock-input-label">Sugestões da IA</label>
+          <div class="ai-suggest">
+            <span class="ai-key">Técnica sugerida</span>
+            Ressignificação ancorada — trabalhar memória da figura materna identificada na fala.
+          </div>
+          <div class="ai-suggest">
+            <span class="ai-key">Pergunta de aprofundamento</span>
+            "Como você se sente em relação a essa parte sua que está se mostrando agora?"
+          </div>
+          <div class="ai-suggest">
+            <span class="ai-key">Homework sugerido</span>
+            Registro diário de gatilhos profissionais durante 7 dias, com nota 1-10.
+          </div>
+        </div>
+
+        <button class="btn-primary" style="align-self: flex-start; margin-top: 4px;">Usar esta sessão</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 9 — LANDING PAGES ============= -->
+  <section class="slide" data-slide="9">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label"><span class="badge badge-gold" style="margin-right: 10px;">BLACK MENTORING</span> LANDING PAGES</div>
+    <h2 class="title title-lg">Sua página de captação gerada por IA em minutos</h2>
+
+    <div class="body-row mt-24">
+      <div class="col-left">
+        <p class="sub" style="margin-top: 0;">A IA cria sua landing page de captação personalizada com base no seu perfil, nicho e tom de voz — pronta para receber leads.</p>
+        <ul class="bullets">
+          <li>Gerada com base no seu perfil, nicho e tom de voz</li>
+          <li>Estatísticas em tempo real: visitas, leads e taxa de conversão</li>
+          <li>Paleta personalizada e domínio próprio</li>
+          <li>Integração nativa com WhatsApp e email</li>
+        </ul>
+      </div>
+
+      <div class="col-right">
+        <div class="app-window" style="height: 540px;">
+          <div class="browser-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <div class="url-bar">portal.omnihypnosis.com.br/landing-pages</div>
+          </div>
+          <div class="app-body">
+            <aside class="portal-sidebar">
+              <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+              <div class="nav-item">Dashboard</div>
+              <div class="nav-item">Perfil</div>
+              <div class="nav-item">Pacientes</div>
+              <div class="nav-item">Copiloto</div>
+              <div class="nav-item active">Landing Pages <span class="lock">BM</span></div>
+              <div class="nav-item">Agência IG <span class="lock">BM</span></div>
+            </aside>
+            <div class="app-content" style="overflow-y: auto;">
+              <div class="page-header">
+                <h2>Minhas Landing Pages</h2>
+                <button class="btn-primary">+ Nova LP</button>
+              </div>
+
+              <div class="lp-grid">
+                <div class="lp-card">
+                  <span class="badge badge-gold top-badge">PUBLICADA</span>
+                  <div class="lp-title">Terapia para Ansiedade</div>
+                  <div class="lp-slug">/ana-lima-ansiedade</div>
+                  <div class="lp-stats">
+                    <span><strong>142</strong> visitas</span>
+                    <span><strong>23</strong> leads</span>
+                    <span><strong>16%</strong> conv.</span>
+                  </div>
+                </div>
+                <div class="lp-card">
+                  <span class="badge badge-gray top-badge">RASCUNHO</span>
+                  <div class="lp-title">Hipnoterapia Executiva</div>
+                  <div class="lp-slug">/ana-lima-exec</div>
+                  <div class="lp-stats">
+                    <span><strong>0</strong> visitas</span>
+                    <span><strong>0</strong> leads</span>
+                  </div>
+                </div>
+                <div class="lp-card new">+ Criar Nova</div>
+              </div>
+
+              <div class="lp-modal">
+                <div class="ttl">Gerando sua Landing Page...</div>
+                <div class="progress-mini"><div class="fill"></div></div>
+                <div class="lp-step"><span class="check">✓</span>Analisando seu perfil</div>
+                <div class="lp-step"><span class="check">✓</span>Adaptando para o nicho de Ansiedade</div>
+                <div class="lp-step active">&middot; Escrevendo copy persuasivo...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 10 — IG AGENCY ============= -->
+  <section class="slide" data-slide="10">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label"><span class="badge badge-gold" style="margin-right: 10px;">BLACK MENTORING</span> AGÊNCIA INSTAGRAM</div>
+    <h2 class="title title-lg">Conteúdo profissional para o seu Instagram, toda semana</h2>
+
+    <div style="margin-top: 16px;">
+      <div class="app-window" style="height: 580px;">
+        <div class="browser-chrome">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <div class="url-bar">portal.omnihypnosis.com.br/agencia-instagram</div>
+        </div>
+        <div class="app-body">
+          <aside class="portal-sidebar">
+            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
+            <div class="nav-item">Dashboard</div>
+            <div class="nav-item">Perfil</div>
+            <div class="nav-item">Pacientes</div>
+            <div class="nav-item">Copiloto</div>
+            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
+            <div class="nav-item active">Agência IG <span class="lock">BM</span></div>
+          </aside>
+          <div class="app-content" style="overflow-y: auto;">
+            <div class="ig-status">
+              <div class="conn">IG Conectado &middot; @analimaterapia</div>
+              <div class="ig-tabs">
+                <div class="ig-tab">Conteúdos</div>
+                <div class="ig-tab active">Calendário</div>
+                <div class="ig-tab">Histórico</div>
+              </div>
+            </div>
+
+            <div class="ig-cal-wrap">
+              <div class="sub-ttl">Sugestões desta semana — selecione para gerar</div>
+
+              <div class="ig-row checked">
+                <div class="check-box">✓</div>
+                <div class="type-badge">POST</div>
+                <div class="ig-text">3 sinais de que hipnoterapia pode te ajudar</div>
+              </div>
+              <div class="ig-row checked">
+                <div class="check-box">✓</div>
+                <div class="type-badge">CARROSSEL</div>
+                <div class="ig-text">Roda da vida: onde você está travado?</div>
+              </div>
+              <div class="ig-row">
+                <div class="check-box"></div>
+                <div class="type-badge">REELS</div>
+                <div class="ig-text">O que é R2C e como funciona na prática</div>
+              </div>
+              <div class="ig-row">
+                <div class="check-box"></div>
+                <div class="type-badge">STORIES</div>
+                <div class="ig-text">Mito vs. Realidade sobre hipnose clínica</div>
+              </div>
+              <div class="ig-row checked">
+                <div class="check-box">✓</div>
+                <div class="type-badge">POST</div>
+                <div class="ig-text">Depoimento: transformação em 4 sessões</div>
+              </div>
+              <div class="ig-row">
+                <div class="check-box"></div>
+                <div class="type-badge">CARROSSEL</div>
+                <div class="ig-text">5 técnicas que uso com meus pacientes</div>
+              </div>
+              <div class="ig-row">
+                <div class="check-box"></div>
+                <div class="type-badge">REELS</div>
+                <div class="ig-text">Antes e depois: ansiedade → calma</div>
+              </div>
+
+              <div class="ig-action">
+                <button class="btn-primary">Gerar 3 conteúdos selecionados</button>
+                <span class="ig-credits">15 / 15 créditos disponíveis hoje</span>
+              </div>
+            </div>
+
+            <div class="ig-content-card">
+              <div class="ig-body">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <span class="badge badge-green">PRONTO</span>
+                  <span class="badge badge-gold">POST</span>
+                </div>
+                <div class="ig-ttl">3 sinais de que hipnoterapia pode te ajudar</div>
+                <div class="ig-preview">Você acorda exausta antes mesmo do dia começar. A ansiedade chega sem aviso e te paralisa nos momentos mais importantes. Já tentou de tudo, mas nada parece chegar à raiz...</div>
+                <div class="ig-tags">#hipnoterapia #ansiedade #autoconhecimento #omniterapia</div>
+              </div>
+              <div class="actions">
+                <button class="btn-mini gold">Aprovar</button>
+                <button class="btn-mini teal">Publicar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 11 — SEGURANÇA ============= -->
+  <section class="slide" data-slide="11">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">CONFORMIDADE</div>
+    <h2 class="title title-lg">Segurança e privacidade como padrão</h2>
+    <p class="sub">A LGPD trata dados de saúde como sensíveis (Art. 11). Tratamos cada paciente do Portal como dado clínico — com criptografia, audit log e crypto-shredding desde o primeiro dia.</p>
+
+    <div class="grid-2">
+      <div class="card-inst">
+        <div class="label-mini">CRIPTOGRAFIA</div>
+        <h3>AES-256-GCM</h3>
+        <p>Dados de pacientes (nome, contato, observações clínicas) são criptografados com chave única antes de chegar ao banco. Nada é exposto em logs ou cache.</p>
+      </div>
+      <div class="card-inst">
+        <div class="label-mini">EXCLUSÃO LGPD</div>
+        <h3>Crypto-Shredding</h3>
+        <p>Ao excluir um paciente, a chave de decriptografia é destruída permanentemente. Sem chave, os dados se tornam matemáticamente inacessíveis — mesmo para a OMNI.</p>
+      </div>
+      <div class="card-inst">
+        <div class="label-mini">CONSENTIMENTO</div>
+        <h3>5 modalidades de aceite</h3>
+        <p>Formulário digital, assinatura física, áudio gravado, mensagem de texto ou consentimento em papel digitalizado. Cada paciente registra seu próprio modo.</p>
+      </div>
+      <div class="card-inst">
+        <div class="label-mini">RASTREABILIDADE</div>
+        <h3>Audit Log Completo</h3>
+        <p>Todas as ações administrativas (criação, edição, exclusão, exportação) são registradas com ator, ação, timestamp e IP — disponíveis para auditoria a qualquer momento.</p>
+      </div>
+    </div>
+
+    <div class="lgpd-foot">LGPD ART. 11 &middot; DADOS SENSÍVEIS DE SAÚDE &middot; AVISO: NÃO SUBSTITUI PRONTUÁRIO CLÍNICO</div>
+  </section>
+
+  <!-- ============= SLIDE 12 — TODOS OS MÓDULOS ============= -->
+  <section class="slide" data-slide="12">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="label">VISÃO COMPLETA</div>
+    <h2 class="title title-lg">O que está disponível hoje — e o que vem a seguir</h2>
+
+    <div class="modules-3x3">
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">ATIVO</span>
+        <h3 style="font-size: 20px;">Perfil Profissional</h3>
+        <p>Identidade, nicho, tom de voz, paleta e Instagram conectado.</p>
+      </div>
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">ATIVO</span>
+        <h3 style="font-size: 20px;">Área do Paciente</h3>
+        <p>Cadastro, tratamentos, Roda da Vida e histórico de sessões.</p>
+      </div>
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">ATIVO</span>
+        <h3 style="font-size: 20px;">Copiloto de Sessão</h3>
+        <p>IA ao vivo: transcrição, sugestões clínicas e registro automático.</p>
+      </div>
+
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">BLACK MENTORING</span>
+        <h3 style="font-size: 20px;">Landing Pages</h3>
+        <p>Páginas de captação geradas por IA com seu perfil e tom de voz.</p>
+      </div>
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">BLACK MENTORING</span>
+        <h3 style="font-size: 20px;">Agência Instagram</h3>
+        <p>Conteúdo semanal autônomo: posts, carrosséis, reels e stories.</p>
+      </div>
+      <div class="card-inst">
+        <span class="badge badge-gold" style="margin-bottom: 10px;">BLACK MENTORING</span>
+        <h3 style="font-size: 20px;">Calendário Editorial</h3>
+        <p>Aprovação semanal, fila de publicação e histórico do que rodou.</p>
+      </div>
+
+      <div class="card-inst" style="opacity: 0.5;">
+        <span class="badge badge-gray" style="margin-bottom: 10px;">EM BREVE</span>
+        <h3 style="font-size: 20px;">Agenda de Sessões</h3>
+        <p>Bookings com WhatsApp e Google Calendar integrados.</p>
+      </div>
+      <div class="card-inst" style="opacity: 0.5;">
+        <span class="badge badge-gray" style="margin-bottom: 10px;">EM BREVE</span>
+        <h3 style="font-size: 20px;">Módulo Financeiro</h3>
+        <p>Cobrança, recibos, NFS-e e fechamento mensal automatizado.</p>
+      </div>
+      <div class="card-inst" style="opacity: 0.5;">
+        <span class="badge badge-gray" style="margin-bottom: 10px;">EM BREVE</span>
+        <h3 style="font-size: 20px;">Vídeo Studio</h3>
+        <p>Edição de reels e cortes de aulas via squad video-editing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SLIDE 13 — ACESSE AGORA ============= -->
+  <section class="slide grid-bg" data-slide="13">
+    <div class="deck-logo"><span class="dot"></span>OMNI BRASIL</div>
+    <div class="center-stack">
+      <div class="label">PRÓXIMOS PASSOS</div>
+      <h2 class="title title-lg" style="text-align: center;">Seu portal está pronto e esperando por você</h2>
+      <div class="url-big">portal.omnihypnosis.com.br</div>
+      <p class="sub" style="text-align: center;">Acesso restrito. Solicite sua liberação via:<br/><strong style="color: var(--cream); font-weight: 500;">suporte@omnihypnosis.com.br</strong></p>
+      <div class="divider-gold"></div>
+      <div class="help-line">PRECISA DE AJUDA? portal.omnihypnosis.com.br/ajuda</div>
+    </div>
+  </section>
+
+  <div class="counter" id="counter">1 / 13</div>
+  <div class="nav-hint">← → para navegar</div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+  const progressBar = document.getElementById('progressBar');
+  const counter = document.getElementById('counter');
+
+  function render() {
+    slides.forEach((s, i) => {
+      s.classList.remove('active', 'prev');
+      if (i === current) s.classList.add('active');
+      else if (i < current) s.classList.add('prev');
+    });
+    progressBar.style.width = (((current + 1) / total) * 100) + '%';
+    counter.textContent = (current + 1) + ' / ' + total;
+  }
+
+  function goNext() { if (current < total - 1) { current++; render(); } }
+  function goPrev() { if (current > 0) { current--; render(); } }
+  function goTo(n) { if (n >= 0 && n < total) { current = n; render(); } }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goNext(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goPrev(); }
+    else if (e.key === 'Home') { goTo(0); }
+    else if (e.key === 'End') { goTo(total - 1); }
+    else if (e.key >= '1' && e.key <= '9') { goTo(parseInt(e.key) - 1); }
+  });
+
+  // touch swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    const diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 60) { if (diff < 0) goNext(); else goPrev(); }
+  }, { passive: true });
+
+  // click forward on right half / back on left half (subtle)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .swatch, input, textarea, .ig-tab, .ig-row, .nav-item, .patient-card')) return;
+    const x = e.clientX;
+    if (x > window.innerWidth * 0.66) goNext();
+    else if (x < window.innerWidth * 0.34) goPrev();
+  });
+
+  // populate waveform bars (slide 8)
+  (function buildWaveform() {
+    const wf = document.getElementById('wf');
+    if (!wf) return;
+    const heights = [40, 75, 30, 90, 55, 70, 25, 95, 50, 65, 35, 80, 45, 60, 85, 30, 70, 50, 95, 40, 65, 25, 75, 55, 80, 35];
+    heights.forEach((h, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'wave-bar';
+      bar.style.height = h + '%';
+      bar.style.animationDelay = (i * 0.05) + 's';
+      wf.appendChild(bar);
+    });
+  })();
+
+  render();
+  window.goNext = goNext;
+</script>
+</body>
+</html>
