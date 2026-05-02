@@ -323,6 +323,32 @@
   .gold-text { color: var(--gold); }
   .divider-gold { width: 80px; height: 1px; background: var(--gold); margin: 28px auto; }
 
+  /* ============= PRINT IMAGES (real screenshots) ============= */
+  .print-img {
+    width: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    display: block;
+  }
+  .print-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex: 1;
+    min-height: 0;
+    align-items: center;
+  }
+  .print-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+    align-items: center;
+  }
+
   /* ============= SLIDE-SPECIFIC ============= */
   /* ----- Slide 1 ----- */
   .cover-cta { margin-top: 48px; display: flex; gap: 16px; justify-content: center; }
@@ -981,36 +1007,7 @@
       </div>
 
       <div class="col-right">
-        <div class="app-window" style="height: 460px;">
-          <div class="browser-chrome">
-            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-            <div class="url-bar">portal.omnihypnosis.com.br</div>
-          </div>
-          <div class="login-area">
-            <div class="login-card">
-              <div class="login-logo">&middot; OMNI &middot;</div>
-              <h3>Acessar Portal</h3>
-              <div class="field">
-                <label class="mock-input-label">Email</label>
-                <div class="mock-input"><span class="placeholder">ana@meuemail.com</span></div>
-              </div>
-              <div class="field">
-                <label class="mock-input-label">Senha</label>
-                <div class="field-row">
-                  <div class="mock-input"><span class="placeholder">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span></div>
-                  <span class="eye">&#128065;</span>
-                </div>
-              </div>
-              <div style="margin-top: 18px;">
-                <button class="btn-primary" style="width: 100%;">Entrar</button>
-              </div>
-              <div class="login-links">
-                <a>Criar minha conta</a>
-                <a>Solicitar Acesso</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img src="assets/portal-prints/03.png" alt="Tela de login do Portal" class="print-img">
       </div>
     </div>
   </section>
@@ -1022,60 +1019,7 @@
     <h2 class="title title-lg">Tudo em um só lugar</h2>
 
     <div style="margin-top: 18px;">
-      <div class="app-window" style="height: 540px;">
-        <div class="browser-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <div class="url-bar">portal.omnihypnosis.com.br/dashboard</div>
-        </div>
-        <div class="app-body">
-          <aside class="portal-sidebar">
-            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-            <div class="nav-item active">Dashboard</div>
-            <div class="nav-item">Perfil</div>
-            <div class="nav-item">Pacientes</div>
-            <div class="nav-item">Copiloto</div>
-            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
-            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
-            <div class="sidebar-foot">v1.4.2 &middot; ANA LIMA</div>
-          </aside>
-          <div class="app-content">
-            <div class="dash-greet">Olá, Ana — bem-vinda de volta</div>
-
-            <div class="module-grid">
-              <div class="module-card">
-                <span class="badge badge-gold mod-badge">ATIVO</span>
-                <div class="mod-title">Perfil Profissional</div>
-                <div class="mod-sub">Configure sua identidade, nicho e tom de voz.</div>
-              </div>
-              <div class="module-card">
-                <span class="badge badge-gold mod-badge">ATIVO</span>
-                <div class="mod-title">Área do Paciente</div>
-                <div class="mod-sub">12 pacientes ativos &middot; 3 sessões nesta semana</div>
-              </div>
-              <div class="module-card">
-                <span class="badge badge-gold mod-badge">ATIVO</span>
-                <div class="mod-title">Copiloto de Sessão</div>
-                <div class="mod-sub">IA ao vivo durante o atendimento.</div>
-              </div>
-              <div class="module-card">
-                <span class="badge badge-gold mod-badge">BLACK MENTORING</span>
-                <div class="mod-title">Landing Pages</div>
-                <div class="mod-sub">Páginas de captação geradas em minutos.</div>
-              </div>
-              <div class="module-card">
-                <span class="badge badge-gold mod-badge">BLACK MENTORING</span>
-                <div class="mod-title">Agência Instagram</div>
-                <div class="mod-sub">Conteúdo profissional toda semana.</div>
-              </div>
-              <div class="module-card coming">
-                <span class="badge badge-gray mod-badge">EM BREVE</span>
-                <div class="mod-title">Agenda &middot; Financeiro &middot; Vídeo</div>
-                <div class="mod-sub">Próximos módulos da plataforma.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <img src="assets/portal-prints/04.png" alt="Hub de módulos do Portal" class="print-img">
     </div>
 
     <p class="annotation" style="margin-top: 14px;">Módulos Black Mentoring desbloqueados automaticamente para alunos do programa.</p>
@@ -1098,83 +1042,7 @@
       </div>
 
       <div class="col-right">
-        <div class="app-window" style="height: 540px;">
-          <div class="browser-chrome">
-            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-            <div class="url-bar">portal.omnihypnosis.com.br/perfil</div>
-          </div>
-          <div class="app-body">
-            <aside class="portal-sidebar">
-              <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-              <div class="nav-item">Dashboard</div>
-              <div class="nav-item active">Perfil</div>
-              <div class="nav-item">Pacientes</div>
-              <div class="nav-item">Copiloto</div>
-              <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
-              <div class="nav-item">Agência IG <span class="lock">BM</span></div>
-            </aside>
-            <div class="app-content" style="overflow-y: auto;">
-              <div class="page-header">
-                <h2>Perfil Profissional</h2>
-              </div>
-
-              <div class="profile-photo">+</div>
-
-              <div class="profile-row" style="margin-bottom: 12px;">
-                <div>
-                  <label class="mock-input-label">Nome completo</label>
-                  <div class="mock-input">Ana Lima Carvalho</div>
-                </div>
-                <div>
-                  <label class="mock-input-label">Nicho profissional</label>
-                  <div class="mock-input">Hipnoterapia para Ansiedade</div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 12px;">
-                <label class="mock-input-label">Bio profissional</label>
-                <div class="mock-input area">Hipnoterapeuta certificada OMNI, atendo profissionais que buscam quebrar padrões emocionais limitantes. Método R2C aplicado em mais de 200 casos.</div>
-              </div>
-
-              <div class="profile-row" style="margin-bottom: 12px;">
-                <div>
-                  <label class="mock-input-label">Modalidade</label>
-                  <div class="mock-input">Online &middot; Presencial</div>
-                </div>
-                <div>
-                  <label class="mock-input-label">Tom de voz</label>
-                  <div class="mock-input select">Empático</div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 14px;">
-                <label class="mock-input-label">Endereço de atendimento</label>
-                <div class="mock-input">Rua Felipe Schmidt, 312 &middot; Florianópolis, SC</div>
-              </div>
-
-              <div style="border-top: 1px solid var(--gray-dark); padding-top: 14px; margin-bottom: 14px;">
-                <label class="mock-input-label">Instagram</label>
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <button class="btn-secondary">Conectar Instagram</button>
-                  <span style="font-size: 11px; color: var(--cream-50);">Necessário para Agência IG</span>
-                </div>
-              </div>
-
-              <div style="border-top: 1px solid var(--gray-dark); padding-top: 14px; margin-bottom: 18px;">
-                <label class="mock-input-label">Paleta de cores</label>
-                <div class="palette">
-                  <div class="swatch" style="background:#C8A84B;"></div>
-                  <div class="swatch active" style="background:#2A9D8F;"></div>
-                  <div class="swatch" style="background:#264653;"></div>
-                  <div class="swatch" style="background:#E76F51;"></div>
-                  <div class="swatch" style="background:#9C6644;"></div>
-                </div>
-              </div>
-
-              <button class="btn-primary">Salvar Perfil</button>
-            </div>
-          </div>
-        </div>
+        <img src="assets/portal-prints/05.png" alt="Tela de perfil profissional" class="print-img">
       </div>
     </div>
   </section>
@@ -1186,101 +1054,7 @@
     <h2 class="title title-lg">Todos os seus pacientes, com segurança clínica</h2>
 
     <div style="margin-top: 18px;">
-      <div class="app-window" style="height: 560px;">
-        <div class="browser-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <div class="url-bar">portal.omnihypnosis.com.br/pacientes</div>
-        </div>
-        <div class="app-body">
-          <aside class="portal-sidebar">
-            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-            <div class="nav-item">Dashboard</div>
-            <div class="nav-item">Perfil</div>
-            <div class="nav-item active">Pacientes</div>
-            <div class="nav-item">Copiloto</div>
-            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
-            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
-          </aside>
-          <div class="app-content">
-            <div class="page-header">
-              <h2>Pacientes</h2>
-              <button class="btn-primary">+ Novo Paciente</button>
-            </div>
-
-            <div class="patients-layout">
-              <div>
-                <div class="patient-card active">
-                  <div class="avatar">MC</div>
-                  <div class="info">
-                    <div class="name">Maria Clara</div>
-                    <div class="since">DESDE JAN/2026</div>
-                  </div>
-                  <span class="badge badge-gold">EM TRATAMENTO</span>
-                </div>
-                <div class="patient-card">
-                  <div class="avatar">JR</div>
-                  <div class="info">
-                    <div class="name">João Rafael</div>
-                    <div class="since">DESDE FEV/2026</div>
-                  </div>
-                  <span class="badge badge-gold">EM TRATAMENTO</span>
-                </div>
-                <div class="patient-card">
-                  <div class="avatar">LS</div>
-                  <div class="info">
-                    <div class="name">Luana Silva</div>
-                    <div class="since">DESDE MAR/2026</div>
-                  </div>
-                  <span class="badge badge-gray">ENCERRADO</span>
-                </div>
-                <div class="patient-card">
-                  <div class="avatar" style="background: #1A1A1A; color: var(--gold); border: 1px dashed rgba(200,168,75,0.4);">PT</div>
-                  <div class="info">
-                    <div class="name">Pedro Torres</div>
-                    <div class="new">+ INICIAR TRATAMENTO</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="patient-detail">
-                <div class="patient-header">
-                  <div class="avatar lg">MC</div>
-                  <div>
-                    <div class="name-block">Maria Clara Souza</div>
-                    <div class="since">PACIENTE DESDE 12/JAN/2026</div>
-                  </div>
-                </div>
-
-                <div class="patient-info-grid">
-                  <div class="info-pill">
-                    <div class="key">Telefone</div>
-                    <div class="val">+55 48 99932-4421</div>
-                  </div>
-                  <div class="info-pill">
-                    <div class="key">Email</div>
-                    <div class="val">maria.clara@email.com</div>
-                  </div>
-                  <div class="info-pill">
-                    <div class="key">Data nasc.</div>
-                    <div class="val">14/03/1987 &middot; 39 anos</div>
-                  </div>
-                </div>
-
-                <div class="treatment-block">
-                  <div class="row1">
-                    <span class="badge badge-gold">ATIVO</span>
-                    <div class="ttl">Tratamento de Ansiedade</div>
-                  </div>
-                  <div class="treatment-meta">Início em 14/JAN/2026 &middot; 8 sessões realizadas &middot; Próxima 22/MAI/2026</div>
-                  <button class="btn-secondary">Ver evolução</button>
-                </div>
-
-                <div class="secure-note">&#128274; Criptografia AES-256-GCM &middot; Dados nunca expostos em logs ou cache</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <img src="assets/portal-prints/06.png" alt="Tela de gestão de pacientes" class="print-img">
     </div>
   </section>
 
@@ -1290,101 +1064,10 @@
     <div class="label">PASSO 05 &middot; TRATAMENTOS</div>
     <h2 class="title title-lg">Acompanhe a evolução em 13 dimensões da vida</h2>
 
-    <div style="margin-top: 14px;">
-      <div class="app-window" style="height: 580px;">
-        <div class="browser-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <div class="url-bar">portal.omnihypnosis.com.br/pacientes/maria-clara/tratamento</div>
-        </div>
-        <div class="app-body">
-          <aside class="portal-sidebar">
-            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-            <div class="nav-item">Dashboard</div>
-            <div class="nav-item">Perfil</div>
-            <div class="nav-item active">Pacientes</div>
-            <div class="nav-item">Copiloto</div>
-            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
-            <div class="nav-item">Agência IG <span class="lock">BM</span></div>
-          </aside>
-          <div class="app-content">
-            <div class="page-header">
-              <div>
-                <div class="crumb">PACIENTES &middot; MARIA CLARA &middot; TRATAMENTO</div>
-                <h2>Roda da Vida &middot; Evolução</h2>
-              </div>
-            </div>
-
-            <div class="twocol">
-              <div class="radar-wrap">
-                <svg viewBox="0 0 320 320" style="width: 100%; max-width: 320px;">
-                  <!-- 8 grid rings -->
-                  <g fill="none" stroke="rgba(200,168,75,0.12)" stroke-width="1">
-                    <polygon points="160,30 256.6,75.4 290,160 256.6,244.6 160,290 63.4,244.6 30,160 63.4,75.4" />
-                    <polygon points="160,55 233.9,89.6 265,160 233.9,230.4 160,265 86.1,230.4 55,160 86.1,89.6" />
-                    <polygon points="160,80 211.2,103.8 240,160 211.2,216.2 160,240 108.8,216.2 80,160 108.8,103.8" />
-                    <polygon points="160,105 188.5,118 215,160 188.5,202 160,215 131.5,202 105,160 131.5,118" />
-                  </g>
-                  <!-- 8 axes -->
-                  <g stroke="rgba(200,168,75,0.18)" stroke-width="1">
-                    <line x1="160" y1="160" x2="160" y2="30"/>
-                    <line x1="160" y1="160" x2="256.6" y2="75.4"/>
-                    <line x1="160" y1="160" x2="290" y2="160"/>
-                    <line x1="160" y1="160" x2="256.6" y2="244.6"/>
-                    <line x1="160" y1="160" x2="160" y2="290"/>
-                    <line x1="160" y1="160" x2="63.4" y2="244.6"/>
-                    <line x1="160" y1="160" x2="30" y2="160"/>
-                    <line x1="160" y1="160" x2="63.4" y2="75.4"/>
-                  </g>
-                  <!-- baseline polygon (teal) -->
-                  <polygon points="160,80 200,115 230,160 215,210 160,240 115,210 90,160 115,115"
-                    fill="rgba(42,157,143,0.18)" stroke="#2A9D8F" stroke-width="1.5"/>
-                  <!-- atual polygon (gold) -->
-                  <polygon points="160,55 220,95 260,160 230,215 160,250 105,220 70,160 100,95"
-                    fill="rgba(200,168,75,0.18)" stroke="#C8A84B" stroke-width="2"/>
-                  <!-- labels -->
-                  <g font-family="IBM Plex Mono, monospace" font-size="9" fill="rgba(245,240,232,0.7)" letter-spacing="0.5">
-                    <text x="160" y="20" text-anchor="middle">SAÚDE</text>
-                    <text x="265" y="72" text-anchor="middle">CARREIRA</text>
-                    <text x="298" y="163" text-anchor="start">FINANÇAS</text>
-                    <text x="265" y="258" text-anchor="middle">RELAC.</text>
-                    <text x="160" y="305" text-anchor="middle">FAMÍLIA</text>
-                    <text x="55" y="258" text-anchor="middle">LAZER</text>
-                    <text x="22" y="163" text-anchor="end">ESPIRIT.</text>
-                    <text x="55" y="72" text-anchor="middle">PROPÓSITO</text>
-                  </g>
-                  <!-- center dot -->
-                  <circle cx="160" cy="160" r="2" fill="#C8A84B"/>
-                </svg>
-                <div class="legend">
-                  <span><span class="sw" style="background:#2A9D8F"></span>BASELINE JAN</span>
-                  <span><span class="sw" style="background:#C8A84B"></span>ATUAL ABR</span>
-                </div>
-              </div>
-
-              <div>
-                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.18em; margin-bottom: 10px; text-transform: uppercase;">Histórico de Sessões</div>
-                <table class="session-table">
-                  <thead>
-                    <tr><th>Data</th><th>Técnica</th><th>Duração</th><th>Delta</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>15/04/2026</td><td>R2C</td><td>60 min</td><td class="delta-up">+3</td></tr>
-                    <tr><td>08/04/2026</td><td>EMD</td><td>90 min</td><td class="delta-up">+2</td></tr>
-                    <tr><td>01/04/2026</td><td>R2C</td><td>60 min</td><td class="delta-up">+1</td></tr>
-                    <tr><td>25/03/2026</td><td>Ressig.</td><td>60 min</td><td class="delta-up">+2</td></tr>
-                    <tr><td>18/03/2026</td><td>R2C</td><td>90 min</td><td class="delta-up">+1</td></tr>
-                  </tbody>
-                </table>
-
-                <div class="alert-card">
-                  <span class="alert-label">Alerta inteligente</span>
-                  Piora detectada na dimensão <strong style="color: var(--cream);">Saúde</strong> nas últimas 2 sessões. Verificar na próxima consulta.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="print-grid-3" style="margin-top: 14px;">
+      <img src="assets/portal-prints/07.1.png" alt="Roda da Vida — visão 1" class="print-img">
+      <img src="assets/portal-prints/07.2.png" alt="Roda da Vida — visão 2" class="print-img">
+      <img src="assets/portal-prints/07.3.png" alt="Roda da Vida — visão 3" class="print-img">
     </div>
   </section>
 
@@ -1394,91 +1077,9 @@
     <div class="label">PASSO 06 &middot; SESSÕES</div>
     <h2 class="title title-lg">Registre manualmente ou deixe a IA fazer por você</h2>
 
-    <div class="split-twocol mt-24">
-      <!-- LEFT: manual form -->
-      <div class="split-pane">
-        <div class="pane-title">Nova Sessão &middot; Maria Clara</div>
-
-        <div class="profile-row">
-          <div>
-            <label class="mock-input-label">Data</label>
-            <div class="mock-input">22/05/2026</div>
-          </div>
-          <div>
-            <label class="mock-input-label">Duração</label>
-            <div class="mock-input">60 min</div>
-          </div>
-        </div>
-
-        <div>
-          <label class="mock-input-label">Técnica aplicada</label>
-          <div class="mock-input select">R2C — Regressão à Causa</div>
-        </div>
-
-        <div>
-          <label class="mock-input-label">Delta percebido (1 → 10)</label>
-          <div class="slider-row">
-            <div class="slider-track">
-              <div class="slider-fill"></div>
-              <div class="slider-thumb"></div>
-            </div>
-            <span class="slider-val">7</span>
-          </div>
-        </div>
-
-        <div>
-          <label class="mock-input-label">Observações da sessão</label>
-          <div class="mock-input area">Paciente trouxe memória da infância relacionada ao gatilho. Trabalhamos ressignificação com técnica R2C clássica.</div>
-        </div>
-
-        <div>
-          <label class="mock-input-label">Evolução do paciente</label>
-          <div class="mock-input area">Maior consciência corporal e respiração mais regulada ao final da sessão.</div>
-        </div>
-
-        <div>
-          <label class="mock-input-label">Homework</label>
-          <div class="mock-input area">Diário emocional diário por 7 dias e prática de respiração 4-7-8 ao acordar.</div>
-        </div>
-
-        <button class="btn-primary" style="align-self: flex-start; margin-top: 6px;">Salvar Sessão</button>
-      </div>
-
-      <!-- DIVIDER -->
-      <div class="split-divider"><span class="or">OU</span></div>
-
-      <!-- RIGHT: copilot live -->
-      <div class="split-pane">
-        <div class="pane-title">Copiloto de Sessão</div>
-        <div class="live-badge"><span class="live-dot"></span>AO VIVO</div>
-
-        <div class="waveform" id="wf">
-          <!-- 26 bars; heights & delays varied -->
-        </div>
-
-        <div>
-          <label class="mock-input-label">Transcrição em tempo real</label>
-          <div class="transcript">"...paciente relata melhora significativa no relacionamento com a mãe desde a última sessão. Apresenta resistência ao trabalhar questões de autoestima profissional, mas demonstra abertura para...<span class="cursor"></span>"</div>
-        </div>
-
-        <div style="margin-top: 4px;">
-          <label class="mock-input-label">Sugestões da IA</label>
-          <div class="ai-suggest">
-            <span class="ai-key">Técnica sugerida</span>
-            Ressignificação ancorada — trabalhar memória da figura materna identificada na fala.
-          </div>
-          <div class="ai-suggest">
-            <span class="ai-key">Pergunta de aprofundamento</span>
-            "Como você se sente em relação a essa parte sua que está se mostrando agora?"
-          </div>
-          <div class="ai-suggest">
-            <span class="ai-key">Homework sugerido</span>
-            Registro diário de gatilhos profissionais durante 7 dias, com nota 1-10.
-          </div>
-        </div>
-
-        <button class="btn-primary" style="align-self: flex-start; margin-top: 4px;">Usar esta sessão</button>
-      </div>
+    <div class="print-grid-2 mt-24">
+      <img src="assets/portal-prints/8.1.png" alt="Registro de sessão — formulário" class="print-img">
+      <img src="assets/portal-prints/8.2.png" alt="Copiloto de Sessão ao vivo" class="print-img">
     </div>
   </section>
 
@@ -1500,60 +1101,7 @@
       </div>
 
       <div class="col-right">
-        <div class="app-window" style="height: 540px;">
-          <div class="browser-chrome">
-            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-            <div class="url-bar">portal.omnihypnosis.com.br/landing-pages</div>
-          </div>
-          <div class="app-body">
-            <aside class="portal-sidebar">
-              <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-              <div class="nav-item">Dashboard</div>
-              <div class="nav-item">Perfil</div>
-              <div class="nav-item">Pacientes</div>
-              <div class="nav-item">Copiloto</div>
-              <div class="nav-item active">Landing Pages <span class="lock">BM</span></div>
-              <div class="nav-item">Agência IG <span class="lock">BM</span></div>
-            </aside>
-            <div class="app-content" style="overflow-y: auto;">
-              <div class="page-header">
-                <h2>Minhas Landing Pages</h2>
-                <button class="btn-primary">+ Nova LP</button>
-              </div>
-
-              <div class="lp-grid">
-                <div class="lp-card">
-                  <span class="badge badge-gold top-badge">PUBLICADA</span>
-                  <div class="lp-title">Terapia para Ansiedade</div>
-                  <div class="lp-slug">/ana-lima-ansiedade</div>
-                  <div class="lp-stats">
-                    <span><strong>142</strong> visitas</span>
-                    <span><strong>23</strong> leads</span>
-                    <span><strong>16%</strong> conv.</span>
-                  </div>
-                </div>
-                <div class="lp-card">
-                  <span class="badge badge-gray top-badge">RASCUNHO</span>
-                  <div class="lp-title">Hipnoterapia Executiva</div>
-                  <div class="lp-slug">/ana-lima-exec</div>
-                  <div class="lp-stats">
-                    <span><strong>0</strong> visitas</span>
-                    <span><strong>0</strong> leads</span>
-                  </div>
-                </div>
-                <div class="lp-card new">+ Criar Nova</div>
-              </div>
-
-              <div class="lp-modal">
-                <div class="ttl">Gerando sua Landing Page...</div>
-                <div class="progress-mini"><div class="fill"></div></div>
-                <div class="lp-step"><span class="check">✓</span>Analisando seu perfil</div>
-                <div class="lp-step"><span class="check">✓</span>Adaptando para o nicho de Ansiedade</div>
-                <div class="lp-step active">&middot; Escrevendo copy persuasivo...</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img src="assets/portal-prints/09.png" alt="Tela de Landing Pages" class="print-img">
       </div>
     </div>
   </section>
@@ -1564,95 +1112,9 @@
     <div class="label"><span class="badge badge-gold" style="margin-right: 10px;">BLACK MENTORING</span> AGÊNCIA INSTAGRAM</div>
     <h2 class="title title-lg">Conteúdo profissional para o seu Instagram, toda semana</h2>
 
-    <div style="margin-top: 16px;">
-      <div class="app-window" style="height: 580px;">
-        <div class="browser-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <div class="url-bar">portal.omnihypnosis.com.br/agencia-instagram</div>
-        </div>
-        <div class="app-body">
-          <aside class="portal-sidebar">
-            <div class="sidebar-logo">&middot; OMNI &middot;<span class="small">PORTAL</span></div>
-            <div class="nav-item">Dashboard</div>
-            <div class="nav-item">Perfil</div>
-            <div class="nav-item">Pacientes</div>
-            <div class="nav-item">Copiloto</div>
-            <div class="nav-item">Landing Pages <span class="lock">BM</span></div>
-            <div class="nav-item active">Agência IG <span class="lock">BM</span></div>
-          </aside>
-          <div class="app-content" style="overflow-y: auto;">
-            <div class="ig-status">
-              <div class="conn">IG Conectado &middot; @analimaterapia</div>
-              <div class="ig-tabs">
-                <div class="ig-tab">Conteúdos</div>
-                <div class="ig-tab active">Calendário</div>
-                <div class="ig-tab">Histórico</div>
-              </div>
-            </div>
-
-            <div class="ig-cal-wrap">
-              <div class="sub-ttl">Sugestões desta semana — selecione para gerar</div>
-
-              <div class="ig-row checked">
-                <div class="check-box">✓</div>
-                <div class="type-badge">POST</div>
-                <div class="ig-text">3 sinais de que hipnoterapia pode te ajudar</div>
-              </div>
-              <div class="ig-row checked">
-                <div class="check-box">✓</div>
-                <div class="type-badge">CARROSSEL</div>
-                <div class="ig-text">Roda da vida: onde você está travado?</div>
-              </div>
-              <div class="ig-row">
-                <div class="check-box"></div>
-                <div class="type-badge">REELS</div>
-                <div class="ig-text">O que é R2C e como funciona na prática</div>
-              </div>
-              <div class="ig-row">
-                <div class="check-box"></div>
-                <div class="type-badge">STORIES</div>
-                <div class="ig-text">Mito vs. Realidade sobre hipnose clínica</div>
-              </div>
-              <div class="ig-row checked">
-                <div class="check-box">✓</div>
-                <div class="type-badge">POST</div>
-                <div class="ig-text">Depoimento: transformação em 4 sessões</div>
-              </div>
-              <div class="ig-row">
-                <div class="check-box"></div>
-                <div class="type-badge">CARROSSEL</div>
-                <div class="ig-text">5 técnicas que uso com meus pacientes</div>
-              </div>
-              <div class="ig-row">
-                <div class="check-box"></div>
-                <div class="type-badge">REELS</div>
-                <div class="ig-text">Antes e depois: ansiedade → calma</div>
-              </div>
-
-              <div class="ig-action">
-                <button class="btn-primary">Gerar 3 conteúdos selecionados</button>
-                <span class="ig-credits">15 / 15 créditos disponíveis hoje</span>
-              </div>
-            </div>
-
-            <div class="ig-content-card">
-              <div class="ig-body">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                  <span class="badge badge-green">PRONTO</span>
-                  <span class="badge badge-gold">POST</span>
-                </div>
-                <div class="ig-ttl">3 sinais de que hipnoterapia pode te ajudar</div>
-                <div class="ig-preview">Você acorda exausta antes mesmo do dia começar. A ansiedade chega sem aviso e te paralisa nos momentos mais importantes. Já tentou de tudo, mas nada parece chegar à raiz...</div>
-                <div class="ig-tags">#hipnoterapia #ansiedade #autoconhecimento #omniterapia</div>
-              </div>
-              <div class="actions">
-                <button class="btn-mini gold">Aprovar</button>
-                <button class="btn-mini teal">Publicar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="print-grid-2" style="margin-top: 16px;">
+      <img src="assets/portal-prints/10.1.png" alt="Agência Instagram — visão 1" class="print-img">
+      <img src="assets/portal-prints/10.2.png" alt="Agência Instagram — visão 2" class="print-img">
     </div>
   </section>
 
