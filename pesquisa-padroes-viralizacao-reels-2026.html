@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesquisa: Padroes de Viralizacao — Reels e Shorts | OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245, 240, 232, 0.70);
+    --color-cream-50: rgba(245, 240, 232, 0.50);
+    --color-teal: #2A9D8F;
+    --color-gray: #6B6B6B;
+    --gradient-gold: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--color-black);
+    color: var(--color-cream);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--color-black);
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .header-sub {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--color-cream-50);
+    text-transform: uppercase;
+  }
+
+  /* Hero */
+  .hero {
+    padding: clamp(60px, 10vh, 120px) 24px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--color-dark) 0%, var(--color-black) 100%);
+    border-bottom: 1px solid rgba(200,168,75,0.1);
+  }
+  .hero-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    color: var(--color-cream-70);
+    max-width: 640px;
+    margin: 0 auto 24px;
+  }
+  .hero-meta {
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    letter-spacing: 0.08em;
+  }
+
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Sections */
+  section {
+    padding: clamp(48px, 8vh, 80px) 0;
+    border-bottom: 1px solid rgba(200,168,75,0.08);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 32px;
+  }
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--color-cream);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+  h4 {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-gold-light);
+    margin: 24px 0 8px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.88rem;
+  }
+  thead th {
+    background: var(--color-dark-elevated);
+    color: var(--color-gold);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--color-gold-deep);
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(200,168,75,0.08);
+    color: var(--color-cream-70);
+  }
+  tbody tr:hover { background: rgba(200,168,75,0.04); }
+
+  /* Cards */
+  .card {
+    background: var(--color-dark-elevated);
+    border: 1px solid rgba(200,168,75,0.15);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .card-confirmed {
+    border-left: 3px solid var(--color-teal);
+  }
+  .card-warning {
+    border-left: 3px solid #E8C86A;
+  }
+
+  /* Verdict badges */
+  .verdict {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .verdict-confirmed {
+    background: rgba(42,157,143,0.15);
+    color: var(--color-teal);
+    border: 1px solid rgba(42,157,143,0.3);
+  }
+  .verdict-partial {
+    background: rgba(232,200,106,0.15);
+    color: var(--color-gold-light);
+    border: 1px solid rgba(232,200,106,0.3);
+  }
+
+  /* Ranking */
+  .ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--color-dark-elevated);
+    border: 1px solid rgba(200,168,75,0.1);
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .ranking-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    min-width: 40px;
+    text-align: center;
+  }
+  .ranking-content {
+    flex: 1;
+  }
+  .ranking-title {
+    font-weight: 600;
+    color: var(--color-cream);
+    margin-bottom: 4px;
+  }
+  .ranking-desc {
+    font-size: 0.82rem;
+    color: var(--color-cream-50);
+  }
+
+  /* Quotes */
+  blockquote {
+    border-left: 3px solid var(--color-gold);
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: rgba(200,168,75,0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--color-cream-70);
+    font-size: 0.92rem;
+  }
+
+  /* Combo table */
+  .combo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  @media (max-width: 640px) { .combo-grid { grid-template-columns: 1fr; } }
+  .combo-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid rgba(200,168,75,0.12);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .combo-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 8px;
+  }
+  .combo-example {
+    font-size: 0.88rem;
+    color: var(--color-cream-70);
+    font-style: italic;
+  }
+
+  /* Lists */
+  ul, ol {
+    padding-left: 20px;
+    margin: 8px 0 16px;
+  }
+  li {
+    margin-bottom: 6px;
+    color: var(--color-cream-70);
+  }
+  li strong { color: var(--color-cream); }
+
+  /* Code/YAML block */
+  .yaml-block {
+    background: var(--color-dark);
+    border: 1px solid rgba(200,168,75,0.12);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--color-cream-70);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .yaml-key { color: var(--color-gold); }
+  .yaml-val { color: var(--color-teal); }
+  .yaml-comment { color: var(--color-gray); }
+
+  /* Paragraph */
+  p { margin-bottom: 12px; }
+  strong { color: var(--color-cream); }
+  em { color: var(--color-cream-70); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 48px 24px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+    border-top: 1px solid rgba(200,168,75,0.08);
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; color: #111; }
+    header { position: static; }
+    .hero { background: none; }
+    .hero h1 { -webkit-text-fill-color: #9A7A2E; }
+    .card, .ranking-item, .combo-card { border-color: #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="header-logo">OMNI BRASIL</a>
+  <span class="header-sub">Pesquisa de Mercado</span>
+</header>
+
+<div class="hero">
+  <div class="hero-label">Squad Video-Editing // Inteligencia de Conteudo</div>
+  <h1>Padroes de Viralizacao<br>Reels e Shorts</h1>
+  <p>Nicho de Autoconhecimento e Desenvolvimento Pessoal no Brasil</p>
+  <div class="hero-meta">Fernanda Machado &middot; 04 Maio 2026</div>
+</div>
+
+<div class="container">
+
+<!-- SECAO 1 -->
+<section>
+  <h2>1. Perfis Brasileiros que Viralizaram</h2>
+
+  <h3>Psicologia e Saude Mental</h3>
+  <table>
+    <thead><tr><th>Perfil</th><th>Seguidores</th><th>Nicho</th></tr></thead>
+    <tbody>
+      <tr><td><strong>@eslen.delanogare</strong></td><td>2M</td><td>Neurociencia comportamental — reels diarios em linguagem acessivel</td></tr>
+      <tr><td>Amanda Fitas</td><td>1,7M</td><td>Psicologia geral, saude mental</td></tr>
+      <tr><td>Brisa Dantas</td><td>+1M</td><td>Relacionamentos, inteligencia emocional</td></tr>
+      <tr><td>@thomytalks</td><td>929K</td><td>Psicologia de relacionamentos</td></tr>
+      <tr><td>@fernandalandeiro</td><td>588K</td><td>TCC baseada em evidencias</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Espiritualidade e Autoconhecimento</h3>
+  <table>
+    <thead><tr><th>Perfil</th><th>Seguidores</th><th>Nicho</th></tr></thead>
+    <tbody>
+      <tr><td><strong>@espiritualidades</strong></td><td>3M</td><td>Espiritualidade + autoconhecimento — maior do nicho no BR</td></tr>
+      <tr><td>@espiritualidadepura</td><td>923K</td><td>Espiritualidade aplicada a vida real (+7.000 posts)</td></tr>
+      <tr><td>@acordandogigantes</td><td>280K</td><td>Livros, filmes, frases provocativas</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Hipnose</h3>
+  <table>
+    <thead><tr><th>Perfil</th><th>Contexto</th></tr></thead>
+    <tbody>
+      <tr><td>@felipegonzalezoficial</td><td>Hipnoterapia para lideres, pesquisador HC-FMUSP</td></tr>
+      <tr><td>@tonlucas</td><td>Psicologo + hipnoterapeuta, ativo desde 2013</td></tr>
+      <tr><td>@juliannerossi_</td><td>Hipnoterapeuta OMNI certificada</td></tr>
+    </tbody>
+  </table>
+
+  <blockquote>
+    <strong>Destaque:</strong> Eslen Delanogare e o caso mais estudado — cresceu com reels de 30-60s de neurociencia em tom professoral, sem cenario elaborado, com producao diaria e consistente. Seus reels polemicos (contrassenso + provocacao) sao os que mais viralizam.
+  </blockquote>
+</section>
+
+<!-- SECAO 2 -->
+<section>
+  <h2>2. Padroes de Edicao nos Virais</h2>
+
+  <h3>2.1 Duracao Ideal</h3>
+  <table>
+    <thead><tr><th>Faixa</th><th>Resultado</th><th>Recomendacao</th></tr></thead>
+    <tbody>
+      <tr><td>7–15s</td><td>Maior taxa de conclusao</td><td>Hooks de impacto emocional</td></tr>
+      <tr style="background: rgba(200,168,75,0.08);"><td><strong>45–60s</strong></td><td><strong>Ponto ideal pro nicho</strong></td><td><strong>Recomendado para talking head OMNI</strong></td></tr>
+      <tr><td>60–90s</td><td>Storytelling completo</td><td>Quando o arco narrativo exige</td></tr>
+      <tr><td>90s+</td><td>Queda significativa</td><td>Evitar</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.2 Ritmo de Cortes</h3>
+  <table>
+    <thead><tr><th>Momento</th><th>Frequencia</th></tr></thead>
+    <tbody>
+      <tr><td>Primeiros 3s (hook)</td><td>Ate 5 cortes</td></tr>
+      <tr><td>Desenvolvimento (3s–40s)</td><td>Corte a cada 2–3 segundos</td></tr>
+      <tr><td>Climax (40s–55s)</td><td>Corte a cada 0.5–1 segundo</td></tr>
+      <tr><td>Fechamento/CTA</td><td>1 corte limpo</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>Jump cuts dominam</strong> o nicho de desenvolvimento pessoal</li>
+    <li>Nenhum gap de audio acima de <strong>0.4s</strong> entre frases</li>
+    <li>Silencios &gt; 300ms sao cortados automaticamente</li>
+  </ul>
+
+  <h3>2.3 Legendas</h3>
+  <table>
+    <thead><tr><th>Parametro</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Estilo</td><td>Palavra por palavra com highlight animado</td></tr>
+      <tr><td>Fonte</td><td>Montserrat Bold / DM Sans Bold</td></tr>
+      <tr><td>Tamanho</td><td>72–90px em 1080x1920</td></tr>
+      <tr><td>Posicao</td><td>Terco inferior ou centro</td></tr>
+      <tr><td>Cor</td><td>Branco #FFFFFF com outline preto 3–4px</td></tr>
+      <tr><td>Destaque</td><td>Amarelo #FFD700 na palavra-chave</td></tr>
+    </tbody>
+  </table>
+  <blockquote>65–80% dos usuarios assistem SEM som. Legendas on-screen aumentam retencao em <strong>+40%</strong>.</blockquote>
+
+  <h3>2.4 Formato Visual</h3>
+  <ul>
+    <li><strong>Talking head com fundo desfocado (bokeh)</strong> e o padrao do nicho</li>
+    <li>Alternancia close-up / plano medio a cada 10–15s</li>
+    <li>Zoom-in sutil (1.05x–1.12x) nas palavras-chave emocionais</li>
+    <li>B-roll pontual a cada 15–20s para aliviar o talking head puro</li>
+    <li>Luz suave frontal, temperatura 5500–6000K</li>
+  </ul>
+
+  <h3>2.5 Velocidade da Fala</h3>
+  <table>
+    <thead><tr><th>Tecnica</th><th>Valor</th><th>Efeito</th></tr></thead>
+    <tbody>
+      <tr><td>Aceleracao padrao</td><td><strong>1.05x–1.08x</strong></td><td>Elimina hesitacoes, mantem naturalidade</td></tr>
+      <tr><td>Pitch correction</td><td>Sempre ativa</td><td>Compensa voz agudizada</td></tr>
+      <tr><td>Aceleracao alta (1.20x+)</td><td>Evitar</td><td>Perde naturalidade no nicho terapeutico</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.6 Zoom Dinamico</h3>
+  <table>
+    <thead><tr><th>Momento</th><th>Tecnica</th><th>Fator</th></tr></thead>
+    <tbody>
+      <tr><td>Palavra-chave emocional</td><td>Zoom-in rapido (0.2–0.3s)</td><td>1.05x–1.08x</td></tr>
+      <tr><td>Climax do argumento</td><td>Zoom-in dramatico (0.5s)</td><td>1.10x–1.12x</td></tr>
+      <tr><td>Pausa reflexiva</td><td>Zoom-out lento (1–2s)</td><td>0.95x</td></tr>
+      <tr><td>Maximo absoluto</td><td>—</td><td>1.12x</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.7 CTA — Como os Virais Terminam</h3>
+  <div class="ranking">
+    <div class="ranking-item">
+      <div class="ranking-num">1</div>
+      <div class="ranking-content">
+        <div class="ranking-title">DM Share (mais poderoso)</div>
+        <div class="ranking-desc">"Manda pra alguem que precisa ouvir isso hoje."</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">2</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Comentario</div>
+        <div class="ranking-desc">"Qual dessas frases mais te tocou? Comenta aqui."</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">3</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Salvamento</div>
+        <div class="ranking-desc">"Salva esse video pra relembrar quando precisar."</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">4</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Conversao</div>
+        <div class="ranking-desc">"Link da formacao no perfil."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECAO 3 -->
+<section>
+  <h2>3. Verificacao das Hipoteses de Headline</h2>
+
+  <div class="card card-confirmed">
+    <span class="verdict verdict-confirmed">Confirmada</span>
+    <h3 style="margin-top:0; border:none;">3.1 Contrassenso</h3>
+    <p>Afirmacoes que contradizem o senso comum. Chamado de "pattern interrupt" — o cerebro reage com atencao imediata quando uma crenca e quebrada.</p>
+    <h4>Exemplos reais que viralizaram:</h4>
+    <ul>
+      <li>"Nao use afirmacoes positivas. Use isso em vez disso."</li>
+      <li>"Meditacao errada faz mais mal do que bem."</li>
+      <li>"Seu trauma nao e culpa sua. Mas a cura e."</li>
+      <li>"A militancia na psicologia esta atrasando sua cura." (Eslen)</li>
+    </ul>
+    <p><strong>Forca:</strong> Alta — especialmente com dado/estudo fundamentando.<br>
+    <strong>Metrica principal:</strong> Compartilhamentos (share) — alcance para nao-seguidores.<br>
+    <strong>Risco:</strong> Perde credibilidade se nao fundamentar a afirmacao.</p>
+  </div>
+
+  <div class="card card-confirmed">
+    <span class="verdict verdict-confirmed">Confirmada</span>
+    <h3 style="margin-top:0; border:none;">3.2 Curiosidade</h3>
+    <p>Ganchos que criam gap de informacao. O tipo mais documentado e amplamente utilizado. Cria "information gap" — o cerebro e programado para buscar fechamento.</p>
+    <h4>Exemplos reais:</h4>
+    <ul>
+      <li>"Pouca gente sabe disso, mas..."</li>
+      <li>"O que ninguem te conta sobre ansiedade (e que muda tudo)"</li>
+      <li>"Descobri o motivo real por que nao consigo mudar meus habitos."</li>
+      <li>"Quase desisti da terapia ate descobrir isso."</li>
+    </ul>
+    <p><strong>Forca:</strong> Muito alta — maior correlacao com saves.<br>
+    <strong>Metrica principal:</strong> Saves (salvamentos).<br>
+    <strong>Risco:</strong> A entrega precisa ser genuinamente surpreendente.</p>
+  </div>
+
+  <div class="card card-warning">
+    <span class="verdict verdict-partial">Confirmada com ressalvas</span>
+    <h3 style="margin-top:0; border:none;">3.3 Promessa de Caminho Facil</h3>
+    <p>Atalhos ou simplificacao com numeros especificos. Funciona, mas esta em fase de saturacao. O publico brasileiro ja desenvolveu ceticismo.</p>
+    <h4>Exemplos reais:</h4>
+    <ul>
+      <li>"3 sinais de que seu sistema nervoso ainda esta em colapso."</li>
+      <li>"Em 60 segundos voce vai entender o modo fight-or-flight."</li>
+      <li>"O unico exercicio que uso com pacientes para parar ansiedade em 90 segundos"</li>
+    </ul>
+    <p><strong>Forca:</strong> Media-alta — funciona melhor com especificidade real.<br>
+    <strong>Metrica principal:</strong> Cliques e saves.<br>
+    <strong>Risco:</strong> Promessa vazia e o anti-padrao mais punido pelo algoritmo.</p>
+  </div>
+
+  <div class="card card-confirmed">
+    <span class="verdict verdict-confirmed">Confirmada — especialmente forte neste nicho</span>
+    <h3 style="margin-top:0; border:none;">3.4 Reflexao</h3>
+    <p>Perguntas profundas que fazem o espectador parar. O unico tipo de hook que gera engajamento cognitivo ANTES da decisao de continuar assistindo. A pergunta e o conteudo no nicho de autoconhecimento.</p>
+    <h4>Exemplos reais:</h4>
+    <ul>
+      <li>"Voce ja parou pra pensar que talvez sua ansiedade nao seja um problema, mas um sinal pra escutar?"</li>
+      <li>"Quando foi a ultima vez que voce fez algo sem precisar do reconhecimento de ninguem?"</li>
+      <li>"O que voce escolheria se soubesse que nao ia dar errado?"</li>
+    </ul>
+    <p><strong>Forca:</strong> Muito alta no nicho — gera mais comentarios qualificados que qualquer outro tipo.<br>
+    <strong>Metrica principal:</strong> Comentarios qualificados (segunda onda de distribuicao).<br>
+    <strong>Risco:</strong> Pode nao reter audiencia fria (nao-seguidores) tao bem quanto contrassenso.</p>
+  </div>
+
+  <div class="card card-confirmed">
+    <span class="verdict verdict-confirmed">Confirmada — alto potencial, alto risco</span>
+    <h3 style="margin-top:0; border:none;">3.5 Provocacao</h3>
+    <p>Desafio direto ao espectador. Cria dissonancia cognitiva e gera reacoes emocionais que alimentam comentarios.</p>
+    <h4>Exemplos reais:</h4>
+    <ul>
+      <li>"Voce nao e ansioso — voce esta ansioso. E essa diferenca muda tudo."</li>
+      <li>"O problema nao e voce nao ter disciplina. E que ninguem te ensinou como seu cerebro funciona."</li>
+      <li>"Voce nao procrastina por preguica. Procrastina por regulacao emocional — e isso tem solucao."</li>
+    </ul>
+    <p><strong>Forca:</strong> Alta — maior gerador de comentarios e debates.<br>
+    <strong>Metrica principal:</strong> Comentarios e debates.<br>
+    <strong>Risco:</strong> No nicho saude mental, pode soar invalidante. Provocar para abrir perspectiva, nunca para negar a experiencia.</p>
+  </div>
+</section>
+
+<!-- SECAO 4 -->
+<section>
+  <h2>4. Ranking de Eficacia por Tipo de Hook</h2>
+
+  <div class="ranking">
+    <div class="ranking-item">
+      <div class="ranking-num">1</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Curiosidade</div>
+        <div class="ranking-desc">Saves + retencao. Usar como base constante.</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">2</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Reflexao</div>
+        <div class="ranking-desc">Comentarios qualificados. Ideal pro nicho — a pergunta ja entrega valor.</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">3</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Contrassenso</div>
+        <div class="ranking-desc">Compartilhamentos (share). Alcance para nao-seguidores.</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">4</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Provocacao</div>
+        <div class="ranking-desc">Engajamento emocional. Usar com cuidado no tom.</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">5</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Promessa facil</div>
+        <div class="ranking-desc">Cliques/saves. Saturado — precisa de especificidade real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECAO 5 -->
+<section>
+  <h2>5. Combinacoes que Maximizam Viralizacao</h2>
+  <p>Os reels de <strong>maior viralizacao combinam 2 tipos simultaneamente</strong>:</p>
+
+  <div class="combo-grid">
+    <div class="combo-card">
+      <div class="combo-label">Contrassenso + Curiosidade</div>
+      <div class="combo-example">"Parar de meditar me fez mais presente. O que acontece no seu cerebro quando voce para."</div>
+    </div>
+    <div class="combo-card">
+      <div class="combo-label">Provocacao + Promessa</div>
+      <div class="combo-example">"Voce nao e ansioso — voce esta ansioso. Em 60 segundos eu explico a diferenca."</div>
+    </div>
+    <div class="combo-card">
+      <div class="combo-label">Reflexao + Contrassenso</div>
+      <div class="combo-example">"Voce ja parou pra pensar que talvez sua ansiedade nao seja um problema, mas uma resposta inteligente do seu corpo?"</div>
+    </div>
+    <div class="combo-card">
+      <div class="combo-label">Curiosidade + Provocacao</div>
+      <div class="combo-example">"O que ninguem te conta sobre autoconhecimento (e que pode estar te fazendo pior)"</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECAO 6 -->
+<section>
+  <h2>6. Contexto Algoritmico 2026</h2>
+
+  <h3>Sinais de Engajamento em Ordem de Peso</h3>
+  <div class="ranking">
+    <div class="ranking-item">
+      <div class="ranking-num">1</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Compartilhamentos via DM</div>
+        <div class="ranking-desc">Cada share vale ~10-15 curtidas em peso algoritmico</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">2</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Salvamentos</div>
+        <div class="ranking-desc">Indicam "quero voltar aqui"</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">3</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Taxa de replay</div>
+        <div class="ranking-desc">Assistiu mais de uma vez = sinal fortissimo</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">4</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Comentarios qualificados</div>
+        <div class="ranking-desc">Nao apenas volume, mas profundidade</div>
+      </div>
+    </div>
+    <div class="ranking-item">
+      <div class="ranking-num">5</div>
+      <div class="ranking-content">
+        <div class="ranking-title">Curtidas</div>
+        <div class="ranking-desc">Menor peso relativo em 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Mudancas Relevantes</h3>
+  <ul>
+    <li>Desde set/2025, <strong>Google indexa Reels publicos</strong> — o hook verbal virou SEO</li>
+    <li>O Instagram transcreve o audio automaticamente — o que voce fala nos primeiros segundos e pesquisavel</li>
+    <li>Reels com retencao acima de 70% tem <strong>3x mais distribuicao</strong> para nao-seguidores</li>
+    <li>YouTube Shorts: conteudo autentico e bruto performa <strong>60% melhor</strong> que producao excessivamente polida</li>
+    <li>Brasil tem <strong>134 milhoes de contas ativas</strong> no Instagram (3o pais do mundo)</li>
+  </ul>
+
+  <h3>Anti-padroes (o que o algoritmo pune)</h3>
+  <ul>
+    <li>Hooks que prometem e nao entregam &rarr; queda em saves e shares</li>
+    <li>Hooks genericos sem especificidade &rarr; baixa retencao</li>
+    <li>Marca d'agua de outros apps &rarr; penalizacao direta</li>
+    <li>Hooks com retencao mas sem compartilhamento &rarr; alcance limitado</li>
+  </ul>
+</section>
+
+<!-- SECAO 7 -->
+<section>
+  <h2>7. Estrutura de Roteiro Padrao</h2>
+
+  <h3>Reels de 45–60s</h3>
+  <div class="yaml-block"><span class="yaml-comment"># Framework de roteiro para talking head OMNI</span>
+<span class="yaml-key">[0s – 3s]</span>   <span class="yaml-val">GANCHO</span>: frase forte + movimento visual
+<span class="yaml-key">[3s – 8s]</span>   <span class="yaml-val">CONTEXTO</span>: por que isso importa para voce
+<span class="yaml-key">[8s – 40s]</span>  <span class="yaml-val">DESENVOLVIMENTO</span>: 3 pontos praticos OU 1 revelacao
+<span class="yaml-key">[40s – 50s]</span> <span class="yaml-val">PROVA</span>: dado, estatistica, exemplo real
+<span class="yaml-key">[50s – 60s]</span> <span class="yaml-val">CTA</span>: "manda pra alguem", "salva", "comenta"</div>
+
+  <h3>Reels curtos (15–20s)</h3>
+  <div class="yaml-block"><span class="yaml-key">[0s – 2s]</span>   <span class="yaml-val">GANCHO</span> polemico ou dor
+<span class="yaml-key">[2s – 15s]</span>  <span class="yaml-val">REVELACAO</span> + 1 ponto pratico
+<span class="yaml-key">[15s – 20s]</span> <span class="yaml-val">CTA</span> implicito (frase que gera share espontaneo)</div>
+</section>
+
+<!-- SECAO 8 -->
+<section>
+  <h2>8. Temas com Maior Potencial Viral</h2>
+  <div class="ranking">
+    <div class="ranking-item"><div class="ranking-num">1</div><div class="ranking-content"><div class="ranking-title">Ansiedade e sistema nervoso</div><div class="ranking-desc">Maior demanda, alta identificacao</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">2</div><div class="ranking-content"><div class="ranking-title">Relacionamentos e apego</div><div class="ranking-desc">Ansioso, evitativo, seguro — alto share</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">3</div><div class="ranking-content"><div class="ranking-title">Reprogramacao mental e subconsciente</div><div class="ranking-desc">Alto save</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">4</div><div class="ranking-content"><div class="ranking-title">Sinais de que voce precisa de autocuidado</div><div class="ranking-desc">Alto compartilhamento</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">5</div><div class="ranking-content"><div class="ranking-title">Trauma e ressignificacao</div><div class="ranking-desc">Forte carga emocional</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">6</div><div class="ranking-content"><div class="ranking-title">Neurociencia aplicada ao cotidiano</div><div class="ranking-desc">Autoridade + acessibilidade</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">7</div><div class="ranking-content"><div class="ranking-title">Espiritualidade pratica (sem dogma)</div><div class="ranking-desc">Amplo alcance</div></div></div>
+    <div class="ranking-item"><div class="ranking-num">8</div><div class="ranking-content"><div class="ranking-title">Hipnose desmistificada</div><div class="ranking-desc">Curiosidade alta, pouca competicao de qualidade</div></div></div>
+  </div>
+</section>
+
+<!-- SECAO 9 -->
+<section>
+  <h2>9. Parametros para o Pipeline OMNI</h2>
+  <div class="yaml-block"><span class="yaml-comment"># OMNI Video Pipeline — Parametros de Edicao Viral 2025/2026</span>
+
+<span class="yaml-key">formato:</span>
+  <span class="yaml-key">resolucao:</span> <span class="yaml-val">1080x1920</span>
+  <span class="yaml-key">aspect_ratio:</span> <span class="yaml-val">"9:16"</span>
+  <span class="yaml-key">fps:</span> <span class="yaml-val">30</span>
+
+<span class="yaml-key">duracao_alvo:</span>
+  <span class="yaml-key">minimo:</span> <span class="yaml-val">30s</span>
+  <span class="yaml-key">ideal:</span> <span class="yaml-val">45-60s</span>
+  <span class="yaml-key">maximo:</span> <span class="yaml-val">90s</span>
+
+<span class="yaml-key">audio:</span>
+  <span class="yaml-key">remocao_silencio:</span> <span class="yaml-val">threshold_300ms</span>
+  <span class="yaml-key">remocao_fillers:</span> <span class="yaml-val">true</span>
+  <span class="yaml-key">aceleracao_fala:</span> <span class="yaml-val">1.07x</span>
+  <span class="yaml-key">pitch_correction:</span> <span class="yaml-val">true</span>
+  <span class="yaml-key">musica_fundo:</span>
+    <span class="yaml-key">estilo:</span> <span class="yaml-val">"lo-fi instrumental / ambient piano"</span>
+    <span class="yaml-key">volume_relativo:</span> <span class="yaml-val">"-18dB a -20dB vs voz"</span>
+    <span class="yaml-key">bpm:</span> <span class="yaml-val">60-90</span>
+
+<span class="yaml-key">cortes:</span>
+  <span class="yaml-key">hook_0_3s:</span> <span class="yaml-val">"ate 5 cortes em 3 segundos"</span>
+  <span class="yaml-key">desenvolvimento:</span> <span class="yaml-val">"corte a cada 2-3 segundos"</span>
+  <span class="yaml-key">climax:</span> <span class="yaml-val">"corte a cada 0.5-1 segundo"</span>
+  <span class="yaml-key">gap_maximo_entre_falas:</span> <span class="yaml-val">0.4s</span>
+
+<span class="yaml-key">zoom:</span>
+  <span class="yaml-key">punch_in_suave:</span> <span class="yaml-val">"1.05x-1.08x (0.2-0.3s)"</span>
+  <span class="yaml-key">punch_in_dramatico:</span> <span class="yaml-val">"1.10x-1.12x (0.5s)"</span>
+  <span class="yaml-key">maximo_absoluto:</span> <span class="yaml-val">1.12x</span>
+
+<span class="yaml-key">legendas:</span>
+  <span class="yaml-key">estilo:</span> <span class="yaml-val">"palavra por palavra animada"</span>
+  <span class="yaml-key">fonte:</span> <span class="yaml-val">"DM Sans Bold"</span>
+  <span class="yaml-key">tamanho:</span> <span class="yaml-val">"72-90px"</span>
+  <span class="yaml-key">cor_principal:</span> <span class="yaml-val">"#FFFFFF com outline preto 3-4px"</span>
+  <span class="yaml-key">cor_destaque:</span> <span class="yaml-val">"#FFD700 (amarelo)"</span>
+
+<span class="yaml-key">hook:</span>
+  <span class="yaml-key">tipo_primario:</span> <span class="yaml-val">"curiosidade ou reflexao"</span>
+  <span class="yaml-key">combinacao_ideal:</span> <span class="yaml-val">"2 tipos simultaneos"</span>
+
+<span class="yaml-key">cta:</span>
+  <span class="yaml-key">duracao:</span> <span class="yaml-val">"3-5s"</span>
+  <span class="yaml-key">prioridade:</span> <span class="yaml-val">"DM share > comentario > salvamento > link"</span></div>
+</section>
+
+<!-- SECAO 10 -->
+<section>
+  <h2>10. Fontes Consultadas</h2>
+  <ul>
+    <li>Rafael Terra — Guia Tendencias Reels 2026</li>
+    <li>Agenciagram — 30 Ganchos que Viralizam 2026</li>
+    <li>Digital7Pro — Reels de Alta Retencao: 7 Formulas</li>
+    <li>Clinica Agil Psicologia — Como Viralizar Reels de Psicologia</li>
+    <li>Envox — Roteiro para Reels Primeiros 3 Segundos</li>
+    <li>CreatorsJet — 15 Formulas de Hook para Reels</li>
+    <li>Nikau — 10 Ganchos Infaliveis para Reels</li>
+    <li>Taggbox — 100+ Ganchos para Reels Instagram</li>
+    <li>SMAM / Jamile Fernandes — Como Criar Reels que Viralizam 2026</li>
+    <li>CapCut — 8 Melhores Hooks para Instagram Reels</li>
+    <li>99Influence — Top 10 Psicologos com Mais Seguidores</li>
+    <li>Go Viral — Algoritmo YouTube Shorts 2026</li>
+    <li>SAF — Neuromarketing: Script que Libera Dopamina nos Primeiros 3s</li>
+    <li>SelfStorming — Contrarian Statement Hook</li>
+    <li>CreativeClick — The Science Behind Viral Reels</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>OMNI Brasil // Pesquisa de Mercado // Mai 2026</footer>
+
+</body>
+</html>
