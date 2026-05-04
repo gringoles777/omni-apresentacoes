@@ -186,7 +186,8 @@ body {
 
   window.__timelines["bm-logo-slide"] = tl;
 
-  // Auto-play para visualização em browser normal
+  // Ao terminar os 30s, volta para t=3 (breathe) e repete infinitamente
+  tl.eventCallback("onComplete", () => { tl.seek(3); tl.play(); });
   tl.play();
   </script>
 </div>
