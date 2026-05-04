@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fase 2 — Manual de Qualificação SDR | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080B14;
+    --purple: #7B2FBE;
+    --purple-soft: rgba(123, 47, 190, 0.15);
+    --gold: #D4AF37;
+    --gold-soft: rgba(212, 175, 55, 0.15);
+    --teal: #00D4AA;
+    --teal-soft: rgba(0, 212, 170, 0.12);
+    --red: #FF4444;
+    --red-soft: rgba(255, 68, 68, 0.12);
+    --yellow-soft: rgba(255, 200, 80, 0.10);
+    --text: #E8E8F0;
+    --text-dim: #A8A8B8;
+    --text-mute: #6E6E80;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(180, 120, 255, 0.15);
+    --card-border-strong: rgba(180, 120, 255, 0.30);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 50%; left: 50%;
+    width: 120vw; height: 120vh;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center,
+      rgba(123, 47, 190, 0.18) 0%,
+      rgba(123, 47, 190, 0.08) 25%,
+      rgba(8, 11, 20, 0) 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* BANNER FIXO */
+  .checkpoint-banner {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: linear-gradient(90deg, #5a0e1a 0%, #7a1525 50%, #5a0e1a 100%);
+    border-bottom: 1px solid rgba(255, 100, 100, 0.4);
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: #ffd0d0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+  }
+
+  /* CONTAINER */
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 28px 120px;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 32px 0 16px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 8px 18px;
+    background: linear-gradient(90deg, var(--purple-soft), var(--gold-soft));
+    border: 1px solid var(--card-border-strong);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #d8c8ff 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 18px;
+  }
+
+  .hero p.sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+
+  .kpis {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+
+  .kpi {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 28px;
+    min-width: 180px;
+  }
+
+  .kpi-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .kpi-label {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  /* SECTION */
+  section {
+    margin-bottom: 88px;
+  }
+
+  .sec-head {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .sec-head h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .sec-head p {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* CARD BASE */
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 32px;
+  }
+
+  /* CARD IDENTIFICAÇÃO RÁPIDA */
+  .ident-card {
+    max-width: 760px;
+    margin: 0 auto 56px;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.06), rgba(123, 47, 190, 0.04));
+    padding: 36px 32px;
+  }
+
+  .ident-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .ident-q {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 18px 22px;
+    border-radius: 12px;
+    border-left: 3px solid var(--gold);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .ident-arrows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .arrow-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.96rem;
+  }
+
+  .arrow-row .lbl {
+    font-weight: 700;
+    color: var(--gold);
+    min-width: 240px;
+  }
+
+  /* PERFIS GRID */
+  .perfis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    gap: 28px;
+  }
+
+  .perfil-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .perfil-gestor { border-left: 4px solid var(--gold); }
+  .perfil-terapeuta { border-left: 4px solid var(--purple); }
+
+  .perfil-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .perfil-gestor .perfil-badge {
+    background: var(--gold-soft);
+    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+  }
+
+  .perfil-terapeuta .perfil-badge {
+    background: var(--purple-soft);
+    color: #c594ff;
+    border: 1px solid rgba(180, 120, 255, 0.4);
+  }
+
+  .perfil-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+
+  .perfil-row {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .perfil-row strong {
+    display: block;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .perfil-row .val { color: var(--text); }
+  .perfil-row em.quote {
+    color: #d8c8ff;
+    font-style: italic;
+  }
+
+  .flags-block { margin-top: 22px; }
+  .flags-block h4 {
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+
+  .flag-list { list-style: none; }
+  .flag-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 7px 0;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+
+  .flag-list li::before {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .flag-green li::before { content: '✓'; color: var(--teal); font-weight: 700; }
+  .flag-red li::before { content: '!'; color: var(--red); font-weight: 700; width: 14px; text-align: center; }
+
+  /* TABS */
+  .tabs-wrap { max-width: 980px; margin: 0 auto; }
+
+  .tabs-nav {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--card-border);
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    padding: 14px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    margin-bottom: -1px;
+  }
+
+  .tab-btn:hover { color: #fff; }
+
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; animation: fadeIn 0.4s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* PERGUNTAS */
+  .perguntas-grid { display: flex; flex-direction: column; gap: 20px; }
+
+  .pergunta-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 28px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    transition: border-color 0.25s ease;
+  }
+
+  .pergunta-card:hover { border-color: var(--card-border-strong); }
+
+  .pergunta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--purple), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+
+  .pergunta-body h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .pergunta-q {
+    background: rgba(0, 0, 0, 0.28);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    color: #fff;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .pergunta-meta {
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .pergunta-meta p { margin-bottom: 8px; }
+  .pergunta-meta strong { color: var(--text); font-weight: 600; }
+
+  .signal-green {
+    color: var(--teal);
+    background: var(--teal-soft);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 0.88rem;
+    border-left: 2px solid var(--teal);
+  }
+
+  .signal-warn {
+    color: #ffc850;
+    background: var(--yellow-soft);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-size: 0.88rem;
+    border-left: 2px solid #ffc850;
+  }
+
+  /* SCORECARD */
+  .scorecard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+  }
+
+  .scorecard-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .check-list { list-style: none; }
+  .check-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    line-height: 1.5;
+  }
+
+  .check-list li::before {
+    content: '☐';
+    color: var(--purple);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .info-box {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.06), transparent);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-left: 3px solid var(--gold);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* DECISÕES */
+  .decisao-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+  }
+
+  .decisao-card {
+    padding: 28px 24px;
+    border-radius: 16px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-top-width: 4px;
+  }
+
+  .decisao-aprovado { border-top-color: var(--teal); }
+  .decisao-futura { border-top-color: var(--gold); }
+  .decisao-descarte { border-top-color: var(--red); }
+
+  .decisao-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+
+  .decisao-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+
+  .decisao-aprovado h3 { color: var(--teal); }
+  .decisao-futura h3 { color: var(--gold); }
+  .decisao-descarte h3 { color: var(--red); }
+
+  .decisao-card p.lead {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .decisao-card ul {
+    list-style: none;
+    font-size: 0.92rem;
+  }
+
+  .decisao-card ul li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .decisao-card ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  .alert-red {
+    margin-top: 32px;
+    padding: 22px 26px;
+    background: var(--red-soft);
+    border: 1px solid rgba(255, 68, 68, 0.4);
+    border-left: 3px solid var(--red);
+    border-radius: 12px;
+    color: #ffd0d0;
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .alert-red strong { color: #fff; }
+
+  /* FILTRO FINANCEIRO */
+  .faixa-grid { display: flex; flex-direction: column; gap: 20px; max-width: 920px; margin: 0 auto; }
+
+  .faixa {
+    padding: 24px 28px;
+    border-radius: 14px;
+    border: 1px solid;
+    border-left-width: 4px;
+  }
+
+  .faixa-verde {
+    background: var(--teal-soft);
+    border-color: rgba(0, 212, 170, 0.4);
+    border-left-color: var(--teal);
+  }
+
+  .faixa-amarelo {
+    background: var(--yellow-soft);
+    border-color: rgba(212, 175, 55, 0.4);
+    border-left-color: var(--gold);
+  }
+
+  .faixa-vermelho {
+    background: var(--red-soft);
+    border-color: rgba(255, 68, 68, 0.4);
+    border-left-color: var(--red);
+  }
+
+  .faixa h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+  }
+
+  .faixa-verde h3 { color: var(--teal); }
+  .faixa-amarelo h3 { color: var(--gold); }
+  .faixa-vermelho h3 { color: var(--red); }
+
+  .faixa ul {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+
+  .faixa ul li {
+    padding: 5px 0 5px 16px;
+    position: relative;
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .faixa ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+  }
+
+  .faixa-verde ul li::before { color: var(--teal); }
+  .faixa-amarelo ul li::before { color: var(--gold); }
+  .faixa-vermelho ul li::before { color: var(--red); }
+
+  .faixa-action {
+    margin-top: 12px;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--text-dim);
+  }
+
+  .script-box {
+    margin-top: 32px;
+    padding: 26px 30px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(123, 47, 190, 0.04));
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-left: 3px solid var(--gold);
+    border-radius: 14px;
+    max-width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .script-box h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .script-text {
+    font-style: italic;
+    color: #fff;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 18px 22px;
+    border-radius: 10px;
+  }
+
+  /* PRÓXIMO PASSO */
+  .next-box {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(180, 120, 255, 0.4);
+    border-left: 3px solid var(--purple);
+    border-radius: 14px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 100px;
+    padding-top: 32px;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+    color: var(--text-mute);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* FAB */
+  .fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--gold));
+    border: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(123, 47, 190, 0.5);
+    z-index: 998;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fab:hover { transform: scale(1.08); }
+
+  /* RESPONSIVE */
+  @media (max-width: 720px) {
+    .wrap { padding: 36px 18px 100px; }
+    .pergunta-card { grid-template-columns: 1fr; }
+    .pergunta-num { font-size: 2.6rem; text-align: left; }
+    .arrow-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .arrow-row .lbl { min-width: auto; }
+    .checkpoint-banner { font-size: 0.78rem; padding: 12px 16px; }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #fff !important; color: #111 !important; }
+    body::before { display: none; }
+    .checkpoint-banner {
+      background: #ffe4e4 !important;
+      color: #6a0a18 !important;
+      border-bottom: 2px solid #6a0a18 !important;
+      position: static !important;
+      box-shadow: none !important;
+    }
+    .fab { display: none !important; }
+    .wrap { padding: 24px; max-width: 100%; }
+    .hero h1, .sec-head h2, .perfil-card h3, .pergunta-body h4,
+    .scorecard-col h3, .decisao-card h3, .faixa h3 {
+      color: #111 !important;
+      -webkit-text-fill-color: #111 !important;
+      background: none !important;
+    }
+    .hero p.sub, .sec-head p, .text-dim, .perfil-row strong { color: #444 !important; }
+    .card, .kpi, .perfil-card, .pergunta-card, .decisao-card,
+    .ident-card, .next-box, .info-box, .script-box, .alert-red {
+      background: #fff !important;
+      border: 1px solid #ccc !important;
+      color: #111 !important;
+      backdrop-filter: none !important;
+    }
+    .faixa-verde { background: #eaffea !important; border-color: #4caf50 !important; color: #1b3a1f !important; }
+    .faixa-amarelo { background: #fff8db !important; border-color: #c79a00 !important; color: #4a3a00 !important; }
+    .faixa-vermelho { background: #ffe8e8 !important; border-color: #c0392b !important; color: #6a1010 !important; }
+    .pergunta-q, .ident-q, .script-text {
+      background: #f4f0e6 !important;
+      color: #111 !important;
+      border-left-color: #c79a00 !important;
+    }
+    .pergunta-num {
+      color: #5a1b8a !important;
+      -webkit-text-fill-color: #5a1b8a !important;
+      background: none !important;
+    }
+    .tab-pane { display: block !important; page-break-inside: avoid; }
+    .tabs-nav { display: none !important; }
+    .tab-pane::before {
+      content: attr(data-print-title);
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #5a1b8a;
+      margin: 24px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #c79a00;
+    }
+    section { page-break-inside: avoid; margin-bottom: 36px; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="checkpoint-banner">
+  ⚠️ FASE 2 — AGUARDANDO VALIDAÇÃO DA RAFA ANTES DE COMPARTILHAR COM OS SDRs
+</div>
+
+<div class="content">
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <span class="badge">Fase 2 de 6 — ICP e Qualificação</span>
+      <h1>Manual de Qualificação SDR</h1>
+      <p class="sub">Os dois perfis de lead, os roteiros de qualificação, o scorecard e os critérios de decisão.</p>
+      <div class="kpis">
+        <div class="kpi"><div class="kpi-num">2</div><div class="kpi-label">Perfis de Lead</div></div>
+        <div class="kpi"><div class="kpi-num">5</div><div class="kpi-label">Perguntas por perfil</div></div>
+        <div class="kpi"><div class="kpi-num">3</div><div class="kpi-label">Decisões possíveis</div></div>
+      </div>
+    </header>
+
+    <!-- SEÇÃO 1 — PERFIS -->
+    <section id="perfis">
+      <div class="sec-head">
+        <h2>Quem o SDR vai atender</h2>
+        <p>A OMNI recebe dois perfis distintos. O SDR identifica qual é nos primeiros 2 minutos e ajusta a abordagem.</p>
+      </div>
+
+      <div class="ident-card">
+        <h3>A pergunta que identifica o perfil</h3>
+        <div class="ident-q">"Você já trabalha na área de saúde, terapia ou desenvolvimento humano?"</div>
+        <div class="ident-arrows">
+          <div class="arrow-row"><span class="lbl">→ SIM</span><span>Perfil Terapeuta</span></div>
+          <div class="arrow-row"><span class="lbl">→ NÃO</span><span>Perfil Gestor Exausto</span></div>
+          <div class="arrow-row"><span class="lbl">→ Estou estudando / me formando</span><span>Se perspectiva de atender clientes: Terapeuta. Se formação complementar de outra área: Gestor Exausto.</span></div>
+        </div>
+      </div>
+
+      <div class="perfis-grid">
+
+        <!-- CARD GESTOR EXAUSTO -->
+        <article class="card perfil-card perfil-gestor">
+          <span class="perfil-badge">ICP Primário — Foco Máximo</span>
+          <h3>O Gestor Exausto</h3>
+
+          <div class="perfil-row">
+            <strong>Quem é</strong>
+            <span class="val">Executivo, funcionário público de alto salário, pequeno empresário. 30-55 anos com estabilidade financeira.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Como chega</strong>
+            <span class="val">Tráfego pago (Meta Ads / Google Ads).</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Motivação central</strong>
+            <span class="val">Propósito, transição de carreira, segunda carreira com significado.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Dor central (como fala)</strong>
+            <em class="quote">"Estou cansado de tudo", "não vejo meus filhos crescer", "mente que não desliga", "quero encontrar um propósito", "não consigo parar de pensar no trabalho".</em>
+          </div>
+          <div class="perfil-row">
+            <strong>Potencial</strong>
+            <span class="val">LTV completo — Formação + Black Mentoring + esteira.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Abordagem SDR</strong>
+            <span class="val">Qualificação emocional profunda + filtro financeiro + verificação de decisor.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Tempo de ligação esperado</strong>
+            <span class="val">10–15 min.</span>
+          </div>
+
+          <div class="flags-block">
+            <h4>Green Flags</h4>
+            <ul class="flag-list flag-green">
+              <li>Já investiu em cursos, terapia ou formação antes.</li>
+              <li>Expressa insatisfação com carreira atual.</li>
+              <li>Busca propósito, não apenas informação técnica.</li>
+              <li>Profissional estável (cargo, empresa, clientes).</li>
+              <li>Fala de família, tempo, legado.</li>
+            </ul>
+          </div>
+
+          <div class="flags-block">
+            <h4>Red Flags</h4>
+            <ul class="flag-list flag-red">
+              <li>Busca "cura rápida" sem compromisso com formação.</li>
+              <li>Declarou incapacidade financeira absoluta.</li>
+              <li>Resposta automática de empresa/bot.</li>
+              <li>Sem nenhuma estabilidade profissional aparente.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- CARD TERAPEUTA -->
+        <article class="card perfil-card perfil-terapeuta">
+          <span class="perfil-badge">ICP Secundário — Perfil Orgânico</span>
+          <h3>O Terapeuta</h3>
+
+          <div class="perfil-row">
+            <strong>Quem é</strong>
+            <span class="val">Psicólogo, fisioterapeuta, coach, terapeuta holístico, estudante de terapia em fase avançada.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Como chega</strong>
+            <span class="val">Google Orgânico — não há marketing ativo para este perfil.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Motivação central</strong>
+            <span class="val">Ampliar ferramentas profissionais, adicionar hipnoterapia ao repertório clínico.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Dor central (como fala)</strong>
+            <em class="quote">"Quero oferecer mais para meus clientes", "preciso de uma ferramenta mais eficiente", "trabalho com [área] e quero acrescentar hipnoterapia".</em>
+          </div>
+          <div class="perfil-row">
+            <strong>Potencial</strong>
+            <span class="val">Compra a Formação. Raramente compra esteira completa.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Abordagem SDR</strong>
+            <span class="val">Qualificação profissional mais direta, caminho mais curto para agendamento.</span>
+          </div>
+          <div class="perfil-row">
+            <strong>Tempo de ligação esperado</strong>
+            <span class="val">7–10 min.</span>
+          </div>
+
+          <div class="flags-block">
+            <h4>Green Flags</h4>
+            <ul class="flag-list flag-green">
+              <li>Já tem clientes ativos.</li>
+              <li>Já fez outras formações complementares.</li>
+              <li>Fala de aplicação profissional específica.</li>
+              <li>Demonstra conhecimento do campo terapêutico.</li>
+            </ul>
+          </div>
+
+          <div class="flags-block">
+            <h4>Red Flags</h4>
+            <ul class="flag-list flag-red">
+              <li>Menos de 18 anos.</li>
+              <li>Ensino médio incompleto.</li>
+              <li>Declarou impossibilidade financeira absoluta.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2 — ROTEIROS -->
+    <section id="roteiros">
+      <div class="sec-head">
+        <h2>As perguntas certas, na ordem certa</h2>
+        <p>Não é um interrogatório — é uma conversa com propósito. Cada pergunta tem uma razão.</p>
+      </div>
+
+      <div class="tabs-wrap">
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" data-tab="gestor" role="tab">Gestor Exausto</button>
+          <button class="tab-btn" data-tab="terapeuta" role="tab">Terapeuta</button>
+        </div>
+
+        <!-- ABA GESTOR -->
+        <div class="tab-pane active" id="tab-gestor" data-print-title="Roteiro — Gestor Exausto">
+          <div class="perguntas-grid">
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">1</div>
+              <div class="pergunta-body">
+                <h4>Abertura / Conexão</h4>
+                <div class="pergunta-q">"O que te fez buscar isso agora? O que está acontecendo na sua vida que te trouxe até a OMNI?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Motivação emocional principal, urgência, dor real.</p>
+                  <p><strong>Nota:</strong> Esta é a pergunta mais importante. Deixar o lead falar sem interromper. Tudo que ele disser aqui é munição para o closer.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">2</div>
+              <div class="pergunta-body">
+                <h4>Situação Profissional</h4>
+                <div class="pergunta-q">"Você está atuando em qual área hoje?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Perfil profissional, estabilidade, contexto.</p>
+                  <p><strong>Nota:</strong> Não avaliar pelo cargo — funcionário público e executivo ambos têm capacidade.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">3</div>
+              <div class="pergunta-body">
+                <h4>Filtro Financeiro (Investimento Histórico)</h4>
+                <div class="pergunta-q">"Você já fez algum investimento em desenvolvimento pessoal ou profissional antes — um curso, terapia, formação? Me conta um pouco..."</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Histórico de investimento = indicador de mentalidade e capacidade financeira.</p>
+                  <div class="signal-green"><strong>Sinal verde:</strong> Já investiu qualquer valor em desenvolvimento → tem mentalidade de investidor.</div>
+                  <div class="signal-warn"><strong>Atenção:</strong> Nunca perguntou renda diretamente — avaliar pelo comportamento.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">4</div>
+              <div class="pergunta-body">
+                <h4>Intenção de Uso</h4>
+                <div class="pergunta-q">"Você imagina usar a hipnoterapia para você mesmo, como profissional atendendo clientes, ou nos dois sentidos?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Define o argumento que o closer vai usar na consultoria.</p>
+                  <p><strong>Nota:</strong> Registrar literalmente no Pipedrive para o closer saber por onde começar.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">5</div>
+              <div class="pergunta-body">
+                <h4>Decisor</h4>
+                <div class="pergunta-q">"Caso você decida avançar, esse é um tipo de decisão que você toma sozinho ou normalmente alinha com alguém da família?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Quem precisa estar na consultoria.</p>
+                  <div class="signal-green"><strong>Sinal verde:</strong> Decide sozinho → agendar normalmente.</div>
+                  <div class="signal-warn"><strong>Atenção:</strong> Precisa de parceiro → tentar incluir a pessoa na consultoria. <em>"Perfeito — essa pessoa conseguiria estar disponível no mesmo horário?"</em></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ABA TERAPEUTA -->
+        <div class="tab-pane" id="tab-terapeuta" data-print-title="Roteiro — Terapeuta">
+          <div class="perguntas-grid">
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">1</div>
+              <div class="pergunta-body">
+                <h4>Contexto Profissional</h4>
+                <div class="pergunta-q">"Qual área você atua hoje? Já tem clientes?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Perfil profissional, volume de trabalho, maturidade.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">2</div>
+              <div class="pergunta-body">
+                <h4>Motivação</h4>
+                <div class="pergunta-q">"O que te fez buscar a hipnoterapia especificamente agora?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Urgência, motivação profissional específica.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">3</div>
+              <div class="pergunta-body">
+                <h4>Histórico de Formação</h4>
+                <div class="pergunta-q">"Você já fez outras formações complementares antes? Me conta um pouco..."</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Mentalidade de investimento em formação profissional.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">4</div>
+              <div class="pergunta-body">
+                <h4>Aplicação</h4>
+                <div class="pergunta-q">"Sua ideia é usar a hipnoterapia com seus clientes atuais ou você está pensando em expandir para novas áreas?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Contexto de uso, potencial de expansão.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pergunta-card">
+              <div class="pergunta-num">5</div>
+              <div class="pergunta-body">
+                <h4>Decisor</h4>
+                <div class="pergunta-q">"Esse tipo de decisão de formação profissional você toma sozinho?"</div>
+                <div class="pergunta-meta">
+                  <p><strong>O que captura:</strong> Decisor — igual ao Gestor Exausto.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3 — SCORECARD -->
+    <section id="scorecard">
+      <div class="sec-head">
+        <h2>O que o SDR deve ter capturado antes de mover para "Avaliado"</h2>
+        <p>Se algum item obrigatório estiver em branco, a lead não está pronta para ser movida.</p>
+      </div>
+
+      <div class="scorecard-grid">
+
+        <div class="card scorecard-col">
+          <h3>Mínimo Obrigatório (ambos os perfis)</h3>
+          <ul class="check-list">
+            <li>Perfil identificado: Gestor Exausto ou Terapeuta.</li>
+            <li>Motivação principal capturada (em palavras do lead).</li>
+            <li>Área profissional atual.</li>
+            <li>Histórico de investimento em desenvolvimento (sim/não).</li>
+            <li>Intenção de uso (pessoal / profissional / ambos).</li>
+            <li>Decisor identificado (decide sozinho? Parceiro incluído?).</li>
+            <li>Data e horário da consultoria confirmados.</li>
+            <li>Lead informado: consultoria gratuita de 45min online.</li>
+          </ul>
+        </div>
+
+        <div class="card scorecard-col">
+          <h3>Adicional para Gestor Exausto</h3>
+          <ul class="check-list">
+            <li>Dor principal articulada (frase literal do lead, não interpretação do SDR).</li>
+            <li>Sinal de capacidade financeira (verde / amarelo / vermelho).</li>
+            <li>Se decisor externo: pessoa confirmada para a consultoria?</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="info-box">
+        Registrar tudo no Pipedrive antes de mover o lead. O closer lê essas informações antes da consultoria — quanto mais específico o SDR for, mais eficiente a consultoria fica.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4 — DECISÕES -->
+    <section id="decisoes">
+      <div class="sec-head">
+        <h2>Para onde mover o lead após a ligação</h2>
+        <p>Três destinos possíveis — o SDR decide com base nos critérios abaixo.</p>
+      </div>
+
+      <div class="decisao-grid">
+
+        <article class="decisao-card decisao-aprovado">
+          <div class="decisao-icon">✅</div>
+          <h3>Avaliado (Agendar)</h3>
+          <p class="lead">Mover para cá quando:</p>
+          <ul>
+            <li>Perfil identificado (qualquer um dos dois).</li>
+            <li>Motivação capturada.</li>
+            <li>NÃO declarou incapacidade financeira absoluta.</li>
+            <li>NÃO apresenta red flags críticos.</li>
+            <li>Aceitou o agendamento.</li>
+          </ul>
+        </article>
+
+        <article class="decisao-card decisao-futura">
+          <div class="decisao-icon">📅</div>
+          <h3>Agenda Futura</h3>
+          <p class="lead">Mover para cá quando:</p>
+          <ul>
+            <li>Lead genuinamente interessado MAS tem impedimento temporário legítimo.</li>
+            <li>Exemplos: "vou viajar essa semana", "estou terminando um projeto pesado", "quero esperar terminar a pós".</li>
+            <li>SDR registra: data prevista de retorno + motivo.</li>
+            <li>Prazo máximo: 60 dias. Após isso → nutrição.</li>
+            <li>Não é rejeição — é timing.</li>
+          </ul>
+        </article>
+
+        <article class="decisao-card decisao-descarte">
+          <div class="decisao-icon">✗</div>
+          <h3>Descarte</h3>
+          <p class="lead">Mover para cá quando:</p>
+          <ul>
+            <li>Menos de 18 anos.</li>
+            <li>Ensino médio incompleto sem perspectiva de concluir.</li>
+            <li>Declarou explicitamente que não pode investir nenhum valor ("estou devendo, mal pago as contas").</li>
+            <li>Não é pessoa física (bot, resposta automática de empresa).</li>
+            <li>Recusou agendamento sem nenhuma abertura para retorno.</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <div class="alert-red">
+        <strong>NUNCA descartar apenas por:</strong> score baixo no formulário (o ICP mente no score), cidade pequena ou interior, demorar a responder, nome/fala que pareça "simples", ou por ser de área não-corporativa.
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5 — FILTRO FINANCEIRO -->
+    <section id="filtro-financeiro">
+      <div class="sec-head">
+        <h2>Como avaliar capacidade financeira sem perguntar a renda</h2>
+        <p>O SDR avalia pelo comportamento e histórico — nunca pergunta quanto ganha.</p>
+      </div>
+
+      <div class="faixa-grid">
+
+        <div class="faixa faixa-verde">
+          <h3>Sinal Verde — Pode investir</h3>
+          <p style="font-size:0.86rem; color:var(--text-dim); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Sinais observados:</p>
+          <ul>
+            <li>Já fez curso ou formação que custou mais de R$ 1.000.</li>
+            <li>Menciona carreira estável (cargo fixo, empresa, base de clientes).</li>
+            <li>Busca hipnoterapia como investimento profissional ou de crescimento.</li>
+            <li>Não questiona preço antes de entender o produto.</li>
+            <li>Fala de futuro e retorno ("quero mudar de carreira", "quero atender clientes").</li>
+          </ul>
+        </div>
+
+        <div class="faixa faixa-amarelo">
+          <h3>Sinal Amarelo — Requer atenção do closer</h3>
+          <p style="font-size:0.86rem; color:var(--text-dim); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Sinais observados:</p>
+          <ul>
+            <li>Nunca investiu nada em desenvolvimento (primeira vez).</li>
+            <li>Pergunta preço antes de qualquer qualificação.</li>
+            <li>"Depende muito do valor" sem abertura para entender o produto primeiro.</li>
+          </ul>
+          <p class="faixa-action">→ Encaminhar para consultoria, registrar o sinal para o closer.</p>
+        </div>
+
+        <div class="faixa faixa-vermelho">
+          <h3>Sinal Vermelho — Potencial descarte</h3>
+          <p style="font-size:0.86rem; color:var(--text-dim); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Sinais observados:</p>
+          <ul>
+            <li>Declarou desemprego + sem renda + sem reservas de forma explícita.</li>
+            <li>"Não tenho como pagar nada agora de jeito nenhum".</li>
+            <li>Pede desconto antes mesmo de saber o que é o produto.</li>
+          </ul>
+          <p class="faixa-action">→ Avaliar caso a caso. Se muito claro, descartar gentilmente.</p>
+        </div>
+
+      </div>
+
+      <div class="script-box">
+        <h4>Se o lead pergunta o preço antes de qualquer qualificação:</h4>
+        <div class="script-text">
+          "A formação vai de R$ 5k a R$ 20k dependendo da modalidade — e a maioria dos nossos alunos recupera isso em poucos meses de trabalho. Mas o que eu recomendo antes de falar de investimento é você entender o que a formação faz pelo seu objetivo de [X que ele disse], porque aí o valor faz muito mais sentido. A consultoria é exatamente pra isso — e é gratuita."
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6 — PRÓXIMO PASSO -->
+    <section id="proximo-passo">
+      <div class="sec-head">
+        <h2>Próximo passo</h2>
+      </div>
+      <div class="next-box">
+        ✅ Com estes critérios validados pela diretora, a Fase 3 começa: construção do script de ligação completo — abertura, roteiro de qualificação, pitch da consultoria, tratamento de objeções e protocolos WhatsApp.
+      </div>
+    </section>
+
+    <footer>
+      Fase 2 — ICP e Qualificação | Projeto Reestruturação Pré-Venda OMNI Brasil | 30/04/2026 | Squad Comercial-Ops + AURA AIOX
+    </footer>
+
+  </div>
+</div>
+
+<button class="fab" onclick="window.print()" title="Imprimir">🖨</button>
+
+<script>
+  (function() {
+    var btns = document.querySelectorAll('.tab-btn');
+    var panes = document.querySelectorAll('.tab-pane');
+    btns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tab = btn.getAttribute('data-tab');
+        btns.forEach(function(b) { b.classList.remove('active'); });
+        panes.forEach(function(p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        var pane = document.getElementById('tab-' + tab);
+        if (pane) pane.classList.add('active');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
