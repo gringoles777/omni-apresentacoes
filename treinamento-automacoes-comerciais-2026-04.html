@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automações Comerciais OMNI — Guia de Gestão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-black: #050505;
+    --color-dark: #0D0D0D;
+    --color-dark-elevated: #1A1A1A;
+    --color-dark-texture: #2D2D2D;
+    --color-gold: #C8A84B;
+    --color-gold-light: #E8C86A;
+    --color-gold-deep: #9A7A2E;
+    --color-cream: #F5F0E8;
+    --color-cream-70: rgba(245,240,232,0.70);
+    --color-cream-50: rgba(245,240,232,0.50);
+    --color-teal: #2A9D8F;
+    --color-gray: #6B6B6B;
+    --color-gray-dark: #242424;
+    --color-gold-10: rgba(200,168,75,0.10);
+    --color-gold-20: rgba(200,168,75,0.20);
+    --color-gold-30: rgba(200,168,75,0.30);
+    --color-teal-10: rgba(42,157,143,0.10);
+    --color-teal-20: rgba(42,157,143,0.20);
+    --color-red: #E05252;
+    --color-red-10: rgba(224,82,82,0.10);
+    --color-green: #4CAF82;
+    --color-green-10: rgba(76,175,130,0.10);
+    --color-orange: #E09A52;
+    --color-orange-10: rgba(224,154,82,0.10);
+    --gradient-gold: linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+    --font-display: 'Oswald', sans-serif;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+    --shadow-card: 0 2px 12px rgba(0,0,0,0.4);
+    --shadow-gold-glow: 0 0 24px rgba(200,168,75,0.25);
+    --radius-card: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--color-black);
+    color: var(--color-cream);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── LOCK SCREEN ─────────────────────────────── */
+  #lockScreen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--color-black);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lock-box {
+    text-align: center;
+    padding: 48px;
+    border: 1px solid var(--color-gold-deep);
+    border-radius: var(--radius-card);
+    background: var(--color-dark-elevated);
+    max-width: 380px; width: 90%;
+    box-shadow: var(--shadow-gold-glow);
+  }
+  .lock-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    color: var(--color-gold);
+    margin-bottom: 32px;
+  }
+  .lock-box h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-cream);
+    margin-bottom: 8px;
+  }
+  .lock-box p { color: var(--color-gray); font-size: 0.85rem; margin-bottom: 28px; }
+  .lock-input {
+    width: 100%; padding: 12px 16px;
+    background: var(--color-dark); border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card); color: var(--color-cream);
+    font-family: var(--font-mono); font-size: 1rem; text-align: center;
+    outline: none; transition: border-color 0.2s;
+    margin-bottom: 16px;
+  }
+  .lock-input:focus { border-color: var(--color-gold); }
+  .lock-btn {
+    width: 100%; padding: 13px;
+    background: var(--gradient-gold);
+    border: none; border-radius: var(--radius-card);
+    color: var(--color-dark); font-family: var(--font-display);
+    font-size: 0.85rem; letter-spacing: 0.12em; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .lock-btn:hover { opacity: 0.9; }
+  .lock-error {
+    color: var(--color-red); font-size: 0.8rem;
+    margin-top: 12px; display: none;
+  }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  #mainContent { display: none; }
+
+  /* ── HEADER ──────────────────────────────────── */
+  .doc-header {
+    background: var(--color-dark);
+    border-bottom: 1px solid var(--color-gold-deep);
+    padding: 28px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .doc-header-brand {
+    font-family: var(--font-display);
+    font-size: 0.85rem; letter-spacing: 0.18em;
+    color: var(--color-gold);
+  }
+  .doc-header-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem; color: var(--color-cream);
+  }
+  .doc-header-badge {
+    background: var(--color-gold-10);
+    border: 1px solid var(--color-gold-deep);
+    color: var(--color-gold);
+    font-family: var(--font-mono);
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    padding: 4px 12px; border-radius: 50px;
+  }
+
+  /* ── NAV ─────────────────────────────────────── */
+  .doc-nav {
+    background: var(--color-dark-elevated);
+    border-bottom: 1px solid var(--color-gray-dark);
+    padding: 0 48px;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-item {
+    padding: 14px 20px;
+    font-family: var(--font-display);
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    color: var(--color-gray);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--color-gold); border-bottom-color: var(--color-gold);
+  }
+
+  /* ── LAYOUT ──────────────────────────────────── */
+  .page-body { max-width: 1200px; margin: 0 auto; padding: 48px 48px 96px; }
+
+  /* ── SECTION ─────────────────────────────────── */
+  .section { margin-bottom: 64px; scroll-margin-top: 100px; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem; letter-spacing: 0.18em;
+    color: var(--color-gold-deep); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 2rem; color: var(--color-cream);
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .section-intro {
+    color: var(--color-cream-70); font-size: 0.95rem;
+    max-width: 680px; margin-bottom: 32px;
+    border-left: 2px solid var(--color-gold-deep);
+    padding-left: 16px;
+  }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, var(--color-dark-elevated) 0%, var(--color-dark) 100%);
+    border: 1px solid var(--color-gold-deep);
+    border-radius: var(--radius-card);
+    padding: 40px 48px;
+    margin-bottom: 48px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--color-gold-10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--color-gold);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: var(--font-serif); font-size: 2.4rem;
+    color: var(--color-cream); line-height: 1.2; margin-bottom: 16px;
+  }
+  .hero-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-desc { color: var(--color-cream-70); font-size: 0.95rem; max-width: 600px; margin-bottom: 28px; }
+  .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+  .hero-stat { }
+  .hero-stat-num {
+    font-family: var(--font-display); font-size: 1.8rem;
+    background: var(--gradient-gold); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; background-clip: text;
+    font-weight: 600;
+  }
+  .hero-stat-label { font-size: 0.75rem; color: var(--color-gray); letter-spacing: 0.05em; }
+
+  /* ── CARDS ───────────────────────────────────── */
+  .card-grid { display: grid; gap: 16px; }
+  .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--color-gold-deep); }
+  .card-gold { border-color: var(--color-gold-deep); background: linear-gradient(135deg, var(--color-dark-elevated), rgba(200,168,75,0.04)); }
+  .card-teal { border-color: rgba(42,157,143,0.4); background: linear-gradient(135deg, var(--color-dark-elevated), var(--color-teal-10)); }
+  .card-red { border-color: rgba(224,82,82,0.3); background: linear-gradient(135deg, var(--color-dark-elevated), var(--color-red-10)); }
+  .card-green { border-color: rgba(76,175,130,0.3); background: linear-gradient(135deg, var(--color-dark-elevated), var(--color-green-10)); }
+  .card-orange { border-color: rgba(224,154,82,0.3); background: linear-gradient(135deg, var(--color-dark-elevated), var(--color-orange-10)); }
+
+  .card-icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .card-title {
+    font-family: var(--font-display); font-size: 0.9rem;
+    letter-spacing: 0.06em; color: var(--color-gold);
+    margin-bottom: 8px;
+  }
+  .card-body { font-size: 0.85rem; color: var(--color-cream-70); line-height: 1.6; }
+
+  /* ── WORKFLOW CARDS ──────────────────────────── */
+  .wf-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card);
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .wf-header {
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.2s;
+  }
+  .wf-header:hover { background: var(--color-gold-10); }
+  .wf-code {
+    font-family: var(--font-mono); font-size: 0.75rem;
+    background: var(--color-gold-10); border: 1px solid var(--color-gold-deep);
+    color: var(--color-gold); padding: 4px 10px;
+    border-radius: 4px; white-space: nowrap;
+  }
+  .wf-name {
+    font-family: var(--font-display); font-size: 1rem;
+    letter-spacing: 0.04em; color: var(--color-cream);
+    flex: 1;
+  }
+  .wf-status {
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    padding: 3px 10px; border-radius: 50px;
+    font-family: var(--font-mono);
+  }
+  .status-active { background: var(--color-green-10); color: var(--color-green); border: 1px solid rgba(76,175,130,0.3); }
+  .status-pending { background: var(--color-orange-10); color: var(--color-orange); border: 1px solid rgba(224,154,82,0.3); }
+  .wf-chevron { color: var(--color-gray); font-size: 0.8rem; transition: transform 0.2s; }
+  .wf-card.open .wf-chevron { transform: rotate(180deg); }
+  .wf-card.open .wf-header { border-bottom-color: var(--color-gray-dark); }
+  .wf-body { display: none; padding: 24px; }
+  .wf-card.open .wf-body { display: block; }
+
+  /* ── TABLES ──────────────────────────────────── */
+  .table-wrap { overflow-x: auto; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+  thead tr { border-bottom: 1px solid var(--color-gold-deep); }
+  th {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-gold); padding: 10px 14px;
+    text-align: left; white-space: nowrap;
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--color-gray-dark); color: var(--color-cream-70); vertical-align: top; }
+  tr:hover td { background: var(--color-gold-10); }
+  td code, th code {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    background: var(--color-dark); padding: 2px 6px;
+    border-radius: 3px; color: var(--color-gold-light);
+  }
+
+  /* ── BADGE ───────────────────────────────────── */
+  .badge {
+    display: inline-block; font-family: var(--font-mono);
+    font-size: 0.65rem; letter-spacing: 0.08em;
+    padding: 3px 9px; border-radius: 50px;
+  }
+  .badge-gold { background: var(--color-gold-10); color: var(--color-gold); border: 1px solid var(--color-gold-deep); }
+  .badge-teal { background: var(--color-teal-10); color: var(--color-teal); border: 1px solid rgba(42,157,143,0.3); }
+  .badge-red { background: var(--color-red-10); color: var(--color-red); border: 1px solid rgba(224,82,82,0.3); }
+  .badge-green { background: var(--color-green-10); color: var(--color-green); border: 1px solid rgba(76,175,130,0.3); }
+  .badge-orange { background: var(--color-orange-10); color: var(--color-orange); border: 1px solid rgba(224,154,82,0.3); }
+  .badge-gray { background: rgba(107,107,107,0.15); color: var(--color-gray); border: 1px solid rgba(107,107,107,0.2); }
+
+  /* ── ALERT BOXES ─────────────────────────────── */
+  .alert {
+    padding: 16px 20px; border-radius: var(--radius-card);
+    margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-body { font-size: 0.85rem; }
+  .alert-title { font-weight: 600; margin-bottom: 4px; }
+  .alert-red { background: var(--color-red-10); border: 1px solid rgba(224,82,82,0.25); color: var(--color-cream); }
+  .alert-red .alert-title { color: var(--color-red); }
+  .alert-orange { background: var(--color-orange-10); border: 1px solid rgba(224,154,82,0.25); color: var(--color-cream); }
+  .alert-orange .alert-title { color: var(--color-orange); }
+  .alert-gold { background: var(--color-gold-10); border: 1px solid var(--color-gold-deep); color: var(--color-cream); }
+  .alert-gold .alert-title { color: var(--color-gold); }
+  .alert-teal { background: var(--color-teal-10); border: 1px solid rgba(42,157,143,0.25); color: var(--color-cream); }
+  .alert-teal .alert-title { color: var(--color-teal); }
+  .alert-green { background: var(--color-green-10); border: 1px solid rgba(76,175,130,0.25); color: var(--color-cream); }
+  .alert-green .alert-title { color: var(--color-green); }
+
+  /* ── STEPS ───────────────────────────────────── */
+  .steps { display: flex; flex-direction: column; gap: 12px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--color-gold-10); border: 1px solid var(--color-gold-deep);
+    color: var(--color-gold); font-family: var(--font-mono); font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-body { font-size: 0.88rem; color: var(--color-cream-70); }
+  .step-body strong { color: var(--color-cream); }
+
+  /* ── FLOW DIAGRAM ────────────────────────────── */
+  .flow {
+    display: flex; gap: 0; align-items: stretch;
+    flex-wrap: wrap; margin: 20px 0;
+  }
+  .flow-node {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card);
+    padding: 12px 16px;
+    font-size: 0.78rem; text-align: center;
+    min-width: 120px; position: relative;
+  }
+  .flow-node-gold { border-color: var(--color-gold-deep); }
+  .flow-node-teal { border-color: rgba(42,157,143,0.4); }
+  .flow-node-green { border-color: rgba(76,175,130,0.4); }
+  .flow-node-red { border-color: rgba(224,82,82,0.4); }
+  .flow-arrow {
+    display: flex; align-items: center;
+    padding: 0 8px; color: var(--color-gray); font-size: 0.9rem;
+  }
+  .flow-label { font-size: 0.65rem; color: var(--color-gray); margin-top: 4px; }
+
+  /* ── CODE ────────────────────────────────────── */
+  pre {
+    background: var(--color-dark); border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card); padding: 16px 20px;
+    font-family: var(--font-mono); font-size: 0.8rem;
+    color: var(--color-cream-70); overflow-x: auto; margin: 12px 0;
+    line-height: 1.6;
+  }
+  code { font-family: var(--font-mono); font-size: 0.82em; color: var(--color-gold-light); }
+
+  /* ── DIVIDER ─────────────────────────────────── */
+  .divider {
+    border: none; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold-deep), transparent);
+    margin: 40px 0;
+  }
+
+  /* ── CHECKLIST ───────────────────────────────── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .checklist li {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.88rem; color: var(--color-cream-70);
+  }
+  .checklist li::before {
+    content: '◻'; color: var(--color-gold-deep); flex-shrink: 0;
+    font-size: 0.9rem; margin-top: 1px;
+  }
+  .checklist li strong { color: var(--color-cream); }
+
+  /* ── TIMELINE ────────────────────────────────── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 20px; }
+  .tl-left { display: flex; flex-direction: column; align-items: center; min-width: 40px; }
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--color-gold); flex-shrink: 0; margin-top: 6px;
+  }
+  .tl-dot-red { background: var(--color-red); }
+  .tl-dot-teal { background: var(--color-teal); }
+  .tl-line { width: 1px; flex: 1; background: var(--color-gray-dark); margin: 4px 0; min-height: 20px; }
+  .tl-content { padding-bottom: 24px; }
+  .tl-date { font-family: var(--font-mono); font-size: 0.68rem; color: var(--color-gold); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .tl-title { font-weight: 600; font-size: 0.9rem; color: var(--color-cream); margin-bottom: 4px; }
+  .tl-body { font-size: 0.83rem; color: var(--color-cream-70); }
+
+  /* ── LABEL GRID ──────────────────────────────── */
+  .label-card {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card); padding: 16px 20px;
+  }
+  .label-tag {
+    display: inline-block; font-family: var(--font-mono);
+    font-size: 0.78rem; padding: 4px 12px; border-radius: 50px;
+    margin-bottom: 10px; font-weight: 500;
+  }
+
+  /* ── QUICK REF ───────────────────────────────── */
+  .ref-block {
+    background: var(--color-dark-elevated);
+    border: 1px solid var(--color-gray-dark);
+    border-radius: var(--radius-card); padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .ref-title {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    letter-spacing: 0.14em; color: var(--color-gold);
+    text-transform: uppercase; margin-bottom: 14px;
+    border-bottom: 1px solid var(--color-gray-dark); padding-bottom: 8px;
+  }
+  .ref-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid rgba(36,36,36,0.5);
+    font-size: 0.82rem;
+  }
+  .ref-row:last-child { border-bottom: none; }
+  .ref-key { color: var(--color-cream-70); }
+  .ref-val { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-gold-light); }
+
+  /* ── EMERGENCY BOX ───────────────────────────── */
+  .emergency-box {
+    background: linear-gradient(135deg, rgba(224,82,82,0.08), var(--color-dark-elevated));
+    border: 1px solid rgba(224,82,82,0.4); border-radius: var(--radius-card);
+    padding: 24px 28px; margin-bottom: 24px;
+  }
+  .emergency-title {
+    font-family: var(--font-display); font-size: 1rem;
+    letter-spacing: 0.08em; color: var(--color-red);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 768px) {
+    .doc-header { padding: 16px 20px; }
+    .doc-nav { padding: 0 20px; }
+    .page-body { padding: 24px 20px 64px; }
+    .card-grid-2, .card-grid-3, .card-grid-4 { grid-template-columns: 1fr; }
+    .hero { padding: 28px 24px; }
+    .hero-stats { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ LOCK SCREEN ══════════════════════════════════════════ -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <div class="lock-logo">OMNI BRASIL</div>
+    <h2>Documento Restrito</h2>
+    <p>Automações Comerciais — Guia de Gestão<br>Insira a senha para continuar.</p>
+    <input type="password" id="pwInput" class="lock-input" placeholder="••••••••" autocomplete="off">
+    <button class="lock-btn" onclick="unlock()">ACESSAR</button>
+    <div class="lock-error" id="lockError">Senha incorreta. Tente novamente.</div>
+  </div>
+</div>
+
+<!-- ══ MAIN ══════════════════════════════════════════════════ -->
+<div id="mainContent">
+
+  <!-- HEADER -->
+  <header class="doc-header">
+    <div class="doc-header-brand">OMNI BRASIL</div>
+    <div class="doc-header-title">Automações Comerciais — Guia de Gestão</div>
+    <div class="doc-header-badge">CONFIDENCIAL · v1.0 · ABR 2026</div>
+  </header>
+
+  <!-- NAV -->
+  <nav class="doc-nav">
+    <a class="nav-item active" href="#s-visao">VISÃO GERAL</a>
+    <a class="nav-item" href="#s-workflows">WORKFLOWS</a>
+    <a class="nav-item" href="#s-servicos">SERVIÇOS</a>
+    <a class="nav-item" href="#s-monitoramento">MONITORAMENTO</a>
+    <a class="nav-item" href="#s-erros">ERROS &amp; SOLUÇÕES</a>
+    <a class="nav-item" href="#s-labels">LABELS CHATWOOT</a>
+    <a class="nav-item" href="#s-emergencia">EMERGÊNCIAS</a>
+    <a class="nav-item" href="#s-refs">REFERÊNCIAS</a>
+  </nav>
+
+  <div class="page-body">
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <div class="hero">
+      <div class="hero-eyebrow">PROCESSO COMERCIAL · OMNI BRASIL · 2026</div>
+      <h1 class="hero-title">Guia de Gestão<br><span>Automações Comerciais</span></h1>
+      <p class="hero-desc">
+        Este documento cobre tudo que você precisa para gerenciar, monitorar e solucionar problemas nas automações do processo comercial da OMNI Brasil — do lead entrando no funil até o feedback pós-reunião.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">11</div>
+          <div class="hero-stat-label">Workflows ativos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">W0000</div>
+          <div class="hero-stat-label">Abertura de lead</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">W0001</div>
+          <div class="hero-stat-label">Follow-up conexão</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">W0002</div>
+          <div class="hero-stat-label">Prevenção no-show (5 sub)</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">W0003</div>
+          <div class="hero-stat-label">Feedback diário reuniões</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ SEÇÃO 1 — VISÃO GERAL ═══════════ -->
+    <section class="section" id="s-visao">
+      <div class="section-label">01 · Visão Geral</div>
+      <h2 class="section-title">O processo comercial e onde as automações atuam</h2>
+      <p class="section-intro">
+        Cada workflow foi criado para cobrir um "furo" específico do funil. Entender onde cada um atua é o primeiro passo para gerenciá-los com segurança.
+      </p>
+
+      <!-- FUNIL VISUAL -->
+      <div class="card card-gold" style="margin-bottom:24px;">
+        <div class="card-title">FUNIL OMNI BRASIL — Pipedrive</div>
+        <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Pipeline SDR -->
+          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.12em;color:var(--color-gold);margin-bottom:4px;">PIPELINE SDR-NOVO (ID: 65)</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Leads Gerais</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 480</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid var(--color-gold-deep);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Tentativa Conectar</div>
+              <div style="color:var(--color-gold);font-size:0.65rem;">Stage 421 → W0001</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Conectado</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 422</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Avaliado/Agendar</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 423</div>
+            </div>
+          </div>
+          <!-- Pipeline Closer -->
+          <div style="font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.12em;color:var(--color-teal);margin-top:12px;margin-bottom:4px;">PIPELINE CLOSER (ID: 21)</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            <div style="background:var(--color-dark);border:1px solid rgba(42,157,143,0.4);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Reunião Agendada</div>
+              <div style="color:var(--color-teal);font-size:0.65rem;">Stage 112 → W0002</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Reunião Realizada</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 113 → W0003</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-cream);">Negociação</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 114</div>
+            </div>
+            <div style="color:var(--color-gray)">→</div>
+            <div style="background:var(--color-dark);border:1px solid rgba(76,175,130,0.4);border-radius:4px;padding:8px 12px;font-size:0.75rem;text-align:center;">
+              <div style="color:var(--color-green);">Venda</div>
+              <div style="color:var(--color-gray);font-size:0.65rem;">Stage 280</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAPA DE AUTOMAÇÕES -->
+      <div class="card-grid card-grid-4" style="margin-bottom:24px;">
+        <div class="card card-gold">
+          <div class="card-icon">🚀</div>
+          <div class="card-title">W0000 — Abertura de Lead</div>
+          <div class="card-body">
+            Quando um lead entra no Pipedrive (stage MQL/480), dispara a mensagem de abertura via WhatsApp pelo SDR responsável. IA classifica a resposta e age: move para "Conectado" se engajado, cria atividade se fora do horário.
+          </div>
+        </div>
+        <div class="card card-gold">
+          <div class="card-icon">📡</div>
+          <div class="card-title">W0001 — Conexão de Leads</div>
+          <div class="card-body">
+            Quando um lead entra na etapa "Tentativa de Conectar" (421), dispara sequência de 3 mensagens WhatsApp em até 48h úteis. IA classifica resposta e move o deal automaticamente.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">W0002 — Prevenção No-Show</div>
+          <div class="card-body">
+            5 sub-workflows que garantem confirmação de presença antes da reunião. M1 imediato + resposta do lead + alerta sem resposta + lembretes M3/M4/M5 + auditoria Closer 2x/dia.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">W0003 — Feedback Reuniões</div>
+          <div class="card-body">
+            Todo dia às 18:30 varre as pastas Drive das closers, avalia as reuniões do dia com IA (framework FPH, 14 blocos) e envia email de coaching individual + consolidado para a Rafa.
+          </div>
+        </div>
+      </div>
+
+      <!-- RESPONSÁVEIS -->
+      <div class="card-grid card-grid-2">
+        <div class="card">
+          <div class="card-title">SDRs e seus canais</div>
+          <div class="table-wrap" style="margin-top:12px;">
+            <table>
+              <thead><tr><th>SDR</th><th>owner_id PD</th><th>Inbox</th><th>Canal</th></tr></thead>
+              <tbody>
+                <tr><td>David</td><td><code>20525394</code></td><td>Inbox 16 (oficial)</td><td><span class="badge badge-teal">WABA David</span></td></tr>
+                <tr><td>David</td><td><code>20525394</code></td><td>Inbox 4 (unofficial)</td><td><span class="badge badge-gray">Evolution</span></td></tr>
+                <tr><td>Rafaela</td><td><code>2872886</code></td><td>Inbox 9 (oficial)</td><td><span class="badge badge-gold">WABA OMNI</span></td></tr>
+                <tr><td>Layslla</td><td><code>22894651</code></td><td>Inbox 18 (oficial)</td><td><span class="badge badge-gold">WABA Layslla</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Regra de canais — importante</div>
+          <div class="card-body" style="margin-top:12px;">
+            <div class="alert alert-gold">
+              <div class="alert-icon">⚠️</div>
+              <div class="alert-body">
+                <div class="alert-title">W0002 usa APENAS canal oficial (WABA)</div>
+                O inbox 4 (unofficial Evolution) é usado apenas pelo W0000 e W0001 para mensagens livres do David. Templates Meta de confirmação/lembrete sempre vão pelo canal oficial.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 2 — WORKFLOWS ═══════════ -->
+    <section class="section" id="s-workflows">
+      <div class="section-label">02 · Workflows</div>
+      <h2 class="section-title">Detalhamento de cada automação</h2>
+      <p class="section-intro">Clique em cada workflow para expandir os detalhes de funcionamento, guards e fluxo de execução.</p>
+
+      <!-- W0000 -->
+      <div class="wf-card" id="wf-w0000">
+        <div class="wf-header" onclick="toggleWF('wf-w0000')">
+          <span class="wf-code">W0000</span>
+          <span class="wf-name">Abertura de Lead — Disparo automático ao cadastro</span>
+          <span class="wf-status status-active">ATIVO v1.3</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">O QUE FAZ</div>
+              <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:12px;">
+                Disparado quando um lead entra no Pipedrive (stage <strong style="color:var(--color-cream)">MQL — stage 480</strong>). Envia a mensagem de abertura via WhatsApp pelo SDR responsável pelo deal.
+              </p>
+              <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Dedup:</strong> rejeita o mesmo deal se disparar 2x em 5 min</div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Mensagem de abertura:</strong> enviada imediatamente, qualquer horário</div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Lead responde?</strong> IA classifica a resposta em 3 categorias</div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Fora do horário comercial (10h–18h, seg–sáb):</strong> envia mensagem de fora do horário + cria atividade para SDR abrir expediente</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">CLASSIFICAÇÃO IA — 3 CATEGORIAS</div>
+              <div class="alert alert-gray" style="background:rgba(107,107,107,0.08);border:1px solid rgba(107,107,107,0.2);margin-bottom:8px;">
+                <div class="alert-icon">🤖</div>
+                <div class="alert-body"><strong style="color:var(--color-cream);">Automático</strong> — bot, OOO, operadora<br><span style="font-size:0.82rem;color:var(--color-gray);">Ignora. SDR age manualmente.</span></div>
+              </div>
+              <div class="alert alert-orange" style="margin-bottom:8px;">
+                <div class="alert-icon">💬</div>
+                <div class="alert-body"><strong>Humano — baixo engajamento</strong> — "oi", "sim", emoji<br><span style="font-size:0.82rem;">Mantém no stage. Atividade no Pipedrive + alerta Google Chat para SDR.</span></div>
+              </div>
+              <div class="alert alert-green">
+                <div class="alert-icon">🎯</div>
+                <div class="alert-body"><strong>Humano — engajado</strong> — pergunta real, interesse demonstrado<br><span style="font-size:0.82rem;">Move para <strong>stage 422 (Conectado)</strong> + alerta Google Chat para SDR.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;">MENSAGENS DISPARADAS</div>
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div class="card" style="padding:16px;">
+              <div class="card-title" style="font-size:0.75rem;margin-bottom:8px;">MENSAGEM 1 — Abertura (imediato)</div>
+              <div style="background:var(--color-dark);border-radius:6px;padding:12px;font-size:0.82rem;color:var(--color-cream-70);line-height:1.6;font-style:italic;">
+                "Oi, [Nome]! Excelente dia 🌞<br>
+                Aqui é [seu nome], da OMNI.<br>
+                Vi que você se cadastrou pra saber mais sobre a Formação em Hipnoterapia OMNI, e passar por nossa consultoria estratégica foi isso mesmo?<br>
+                Posso te ligar rapidinho? São só 5 minutinhos para entender como posso te ajudar melhor 😊"
+              </div>
+            </div>
+            <div class="card" style="padding:16px;">
+              <div class="card-title" style="font-size:0.75rem;margin-bottom:8px;">MENSAGEM 2 — Fora do Horário (se resposta após 18h ou antes das 10h)</div>
+              <div style="background:var(--color-dark);border-radius:6px;padding:12px;font-size:0.82rem;color:var(--color-cream-70);line-height:1.6;font-style:italic;">
+                "Oi, [Nome]! Recebemos sua mensagem e ficamos felizes com seu interesse 😊<br>
+                Nosso atendimento é de segunda a sábado, das 10h às 18h.<br>
+                Você será uma das primeiras pessoas que vou chamar ao abrir o expediente!<br>
+                Até logo 🙏"
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;">PROTEÇÕES</div>
+          <div class="alert alert-gold">
+            <div class="alert-icon">🛡️</div>
+            <div class="alert-body">
+              <strong>1. Dedup de webhook</strong> — rejeita mesmo deal em 5 min<br>
+              <strong>2. Guard de abertura</strong> — verifica atividade no Pipedrive antes de enviar (evita reenvio se deal voltar ao stage)<br>
+              <strong>3. Classificação IA</strong> — não move deal por resposta de bot ou automático<br>
+              <strong>4. Check de horário comercial</strong> — 10h–18h, seg–sáb
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
+            <code>rbMru9IlbTR2CBra</code>
+            &nbsp;&nbsp;
+            <div class="section-label" style="display:inline;margin-left:24px;">MODELO IA</div>
+            <code style="margin-left:8px;">google/gemini-flash-1.5 via OpenRouter</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- W0001 -->
+      <div class="wf-card" id="wf-w0001">
+        <div class="wf-header" onclick="toggleWF('wf-w0001')">
+          <span class="wf-code">W0001</span>
+          <span class="wf-name">Automação de Conexão de Leads (Follow-up WhatsApp)</span>
+          <span class="wf-status status-active">ATIVO v5.1</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">O QUE FAZ</div>
+              <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:12px;">
+                Disparado quando um deal entra na etapa <strong style="color:var(--color-cream)">421 (Tentativa de Conectar)</strong> no Pipedrive. Envia 3 mensagens via WhatsApp com intervalos:
+              </p>
+              <div class="steps">
+                <div class="step"><div class="step-num">D1</div><div class="step-body"><strong>Imediato</strong> — primeira mensagem assim que o deal entra no stage</div></div>
+                <div class="step"><div class="step-num">D2</div><div class="step-body"><strong>+12h úteis</strong> — se sem resposta</div></div>
+                <div class="step"><div class="step-num">D3</div><div class="step-body"><strong>+24h úteis</strong> — terceiro toque</div></div>
+                <div class="step"><div class="step-num">D4</div><div class="step-body"><strong>+24h úteis</strong> — último toque. Sem resposta = marca como PERDIDO + cria deal Nutrição</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">RESULTADO ESPERADO</div>
+              <div class="alert alert-green">
+                <div class="alert-icon">✅</div>
+                <div class="alert-body">Lead responde → move para <strong>stage 422 (Conectado)</strong> + label "conectado"</div>
+              </div>
+              <div class="alert alert-red">
+                <div class="alert-icon">❌</div>
+                <div class="alert-body">Sem resposta após D4 → deal marcado como <strong>PERDIDO</strong> + novo deal criado no funil de Nutrição (pipeline 72, stage 487)</div>
+              </div>
+              <div class="alert alert-gold" style="margin-top:8px;">
+                <div class="alert-icon">🤖</div>
+                <div class="alert-body"><strong>IA classifica cada resposta</strong> — diferencia humano real de resposta automática (bot). Evita mover deal por mensagem de sistema.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;">PROTEÇÕES ANTI-DUPLICATA (guards)</div>
+          <div class="alert alert-gold">
+            <div class="alert-icon">🛡️</div>
+            <div class="alert-body">
+              <div class="alert-title">Como o workflow evita envios duplicados</div>
+              <strong>1. Dedup webhook (5 min):</strong> rejeita o mesmo deal se o Pipedrive disparar 2x no intervalo de 5 minutos.<br>
+              <strong>2. Guard D1/D2/D3:</strong> antes de cada mensagem, verifica atividade no Pipedrive (fonte de verdade).<br>
+              <strong>3. Check de etapa:</strong> verifica se o deal ainda está no stage 421 antes de cada disparo.<br>
+              <strong>4. Race condition fix (v5.1):</strong> Guard D1 inserido antes de qualquer IO — Pipedrive é consultado antes de escrever no staticData, eliminando a janela de 2–4s onde ambas as execuções passavam.
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-bottom:12px;margin-top:20px;">ID N8N</div>
+          <code>1ZMM6TwQ0awoqlJD</code>
+        </div>
+      </div>
+
+      <!-- W0002 -->
+      <div class="wf-card" id="wf-w0002">
+        <div class="wf-header" onclick="toggleWF('wf-w0002')">
+          <span class="wf-code">W0002</span>
+          <span class="wf-name">Prevenção No-Show (5 sub-workflows)</span>
+          <span class="wf-status status-active">ATIVO · Fase 1+2</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <div class="alert alert-teal" style="margin-bottom:20px;">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-body">
+              <div class="alert-title">Objetivo</div>
+              Reduzir o no-show de 45% para ~25%. Toda reunião agendada recebe confirmação automática (M1) + lembretes (M3/M4/M5). Só cancelamento explícito do lead interrompe a sequência.
+            </div>
+          </div>
+
+          <!-- Fluxo geral -->
+          <div class="section-label" style="margin-bottom:12px;">FLUXO COMPLETO M1 → M5</div>
+          <div style="background:var(--color-dark);border:1px solid var(--color-gray-dark);border-radius:var(--radius-card);padding:20px;margin-bottom:20px;font-family:var(--font-mono);font-size:0.78rem;line-height:1.8;color:var(--color-cream-70);">
+            Reunião agendada no Pipedrive (activity.added, type=meeting)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+            <span style="color:var(--color-gold);">[W0002a]</span> Disparo imediato: envia M1 (template "confirmacao_agendamento") via WABA<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;↓ Adiciona label <span style="color:var(--color-orange);">confirmacao_pendente</span> + registra guard W0002_Confirmado<br>
+            <br>
+            Lead responde? <span style="color:var(--color-gold);">[W0002b]</span> monitora as labels<br>
+            &nbsp;&nbsp;├── <span style="color:var(--color-green);">POSITIVO</span> ("sim", "confirmado", "ok", 👍, etc.)<br>
+            &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;↓ Envia M2 (link Meet + email) + card PNG instrucoes → move deal stage 112 (Closer)<br>
+            &nbsp;&nbsp;│<br>
+            &nbsp;&nbsp;├── <span style="color:var(--color-red);">NEGATIVO</span> ("não posso", "cancelar", etc.)<br>
+            &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;↓ Deleta guard W0002_Confirmado → M3/M4/M5 param<br>
+            &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;→ Move deal stage 423 → label reagendar → SDR contata manualmente<br>
+            &nbsp;&nbsp;│<br>
+            &nbsp;&nbsp;└── <span style="color:var(--color-gray);">AMBÍGUO ou SEM RESPOSTA</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓ Nada — guard existe, lembretes continuam<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color:var(--color-gold);">[W0002c]</span> alerta após 5h sem resposta (label "alerta")<br>
+            <br>
+            Se guard W0002_Confirmado existe:<br>
+            <span style="color:var(--color-gold);">[W0002d]</span> Cron 30min → M3 (23h–25h antes) + M4 (45–75min antes) + M5 (hora da reunião)<br>
+            <br>
+            <span style="color:var(--color-gold);">[W0002e]</span> Cron 12h/18h BRT → auditoria Closer: deals sem reunião futura → alerta Google Chat
+          </div>
+
+          <!-- Sub-workflows -->
+          <div class="section-label" style="margin-bottom:12px;">SUB-WORKFLOWS EM DETALHE</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Sub</th><th>ID n8n</th><th>Trigger</th><th>O que faz</th><th>Versão</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>W0002a</strong></td>
+                  <td><code>UPJ16pnL3gCpF5Tp</code></td>
+                  <td>Webhook PD <code>activity.added</code></td>
+                  <td>Envia M1 (template WABA) + label confirmacao_pendente + registra guards</td>
+                  <td><span class="badge badge-green">v1.3</span></td>
+                </tr>
+                <tr>
+                  <td><strong>W0002b</strong></td>
+                  <td><code>S3abDnhQ0xWDIMdz</code></td>
+                  <td>Webhook Chatwoot <code>message_created</code></td>
+                  <td>Classifica resposta → M2 (positivo), cancela (negativo) ou ignora (ambíguo)</td>
+                  <td><span class="badge badge-green">v2.0</span></td>
+                </tr>
+                <tr>
+                  <td><strong>W0002c</strong></td>
+                  <td><code>x0kPTjXh0cOr4Ich</code></td>
+                  <td>Cron a cada 30min</td>
+                  <td>Busca label confirmacao_pendente há &gt;5h → adiciona label "alerta"</td>
+                  <td><span class="badge badge-green">v1.1</span></td>
+                </tr>
+                <tr>
+                  <td><strong>W0002d</strong></td>
+                  <td><code>ZMBG4LKTcHBtWgxO</code></td>
+                  <td>Cron a cada 30min</td>
+                  <td>Verifica guard W0002_Confirmado → envia M3/M4/M5 nas janelas corretas</td>
+                  <td><span class="badge badge-green">v1.1</span></td>
+                </tr>
+                <tr>
+                  <td><strong>W0002e</strong></td>
+                  <td><code>Kdpwiiwo3yy4Etmk</code></td>
+                  <td>Cron 12h/18h BRT</td>
+                  <td>Auditoria Closer: deals sem guard/reunião futura → cria guard ou alerta Google Chat</td>
+                  <td><span class="badge badge-green">v1.0</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Templates Meta -->
+          <div class="section-label" style="margin-bottom:12px;margin-top:20px;">TEMPLATES META WHATSAPP — IDs por WABA</div>
+          <div class="alert alert-orange" style="margin-bottom:16px;">
+            <div class="alert-icon">⏳</div>
+            <div class="alert-body">
+              <div class="alert-title">Templates David (inbox 16) ainda pendentes no W0002d</div>
+              Os IDs dos templates para o David (inbox 16) estão aprovados mas ainda não mapeados no W0002d. Atualmente usa o fallback do canal oficial (inbox 9). Quando mapear, atualizar o nó de templates no workflow.
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Msg</th><th>Template</th><th>OMNI Brasil (inbox 9)</th><th>Layslla (inbox 18)</th><th>David (inbox 16)</th></tr></thead>
+              <tbody>
+                <tr><td>M1</td><td>confirmacao_agendamento</td><td><code>2807311279607388</code></td><td><code>1717549719208786</code></td><td><code>4404503943103494</code> ⏳</td></tr>
+                <tr><td>M3</td><td>lembrete_24h</td><td><code>1603697970886331</code></td><td><code>1925112558121302</code></td><td><code>2427750891077063</code> ⏳</td></tr>
+                <tr><td>M4</td><td>lembrete_1h</td><td><code>851759767924333</code></td><td><code>2006248343347666</code></td><td><code>823486417197397</code> ⏳</td></tr>
+                <tr><td>M5</td><td>hora_consultoria</td><td><code>1277269237670363</code></td><td><code>3711487612338016</code></td><td><code>1549161327215162</code> ⏳</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- W0003 -->
+      <div class="wf-card" id="wf-w0003">
+        <div class="wf-header" onclick="toggleWF('wf-w0003')">
+          <span class="wf-code">W0003</span>
+          <span class="wf-name">Feedback Diário de Reuniões (FPH)</span>
+          <span class="wf-status status-active">ATIVO v1.0</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <div class="card-grid card-grid-2" style="margin-bottom:20px;">
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">O QUE FAZ</div>
+              <div class="steps">
+                <div class="step"><div class="step-num">1</div><div class="step-body">Cron dispara todo dia às <strong>18:30 BRT (21:30 UTC)</strong></div></div>
+                <div class="step"><div class="step-num">2</div><div class="step-body">Varre as <strong>pastas Google Drive</strong> das closers em busca de arquivos das últimas 24h</div></div>
+                <div class="step"><div class="step-num">3</div><div class="step-body">Baixa a transcrição (Google Docs → texto plano)</div></div>
+                <div class="step"><div class="step-num">4</div><div class="step-body">Avalia com IA (Claude Haiku via OpenRouter) usando o <strong>framework FPH</strong> — 14 blocos, score 0–100</div></div>
+                <div class="step"><div class="step-num">5</div><div class="step-body">Envia email de coaching para a closer e email consolidado para a Rafa</div></div>
+              </div>
+            </div>
+            <div>
+              <div class="section-label" style="margin-bottom:8px;">CLOSERS MAPEADAS</div>
+              <div class="ref-block">
+                <div class="ref-row">
+                  <span class="ref-key">Diumara Carvalho</span>
+                  <span class="ref-val">Diumara.carvalho@omnihypnosis.com.br</span>
+                </div>
+                <div class="ref-row">
+                  <span class="ref-key">Pasta Drive</span>
+                  <span class="ref-val" style="font-size:0.65rem;">1S7CCZBEx2NrG2JLfzwaxFAhOAT_yY9VO</span>
+                </div>
+                <div class="ref-row" style="margin-top:8px;">
+                  <span class="ref-key">Brandy Rangel</span>
+                  <span class="ref-val">brandy.rangel@omnihypnosis.com.br</span>
+                </div>
+                <div class="ref-row">
+                  <span class="ref-key">Pasta Drive</span>
+                  <span class="ref-val" style="font-size:0.65rem;">1THNaoPZjL-a9xKZRXoN8i54KHbbAX8YE</span>
+                </div>
+              </div>
+              <div class="alert alert-gold" style="margin-top:12px;">
+                <div class="alert-icon">📧</div>
+                <div class="alert-body">Email consolidado vai para <strong>rafaela@omnihypnosis.com.br</strong></div>
+              </div>
+            </div>
+          </div>
+          <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
+          <code>MRM4wO7LFNlnC6cA</code>
+        </div>
+      </div>
+
+      <!-- MON001 -->
+      <div class="wf-card" id="wf-mon001">
+        <div class="wf-header" onclick="toggleWF('wf-mon001')">
+          <span class="wf-code">MON001</span>
+          <span class="wf-name">SLA Monitor SDR — Alerta Google Chat</span>
+          <span class="wf-status status-active">ATIVO v1.0</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:16px;">
+            Monitora o SLA dos SDRs: verifica se leads nas etapas críticas (480, 421, 422, 428) estão sem interação há mais tempo do que o permitido. Envia alerta via <strong>Google Chat</strong> (não Telegram) quando detecta violação de SLA.
+          </p>
+          <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
+          <code>WNM33bxah57EAUCP</code>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 3 — SERVIÇOS ═══════════ -->
+    <section class="section" id="s-servicos">
+      <div class="section-label">03 · Serviços Conectados</div>
+      <h2 class="section-title">Dependências e credenciais</h2>
+      <p class="section-intro">Esses são todos os sistemas externos que as automações tocam. Um problema em qualquer um deles pode impactar um ou mais workflows.</p>
+
+      <div class="card-grid card-grid-3" style="margin-bottom:24px;">
+        <div class="card card-gold">
+          <div class="card-title">Pipedrive</div>
+          <div class="card-body">
+            CRM principal. Fonte de verdade para deals, stages, SDR owner e atividades (guards).
+            <br><br><strong>Impacto se cair:</strong> todos os webhooks param. Workflows que consultam deals ficam sem dados.
+          </div>
+        </div>
+        <div class="card card-teal">
+          <div class="card-title">Chatwoot</div>
+          <div class="card-body">
+            Gerenciamento das conversas WhatsApp. Labels, conversas e mensagens. URL: <code>conversas-web.server.omnihypnosis.com.br</code>
+            <br><br><strong>Impacto se cair:</strong> W0002b não recebe respostas. Labels não são atualizadas.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">OpenRouter (IA)</div>
+          <div class="card-body">
+            Classificação de respostas (W0001, W0002b) e avaliação FPH (W0003). Modelo: Claude Haiku / Gemini Flash.
+            <br><br><strong>⚠️ Atenção:</strong> A key pode expirar. W0002b retornou 401 em 27/04. Verificar periodicamente.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">WhatsApp Business (WABA)</div>
+          <div class="card-body">
+            Canais oficiais Meta para envio de templates aprovados. W0002 depende 100% dos canais WABA (inboxes 9, 16, 18).
+            <br><br><strong>Impacto se cair:</strong> M1–M5 não são enviados.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Google Drive</div>
+          <div class="card-body">
+            Fonte das transcrições de reunião para W0003. Credencial: <em>Google account 2</em> (rafaela@omnihypnosis.com.br).
+            <br><br>Escopos: <code>drive.readonly</code> + <code>gmail.send</code>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Google Chat</div>
+          <div class="card-body">
+            Canal de alertas para SDRs e para a gestão. Usado por: MON001, W0002e (alerta sem reunião), W0003 (resultado FPH).
+            <br><br><strong>Não é Telegram</strong> — alertas sempre vão para o Google Chat via webhook.
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-red">
+        <div class="alert-icon">🚨</div>
+        <div class="alert-body">
+          <div class="alert-title">Webhooks externos ativos no Pipedrive — risco potencial</div>
+          Existem <strong>4 webhooks da V4AI (Collie Associados)</strong> configurados na conta Pipedrive. Em 22/04/2026, o webhook 2959184 moveu um deal do Closer de volta ao SDR sem verificar o pipeline. Toda mudança de stage nos workflows OMNI deve incluir guard de <code>pipeline_id</code>. Se deals aparecerem em stages errados inexplicavelmente, suspeitar desses webhooks primeiro.
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 4 — MONITORAMENTO ═══════════ -->
+    <section class="section" id="s-monitoramento">
+      <div class="section-label">04 · Monitoramento</div>
+      <h2 class="section-title">O que verificar e quando</h2>
+      <p class="section-intro">Esta é a rotina mínima para garantir que as automações estão funcionando corretamente. Não precisa ser técnico — só observar os sinais certos.</p>
+
+      <div class="card-grid card-grid-2" style="margin-bottom:24px;">
+        <!-- DIÁRIO -->
+        <div class="card card-gold">
+          <div class="card-icon">📆</div>
+          <div class="card-title">Checklist Diário</div>
+          <ul class="checklist" style="margin-top:12px;">
+            <li><strong>Email do W0003 chegou?</strong> Esperar às 18:30 BRT. Se não chegou até 19h, algo parou.</li>
+            <li><strong>Alertas Google Chat</strong> — checar se chegou algum alerta de SLA (MON001) ou de deal sem reunião (W0002e).</li>
+            <li><strong>Labels Chatwoot suspeitas</strong> — se houver muitas conversas com label <code>reagendar</code> ou <code>alerta</code>, pode indicar leads não sendo contactados.</li>
+            <li><strong>Deals parados em 421</strong> — se um deal ficou mais de 2 dias em "Tentativa Conectar" sem mover, W0001 pode não ter disparado.</li>
+          </ul>
+        </div>
+
+        <!-- SEMANAL -->
+        <div class="card card-teal">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Checklist Semanal</div>
+          <ul class="checklist" style="margin-top:12px;">
+            <li><strong>Taxa de no-show</strong> — comparar reuniões agendadas vs realizadas. Meta: abaixo de 30%.</li>
+            <li><strong>Leads em Nutrição</strong> — ver quantos deals foram movidos pelo W0001 para o funil de Nutrição (pipeline 72). Sinal de saúde da conexão.</li>
+            <li><strong>Erros no n8n</strong> — abrir o n8n, ir em Execuções e verificar se há erros recorrentes (vermelho).</li>
+            <li><strong>Key OpenRouter</strong> — se W0001 ou W0002b apresentarem anomalias na classificação de resposta, verificar se a key não expirou.</li>
+            <li><strong>Templates Meta</strong> — verificar se algum template foi pausado/rejeitado pelo Meta no Business Manager.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SINAIS DE PROBLEMA -->
+      <div class="section-label" style="margin-bottom:16px;">SINAIS DE PROBLEMA — o que olhar no Pipedrive</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sinal no Pipedrive/Chatwoot</th><th>Possível causa</th><th>Primeiro passo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Deal ficou em stage 421 por mais de 2 dias sem atividade</td>
+              <td>W0001 não disparou ou webhook Pipedrive parou</td>
+              <td>Checar execuções do W0001 no n8n. Ver se o deal tem a atividade "D1 Tentativa Imediata".</td>
+            </tr>
+            <tr>
+              <td>Lead recebeu a mesma mensagem 2x</td>
+              <td>Race condition — dedup não pegou a tempo</td>
+              <td>Verificar no n8n se há 2 execuções quase simultâneas para o mesmo deal. Já foi corrigido no v5.1 — se voltar, acionar @n8n-chief.</td>
+            </tr>
+            <tr>
+              <td>Deal do Closer voltou para stage SDR inexplicavelmente</td>
+              <td>Webhook V4AI sem guard de pipeline_id</td>
+              <td>Mover deal de volta manualmente. Registrar o horário e deal ID para investigação. Ver logs do webhook 2959184.</td>
+            </tr>
+            <tr>
+              <td>M1 foi para o inbox errado (mensagem não chegou no WhatsApp da pessoa certa)</td>
+              <td>Deal transferida para Closer antes de W0002a verificar o inbox</td>
+              <td>Corrigido em v1.3 (fix 28/04). Se voltar: verificar se o deal tinha conversa Chatwoot aberta antes de entrar no Closer.</td>
+            </tr>
+            <tr>
+              <td>"Confirmado." não gerou o M2 (link de reunião)</td>
+              <td>Pontuação na mensagem do lead não sendo reconhecida como keyword positiva</td>
+              <td>Corrigido em W0002b (strip pontuação). Se persistir: checar se há caractere incomum na mensagem.</td>
+            </tr>
+            <tr>
+              <td>Email do W0003 não chegou</td>
+              <td>Nenhuma transcrição na pasta Drive das closers nas últimas 24h, ou erro na credencial Google</td>
+              <td>Checar se as closers salvaram as transcrições na pasta correta do Drive. Depois checar execução do W0003 no n8n.</td>
+            </tr>
+            <tr>
+              <td>Alerta de "sem resposta 5h" chega cedo demais</td>
+              <td>W0002c usando created_at de conversa antiga (corrigido v1.1)</td>
+              <td>Confirmar que a versão 1.1 está ativa. Se persistir, a conversa pode estar sendo reutilizada de forma inesperada.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 5 — ERROS ═══════════ -->
+    <section class="section" id="s-erros">
+      <div class="section-label">05 · Erros &amp; Soluções</div>
+      <h2 class="section-title">Histórico de bugs e como cada um foi resolvido</h2>
+      <p class="section-intro">Registro completo de todos os problemas que já aconteceram. Serve tanto para entender o histórico quanto para guiar a resolução caso algo similar volte a acontecer.</p>
+
+      <!-- INCIDENTE CRÍTICO -->
+      <div class="emergency-box" style="margin-bottom:24px;">
+        <div class="emergency-title">🚨 INCIDENTE CRÍTICO — 22/04/2026 — Webhook V4AI moveu deal do Closer</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num" style="background:var(--color-red-10);border-color:rgba(224,82,82,0.4);color:var(--color-red);">!</div>
+            <div class="step-body">
+              <strong>O que aconteceu:</strong> Deal 280890 (Gisele Mathias) foi movida do stage 112 (Closer) para stage 481→420 (SDR) por um webhook externo da V4AI (Collie Associados) que não verificava o pipeline_id antes de mover.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:var(--color-red-10);border-color:rgba(224,82,82,0.4);color:var(--color-red);">!</div>
+            <div class="step-body">
+              <strong>Causa:</strong> 4 webhooks externos ativos no Pipedrive (IDs: 2935944, 2936012, 2959184, 3011880). O 2959184 "Webhook Estagio Deal" ouve <code>deal.change</code> e move o stage sem checar em qual pipeline o deal está.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">✓</div>
+            <div class="step-body">
+              <strong>Solução:</strong> Guard obrigatório nos workflows OMNI — todo código que muda stage verifica <code>pipeline_id</code> antes. Relatório enviado para a V4AI pedindo correção no webhook deles.
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">⚠</div>
+            <div class="step-body">
+              <strong>Se acontecer de novo:</strong> Anotar o deal ID e horário, mover o deal de volta manualmente para o stage correto, e verificar os logs do webhook 2959184.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE DE BUGS -->
+      <div class="section-label" style="margin-bottom:20px;">HISTÓRICO COMPLETO DE BUGS RESOLVIDOS</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">28 ABR 2026 — W0001 v5.1</div>
+            <div class="tl-title">Race condition: lead recebia D1 duas vezes</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> Pipedrive dispara o webhook 2x com 2–4s de diferença. Ambas as execuções passavam pelo dedup antes que qualquer uma escrevesse no staticData.<br>
+              <strong>Solução:</strong> Guard D1 inserido antes de qualquer IO — consulta o Pipedrive (fonte de verdade) antes de registrar no staticData. Dupla proteção: staticData + Pipedrive.<br>
+              <strong>Lead afetada:</strong> Lilian (28/04 15:22 BRT) recebeu D1 duas vezes — confirmado no n8n.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">28 ABR 2026 — W0002a v1.3</div>
+            <div class="tl-title">M1 enviada para o inbox errado após transferência para Closer</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> Quando o deal era transferida para o Closer antes do W0002a rodar, o inbox esperado não tinha conversa aberta e a mensagem ficava sem destino.<br>
+              <strong>Solução:</strong> Nó "Verificar Conversa Existente" recebeu uma 2ª passagem — se não encontrar no inbox esperado, busca qualquer conversa WhatsApp aberta (inboxes 9/16/18) e herda o inbox_id dela.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">27 ABR 2026 — W0002c v1.1</div>
+            <div class="tl-title">Alerta de "sem resposta" chegando antes dos 5h</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> W0002c usava <code>created_at</code> da conversa para calcular o tempo. Se a conversa era antiga (reutilizada), o tempo era muito maior do que 5h e o alerta disparava na hora.<br>
+              <strong>Caso real:</strong> Gustavo (conv 15331, deal 274367) recebeu alerta em 22 min.<br>
+              <strong>Solução:</strong> Substituído por <code>last_activity_at</code> — mede desde a última atividade, não desde a criação.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">27 ABR 2026 — W0002b</div>
+            <div class="tl-title">Keyword "Confirmado." (com ponto) não era reconhecida</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> Leads mandavam "Confirmado." ou "Ok!" e o workflow não reconhecia como positivo porque a pontuação ficava junto com a palavra.<br>
+              <strong>Solução:</strong> Strip de pontuação antes de comparar: <code>replace(/[.,!?;:\-]/g, ' ')</code>. Lista de keywords positivas expandida para incluir emojis (👍, ✅) e variações comuns.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">22 ABR 2026 — INCIDENTE</div>
+            <div class="tl-title">Webhook V4AI moveu deal do Closer para SDR</div>
+            <div class="tl-body">Ver caixa de incidente crítico acima.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">08 ABR 2026 — W0001 v4.0</div>
+            <div class="tl-title">Mensagens enviadas mesmo após lead sair do stage 421</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> D2/D3 eram enviados mesmo se o deal já tinha saído da etapa 421 (deal já resolvido manualmente pelo SDR).<br>
+              <strong>Solução:</strong> Check de etapa adicionado antes de cada disparo — verifica o stage atual do deal antes de enviar.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">31 MAR 2026 — W0001 v3.0</div>
+            <div class="tl-title">Resposta automática de bot movia deal para "Conectado"</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> Qualquer mensagem recebida era interpretada como resposta humana.<br>
+              <strong>Solução:</strong> IA de classificação adicionada — diferencia resposta humana de automática antes de mover o deal.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">01 ABR 2026 — W0002a</div>
+            <div class="tl-title">Vários bugs de estrutura e timezone</div>
+            <div class="tl-body">
+              4 bugs em sequência na primeira versão:<br>
+              • JSON com <code>{{'{{'}}{{'}}'}}</code> duplo (body sendo stringificado duas vezes)<br>
+              • URL da nota do Pipedrive em HTML (regex agora tenta <code>href="..."</code> primeiro)<br>
+              • Inbox determinado pelo user_id da consultora, não pelo SDR responsável<br>
+              • <code>due_time</code> em UTC sem conversão para UTC-3 (horário da reunião errado)
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot tl-dot-teal"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">10 ABR 2026 — W0003</div>
+            <div class="tl-title">SplitInBatches causava loop infinito</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> O nó SplitInBatches do n8n não funcionava corretamente no fluxo de processamento de múltiplas reuniões.<br>
+              <strong>Solução:</strong> Removido. Processamento direto em cadeia + nó "Agregar Resultados" com <code>runOnceForAllItems</code>. Adicionado <code>continueOnFail: true</code> no Download para ignorar arquivos corrompidos sem parar o fluxo.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot tl-dot-red"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">PENDENTE</div>
+            <div class="tl-title">Key OpenRouter expirada (W0002b)</div>
+            <div class="tl-body">
+              Em 27/04, a key do OpenRouter estava retornando 401 para o W0002b. Isso faz a classificação de resposta falhar. Quando a key expirar, o workflow para de reconhecer "positivo/negativo/ambíguo".<br>
+              <strong>Ação necessária:</strong> Renovar a key no OpenRouter e atualizar a credencial no n8n.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PADRÕES TÉCNICOS -->
+      <div class="section-label" style="margin-bottom:16px;margin-top:32px;">PADRÕES TÉCNICOS — armadilhas conhecidas do n8n</div>
+      <div class="alert alert-gold" style="margin-bottom:12px;">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body"><div class="alert-title">runOnceForEachItem — como retornar "skip"</div>Para pular um item sem gerar erro, retorne <code>[]</code> (array vazio), não <code>[{'{json: {_skip: true}'}]</code>. O segundo formato causa erro "Code doesn't return a single object".</div>
+      </div>
+      <div class="alert alert-gold" style="margin-bottom:12px;">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body"><div class="alert-title">Perda de contexto após HTTP Request</div>Após um nó de requisição HTTP, <code>$json.campo</code> não acessa dados do nó anterior. Sempre usar: <code>$('Nome Do Node Anterior').first().json.campo</code></div>
+      </div>
+      <div class="alert alert-gold" style="margin-bottom:12px;">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body"><div class="alert-title">Fan-out com Wait node</div>Se o nó Wait estiver em paralelo com outro nó (ex: "RegistrarAtividade"), apenas o Wait executa. Solução: colocar em sequência — primeiro Wait, depois o próximo nó.</div>
+      </div>
+      <div class="alert alert-gold">
+        <div class="alert-icon">💡</div>
+        <div class="alert-body"><div class="alert-title">person_id no Pipedrive é objeto, não número</div>Sempre acessar: <code>deal.person_id.value</code></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 6 — LABELS ═══════════ -->
+    <section class="section" id="s-labels">
+      <div class="section-label">06 · Labels Chatwoot</div>
+      <h2 class="section-title">O que cada label significa para o lead</h2>
+      <p class="section-intro">As labels são o sistema de estado das conversas WhatsApp. Elas dizem em qual ponto do fluxo de confirmação cada lead está. Saber ler as labels é saber ler o status da automação.</p>
+
+      <div class="card-grid card-grid-2">
+        <div class="label-card">
+          <div class="label-tag" style="background:rgba(224,154,82,0.15);color:var(--color-orange);border:1px solid rgba(224,154,82,0.3);">confirmacao_pendente</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">M1 enviada, aguardando resposta do lead.</strong><br>
+            Adicionada por: W0002a (disparo imediato)<br>
+            Removida por: W0002b (quando lead confirma ou cancela) ou W0002c (após 5h sem resposta — substitui por "alerta")<br><br>
+            <em>Se você ver essa label há mais de 24h, o lead provavelmente não viu a mensagem ou está indeciso.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:var(--color-green-10);color:var(--color-green);border:1px solid rgba(76,175,130,0.3);">confirmado</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Lead confirmou presença na reunião.</strong><br>
+            Adicionada por: W0002b (quando resposta positiva é detectada)<br>
+            Ação associada: M2 enviado (link do Meet), deal movido para stage 112 (Closer)<br><br>
+            <em>Lead com essa label deve receber M3, M4 e M5 automaticamente. O closer já deveria estar vendo o deal.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:var(--color-red-10);color:var(--color-red);border:1px solid rgba(224,82,82,0.3);">reagendar</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Lead cancelou — SDR deve reagendar.</strong><br>
+            Adicionada por: W0002b (quando resposta negativa é detectada)<br>
+            Ação associada: deal movido para stage 423 (Avaliado/Agendar)<br><br>
+            <em>Requer ação manual do SDR. Se a label estiver acumulando sem ação, checar com a equipe SDR.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:rgba(224,82,82,0.12);color:#E07252;border:1px solid rgba(224,114,82,0.3);">alerta</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Sem resposta em 5h — SDR deve agir.</strong><br>
+            Adicionada por: W0002c (após 5h sem resposta à M1)<br>
+            Remove: confirmacao_pendente<br><br>
+            <em>O lead não confirmou nem cancelou em 5h. SDR deve ligar ou enviar mensagem manual para garantir presença.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:rgba(224,82,82,0.15);color:var(--color-red);border:1px solid rgba(224,82,82,0.3);">alerta_sem_reuniao</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Deal no Closer sem reunião futura agendada.</strong><br>
+            Adicionada por: W0002e (auditoria 12h/18h BRT)<br><br>
+            <em>O closer tem um deal na fila mas sem data de reunião. Requer ação para reagendar ou confirmar o que aconteceu com esse lead.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:rgba(107,107,107,0.15);color:var(--color-gray);border:1px solid rgba(107,107,107,0.2);">duvida</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Resposta ambígua — pode confirmar depois.</strong><br>
+            Adicionada por: W0002b (quando resposta não é nem positiva nem negativa)<br><br>
+            <em>O lead respondeu algo como "talvez" ou uma pergunta. Os lembretes M3/M4/M5 continuam normalmente. SDR pode intervir manualmente.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:var(--color-gold-10);color:var(--color-gold);border:1px solid var(--color-gold-deep);">conectado</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Lead respondeu e foi conectado ao SDR (W0001).</strong><br>
+            Adicionada por: W0001 quando classificação IA detecta resposta humana positiva<br>
+            Ação associada: deal movido para stage 422 (Conectado)<br><br>
+            <em>Sinal de que a automação de follow-up funcionou. Lead está pronto para agendamento.</em>
+          </div>
+        </div>
+
+        <div class="label-card">
+          <div class="label-tag" style="background:rgba(42,157,143,0.12);color:var(--color-teal);border:1px solid rgba(42,157,143,0.25);">confirmacao_pendente (histórico)</div>
+          <div style="font-size:0.88rem;color:var(--color-cream-70);">
+            <strong style="color:var(--color-cream);">Guards Pipedrive (não são labels):</strong><br>
+            São atividades registradas no Pipedrive para controle de estado:<br>
+            <code>W0002_Confirmado</code> — dispara M3/M4/M5<br>
+            <code>W0002_M3_Enviada</code>, <code>W0002_M4_Enviada</code>, <code>W0002_M5_Enviada</code><br>
+            <code>W0002_M1_Enviada | chatwoot_conv:{'{id}'}</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 7 — EMERGÊNCIA ═══════════ -->
+    <section class="section" id="s-emergencia">
+      <div class="section-label">07 · Emergências</div>
+      <h2 class="section-title">O que fazer quando algo quebra</h2>
+      <p class="section-intro">Siga esses protocolos antes de acionar qualquer pessoa técnica. Em 80% dos casos, o problema se resolve com uma dessas ações.</p>
+
+      <div class="card-grid card-grid-2" style="margin-bottom:24px;">
+        <div class="emergency-box">
+          <div class="emergency-title">🔴 Workflow parou de executar completamente</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body">Abrir o n8n → Execuções → buscar o workflow pelo nome</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body">Clicar na última execução com erro (ícone vermelho)</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body">Identificar qual nó falhou e o erro exibido</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body">Se for erro de credencial (401/403): checar key no painel do serviço (OpenRouter, Pipedrive, etc.)</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-body">Se for erro de conexão com Pipedrive/Chatwoot: verificar se os serviços estão no ar</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-body">Se não conseguir resolver: acionar @n8n-chief com o print do erro</div></div>
+          </div>
+        </div>
+
+        <div class="emergency-box">
+          <div class="emergency-title">🔴 Lead recebeu mensagem duplicada</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body">Anotar: deal ID, nome do lead, horário das mensagens</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body">Buscar no n8n execuções do W0001 ou W0002 com esse deal ID</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body">Verificar se houve 2 execuções quase simultâneas (menos de 30s de diferença)</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body">Entrar em contato com o lead se necessário — pedir desculpas e explicar como mensagem dupla</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-body">Registrar o caso e acionar @n8n-chief para análise</div></div>
+          </div>
+        </div>
+
+        <div class="emergency-box">
+          <div class="emergency-title">🔴 Deal apareceu no stage errado</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body">Mover o deal manualmente para o stage correto no Pipedrive</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body">Anotar: deal ID, stage onde estava, stage correto, horário</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body">Verificar se o webhook V4AI (ID 2959184) executou no mesmo horário</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body">Se for recorrente: contatar a V4AI (Collie Associados) com o registro dos casos</div></div>
+          </div>
+        </div>
+
+        <div class="emergency-box">
+          <div class="emergency-title">🔴 W0003 não enviou email hoje</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body">Verificar se as closers salvaram transcrições na pasta Drive correta (formato esperado: Google Docs)</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body">Abrir n8n → execução do W0003 de hoje → ver se houve erro</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body">Se o erro for na credencial Google: reautenticar "Google account 2" no n8n</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body">Se o erro for no OpenRouter (401): renovar key e atualizar credencial no n8n</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-body">Se não houver reuniões no dia: normal — o workflow executa mas não envia email vazio</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTATOS ESCALAÇÃO -->
+      <div class="card card-gold">
+        <div class="card-title">Escalonamento — quando acionar quem</div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <thead><tr><th>Situação</th><th>Acionar</th><th>Via</th></tr></thead>
+            <tbody>
+              <tr><td>Workflow com erro técnico que não se resolve nos passos acima</td><td><strong>@n8n-chief</strong> (squad n8n-integration)</td><td>AURA no workspace</td></tr>
+              <tr><td>Template Meta rejeitado ou pausado</td><td><strong>@template-chief</strong> (squad meta-templates)</td><td>AURA no workspace</td></tr>
+              <tr><td>Credencial Google expirada</td><td><strong>Rafa</strong></td><td>WhatsApp direto</td></tr>
+              <tr><td>Webhook V4AI movendo deals</td><td><strong>Equipe V4AI (Collie)</strong> + Rafa</td><td>Email + registro</td></tr>
+              <tr><td>OpenRouter key expirada</td><td><strong>Rafa</strong></td><td>WhatsApp direto</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ═══════════ SEÇÃO 8 — REFERÊNCIAS ═══════════ -->
+    <section class="section" id="s-refs">
+      <div class="section-label">08 · Referências Rápidas</div>
+      <h2 class="section-title">IDs, stages, inboxes e credenciais</h2>
+
+      <div class="card-grid card-grid-2" style="margin-bottom:24px;">
+        <!-- Pipedrive Stages -->
+        <div>
+          <div class="ref-block">
+            <div class="ref-title">PIPEDRIVE — PIPELINE SDR-NOVO (ID: 65)</div>
+            <div class="ref-row"><span class="ref-key">Leads Gerais</span><span class="ref-val">Stage 480</span></div>
+            <div class="ref-row"><span class="ref-key">Conectado IA</span><span class="ref-val">Stage 481</span></div>
+            <div class="ref-row"><span class="ref-key">MQL</span><span class="ref-val">Stage 420</span></div>
+            <div class="ref-row"><span class="ref-key">Tentativa Conectar → W0001</span><span class="ref-val" style="color:var(--color-gold);">Stage 421</span></div>
+            <div class="ref-row"><span class="ref-key">Conectado</span><span class="ref-val">Stage 422</span></div>
+            <div class="ref-row"><span class="ref-key">Avaliado/Agendar</span><span class="ref-val">Stage 423</span></div>
+            <div class="ref-row"><span class="ref-key">Agenda futura</span><span class="ref-val">Stage 485</span></div>
+          </div>
+          <div class="ref-block">
+            <div class="ref-title">PIPEDRIVE — PIPELINE CLOSER (ID: 21)</div>
+            <div class="ref-row"><span class="ref-key">Reunião Agendada → W0002</span><span class="ref-val" style="color:var(--color-teal);">Stage 112</span></div>
+            <div class="ref-row"><span class="ref-key">Reunião Realizada → W0003</span><span class="ref-val">Stage 113</span></div>
+            <div class="ref-row"><span class="ref-key">Oportunidade</span><span class="ref-val">Stage 116</span></div>
+            <div class="ref-row"><span class="ref-key">Negociação</span><span class="ref-val">Stage 114</span></div>
+            <div class="ref-row"><span class="ref-key">Venda</span><span class="ref-val" style="color:var(--color-green);">Stage 280</span></div>
+          </div>
+          <div class="ref-block">
+            <div class="ref-title">PIPEDRIVE — OUTROS</div>
+            <div class="ref-row"><span class="ref-key">Pipeline Nutrição</span><span class="ref-val">ID: 72</span></div>
+            <div class="ref-row"><span class="ref-key">Stage Nutrição Entrada</span><span class="ref-val">Stage 487</span></div>
+            <div class="ref-row"><span class="ref-key">Activity Type "Reunião"</span><span class="ref-val">Type ID: 2 / key: meeting</span></div>
+          </div>
+        </div>
+
+        <!-- Chatwoot + n8n -->
+        <div>
+          <div class="ref-block">
+            <div class="ref-title">CHATWOOT — INBOXES</div>
+            <div class="ref-row"><span class="ref-key">omni-oficial (Rafaela/fallback)</span><span class="ref-val">Inbox 9 · WABA OMNI</span></div>
+            <div class="ref-row"><span class="ref-key">omni-david (unofficial)</span><span class="ref-val">Inbox 4 · Evolution</span></div>
+            <div class="ref-row"><span class="ref-key">Omni - David (oficial)</span><span class="ref-val">Inbox 16 · WABA David</span></div>
+            <div class="ref-row"><span class="ref-key">omni-layslla (oficial)</span><span class="ref-val">Inbox 18 · WABA Layslla</span></div>
+          </div>
+          <div class="ref-block">
+            <div class="ref-title">IDs N8N — WORKFLOWS COMERCIAIS</div>
+            <div class="ref-row"><span class="ref-key">W0000 Abertura Lead</span><span class="ref-val" style="font-size:0.7rem;">rbMru9IlbTR2CBra</span></div>
+            <div class="ref-row"><span class="ref-key">W0001 Follow-up</span><span class="ref-val" style="font-size:0.7rem;">1ZMM6TwQ0awoqlJD</span></div>
+            <div class="ref-row"><span class="ref-key">W0002a Disparo Imediato</span><span class="ref-val" style="font-size:0.7rem;">UPJ16pnL3gCpF5Tp</span></div>
+            <div class="ref-row"><span class="ref-key">W0002b Resposta Lead</span><span class="ref-val" style="font-size:0.7rem;">S3abDnhQ0xWDIMdz</span></div>
+            <div class="ref-row"><span class="ref-key">W0002c Alerta 5h</span><span class="ref-val" style="font-size:0.7rem;">x0kPTjXh0cOr4Ich</span></div>
+            <div class="ref-row"><span class="ref-key">W0002d Lembretes M3/M4/M5</span><span class="ref-val" style="font-size:0.7rem;">ZMBG4LKTcHBtWgxO</span></div>
+            <div class="ref-row"><span class="ref-key">W0002e Auditoria Closer</span><span class="ref-val" style="font-size:0.7rem;">Kdpwiiwo3yy4Etmk</span></div>
+            <div class="ref-row"><span class="ref-key">W0003 Feedback Reuniões</span><span class="ref-val" style="font-size:0.7rem;">MRM4wO7LFNlnC6cA</span></div>
+            <div class="ref-row"><span class="ref-key">MON001 SLA Monitor SDR</span><span class="ref-val" style="font-size:0.7rem;">WNM33bxah57EAUCP</span></div>
+          </div>
+          <div class="ref-block">
+            <div class="ref-title">SDRS — OWNER IDs PIPEDRIVE</div>
+            <div class="ref-row"><span class="ref-key">David</span><span class="ref-val">20525394</span></div>
+            <div class="ref-row"><span class="ref-key">Rafaela</span><span class="ref-val">2872886</span></div>
+            <div class="ref-row"><span class="ref-key">Layslla</span><span class="ref-val">22894651</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pendências -->
+      <div class="card card-orange">
+        <div class="card-title">⏳ Pendências em aberto (herdar na gestão)</div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <thead><tr><th>Item</th><th>Contexto</th><th>Ação necessária</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Template IDs David (inbox 16) não mapeados em W0002d</td>
+                <td>Templates aprovados em 20/04 mas não configurados no workflow de lembretes</td>
+                <td>Acionar @n8n-chief para mapear os IDs no W0002d</td>
+              </tr>
+              <tr>
+                <td>Key OpenRouter expirada</td>
+                <td>Retornou 401 em 27/04 no W0002b. Classificação de resposta pode estar falhando silenciosamente.</td>
+                <td>Renovar key e atualizar credencial no n8n. Solicitar à Rafa.</td>
+              </tr>
+              <tr>
+                <td>Testar M2 + card com conversa real</td>
+                <td>Fluxo M2 foi reestruturado em 28/04 mas ainda não foi testado com lead real</td>
+                <td>Monitorar próximas reuniões confirmadas via WhatsApp</td>
+              </tr>
+              <tr>
+                <td>Webhooks V4AI sem guard pipeline_id</td>
+                <td>Webhook 2959184 causou incidente em 22/04. Relatório enviado para V4AI.</td>
+                <td>Acompanhar resposta da V4AI / Collie Associados</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-body -->
+</div><!-- /mainContent -->
+
+<script>
+  function unlock() {
+    const val = document.getElementById('pwInput').value.trim();
+    if (val === 'omni2026') {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    } else {
+      document.getElementById('lockError').style.display = 'block';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  }
+
+  document.getElementById('pwInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') unlock();
+  });
+
+  function toggleWF(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Nav active
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navItems.forEach(n => {
+      n.classList.remove('active');
+      if (n.getAttribute('href') === '#' + current) n.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
