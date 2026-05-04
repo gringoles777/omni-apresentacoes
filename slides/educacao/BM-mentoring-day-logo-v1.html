@@ -14,9 +14,12 @@
 
 body {
   background: var(--bg);
-  width: 1920px;
-  height: 1080px;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 [data-composition-id="bm-logo-slide"] {
@@ -25,6 +28,8 @@ body {
   height: 1080px;
   background: var(--bg);
   overflow: hidden;
+  transform-origin: center center;
+  flex-shrink: 0;
 }
 
 .bg-glow {
@@ -189,6 +194,15 @@ body {
   // Ao terminar os 30s, volta para t=3 (breathe) e repete infinitamente
   tl.eventCallback("onComplete", () => { tl.seek(3); tl.play(); });
   tl.play();
+
+  // Escala a composição para preencher a janela mantendo 16:9
+  const comp = document.querySelector('[data-composition-id="bm-logo-slide"]');
+  function scaleToFit() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    comp.style.transform = 'scale(' + scale + ')';
+  }
+  scaleToFit();
+  window.addEventListener('resize', scaleToFit);
   </script>
 </div>
 </body>
