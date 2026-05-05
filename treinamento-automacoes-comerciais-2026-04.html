@@ -489,7 +489,7 @@
   <header class="doc-header">
     <div class="doc-header-brand">OMNI BRASIL</div>
     <div class="doc-header-title">Automações Comerciais — Guia de Gestão</div>
-    <div class="doc-header-badge">CONFIDENCIAL · v1.0 · ABR 2026</div>
+    <div class="doc-header-badge">CONFIDENCIAL · v1.1 · MAI 2026</div>
   </header>
 
   <!-- NAV -->
@@ -897,21 +897,21 @@
 
           <!-- Templates Meta -->
           <div class="section-label" style="margin-bottom:12px;margin-top:20px;">TEMPLATES META WHATSAPP — IDs por WABA</div>
-          <div class="alert alert-orange" style="margin-bottom:16px;">
-            <div class="alert-icon">⏳</div>
+          <div class="alert alert-green" style="margin-bottom:16px;">
+            <div class="alert-icon">✅</div>
             <div class="alert-body">
-              <div class="alert-title">Templates David (inbox 16) ainda pendentes no W0002d</div>
-              Os IDs dos templates para o David (inbox 16) estão aprovados mas ainda não mapeados no W0002d. Atualmente usa o fallback do canal oficial (inbox 9). Quando mapear, atualizar o nó de templates no workflow.
+              <div class="alert-title">Auto-routing por nome de template — David (inbox 16) funcionando</div>
+              O W0002d envia templates pelo <strong>nome</strong> (ex: <code>lembrete_24h</code>), não pelo ID numérico. O Chatwoot roteia automaticamente para o WABA correto com base na inbox da conversa. Verificado: 0 erros em produção para todos os SDRs.
             </div>
           </div>
           <div class="table-wrap">
             <table>
               <thead><tr><th>Msg</th><th>Template</th><th>OMNI Brasil (inbox 9)</th><th>Layslla (inbox 18)</th><th>David (inbox 16)</th></tr></thead>
               <tbody>
-                <tr><td>M1</td><td>confirmacao_agendamento</td><td><code>2807311279607388</code></td><td><code>1717549719208786</code></td><td><code>4404503943103494</code> ⏳</td></tr>
-                <tr><td>M3</td><td>lembrete_24h</td><td><code>1603697970886331</code></td><td><code>1925112558121302</code></td><td><code>2427750891077063</code> ⏳</td></tr>
-                <tr><td>M4</td><td>lembrete_1h</td><td><code>851759767924333</code></td><td><code>2006248343347666</code></td><td><code>823486417197397</code> ⏳</td></tr>
-                <tr><td>M5</td><td>hora_consultoria</td><td><code>1277269237670363</code></td><td><code>3711487612338016</code></td><td><code>1549161327215162</code> ⏳</td></tr>
+                <tr><td>M1</td><td>confirmacao_agendamento</td><td><code>2807311279607388</code></td><td><code>1717549719208786</code></td><td><code>4404503943103494</code></td></tr>
+                <tr><td>M3</td><td>lembrete_24h</td><td><code>1603697970886331</code></td><td><code>1925112558121302</code></td><td><code>2427750891077063</code></td></tr>
+                <tr><td>M4</td><td>lembrete_1h</td><td><code>851759767924333</code></td><td><code>2006248343347666</code></td><td><code>823486417197397</code></td></tr>
+                <tr><td>M5</td><td>hora_consultoria</td><td><code>1277269237670363</code></td><td><code>3711487612338016</code></td><td><code>1549161327215162</code></td></tr>
               </tbody>
             </table>
           </div>
@@ -974,15 +974,50 @@
         <div class="wf-header" onclick="toggleWF('wf-mon001')">
           <span class="wf-code">MON001</span>
           <span class="wf-name">SLA Monitor SDR — Alerta Google Chat</span>
-          <span class="wf-status status-active">ATIVO v1.0</span>
+          <span class="wf-status status-active">ATIVO v1.1</span>
           <span class="wf-chevron">▼</span>
         </div>
         <div class="wf-body">
           <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:16px;">
             Monitora o SLA dos SDRs: verifica se leads nas etapas críticas (480, 421, 422, 428) estão sem interação há mais tempo do que o permitido. Envia alerta via <strong>Google Chat</strong> (não Telegram) quando detecta violação de SLA.
           </p>
+          <div class="alert alert-gold" style="margin-bottom:12px;">
+            <div class="alert-icon">🔧</div>
+            <div class="alert-body"><div class="alert-title">Fix 30/04 — v1.1</div>Nó "Dedup Conversa" usava <code>throw new Error('SKIP: ...')</code> como guard. O n8n trata throw como erro de execução — gerava ~8 falsos positivos/dia no log. Substituído por <code>return []</code>: encerra silenciosamente sem registrar erro.</div>
+          </div>
           <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
           <code>WNM33bxah57EAUCP</code>
+        </div>
+      </div>
+
+      <!-- LINK001 -->
+      <div class="wf-card" id="wf-link001">
+        <div class="wf-header" onclick="toggleWF('wf-link001')">
+          <span class="wf-code">LINK001</span>
+          <span class="wf-name">Pipedrive → Chatwoot Link</span>
+          <span class="wf-status status-active">ATIVO v14</span>
+          <span class="wf-chevron">▼</span>
+        </div>
+        <div class="wf-body">
+          <p style="font-size:0.88rem;color:var(--color-cream-70);margin-bottom:16px;">
+            Preenche automaticamente o campo <strong>"ChatWoot link"</strong> no Pipedrive com o link direto para a conversa Chatwoot do contato. Elimina a pesquisa manual pelo SDR.
+          </p>
+          <div class="section-label" style="margin-bottom:8px;">COMO FUNCIONA</div>
+          <div class="steps" style="margin-bottom:16px;">
+            <div class="step"><div class="step-num">1</div><div class="step-body">Dispara quando uma <strong>pessoa é adicionada no Pipedrive</strong> via formulário (<code>person.added</code>)</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body">Aguarda <strong>1 minuto</strong> (Wait node) para o W0000 criar o contato no Chatwoot</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body">Busca dados completos do contato via <code>GET /v1/persons/{id}</code> na API REST do Pipedrive</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body">Normaliza o telefone (extrai array <code>phones</code>, prioriza primary, remove não-dígitos)</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-body">Busca no Chatwoot por <strong>últimos 8 dígitos</strong> do telefone → match com a conversa</div></div>
+            <div class="step"><div class="step-num">6</div><div class="step-body">Atualiza campo customizado no Pipedrive com o link direto da conversa (~90s de latência total)</div></div>
+          </div>
+          <div class="alert alert-gold" style="margin-bottom:12px;">
+            <div class="alert-icon">💡</div>
+            <div class="alert-body"><div class="alert-title">Bug corrigido no build</div>Pipedrive Trigger v1.1 entrega telefone em <code>$json.data.phones</code> (array), não em <code>$json.phone</code> como a documentação sugere. Solução: GET direto na API REST — dados sempre completos e frescos.</div>
+          </div>
+          <div class="section-label" style="margin-bottom:8px;">ID N8N</div>
+          <code>ZBSDy5CV08MNj2WO</code>
+          <div style="margin-top:8px;font-size:0.8rem;color:var(--color-gray);">Validado em produção em 24/04/2026 com lead real.</div>
         </div>
       </div>
     </section>
@@ -1013,8 +1048,9 @@
         <div class="card">
           <div class="card-title">OpenRouter (IA)</div>
           <div class="card-body">
-            Classificação de respostas (W0001, W0002b) e avaliação FPH (W0003). Modelo: Claude Haiku / Gemini Flash.
-            <br><br><strong>⚠️ Atenção:</strong> A key pode expirar. W0002b retornou 401 em 27/04. Verificar periodicamente.
+            Classificação de respostas (W0001) e avaliação FPH (W0003). Modelo: Claude Haiku / Gemini Flash.
+            <br><br><strong>Nota:</strong> W0002b não usa mais OpenRouter — classificação migrada para keywords (fix 27/04). Se a key expirar, apenas W0001 e W0003 são impactados.
+            <br><br><strong>⚠️ Atenção:</strong> Key retornou 401 em 27/04. Verificar periodicamente no painel do OpenRouter.
           </div>
         </div>
         <div class="card">
@@ -1274,13 +1310,40 @@
           </div>
         </div>
         <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">30 ABR 2026 — W0002b v1.2 + MON001 v1.1</div>
+            <div class="tl-title">throw new Error() em guards gerava falsos positivos no log de erros</div>
+            <div class="tl-body">
+              <strong>Problema:</strong> Nós de guarda usavam <code>throw new Error('SKIP: ...')</code> para interromper branches sem ação. O n8n trata <code>throw</code> como erro de execução — gerava ~15 falsos positivos/dia no W0002b e ~8 no MON001.<br>
+              <strong>Solução:</strong> Substituição de <code>throw new Error()</code> por <code>return []</code> nos nós:<br>
+              • W0002b: "Verificar Label Pendente" e "Verificar Stage Atual"<br>
+              • MON001: "Dedup Conversa" (guarda de conversation.id ausente + janela de 5min)<br>
+              Branches sem ação encerram silenciosamente sem registrar erro.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-date">30 ABR 2026 — WF17 + YC49</div>
+            <div class="tl-title">Quota exceeded e perda de dados no Google Sheets</div>
+            <div class="tl-body">
+              <strong>WF17 — Problema:</strong> Nó Google Sheets sem retry configurado. Erros transitórios "Service unavailable" causavam falha da execução inteira — dado do ciclo perdido até o próximo disparo do cron.<br>
+              <strong>WF17 — Solução:</strong> <code>retryOnFail=true, maxTries=3, waitBetweenTries=5000ms</code> no nó de leitura.<br><br>
+              <strong>YC49 — Problema:</strong> Wait node com parâmetros vazios (sem delay). n8n executava como no-op → chamadas em rajada à API do Google Sheets → Quota exceeded (HTTP 429) → perda parcial de dados.<br>
+              <strong>YC49 — Solução:</strong> Wait atualizado para <code>resume=timeInterval, amount=1.5, unit=seconds</code>. Throttle de 1.5s entre cada gravação elimina o erro de quota.
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
           <div class="tl-left"><div class="tl-dot tl-dot-red"></div></div>
           <div class="tl-content">
             <div class="tl-date">PENDENTE</div>
-            <div class="tl-title">Key OpenRouter expirada (W0002b)</div>
+            <div class="tl-title">Key OpenRouter possivelmente expirada (W0001 + W0003)</div>
             <div class="tl-body">
-              Em 27/04, a key do OpenRouter estava retornando 401 para o W0002b. Isso faz a classificação de resposta falhar. Quando a key expirar, o workflow para de reconhecer "positivo/negativo/ambíguo".<br>
-              <strong>Ação necessária:</strong> Renovar a key no OpenRouter e atualizar a credencial no n8n.
+              Em 27/04 a key retornou 401. W0002b foi migrado para classificação por keywords (não depende mais do OpenRouter). Impacto atual: apenas W0001 (classificação de resposta humana vs bot) e W0003 (avaliação FPH).<br>
+              <strong>Ação necessária:</strong> Verificar se a key foi renovada. Se não: renovar no painel OpenRouter e atualizar credencial no n8n.
             </div>
           </div>
         </div>
@@ -1524,6 +1587,7 @@
             <div class="ref-row"><span class="ref-key">W0002e Auditoria Closer</span><span class="ref-val" style="font-size:0.7rem;">Kdpwiiwo3yy4Etmk</span></div>
             <div class="ref-row"><span class="ref-key">W0003 Feedback Reuniões</span><span class="ref-val" style="font-size:0.7rem;">MRM4wO7LFNlnC6cA</span></div>
             <div class="ref-row"><span class="ref-key">MON001 SLA Monitor SDR</span><span class="ref-val" style="font-size:0.7rem;">WNM33bxah57EAUCP</span></div>
+            <div class="ref-row"><span class="ref-key">LINK001 Pipedrive→Chatwoot Link</span><span class="ref-val" style="font-size:0.7rem;">ZBSDy5CV08MNj2WO</span></div>
           </div>
           <div class="ref-block">
             <div class="ref-title">SDRS — OWNER IDs PIPEDRIVE</div>
@@ -1542,14 +1606,9 @@
             <thead><tr><th>Item</th><th>Contexto</th><th>Ação necessária</th></tr></thead>
             <tbody>
               <tr>
-                <td>Template IDs David (inbox 16) não mapeados em W0002d</td>
-                <td>Templates aprovados em 20/04 mas não configurados no workflow de lembretes</td>
-                <td>Acionar @n8n-chief para mapear os IDs no W0002d</td>
-              </tr>
-              <tr>
-                <td>Key OpenRouter expirada</td>
-                <td>Retornou 401 em 27/04 no W0002b. Classificação de resposta pode estar falhando silenciosamente.</td>
-                <td>Renovar key e atualizar credencial no n8n. Solicitar à Rafa.</td>
+                <td>Key OpenRouter possivelmente expirada</td>
+                <td>Retornou 401 em 27/04. W0002b migrado para keywords — impacto atual apenas em W0001 (classificação) e W0003 (FPH).</td>
+                <td>Verificar se foi renovada. Se não: renovar no painel OpenRouter + atualizar credencial no n8n.</td>
               </tr>
               <tr>
                 <td>Testar M2 + card com conversa real</td>
