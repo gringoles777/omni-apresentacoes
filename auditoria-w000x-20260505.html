@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria W000X — OMNI Brasil</title>
+<style>
+  :root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#6c63ff;--crit:#ff4444;--alto:#ff8800;--medio:#ffcc00;--baixo:#44bbff;--ok:#00cc66;--text:#e0e0f0;--muted:#666680}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;padding:2rem;line-height:1.6}
+  h1{font-size:1.8rem;font-weight:700;margin-bottom:.25rem;color:#fff}
+  .subtitle{color:var(--muted);font-size:.9rem;margin-bottom:2rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+  .summary-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center}
+  .summary-card .num{font-size:2.2rem;font-weight:700;line-height:1}
+  .summary-card .label{font-size:.78rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.05em}
+  .crit{color:var(--crit)} .alto{color:var(--alto)} .medio{color:var(--medio)} .baixo{color:var(--baixo)} .ok{color:var(--ok)}
+  .section-title{font-size:1.1rem;font-weight:600;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+  .wf-grid{display:grid;gap:1rem;margin-bottom:2rem}
+  .wf-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem}
+  .wf-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+  .wf-name{font-weight:700;font-size:1rem}
+  .wf-meta{font-size:.78rem;color:var(--muted)}
+  .badge{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.72rem;font-weight:600;letter-spacing:.04em}
+  .badge-crit{background:#ff444420;color:var(--crit);border:1px solid #ff444440}
+  .badge-alto{background:#ff880020;color:var(--alto);border:1px solid #ff880040}
+  .badge-medio{background:#ffcc0015;color:var(--medio);border:1px solid #ffcc0030}
+  .badge-ok{background:#00cc6615;color:var(--ok);border:1px solid #00cc6630}
+  .issue-list{display:flex;flex-direction:column;gap:.4rem}
+  .issue{padding:.5rem .75rem;border-radius:6px;font-size:.82rem;display:flex;gap:.6rem;align-items:flex-start}
+  .issue-crit{background:#ff44440d;border-left:3px solid var(--crit)}
+  .issue-alto{background:#ff88000d;border-left:3px solid var(--alto)}
+  .issue-medio{background:#ffcc000d;border-left:3px solid var(--medio)}
+  .issue-ok{background:#00cc660d;border-left:3px solid var(--ok);color:var(--muted)}
+  .issue-node{font-family:monospace;background:#ffffff10;padding:.1rem .35rem;border-radius:3px;flex-shrink:0}
+  .plan-section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1rem}
+  .plan-title{font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+  .plan-items{display:flex;flex-direction:column;gap:.5rem}
+  .plan-item{display:flex;gap:.8rem;align-items:flex-start;padding:.5rem .75rem;background:#ffffff05;border-radius:6px;font-size:.85rem}
+  .plan-num{font-weight:700;flex-shrink:0;width:1.4rem;text-align:center}
+  .impact-table{width:100%;border-collapse:collapse;font-size:.83rem}
+  .impact-table th{text-align:left;padding:.5rem .75rem;background:#ffffff08;color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase}
+  .impact-table td{padding:.5rem .75rem;border-bottom:1px solid var(--border)}
+  .tag{display:inline-block;padding:.1rem .4rem;border-radius:3px;font-size:.7rem;font-weight:600}
+  .tag-fix{background:#6c63ff20;color:var(--accent)}
+  .tag-new{background:#00cc6615;color:var(--ok)}
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:3rem;padding-top:1rem;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<h1>🔍 Auditoria de Qualidade — W000X</h1>
+<p class="subtitle">OMNI Brasil · 05/05/2026 · @n8n-auditor · squad n8n-integration</p>
+
+<div class="summary-grid">
+  <div class="summary-card"><div class="num crit">4</div><div class="label">Críticos</div></div>
+  <div class="summary-card"><div class="num alto">152</div><div class="label">Altos (todos wf)</div></div>
+  <div class="summary-card"><div class="num medio">4</div><div class="label">Médios</div></div>
+  <div class="summary-card"><div class="num" style="color:#fff">7</div><div class="label">Workflows auditados</div></div>
+</div>
+
+<h2 class="section-title">⚠️ Issues por Workflow (ranking por risco)</h2>
+<div class="wf-grid">
+
+<!-- W0001 -->
+<div class="wf-card">
+  <div class="wf-header">
+    <div>
+      <div class="wf-name">W0001 — Tentativa de Conectar
+        <span class="badge badge-crit">CRÍTICO</span>
+        <span class="badge badge-ok">3 fixes aplicados ontem</span>
+      </div>
+      <div class="wf-meta">115 nodes · Trigger: Webhook Pipedrive (move para stage 421)</div>
+    </div>
+  </div>
+  <div class="issue-list">
+    <div class="issue issue-ok"><span class="issue-node">✅ FIX</span> Log PD DEPOIS do envio Chatwoot — corrigido 04/05</div>
+    <div class="issue issue-ok"><span class="issue-node">✅ FIX</span> Guards com validação de deal_id — corrigido 05/05</div>
+    <div class="issue issue-ok"><span class="issue-node">✅ FIX</span> Atividade PD usa Preparar Contexto (anti-contaminação) — corrigido 05/05</div>
+    <div class="issue issue-alto"><span class="issue-node">Salvar Ts D1-D4</span> $("Preparar Msg X").first() ainda presente — risco de contaminação residual em alta concorrência</div>
+    <div class="issue issue-alto"><span class="issue-node">~25 code nodes</span> return {json:...} sem array wrapper — pode causar "doesn't return single object" em fluxos de erro</div>
+    <div class="issue issue-alto"><span class="issue-node">~30 HTTP nodes</span> Sem retry configurado — falha pontual de API (Pipedrive/Chatwoot) mata a execução permanentemente</div>
+    <div class="issue issue-alto"><span class="issue-node">WORKFLOW</span> Sem Error Trigger — falhas não geram alerta, só são descobertas quando SDR reclama</div>
+    <div class="issue issue-medio"><span class="issue-node">Preparar Contexto</span> $getWorkflowStaticData() — dedup se perde se n8n reiniciar (deal não recebe D1)</div>
+  </div>
+</div>
+
+<!-- W0000 -->
+<div class="wf-card">
+  <div class="wf-header">
+    <div>
+      <div class="wf-name">W0000 — Abertura <span class="badge badge-alto">ALTO</span></div>
+      <div class="wf-meta">56 nodes · Trigger: Webhook Pipedrive (cadastro lead)</div>
+    </div>
+  </div>
+  <div class="issue-list">
+    <div class="issue issue-alto"><span class="issue-node">Guard Abertura</span> Sem validação deal_id — mesmo bug que W0001 tinha: Pipedrive retorna atividades de outros leads do mesmo contato</div>
+    <div class="issue issue-alto"><span class="issue-node">Atividade PD Abertura</span> Log PD posicionado antes do envio Chatwoot — mesmo padrão do bug raiz do W0001</div>
+    <div class="issue issue-alto"><span class="issue-node">Salvar Ts Abertura</span> $("Preparar Abertura").first() — risco contaminação</div>
+    <div class="issue issue-alto"><span class="issue-node">~12 code nodes</span> return {json:...} sem array wrapper</div>
+    <div class="issue issue-alto"><span class="issue-node">~10 HTTP nodes</span> Sem retry</div>
+    <div class="issue issue-alto"><span class="issue-node">WORKFLOW</span> Sem Error Trigger</div>
+    <div class="issue issue-medio"><span class="issue-node">Dedup Webhook</span> $getWorkflowStaticData() — mesma fragilidade do W0001</div>
+  </div>
+</div>
+
+<!-- W0002b -->
+<div class="wf-card">
+  <div class="wf-header">
+    <div>
+      <div class="wf-name">W0002b — Resposta do Lead
+        <span class="badge badge-alto">ALTO</span>
+        <span class="badge badge-ok">1 fix aplicado ontem</span>
+      </div>
+      <div class="wf-meta">31 nodes · Trigger: Webhook Chatwoot (mensagem recebida)</div>
+    </div>
+  </div>
+  <div class="issue-list">
+    <div class="issue issue-ok"><span class="issue-node">✅ FIX</span> Verificar Label Pendente array wrapper — corrigido 04/05</div>
+    <div class="issue issue-alto"><span class="issue-node">Classificar via Claude</span> HTTP sem retry — se OpenRouter falha, lead "confirmado" não recebe M2</div>
+    <div class="issue issue-alto"><span class="issue-node">~10 HTTP nodes</span> Sem retry</div>
+    <div class="issue issue-alto"><span class="issue-node">~8 code nodes</span> return {json:...} sem array</div>
+    <div class="issue issue-alto"><span class="issue-node">WORKFLOW</span> Sem Error Trigger</div>
+  </div>
+</div>
+
+<!-- W0002a -->
+<div class="wf-card">
+  <div class="wf-header">
+    <div>
+      <div class="wf-name">W0002a — Disparo ao Agendar
+        <span class="badge badge-alto">ALTO</span>
+        <span class="badge badge-ok">1 fix aplicado ontem</span>
+      </div>
+      <div class="wf-meta">32 nodes · Trigger: Webhook Pipedrive (agendamento)</div>
+    </div>
+  </div>
+  <div class="issue-list">
+    <div class="issue issue-ok"><span class="issue-node">✅ FIX</span> PATCH additional_attributes em conversa existente — corrigido 04/05</div>
+    <div class="issue issue-alto"><span class="issue-node">~10 HTTP nodes</span> Sem retry</div>
+    <div class="issue issue-alto"><span class="issue-node">~6 code nodes</span> return {json:...} sem array</div>
+    <div class="issue issue-alto"><span class="issue-node">WORKFLOW</span> Sem Error Trigger</div>
+    <div class="issue issue-medio"><span class="issue-node">Extrair Dados</span> $getWorkflowStaticData() — dedup frágil</div>
+  </div>
+</div>
+
+<!-- W0002e/d/c -->
+<div class="wf-card">
+  <div class="wf-header">
+    <div>
+      <div class="wf-name">W0002c/d/e — Alerta / Lembretes / Auditoria <span class="badge badge-alto">ALTO</span></div>
+      <div class="wf-meta">5–19 nodes · Triggers: Schedule</div>
+    </div>
+  </div>
+  <div class="issue-list">
+    <div class="issue issue-alto"><span class="issue-node">~25 HTTP nodes</span> Sem retry (todos os 3 workflows)</div>
+    <div class="issue issue-alto"><span class="issue-node">~12 code nodes</span> return {json:...} sem array</div>
+    <div class="issue issue-alto"><span class="issue-node">WORKFLOW ×3</span> Sem Error Trigger</div>
+  </div>
+</div>
+
+</div>
+
+<h2 class="section-title">🗺️ Plano de Correção — Priorizado por Impacto</h2>
+
+<div class="plan-section">
+  <div class="plan-title crit">🔴 Sprint 1 — CRÍTICO (fazer hoje)</div>
+  <div class="plan-items">
+    <div class="plan-item">
+      <span class="plan-num crit">1</span>
+      <div>
+        <strong>W0000: aplicar os mesmos 3 fixes do W0001</strong> <span class="tag tag-fix">fix</span><br>
+        <span style="color:var(--muted);font-size:.82rem">Guard Abertura precisa de deal_id validation · Atividade PD deve vir depois do envio Chatwoot · Referência Preparar Contexto nos nodes de atividade. W0000 tem exatamente os mesmos bugs que causaram 2 dias de problemas no W0001.</span>
+      </div>
+    </div>
+    <div class="plan-item">
+      <span class="plan-num crit">2</span>
+      <div>
+        <strong>Todos os 7 workflows: adicionar Error Trigger + alerta WhatsApp</strong> <span class="tag tag-new">novo</span><br>
+        <span style="color:var(--muted);font-size:.82rem">1 workflow novo: "Monitor de Erros" que recebe de todos os workflows via Error Trigger e envia mensagem no WhatsApp (Prisma) com deal_id + workflow + mensagem de erro. Resolve o problema de descobrir bugs só quando SDR reclama.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="plan-section">
+  <div class="plan-title alto">🟠 Sprint 2 — ALTO (esta semana)</div>
+  <div class="plan-items">
+    <div class="plan-item">
+      <span class="plan-num alto">3</span>
+      <div>
+        <strong>Todos os workflows: HTTP nodes críticos com retry (3x, backoff 5s)</strong> <span class="tag tag-fix">fix</span><br>
+        <span style="color:var(--muted);font-size:.82rem">Priorizar: Disparo (Chatwoot), Atividade PD, Buscar Deal. Uma falha pontual de API hoje mata a execução permanentemente. Com retry, o workflow aguarda e tenta novamente.</span>
+      </div>
+    </div>
+    <div class="plan-item">
+      <span class="plan-num alto">4</span>
+      <div>
+        <strong>W0001 + W0000: Salvar Ts — trocar .first() por referência direta</strong> <span class="tag tag-fix">fix</span><br>
+        <span style="color:var(--muted);font-size:.82rem">Substituir $("Preparar Msg X").first() por $("Preparar Contexto").first() nos 4 Salvar Ts do W0001 e 1 do W0000. Elimina risco residual de contaminação em concorrência.</span>
+      </div>
+    </div>
+    <div class="plan-item">
+      <span class="plan-num alto">5</span>
+      <div>
+        <strong>Todos os workflows: return [{json:...}] com array wrapper</strong> <span class="tag tag-fix">fix</span><br>
+        <span style="color:var(--muted);font-size:.82rem">~50 code nodes no total. Pode ser aplicado em lote com script. Elimina a classe de erro "Code doesn't return single object".</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="plan-section">
+  <div class="plan-title medio">🟡 Sprint 3 — MÉDIO (próxima semana)</div>
+  <div class="plan-items">
+    <div class="plan-item">
+      <span class="plan-num medio">6</span>
+      <div>
+        <strong>Substituir $getWorkflowStaticData por Redis ou store externo para dedup</strong> <span class="tag tag-fix">fix</span><br>
+        <span style="color:var(--muted);font-size:.82rem">StaticData se perde quando n8n reinicia. Um Redis simples (já existe no VPS) garante que o dedup persiste entre reinicializações.</span>
+      </div>
+    </div>
+    <div class="plan-item">
+      <span class="plan-num medio">7</span>
+      <div>
+        <strong>Job de reconciliação diária</strong> <span class="tag tag-new">novo</span><br>
+        <span style="color:var(--muted);font-size:.82rem">Workflow que roda toda manhã às 8h verificando: deals em stage 421 há mais de 4h sem D1 em waiting · conversas com confirmacao_pendente há mais de 6h sem M2 enviado. Para cada anomalia: cria atividade Pipedrive "ATENÇÃO — Disparo falhou" para o SDR.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="section-title">📊 Impacto Estimado por Categoria</h2>
+<table class="impact-table">
+  <tr><th>Bug</th><th>Frequência estimada</th><th>Impacto operacional</th><th>Solução</th></tr>
+  <tr>
+    <td>Guard sem deal_id (cross-contamination)</td>
+    <td>Toda vez que 2+ leads com mesmo contato entram em stage 421 no mesmo dia</td>
+    <td>Lead não recebe disparo · SDR chama sem aquecimento</td>
+    <td class="ok">✅ Corrigido W0001 · 🔴 Pendente W0000</td>
+  </tr>
+  <tr>
+    <td>Log PD antes do envio Chatwoot</td>
+    <td>Sempre que Chatwoot/Meta falha pontualmente</td>
+    <td>Guard bloqueia retry · lead nunca recebe mensagem</td>
+    <td class="ok">✅ Corrigido W0001 · 🔴 Pendente W0000</td>
+  </tr>
+  <tr>
+    <td>.first() poluído em concorrência</td>
+    <td>Quando 2+ execuções rodam em milissegundos de diferença</td>
+    <td>Atividade logada no deal errado · guard bloqueia deal correto</td>
+    <td class="ok">✅ Corrigido W0001 · 🔴 Parcial W0001 (Salvar Ts)</td>
+  </tr>
+  <tr>
+    <td>Sem retry HTTP</td>
+    <td>Qualquer instabilidade de API (acontece toda semana)</td>
+    <td>Execução morre silenciosamente · lead fica sem mensagem</td>
+    <td style="color:var(--alto)">🟠 Pendente todos</td>
+  </tr>
+  <tr>
+    <td>Sem Error Trigger</td>
+    <td>Toda falha não visível</td>
+    <td>Bugs descobertos por reclamação, não por monitoramento</td>
+    <td style="color:var(--alto)">🟠 Pendente todos</td>
+  </tr>
+</table>
+
+<div class="footer">Auditoria executada por @n8n-auditor · squad n8n-integration · OMNI Brasil · 05/05/2026</div>
+
+</body>
+</html>
