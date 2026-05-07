@@ -408,20 +408,31 @@ footer {
 <!-- SETUP BANNER (shown if table não existe) -->
 <div id="setup-banner">
   <div class="setup-inner">
-    <strong>⚡ Configuração necessária:</strong> Execute o SQL abaixo no Supabase para ativar sincronização em tempo real.
-    <pre id="setup-sql">-- Execute no Supabase Dashboard → SQL Editor
-create table if not exists legacy_experience_canvas (
-  id          text primary key,
-  categoria   text not null,
-  status      text not null default 'open',
-  resposta    text default '',
-  atualizado_por text default '',
-  atualizado_em  timestamptz default now()
+    <strong>⚡ Tabela não encontrada.</strong> Acesse o <a href="https://supabase.com/dashboard/project/gdizgxysttvhvuetesvn/sql/new" target="_blank" style="color:var(--color-gold)">Supabase SQL Editor</a> e execute:
+    <pre id="setup-sql">-- Cole e execute no Supabase Dashboard → SQL Editor
+
+create table if not exists public.legacy_experience_canvas (
+  id              text primary key,
+  categoria       text not null default '',
+  status          text not null default 'open',
+  resposta        text not null default '',
+  atualizado_por  text not null default '',
+  atualizado_em   timestamptz not null default now()
 );
-alter table legacy_experience_canvas enable row level security;
-create policy "canvas_public_rw" on legacy_experience_canvas
-  for all to anon using (true) with check (true);</pre>
-    <p>Enquanto isso, as decisões são salvas localmente no navegador.</p>
+
+alter table public.legacy_experience_canvas enable row level security;
+
+create policy "anon_select_canvas" on public.legacy_experience_canvas
+  for select to anon using (true);
+
+create policy "anon_insert_canvas" on public.legacy_experience_canvas
+  for insert to anon with check (true);
+
+create policy "anon_update_canvas" on public.legacy_experience_canvas
+  for update to anon using (true) with check (true);
+
+alter publication supabase_realtime add table public.legacy_experience_canvas;</pre>
+    <p>Após rodar o SQL, recarregue a página. Enquanto isso as respostas são salvas no navegador.</p>
   </div>
 </div>
 
@@ -682,27 +693,11 @@ async function init() {
       return;
     }
 
-    // Carregar dados do banco
+    // Carregar dados do banco — merge com localStorage
+    const ls = lsLoad();
     data.forEach(row => { dbState[row.id] = row; });
-
-    // Se banco vazio, fazer upsert inicial de todos os gaps
-    if (data.length === 0) {
-      const rows = [];
-      CANVAS.forEach(cat => {
-        cat.gaps.forEach((_, i) => {
-          const id = `${cat.id}_${i}`;
-          const ls = lsLoad()[id];
-          rows.push({
-            id, categoria: cat.id,
-            status:         ls?.status || 'open',
-            resposta:       ls?.resposta || '',
-            atualizado_por: ls?.atualizado_por || '',
-          });
-        });
-      });
-      await supabase.from(TABLE).upsert(rows, { onConflict: 'id' });
-      rows.forEach(r => { dbState[r.id] = r; });
-    }
+    // Gaps sem entrada no banco ficam com estado do localStorage (ou default)
+    Object.keys(ls).forEach(id => { if (!dbState[id]) dbState[id] = ls[id]; });
 
     liveEl.className = 'status-pill live';
     liveEl.innerHTML = '<span>Live · Supabase</span>';
