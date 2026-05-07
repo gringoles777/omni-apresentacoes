@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legacy Experience — Canvas de Decisões</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: #2a2a2a;
+    --gold: #C9A84C;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.12);
+    --text: #e8e8e8;
+    --text-dim: #888;
+    --red: #e05252;
+    --yellow: #e0b452;
+    --green: #52c07a;
+    --red-bg: rgba(224,82,82,0.1);
+    --yellow-bg: rgba(224,180,82,0.1);
+    --green-bg: rgba(82,192,122,0.1);
+    --font: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── PASSWORD OVERLAY ── */
+  #lock-overlay {
+    position: fixed; inset: 0;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    flex-direction: column;
+    gap: 24px;
+  }
+  #lock-overlay .lock-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    text-align: center;
+    max-width: 360px;
+    width: 90%;
+  }
+  #lock-overlay .lock-icon { font-size: 40px; margin-bottom: 16px; }
+  #lock-overlay h2 { color: var(--gold); font-size: 18px; margin-bottom: 4px; font-weight: 600; }
+  #lock-overlay p { color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
+  #lock-overlay input {
+    width: 100%; padding: 12px 16px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 16px;
+    text-align: center; letter-spacing: 4px;
+    outline: none; transition: border 0.2s;
+  }
+  #lock-overlay input:focus { border-color: var(--gold); }
+  #lock-overlay button {
+    margin-top: 12px; width: 100%; padding: 12px;
+    background: var(--gold); color: #000; border: none;
+    border-radius: 8px; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  #lock-overlay button:hover { opacity: 0.85; }
+  #lock-overlay .error { color: var(--red); font-size: 12px; margin-top: 8px; min-height: 16px; }
+
+  /* ── MAIN ── */
+  #main { display: none; }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px 24px;
+    background: var(--surface);
+  }
+  .header-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .header-title { display: flex; align-items: center; gap: 16px; }
+  .badge {
+    background: var(--gold-dim); border: 1px solid var(--gold);
+    color: var(--gold); font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.2; }
+  .header .subtitle { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px;
+  }
+  .stat {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px;
+  }
+  .stat .dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+  .stat .count { font-weight: 700; font-size: 18px; line-height: 1; }
+  .stat .label { color: var(--text-dim); font-size: 12px; }
+  .progress-bar-wrap {
+    margin-top: 16px; background: var(--surface2); border-radius: 8px; height: 6px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--green); border-radius: 8px; transition: width 0.4s;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    padding: 12px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    background: var(--bg);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-dim); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend small { font-style: italic; color: var(--text-dim); font-size: 11px; }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+    padding: 32px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a3a3a; }
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    background: var(--gold-dim);
+  }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--gold); }
+  .card-count { margin-left: auto; font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+  .card-body { padding: 8px 0; }
+
+  /* ── GAP ITEM ── */
+  .gap-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 0;
+    user-select: none;
+  }
+  .gap-item:hover { background: var(--surface2); }
+  .gap-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    margin-top: 6px; transition: background 0.2s;
+  }
+  .gap-text {
+    font-size: 13px; color: var(--text); line-height: 1.5; flex: 1;
+  }
+  .gap-item[data-status="open"] .gap-dot { background: var(--red); box-shadow: 0 0 6px var(--red); }
+  .gap-item[data-status="thinking"] .gap-dot { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+  .gap-item[data-status="done"] .gap-dot { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .gap-item[data-status="done"] .gap-text { color: var(--text-dim); text-decoration: line-through; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; padding: 32px 40px;
+    color: var(--text-dim); font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .footer span { color: var(--gold); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .header { padding: 20px; }
+    .legend { padding: 10px 20px; }
+    .grid { padding: 16px; gap: 14px; grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ PASSWORD OVERLAY -->
+<div id="lock-overlay">
+  <div class="lock-box">
+    <div class="lock-icon">🔐</div>
+    <h2>Legacy Experience</h2>
+    <p>Canvas de Decisões — Acesso restrito à equipe OMNI</p>
+    <input type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
+    <button onclick="checkPwd()">Entrar</button>
+    <div class="error" id="pwd-error"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ MAIN -->
+<div id="main">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-title">
+        <div>
+          <div class="badge">Planejamento</div>
+          <h1>Legacy Experience</h1>
+          <div class="subtitle">Canvas de Decisões · Outubro 2026 · Meta: 100 participantes</div>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:12px;color:var(--text-dim)">Equipe</div>
+        <div style="font-size:13px;margin-top:4px">
+          Michael · Fernanda · Marcão · Eliza · Gerlandia
+        </div>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="dot" style="background:var(--text-dim)"></div>
+        <div>
+          <div class="count" id="total-count">0</div>
+          <div class="label">Total de lacunas</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="dot" style="background:var(--red)"></div>
+        <div>
+          <div class="count" id="open-count">0</div>
+          <div class="label">Em aberto</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="dot" style="background:var(--yellow)"></div>
+        <div>
+          <div class="count" id="thinking-count">0</div>
+          <div class="label">Em discussão</div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="dot" style="background:var(--green)"></div>
+        <div>
+          <div class="count" id="done-count">0</div>
+          <div class="label">Definidas</div>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar-wrap" style="margin-top:12px">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div style="font-size:12px;color:var(--text-dim);font-weight:600">Clique em qualquer lacuna para mudar o status:</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Em aberto</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Em discussão</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Definida</div>
+    <small>· Estado salvo no navegador</small>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid" id="gap-grid"></div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Canvas gerado em maio 2026 · <span>OMNI Brasil</span> · Legacy Experience
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════ DATA
+const CANVAS = [
+  {
+    id: 'oferta',
+    icon: '🎯',
+    title: 'Oferta & Posicionamento',
+    gaps: [
+      'Qual é a promessa central do Legacy Experience — o que o profissional liberal vai conquistar em 4 dias que não conseguiria no formato padrão?',
+      'Por que AGORA? Qual o gatilho temporal ou cultural que justifica esse formato em outubro 2026?',
+      'O Legacy Experience convive com o Legacy regular em paralelo ou o substitui durante o lançamento?',
+      'O ingresso "1+1 acompanhante" é a headline principal da oferta ou um reveal estratégico ao longo do lançamento?',
+      'Qual o nome oficial do evento: "Legacy Experience", "Legacy Imersão" ou outro?',
+      'O que está incluso além dos 4 dias: material físico, gravações, certificação, acesso online?',
+      'Quem comprou o Legacy recentemente tem condição de upgrade ou desconto para o Experience?',
+      'Qual é o preço-âncora (valor percebido) que justifica o ticket cobrado?',
+    ]
+  },
+  {
+    id: 'avatar',
+    icon: '👤',
+    title: 'Público & Avatar',
+    gaps: [
+      'Dentro de "profissionais liberais", qual é o avatar primário vs. secundário? (ex: terapeuta com prática estabelecida vs. dentista recém-formado)',
+      'O acompanhante pode ser sócio ou parceiro de trabalho, ou deve ser exclusivamente familiar?',
+      'O acompanhante recebe certificação, material e acesso igual ao titular?',
+      'Alunos do Legacy padrão entram como público prioritário (upgrade) ou são excluídos da campanha principal?',
+      'O acompanhante é parte ativa da decisão de compra na copy, ou é tratado como surpresa/bônus?',
+      'Existe restrição de perfil para o acompanhante: idade mínima, vínculo comprovado?',
+    ]
+  },
+  {
+    id: 'preco',
+    icon: '💰',
+    title: 'Precificação & Estrutura Comercial',
+    gaps: [
+      'Qual o preço cheio por ingresso (considerando que 1 ingresso = 2 pessoas)?',
+      'Estrutura de lotes: lote único, 2 ou 3 lotes? Gatilhos de virada por data ou por quantidade?',
+      'Parcelamento máximo aceito? Há desconto à vista (Pix)?',
+      'Haverá early bird exclusivo para Aliança OMNI antes da abertura ao público geral?',
+      'Política de reembolso: qual a janela e em quais condições é aceito?',
+      'Política de transferência de ingresso caso o comprador não possa comparecer?',
+      'Haverá condição especial para ex-alunos do Legacy padrão?',
+    ]
+  },
+  {
+    id: 'cronograma',
+    icon: '📅',
+    title: 'Cronograma',
+    gaps: [
+      'Qual a data exata da imersão em outubro 2026 (4 dias específicos)?',
+      'Quando abre e quando fecha o carrinho de vendas?',
+      'Qual a janela de aquecimento orgânico antes do pré-lançamento formal — 60, 90 ou 120 dias?',
+      'Qual é o cronograma reverso completo: da imersão até o início do aquecimento?',
+      'Quando é o gate de decisão — data limite para confirmar público mínimo viável (break-even)?',
+    ]
+  },
+  {
+    id: 'plf',
+    icon: '🚀',
+    title: 'Estratégia de Lançamento (PLF)',
+    gaps: [
+      'Faz sentido um seed launch (20-30 pessoas da Aliança, 60 dias antes) para validar oferta e coletar testemunhos antes do lançamento principal?',
+      'Se sim, esses 20-30 entram dentro da meta de 100 ou são extras?',
+      'Qual a sequência dos 3 PLCs e a tese de cada um adaptada ao profissional liberal (oportunidade → transformação → ownership)?',
+      'Formato dos PLCs: vídeo gravado, live, série de e-mails ou híbrido?',
+      'Qual a janela do PLC antes do carrinho: 7, 10 ou 14 dias?',
+      'Haverá live de aquecimento com Michael antes do PLC1 para "anunciar que algo vem"?',
+      'Duração do carrinho aberto: 4, 5 ou 7 dias?',
+      'Haverá live de abertura do carrinho e live de fechamento (last call)?',
+      'Mecanismo de escassez REAL: vagas limitadas em 100, data fixa do evento, capacidade do venue?',
+      'Haverá evento online de pré-lançamento (CPL, aula ao vivo) ou venda direta via sequência de conteúdo?',
+    ]
+  },
+  {
+    id: 'lista',
+    icon: '📋',
+    title: 'Lista & Audiência',
+    gaps: [
+      'Qual o tamanho atual da lista quente: alunos Legacy + Aliança OMNI + leads orgânicos segmentados?',
+      'Qual a taxa de conversão histórica da lista quente para imersão de ticket alto na OMNI?',
+      'Haverá lista de espera / early access exclusiva com benefício real (lote zero, vaga garantida, bônus)?',
+      'Haverá pesquisa de aquecimento (survey estilo Ask Method) para coletar a linguagem e as dores reais do avatar antes de escrever a copy?',
+    ]
+  },
+  {
+    id: 'parceiros',
+    icon: '🤝',
+    title: 'Parceiros & Aliança OMNI',
+    gaps: [
+      'Quais membros da Aliança são tier 1 (alta audiência + alinhamento total) vs. tier 2/3?',
+      'A comissão de 25% é competitiva para o mercado de imersão presencial premium (benchmark: 30-40%)?',
+      'Comissão calculada sobre valor bruto ou líquido? Inclui parcelamento futuro ou apenas primeira parcela?',
+      'Qual o ciclo de pagamento da comissão: após confirmação, após janela de reembolso ou escalonado?',
+      'Como será feita a atribuição da venda ao parceiro: link rastreável, cupom ou formulário?',
+      'Haverá meta mínima de venda por parceiro para liberar a comissão cheia?',
+      'Incentivo para top performers: leaderboard ao vivo, bônus em dinheiro, presença VIP?',
+      'Parceiros recebem kit de divulgação completo: swipe copy, criativos, vídeos prontos, links UTM?',
+      'Haverá janela exclusiva para afiliados antes da abertura ao público geral?',
+      'Quem é o ponto focal com a Aliança durante o lançamento: Michael, Fernanda ou alguém dedicado?',
+      'Quando e quem assina o contrato/termo formal de parceria com cada afiliado?',
+    ]
+  },
+  {
+    id: 'captacao',
+    icon: '🔀',
+    title: 'Captação & Funil',
+    gaps: [
+      'A captação será 100% orgânica, 100% paga ou híbrida? Qual o split de meta de leads por canal?',
+      'Haverá isca digital / lead magnet antes da página de venda para aquecer o lead?',
+      'Modelo de venda: direto (LP → checkout) ou com etapa de aplicação/qualificação do lead?',
+      'A oferta será por sales call com closer humano ou self-checkout na página?',
+      'Qual o orçamento de mídia paga e em quais canais (Meta, YouTube, Google)?',
+      'Qual o CAC máximo aceitável para bater 100 ingressos com tráfego pago?',
+      'Como trabalhar a base existente: sequência de e-mail, régua de WhatsApp ou ligação ativa?',
+      'Como rastrear o ROI por origem (lista quente, afiliado, tráfego pago, orgânico) via UTMs e pixel?',
+    ]
+  },
+  {
+    id: 'copy',
+    icon: '✍️',
+    title: 'Conteúdo & Copy',
+    gaps: [
+      'Qual é a "história única" que conduz o profissional liberal do awareness até a decisão de compra?',
+      'Quais são as 3-5 objeções principais (tempo fora do consultório, custo, ceticismo, "já fiz o Legacy") e como cada uma é respondida na sequência?',
+      'Onde o "+1 acompanhante" é revelado na narrativa para maximizar o impacto emocional e de venda?',
+      'Qual prova social já existe (testemunhos do Legacy padrão) e o que precisa ser produzido do zero?',
+      'Haverá um "case story" central (um aluno-herói) ou múltiplas histórias de transformação?',
+      'Quem escreve a copy da página de vendas: Marcão, copywriter externo ou Fernanda?',
+      'Vídeo de vendas (VSL): Michael à frente? Formato (câmera, slides), local e data de gravação?',
+      'Quantidade e formato de criativos para tráfego pago: estáticos, vídeos curtos, depoimentos?',
+    ]
+  },
+  {
+    id: 'logistica',
+    icon: '📍',
+    title: 'Local & Logística do Evento',
+    gaps: [
+      'Cidade e venue confirmados? Contrato assinado ou em negociação?',
+      'A capacidade do venue suporta 200 pessoas (100 ingressos × 2 pessoas por ingresso)?',
+      'Hospedagem está inclusa no ticket, é recomendada com parceiro ou por conta do participante?',
+      'Alimentação (café, almoço, jantares) está inclusa total ou parcialmente?',
+      'Transfer aeroporto-hotel-evento é responsabilidade da OMNI ou por conta própria?',
+      'Estrutura técnica: som, iluminação, palco, gravação do evento — quem fornece e qual o custo?',
+      'Material físico (apostila, caderno, brindes) — quem produz, prazo e orçamento?',
+      'Agenda dos 4 dias: dress code, atividades extras, jantar de boas-vindas?',
+      'Plano B se Michael ou facilitador-chave tiver um imprevisto no período do evento?',
+    ]
+  },
+  {
+    id: 'onboarding',
+    icon: '🎓',
+    title: 'Onboarding & Pós-Compra',
+    gaps: [
+      'Qual o fluxo de boas-vindas após a compra: e-mail automático, WhatsApp via Prisma ou ligação da Eliza?',
+      'Como e quando o acompanhante é cadastrado — quem faz, qual formulário, qual prazo?',
+      'Quais dados precisam ser coletados de cada participante e do acompanhante (nome, profissão, restrições alimentares, etc.)?',
+      'Haverá pré-trabalho ou conteúdo preparatório antes da imersão para elevar o engajamento?',
+      'Comunicação de "esquenta" nas semanas anteriores ao evento: roteiro, frequência e canal?',
+      'Grupo de WhatsApp dos confirmados: quando cria, quem gerencia e qual a dinâmica?',
+      'O que acontece entre a compra (ex: julho) e o evento (outubro) para evitar cancelamentos de última hora?',
+    ]
+  },
+  {
+    id: 'time',
+    icon: '👥',
+    title: 'Time & Responsabilidades',
+    gaps: [
+      'Fernanda tem briefing fechado de execução de marketing, com escopo, autonomia e orçamento definidos?',
+      'Marcão tem deadline e formato de entrega da estratégia de conteúdo — calendário editorial, canais e tipo de peças?',
+      'Gerlandia tem orçamento aprovado e autonomia para contratar fornecedores de logística?',
+      'Fernanda consegue rodar um PLF completo sozinha ou precisa de reforço (copywriter, editor de vídeo, gestor de tráfego)?',
+      'Quem é o "rosto" nos vídeos e lives — Michael sozinho ou com um aluno-case como dupla?',
+      'Existe closer dedicado para atendimento consultivo de leads quentes, ou é Michael + Fernanda?',
+      'Quem é o DRI — responsável final por bater a meta de 100 ingressos?',
+    ]
+  },
+  {
+    id: 'tech',
+    icon: '⚙️',
+    title: 'Tecnologia & Operações',
+    gaps: [
+      'Plataforma de checkout: Hotmart, Eduzz, Stripe ou solução própria?',
+      'ActiveCampaign já tem a lista segmentada e automações configuradas para esse lançamento?',
+      'CRM para follow-up de leads quentes que não compraram: Pipedrive ou outra ferramenta?',
+      'Pixel, eventos de conversão e UTMs configurados antes do início do tráfego pago?',
+      'Dashboard de acompanhamento de vendas em tempo real — quem monitora e com qual frequência?',
+      'Integração checkout → onboarding da Eliza está mapeada e automatizada?',
+    ]
+  },
+  {
+    id: 'metricas',
+    icon: '📊',
+    title: 'Métricas & Metas',
+    gaps: [
+      'Meta de "100 participantes" = 100 ingressos (200 pessoas no venue) ou 100 pessoas (50 ingressos)?',
+      'Funil reverso: quantos leads precisamos para 100 vendas, considerando taxa de conversão histórica?',
+      'KPIs por etapa: visitantes na LP, opt-ins, leads qualificados, chamadas, conversão e ticket médio efetivo.',
+      'Meta de vendas por semana e por dia da janela de carrinho aberto.',
+      'Cenários: pessimista, realista e otimista — com ponto de break-even definido para cada.',
+      'Gate de decisão: em que momento se aciona "modo de emergência" se as vendas estiverem abaixo da curva?',
+    ]
+  },
+  {
+    id: 'riscos',
+    icon: '⚠️',
+    title: 'Riscos & Compliance',
+    gaps: [
+      'Haverá contrato ou termo de participação assinado digitalmente pelos compradores?',
+      'Cláusula de uso de imagem (foto e vídeo) durante a imersão está prevista no processo de compra?',
+      'Política de cancelamento do evento por força maior — quem assume custos e como é comunicado?',
+      'Seguro do evento é necessário para eventos com ~200 pessoas?',
+      'Conformidade fiscal: nota fiscal de serviço, recolhimento de impostos sobre comissões (IRRF)?',
+      'LGPD: coleta, armazenamento e uso dos dados dos leads e participantes está mapeado e documentado?',
+    ]
+  },
+  {
+    id: 'pos',
+    icon: '🔮',
+    title: 'Pós-Evento & Continuidade',
+    gaps: [
+      'Existe oferta de upsell pós-imersão: mentoria continuada, próximo produto ou nível da jornada?',
+      'Participantes do Experience entram automaticamente na Aliança OMNI ou em algum grupo VIP?',
+      'Como serão captados depoimentos e cases durante e logo após o evento para o próximo lançamento?',
+      'Plano de fidelização — o que acontece com o aluno do Experience nos 12 meses seguintes?',
+      'Como o Legacy Experience serve como combustível (provas sociais, cases, comunidade) para o próximo lançamento?',
+    ]
+  }
+];
+
+// ═══════════════════════════════════ PASSWORD
+const PWD = 'omni777';
+const SK = 'le_canvas_auth';
+
+function checkPwd() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === PWD) {
+    sessionStorage.setItem(SK, '1');
+    document.getElementById('lock-overlay').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    render();
+  } else {
+    document.getElementById('pwd-error').textContent = 'Senha incorreta.';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+
+if (sessionStorage.getItem(SK) === '1') {
+  document.getElementById('lock-overlay').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+}
+
+// ═══════════════════════════════════ STATE
+const STORE_KEY = 'le_canvas_v1';
+let state = {};
+
+function loadState() {
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch { state = {}; }
+}
+
+function saveState() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+}
+
+function getGapId(catId, idx) { return `${catId}_${idx}`; }
+
+function getStatus(catId, idx) {
+  return state[getGapId(catId, idx)] || 'open';
+}
+
+function nextStatus(s) {
+  return s === 'open' ? 'thinking' : s === 'thinking' ? 'done' : 'open';
+}
+
+// ═══════════════════════════════════ RENDER
+function render() {
+  loadState();
+  const grid = document.getElementById('gap-grid');
+  grid.innerHTML = '';
+
+  CANVAS.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const openCount = cat.gaps.filter((_, i) => getStatus(cat.id, i) === 'open').length;
+    const doneCount = cat.gaps.filter((_, i) => getStatus(cat.id, i) === 'done').length;
+
+    card.innerHTML = `
+      <div class="card-header">
+        <div class="card-icon">${cat.icon}</div>
+        <div class="card-title">${cat.title}</div>
+        <div class="card-count">${doneCount}/${cat.gaps.length} definidas</div>
+      </div>
+      <div class="card-body" id="body-${cat.id}"></div>
+    `;
+
+    grid.appendChild(card);
+    const body = card.querySelector(`#body-${cat.id}`);
+
+    cat.gaps.forEach((gap, i) => {
+      const status = getStatus(cat.id, i);
+      const item = document.createElement('div');
+      item.className = 'gap-item';
+      item.dataset.status = status;
+      item.innerHTML = `<div class="gap-dot"></div><div class="gap-text">${gap}</div>`;
+      item.addEventListener('click', () => {
+        const ns = nextStatus(item.dataset.status);
+        item.dataset.status = ns;
+        state[getGapId(cat.id, i)] = ns;
+        saveState();
+        updateStats();
+        // update card count
+        const allItems = body.querySelectorAll('.gap-item');
+        let dc = 0; allItems.forEach(it => { if (it.dataset.status === 'done') dc++; });
+        card.querySelector('.card-count').textContent = `${dc}/${cat.gaps.length} definidas`;
+      });
+      body.appendChild(item);
+    });
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  let total = 0, open = 0, thinking = 0, done = 0;
+  CANVAS.forEach(cat => {
+    cat.gaps.forEach((_, i) => {
+      total++;
+      const s = state[getGapId(cat.id, i)] || 'open';
+      if (s === 'open') open++;
+      else if (s === 'thinking') thinking++;
+      else done++;
+    });
+  });
+  document.getElementById('total-count').textContent = total;
+  document.getElementById('open-count').textContent = open;
+  document.getElementById('thinking-count').textContent = thinking;
+  document.getElementById('done-count').textContent = done;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+// Auto-init if already authenticated
+if (sessionStorage.getItem(SK) === '1') render();
+</script>
+</body>
+</html>
