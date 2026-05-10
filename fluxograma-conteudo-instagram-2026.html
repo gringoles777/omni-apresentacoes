@@ -906,10 +906,10 @@
   <text x="755" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">SOCIAL SELLING</text>
   <text x="755" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Comment → DM</text>
 
-  <!-- 3 formatos → PÚBLICO QUENTE: convergência simétrica (curvas de mesmo raio nos lados) -->
-  <path d="M 315,262 Q 380,295 463,312" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
-  <line x1="530" y1="262" x2="530" y2="300" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
-  <path d="M 755,262 Q 680,295 597,312" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <!-- 3 formatos → PÚBLICO QUENTE: convergência simétrica (terminam ON THE ELLIPSE BORDER, não dentro) -->
+  <path d="M 315,262 Q 380,288 463,300" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="530" y1="262" x2="530" y2="297" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <path d="M 755,262 Q 680,288 597,300" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
 
   <!-- ─── LINHA 4: PÚBLICO QUENTE ─── -->
   <ellipse cx="530" cy="322" rx="135" ry="24" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
@@ -965,8 +965,8 @@
   <path d="M 380,84 L 380,68 L 100,68 L 100,194" fill="none" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)" opacity="0.85"/>
   <text x="240" y="62" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.65" letter-spacing="1">alimenta tráfego</text>
 
-  <!-- TRÁFEGO PAGO → container de formatos: seta horizontal limpa -->
-  <line x1="170" y1="225" x2="232" y2="225" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <!-- TRÁFEGO PAGO → LP DE CONSULTORIA: seta vertical descendente (público frio pago vai direto pra LP) -->
+  <line x1="100" y1="254" x2="100" y2="297" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
 
   <!-- PÚBLICO QUENTE → LP DE CONSULTORIA: seta horizontal da borda esquerda do oval -->
   <line x1="395" y1="322" x2="172" y2="327" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)"/>
@@ -1008,8 +1008,7 @@
   <text x="618" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">MENTORING</text>
   <text x="618" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B">★ 50k+</text>
 
-  <!-- BM ↔ OMNITERAPIA -->
-  <line x1="664" y1="515" x2="749" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <!-- (sem seta direta BM ↔ OMNITERAPIA — eles se conectam apenas via a merge-bar inferior) -->
 
   <!-- OMNITERAPIA -->
   <circle cx="795" cy="515" r="46" fill="#0f0e0a" stroke="#C8A84B" stroke-width="1.5"/>
@@ -1033,12 +1032,14 @@
   <path d="M 1030,272 C 1150,170 1080,30 740,96" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="7 4" marker-end="url(#arr-g)"/>
   <text x="1075" y="124" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#E8C86A" opacity="0.85" letter-spacing="1">prova → conteúdo</text>
 
-  <!-- BLACK MENTORING → CONTEÚDO PODEROSO: arco pelo flanco direito interno
-       Termina em (715, 128) — sobre o quadrante inferior-direito do oval, sem cruzar a entrada de cima -->
-  <path d="M 618,469 C 880,440 880,180 715,128" fill="none" stroke="#E8C86A" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arr-g2)" opacity="0.78"/>
-  <!-- Label no espaço livre à direita, próximo ao meio do arco -->
-  <text x="900" y="270" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#E8C86A" opacity="0.85" letter-spacing="0.5">Conteúdo:</text>
-  <text x="900" y="284" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.78">Tipo A &amp; Tipo B</text>
+  <!-- BLACK MENTORING → CONTEÚDO PODEROSO: arco pelo flanco ESQUERDO/INFERIOR do diagrama
+       Sai do BLACK pela borda inferior-esquerda, desce abaixo da merge-bar, sobe pela margem esquerda
+       (passando POR FORA da coluna TRÁFEGO/LP em x=30-170), e entra no oval CONTEÚDO pela parte superior-esquerda.
+       Lado oposto ao arco TRANSFORMAÇÃO → CONTEÚDO (que vai pelo flanco direito). Zero sobreposição. -->
+  <path d="M 580,548 C 550,680 50,700 5,500 C 5,100 50,25 320,96" fill="none" stroke="#E8C86A" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arr-g2)" opacity="0.78"/>
+  <!-- Label na faixa horizontal LIVRE entre TRÁFEGO (y≤254) e LP (y≥298), encostada na curva (~10-12px de afastamento) -->
+  <text x="30" y="268" text-anchor="start" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.9" letter-spacing="0.5">Conteúdo:</text>
+  <text x="30" y="282" text-anchor="start" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.82">Tipo A &amp; B</text>
 
   <!-- ═══ RODAPÉ ═══ -->
   <text x="590" y="705" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" fill="#9A7A2E" letter-spacing="5" opacity="0.7">↻ CADA RESULTADO SE TORNA PROVA E ALIMENTA NOVO CONTEÚDO ↻</text>
