@@ -829,94 +829,99 @@
 <div class="section-title"><span class="num">3</span>Flywheel · Como o Ecossistema OMNI se Alimenta</div>
 
 <div style="width:100%;overflow-x:auto;padding:8px 0 20px;">
-<svg viewBox="0 0 1100 750" width="100%" style="min-width:700px;display:block;" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 1180 720" width="100%" style="min-width:760px;display:block;" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="fa" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+    <!-- Setas de fluxo principal (ouro pleno) -->
+    <marker id="arr-g" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
     </marker>
-    <marker id="fa2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+    <!-- Setas de retorno/feedback (ouro claro) -->
+    <marker id="arr-g2" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#E8C86A"/>
     </marker>
-    <marker id="fa3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B" opacity="0.7"/>
-    </marker>
-  </defs>
-
-  <defs>
-    <marker id="arr-g" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
-    </marker>
-    <marker id="arr-g2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#E8C86A"/>
-    </marker>
-    <marker id="arr-rev" markerWidth="8" markerHeight="8" refX="1" refY="3" orient="auto">
+    <!-- Seta reversa (para setas bidirecionais) -->
+    <marker id="arr-rev" markerWidth="9" markerHeight="9" refX="0.5" refY="3" orient="auto">
       <path d="M8,0 L8,6 L0,3 z" fill="#C8A84B"/>
     </marker>
   </defs>
 
-  <rect width="1100" height="750" fill="#050505"/>
+  <rect width="1180" height="720" fill="#050505"/>
 
-  <!-- PÚBLICO FRIO -->
-  <text x="470" y="16" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#9A7A2E" letter-spacing="4" opacity="0.85">PÚBLICO FRIO</text>
-  <line x1="440" y1="20" x2="364" y2="47" stroke="#9A7A2E" stroke-width="1" opacity="0.4"/>
-  <line x1="500" y1="20" x2="578" y2="47" stroke="#9A7A2E" stroke-width="1" opacity="0.4"/>
-  <text x="338" y="44" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Terapeuta "Rico"</text>
-  <text x="604" y="44" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Gestor Exausto</text>
-  <line x1="362" y1="49" x2="378" y2="59" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
-  <line x1="578" y1="49" x2="562" y2="59" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYOUT GRID (referência mental, não renderizado)
+       Coluna A (esquerda):     x = 30 ─ 170    → tráfego pago / LP
+       Coluna B (centro):       x = 230 ─ 850   → fluxo principal vertical
+       Coluna C (direita):      x = 920 ─ 1140  → transformação
+       Linha 1 (público frio):  y = 24
+       Linha 2 (conteúdo):      y = 110
+       Linha 3 (formatos):      y = 210
+       Linha 4 (público quente):y = 322
+       Linha 5 (comercial):     y = 400
+       Linha 6 (produtos):      y = 515
+       Linha 7 (merge bar):     y = 582
+       Rodapé:                  y = 705
+       ═══════════════════════════════════════════════════════════ -->
 
-  <!-- CONTEÚDO PODEROSO -->
-  <ellipse cx="470" cy="102" rx="215" ry="43" fill="#131310" stroke="#C8A84B" stroke-width="2.5"/>
-  <text x="470" y="95" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="15" font-weight="700" fill="#E8C86A" letter-spacing="1">CONTEÚDO PODEROSO</text>
-  <text x="470" y="113" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#A8A095" letter-spacing="2">INSTAGRAM · YOUTUBE · BLOG</text>
+  <!-- ─── LINHA 1: PÚBLICO FRIO + bifurcação ─── -->
+  <text x="530" y="22" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#9A7A2E" letter-spacing="4" opacity="0.85">PÚBLICO FRIO</text>
+  <text x="380" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Terapeuta "Rico"</text>
+  <text x="680" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Gestor Exausto</text>
+  <!-- bifurcação descendente (sem cruzar os labels) -->
+  <line x1="510" y1="32" x2="425" y2="44" stroke="#9A7A2E" stroke-width="1" opacity="0.45"/>
+  <line x1="550" y1="32" x2="635" y2="44" stroke="#9A7A2E" stroke-width="1" opacity="0.45"/>
+  <!-- dos sub-públicos descendo limpo até a borda superior do oval CONTEÚDO -->
+  <line x1="380" y1="60" x2="395" y2="78" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <line x1="680" y1="60" x2="665" y2="78" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
 
-  <!-- CONTEÚDO fan-out para 3 sub-elementos -->
-  <line x1="352" y1="136" x2="228" y2="162" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <line x1="453" y1="145" x2="430" y2="162" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <line x1="590" y1="136" x2="643" y2="162" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <!-- ─── LINHA 2: CONTEÚDO PODEROSO ─── -->
+  <ellipse cx="530" cy="110" rx="230" ry="36" fill="#131310" stroke="#C8A84B" stroke-width="2.5"/>
+  <text x="530" y="106" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="16" font-weight="700" fill="#E8C86A" letter-spacing="1.5">CONTEÚDO PODEROSO</text>
+  <text x="530" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#A8A095" letter-spacing="2.5">INSTAGRAM · YOUTUBE · BLOG</text>
 
-  <!-- CONTAINER PONTILHADO -->
-  <rect x="150" y="156" width="572" height="76" rx="12" fill="none" stroke="#C8A84B" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
+  <!-- CONTEÚDO → 3 formatos: três descidas simétricas verticais a partir do fundo do oval -->
+  <line x1="315" y1="144" x2="315" y2="186" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="530" y1="146" x2="530" y2="186" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="755" y1="144" x2="755" y2="186" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- ─── LINHA 3: CONTAINER PONTILHADO + 3 FORMATOS ─── -->
+  <rect x="230" y="190" width="620" height="78" rx="12" fill="none" stroke="#C8A84B" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
+  <text x="540" y="182" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095" letter-spacing="3" opacity="0.7">FORMATOS DE CONVERSÃO</text>
 
   <!-- VSL -->
-  <rect x="158" y="162" width="120" height="62" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="218" y="187" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">VSL</text>
-  <text x="218" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Vídeo de Vendas</text>
-
-  <!-- VSL ↔ AULA: seta dupla numa linha -->
-  <line x1="278" y1="194" x2="352" y2="194" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <rect x="240" y="196" width="150" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="315" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="14" font-weight="700" fill="#E8C86A">VSL</text>
+  <text x="315" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Vídeo de Vendas</text>
+  <!-- VSL ↔ AULA -->
+  <line x1="390" y1="229" x2="455" y2="229" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
 
   <!-- AULA AO VIVO -->
-  <rect x="352" y="162" width="138" height="62" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="421" y="187" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A">AULA AO VIVO</text>
-  <text x="421" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Webinar · Live</text>
-
-  <!-- AULA ↔ SOCIAL: seta dupla numa linha -->
-  <line x1="490" y1="194" x2="562" y2="194" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <rect x="455" y="196" width="150" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="530" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">AULA AO VIVO</text>
+  <text x="530" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Webinar · Live</text>
+  <!-- AULA ↔ SOCIAL -->
+  <line x1="605" y1="229" x2="670" y2="229" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
 
   <!-- SOCIAL SELLING -->
-  <rect x="562" y="162" width="148" height="62" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="636" y="187" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">SOCIAL SELLING</text>
-  <text x="636" y="204" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Comment → DM</text>
+  <rect x="670" y="196" width="170" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="755" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">SOCIAL SELLING</text>
+  <text x="755" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Comment → DM</text>
 
-  <!-- sub-elementos → PÚBLICO QUENTE (convergem sem cruzar) -->
-  <path d="M 218,224 Q 300,250 390,258" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <path d="M 421,224 L 455,255" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <path d="M 636,224 Q 574,250 550,258" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <!-- 3 formatos → PÚBLICO QUENTE: convergência simétrica (curvas de mesmo raio nos lados) -->
+  <path d="M 315,262 Q 380,295 463,312" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="530" y1="262" x2="530" y2="300" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <path d="M 755,262 Q 680,295 597,312" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
 
-  <!-- PÚBLICO QUENTE -->
-  <ellipse cx="470" cy="278" rx="128" ry="26" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
-  <text x="470" y="274" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1">PÚBLICO QUENTE</text>
-  <text x="470" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Lead aquecido e qualificado</text>
-  <line x1="470" y1="304" x2="470" y2="316" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <!-- ─── LINHA 4: PÚBLICO QUENTE ─── -->
+  <ellipse cx="530" cy="322" rx="135" ry="24" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="530" y="318" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">PÚBLICO QUENTE</text>
+  <text x="530" y="334" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Lead aquecido e qualificado</text>
+  <!-- QUENTE → COMERCIAL: linha curta vertical -->
+  <line x1="530" y1="346" x2="530" y2="376" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
 
-  <!-- COMERCIAL -->
-  <rect x="292" y="316" width="356" height="50" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
-  <text x="470" y="336" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#C8A84B" letter-spacing="1">COMERCIAL</text>
-  <text x="470" y="353" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">SDR → Closer · Reunião de vendas</text>
-
-
-
+  <!-- ─── LINHA 5: COMERCIAL ─── -->
+  <rect x="345" y="380" width="370" height="52" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="530" y="402" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#C8A84B" letter-spacing="1.5">COMERCIAL</text>
+  <text x="530" y="420" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">SDR → Closer · Reunião de vendas</text>
 
 
 
@@ -927,108 +932,116 @@
 
 
 
-  <!-- TRÁFEGO PAGO (esquerda) -->
-  <rect x="8" y="192" width="130" height="50" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
-  <text x="73" y="212" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">TRÁFEGO</text>
-  <text x="73" y="228" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">PAGO</text>
-  <line x1="73" y1="242" x2="73" y2="258" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+
+
+
+  <!-- ─── COLUNA ESQUERDA: TRÁFEGO PAGO (alinhado com formatos) + LP (alinhada com público quente) ─── -->
+
+  <!-- TRÁFEGO PAGO -->
+  <rect x="30" y="196" width="140" height="58" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="100" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">TRÁFEGO</text>
+  <text x="100" y="239" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">PAGO</text>
 
   <!-- LP DE CONSULTORIA -->
-  <rect x="8" y="258" width="130" height="52" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
-  <text x="73" y="278" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#C8A84B" letter-spacing="1">LP DE</text>
-  <text x="73" y="294" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#C8A84B" letter-spacing="1">CONSULTORIA</text>
-  <!-- LP → COMERCIAL: curva limpa, sem cruzar nada -->
-  <path d="M 138,284 Q 220,305 292,332" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <rect x="30" y="298" width="140" height="58" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="100" y="322" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">LP DE</text>
+  <text x="100" y="340" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">CONSULTORIA</text>
+
+  <!-- LP → COMERCIAL: curva descendente limpa -->
+  <path d="M 170,327 Q 255,365 345,399" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
 
 
 
 
 
 
-  <!-- TRANSFORMAÇÃO QUE SE PROVA -->
-  <ellipse cx="905" cy="303" rx="80" ry="40" fill="#0f0e0a" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="905" y="294" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A" letter-spacing="1">TRANSFORMAÇÃO</text>
-  <text x="905" y="310" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A" letter-spacing="1">QUE SE PROVA</text>
-  <text x="905" y="328" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Cases · Depoimentos</text>
+  <!-- ─── COLUNA DIREITA: TRANSFORMAÇÃO QUE SE PROVA (alinhada verticalmente com COMERCIAL) ─── -->
+  <ellipse cx="1030" cy="322" rx="105" ry="50" fill="#0f0e0a" stroke="#C8A84B" stroke-width="2"/>
+  <text x="1030" y="314" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">TRANSFORMAÇÃO</text>
+  <text x="1030" y="332" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">QUE SE PROVA</text>
+  <text x="1030" y="354" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Cases · Depoimentos</text>
 
-  <!-- TRANSFORMAÇÃO → CONTEÚDO: arco limpo pelo canto superior direito -->
+  <!-- CONTEÚDO → TRÁFEGO PAGO: rota ortogonal pela margem superior (não corta o oval) -->
+  <path d="M 380,84 L 380,68 L 100,68 L 100,194" fill="none" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)" opacity="0.85"/>
+  <text x="240" y="62" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.65" letter-spacing="1">alimenta tráfego</text>
 
+  <!-- TRÁFEGO PAGO → container de formatos: seta horizontal limpa -->
+  <line x1="170" y1="225" x2="232" y2="225" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
 
-
-  <!-- CONTEÚDO → TRÁFEGO PAGO: sai pela esquerda do oval, desce limpo -->
-  <path d="M 255,102 L 73,102 L 73,190" fill="none" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)" opacity="0.75"/>
-
-  <!-- TRÁFEGO PAGO → container (VSL/Aula/Social) -->
-  <line x1="138" y1="214" x2="150" y2="196" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)"/>
-
-  <!-- PÚBLICO QUENTE → LP DE CONSULTORIA -->
-  <line x1="342" y1="278" x2="138" y2="284" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)"/>
+  <!-- PÚBLICO QUENTE → LP DE CONSULTORIA: seta horizontal da borda esquerda do oval -->
+  <line x1="395" y1="322" x2="172" y2="327" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)"/>
 
 
 
 
-  <!-- ═══ 4 PRODUTOS (fila inferior, mais próximos) ═══ -->
+  <!-- ═══ COMERCIAL → 4 PRODUTOS: barra de distribuição em T + descidas paralelas ═══ -->
+  <line x1="530" y1="432" x2="530" y2="450" stroke="#C8A84B" stroke-width="1.5"/>
+  <line x1="265" y1="450" x2="795" y2="450" stroke="#C8A84B" stroke-width="1.5"/>
+  <line x1="265" y1="450" x2="265" y2="470" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="442" y1="450" x2="442" y2="470" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="618" y1="450" x2="618" y2="470" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="795" y1="450" x2="795" y2="470" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- ═══ LINHA 6: 4 PRODUTOS (espaçamento uniforme) ═══ -->
 
   <!-- FPH / MASTER -->
-  <circle cx="205" cy="443" r="45" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="205" y="436" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">FPH /</text>
-  <text x="205" y="450" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">MASTER</text>
-  <text x="205" y="465" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#A8A095">Formação</text>
+  <circle cx="265" cy="515" r="46" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="265" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">FPH /</text>
+  <text x="265" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">MASTER</text>
+  <text x="265" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Formação</text>
 
   <!-- FPH ↔ LEGACY -->
-  <line x1="250" y1="443" x2="308" y2="443" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <line x1="311" y1="515" x2="396" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
 
   <!-- OMNI LEGACY -->
-  <circle cx="358" cy="443" r="45" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="358" y="436" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">OMNI</text>
-  <text x="358" y="450" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">LEGACY</text>
-  <text x="358" y="465" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#A8A095">Imersão</text>
+  <circle cx="442" cy="515" r="46" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="442" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">OMNI</text>
+  <text x="442" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">LEGACY</text>
+  <text x="442" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Imersão</text>
 
   <!-- LEGACY ↔ BM -->
-  <line x1="403" y1="443" x2="461" y2="443" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <line x1="488" y1="515" x2="572" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
 
-  <!-- BLACK MENTORING -->
-  <circle cx="511" cy="443" r="45" fill="rgba(200,168,75,0.08)" stroke="#E8C86A" stroke-width="2.5"/>
-  <text x="511" y="436" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">BLACK</text>
-  <text x="511" y="450" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">MENTORING</text>
-  <text x="511" y="465" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#C8A84B">★ 50k+</text>
+  <!-- BLACK MENTORING (destaque) -->
+  <circle cx="618" cy="515" r="46" fill="rgba(200,168,75,0.08)" stroke="#E8C86A" stroke-width="2.5"/>
+  <text x="618" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">BLACK</text>
+  <text x="618" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">MENTORING</text>
+  <text x="618" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B">★ 50k+</text>
 
   <!-- BM ↔ OMNITERAPIA -->
-  <line x1="556" y1="443" x2="614" y2="443" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+  <line x1="664" y1="515" x2="749" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
 
-  <!-- OMNITERAPIA (agora produto, mesma fila) -->
-  <circle cx="664" cy="443" r="45" fill="#0f0e0a" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="664" y="436" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">OMNI-</text>
-  <text x="664" y="450" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">TERAPIA</text>
-  <text x="664" y="465" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#A8A095">Prática real</text>
+  <!-- OMNITERAPIA -->
+  <circle cx="795" cy="515" r="46" fill="#0f0e0a" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="795" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">OMNI-</text>
+  <text x="795" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">TERAPIA</text>
+  <text x="795" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Prática real</text>
 
-  <!-- COMERCIAL → 4 produtos -->
-  <path d="M 325,366 L 215,398" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <path d="M 420,366 L 362,398" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <path d="M 525,366 L 515,398" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
-  <path d="M 618,366 L 660,398" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <!-- ═══ LINHA 7: MERGE BAR + seta única para TRANSFORMAÇÃO ═══ -->
+  <line x1="265" y1="561" x2="265" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="442" y1="561" x2="442" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="618" y1="561" x2="618" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="795" y1="561" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="265" y1="580" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.8"/>
+  <!-- seta única do extremo direito da barra subindo até TRANSFORMAÇÃO (cy=322, parte inferior y=372) -->
+  <path d="M 795,580 Q 950,580 1030,375" fill="none" stroke="#C8A84B" stroke-width="1.6" marker-end="url(#arr-g)"/>
 
-  <!-- Merge: drops + barra horizontal + seta única → TRANSFORMAÇÃO QUE SE PROVA -->
-  <line x1="205" y1="488" x2="205" y2="502" stroke="#C8A84B" stroke-width="1.2"/>
-  <line x1="358" y1="488" x2="358" y2="502" stroke="#C8A84B" stroke-width="1.2"/>
-  <line x1="511" y1="488" x2="511" y2="502" stroke="#C8A84B" stroke-width="1.2"/>
-  <line x1="664" y1="488" x2="664" y2="502" stroke="#C8A84B" stroke-width="1.2"/>
-  <line x1="205" y1="502" x2="664" y2="502" stroke="#C8A84B" stroke-width="1.5"/>
-  <path d="M 664,502 Q 810,455 820,343" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+  <!-- ═══ LOOPS DE RETORNO (tracejados) ═══ -->
 
-  <!-- TRANSFORMAÇÃO → CONTEÚDO: arco pelo canto superior direito (sem cruzar BLACK arc) -->
-  <path d="M 905,263 C 990,180 990,30 685,91" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="7 4" marker-end="url(#arr-g)"/>
-  <text x="970" y="138" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.7">← prova</text>
+  <!-- TRANSFORMAÇÃO → CONTEÚDO PODEROSO: arco pelo canto superior direito
+       Termina em (740, 96) — sobre o quadrante superior-direito do oval (cy=110, ry=36) -->
+  <path d="M 1030,272 C 1150,170 1080,30 740,96" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="7 4" marker-end="url(#arr-g)"/>
+  <text x="1075" y="124" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#E8C86A" opacity="0.85" letter-spacing="1">prova → conteúdo</text>
 
-  <!-- BLACK MENTORING → CONTEÚDO PODEROSO: arc pelo lado esquerdo (não cruza o de cima) -->
-  <path d="M 511,398 C 180,310 180,140 262,90" fill="none" stroke="#E8C86A" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#arr-g2)" opacity="0.65"/>
-  <!-- Label próximo à linha, na lateral esquerda -->
-  <text x="148" y="276" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.7">Conteúdo:</text>
-  <text x="148" y="290" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.7">Tipo A</text>
-  <text x="148" y="304" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.7">e Tipo B</text>
+  <!-- BLACK MENTORING → CONTEÚDO PODEROSO: arco pelo flanco direito interno
+       Termina em (715, 128) — sobre o quadrante inferior-direito do oval, sem cruzar a entrada de cima -->
+  <path d="M 618,469 C 880,440 880,180 715,128" fill="none" stroke="#E8C86A" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#arr-g2)" opacity="0.78"/>
+  <!-- Label no espaço livre à direita, próximo ao meio do arco -->
+  <text x="900" y="270" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#E8C86A" opacity="0.85" letter-spacing="0.5">Conteúdo:</text>
+  <text x="900" y="284" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.78">Tipo A &amp; Tipo B</text>
 
-  <!-- RODAPÉ -->
-  <text x="550" y="740" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" fill="#9A7A2E" letter-spacing="5" opacity="0.6">↻ CADA RESULTADO SE TORNA PROVA E ALIMENTA NOVO CONTEÚDO ↻</text>
+  <!-- ═══ RODAPÉ ═══ -->
+  <text x="590" y="705" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" fill="#9A7A2E" letter-spacing="5" opacity="0.7">↻ CADA RESULTADO SE TORNA PROVA E ALIMENTA NOVO CONTEÚDO ↻</text>
 </svg>
 </div>
 
