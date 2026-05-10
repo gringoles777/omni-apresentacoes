@@ -826,98 +826,174 @@
 </div>
 
 <!-- ============ SEÇÃO 3: FLYWHEEL ============ -->
-<div class="section-title"><span class="num">3</span>Flywheel · O Motor de Conteúdo OMNI</div>
+<div class="section-title"><span class="num">3</span>Flywheel · Como o Ecossistema OMNI se Alimenta</div>
 
-<div style="display:flex;justify-content:center;align-items:center;padding:8px 0 16px;">
-<svg viewBox="0 0 900 820" width="100%" style="max-width:860px;" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif">
+<div style="width:100%;overflow-x:auto;padding:8px 0 20px;">
+<svg viewBox="0 0 1100 790" width="100%" style="min-width:700px;display:block;" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <marker id="fa" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
     </marker>
-    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <marker id="fa2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#E8C86A"/>
     </marker>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#2a2000"/>
-      <stop offset="100%" stop-color="#0D0D0D"/>
-    </radialGradient>
-    <radialGradient id="blackGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(200,168,75,0.18)"/>
-      <stop offset="100%" stop-color="rgba(200,168,75,0.04)"/>
-    </radialGradient>
+    <marker id="fa3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B" opacity="0.7"/>
+    </marker>
   </defs>
 
-  <!-- anel externo Black Mentoring -->
-  <circle cx="450" cy="400" r="340" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
-  <text x="450" y="68" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="4" opacity="0.7">★ BLACK MENTORING ACELERA O LOOP ★</text>
+  <!-- separador central sutil -->
+  <line x1="550" y1="15" x2="550" y2="590" stroke="#C8A84B" stroke-width="0.5" stroke-dasharray="3 14" opacity="0.12"/>
 
-  <!-- setas circulares (arcos horários) -->
-  <!-- 1→2: topo direita -->
-  <path d="M 572,175 A 240,240 0 0,1 710,310" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
-  <!-- 2→3: direita baixo -->
-  <path d="M 720,360 A 240,240 0 0,1 690,520" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
-  <!-- 3→4: baixo esq -->
-  <path d="M 620,620 A 240,240 0 0,1 460,678" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
-  <!-- 4→5: esq baixo -->
-  <path d="M 380,672 A 240,240 0 0,1 200,535" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
-  <!-- 5→6: esq topo -->
-  <path d="M 183,365 A 240,240 0 0,1 228,195" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
-  <!-- 6→1: topo -->
-  <path d="M 318,143 A 240,240 0 0,1 432,122" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- labels de coluna -->
+  <text x="175" y="12" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="9" fill="#9A7A2E" letter-spacing="3" opacity="0.75">FUNIL @MICHAELARRUDA · FORMAÇÃO</text>
+  <text x="925" y="12" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="9" fill="#9A7A2E" letter-spacing="3" opacity="0.75">FUNIL @OMNIBR · TERAPIA</text>
 
-  <!-- CENTRO -->
-  <circle cx="450" cy="400" r="90" fill="url(#centerGrad)" stroke="#C8A84B" stroke-width="2.5" filter="url(#glow)"/>
-  <text x="450" y="388" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">PRODUÇÃO DE</text>
-  <text x="450" y="406" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">CONTEÚDO</text>
-  <text x="450" y="424" text-anchor="middle" font-size="10" fill="#C8A84B" opacity="0.8">↻ motor</text>
+  <!-- ============ COLUNA ESQUERDA ============ -->
 
-  <!-- NÓ 1 — topo — @omnibr publica -->
-  <rect x="340" y="90" width="220" height="72" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="450" y="111" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">@OMNIBR PUBLICA</text>
-  <text x="450" y="127" text-anchor="middle" font-size="10" fill="#F5F0E8">Case OMNI: Animação IA</text>
-  <text x="450" y="141" text-anchor="middle" font-size="10" fill="#F5F0E8">Carrossel · Omniterapeuta Fala</text>
-  <text x="450" y="155" text-anchor="middle" font-size="9" fill="#C8A84B" opacity="0.8">→ DM: "chame no DM para ajuda"</text>
+  <!-- @michaelarruda -->
+  <rect x="15" y="20" width="320" height="85" rx="7" fill="#131310" stroke="#C8A84B" stroke-width="2"/>
+  <text x="175" y="40" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">@MICHAELARRUDA</text>
+  <text x="175" y="57" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Tipo A — Prosperidade (50%)</text>
+  <text x="175" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Tipo B — Prova (30%)</text>
+  <text x="175" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Tipo C — Mentalidade (20%)</text>
 
-  <!-- NÓ 2 — direita topo — Público vê -->
-  <rect x="690" y="270" width="200" height="80" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="790" y="291" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">PÚBLICO VÊ</text>
-  <text x="790" y="307" text-anchor="middle" font-size="10" fill="#F5F0E8">Com problema →</text>
-  <text x="790" y="321" text-anchor="middle" font-size="10" fill="#F5F0E8">procura omniterapeuta</text>
-  <text x="790" y="337" text-anchor="middle" font-size="10" fill="#F5F0E8">Profissional → @michaelarruda</text>
+  <line x1="175" y1="105" x2="175" y2="123" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
 
-  <!-- NÓ 3 — direita baixo — michaelarruda converte -->
-  <rect x="680" y="490" width="210" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="785" y="511" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">@MICHAELARRUDA</text>
-  <text x="785" y="527" text-anchor="middle" font-size="10" fill="#F5F0E8">Tipos A · B · C</text>
-  <text x="785" y="543" text-anchor="middle" font-size="10" fill="#F5F0E8">Converte em FPH</text>
-  <text x="785" y="559" text-anchor="middle" font-size="10" fill="#F5F0E8">Master · Black Mentoring</text>
+  <!-- Audiência Qualificada -->
+  <rect x="15" y="123" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="175" y="142" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">AUDIÊNCIA QUALIFICADA</text>
+  <text x="175" y="158" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Terapeuta "Rico" · Gestor Exausto</text>
+  <text x="175" y="173" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Desejo: qualidade de vida + propósito</text>
 
-  <!-- NÓ 4 — baixo — Formado -->
-  <rect x="330" y="640" width="240" height="66" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="450" y="660" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">OMNITERAPEUTA FORMADO</text>
-  <text x="450" y="676" text-anchor="middle" font-size="10" fill="#F5F0E8">Atende clientes reais</text>
-  <text x="450" y="691" text-anchor="middle" font-size="10" fill="#F5F0E8">Coleta resultados do método</text>
+  <line x1="175" y1="187" x2="175" y2="205" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
 
-  <!-- NÓ 5 — esquerda baixo — Portal -->
-  <rect x="10" y="490" width="200" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="110" y="511" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">PORTAL DE CASES</text>
-  <text x="110" y="527" text-anchor="middle" font-size="10" fill="#F5F0E8">Omniterapeuta submete</text>
-  <text x="110" y="543" text-anchor="middle" font-size="10" fill="#F5F0E8">IA valida · Julia aprova</text>
-  <text x="110" y="559" text-anchor="middle" font-size="10" fill="#C8A84B">★ Black: crédito na legenda</text>
+  <!-- Social Selling -->
+  <rect x="15" y="205" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="175" y="224" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">SOCIAL SELLING</text>
+  <text x="175" y="240" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Comment → DM automático</text>
+  <text x="175" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">CTA: reunião ou material rico (áudio / mapa)</text>
 
-  <!-- NÓ 6 — esquerda topo — Roteiro e Produção -->
-  <rect x="10" y="270" width="200" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
-  <text x="110" y="291" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">ROTEIRO + PRODUÇÃO</text>
-  <text x="110" y="307" text-anchor="middle" font-size="10" fill="#F5F0E8">GICA aplicado ao case</text>
-  <text x="110" y="323" text-anchor="middle" font-size="10" fill="#F5F0E8">IA gera cenas visuais</text>
-  <text x="110" y="339" text-anchor="middle" font-size="10" fill="#F5F0E8">Julia edita → exporta</text>
+  <line x1="175" y1="269" x2="175" y2="287" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
 
-  <!-- label loop -->
-  <text x="450" y="800" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" fill="#C8A84B" letter-spacing="5" opacity="0.6">↻ CADA VOLTA ACELERA A PRÓXIMA ↻</text>
+  <!-- Comercial -->
+  <rect x="15" y="287" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="175" y="306" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">COMERCIAL · SDR → CLOSER</text>
+  <text x="175" y="322" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Reunião de vendas · Qualificação</text>
+  <text x="175" y="337" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Apresentação da oferta adequada ao perfil</text>
+
+  <!-- split: CO → FPH e CO → Black -->
+  <line x1="90" y1="351" x2="90" y2="375" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+  <line x1="260" y1="351" x2="260" y2="375" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- FPH / Master -->
+  <rect x="15" y="375" width="148" height="82" rx="6" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="89" y="396" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A" letter-spacing="1">FPH / MASTER</text>
+  <text x="89" y="413" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Formação completa</text>
+  <text x="89" y="429" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Certifica novo</text>
+  <text x="89" y="443" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">omniterapeuta</text>
+
+  <!-- Black Mentoring -->
+  <rect x="172" y="375" width="163" height="82" rx="6" fill="rgba(200,168,75,0.08)" stroke="#E8C86A" stroke-width="2"/>
+  <text x="253" y="396" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A" letter-spacing="1">BLACK MENTORING</text>
+  <text x="253" y="413" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Escalar para 50k+</text>
+  <text x="253" y="429" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#F5F0E8">Já é terapeuta, quer mais</text>
+  <text x="253" y="445" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B">★ @handle no @omnibr</text>
+
+  <!-- FPH → Formado -->
+  <line x1="89" y1="457" x2="89" y2="479" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+  <!-- Black → Formado (dashed) -->
+  <path d="M 253,457 Q 253,470 175,479" fill="none" stroke="#E8C86A" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#fa2)"/>
+
+  <!-- Omniterapeuta Formado -->
+  <rect x="15" y="479" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="175" y="498" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">OMNITERAPEUTA FORMADO</text>
+  <text x="175" y="514" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Atende clientes · Coleta resultados</text>
+  <text x="175" y="529" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Pode integrar a rede de parceiros OMNI</text>
+
+  <!-- Formado → Cases -->
+  <path d="M 175,543 Q 200,600 370,618" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- cross: Formado → Parceiro (formado torna-se parceiro) -->
+  <path d="M 335,511 Q 550,480 765,320" fill="none" stroke="#9A7A2E" stroke-width="1" stroke-dasharray="4 6" marker-end="url(#fa)" opacity="0.45"/>
+  <text x="560" y="468" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#9A7A2E" opacity="0.6">torna-se parceiro</text>
+
+  <!-- ============ COLUNA DIREITA ============ -->
+
+  <!-- @omnibr -->
+  <rect x="765" y="20" width="320" height="85" rx="7" fill="#131310" stroke="#C8A84B" stroke-width="2"/>
+  <text x="925" y="40" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">@OMNIBR</text>
+  <text x="925" y="57" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Case OMNI: Animação IA · Carrossel</text>
+  <text x="925" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Omniterapeuta Fala (★ Black)</text>
+  <text x="925" y="87" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">CTA: "Chame no DM para ajuda"</text>
+
+  <line x1="925" y1="105" x2="925" y2="123" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- Público com Problema -->
+  <rect x="765" y="123" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="925" y="142" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">PÚBLICO COM PROBLEMA</text>
+  <text x="925" y="158" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Ansiedade · Fobia · Bloqueio</text>
+  <text x="925" y="173" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Vê o case → se identifica → quer resolver</text>
+
+  <line x1="925" y1="187" x2="925" y2="205" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- Procura Omniterapeuta -->
+  <rect x="765" y="205" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="925" y="224" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">PROCURA OMNITERAPEUTA</text>
+  <text x="925" y="240" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Clica no DM · Pede indicação na rede</text>
+  <text x="925" y="255" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Direcionado ao omniterapeuta parceiro</text>
+
+  <line x1="925" y1="269" x2="925" y2="287" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- Omniterapeuta Parceiro -->
+  <rect x="765" y="287" width="320" height="64" rx="6" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="925" y="306" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A" letter-spacing="1">OMNITERAPEUTA PARCEIRO</text>
+  <text x="925" y="322" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Formado pela OMNI · Ativo na rede</text>
+  <text x="925" y="337" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Recebe e agenda o atendimento</text>
+
+  <line x1="925" y1="351" x2="925" y2="375" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- Terapia / Atendimento -->
+  <rect x="765" y="375" width="320" height="82" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="925" y="395" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">TERAPIA / ATENDIMENTO</text>
+  <text x="925" y="411" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Sessões de Omniterapia</text>
+  <text x="925" y="427" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Método aplicado na prática real</text>
+  <text x="925" y="443" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Cliente passa pela transformação</text>
+
+  <line x1="925" y1="457" x2="925" y2="479" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- Resultado Real -->
+  <rect x="765" y="479" width="320" height="64" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="925" y="498" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">RESULTADO REAL</text>
+  <text x="925" y="514" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Transformação documentada</text>
+  <text x="925" y="529" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Case pronto para submissão no portal</text>
+
+  <!-- Resultado → Cases -->
+  <path d="M 925,543 Q 900,600 740,618" fill="none" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#fa)"/>
+
+  <!-- ============ CONVERGÊNCIA CENTRAL — CASES OMNI ============ -->
+  <rect x="330" y="600" width="440" height="85" rx="8" fill="#1a1400" stroke="#E8C86A" stroke-width="2.5"/>
+  <text x="550" y="622" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="14" font-weight="700" fill="#E8C86A" letter-spacing="2">CASES OMNI</text>
+  <text x="550" y="639" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Portal · IA valida · Julia aprova · Roteiro GICA</text>
+  <text x="550" y="654" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#F5F0E8">Animação IA · Carrossel · Omniterapeuta Fala</text>
+  <text x="550" y="670" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B">★ Black: case publicado com @handle do omniterapeuta</text>
+
+  <!-- ============ SETAS DE RETORNO (LOOP) ============ -->
+
+  <!-- Cases → @michaelarruda (esquerda, subindo pelo lado de fora) -->
+  <path d="M 370,600 L 30,600 L 30,62 L 175,62" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#fa3)" opacity="0.75"/>
+  <text x="20" y="355" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.8" transform="rotate(-90,20,355)">Tipo B · Prova → @michaelarruda</text>
+
+  <!-- Cases → @omnibr (direita, subindo pelo lado de fora) -->
+  <path d="M 730,600 L 1070,600 L 1070,62 L 925,62" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#fa3)" opacity="0.75"/>
+  <text x="1080" y="355" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.8" transform="rotate(90,1080,355)">Case publicado → @omnibr</text>
+
+  <!-- Especial: Black Mentoring → @omnibr (crédito na legenda) -->
+  <path d="M 335,416 Q 550,310 765,62" fill="none" stroke="#E8C86A" stroke-width="1.2" stroke-dasharray="3 5" marker-end="url(#fa2)" opacity="0.45"/>
+  <text x="575" y="310" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.6">★ Black → @handle em destaque no @omnibr</text>
+
+  <!-- label rodapé -->
+  <text x="550" y="780" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" fill="#9A7A2E" letter-spacing="5" opacity="0.65">↻ CADA RESULTADO ALIMENTA O PRÓXIMO CONTEÚDO ↻</text>
 </svg>
 </div>
 
