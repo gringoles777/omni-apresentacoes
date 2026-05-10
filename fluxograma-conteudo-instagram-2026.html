@@ -920,7 +920,7 @@
   <!-- ─── LINHA 5: COMERCIAL ─── -->
   <rect x="345" y="380" width="370" height="52" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
   <text x="530" y="402" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#C8A84B" letter-spacing="1.5">COMERCIAL</text>
-  <text x="530" y="420" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">SDR → Closer · Reunião de vendas</text>
+  <text x="530" y="420" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">SDR → Closer · Consultoria estratégica</text>
 
 
 
@@ -955,10 +955,10 @@
 
 
   <!-- ─── COLUNA DIREITA: TRANSFORMAÇÃO QUE SE PROVA (alinhada verticalmente com COMERCIAL) ─── -->
-  <ellipse cx="1030" cy="322" rx="105" ry="50" fill="#0f0e0a" stroke="#C8A84B" stroke-width="2"/>
-  <text x="1030" y="314" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">TRANSFORMAÇÃO</text>
-  <text x="1030" y="332" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">QUE SE PROVA</text>
-  <text x="1030" y="354" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Cases · Depoimentos</text>
+  <ellipse cx="1030" cy="322" rx="115" ry="55" fill="#0f0e0a" stroke="#C8A84B" stroke-width="2"/>
+  <text x="1030" y="311" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">TRANSFORMAÇÃO</text>
+  <text x="1030" y="329" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">QUE SE PROVA</text>
+  <text x="1030" y="351" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#A8A095">Cases OMNI + Conteúdo A e B</text>
 
   <!-- CONTEÚDO → TRÁFEGO PAGO: rota ortogonal pela margem superior (não corta o oval) -->
   <path d="M 380,84 L 380,68 L 100,68 L 100,194" fill="none" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)" opacity="0.85"/>
@@ -1025,14 +1025,18 @@
   <line x1="795" y1="561" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
   <line x1="265" y1="580" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.8"/>
   <!-- seta única do extremo direito da barra subindo até TRANSFORMAÇÃO (cy=322, parte inferior y=372) -->
-  <path d="M 795,580 Q 950,580 1030,375" fill="none" stroke="#C8A84B" stroke-width="1.6" marker-end="url(#arr-g)"/>
+  <path d="M 795,580 Q 950,580 1030,380" fill="none" stroke="#C8A84B" stroke-width="1.6" marker-end="url(#arr-g)"/>
 
-  <!-- ═══ LOOPS DE RETORNO (tracejados) ═══ -->
+  <!-- ═══ LOOPS DE RETORNO ═══ -->
 
-  <!-- TRANSFORMAÇÃO → CONTEÚDO PODEROSO: arco pelo canto superior direito
+  <!-- TRANSFORMAÇÃO → CONTEÚDO PODEROSO: arco pelo canto superior direito (loop principal de feedback — sólido)
        Termina em (740, 96) — sobre o quadrante superior-direito do oval (cy=110, ry=36) -->
-  <path d="M 1030,272 C 1030,140 880,80 740,96" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="7 4" marker-end="url(#arr-g)"/>
-  <text x="1075" y="124" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#E8C86A" opacity="0.85" letter-spacing="1">prova → conteúdo</text>
+  <path d="M 1030,267 C 1030,140 880,80 740,96" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr-g)"/>
+
+  <!-- OMNITERAPIA → COMERCIAL: loop de retorno (novos casos / encaminhamento / 2º atendimento)
+       Sai do quadrante superior-direito do círculo OMNITERAPIA (cx=795, cy=515, r=46), sobe pela margem livre entre o merge-arrow (Q 950,580 1030,380) e os produtos, volta pra direita do retângulo COMERCIAL (x=715, y=380→432) -->
+  <path d="M 830,490 C 900,440 870,400 715,415" fill="none" stroke="#C8A84B" stroke-width="1.8" marker-end="url(#arr-g)"/>
+  <text x="855" y="438" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#E8C86A" opacity="0.9" letter-spacing="0.5">novos casos</text>
 
 
   <!-- ═══ RODAPÉ ═══ -->
