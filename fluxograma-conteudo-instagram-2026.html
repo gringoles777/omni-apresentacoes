@@ -826,44 +826,99 @@
 </div>
 
 <!-- ============ SEÇÃO 3: FLYWHEEL ============ -->
-<div class="section-title"><span class="num">3</span>Flywheel · Como os Dois Perfis se Alimentam</div>
+<div class="section-title"><span class="num">3</span>Flywheel · O Motor de Conteúdo OMNI</div>
 
-<div class="fw-grid">
-  <div class="fw-node" style="grid-column: 1 / -1;">
-    <strong>Início · @omnibr publica Case OMNI</strong>
-    Animação IA + Carrossel + (Black) Omniterapeuta Fala
-  </div>
-  <div class="fw-arrow-down">▼</div>
+<div style="display:flex;justify-content:center;align-items:center;padding:8px 0 16px;">
+<svg viewBox="0 0 900 820" width="100%" style="max-width:860px;" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#E8C86A"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a2000"/>
+      <stop offset="100%" stop-color="#0D0D0D"/>
+    </radialGradient>
+    <radialGradient id="blackGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(200,168,75,0.18)"/>
+      <stop offset="100%" stop-color="rgba(200,168,75,0.04)"/>
+    </radialGradient>
+  </defs>
 
-  <div class="fw-node">
-    <strong>Público com Problema</strong>
-    Procura omniterapeuta credenciado → vira <em>cliente para o formado</em>
-  </div>
-  <div class="fw-arrow" style="font-size:14px;">+</div>
-  <div class="fw-node">
-    <strong>Profissional Vê o Método</strong>
-    Migra para <em>@michaelarruda</em> querendo aprender
-  </div>
-  <div class="fw-arrow-down">▼</div>
+  <!-- anel externo Black Mentoring -->
+  <circle cx="450" cy="400" r="340" fill="none" stroke="#C8A84B" stroke-width="1.5" stroke-dasharray="8 6" opacity="0.4"/>
+  <text x="450" y="68" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="4" opacity="0.7">★ BLACK MENTORING ACELERA O LOOP ★</text>
 
-  <div class="fw-node" style="grid-column: 1 / -1;">
-    <strong>@michaelarruda Converte</strong>
-    Funil de produtos · <em>FPH → Master → Black Mentoring</em>
-  </div>
-  <div class="fw-arrow-down">▼</div>
+  <!-- setas circulares (arcos horários) -->
+  <!-- 1→2: topo direita -->
+  <path d="M 572,175 A 240,240 0 0,1 710,310" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- 2→3: direita baixo -->
+  <path d="M 720,360 A 240,240 0 0,1 690,520" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- 3→4: baixo esq -->
+  <path d="M 620,620 A 240,240 0 0,1 460,678" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- 4→5: esq baixo -->
+  <path d="M 380,672 A 240,240 0 0,1 200,535" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- 5→6: esq topo -->
+  <path d="M 183,365 A 240,240 0 0,1 228,195" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
+  <!-- 6→1: topo -->
+  <path d="M 318,143 A 240,240 0 0,1 432,122" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr)" opacity="0.7"/>
 
-  <div class="fw-node" style="grid-column: 1 / -1;">
-    <strong>Novo Omniterapeuta Formado</strong>
-    Atende clientes reais → coleta resultados → submete case no portal → <em>volta para @omnibr</em>
-  </div>
-  <div class="fw-arrow-down">▼</div>
+  <!-- CENTRO -->
+  <circle cx="450" cy="400" r="90" fill="url(#centerGrad)" stroke="#C8A84B" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="450" y="388" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">PRODUÇÃO DE</text>
+  <text x="450" y="406" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A" letter-spacing="1">CONTEÚDO</text>
+  <text x="450" y="424" text-anchor="middle" font-size="10" fill="#C8A84B" opacity="0.8">↻ motor</text>
 
-  <div class="fw-node" style="grid-column: 1 / -1; border-color: var(--gold-light); background: rgba(200,168,75,0.08);">
-    <strong>Black Mentoring · Aceleração do Loop</strong>
-    Cases com crédito → mais visibilidade do omniterapeuta → mais conversão para Black → mais cases premium → roda mais rápido
-  </div>
+  <!-- NÓ 1 — topo — @omnibr publica -->
+  <rect x="340" y="90" width="220" height="72" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="450" y="111" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">@OMNIBR PUBLICA</text>
+  <text x="450" y="127" text-anchor="middle" font-size="10" fill="#F5F0E8">Case OMNI: Animação IA</text>
+  <text x="450" y="141" text-anchor="middle" font-size="10" fill="#F5F0E8">Carrossel · Omniterapeuta Fala</text>
+  <text x="450" y="155" text-anchor="middle" font-size="9" fill="#C8A84B" opacity="0.8">→ DM: "chame no DM para ajuda"</text>
 
-  <div class="fw-loop-label">↻ Loop Infinito · Cada Volta Acelera a Próxima ↻</div>
+  <!-- NÓ 2 — direita topo — Público vê -->
+  <rect x="690" y="270" width="200" height="80" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="790" y="291" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">PÚBLICO VÊ</text>
+  <text x="790" y="307" text-anchor="middle" font-size="10" fill="#F5F0E8">Com problema →</text>
+  <text x="790" y="321" text-anchor="middle" font-size="10" fill="#F5F0E8">procura omniterapeuta</text>
+  <text x="790" y="337" text-anchor="middle" font-size="10" fill="#F5F0E8">Profissional → @michaelarruda</text>
+
+  <!-- NÓ 3 — direita baixo — michaelarruda converte -->
+  <rect x="680" y="490" width="210" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="785" y="511" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">@MICHAELARRUDA</text>
+  <text x="785" y="527" text-anchor="middle" font-size="10" fill="#F5F0E8">Tipos A · B · C</text>
+  <text x="785" y="543" text-anchor="middle" font-size="10" fill="#F5F0E8">Converte em FPH</text>
+  <text x="785" y="559" text-anchor="middle" font-size="10" fill="#F5F0E8">Master · Black Mentoring</text>
+
+  <!-- NÓ 4 — baixo — Formado -->
+  <rect x="330" y="640" width="240" height="66" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="450" y="660" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">OMNITERAPEUTA FORMADO</text>
+  <text x="450" y="676" text-anchor="middle" font-size="10" fill="#F5F0E8">Atende clientes reais</text>
+  <text x="450" y="691" text-anchor="middle" font-size="10" fill="#F5F0E8">Coleta resultados do método</text>
+
+  <!-- NÓ 5 — esquerda baixo — Portal -->
+  <rect x="10" y="490" width="200" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="110" y="511" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">PORTAL DE CASES</text>
+  <text x="110" y="527" text-anchor="middle" font-size="10" fill="#F5F0E8">Omniterapeuta submete</text>
+  <text x="110" y="543" text-anchor="middle" font-size="10" fill="#F5F0E8">IA valida · Julia aprova</text>
+  <text x="110" y="559" text-anchor="middle" font-size="10" fill="#C8A84B">★ Black: crédito na legenda</text>
+
+  <!-- NÓ 6 — esquerda topo — Roteiro e Produção -->
+  <rect x="10" y="270" width="200" height="78" rx="7" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="110" y="291" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1">ROTEIRO + PRODUÇÃO</text>
+  <text x="110" y="307" text-anchor="middle" font-size="10" fill="#F5F0E8">GICA aplicado ao case</text>
+  <text x="110" y="323" text-anchor="middle" font-size="10" fill="#F5F0E8">IA gera cenas visuais</text>
+  <text x="110" y="339" text-anchor="middle" font-size="10" fill="#F5F0E8">Julia edita → exporta</text>
+
+  <!-- label loop -->
+  <text x="450" y="800" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" fill="#C8A84B" letter-spacing="5" opacity="0.6">↻ CADA VOLTA ACELERA A PRÓXIMA ↻</text>
+</svg>
 </div>
 
 <!-- ============ SEÇÃO 4: REGRAS EFEITO DI ============ -->
