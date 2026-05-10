@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Estratégia de Conteúdo Instagram — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050505;
+    --elev: #0D0D0D;
+    --card: #1A1A1A;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --text: #F5F0E8;
+    --text-dim: #A8A095;
+    --shadow: 0 0 24px rgba(200,168,75,0.25);
+    --border: 1px solid #C8A84B;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  body {
+    padding: 32px 40px 48px 40px;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  /* === TIPOGRAFIA === */
+  .display {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 44px;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--text-dim);
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    font-size: 12px;
+  }
+  .micro {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  /* === HEADER === */
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+  }
+  header .tagline {
+    margin-top: 14px;
+    color: var(--text);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    font-weight: 300;
+  }
+  header .tagline strong { color: var(--gold-light); font-weight: 600; }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-size: 16px;
+    margin: 36px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title .num {
+    background: var(--gold);
+    color: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  /* === CARDS / BOXES === */
+  .box {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .box-elev {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  /* === DOIS PERFIS === */
+  .perfis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .perfil {
+    position: relative;
+  }
+  .perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(200,168,75,0.25);
+  }
+  .perfil-handle {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 26px;
+    text-transform: lowercase;
+    letter-spacing: 0;
+  }
+  .perfil-tagline {
+    font-style: italic;
+    color: var(--text);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .perfil-meta {
+    text-align: right;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .perfil-meta strong { color: var(--gold); font-weight: 600; }
+  .meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+  .meta-row .meta-cell strong {
+    display: block;
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* === TRILHOS === */
+  .trilhos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .trilho {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .trilho-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+  .quadro-name {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .quadro-name::before { content: "▸ "; }
+  .opener {
+    color: var(--text);
+    font-size: 11px;
+    font-style: italic;
+    background: rgba(200,168,75,0.06);
+    padding: 6px 8px;
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .formato-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.4);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 500;
+  }
+
+  .mix-bar {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(200,168,75,0.2);
+  }
+  .mix-bar-bg {
+    display: flex;
+    height: 18px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+    border: 1px solid rgba(200,168,75,0.3);
+  }
+  .mix-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+  }
+  .mix-prosp { background: var(--gold-light); flex: 50; }
+  .mix-prova { background: var(--gold); flex: 30; }
+  .mix-mente { background: #8a7333; color: var(--text); flex: 20; }
+
+  .mecanica {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(200,168,75,0.06);
+    border: 1px dashed rgba(200,168,75,0.5);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--text);
+  }
+  .mecanica strong { color: var(--gold); }
+
+  /* === PERFIL OMNIBR — formatos === */
+  .formatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .formato {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 12px;
+    position: relative;
+  }
+  .formato-num {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: var(--gold);
+    color: #000;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .formato-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+  .formato-desc {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .black-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #000;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  /* === PIPELINE === */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+  .step {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 12px 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .step-num {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .step-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .step-detail {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+  .step::after {
+    content: "▶";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    z-index: 2;
+  }
+  .step:last-child::after { display: none; }
+
+  /* === BLACK RULES === */
+  .black-box {
+    margin-top: 18px;
+    background: linear-gradient(135deg, rgba(200,168,75,0.10), rgba(232,200,106,0.04));
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-shadow: 0 0 32px rgba(200,168,75,0.35);
+    position: relative;
+  }
+  .black-box::before {
+    content: "★ BLACK MENTORING ★";
+    position: absolute;
+    top: -12px;
+    left: 22px;
+    background: var(--bg);
+    padding: 2px 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+  .black-rules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .black-rule {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .black-rule strong {
+    display: block;
+    color: var(--gold-light);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  /* === FLYWHEEL === */
+  .flywheel-wrap {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .flywheel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    align-items: stretch;
+    position: relative;
+  }
+  .fw-node {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 11px;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    line-height: 1.4;
+    position: relative;
+  }
+  .fw-node strong {
+    display: block;
+    color: var(--gold-light);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .fw-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .fw-loop-label {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(200,168,75,0.4);
+    margin-top: 4px;
+  }
+
+  /* Flywheel diagram with grid layout */
+  .fw-grid {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 8px;
+    row-gap: 6px;
+    align-items: center;
+  }
+  .fw-grid .fw-arrow-down {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* === REGRAS DI === */
+  .di-rules {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .di-rule {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .di-rule .di-icon {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .di-rule .di-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .di-rule .di-desc {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* === FOOTER === */
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(200,168,75,0.3);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  footer strong { color: var(--gold); }
+
+  /* === PRINT === */
+  @media print {
+    @page { size: A3 landscape; margin: 12mm; }
+    body { padding: 0; max-width: 100%; }
+    .box, .step, .di-rule, .fw-node {
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+    .black-box { box-shadow: none !important; }
+  }
+
+  /* arrow connectors in pipeline grid for narrow screens */
+  @media (max-width: 1280px) {
+    .pipeline { grid-template-columns: repeat(4, 1fr); row-gap: 24px; }
+    .step:nth-child(4)::after { display: none; }
+    .di-rules { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>
+    Estratégia de Conteúdo Instagram
+    <span class="sub">OMNI BRASIL · UMA PÁGINA · UM SISTEMA</span>
+  </h1>
+  <p class="tagline">
+    Dois perfis. Um motor de cases. <strong>Um flywheel</strong> que transforma método em prova social, prova social em cliente, e cliente em novo case.
+  </p>
+</header>
+
+<!-- ============ SEÇÃO 1: DOIS PERFIS ============ -->
+<div class="section-title"><span class="num">1</span>Dois Perfis · Lados Complementares da Mesma Estratégia</div>
+
+<div class="perfis">
+
+  <!-- @michaelarruda -->
+  <div class="perfil box">
+    <div class="perfil-header">
+      <div>
+        <div class="perfil-handle">@michaelarruda</div>
+        <div class="perfil-tagline">"Resultado e dinheiro via Omniterapia"</div>
+      </div>
+      <div class="perfil-meta">
+        <strong>Início:</strong> 10 dias<br>
+        <strong>Grava:</strong> Michael<br>
+        <strong>Edita:</strong> Julia (com IA)
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-cell">
+        <strong>Público A</strong>
+        Terapeuta Rico<br>(quer 50k/mês)
+      </div>
+      <div class="meta-cell">
+        <strong>Público B</strong>
+        Gestor Exausto<br>(quer propósito + liberdade)
+      </div>
+      <div class="meta-cell">
+        <strong>Cadência</strong>
+        4–5 posts<br>por semana
+      </div>
+    </div>
+
+    <h3>3 Trilhos · Quadros Viciantes</h3>
+    <div class="trilhos">
+      <div class="trilho">
+        <div class="trilho-name">Prosperidade · 50%</div>
+        <div class="quadro-name">Quadro "A Conta"</div>
+        <div class="opener">"Deixa eu te mostrar uma conta que muda tudo"</div>
+        <span class="formato-tag">Reels</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+      <div class="trilho">
+        <div class="trilho-name">Prova · 30%</div>
+        <div class="quadro-name">Quadro "Do Outro Lado"</div>
+        <div class="opener">"[Nome] era [profissão] e hoje fatura R$[X]"</div>
+        <span class="formato-tag">Reels (live)</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+      <div class="trilho">
+        <div class="trilho-name">Mentalidade · 20%</div>
+        <div class="quadro-name">Quadro "O Bloqueio"</div>
+        <div class="opener">"Você não ganha mais por causa disso:"</div>
+        <span class="formato-tag">Reels</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+    </div>
+
+    <div class="mix-bar">
+      <div class="micro">Mix do Feed</div>
+      <div class="mix-bar-bg">
+        <div class="mix-seg mix-prosp">PROSPERIDADE 50%</div>
+        <div class="mix-seg mix-prova">PROVA 30%</div>
+        <div class="mix-seg mix-mente">MENTE 20%</div>
+      </div>
+    </div>
+
+    <div class="mecanica">
+      <strong>Mecânica de conversão →</strong> Comment <em>CONTA / HISTÓRIA / TETO</em> → DM automático
+    </div>
+  </div>
+
+  <!-- @omnibr -->
+  <div class="perfil box">
+    <div class="perfil-header">
+      <div>
+        <div class="perfil-handle">@omnibr</div>
+        <div class="perfil-tagline">"Prova social do método"</div>
+      </div>
+      <div class="perfil-meta">
+        <strong>Início:</strong> 10 dias<br>
+        <strong>Responsável:</strong> Julia<br>
+        <strong>Fluxo:</strong> completo
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-cell">
+        <strong>Público A</strong>
+        Pessoa com problema<br>(ansiedade, fobia, bloqueio)
+      </div>
+      <div class="meta-cell">
+        <strong>Público B</strong>
+        Profissional<br>que vê e quer aprender o método
+      </div>
+      <div class="meta-cell">
+        <strong>Formato</strong>
+        Único: Case OMNI<br>em 3 versões
+      </div>
+    </div>
+
+    <h3>Formato Único · Case OMNI · 3 Versões</h3>
+    <div class="formatos">
+      <div class="formato">
+        <div class="formato-num">1</div>
+        <div class="formato-name">Animação IA</div>
+        <div class="formato-desc">Reels 60–90s gerado por IA. Visual cinematográfico, narrativa do case.</div>
+      </div>
+      <div class="formato">
+        <div class="formato-num">2</div>
+        <div class="formato-name">Carrossel</div>
+        <div class="formato-desc">Mesma produção do Reels. Duplica conteúdo sem custo extra.</div>
+      </div>
+      <div class="formato">
+        <div class="formato-num">3</div>
+        <div class="formato-name">Omniterapeuta Fala</div>
+        <div class="formato-desc">Rosto + voz do omniterapeuta. <span class="black-badge">EXCLUSIVO BLACK</span> @handle na legenda.</div>
+      </div>
+    </div>
+
+    <div class="mecanica">
+      <strong>Lógica →</strong> 1 case = 3 conteúdos publicados. Multiplicação sem aumentar produção.
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ SEÇÃO 2: PIPELINE (motor) ============ -->
+<div class="section-title"><span class="num">2</span>Pipeline de Cases · O Motor que Alimenta @omnibr</div>
+
+<div class="pipeline">
+  <div class="step">
+    <div class="step-num">01</div>
+    <div class="step-name">Portal<br>Omniterapeuta</div>
+    <div class="step-detail">Plataforma central de submissão</div>
+  </div>
+  <div class="step">
+    <div class="step-num">02</div>
+    <div class="step-name">Envio<br>do Case</div>
+    <div class="step-detail">Omniterapeuta escreve e submete</div>
+  </div>
+  <div class="step">
+    <div class="step-num">03</div>
+    <div class="step-name">Análise<br>IA</div>
+    <div class="step-detail">Valida e flag de detalhes faltando</div>
+  </div>
+  <div class="step">
+    <div class="step-num">04</div>
+    <div class="step-name">Validação<br>Julia</div>
+    <div class="step-detail">Aprovação final humana</div>
+  </div>
+  <div class="step">
+    <div class="step-num">05</div>
+    <div class="step-name">Roteiro<br>GICA</div>
+    <div class="step-detail">Equipe OMNI produz roteiro</div>
+  </div>
+  <div class="step">
+    <div class="step-num">06</div>
+    <div class="step-name">Cenas<br>IA</div>
+    <div class="step-detail">Geração visual automatizada</div>
+  </div>
+  <div class="step">
+    <div class="step-num">07</div>
+    <div class="step-name">Edição<br>+ Export</div>
+    <div class="step-detail">Reels + Carrossel finalizados</div>
+  </div>
+  <div class="step">
+    <div class="step-num">08</div>
+    <div class="step-name">Publicação<br>@omnibr</div>
+    <div class="step-detail">Distribuição no perfil</div>
+  </div>
+</div>
+
+<!-- BLACK BOX -->
+<div class="black-box">
+  <h2 style="margin-bottom: 10px;">Regra Black Mentoring · Visibilidade como Recompensa</h2>
+  <div class="black-rules">
+    <div class="black-rule">
+      <strong>Crédito na Legenda</strong>
+      Todo case Black é publicado com o <em>@handle do omniterapeuta</em> na legenda. Visibilidade direta para quem participa.
+    </div>
+    <div class="black-rule">
+      <strong>Formato 3 Exclusivo</strong>
+      Apenas Black members podem gravar o <em>"Omniterapeuta Fala"</em> — rosto, voz e autoridade no perfil OMNI.
+    </div>
+    <div class="black-rule">
+      <strong>Efeito Cascata</strong>
+      Black aparece → não-Black vê → quer estar no mesmo lugar → <em>conversão para Black Mentoring</em>.
+    </div>
+  </div>
+</div>
+
+<!-- ============ SEÇÃO 3: FLYWHEEL ============ -->
+<div class="section-title"><span class="num">3</span>Flywheel · Como os Dois Perfis se Alimentam</div>
+
+<div class="fw-grid">
+  <div class="fw-node" style="grid-column: 1 / -1;">
+    <strong>Início · @omnibr publica Case OMNI</strong>
+    Animação IA + Carrossel + (Black) Omniterapeuta Fala
+  </div>
+  <div class="fw-arrow-down">▼</div>
+
+  <div class="fw-node">
+    <strong>Público com Problema</strong>
+    Procura omniterapeuta credenciado → vira <em>cliente para o formado</em>
+  </div>
+  <div class="fw-arrow" style="font-size:14px;">+</div>
+  <div class="fw-node">
+    <strong>Profissional Vê o Método</strong>
+    Migra para <em>@michaelarruda</em> querendo aprender
+  </div>
+  <div class="fw-arrow-down">▼</div>
+
+  <div class="fw-node" style="grid-column: 1 / -1;">
+    <strong>@michaelarruda Converte</strong>
+    Funil de produtos · <em>FPH → Master → Black Mentoring</em>
+  </div>
+  <div class="fw-arrow-down">▼</div>
+
+  <div class="fw-node" style="grid-column: 1 / -1;">
+    <strong>Novo Omniterapeuta Formado</strong>
+    Atende clientes reais → coleta resultados → submete case no portal → <em>volta para @omnibr</em>
+  </div>
+  <div class="fw-arrow-down">▼</div>
+
+  <div class="fw-node" style="grid-column: 1 / -1; border-color: var(--gold-light); background: rgba(200,168,75,0.08);">
+    <strong>Black Mentoring · Aceleração do Loop</strong>
+    Cases com crédito → mais visibilidade do omniterapeuta → mais conversão para Black → mais cases premium → roda mais rápido
+  </div>
+
+  <div class="fw-loop-label">↻ Loop Infinito · Cada Volta Acelera a Próxima ↻</div>
+</div>
+
+<!-- ============ SEÇÃO 4: REGRAS EFEITO DI ============ -->
+<div class="section-title"><span class="num">4</span>Regras Efeito DI · Princípios para os Dois Perfis</div>
+
+<div class="di-rules">
+  <div class="di-rule">
+    <div class="di-icon">G·I·C·A</div>
+    <div class="di-name">GICA em Todo Post</div>
+    <div class="di-desc"><strong>G</strong>ancho (3s) → <strong>I</strong>nteresse → <strong>C</strong>ontexto → <strong>A</strong>ção. Não negociável.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">D + O</div>
+    <div class="di-name">Dopamina + Ocitocina</div>
+    <div class="di-desc">Todo post precisa <em>parar o scroll</em> (dopamina) E <em>fidelizar</em> (ocitocina). Os dois.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">3R</div>
+    <div class="di-name">Regra dos 3R</div>
+    <div class="di-desc">1 produção = <em>Reels + Carrossel + Stories</em>. Uma gravação rende 3 semanas de conteúdo.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">→ DM</div>
+    <div class="di-name">Comment → DM</div>
+    <div class="di-desc">Automação ativa em <em>todo post</em>. Comentário vira DM, DM vira lead, lead vira cliente.</div>
+  </div>
+</div>
+
+<footer>
+  OMNI Brasil · Estratégia de Conteúdo Instagram · <strong>Versão 1 · 2026-05</strong> · Documento Interno · Equipe OMNI
+</footer>
+
+</body>
+</html>
