@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Legacy Experience — Canvas de Decisões · OMNI Brasil</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════
+   OMNI DESIGN SYSTEM — TOKENS
+   ═══════════════════════════════════════════════════ */
+:root {
+  --color-black:        #050505;
+  --color-dark:         #0D0D0D;
+  --color-dark-elevated:#1A1A1A;
+  --color-dark-texture: #2D2D2D;
+  --color-gold:         #C8A84B;
+  --color-gold-light:   #E8C86A;
+  --color-gold-deep:    #9A7A2E;
+  --color-cream:        #F5F0E8;
+  --color-cream-70:     rgba(245,240,232,0.70);
+  --color-cream-50:     rgba(245,240,232,0.50);
+  --color-cream-30:     rgba(245,240,232,0.30);
+  --color-teal:         #2A9D8F;
+  --color-red:          #E74C3C;
+  --color-gold-10:      rgba(200,168,75,0.10);
+  --color-gold-15:      rgba(200,168,75,0.15);
+  --color-gold-20:      rgba(200,168,75,0.20);
+  --color-gold-30:      rgba(200,168,75,0.30);
+  --status-open:        #E74C3C;
+  --status-thinking:    #E8C86A;
+  --status-done:        #2A9D8F;
+  --font-display: 'Oswald', sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-serif:   'DM Serif Display', serif;
+  --radius-card:  8px;
+  --radius-pill:  50px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--color-black); color: var(--color-cream); min-height: 100vh; }
+body { font-family: var(--font-body); line-height: 1.5; padding-bottom: 80px; }
+
+/* ═══════════════════════════════════════════════════
+   PASSWORD OVERLAY
+   ═══════════════════════════════════════════════════ */
+#lock-overlay {
+  position: fixed; inset: 0;
+  background: var(--color-black);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.lock-box {
+  background: var(--color-dark);
+  border: 1px solid var(--color-gold-20);
+  border-radius: 16px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 380px; width: 90%;
+}
+.lock-logo { margin-bottom: 24px; }
+.lock-box h2 {
+  font-family: var(--font-display); font-size: 22px;
+  letter-spacing: 5px; color: var(--color-gold); text-transform: uppercase; margin-bottom: 4px;
+}
+.lock-box .lock-sub {
+  font-family: var(--font-serif); font-size: 16px;
+  color: var(--color-cream-50); margin-bottom: 6px;
+}
+.lock-box p { color: var(--color-cream-30); font-size: 12px; margin-bottom: 28px; }
+.lock-box input {
+  width: 100%; padding: 12px 16px;
+  background: var(--color-dark-texture); border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-card); color: var(--color-cream); font-size: 18px;
+  text-align: center; letter-spacing: 6px; outline: none; transition: border 0.2s;
+  font-family: var(--font-body);
+}
+.lock-box input:focus { border-color: var(--color-gold); }
+.lock-box button {
+  margin-top: 12px; width: 100%; padding: 12px;
+  background: var(--color-gold); color: var(--color-black); border: none;
+  border-radius: var(--radius-pill); font-family: var(--font-display);
+  font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.lock-box button:hover { opacity: 0.85; }
+.lock-error { color: var(--status-open); font-size: 12px; margin-top: 8px; min-height: 16px; }
+
+/* ═══════════════════════════════════════════════════
+   MAIN
+   ═══════════════════════════════════════════════════ */
+#main { display: none; }
+
+/* ═══════════════════════════════════════════════════
+   HEADER FIXO
+   ═══════════════════════════════════════════════════ */
+header.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: linear-gradient(180deg, var(--color-black) 0%, rgba(5,5,5,0.95) 100%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-gold-20);
+  padding: 20px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-logo { width: 72px; height: 29px; flex-shrink: 0; display: block; }
+.brand-mark { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: 6px; color: var(--color-gold); text-transform: uppercase; }
+.brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--color-cream-50); text-transform: uppercase; }
+.title-block { text-align: center; flex: 1; }
+.page-title { font-family: var(--font-serif); font-size: clamp(18px, 2.5vw, 26px); color: var(--color-cream); }
+.page-sub { font-size: 11px; letter-spacing: 2px; color: var(--color-cream-50); text-transform: uppercase; margin-top: 2px; }
+.status-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border: 1px solid var(--color-gold-30);
+  border-radius: var(--radius-pill); font-size: 11px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--color-gold);
+}
+.status-pill.live::before {
+  content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--color-teal); box-shadow: 0 0 8px var(--color-teal);
+  animation: pulse 2s ease-in-out infinite;
+}
+.status-pill.offline::before {
+  content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: #6B6B6B;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* ═══════════════════════════════════════════════════
+   SUMMARY
+   ═══════════════════════════════════════════════════ */
+.summary-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px; padding: 32px; max-width: 1400px; margin: 0 auto;
+}
+.summary-card {
+  background: var(--color-dark); border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-card); padding: 20px; text-align: center;
+}
+.summary-card .label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cream-50); margin-bottom: 10px; }
+.summary-card .value { font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--color-gold); }
+.summary-card .sub { font-size: 11px; color: var(--color-cream-50); margin-top: 6px; }
+.progress-track { background: var(--color-dark-texture); height: 6px; border-radius: 3px; margin-top: 12px; overflow: hidden; }
+.progress-fill { background: linear-gradient(90deg, var(--color-gold-deep), var(--color-gold), var(--color-gold-light)); height: 100%; transition: width 400ms; }
+
+/* ═══════════════════════════════════════════════════
+   CONFIG / SETUP BANNER
+   ═══════════════════════════════════════════════════ */
+#setup-banner {
+  max-width: 1400px; margin: 0 auto; padding: 0 32px 16px;
+  display: none;
+}
+.setup-inner {
+  background: rgba(200,168,75,0.06); border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-card); padding: 16px 20px; font-size: 13px;
+}
+.setup-inner strong { color: var(--color-gold); }
+.setup-inner pre {
+  background: var(--color-dark-texture); padding: 12px; border-radius: 4px;
+  font-size: 11px; color: var(--color-gold-light); overflow-x: auto; margin-top: 10px;
+  white-space: pre-wrap; word-break: break-all; font-family: 'Courier New', monospace;
+}
+.setup-inner p { color: var(--color-cream-70); margin-top: 8px; font-size: 12px; }
+
+/* ═══════════════════════════════════════════════════
+   FILTERS
+   ═══════════════════════════════════════════════════ */
+.filters {
+  max-width: 1400px; margin: 0 auto; padding: 0 32px 16px;
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.filter-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cream-50); margin-right: 8px; }
+.filter-btn {
+  background: transparent; border: 1px solid var(--color-gold-20);
+  color: var(--color-cream-70); padding: 5px 14px; border-radius: var(--radius-pill);
+  font-size: 11px; font-weight: 500; cursor: pointer; transition: all 150ms; font-family: var(--font-body);
+}
+.filter-btn:hover { border-color: var(--color-gold); color: var(--color-gold-light); }
+.filter-btn.active { background: var(--color-gold-15); border-color: var(--color-gold); color: var(--color-gold); }
+.filter-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.filter-toggle { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--color-cream-50); cursor: pointer; }
+
+/* ═══════════════════════════════════════════════════
+   CANVAS MAIN
+   ═══════════════════════════════════════════════════ */
+.canvas-wrap { max-width: 1400px; margin: 0 auto; padding: 0 32px; display: flex; flex-direction: column; gap: 8px; }
+
+/* CATEGORY SECTION */
+.cat-section {}
+
+.cat-header {
+  background: var(--color-dark); border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-card); padding: 14px 20px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: all 150ms; user-select: none;
+}
+.cat-header:hover { border-color: var(--color-gold-30); background: var(--color-dark-elevated); }
+.cat-section.open > .cat-header { border-color: var(--color-gold-30); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+.cat-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+.cat-title { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--color-gold); text-transform: uppercase; letter-spacing: 1px; flex: 1; }
+.cat-stats { display: flex; align-items: center; gap: 12px; }
+.cat-mini-bars { display: flex; gap: 3px; }
+.cat-mini-bar { width: 6px; height: 18px; border-radius: 3px; background: var(--color-dark-texture); }
+.cat-mini-bar.s-open { background: rgba(231,76,60,0.6); }
+.cat-mini-bar.s-thinking { background: rgba(232,200,106,0.6); }
+.cat-mini-bar.s-done { background: rgba(42,157,143,0.6); }
+.cat-count { font-size: 11px; color: var(--color-cream-50); white-space: nowrap; }
+.cat-pct { font-family: var(--font-display); font-size: 14px; color: var(--color-gold); width: 40px; text-align: right; }
+.cat-chevron { color: var(--color-cream-30); font-size: 14px; transition: transform 200ms; flex-shrink: 0; }
+.cat-section.open .cat-chevron { transform: rotate(180deg); }
+
+/* CATEGORY BODY */
+.cat-body {
+  display: none;
+  background: var(--color-dark);
+  border: 1px solid var(--color-gold-30); border-top: none;
+  border-bottom-left-radius: var(--radius-card); border-bottom-right-radius: var(--radius-card);
+  overflow: hidden;
+}
+.cat-section.open .cat-body { display: block; }
+
+/* GAP ROW */
+.gap-row {
+  border-top: 1px solid rgba(200,168,75,0.08);
+  cursor: pointer; transition: background 150ms;
+}
+.gap-row:first-child { border-top: none; }
+.gap-row:hover { background: var(--color-dark-elevated); }
+.gap-row.expanded { background: var(--color-dark-elevated); }
+
+.gap-row-top {
+  display: grid; grid-template-columns: 28px 1fr auto auto;
+  gap: 12px; align-items: center; padding: 12px 18px;
+}
+
+.gap-dot-wrap { display: flex; align-items: center; justify-content: center; }
+.gap-dot {
+  width: 9px; height: 9px; border-radius: 50; flex-shrink: 0; border-radius: 50%;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.gap-row[data-status="open"]     .gap-dot { background: var(--status-open);    box-shadow: 0 0 6px rgba(231,76,60,0.5); }
+.gap-row[data-status="thinking"] .gap-dot { background: var(--status-thinking); box-shadow: 0 0 6px rgba(232,200,106,0.5); }
+.gap-row[data-status="done"]     .gap-dot { background: var(--status-done);    box-shadow: 0 0 6px rgba(42,157,143,0.5); }
+
+.gap-text {
+  font-size: 13px; color: var(--color-cream-70); line-height: 1.5;
+}
+.gap-row[data-status="done"] .gap-text { color: var(--color-cream-30); text-decoration: line-through; }
+
+.gap-badge {
+  font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;
+  padding: 3px 9px; border-radius: var(--radius-pill); white-space: nowrap;
+}
+.gap-row[data-status="open"]     .gap-badge { background: rgba(231,76,60,0.12); color: var(--status-open); border: 1px solid rgba(231,76,60,0.25); }
+.gap-row[data-status="thinking"] .gap-badge { background: rgba(232,200,106,0.12); color: var(--status-thinking); border: 1px solid rgba(232,200,106,0.25); }
+.gap-row[data-status="done"]     .gap-badge { background: rgba(42,157,143,0.12); color: var(--status-done); border: 1px solid rgba(42,157,143,0.25); }
+
+.gap-chevron { color: var(--color-cream-30); font-size: 12px; transition: transform 200ms; }
+.gap-row.expanded .gap-chevron { transform: rotate(180deg); }
+
+/* GAP DETAIL */
+.gap-detail {
+  display: none;
+  padding: 4px 18px 16px 58px;
+  border-top: 1px dashed rgba(200,168,75,0.12);
+}
+.gap-row.expanded .gap-detail { display: block; }
+
+.detail-label {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--color-gold); margin-bottom: 6px; margin-top: 14px;
+}
+.note-input {
+  width: 100%; background: var(--color-dark-texture);
+  border: 1px solid var(--color-gold-20); color: var(--color-cream);
+  padding: 10px 12px; border-radius: var(--radius-card);
+  font-family: var(--font-body); font-size: 13px; min-height: 80px; resize: vertical;
+}
+.note-input:focus { outline: none; border-color: var(--color-gold); }
+.note-input::placeholder { color: var(--color-cream-30); font-style: italic; }
+
+.status-select {
+  background: var(--color-dark-texture); border: 1px solid var(--color-gold-20);
+  color: var(--color-cream); padding: 7px 10px; border-radius: var(--radius-card);
+  font-family: var(--font-body); font-size: 12px; cursor: pointer;
+}
+.status-select:focus { outline: none; border-color: var(--color-gold); }
+
+.save-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+.save-btn {
+  background: var(--color-gold); color: var(--color-black); border: none;
+  padding: 7px 18px; border-radius: var(--radius-pill);
+  font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 150ms;
+}
+.save-btn:hover { background: var(--color-gold-light); }
+.save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.whoami-input {
+  background: transparent; border: 1px solid var(--color-gold-20);
+  color: var(--color-cream); padding: 6px 10px; border-radius: var(--radius-card);
+  font-family: var(--font-body); font-size: 12px; width: 130px;
+}
+.whoami-input:focus { outline: none; border-color: var(--color-gold); }
+.save-status { font-size: 11px; color: var(--color-cream-50); }
+.save-status.ok { color: var(--color-teal); }
+.save-status.err { color: var(--color-red); }
+.last-upd { font-size: 10px; color: var(--color-cream-30); margin-left: auto; white-space: nowrap; }
+
+/* FOOTER */
+footer {
+  max-width: 1400px; margin: 60px auto 0; padding: 32px;
+  border-top: 1px solid var(--color-gold-15);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--color-cream-30); text-align: center;
+}
+
+@media (max-width: 768px) {
+  header.topbar { padding: 14px 16px; }
+  .summary-row, .filters, .canvas-wrap, #setup-banner { padding-left: 16px; padding-right: 16px; }
+  .gap-row-top { grid-template-columns: 24px 1fr auto; }
+  .gap-badge { display: none; }
+  .gap-detail { padding-left: 16px; }
+  .cat-mini-bars, .cat-pct { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     PASSWORD OVERLAY
+     ═══════════════════════════════════════════════════ -->
+<div id="lock-overlay">
+  <div class="lock-box">
+    <div class="lock-logo">
+      <svg width="80" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 226.77">
+        <path fill="#C8A84B" d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/>
+      </svg>
+    </div>
+    <h2>OMNI BRASIL</h2>
+    <div class="lock-sub">Legacy Experience</div>
+    <p>Canvas de Decisões · Acesso restrito à equipe</p>
+    <input type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
+    <button onclick="checkPwd()">Entrar</button>
+    <div class="lock-error" id="pwd-error"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN
+     ═══════════════════════════════════════════════════ -->
+<div id="main">
+
+<!-- HEADER -->
+<header class="topbar">
+  <div class="brand">
+    <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 226.77" aria-hidden="true">
+      <path fill="#C8A84B" d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/>
+    </svg>
+    <div>
+      <div class="brand-mark">OMNI BRASIL</div>
+      <div class="brand-sub">Lançamento</div>
+    </div>
+  </div>
+  <div class="title-block">
+    <div class="page-title">Legacy Experience — Canvas de Decisões</div>
+    <div class="page-sub">Outubro 2026 · Meta: 100 participantes · PM + Estrategista de Lançamento</div>
+  </div>
+  <div id="live-status" class="status-pill offline">
+    <span>Offline</span>
+  </div>
+</header>
+
+<!-- SUMMARY -->
+<section class="summary-row">
+  <div class="summary-card">
+    <div class="label">Total de Lacunas</div>
+    <div id="stat-total" class="value">—</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Definidas</div>
+    <div id="stat-done" class="value" style="color:var(--color-teal)">0</div>
+    <div class="progress-track"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+    <div id="stat-pct" class="sub">0% definido</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Em Discussão</div>
+    <div id="stat-thinking" class="value" style="color:var(--status-thinking)">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Em Aberto</div>
+    <div id="stat-open" class="value" style="color:var(--status-open)">0</div>
+  </div>
+  <div class="summary-card">
+    <div class="label">Equipe</div>
+    <div class="value" style="font-size:13px;line-height:1.4;color:var(--color-cream-70);font-family:var(--font-body);margin-top:4px">
+      Michael · Fernanda<br>Marcão · Eliza · Gerlandia
+    </div>
+  </div>
+</section>
+
+<!-- SETUP BANNER (shown if table não existe) -->
+<div id="setup-banner">
+  <div class="setup-inner">
+    <strong>⚡ Tabela não encontrada.</strong> Acesse o <a href="https://supabase.com/dashboard/project/gdizgxysttvhvuetesvn/sql/new" target="_blank" style="color:var(--color-gold)">Supabase SQL Editor</a> e execute:
+    <pre id="setup-sql">-- Cole e execute no Supabase Dashboard → SQL Editor
+
+create table if not exists public.legacy_experience_canvas (
+  id              text primary key,
+  categoria       text not null default '',
+  status          text not null default 'open',
+  resposta        text not null default '',
+  atualizado_por  text not null default '',
+  atualizado_em   timestamptz not null default now()
+);
+
+alter table public.legacy_experience_canvas enable row level security;
+
+create policy "anon_select_canvas" on public.legacy_experience_canvas
+  for select to anon using (true);
+
+create policy "anon_insert_canvas" on public.legacy_experience_canvas
+  for insert to anon with check (true);
+
+create policy "anon_update_canvas" on public.legacy_experience_canvas
+  for update to anon using (true) with check (true);
+
+alter publication supabase_realtime add table public.legacy_experience_canvas;</pre>
+    <p>Após rodar o SQL, recarregue a página. Enquanto isso as respostas são salvas no navegador.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<nav class="filters">
+  <span class="filter-label">Filtrar</span>
+  <button class="filter-btn active" data-filter="all">Todas</button>
+  <button class="filter-btn" data-filter="open">Em Aberto</button>
+  <button class="filter-btn" data-filter="thinking">Em Discussão</button>
+  <button class="filter-btn" data-filter="done">Definidas</button>
+  <div class="filter-right">
+    <label class="filter-toggle"><input type="checkbox" id="hide-done"> Ocultar definidas</label>
+  </div>
+</nav>
+
+<!-- CANVAS GRID -->
+<main id="canvas-wrap" class="canvas-wrap"></main>
+
+<footer>
+  OMNI Brasil · Legacy Experience · Canvas gerado em maio 2026 · Sync via Supabase
+  <br><span style="opacity:0.4;font-size:9px;">build v2.0 — 2026-05-07</span>
+</footer>
+
+</div><!-- #main -->
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════
+const SUPABASE_URL     = 'https://gdizgxysttvhvuetesvn.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_lxOqb25rvaA2oykxwIZ-Dg_0g33kwgS';
+const TABLE            = 'legacy_experience_canvas';
+const PWD              = 'omni777';
+const LS_AUTH          = 'le_canvas_auth';
+const LS_STATE         = 'le_canvas_v2_state';
+
+// ═══════════════════════════════════════════════════
+// CANVAS DATA
+// ═══════════════════════════════════════════════════
+const CANVAS = [
+  { id:'oferta', icon:'🎯', title:'Oferta & Posicionamento', gaps:[
+    'Qual é a promessa central do Legacy Experience — o que o profissional liberal vai conquistar em 4 dias que não conseguiria no formato padrão?',
+    'Por que AGORA? Qual o gatilho temporal ou cultural que justifica esse formato em outubro 2026?',
+    'O Legacy Experience convive com o Legacy regular em paralelo ou o substitui durante o lançamento?',
+    'O ingresso "1+1 acompanhante" é a headline principal da oferta ou um reveal estratégico ao longo do lançamento?',
+    'Qual o nome oficial do evento: "Legacy Experience", "Legacy Imersão" ou outro?',
+    'O que está incluso além dos 4 dias: material físico, gravações, certificação, acesso online?',
+    'Quem comprou o Legacy recentemente tem condição de upgrade ou desconto para o Experience?',
+    'Qual é o preço-âncora (valor percebido) que justifica o ticket cobrado?',
+  ]},
+  { id:'avatar', icon:'👤', title:'Público & Avatar', gaps:[
+    'Dentro de "profissionais liberais", qual é o avatar primário vs. secundário? (ex: terapeuta com prática estabelecida vs. dentista recém-formado)',
+    'O acompanhante pode ser sócio ou parceiro de trabalho, ou deve ser exclusivamente familiar?',
+    'O acompanhante recebe certificação, material e acesso igual ao titular?',
+    'Alunos do Legacy padrão entram como público prioritário (upgrade) ou são excluídos da campanha principal?',
+    'O acompanhante é parte ativa da decisão de compra na copy, ou é tratado como surpresa/bônus?',
+    'Existe restrição de perfil para o acompanhante: idade mínima, vínculo comprovado?',
+  ]},
+  { id:'preco', icon:'💰', title:'Precificação & Estrutura Comercial', gaps:[
+    'Qual o preço cheio por ingresso (considerando que 1 ingresso = 2 pessoas)?',
+    'Estrutura de lotes: lote único, 2 ou 3 lotes? Gatilhos de virada por data ou por quantidade?',
+    'Parcelamento máximo aceito? Há desconto à vista (Pix)?',
+    'Haverá early bird exclusivo para Aliança OMNI antes da abertura ao público geral?',
+    'Política de reembolso: qual a janela e em quais condições é aceito?',
+    'Política de transferência de ingresso caso o comprador não possa comparecer?',
+    'Haverá condição especial para ex-alunos do Legacy padrão?',
+  ]},
+  { id:'cronograma', icon:'📅', title:'Cronograma', gaps:[
+    'Qual a data exata da imersão em outubro 2026 (4 dias específicos)?',
+    'Quando abre e quando fecha o carrinho de vendas?',
+    'Qual a janela de aquecimento orgânico antes do pré-lançamento formal — 60, 90 ou 120 dias?',
+    'Qual é o cronograma reverso completo: da imersão até o início do aquecimento?',
+    'Quando é o gate de decisão — data limite para confirmar público mínimo viável (break-even)?',
+  ]},
+  { id:'plf', icon:'🚀', title:'Estratégia de Lançamento (PLF)', gaps:[
+    'Faz sentido um seed launch (20-30 pessoas da Aliança, ~60 dias antes) para validar oferta e coletar testemunhos antes do lançamento principal?',
+    'Se sim, esses 20-30 entram dentro da meta de 100 ou são extras?',
+    'Qual a sequência dos 3 PLCs e a tese de cada um adaptada ao profissional liberal (oportunidade → transformação → ownership)?',
+    'Formato dos PLCs: vídeo gravado, live, série de e-mails ou híbrido?',
+    'Qual a janela do PLC antes do carrinho: 7, 10 ou 14 dias?',
+    'Haverá live de aquecimento com Michael antes do PLC1 para "anunciar que algo vem"?',
+    'Duração do carrinho aberto: 4, 5 ou 7 dias?',
+    'Haverá live de abertura do carrinho e live de fechamento (last call)?',
+    'Mecanismo de escassez REAL: vagas limitadas em 100, data fixa do evento, capacidade do venue?',
+    'Haverá evento online de pré-lançamento (CPL, aula ao vivo) ou venda direta via sequência de conteúdo?',
+  ]},
+  { id:'lista', icon:'📋', title:'Lista & Audiência', gaps:[
+    'Qual o tamanho atual da lista quente: alunos Legacy + Aliança OMNI + leads orgânicos segmentados?',
+    'Qual a taxa de conversão histórica da lista quente para imersão de ticket alto na OMNI?',
+    'Haverá lista de espera / early access exclusiva com benefício real (lote zero, vaga garantida, bônus)?',
+    'Haverá pesquisa de aquecimento (survey) para coletar a linguagem e as dores reais do avatar antes de escrever a copy?',
+  ]},
+  { id:'parceiros', icon:'🤝', title:'Parceiros & Aliança OMNI', gaps:[
+    'Quais membros da Aliança são tier 1 (alta audiência + alinhamento total) vs. tier 2/3?',
+    'A comissão de 25% é competitiva para o mercado de imersão presencial premium (benchmark: 30-40%)?',
+    'Comissão calculada sobre valor bruto ou líquido? Inclui parcelamento futuro ou apenas primeira parcela?',
+    'Qual o ciclo de pagamento da comissão: após confirmação, após janela de reembolso ou escalonado?',
+    'Como será feita a atribuição da venda ao parceiro: link rastreável, cupom ou formulário?',
+    'Haverá meta mínima de venda por parceiro para liberar a comissão cheia?',
+    'Incentivo para top performers: leaderboard ao vivo, bônus em dinheiro, presença VIP?',
+    'Parceiros recebem kit de divulgação completo: swipe copy, criativos, vídeos prontos, links UTM?',
+    'Haverá janela exclusiva para afiliados antes da abertura ao público geral?',
+    'Quem é o ponto focal com a Aliança durante o lançamento: Michael, Fernanda ou alguém dedicado?',
+    'Quando e quem assina o contrato/termo formal de parceria com cada afiliado?',
+  ]},
+  { id:'captacao', icon:'🔀', title:'Captação & Funil', gaps:[
+    'A captação será 100% orgânica, 100% paga ou híbrida? Qual o split de meta de leads por canal?',
+    'Haverá isca digital / lead magnet antes da página de venda para aquecer o lead?',
+    'Modelo de venda: direto (LP → checkout) ou com etapa de aplicação/qualificação do lead?',
+    'A oferta será por sales call com closer humano ou self-checkout na página?',
+    'Qual o orçamento de mídia paga e em quais canais (Meta, YouTube, Google)?',
+    'Qual o CAC máximo aceitável para bater 100 ingressos com tráfego pago?',
+    'Como trabalhar a base existente: sequência de e-mail, régua de WhatsApp ou ligação ativa?',
+    'Como rastrear o ROI por origem (lista quente, afiliado, tráfego pago, orgânico) via UTMs e pixel?',
+  ]},
+  { id:'copy', icon:'✍️', title:'Conteúdo & Copy', gaps:[
+    'Qual é a "história única" que conduz o profissional liberal do awareness até a decisão de compra?',
+    'Quais são as 3-5 objeções principais (tempo fora do consultório, custo, ceticismo, "já fiz o Legacy") e como cada uma é respondida na sequência?',
+    'Onde o "+1 acompanhante" é revelado na narrativa para maximizar o impacto emocional e de venda?',
+    'Qual prova social já existe (testemunhos do Legacy padrão) e o que precisa ser produzido do zero?',
+    'Haverá um "case story" central (um aluno-herói) ou múltiplas histórias de transformação?',
+    'Quem escreve a copy da página de vendas: Marcão, copywriter externo ou Fernanda?',
+    'Vídeo de vendas (VSL): Michael à frente? Formato (câmera, slides), local e data de gravação?',
+    'Quantidade e formato de criativos para tráfego pago: estáticos, vídeos curtos, depoimentos?',
+  ]},
+  { id:'logistica', icon:'📍', title:'Local & Logística do Evento', gaps:[
+    'Cidade e venue confirmados? Contrato assinado ou em negociação?',
+    'A capacidade do venue suporta 200 pessoas (100 ingressos × 2 pessoas por ingresso)?',
+    'Hospedagem está inclusa no ticket, é recomendada com parceiro ou por conta do participante?',
+    'Alimentação (café, almoço, jantares) está inclusa total ou parcialmente?',
+    'Transfer aeroporto-hotel-evento é responsabilidade da OMNI ou por conta própria?',
+    'Estrutura técnica: som, iluminação, palco, gravação do evento — quem fornece e qual o custo?',
+    'Material físico (apostila, caderno, brindes) — quem produz, prazo e orçamento?',
+    'Agenda dos 4 dias: dress code, atividades extras, jantar de boas-vindas?',
+    'Plano B se Michael ou facilitador-chave tiver um imprevisto no período do evento?',
+  ]},
+  { id:'onboarding', icon:'🎓', title:'Onboarding & Pós-Compra', gaps:[
+    'Qual o fluxo de boas-vindas após a compra: e-mail automático, WhatsApp via Prisma ou ligação da Eliza?',
+    'Como e quando o acompanhante é cadastrado — quem faz, qual formulário, qual prazo?',
+    'Quais dados precisam ser coletados de cada participante e do acompanhante?',
+    'Haverá pré-trabalho ou conteúdo preparatório antes da imersão para elevar o engajamento?',
+    'Comunicação de "esquenta" nas semanas anteriores ao evento: roteiro, frequência e canal?',
+    'Grupo de WhatsApp dos confirmados: quando cria, quem gerencia e qual a dinâmica?',
+    'O que acontece entre a compra (ex: julho) e o evento (outubro) para evitar cancelamentos?',
+  ]},
+  { id:'time', icon:'👥', title:'Time & Responsabilidades', gaps:[
+    'Fernanda tem briefing fechado de execução de marketing, com escopo, autonomia e orçamento definidos?',
+    'Marcão tem deadline e formato de entrega da estratégia de conteúdo — calendário editorial, canais e peças?',
+    'Gerlandia tem orçamento aprovado e autonomia para contratar fornecedores de logística?',
+    'Fernanda consegue rodar um PLF completo sozinha ou precisa de reforço (copywriter, editor, gestor de tráfego)?',
+    'Quem é o "rosto" nos vídeos e lives — Michael sozinho ou com um aluno-case como dupla?',
+    'Existe closer dedicado para atendimento de leads quentes, ou é Michael + Fernanda?',
+    'Quem é o DRI — responsável final por bater a meta de 100 ingressos?',
+  ]},
+  { id:'tech', icon:'⚙️', title:'Tecnologia & Operações', gaps:[
+    'Plataforma de checkout: Hotmart, Eduzz, Stripe ou solução própria?',
+    'ActiveCampaign já tem a lista segmentada e automações configuradas para esse lançamento?',
+    'CRM para follow-up de leads quentes que não compraram: Pipedrive ou outra ferramenta?',
+    'Pixel, eventos de conversão e UTMs configurados antes do início do tráfego pago?',
+    'Dashboard de acompanhamento de vendas em tempo real — quem monitora e com qual frequência?',
+    'Integração checkout → onboarding da Eliza está mapeada e automatizada?',
+  ]},
+  { id:'metricas', icon:'📊', title:'Métricas & Metas', gaps:[
+    'Meta de "100 participantes" = 100 ingressos (200 pessoas no venue) ou 100 pessoas (50 ingressos)?',
+    'Funil reverso: quantos leads precisamos para 100 vendas, considerando a taxa de conversão histórica?',
+    'KPIs por etapa: visitantes na LP, opt-ins, leads qualificados, chamadas, conversão e ticket médio.',
+    'Meta de vendas por semana e por dia da janela de carrinho aberto.',
+    'Cenários: pessimista, realista e otimista — com ponto de break-even definido para cada.',
+    'Gate de decisão: em que momento se aciona "modo de emergência" se as vendas estiverem abaixo da curva?',
+  ]},
+  { id:'riscos', icon:'⚠️', title:'Riscos & Compliance', gaps:[
+    'Haverá contrato ou termo de participação assinado digitalmente pelos compradores?',
+    'Cláusula de uso de imagem (foto e vídeo) durante a imersão está prevista no processo de compra?',
+    'Política de cancelamento do evento por força maior — quem assume custos e como é comunicado?',
+    'Seguro do evento é necessário para eventos com ~200 pessoas?',
+    'Conformidade fiscal: nota fiscal de serviço, recolhimento de impostos sobre comissões (IRRF)?',
+    'LGPD: coleta, armazenamento e uso dos dados dos leads e participantes está mapeado e documentado?',
+  ]},
+  { id:'pos', icon:'🔮', title:'Pós-Evento & Continuidade', gaps:[
+    'Existe oferta de upsell pós-imersão: mentoria continuada, próximo produto ou nível da jornada?',
+    'Participantes do Experience entram automaticamente na Aliança OMNI ou em algum grupo VIP?',
+    'Como serão captados depoimentos e cases durante e logo após o evento para o próximo lançamento?',
+    'Plano de fidelização — o que acontece com o aluno do Experience nos 12 meses seguintes?',
+    'Como o Legacy Experience serve como combustível (provas sociais, cases) para o próximo lançamento?',
+  ]},
+];
+
+// ═══════════════════════════════════════════════════
+// GLOBAL STATE
+// ═══════════════════════════════════════════════════
+let supabase   = null;
+let dbState    = {};   // id → { status, resposta, atualizado_por, atualizado_em }
+let filterMode = 'all';
+let hideDone   = false;
+const isSupabaseOk = SUPABASE_URL && SUPABASE_ANON_KEY && !SUPABASE_URL.includes('REPLACE');
+
+// ═══════════════════════════════════════════════════
+// PASSWORD
+// ═══════════════════════════════════════════════════
+function checkPwd() {
+  if (document.getElementById('pwd-input').value === PWD) {
+    sessionStorage.setItem(LS_AUTH, '1');
+    document.getElementById('lock-overlay').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('pwd-error').textContent = 'Senha incorreta.';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+if (sessionStorage.getItem(LS_AUTH) === '1') {
+  document.getElementById('lock-overlay').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+}
+
+// ═══════════════════════════════════════════════════
+// LOCAL STORAGE FALLBACK
+// ═══════════════════════════════════════════════════
+function lsLoad() {
+  try { return JSON.parse(localStorage.getItem(LS_STATE)) || {}; } catch { return {}; }
+}
+function lsSave(state) { localStorage.setItem(LS_STATE, JSON.stringify(state)); }
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+async function init() {
+  dbState = lsLoad();
+
+  const liveEl = document.getElementById('live-status');
+
+  if (!isSupabaseOk || typeof window.supabase === 'undefined') {
+    liveEl.className = 'status-pill offline';
+    liveEl.innerHTML = '<span>Offline · Local</span>';
+    render();
+    return;
+  }
+
+  try {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const { data, error } = await supabase.from(TABLE).select('*');
+
+    if (error) {
+      if (error.code === '42P01') {
+        // Tabela não existe
+        document.getElementById('setup-banner').style.display = 'block';
+        liveEl.className = 'status-pill offline';
+        liveEl.innerHTML = '<span>Tabela não criada</span>';
+      } else {
+        throw error;
+      }
+      render();
+      return;
+    }
+
+    // Carregar dados do banco — merge com localStorage
+    const ls = lsLoad();
+    data.forEach(row => { dbState[row.id] = row; });
+    // Gaps sem entrada no banco ficam com estado do localStorage (ou default)
+    Object.keys(ls).forEach(id => { if (!dbState[id]) dbState[id] = ls[id]; });
+
+    liveEl.className = 'status-pill live';
+    liveEl.innerHTML = '<span>Live · Supabase</span>';
+
+    // Realtime
+    supabase.channel('le-canvas')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: TABLE }, payload => {
+        dbState[payload.new.id] = payload.new;
+        refreshRow(payload.new.id, payload.new);
+        updateStats();
+      })
+      .subscribe();
+
+    render();
+  } catch (e) {
+    console.error('[legacy-canvas] Supabase error:', e);
+    liveEl.className = 'status-pill offline';
+    liveEl.innerHTML = '<span>Offline · Erro</span>';
+    render();
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════
+function getState(id) {
+  return dbState[id] || { status: 'open', resposta: '', atualizado_por: '', atualizado_em: null };
+}
+
+function render() {
+  const wrap = document.getElementById('canvas-wrap');
+  wrap.innerHTML = '';
+
+  CANVAS.forEach(cat => {
+    const sec = document.createElement('div');
+    sec.className = 'cat-section';
+    sec.id = 'cat-' + cat.id;
+
+    const counts = { open:0, thinking:0, done:0 };
+    cat.gaps.forEach((_, i) => {
+      const s = getState(`${cat.id}_${i}`).status;
+      counts[s] = (counts[s] || 0) + 1;
+    });
+    const total = cat.gaps.length;
+    const pct   = Math.round(100 * counts.done / total);
+
+    sec.innerHTML = `
+      <div class="cat-header" onclick="toggleCat('${cat.id}')">
+        <span class="cat-icon">${cat.icon}</span>
+        <span class="cat-title">${cat.title}</span>
+        <div class="cat-stats">
+          <div class="cat-mini-bars">${miniBar(counts,total)}</div>
+          <span class="cat-count">${counts.done}/${total} definidas</span>
+          <span class="cat-pct">${pct}%</span>
+        </div>
+        <span class="cat-chevron">▼</span>
+      </div>
+      <div class="cat-body" id="catbody-${cat.id}">
+        ${cat.gaps.map((gap, i) => gapHTML(cat.id, i, gap)).join('')}
+      </div>
+    `;
+    wrap.appendChild(sec);
+  });
+
+  bindGapEvents();
+  updateStats();
+  applyFilter();
+}
+
+function miniBar(counts, total) {
+  const n = Math.min(total, 12);
+  let bars = '';
+  let o = counts.open, t = counts.thinking, d = counts.done;
+  for (let i = 0; i < n; i++) {
+    const ratio = i / n;
+    const dRatio = d / total, tRatio = t / total;
+    let cls = 's-open';
+    if (ratio < (d/total)) cls = 's-done';
+    else if (ratio < (d/total + t/total)) cls = 's-thinking';
+    bars += `<div class="cat-mini-bar ${cls}"></div>`;
+  }
+  return bars;
+}
+
+function gapHTML(catId, idx, text) {
+  const id = `${catId}_${idx}`;
+  const s  = getState(id);
+  const statusLabel = { open: 'Em Aberto', thinking: 'Em Discussão', done: 'Definida' };
+  const lastUpd = s.atualizado_em
+    ? `${fmtDate(s.atualizado_em)}${s.atualizado_por ? ' · ' + esc(s.atualizado_por) : ''}`
+    : '';
+
+  return `
+    <div class="gap-row" data-id="${id}" data-status="${s.status}" data-cat="${catId}">
+      <div class="gap-row-top">
+        <div class="gap-dot-wrap"><div class="gap-dot"></div></div>
+        <div class="gap-text">${esc(text)}</div>
+        <div class="gap-badge">${statusLabel[s.status] || s.status}</div>
+        <div class="gap-chevron">▼</div>
+      </div>
+      <div class="gap-detail">
+        <div class="detail-label">Decisão / Resposta</div>
+        <textarea class="note-input" data-id="${id}" placeholder="Escreva aqui a decisão, os acordos ou as anotações sobre essa questão...">${esc(s.resposta)}</textarea>
+        <div class="save-row">
+          <select class="status-select" data-id="${id}">
+            <option value="open"     ${s.status==='open'    ?'selected':''}>🔴 Em Aberto</option>
+            <option value="thinking" ${s.status==='thinking'?'selected':''}>🟡 Em Discussão</option>
+            <option value="done"     ${s.status==='done'    ?'selected':''}>🟢 Definida</option>
+          </select>
+          <input class="whoami-input" type="text" data-id="${id}" placeholder="Seu nome" value="${esc(localStorage.getItem('le_whoami') || '')}">
+          <button class="save-btn" data-id="${id}">Salvar</button>
+          <span class="save-status" data-id="${id}"></span>
+          ${lastUpd ? `<span class="last-upd">Última: ${lastUpd}</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function bindGapEvents() {
+  document.querySelectorAll('.gap-row').forEach(row => {
+    row.addEventListener('click', e => {
+      if (e.target.closest('.note-input, .save-btn, .status-select, .whoami-input')) return;
+      row.classList.toggle('expanded');
+    });
+  });
+  document.querySelectorAll('.save-btn').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); saveGap(btn.dataset.id); });
+  });
+  document.querySelectorAll('.status-select').forEach(sel => {
+    sel.addEventListener('change', e => { e.stopPropagation(); });
+    sel.addEventListener('click', e => { e.stopPropagation(); });
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// REFRESH SINGLE ROW (realtime update)
+// ═══════════════════════════════════════════════════
+function refreshRow(id, data) {
+  const row = document.querySelector(`.gap-row[data-id="${id}"]`);
+  if (!row) return;
+  const statusLabel = { open: 'Em Aberto', thinking: 'Em Discussão', done: 'Definida' };
+  row.dataset.status = data.status;
+  row.querySelector('.gap-badge').textContent = statusLabel[data.status] || data.status;
+  const ta = row.querySelector('.note-input');
+  if (ta && document.activeElement !== ta) ta.value = data.resposta || '';
+  const sel = row.querySelector('.status-select');
+  if (sel && document.activeElement !== sel) sel.value = data.status;
+  const lastEl = row.querySelector('.last-upd');
+  if (lastEl && data.atualizado_em) {
+    lastEl.textContent = `Última: ${fmtDate(data.atualizado_em)}${data.atualizado_por ? ' · ' + data.atualizado_por : ''}`;
+  }
+  updateCatHeader(id.split('_')[0]);
+}
+
+// ═══════════════════════════════════════════════════
+// SAVE
+// ═══════════════════════════════════════════════════
+async function saveGap(id) {
+  const row      = document.querySelector(`.gap-row[data-id="${id}"]`);
+  const textarea = row.querySelector('.note-input');
+  const sel      = row.querySelector('.status-select');
+  const whoami   = row.querySelector('.whoami-input');
+  const statusEl = row.querySelector('.save-status');
+  const btn      = row.querySelector('.save-btn');
+
+  const who = whoami.value.trim();
+  if (!who) {
+    statusEl.className = 'save-status err';
+    statusEl.textContent = 'Preencha seu nome';
+    return;
+  }
+  localStorage.setItem('le_whoami', who);
+
+  const payload = {
+    status:         sel.value,
+    resposta:       textarea.value,
+    atualizado_por: who,
+    atualizado_em:  new Date().toISOString(),
+  };
+
+  btn.disabled = true;
+  statusEl.className = 'save-status';
+  statusEl.textContent = 'Salvando...';
+
+  // Atualizar estado local
+  dbState[id] = { ...dbState[id], id, categoria: id.split('_')[0], ...payload };
+  row.dataset.status = payload.status;
+  const statusLabel = { open: 'Em Aberto', thinking: 'Em Discussão', done: 'Definida' };
+  row.querySelector('.gap-badge').textContent = statusLabel[payload.status];
+  lsSave(dbState);
+  updateCatHeader(id.split('_')[0]);
+  updateStats();
+  applyFilter();
+
+  // Persistir no Supabase
+  if (supabase) {
+    const { error } = await supabase.from(TABLE)
+      .upsert({ id, categoria: id.split('_')[0], ...payload }, { onConflict: 'id' });
+    btn.disabled = false;
+    if (error) {
+      statusEl.className = 'save-status err';
+      statusEl.textContent = 'Erro: ' + error.message;
+      return;
+    }
+  } else {
+    btn.disabled = false;
+  }
+
+  statusEl.className = 'save-status ok';
+  statusEl.textContent = 'Salvo!';
+  setTimeout(() => { statusEl.textContent = ''; }, 3000);
+}
+
+// ═══════════════════════════════════════════════════
+// CAT TOGGLE
+// ═══════════════════════════════════════════════════
+function toggleCat(id) {
+  const sec = document.getElementById('cat-' + id);
+  sec.classList.toggle('open');
+}
+
+function updateCatHeader(catId) {
+  const cat = CANVAS.find(c => c.id === catId);
+  if (!cat) return;
+  const sec = document.getElementById('cat-' + catId);
+  if (!sec) return;
+  const counts = { open:0, thinking:0, done:0 };
+  cat.gaps.forEach((_, i) => {
+    const s = dbState[`${catId}_${i}`]?.status || 'open';
+    counts[s] = (counts[s] || 0) + 1;
+  });
+  const total = cat.gaps.length;
+  const pct = Math.round(100 * counts.done / total);
+  sec.querySelector('.cat-count').textContent = `${counts.done}/${total} definidas`;
+  sec.querySelector('.cat-pct').textContent = `${pct}%`;
+  sec.querySelector('.cat-mini-bars').innerHTML = miniBar(counts, total);
+}
+
+// ═══════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════
+function updateStats() {
+  let total = 0, open = 0, thinking = 0, done = 0;
+  CANVAS.forEach(cat => {
+    cat.gaps.forEach((_, i) => {
+      total++;
+      const s = dbState[`${cat.id}_${i}`]?.status || 'open';
+      if (s === 'open') open++;
+      else if (s === 'thinking') thinking++;
+      else done++;
+    });
+  });
+  const pct = total ? Math.round(100 * done / total) : 0;
+  document.getElementById('stat-total').textContent   = total;
+  document.getElementById('stat-done').textContent    = done;
+  document.getElementById('stat-thinking').textContent = thinking;
+  document.getElementById('stat-open').textContent    = open;
+  document.getElementById('stat-pct').textContent     = pct + '% definido';
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+// ═══════════════════════════════════════════════════
+// FILTER
+// ═══════════════════════════════════════════════════
+function applyFilter() {
+  document.querySelectorAll('.gap-row').forEach(row => {
+    const status = row.dataset.status || 'open';
+    let show = true;
+    if (filterMode !== 'all' && status !== filterMode) show = false;
+    if (hideDone && status === 'done') show = false;
+    row.style.display = show ? '' : 'none';
+  });
+  // Hide cats where all visible rows are hidden
+  CANVAS.forEach(cat => {
+    const sec = document.getElementById('cat-' + cat.id);
+    if (!sec) return;
+    const rows = sec.querySelectorAll('.gap-row');
+    const anyVisible = Array.from(rows).some(r => r.style.display !== 'none');
+    sec.style.display = anyVisible ? '' : 'none';
+  });
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterMode = btn.dataset.filter;
+    applyFilter();
+  });
+});
+document.getElementById('hide-done').addEventListener('change', e => {
+  hideDone = e.target.checked;
+  applyFilter();
+});
+
+// ═══════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+}
+
+// BOOT
+if (sessionStorage.getItem(LS_AUTH) === '1') init();
+</script>
+</body>
+</html>
