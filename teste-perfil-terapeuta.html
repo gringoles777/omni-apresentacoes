@@ -356,15 +356,27 @@
       cursor: not-allowed;
     }
 
-    .btn-next {
-      display: none;
-    }
-
-    .btn-next.show {
+    .btn-back {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
+      padding: 0.6rem 1rem;
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: color 0.2s var(--ease);
+      width: 100%;
     }
+
+    .btn-back:hover { color: var(--cream-70); }
 
     .btn-secondary {
       display: block;
@@ -634,9 +646,7 @@
           <span class="opt-txt">Acima de R$500</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q1" onclick="go('q2')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q1')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q2: VOLUME ── -->
@@ -661,9 +671,7 @@
           <span class="opt-txt">Mais de 25 atendimentos</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q2" onclick="go('q3')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q2')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q3: MÉTODO / GARANTIA ── -->
@@ -688,9 +696,7 @@
           <span class="opt-txt">Meu trabalho é muito particular para isso</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q3" onclick="go('q4')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q3')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q4: BEM-ESTAR ── -->
@@ -715,9 +721,7 @@
           <span class="opt-txt">Já percebi que estou operando no piloto automático emocional</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q4" onclick="go('q5')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q4')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q5: RESULTADOS DOS CLIENTES ── -->
@@ -742,9 +746,7 @@
           <span class="opt-txt">Angustiado — sei que poderia ir muito mais fundo, mas algo trava o cliente</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q5" onclick="go('q6')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q5')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q6: ENGAJAMENTO DOS CLIENTES ── -->
@@ -769,9 +771,7 @@
           <span class="opt-txt">Percebo um padrão: chegam com expectativa alta, mas desengajam antes de completar o processo</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q6" onclick="go('q7')" aria-label="Próxima pergunta">
-        Próxima &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q6')">&larr; Voltar</button>
     </div>
 
     <!-- ── Q7: FUTURE PACING ── -->
@@ -796,9 +796,7 @@
           <span class="opt-txt">Recuperar minha energia — me sentir vivo após as sessões, não esgotado</span>
         </div>
       </div>
-      <button class="btn-primary btn-next" id="nx-q7" onclick="go('optin')">
-        Ver meu resultado &rarr;
-      </button>
+      <button class="btn-back" onclick="back('q7')">&larr; Voltar</button>
     </div>
 
     <!-- ── OPT-IN ── -->
@@ -926,7 +924,11 @@
       }
     }
 
-    /* ── OPTION SELECTION ── */
+    /* ── NAVIGATION MAPS ── */
+    const NEXT = { q1:'q2', q2:'q3', q3:'q4', q4:'q5', q5:'q6', q6:'q7', q7:'optin' };
+    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q4:'q3', q5:'q4', q6:'q5', q7:'q6' };
+
+    /* ── OPTION SELECTION + AUTO-ADVANCE ── */
     function pick(q, val, el) {
       const screen = el.closest('.screen');
       screen.querySelectorAll('.opt').forEach(o => {
@@ -939,13 +941,16 @@
 
       // Compute faturamento after Q2
       if (q === 'q2' && S.answers.q1 !== undefined) {
-        S.faturamento  = S.answers.q1 * S.answers.q2;
-        S.qualificado  = S.faturamento >= 12000;
+        S.faturamento = S.answers.q1 * S.answers.q2;
+        S.qualificado = S.faturamento >= 12000;
       }
 
-      const btn = document.getElementById('nx-' + q);
-      if (btn) btn.classList.add('show');
+      // Auto-advance after brief delay so selection animation is visible
+      setTimeout(() => { if (NEXT[q]) go(NEXT[q]); }, 360);
     }
+
+    /* ── BACK NAVIGATION ── */
+    function back(q) { if (PREV[q]) go(PREV[q]); }
 
     /* keyboard support */
     function kd(e, q, val, el) {
