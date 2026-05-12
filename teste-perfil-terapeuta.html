@@ -18,26 +18,26 @@
     /* ── RESET ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── TOKENS ── */
+    /* ── TOKENS — Light Theme ── */
     :root {
-      --black:        #050505;
-      --dark:         #0D0D0D;
-      --dark-el:      #1A1A1A;
-      --dark-tx:      #2D2D2D;
-      --gold:         #C8A84B;
-      --gold-light:   #E8C86A;
-      --gold-deep:    #9A7A2E;
-      --gold-10:      rgba(200,168,75,0.10);
-      --gold-15:      rgba(200,168,75,0.15);
-      --gold-20:      rgba(200,168,75,0.20);
-      --gold-30:      rgba(200,168,75,0.30);
-      --cream:        #F5F0E8;
-      --cream-70:     rgba(245,240,232,0.70);
-      --cream-50:     rgba(245,240,232,0.50);
-      --gray:         #6B6B6B;
-      --gray-dark:    #242424;
-      --glow:         0 0 24px rgba(200,168,75,0.25);
-      --glow-h:       0 0 32px rgba(200,168,75,0.35);
+      --black:        #F7F3EC;   /* page background — warm off-white */
+      --dark:         #EDE8DF;   /* secondary background */
+      --dark-el:      #FFFFFF;   /* elevated surfaces (cards, options) */
+      --dark-tx:      #E4DDD2;   /* hover texture */
+      --gold:         #B8943A;   /* slightly deeper gold — better contrast on light */
+      --gold-light:   #C8A84B;
+      --gold-deep:    #8A6A22;
+      --gold-10:      rgba(184,148,58,0.10);
+      --gold-15:      rgba(184,148,58,0.15);
+      --gold-20:      rgba(184,148,58,0.20);
+      --gold-30:      rgba(184,148,58,0.30);
+      --cream:        #1C1814;   /* primary text — near-black warm */
+      --cream-70:     rgba(28,24,20,0.62);
+      --cream-50:     rgba(28,24,20,0.42);
+      --gray:         #8C877E;   /* secondary text */
+      --gray-dark:    #D8D2C8;   /* borders */
+      --glow:         0 0 20px rgba(184,148,58,0.22);
+      --glow-h:       0 0 28px rgba(184,148,58,0.32);
       --ease:         cubic-bezier(0.4,0,0.2,1);
       --serif:        'DM Serif Display', Georgia, serif;
       --mono:         'IBM Plex Mono', 'Courier New', monospace;
@@ -58,17 +58,15 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── CROSSHAIR PATTERN ── */
+    /* ── DOT PATTERN — subtle on light ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background-image:
-        linear-gradient(rgba(200,168,75,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,168,75,0.025) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-image: radial-gradient(rgba(28,24,20,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
     }
@@ -82,10 +80,11 @@
       align-items: center;
       justify-content: center;
       padding: 14px 24px;
-      background: rgba(5,5,5,0.92);
+      background: rgba(247,243,236,0.94);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--gray-dark);
+      box-shadow: 0 1px 0 var(--gray-dark);
     }
 
     .logo-text {
@@ -108,7 +107,7 @@
       position: fixed;
       top: 49px; left: 0; right: 0;
       z-index: 199;
-      background: var(--dark);
+      background: rgba(247,243,236,0.97);
       border-bottom: 1px solid var(--gray-dark);
       padding: 10px 24px;
       display: flex;
@@ -279,14 +278,16 @@
       background: var(--dark-el);
       border: 1px solid var(--gray-dark);
       cursor: pointer;
-      transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 1px 3px rgba(28,24,20,0.06);
     }
 
     .opt:hover {
       border-color: var(--gold-30);
       background: var(--dark-tx);
+      box-shadow: 0 2px 8px rgba(28,24,20,0.10);
     }
 
     .opt.sel {
@@ -503,7 +504,7 @@
       font-family: var(--serif);
       font-size: clamp(1.7rem, 4.5vw, 2.6rem);
       font-weight: 400;
-      color: var(--cream);
+      color: var(--cream);   /* near-black on light bg = dark, high contrast */
       letter-spacing: -0.02em;
       line-height: 1.2;
       margin-bottom: 8px;
@@ -551,6 +552,7 @@
       color: var(--cream);
       line-height: 1.65;
       margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(28,24,20,0.07);
     }
 
     .cta-stack {
