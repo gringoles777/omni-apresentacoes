@@ -828,7 +828,15 @@
       <p class="privacy">Seus dados ficam só com a OMNI Brasil. Sem spam. Só conteúdo relevante para o seu perfil.</p>
     </div>
 
-    <!-- ── RESULT ── -->
+    <!-- ── OBRIGADO ── -->
+    <div class="screen" id="screen-obrigado">
+      <div class="badge">Resultado enviado</div>
+      <h2 class="optin-hl" style="margin-top: 16px;">Recebemos suas respostas.</h2>
+      <p class="optin-sub">Você receberá seu resultado no WhatsApp em instantes. Fique de olho na mensagem.</p>
+      <p style="margin-top: 40px; font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray);">OMNI Brasil &nbsp;&middot;&nbsp; Transformação que se prova.</p>
+    </div>
+
+    <!-- ── RESULT (preview interno via ?perfil=N) ── -->
     <div class="screen" id="screen-result">
       <div class="badge" id="res-badge">Seu Perfil</div>
       <span class="result-eyebrow" id="res-eyebrow"></span>
@@ -964,41 +972,67 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q, val, el); }
     }
 
+    /* ── MONTA TEXTO DO WHATSAPP ── */
+    function buildWaText(p, nome) {
+      let txt = `Olá ${nome}! Aqui está o resultado do seu Teste de Perfil do Terapeuta.\n\n`;
+      txt += `*${p.name.toUpperCase()}*\n\n`;
+      txt += p.desc.replace(/\n\n/g, '\n\n');
+      if (p.losing) txt += '\n\n' + p.losing;
+      return txt;
+    }
+
     /* ── OPT-IN SUBMIT ── */
     async function handleSubmit(e) {
       e.preventDefault();
       const btn   = document.getElementById('btn-submit');
-      const name  = document.getElementById('inp-name').value.trim();
+      const nome  = document.getElementById('inp-name').value.trim();
       const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
 
-      if (!name || phone.length < 6) {
-        console.warn('[Quiz] Validação falhou — nome:', name, '| telefone dígitos:', phone.length);
+      if (!nome || phone.length < 6) {
+        console.warn('[Quiz] Validação falhou — nome:', nome, '| telefone dígitos:', phone.length);
         return;
       }
 
       btn.disabled    = true;
       btn.textContent = 'Analisando...';
 
-      const leadData = {
-        name,
-        phone: '55' + phone,
-        faturamento: S.faturamento,
-        qualificado: S.qualificado,
-        answers: S.answers,
-        ts: new Date().toISOString()
+      const perfilId  = calcPerfil();
+      const p         = PERFIS[perfilId];
+      const waText    = buildWaText(p, nome);
+
+      const payload = {
+        nome,
+        telefone:            '55' + phone,
+        perfil_id:           perfilId,
+        perfil_nome:         p.name,
+        qualificado:         S.qualificado,
+        faturamento_estimado: S.faturamento,
+        mensagem_whatsapp:   waText,
+        respostas:           S.answers,
+        ts:                  new Date().toISOString()
       };
 
-      console.log('[Quiz] Lead capturado:', leadData);
+      console.log('[Quiz] Payload:', payload);
+
+      // Dispara webhook — n8n envia WhatsApp para o lead
+      // Endpoint configurado via @n8n-chief
+      const WEBHOOK_URL = 'http://76.13.169.211:3002/webhook/quiz-perfil-terapeuta';
 
       try {
-        localStorage.setItem('omni_quiz_lead', JSON.stringify(leadData));
-        console.log('[Quiz] Salvo em localStorage com sucesso.');
+        await fetch(WEBHOOK_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+        console.log('[Quiz] Webhook disparado com sucesso.');
       } catch (err) {
-        console.error('[Quiz] Erro ao salvar localStorage:', err);
+        console.warn('[Quiz] Webhook indisponível (será configurado via n8n):', err.message);
       }
 
-      await new Promise(r => setTimeout(r, 900));
-      showResult();
+      // Salva localmente para debug
+      try { localStorage.setItem('omni_quiz_lead', JSON.stringify(payload)); } catch (_) {}
+
+      go('obrigado');
     }
 
     /* ── RESULT ── */
