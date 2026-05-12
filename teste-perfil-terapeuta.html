@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Perfil do Terapeuta — OMNI Brasil</title>
+  <meta name="description" content="Existem 3 perfis de terapeuta que já chegaram no topo e ficaram presos lá de formas completamente diferentes. Descubra o seu — 5 minutos, gratuito.">
+  <meta property="og:title" content="Teste de Perfil do Terapeuta — OMNI Brasil">
+  <meta property="og:description" content="Existem 3 perfis de terapeuta que já chegaram no topo e ficaram presos lá de formas completamente diferentes. Qual é o seu?">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gringoles777.github.io/omni-apresentacoes/teste-perfil-terapeuta.html">
+  <link rel="canonical" href="https://gringoles777.github.io/omni-apresentacoes/teste-perfil-terapeuta.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ── */
+    :root {
+      --black:        #050505;
+      --dark:         #0D0D0D;
+      --dark-el:      #1A1A1A;
+      --dark-tx:      #2D2D2D;
+      --gold:         #C8A84B;
+      --gold-light:   #E8C86A;
+      --gold-deep:    #9A7A2E;
+      --gold-10:      rgba(200,168,75,0.10);
+      --gold-15:      rgba(200,168,75,0.15);
+      --gold-20:      rgba(200,168,75,0.20);
+      --gold-30:      rgba(200,168,75,0.30);
+      --cream:        #F5F0E8;
+      --cream-70:     rgba(245,240,232,0.70);
+      --cream-50:     rgba(245,240,232,0.50);
+      --gray:         #6B6B6B;
+      --gray-dark:    #242424;
+      --glow:         0 0 24px rgba(200,168,75,0.25);
+      --glow-h:       0 0 32px rgba(200,168,75,0.35);
+      --ease:         cubic-bezier(0.4,0,0.2,1);
+      --serif:        'DM Serif Display', Georgia, serif;
+      --mono:         'IBM Plex Mono', 'Courier New', monospace;
+      --body:         'Inter', 'Open Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CROSSHAIR PATTERN ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(200,168,75,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,168,75,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      background: rgba(5,5,5,0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-dark);
+    }
+
+    .logo-text {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .logo-text span {
+      color: var(--cream-50);
+      font-size: 0.55rem;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      position: fixed;
+      top: 49px; left: 0; right: 0;
+      z-index: 199;
+      background: var(--dark);
+      border-bottom: 1px solid var(--gray-dark);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease);
+    }
+
+    .progress-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 2px;
+      background: var(--gray-dark);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.45s var(--ease);
+    }
+
+    .progress-lbl {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 112px 24px 80px;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SCREENS ── */
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeUp 0.4s var(--ease) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MONO LABEL ── */
+    .mono-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--gold-10);
+      color: var(--gold);
+      border: 1px solid var(--gold-20);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
+    /* ══════════════════════════════
+       WELCOME SCREEN
+    ══════════════════════════════ */
+    .welcome-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .welcome-hl em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .welcome-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .welcome-desc {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      color: var(--cream-70);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .welcome-meta {
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ══════════════════════════════
+       QUESTION SCREEN
+    ══════════════════════════════ */
+    .q-text {
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      background: var(--dark-el);
+      border: 1px solid var(--gray-dark);
+      cursor: pointer;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .opt:hover {
+      border-color: var(--gold-30);
+      background: var(--dark-tx);
+    }
+
+    .opt.sel {
+      border-color: var(--gold);
+      background: var(--gold-10);
+    }
+
+    .opt-ltr {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gray-dark);
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all 0.2s var(--ease);
+      margin-top: 1px;
+    }
+
+    .opt.sel .opt-ltr {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .opt-txt {
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--cream);
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════
+       BUTTONS
+    ══════════════════════════════ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 2rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+      width: 100%;
+      line-height: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      box-shadow: var(--glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-next {
+      display: none;
+    }
+
+    .btn-next.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      display: block;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--cream-70);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--gray-dark);
+      border-radius: 0;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+      width: 100%;
+      line-height: 1;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════
+       OPT-IN SCREEN
+    ══════════════════════════════ */
+    .optin-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .optin-sub {
+      font-size: clamp(0.875rem, 1.2vw, 0.975rem);
+      color: var(--cream-70);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .optin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 15px;
+      background: var(--dark-el);
+      border: 1px solid var(--gray-dark);
+      border-radius: 0;
+      color: var(--cream);
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.25s var(--ease);
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--gold);
+    }
+
+    .form-input::placeholder {
+      color: var(--gray);
+    }
+
+    .privacy {
+      font-size: 0.72rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════
+       RESULT SCREEN
+    ══════════════════════════════ */
+    .result-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .result-name {
+      font-family: var(--serif);
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .result-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .result-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream-70);
+      margin-bottom: 24px;
+      line-height: 1.35;
+    }
+
+    .divider-gold {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px 0;
+    }
+
+    .result-desc {
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      color: var(--cream-70);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .losing-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .losing-box {
+      border-left: 2px solid var(--gold);
+      padding: 14px 18px;
+      background: var(--dark-el);
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
+    .cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px solid var(--gray-dark);
+    }
+
+    .footer-txt {
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ── SR ONLY ── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      main { padding: 106px 16px 72px; }
+      .opt { padding: 13px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <span class="logo-text">OMNI Brasil <span>— Transformação que se prova.</span></span>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-wrap" id="progressWrap" role="progressbar" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-lbl" id="progressLbl" aria-live="polite">Pergunta 1 de 7</span>
+  </div>
+
+  <main>
+
+    <!-- ── WELCOME ── -->
+    <div class="screen active" id="screen-welcome">
+      <div class="badge">Teste de Perfil · Gratuito</div>
+      <h1 class="welcome-hl">
+        Existem 3 perfis de terapeuta que já chegaram no topo... e ficaram presos lá de formas <em>completamente diferentes</em>.
+      </h1>
+      <p class="welcome-sub">Qual é o seu?</p>
+      <p class="welcome-desc">O perfil revela não só onde você está — mas onde você está desperdiçando energia sem perceber.</p>
+      <button class="btn-primary" style="max-width:300px;" onclick="go('q1')">
+        Descobrir meu perfil &rarr;
+      </button>
+      <p class="welcome-meta" style="margin-top:14px;">5 minutos &nbsp;&middot;&nbsp; Gratuito &nbsp;&middot;&nbsp; Sem compromisso</p>
+    </div>
+
+    <!-- ── Q1: TICKET MÉDIO ── -->
+    <div class="screen" id="screen-q1">
+      <span class="mono-label">Pergunta 1 de 7</span>
+      <h2 class="q-text">Qual é o investimento que seu cliente faz por sessão com você?</h2>
+      <div class="options" role="radiogroup" aria-label="Ticket médio por sessão">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',150,this)" onkeydown="kd(event,'q1',150,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Até R$150</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',225,this)" onkeydown="kd(event,'q1',225,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">R$151 a R$300</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',400,this)" onkeydown="kd(event,'q1',400,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">R$301 a R$500</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',600,this)" onkeydown="kd(event,'q1',600,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Acima de R$500</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q1" onclick="go('q2')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q2: VOLUME ── -->
+    <div class="screen" id="screen-q2">
+      <span class="mono-label">Pergunta 2 de 7</span>
+      <h2 class="q-text">Quantos atendimentos você realiza por mês?</h2>
+      <div class="options" role="radiogroup" aria-label="Volume de atendimentos por mês">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',8,this)" onkeydown="kd(event,'q2',8,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Até 8 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',12,this)" onkeydown="kd(event,'q2',12,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Entre 9 e 15 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',20,this)" onkeydown="kd(event,'q2',20,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Entre 16 e 25 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',30,this)" onkeydown="kd(event,'q2',30,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Mais de 25 atendimentos</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q2" onclick="go('q3')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q3: MÉTODO / GARANTIA ── -->
+    <div class="screen" id="screen-q3">
+      <span class="mono-label">Pergunta 3 de 7</span>
+      <h2 class="q-text">Você tem segurança para dar garantia de resultado para seus clientes?</h2>
+      <div class="options" role="radiogroup" aria-label="Segurança para garantir resultado">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',3,this)" onkeydown="kd(event,'q3',3,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Sim — uso um método validado com protocolo claro e me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',2,this)" onkeydown="kd(event,'q3',2,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho meu jeito de trabalhar, mas não me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',1,this)" onkeydown="kd(event,'q3',1,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Depende muito do caso — não consigo garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',0,this)" onkeydown="kd(event,'q3',0,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Meu trabalho é muito particular para isso</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q3" onclick="go('q4')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q4: BEM-ESTAR ── -->
+    <div class="screen" id="screen-q4">
+      <span class="mono-label">Pergunta 4 de 7</span>
+      <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
+      <div class="options" role="radiogroup" aria-label="Bem-estar pessoal">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',0,this)" onkeydown="kd(event,'q4',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Estou bem — tenho rituais e consigo me recuperar entre as semanas</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',1,this)" onkeydown="kd(event,'q4',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho dias bons e ruins. Me cuido menos do que deveria</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',3,this)" onkeydown="kd(event,'q4',3,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Honestamente, estou no limite. Cuido de todo mundo menos de mim</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',2,this)" onkeydown="kd(event,'q4',2,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Já percebi que estou operando no piloto automático emocional</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q4" onclick="go('q5')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q5: RESULTADOS DOS CLIENTES ── -->
+    <div class="screen" id="screen-q5">
+      <span class="mono-label">Pergunta 5 de 7</span>
+      <h2 class="q-text">Quando você olha para os resultados dos seus clientes, como se sente com mais frequência?</h2>
+      <div class="options" role="radiogroup" aria-label="Percepção sobre resultados dos clientes">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',0,this)" onkeydown="kd(event,'q5',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Satisfeito — vejo transformações reais e consistentes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',1,this)" onkeydown="kd(event,'q5',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Parcialmente satisfeito — alguns evoluem muito, outros pouco</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',3,this)" onkeydown="kd(event,'q5',3,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Frustrado — sinto que o processo fica na superfície com frequência</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',2,this)" onkeydown="kd(event,'q5',2,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Angustiado — sei que poderia ir muito mais fundo, mas algo trava o cliente</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q5" onclick="go('q6')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q6: ENGAJAMENTO DOS CLIENTES ── -->
+    <div class="screen" id="screen-q6">
+      <span class="mono-label">Pergunta 6 de 7</span>
+      <h2 class="q-text">Como os seus clientes se comportam em relação ao processo terapêutico?</h2>
+      <div class="options" role="radiogroup" aria-label="Comportamento dos clientes no processo">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',0,this)" onkeydown="kd(event,'q6',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">A maioria está comprometida e engajada com o processo</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',1,this)" onkeydown="kd(event,'q6',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Metade engaja bem, metade é resistente ou inconsistente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',2,this)" onkeydown="kd(event,'q6',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Sinto que muitos não valorizam o trabalho como deveriam — faltam sessões, não seguem o que foi acordado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',3,this)" onkeydown="kd(event,'q6',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Percebo um padrão: chegam com expectativa alta, mas desengajam antes de completar o processo</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q6" onclick="go('q7')" aria-label="Próxima pergunta">
+        Próxima &rarr;
+      </button>
+    </div>
+
+    <!-- ── Q7: FUTURE PACING ── -->
+    <div class="screen" id="screen-q7">
+      <span class="mono-label">Pergunta 7 de 7</span>
+      <h2 class="q-text">Se pudesse mudar uma coisa na sua prática hoje, o que seria?</h2>
+      <div class="options" role="radiogroup" aria-label="Principal mudança desejada na prática">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',2,this)" onkeydown="kd(event,'q7',2,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Ter mais tempo para mim e para as pessoas que amo fora da clínica</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',3,this)" onkeydown="kd(event,'q7',3,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Gerar transformações mais profundas e duradouras nos meus clientes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',2,this)" onkeydown="kd(event,'q7',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Sentir que meu trabalho é genuinamente reconhecido e valorizado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',3,this)" onkeydown="kd(event,'q7',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Recuperar minha energia — me sentir vivo após as sessões, não esgotado</span>
+        </div>
+      </div>
+      <button class="btn-primary btn-next" id="nx-q7" onclick="go('optin')">
+        Ver meu resultado &rarr;
+      </button>
+    </div>
+
+    <!-- ── OPT-IN ── -->
+    <div class="screen" id="screen-optin">
+      <h2 class="optin-hl">Seu perfil está pronto.</h2>
+      <p class="optin-sub">Antes de revelar, precisamos de um endereço para enviar seu diagnóstico completo e material complementar direto no WhatsApp.</p>
+      <form class="optin-form" id="optin-form" onsubmit="submit(event)" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="inp-name">Seu nome</label>
+          <input class="form-input" type="text" id="inp-name" name="name"
+                 placeholder="Como prefere ser chamado"
+                 autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-phone">WhatsApp com DDD</label>
+          <input class="form-input" type="tel" id="inp-phone" name="phone"
+                 placeholder="(11) 99999-9999"
+                 autocomplete="tel" required maxlength="15">
+        </div>
+        <button class="btn-primary" type="submit" id="btn-submit" style="margin-top:4px;">
+          Quero ver meu perfil agora &rarr;
+        </button>
+      </form>
+      <p class="privacy">Seus dados ficam só com a OMNI Brasil. Sem spam. Só conteúdo relevante para o seu perfil.</p>
+    </div>
+
+    <!-- ── RESULT ── -->
+    <div class="screen" id="screen-result">
+      <div class="badge" id="res-badge">Seu Perfil</div>
+      <span class="result-eyebrow" id="res-eyebrow"></span>
+      <span class="result-name" id="res-name"></span>
+      <h2 class="result-hl" id="res-hl"></h2>
+      <p class="result-sub" id="res-sub"></p>
+      <div class="divider-gold"></div>
+      <p class="result-desc" id="res-desc"></p>
+      <span class="losing-label">O que você está deixando na mesa</span>
+      <div class="losing-box" id="res-losing"></div>
+      <div class="cta-stack">
+        <a class="btn-primary" id="res-cta" href="#" target="_blank" rel="noopener noreferrer">
+          Agendar Consultoria Gratuita &rarr;
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="footer-txt">&copy; 2026 OMNI Brasil &nbsp;&middot;&nbsp; ISO 9001 &nbsp;&middot;&nbsp; EST. 1979 &nbsp;&middot;&nbsp; Transformação que se prova.</p>
+  </footer>
+
+  <script>
+    /* ── PERFIS DE RESULTADO ── */
+    const PERFIS = {
+      0: {
+        badge:   'Perfil Identificado',
+        eyebrow: 'Resultado da sua análise',
+        name:    'Terapeuta em Construção',
+        hl:      'Você está construindo sua base.',
+        sub:     'E essa base merece atenção antes de escalar.',
+        desc:    'Você está numa fase legítima e importante — mas o próximo passo exige uma ferramenta diferente. Antes de escalar, é preciso consolidar o que já funciona. Sua dedicação é real, e o potencial está lá.',
+        losing:  'Sem posicionamento claro e método estruturado, você compete com qualquer terapeuta da sua cidade — mesmo tendo formação e dedicação acima da média.',
+        cta:     'Acesse o conteúdo gratuito →',
+        url:     'https://wa.me/5511951360623?text=Ol%C3%A1%2C+fiz+o+Teste+de+Perfil+do+Terapeuta+e+gostaria+do+conte%C3%BAdo+gratuito.'
+      },
+      1: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta Preso no Teto',
+        hl:      'Você chegou onde a maioria nunca chega.',
+        sub:     'E está sentindo que poderia ir muito mais fundo.',
+        desc:    'Sua prática funciona, sua agenda é consistente e você claramente tem habilidade. Mas existe uma sensação que você não consegue nomear: a de que o trabalho poderia ir mais fundo — nos seus clientes, e em você. Você não está com problema de resultado. Você está com problema de potencial não explorado.',
+        losing:  'A metodologia que levaria seus clientes de resultados bons para transformações irreversíveis — e você de terapeuta competente para referência da sua área.',
+        cta:     'Agendar Consultoria Gratuita →',
+        url:     'https://wa.me/5511951360623?text=Ol%C3%A1%2C+fiz+o+Teste+de+Perfil+do+Terapeuta.+Meu+resultado+foi+%22Terapeuta+Preso+no+Teto%22.+Quero+agendar+a+consultoria+gratuita.'
+      },
+      2: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta Invisível para Si Mesmo',
+        hl:      'Você tem um dom raro.',
+        sub:     'E está pagando um preço alto por ele.',
+        desc:    'Você sustenta o outro em profundidade. Mas esse dom tem um custo que você está carregando em silêncio — energia, presença, alegria. Você cuida de todo mundo. Quem cuida de você? Quanto mais você dá, menos você tem para oferecer. E isso está começando a aparecer.',
+        losing:  'O modelo de trabalho que permite profundidade terapêutica real sem sacrificar sua própria vitalidade. Você não precisa escolher entre ser um bom terapeuta e se preservar.',
+        cta:     'Agendar Consultoria Gratuita →',
+        url:     'https://wa.me/5511951360623?text=Ol%C3%A1%2C+fiz+o+Teste+de+Perfil+do+Terapeuta.+Meu+resultado+foi+%22Terapeuta+Invis%C3%ADvel+para+Si+Mesmo%22.+Quero+agendar+a+consultoria+gratuita.'
+      },
+      3: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta no Limite da Chama',
+        hl:      'Você está carregando muito.',
+        sub:     'E tem a maior capacidade de transformação represada.',
+        desc:    'A agenda, as demandas emocionais, a sensação de que os clientes não chegam onde poderiam, a frustração de ver potencial desperdiçado — tanto neles quanto em você. Você não está desistindo. Mas está próximo de fazer isso de forma silenciosa: reduzindo a profundidade, ficando na superfície para se proteger.',
+        losing:  'A arquitetura de trabalho que permite que você opere no máximo do seu potencial sem se destruir no processo. Existe um caminho — e ele começa com uma conversa honesta.',
+        cta:     'Agendar Consultoria Gratuita — Vagas Limitadas →',
+        url:     'https://wa.me/5511951360623?text=Ol%C3%A1%2C+fiz+o+Teste+de+Perfil+do+Terapeuta.+Meu+resultado+foi+%22Terapeuta+no+Limite+da+Chama%22.+Quero+agendar+a+consultoria+gratuita+com+urg%C3%AAncia.'
+      }
+    };
+
+    /* ── STATE ── */
+    const S = { answers: {}, faturamento: 0, qualificado: false };
+
+    /* ── NAVIGATION ── */
+    const QMAP = { q1:1, q2:2, q3:3, q4:4, q5:5, q6:6, q7:7 };
+
+    function go(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('screen-' + screenId);
+      if (!el) return;
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const pw   = document.getElementById('progressWrap');
+      const fill = document.getElementById('progressFill');
+      const lbl  = document.getElementById('progressLbl');
+      const num  = QMAP[screenId];
+
+      if (num) {
+        pw.classList.add('show');
+        fill.style.width = (num / 7 * 100) + '%';
+        lbl.textContent  = 'Pergunta ' + num + ' de 7';
+        document.getElementById('progressWrap').setAttribute('aria-valuenow', num);
+      } else {
+        pw.classList.remove('show');
+      }
+    }
+
+    /* ── OPTION SELECTION ── */
+    function pick(q, val, el) {
+      const screen = el.closest('.screen');
+      screen.querySelectorAll('.opt').forEach(o => {
+        o.classList.remove('sel');
+        o.setAttribute('aria-checked', 'false');
+      });
+      el.classList.add('sel');
+      el.setAttribute('aria-checked', 'true');
+      S.answers[q] = val;
+
+      // Compute faturamento after Q2
+      if (q === 'q2' && S.answers.q1 !== undefined) {
+        S.faturamento  = S.answers.q1 * S.answers.q2;
+        S.qualificado  = S.faturamento >= 12000;
+      }
+
+      const btn = document.getElementById('nx-' + q);
+      if (btn) btn.classList.add('show');
+    }
+
+    /* keyboard support */
+    function kd(e, q, val, el) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q, val, el); }
+    }
+
+    /* ── OPT-IN SUBMIT ── */
+    async function submit(e) {
+      e.preventDefault();
+      const btn   = document.getElementById('btn-submit');
+      const name  = document.getElementById('inp-name').value.trim();
+      const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
+
+      if (!name || phone.length < 10) return;
+
+      btn.disabled    = true;
+      btn.textContent = 'Analisando...';
+
+      // Persist lead data (CRM integration to be configured)
+      try {
+        localStorage.setItem('omni_quiz_lead', JSON.stringify({
+          name,
+          phone: '55' + phone,
+          faturamento: S.faturamento,
+          qualificado: S.qualificado,
+          answers: S.answers,
+          ts: new Date().toISOString()
+        }));
+      } catch (_) {}
+
+      await new Promise(r => setTimeout(r, 900));
+      showResult();
+    }
+
+    /* ── RESULT ── */
+    function calcPerfil() {
+      if (!S.qualificado) return 0;
+      const score = ['q3','q4','q5','q6','q7'].reduce((a,k) => a + (S.answers[k] || 0), 0);
+      if (score <= 5)  return 1;
+      if (score <= 10) return 2;
+      return 3;
+    }
+
+    function showResult() {
+      const p = PERFIS[calcPerfil()];
+      document.getElementById('res-badge').textContent   = p.badge;
+      document.getElementById('res-eyebrow').textContent = p.eyebrow;
+      document.getElementById('res-name').textContent    = p.name;
+      document.getElementById('res-hl').textContent      = p.hl;
+      document.getElementById('res-sub').textContent     = p.sub;
+      document.getElementById('res-desc').textContent    = p.desc;
+      document.getElementById('res-losing').textContent  = p.losing;
+      const cta = document.getElementById('res-cta');
+      cta.textContent = p.cta;
+      cta.href        = p.url;
+      go('result');
+    }
+
+    /* ── PHONE MASK ── */
+    document.getElementById('inp-phone').addEventListener('input', function () {
+      let v = this.value.replace(/\D/g,'').substring(0, 11);
+      if      (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+  </script>
+
+</body>
+</html>
