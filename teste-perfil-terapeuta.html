@@ -966,22 +966,31 @@
       const name  = document.getElementById('inp-name').value.trim();
       const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
 
-      if (!name || phone.length < 10) return;
+      if (!name || phone.length < 6) {
+        console.warn('[Quiz] Validação falhou — nome:', name, '| telefone dígitos:', phone.length);
+        return;
+      }
 
       btn.disabled    = true;
       btn.textContent = 'Analisando...';
 
-      // Persist lead data (CRM integration to be configured)
+      const leadData = {
+        name,
+        phone: '55' + phone,
+        faturamento: S.faturamento,
+        qualificado: S.qualificado,
+        answers: S.answers,
+        ts: new Date().toISOString()
+      };
+
+      console.log('[Quiz] Lead capturado:', leadData);
+
       try {
-        localStorage.setItem('omni_quiz_lead', JSON.stringify({
-          name,
-          phone: '55' + phone,
-          faturamento: S.faturamento,
-          qualificado: S.qualificado,
-          answers: S.answers,
-          ts: new Date().toISOString()
-        }));
-      } catch (_) {}
+        localStorage.setItem('omni_quiz_lead', JSON.stringify(leadData));
+        console.log('[Quiz] Salvo em localStorage com sucesso.');
+      } catch (err) {
+        console.error('[Quiz] Erro ao salvar localStorage:', err);
+      }
 
       await new Promise(r => setTimeout(r, 900));
       showResult();
