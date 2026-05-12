@@ -904,7 +904,7 @@
     };
 
     /* ── STATE ── */
-    const S = { answers: {}, faturamento: 0, qualificado: false };
+    const S = { answers: {}, faturamento: 0, qualificado: false, previewPerfil: null };
 
     /* ── NAVIGATION ── */
     const QMAP = { q1:1, q2:2, q3:3, q4:4, q5:5, q6:6, q7:7 };
@@ -1003,6 +1003,7 @@
 
     /* ── RESULT ── */
     function calcPerfil() {
+      if (S.previewPerfil !== null) return S.previewPerfil;
       if (!S.qualificado) return 0;
       // Q1 e Q2 = qualificação financeira. Q7 = levantamento de dor, não classifica.
       // Score baseado apenas nas 4 perguntas de dor: Q3 a Q6 (máx 12 pts)
@@ -1039,6 +1040,15 @@
       cta.href        = p.url;
       go('result');
     }
+
+    /* ── PREVIEW MODE — ?perfil=N pula direto para o resultado ── */
+    (function() {
+      const p = new URLSearchParams(location.search).get('perfil');
+      if (p !== null && PERFIS[+p] !== undefined) {
+        S.previewPerfil = +p;
+        window.addEventListener('load', showResult);
+      }
+    })();
 
     /* ── PHONE MASK ── */
     document.getElementById('inp-phone').addEventListener('input', function () {
