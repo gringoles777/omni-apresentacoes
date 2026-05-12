@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Estratégia de Conteúdo Instagram — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #050505;
+    --elev: #0D0D0D;
+    --card: #1A1A1A;
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --text: #F5F0E8;
+    --text-dim: #A8A095;
+    --shadow: 0 0 24px rgba(200,168,75,0.25);
+    --border: 1px solid #C8A84B;
+  }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  body {
+    padding: 32px 40px 48px 40px;
+    max-width: 1680px;
+    margin: 0 auto;
+  }
+
+  /* === TIPOGRAFIA === */
+  .display {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+  }
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 44px;
+    color: var(--gold);
+    text-align: center;
+    line-height: 1;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--text-dim);
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  h3 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  h4 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    font-size: 12px;
+  }
+  .micro {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+
+  /* === HEADER === */
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+  }
+  header .tagline {
+    margin-top: 14px;
+    color: var(--text);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    font-weight: 300;
+  }
+  header .tagline strong { color: var(--gold-light); font-weight: 600; }
+
+  /* === SECTION TITLES === */
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-size: 16px;
+    margin: 36px 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title .num {
+    background: var(--gold);
+    color: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  /* === CARDS / BOXES === */
+  .box {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .box-elev {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+
+  /* === DOIS PERFIS === */
+  .perfis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .perfil {
+    position: relative;
+  }
+  .perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(200,168,75,0.25);
+  }
+  .perfil-handle {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 26px;
+    text-transform: lowercase;
+    letter-spacing: 0;
+  }
+  .perfil-tagline {
+    font-style: italic;
+    color: var(--text);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .perfil-meta {
+    text-align: right;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .perfil-meta strong { color: var(--gold); font-weight: 600; }
+  .meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 11px;
+  }
+  .meta-row .meta-cell strong {
+    display: block;
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* === TRILHOS === */
+  .trilhos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .trilho {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 12px;
+  }
+  .trilho-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+  .quadro-name {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .quadro-name::before { content: "▸ "; }
+  .opener {
+    color: var(--text);
+    font-size: 11px;
+    font-style: italic;
+    background: rgba(200,168,75,0.06);
+    padding: 6px 8px;
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .formato-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.4);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 4px;
+    font-weight: 500;
+  }
+
+  .mix-bar {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(200,168,75,0.2);
+  }
+  .mix-bar-bg {
+    display: flex;
+    height: 18px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+    border: 1px solid rgba(200,168,75,0.3);
+  }
+  .mix-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+  }
+  .mix-prosp { background: var(--gold-light); flex: 50; }
+  .mix-prova { background: var(--gold); flex: 30; }
+  .mix-mente { background: #8a7333; color: var(--text); flex: 20; }
+
+  .mecanica {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(200,168,75,0.06);
+    border: 1px dashed rgba(200,168,75,0.5);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--text);
+  }
+  .mecanica strong { color: var(--gold); }
+
+  /* === PERFIL OMNIBR — formatos === */
+  .formatos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .formato {
+    background: var(--elev);
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 6px;
+    padding: 12px;
+    position: relative;
+  }
+  .formato-num {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: var(--gold);
+    color: #000;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .formato-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-bottom: 6px;
+  }
+  .formato-desc {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .black-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #000;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    padding: 3px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  /* === PIPELINE === */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+  .step {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 12px 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .step-num {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .step-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 11px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .step-detail {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.3;
+  }
+  .step::after {
+    content: "▶";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14px;
+    z-index: 2;
+  }
+  .step:last-child::after { display: none; }
+
+  /* === BLACK RULES === */
+  .black-box {
+    margin-top: 18px;
+    background: linear-gradient(135deg, rgba(200,168,75,0.10), rgba(232,200,106,0.04));
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-shadow: 0 0 32px rgba(200,168,75,0.35);
+    position: relative;
+  }
+  .black-box::before {
+    content: "★ BLACK MENTORING ★";
+    position: absolute;
+    top: -12px;
+    left: 22px;
+    background: var(--bg);
+    padding: 2px 12px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+  .black-rules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .black-rule {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .black-rule strong {
+    display: block;
+    color: var(--gold-light);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  /* === FLYWHEEL === */
+  .flywheel-wrap {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .flywheel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    align-items: stretch;
+    position: relative;
+  }
+  .fw-node {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 11px;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    line-height: 1.4;
+    position: relative;
+  }
+  .fw-node strong {
+    display: block;
+    color: var(--gold-light);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 11px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .fw-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .fw-loop-label {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    padding-top: 6px;
+    border-top: 1px dashed rgba(200,168,75,0.4);
+    margin-top: 4px;
+  }
+
+  /* Flywheel diagram with grid layout */
+  .fw-grid {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 8px;
+    row-gap: 6px;
+    align-items: center;
+  }
+  .fw-grid .fw-arrow-down {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /* === REGRAS DI === */
+  .di-rules {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .di-rule {
+    background: var(--card);
+    border: var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .di-rule .di-icon {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .di-rule .di-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .di-rule .di-desc {
+    font-size: 11px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* === FOOTER === */
+  footer {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(200,168,75,0.3);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  footer strong { color: var(--gold); }
+
+  /* === PRINT === */
+  @media print {
+    @page { size: A3 landscape; margin: 12mm; }
+    body { padding: 0; max-width: 100%; }
+    .box, .step, .di-rule, .fw-node {
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+    .black-box { box-shadow: none !important; }
+  }
+
+  /* arrow connectors in pipeline grid for narrow screens */
+  @media (max-width: 1280px) {
+    .pipeline { grid-template-columns: repeat(4, 1fr); row-gap: 24px; }
+    .step:nth-child(4)::after { display: none; }
+    .di-rules { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>
+    Estratégia de Conteúdo Instagram
+    <span class="sub">OMNI BRASIL · UMA PÁGINA · UM SISTEMA</span>
+  </h1>
+  <p class="tagline">
+    Dois perfis. Um motor de cases. <strong>Um flywheel</strong> que transforma método em prova social, prova social em cliente, e cliente em novo case.
+  </p>
+</header>
+
+<!-- ============ SEÇÃO 1: DOIS PERFIS ============ -->
+<div class="section-title"><span class="num">1</span>Dois Perfis · Lados Complementares da Mesma Estratégia</div>
+
+<div class="perfis">
+
+  <!-- @michaelarruda -->
+  <div class="perfil box">
+    <div class="perfil-header">
+      <div>
+        <div class="perfil-handle">@michaelarruda</div>
+        <div class="perfil-tagline">"Resultado e dinheiro via Omniterapia"</div>
+      </div>
+      <div class="perfil-meta">
+        <strong>Início:</strong> 10 dias<br>
+        <strong>Grava:</strong> Michael<br>
+        <strong>Edita:</strong> Julia (com IA)
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-cell">
+        <strong>Público A · Terapeuta "Rico"</strong>
+        Já fatura, quer 50k/mês<br>
+        <em style="color:var(--gold);font-size:10px;">Desejo: qualidade de vida</em>
+      </div>
+      <div class="meta-cell">
+        <strong>Público B · Gestor Exausto</strong>
+        30-45 anos, alto salário, vazio<br>
+        <em style="color:var(--gold);font-size:10px;">Desejo: qualidade de vida + propósito</em>
+      </div>
+      <div class="meta-cell">
+        <strong>Cadência</strong>
+        4–5 posts<br>por semana
+      </div>
+    </div>
+
+    <h3>3 Tipos de Conteúdo</h3>
+    <div class="trilhos">
+      <div class="trilho">
+        <div class="trilho-name">Tipo A · Prosperidade · 50%</div>
+        <div class="opener" style="margin-bottom:8px;">Conteúdo de valor prático sobre atração de leads, vendas, crescimento no Instagram e aumento de ticket.</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">OBJETIVO</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">Gerar valor para seguidores atuais e atrair novos seguidores qualificados</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">MÉTRICA</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">Novos seguidores</div>
+        <span class="formato-tag">Reels</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+      <div class="trilho">
+        <div class="trilho-name">Tipo B · Prova · 30%</div>
+        <div class="opener" style="margin-bottom:8px;">Prova social envelopada de conteúdo de valor — aluno entrega aprendizado prático e mostra o resultado que teve.</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">OBJETIVO</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">Converter para FPH, Master e Black Mentoring</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">MÉTRICA</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">DM de interesse</div>
+        <span class="formato-tag">Reels (live)</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+      <div class="trilho">
+        <div class="trilho-name">Tipo C · Mentalidade · 20%</div>
+        <div class="opener" style="margin-bottom:8px;">Conteúdo inspiracional / motivacional ou técnico de mentalidade — quebra de bloqueios e crenças limitantes.</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">OBJETIVO</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">Viralizar — atrair e ampliar base de seguidores</div>
+        <div style="font-size:10px;color:var(--gold);font-weight:600;margin-bottom:2px;">MÉTRICA</div>
+        <div style="font-size:10px;color:var(--text);margin-bottom:6px;">Alcance / Compartilhamentos</div>
+        <span class="formato-tag">Reels</span>
+        <span class="formato-tag">Carrossel</span>
+      </div>
+    </div>
+
+    <div class="mix-bar">
+      <div class="micro">Mix do Feed</div>
+      <div class="mix-bar-bg">
+        <div class="mix-seg mix-prosp">TIPO A 50%</div>
+        <div class="mix-seg mix-prova">TIPO B 30%</div>
+        <div class="mix-seg mix-mente">TIPO C 20%</div>
+      </div>
+      <div style="font-size:10px;color:var(--text-dim);margin-top:6px;font-style:italic;">* As proporções podem variar de acordo com o foco e estratégia do momento.</div>
+    </div>
+
+    <div class="mecanica">
+      <strong>Mecânica de conversão →</strong> CTA para reunião ou receber material rico <em>(Mapa de Estratégia ou Áudio de Auto-Hipnoterapia)</em> via DM automático
+    </div>
+  </div>
+
+  <!-- @omnibr -->
+  <div class="perfil box">
+    <div class="perfil-header">
+      <div>
+        <div class="perfil-handle">@omnibr</div>
+        <div class="perfil-tagline">"Prova social do método"</div>
+      </div>
+      <div class="perfil-meta">
+        <strong>Início:</strong> 10 dias<br>
+        <strong>Responsável:</strong> Julia<br>
+        <strong>Fluxo:</strong> completo
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-cell">
+        <strong>Público A</strong>
+        Pessoa com problema<br>(ansiedade, fobia, bloqueio)
+      </div>
+      <div class="meta-cell">
+        <strong>Público B</strong>
+        Profissional<br>que vê e quer aprender o método
+      </div>
+      <div class="meta-cell">
+        <strong>Tipo Único</strong>
+        Case OMNI
+      </div>
+    </div>
+
+    <h3>Formatos do Case OMNI</h3>
+    <div class="formatos">
+      <div class="formato">
+        <div class="formato-num">1</div>
+        <div class="formato-name">Animação IA</div>
+        <div class="formato-desc">Reels 60–90s gerado por IA. Visual cinematográfico, narrativa do case.</div>
+      </div>
+      <div class="formato">
+        <div class="formato-num">2</div>
+        <div class="formato-name">Carrossel</div>
+        <div class="formato-desc">Mesma produção do Reels. Duplica conteúdo sem custo extra.</div>
+      </div>
+      <div class="formato">
+        <div class="formato-num">3</div>
+        <div class="formato-name">Omniterapeuta Fala</div>
+        <div class="formato-desc">Rosto + voz do omniterapeuta. <span class="black-badge">EXCLUSIVO BLACK</span> @handle na legenda.</div>
+      </div>
+    </div>
+
+    <div class="mecanica" style="margin-top:10px;">
+      <strong>Lógica →</strong> 1 case = 3 conteúdos publicados. Multiplicação sem aumentar produção.
+    </div>
+    <div class="mecanica" style="margin-top:8px;">
+      <strong>Mecânica de conversão →</strong> CTA: <em>"Você precisa de ajuda com esse ou outro problema? Nos chame no DM."</em>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ SEÇÃO 2: PIPELINE (motor) ============ -->
+<div class="section-title"><span class="num">2</span>Pipeline de Cases · O Motor que Alimenta @omnibr</div>
+
+<div class="pipeline">
+  <div class="step">
+    <div class="step-num">01</div>
+    <div class="step-name">Portal<br>Omniterapeuta</div>
+    <div class="step-detail">Plataforma central de submissão</div>
+  </div>
+  <div class="step">
+    <div class="step-num">02</div>
+    <div class="step-name">Envio<br>do Case</div>
+    <div class="step-detail">Omniterapeuta escreve e submete</div>
+  </div>
+  <div class="step">
+    <div class="step-num">03</div>
+    <div class="step-name">Análise<br>IA</div>
+    <div class="step-detail">Valida e flag de detalhes faltando</div>
+  </div>
+  <div class="step">
+    <div class="step-num">04</div>
+    <div class="step-name">Validação<br>Julia</div>
+    <div class="step-detail">Aprovação final humana</div>
+  </div>
+  <div class="step">
+    <div class="step-num">05</div>
+    <div class="step-name">Roteiro<br>GICA</div>
+    <div class="step-detail">Equipe OMNI produz roteiro</div>
+  </div>
+  <div class="step">
+    <div class="step-num">06</div>
+    <div class="step-name">Cenas<br>IA</div>
+    <div class="step-detail">Geração visual automatizada</div>
+  </div>
+  <div class="step">
+    <div class="step-num">07</div>
+    <div class="step-name">Edição<br>+ Export</div>
+    <div class="step-detail">Reels + Carrossel finalizados</div>
+  </div>
+  <div class="step">
+    <div class="step-num">08</div>
+    <div class="step-name">Publicação<br>@omnibr</div>
+    <div class="step-detail">Distribuição no perfil</div>
+  </div>
+</div>
+
+<!-- BLACK BOX -->
+<div class="black-box">
+  <h2 style="margin-bottom: 10px;">Regra Black Mentoring · Visibilidade como Recompensa</h2>
+  <div class="black-rules">
+    <div class="black-rule">
+      <strong>Crédito na Legenda</strong>
+      Todo case Black é publicado com o <em>@handle do omniterapeuta</em> na legenda. Visibilidade direta para quem participa.
+    </div>
+    <div class="black-rule">
+      <strong>Formato 3 Exclusivo</strong>
+      Apenas Black members podem gravar o <em>"Omniterapeuta Fala"</em> — rosto, voz e autoridade no perfil OMNI.
+    </div>
+    <div class="black-rule">
+      <strong>Efeito Cascata</strong>
+      Black aparece → não-Black vê → quer estar no mesmo lugar → <em>conversão para Black Mentoring</em>.
+    </div>
+  </div>
+</div>
+
+<!-- ============ SEÇÃO 3: FLYWHEEL ============ -->
+<div class="section-title"><span class="num">3</span>Flywheel · Como o Ecossistema OMNI se Alimenta</div>
+
+<div style="width:100%;overflow-x:auto;padding:8px 0 20px;">
+<svg viewBox="0 0 1180 720" width="100%" style="min-width:760px;display:block;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Setas de fluxo principal (ouro pleno) -->
+    <marker id="arr-g" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#C8A84B"/>
+    </marker>
+    <!-- Setas de retorno/feedback (ouro claro) -->
+    <marker id="arr-g2" markerWidth="9" markerHeight="9" refX="7.5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#E8C86A"/>
+    </marker>
+    <!-- Seta reversa (para setas bidirecionais) -->
+    <marker id="arr-rev" markerWidth="9" markerHeight="9" refX="0.5" refY="3" orient="auto">
+      <path d="M8,0 L8,6 L0,3 z" fill="#C8A84B"/>
+    </marker>
+  </defs>
+
+  <rect width="1180" height="720" fill="#050505"/>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LAYOUT GRID (referência mental, não renderizado)
+       Coluna A (esquerda):     x = 30 ─ 170    → tráfego pago / LP
+       Coluna B (centro):       x = 230 ─ 850   → fluxo principal vertical
+       Coluna C (direita):      x = 920 ─ 1140  → transformação
+       Linha 1 (público frio):  y = 24
+       Linha 2 (conteúdo):      y = 110
+       Linha 3 (formatos):      y = 210
+       Linha 4 (público quente):y = 322
+       Linha 5 (comercial):     y = 400
+       Linha 6 (produtos):      y = 515
+       Linha 7 (merge bar):     y = 582
+       Rodapé:                  y = 705
+       ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ─── LINHA 1: PÚBLICO FRIO + bifurcação ─── -->
+  <text x="530" y="22" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#9A7A2E" letter-spacing="4" opacity="0.85">PÚBLICO FRIO</text>
+  <text x="380" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Terapeuta "Rico"</text>
+  <text x="680" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#C8A84B" font-style="italic">Gestor Exausto</text>
+  <!-- bifurcação descendente (sem cruzar os labels) -->
+  <line x1="510" y1="32" x2="425" y2="44" stroke="#9A7A2E" stroke-width="1" opacity="0.45"/>
+  <line x1="550" y1="32" x2="635" y2="44" stroke="#9A7A2E" stroke-width="1" opacity="0.45"/>
+  <!-- dos sub-públicos descendo limpo até a borda superior do oval CONTEÚDO (landing exato no quadrante superior do oval) -->
+  <line x1="380" y1="60" x2="425" y2="78" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
+  <line x1="680" y1="60" x2="635" y2="78" stroke="#C8A84B" stroke-width="1.2" marker-end="url(#arr-g)"/>
+
+  <!-- ─── LINHA 2: CONTEÚDO PODEROSO ─── -->
+  <ellipse cx="530" cy="110" rx="230" ry="36" fill="#131310" stroke="#C8A84B" stroke-width="2.5"/>
+  <text x="530" y="106" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="16" font-weight="700" fill="#E8C86A" letter-spacing="1.5">CONTEÚDO PODEROSO</text>
+  <text x="530" y="126" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#A8A095" letter-spacing="2.5">INSTAGRAM · YOUTUBE · BLOG</text>
+
+  <!-- CONTEÚDO → 3 formatos: três descidas simétricas a partir da borda inferior do oval, pousando exatamente no topo dos formatos -->
+  <line x1="455" y1="144" x2="315" y2="194" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="530" y1="146" x2="530" y2="194" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="605" y1="144" x2="755" y2="194" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- ─── LINHA 3: CONTAINER PONTILHADO + 3 FORMATOS ─── -->
+  <rect x="230" y="190" width="620" height="78" rx="12" fill="none" stroke="#C8A84B" stroke-width="1" stroke-dasharray="7 5" opacity="0.55"/>
+
+  <!-- VSL -->
+  <rect x="240" y="196" width="150" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="315" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="14" font-weight="700" fill="#E8C86A">VSL</text>
+  <text x="315" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Vídeo de Vendas</text>
+  <!-- VSL ↔ AULA -->
+  <line x1="390" y1="229" x2="455" y2="229" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+
+  <!-- AULA AO VIVO -->
+  <rect x="455" y="196" width="150" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="530" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">AULA AO VIVO</text>
+  <text x="530" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Webinar · Live</text>
+  <!-- AULA ↔ SOCIAL -->
+  <line x1="605" y1="229" x2="670" y2="229" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+
+  <!-- SOCIAL SELLING -->
+  <rect x="670" y="196" width="170" height="66" rx="5" fill="#1A1A1A" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="755" y="223" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#E8C86A">SOCIAL SELLING</text>
+  <text x="755" y="242" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Comment → DM</text>
+
+  <!-- 3 formatos → PÚBLICO QUENTE: convergência simétrica (terminam ON THE ELLIPSE BORDER, não dentro) -->
+  <path d="M 315,262 Q 380,288 476,300" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="530" y1="262" x2="530" y2="296" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <path d="M 755,262 Q 680,288 584,300" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- ─── LINHA 4: PÚBLICO QUENTE ─── -->
+  <ellipse cx="530" cy="322" rx="135" ry="24" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="530" y="318" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">PÚBLICO QUENTE</text>
+  <text x="530" y="334" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Lead aquecido e qualificado</text>
+  <!-- QUENTE → COMERCIAL: linha curta vertical (pousa exatamente no topo do retângulo, y=380) -->
+  <line x1="530" y1="346" x2="530" y2="378" stroke="#C8A84B" stroke-width="1.5" marker-end="url(#arr-g)"/>
+
+  <!-- ─── LINHA 5: COMERCIAL ─── -->
+  <rect x="345" y="380" width="370" height="52" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="530" y="402" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="13" font-weight="700" fill="#C8A84B" letter-spacing="1.5">COMERCIAL</text>
+  <text x="530" y="420" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">SDR → Closer · Consultoria estratégica</text>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ─── COLUNA ESQUERDA: TRÁFEGO PAGO (alinhado com formatos) + LP (alinhada com público quente) ─── -->
+
+  <!-- TRÁFEGO PAGO -->
+  <rect x="30" y="196" width="140" height="58" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="100" y="220" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">TRÁFEGO</text>
+  <text x="100" y="239" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#C8A84B" letter-spacing="1.5">PAGO</text>
+
+  <!-- LP DE CONSULTORIA -->
+  <rect x="30" y="298" width="140" height="58" rx="6" fill="#0f0e0a" stroke="#9A7A2E" stroke-width="1.5"/>
+  <text x="100" y="322" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">LP DE</text>
+  <text x="100" y="340" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#C8A84B" letter-spacing="1">CONSULTORIA</text>
+
+  <!-- LP → COMERCIAL: curva descendente limpa -->
+  <path d="M 170,327 Q 255,365 345,399" fill="none" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+
+
+
+
+
+  <!-- ─── COLUNA DIREITA: TRANSFORMAÇÃO QUE SE PROVA (alinhada verticalmente com COMERCIAL) ─── -->
+  <ellipse cx="1030" cy="322" rx="115" ry="55" fill="#0f0e0a" stroke="#C8A84B" stroke-width="2"/>
+  <text x="1030" y="311" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">TRANSFORMAÇÃO</text>
+  <text x="1030" y="329" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="12" font-weight="700" fill="#E8C86A" letter-spacing="1.5">QUE SE PROVA</text>
+  <text x="1030" y="351" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" fill="#A8A095">Cases OMNI + Conteúdo A e B</text>
+
+  <!-- CONTEÚDO → TRÁFEGO PAGO: rota ortogonal pela margem superior (origem FORA da elipse, leftmost x=300) -->
+  <path d="M 298,110 L 100,110 L 100,194" fill="none" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)" opacity="0.85"/>
+  <text x="199" y="104" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B" opacity="0.7" letter-spacing="1">alimenta tráfego</text>
+
+  <!-- TRÁFEGO PAGO → LP DE CONSULTORIA: seta vertical descendente (público frio pago vai direto pra LP) -->
+  <line x1="100" y1="254" x2="100" y2="297" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- TRÁFEGO PAGO → CONTAINER de formatos (VSL/Aula/Social): seta horizontal -->
+  <line x1="170" y1="225" x2="228" y2="225" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- PÚBLICO QUENTE → LP DE CONSULTORIA: seta horizontal da borda esquerda do oval, pousando exatamente na borda direita da LP -->
+  <line x1="395" y1="322" x2="170" y2="327" stroke="#C8A84B" stroke-width="1.3" marker-end="url(#arr-g)"/>
+
+
+
+
+  <!-- ═══ COMERCIAL → 4 PRODUTOS: barra de distribuição em T + descidas paralelas (pousam exatamente no topo das circunferências, y=469) ═══ -->
+  <line x1="530" y1="432" x2="530" y2="450" stroke="#C8A84B" stroke-width="1.5"/>
+  <line x1="265" y1="450" x2="795" y2="450" stroke="#C8A84B" stroke-width="1.5"/>
+  <line x1="265" y1="450" x2="265" y2="467" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="442" y1="450" x2="442" y2="467" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="618" y1="450" x2="618" y2="467" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+  <line x1="795" y1="450" x2="795" y2="467" stroke="#C8A84B" stroke-width="1.4" marker-end="url(#arr-g)"/>
+
+  <!-- ═══ LINHA 6: 4 PRODUTOS (espaçamento uniforme) ═══ -->
+
+  <!-- FPH / MASTER -->
+  <circle cx="265" cy="515" r="46" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="265" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">FPH /</text>
+  <text x="265" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">MASTER</text>
+  <text x="265" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Profissão</text>
+
+  <!-- FPH ↔ LEGACY -->
+  <line x1="311" y1="515" x2="396" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+
+  <!-- OMNI LEGACY -->
+  <circle cx="442" cy="515" r="46" fill="#111108" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="442" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">OMNI</text>
+  <text x="442" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" font-weight="700" fill="#E8C86A">LEGACY</text>
+  <text x="442" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Prosperidade</text>
+
+  <!-- LEGACY ↔ BM -->
+  <line x1="488" y1="515" x2="572" y2="515" stroke="#C8A84B" stroke-width="1.3" marker-start="url(#arr-rev)" marker-end="url(#arr-g)"/>
+
+  <!-- BLACK MENTORING (destaque) -->
+  <circle cx="618" cy="515" r="46" fill="rgba(200,168,75,0.08)" stroke="#E8C86A" stroke-width="2.5"/>
+  <text x="618" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">BLACK</text>
+  <text x="618" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">MENTORING</text>
+  <text x="618" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#C8A84B">★ 50k+</text>
+
+  <!-- (sem seta direta BM ↔ OMNITERAPIA — eles se conectam apenas via a merge-bar inferior) -->
+
+  <!-- OMNITERAPIA -->
+  <circle cx="795" cy="515" r="46" fill="#0f0e0a" stroke="#C8A84B" stroke-width="1.5"/>
+  <text x="795" y="509" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">OMNI-</text>
+  <text x="795" y="524" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="10" font-weight="700" fill="#E8C86A">TERAPIA</text>
+  <text x="795" y="540" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" fill="#A8A095">Dor interna</text>
+
+  <!-- ═══ LINHA 7: MERGE BAR + seta única para TRANSFORMAÇÃO ═══ -->
+  <line x1="265" y1="561" x2="265" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="442" y1="561" x2="442" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="618" y1="561" x2="618" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="795" y1="561" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.3"/>
+  <line x1="265" y1="580" x2="795" y2="580" stroke="#C8A84B" stroke-width="1.8"/>
+  <!-- seta única do extremo direito da barra subindo até TRANSFORMAÇÃO (cy=322, parte inferior y=377; pousa na borda) -->
+  <path d="M 795,580 Q 950,580 1030,378" fill="none" stroke="#C8A84B" stroke-width="1.6" marker-end="url(#arr-g)"/>
+
+  <!-- ═══ LOOPS DE RETORNO ═══ -->
+
+  <!-- TRANSFORMAÇÃO → CONTEÚDO PODEROSO: arco pelo canto superior direito (loop principal de feedback — sólido)
+       Termina em (738, 96) — pousando exatamente sobre o quadrante superior-direito do oval (cy=110, ry=36) -->
+  <path d="M 1030,267 C 1030,140 880,80 738,96" fill="none" stroke="#C8A84B" stroke-width="2" marker-end="url(#arr-g)"/>
+
+  <!-- OMNITERAPIA → COMERCIAL: loop de retorno (novos casos / encaminhamento / 2º atendimento)
+       Sai EXATAMENTE da borda do quadrante superior-direito do círculo OMNITERAPIA em (828, 482) ≈ ângulo -45° (cx=795, cy=515, r=46),
+       sobe pela margem livre entre o merge-arrow e os produtos, volta pra direita do retângulo COMERCIAL (x=717 → tip pousa em x=715) -->
+  <path d="M 828,482 C 900,440 870,400 717,415" fill="none" stroke="#C8A84B" stroke-width="1.8" marker-end="url(#arr-g)"/>
+
+
+  <!-- ═══ RODAPÉ ═══ -->
+  <text x="590" y="705" text-anchor="middle" font-family="'Oswald',sans-serif" font-size="11" fill="#9A7A2E" letter-spacing="5" opacity="0.7">↻ CADA RESULTADO SE TORNA PROVA E ALIMENTA NOVO CONTEÚDO ↻</text>
+</svg>
+</div>
+
+<!-- ============ SEÇÃO 4: REGRAS EFEITO DI ============ -->
+<div class="section-title"><span class="num">4</span>Regras Efeito DI · Princípios para os Dois Perfis</div>
+
+<div class="di-rules">
+  <div class="di-rule">
+    <div class="di-icon">G·I·C·A</div>
+    <div class="di-name">GICA em Todo Post</div>
+    <div class="di-desc"><strong>G</strong>ancho (3s) → <strong>I</strong>nteresse → <strong>C</strong>ontexto → <strong>A</strong>ção. Não negociável.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">D + O</div>
+    <div class="di-name">Dopamina + Ocitocina</div>
+    <div class="di-desc">Todo post precisa <em>parar o scroll</em> (dopamina) E <em>fidelizar</em> (ocitocina). Os dois.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">3R</div>
+    <div class="di-name">Regra dos 3R</div>
+    <div class="di-desc">1 produção = <em>Reels + Carrossel + Stories</em>. Uma gravação rende 3 semanas de conteúdo.</div>
+  </div>
+  <div class="di-rule">
+    <div class="di-icon">→ DM</div>
+    <div class="di-name">Comment → DM</div>
+    <div class="di-desc">Automação ativa em <em>todo post</em>. Comentário vira DM, DM vira lead, lead vira cliente.</div>
+  </div>
+</div>
+
+<footer>
+  OMNI Brasil · Estratégia de Conteúdo Instagram · <strong>Versão 1 · 2026-05</strong> · Documento Interno · Equipe OMNI
+</footer>
+
+</body>
+</html>
