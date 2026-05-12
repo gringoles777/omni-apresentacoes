@@ -805,7 +805,7 @@
     <div class="screen" id="screen-optin">
       <h2 class="optin-hl">Seu perfil está pronto.</h2>
       <p class="optin-sub">Antes de revelar, precisamos de um endereço para enviar seu diagnóstico completo e material complementar direto no WhatsApp.</p>
-      <form class="optin-form" id="optin-form" onsubmit="submit(event)" novalidate>
+      <form class="optin-form" id="optin-form" onsubmit="handleSubmit(event)" novalidate>
         <div class="form-group">
           <label class="form-label" for="inp-name">Seu nome</label>
           <input class="form-input" type="text" id="inp-name" name="name"
@@ -960,7 +960,7 @@
     }
 
     /* ── OPT-IN SUBMIT ── */
-    async function submit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       const btn   = document.getElementById('btn-submit');
       const name  = document.getElementById('inp-name').value.trim();
