@@ -1100,6 +1100,13 @@
             <input class="form-input" type="email" id="cons-email" name="email"
                    placeholder="seu@email.com" autocomplete="email" required>
           </div>
+          <div class="form-group" style="flex-direction:row; align-items:center; gap:10px; margin-top:4px;">
+            <input type="checkbox" id="cons-omniterapeuta" name="omniterapeuta"
+                   style="width:18px; height:18px; accent-color:var(--gold); cursor:pointer; flex-shrink:0;">
+            <label for="cons-omniterapeuta" style="font-size:clamp(0.875rem,1.1vw,0.975rem); color:var(--text); cursor:pointer; margin:0;">
+              Já sou Omniterapeuta
+            </label>
+          </div>
           <button class="btn-primary" type="submit" id="btn-consultoria" style="margin-top:6px;">
             Confirmar minha vaga &rarr;
           </button>
@@ -1420,9 +1427,10 @@
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({
             nome, email, telefone,
-            perfil_id:          perfilId,
-            perfil_nome:        PERFIS[perfilId].name,
+            perfil_id:            perfilId,
+            perfil_nome:          PERFIS[perfilId].name,
             faturamento_estimado: S.faturamento,
+            is_omniterapeuta:     document.getElementById('cons-omniterapeuta').checked,
             oportunidades
           })
         });
