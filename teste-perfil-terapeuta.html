@@ -649,10 +649,13 @@
       width: 100%;
       height: 200px;
       object-fit: cover;
-      object-position: center top;
+      object-position: center center;
       margin-bottom: 24px;
       border: 1px solid var(--gray-dark);
     }
+    /* Ajustes finos de crop por pergunta — sujeito posicionado conforme a foto */
+    .q-img-top.pos-q3 { object-position: center 38%; }   /* rostos no terço central-superior */
+    .q-img-top.pos-q9 { object-position: center 30%; }   /* rosto no terço superior-direito */
 
     /* ── IMAGEM INLINE (livro, etc) ── */
     .q-img {
@@ -758,7 +761,7 @@
 
     <!-- ── Q3: AMBIENTE DE INFLUÊNCIA ── -->
     <div class="screen" id="screen-q3">
-      <img class="q-img-top" src="img/quiz/q3-ambiente.jpg" alt="Profissionais em conversa" loading="lazy">
+      <img class="q-img-top pos-q3" src="img/quiz/q3-ambiente.jpg" alt="Profissionais em conversa" loading="lazy">
       <span class="mono-label">Pergunta 3 de 10</span>
       <h2 class="q-text">Como são seus ambientes de influência profissional?</h2>
       <p class="q-note">Afinal, somos a média das pessoas com quem mais convivemos.</p>
@@ -813,7 +816,7 @@
 
     <!-- ── Q5: NICHO E INSTAGRAM ── -->
     <div class="screen" id="screen-q5">
-      <img class="q-img-top" src="img/quiz/q5-instagram.jpg" alt="Criação de conteúdo para Instagram" loading="lazy">
+      <img class="q-img-top" src="img/quiz/q5-instagram.jpg" alt="Criadora de conteúdo capturando o mundo pelo celular" loading="lazy">
       <span class="mono-label">Pergunta 5 de 10</span>
       <h2 class="q-text">Você tem um nicho definido e produz conteúdo estratégico para seu Instagram profissional?</h2>
       <div class="options" role="radiogroup" aria-label="Nicho e presença no Instagram">
@@ -839,7 +842,7 @@
 
     <!-- ── Q6: USO DE IA ── -->
     <div class="screen" id="screen-q6">
-      <img class="q-img-top" src="img/quiz/q6-ia.jpg" alt="Inteligência Artificial e tecnologia" loading="lazy">
+      <img class="q-img-top" src="img/quiz/q6-ia.jpg" alt="Profissionais usando tecnologia em ambiente acolhedor" loading="lazy">
       <span class="mono-label">Pergunta 6 de 10</span>
       <h2 class="q-text">Você usa Inteligência Artificial no seu trabalho como terapeuta?</h2>
       <div class="options" role="radiogroup" aria-label="Uso de Inteligência Artificial">
@@ -865,7 +868,7 @@
 
     <!-- ── Q7: CUIDADO EMOCIONAL ── -->
     <div class="screen" id="screen-q7">
-      <img class="q-img-top" src="img/quiz/q7-cuidado.jpg" alt="Meditação e autocuidado" loading="lazy">
+      <img class="q-img-top" src="img/quiz/q7-cuidado.jpg" alt="Mulher contemplando o pôr do sol no topo da montanha" loading="lazy">
       <span class="mono-label">Pergunta 7 de 10</span>
       <h2 class="q-text">Você cuida de si mesmo passando por processos terapêuticos e cuidando da própria mente? Com qual frequência?</h2>
       <div class="options" role="radiogroup" aria-label="Frequência de cuidado emocional próprio">
@@ -916,7 +919,7 @@
 
     <!-- ── Q9: BEM-ESTAR ── -->
     <div class="screen" id="screen-q9">
-      <img class="q-img-top" src="img/quiz/q9-bemestar.jpg" alt="Bem-estar e qualidade de vida" loading="lazy">
+      <img class="q-img-top pos-q9" src="img/quiz/q9-bemestar.jpg" alt="Bem-estar e qualidade de vida" loading="lazy">
       <span class="mono-label">Pergunta 9 de 10</span>
       <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
       <div class="options" role="radiogroup" aria-label="Bem-estar pessoal recente">
