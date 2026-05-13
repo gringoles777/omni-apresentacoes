@@ -1089,7 +1089,8 @@
     const S = { answers: {}, faturamento: 0, qualificado: false, previewPerfil: null };
 
     /* ── NAVIGATION ── */
-    const QMAP = { q1:1, q2:2, q3:3, q4:4, q5:5, q6:6, q7:7, q8:8, q9:9, q10:10 };
+    // QMAP: posição na sequência de exibição (não o número do ID)
+    const QMAP = { q1:1, q2:2, q3:3, q8:4, q4:5, q5:6, q7:7, q6:8, q9:9, q10:10 };
     const TOTAL_Q = 10;
 
     function go(screenId) {
@@ -1109,14 +1110,18 @@
         fill.style.width = (num / TOTAL_Q * 100) + '%';
         lbl.textContent  = 'Pergunta ' + num + ' de ' + TOTAL_Q;
         document.getElementById('progressWrap').setAttribute('aria-valuenow', num);
+        // Atualiza label interno da pergunta dinamicamente
+        const monoLbl = el.querySelector('.mono-label');
+        if (monoLbl) monoLbl.textContent = 'Pergunta ' + num + ' de ' + TOTAL_Q;
       } else {
         pw.classList.remove('show');
       }
     }
 
-    /* ── NAVIGATION MAPS ── */
-    const NEXT = { q1:'q2', q2:'q3', q3:'q4', q4:'q5', q5:'q6', q6:'q7', q7:'q8', q8:'q9', q9:'q10', q10:'optin' };
-    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q4:'q3', q5:'q4', q6:'q5', q7:'q6', q8:'q7', q9:'q8', q10:'q9' };
+    /* ── NAVIGATION MAPS — intercalando formatos (cenário / afirmação / frequência) ── */
+    // Ordem: Q1→Q2→Q3(cenário) → Q8(afirmação) → Q4(cenário+img) → Q5(afirmação) → Q7(freq) → Q6(afirmação+img) → Q9(cenário) → Q10(cenário)
+    const NEXT = { q1:'q2', q2:'q3', q3:'q8', q8:'q4', q4:'q5', q5:'q7', q7:'q6', q6:'q9', q9:'q10', q10:'optin' };
+    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q8:'q3', q4:'q8', q5:'q4', q7:'q5', q6:'q7', q9:'q6', q10:'q9' };
 
     /* ── OPTION SELECTION + AUTO-ADVANCE ── */
     function pick(q, val, el) {
