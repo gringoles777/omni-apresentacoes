@@ -647,15 +647,13 @@
     .q-img-top {
       display: block;
       width: 100%;
-      height: 200px;
+      height: 250px;
       object-fit: cover;
-      object-position: center center;
+      object-position: center center; /* imagens baixadas em 800x250 com crop faces */
       margin-bottom: 24px;
       border: 1px solid var(--gray-dark);
     }
     /* Ajustes finos de crop por pergunta — sujeito posicionado conforme a foto */
-    .q-img-top.pos-q3 { object-position: center 38%; }   /* rostos no terço central-superior */
-    .q-img-top.pos-q9 { object-position: center 30%; }   /* rosto no terço superior-direito */
 
     /* ── IMAGEM INLINE (livro, etc) ── */
     .q-img {
@@ -761,7 +759,7 @@
 
     <!-- ── Q3: AMBIENTE DE INFLUÊNCIA ── -->
     <div class="screen" id="screen-q3">
-      <img class="q-img-top pos-q3" src="img/quiz/q3-ambiente.jpg" alt="Profissionais em conversa" loading="lazy">
+      <img class="q-img-top" src="img/quiz/q3-ambiente.jpg" alt="Profissionais em reunião" loading="lazy">
       <span class="mono-label">Pergunta 3 de 10</span>
       <h2 class="q-text">Como são seus ambientes de influência profissional?</h2>
       <p class="q-note">Afinal, somos a média das pessoas com quem mais convivemos.</p>
@@ -919,7 +917,7 @@
 
     <!-- ── Q9: BEM-ESTAR ── -->
     <div class="screen" id="screen-q9">
-      <img class="q-img-top pos-q9" src="img/quiz/q9-bemestar.jpg" alt="Bem-estar e qualidade de vida" loading="lazy">
+      <img class="q-img-top" src="img/quiz/q9-bemestar.jpg" alt="Bem-estar e alegria" loading="lazy">
       <span class="mono-label">Pergunta 9 de 10</span>
       <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
       <div class="options" role="radiogroup" aria-label="Bem-estar pessoal recente">
