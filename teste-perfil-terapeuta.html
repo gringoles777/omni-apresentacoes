@@ -564,16 +564,12 @@
       gap: 10px;
     }
 
-    /* ── TRAVAS ── */
+    /* ── TRAVAS — texto corrido ── */
     .trava-item {
-      border-left: 2px solid var(--gold);
-      padding: 14px 18px;
-      background: var(--dark-el);
-      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
-      color: var(--text);
-      line-height: 1.65;
-      margin-bottom: 10px;
-      box-shadow: 0 1px 4px rgba(28,24,20,0.06);
+      font-size: clamp(0.9rem, 1.1vw, 0.975rem);
+      color: var(--text-70);
+      line-height: 1.7;
+      margin-bottom: 12px;
     }
 
     /* ── CONSULTORIA INLINE ── */
@@ -1290,18 +1286,22 @@
     /* ── TRAVAS PERSONALIZADAS (Q3, Q5, Q6, Q8) ── */
     const TRAVAS = {
       q3: {
+        1: 'Seu círculo tem algumas boas referências, mas elas ainda não são o seu ambiente principal. Frequentar mais espaços onde faturamento alto é a norma muda sua percepção do que é possível para você.',
         2: 'Seu círculo profissional está calibrando inconscientemente o seu teto. Quando todos ao redor faturam na mesma faixa, isso passa a parecer normal. Ampliar esse círculo para quem fatura 2 a 3 vezes mais muda completamente a sua régua do que é possível.',
         3: 'Você está trabalhando num vácuo de referências. Terapeutas que deram saltos significativos de faturamento quase sempre citam uma mudança no círculo profissional como parte da virada. O ambiente determina o teto do que parece alcançável.'
       },
       q5: {
+        1: 'Você já tem o nicho definido, que é a base. O que falta é tornar sua presença digital consistente. Conteúdo inconsistente gera audiência inconsistente, e audiência inconsistente gera captação inconsistente.',
         2: 'Você sabe para quem trabalha, mas o cliente ideal ainda não te encontra com frequência. Conteúdo estratégico consistente é o que transforma nicho definido em agenda cheia e em clientes que chegam já entendendo o seu valor.',
         3: 'Sem nicho, você compete por preço com qualquer terapeuta da cidade, independente da sua experiência. E sem presença digital, 100% da sua captação depende de indicação: um modelo frágil que limita crescimento.'
       },
       q6: {
+        1: 'Você usa IA na prática clínica, mas ainda não a integrou à sua comunicação e divulgação. Terapeutas que usam IA nos dois fronts relatam ganhos significativos de tempo e alcance sem aumentar a carga de trabalho.',
         2: 'Usar IA de forma pontual é diferente de ter ela integrada ao seu processo. Quem fez essa transição relata ganhos reais de tempo e consistência, liberando espaço para o que só o terapeuta humano pode oferecer.',
         3: 'IA já é vantagem competitiva real no mercado terapêutico. Quem a usa de forma integrada atende com mais consistência, produz conteúdo com mais frequência e se diferencia sem aumentar horas trabalhadas.'
       },
       q8: {
+        1: 'Você tem um método em desenvolvimento, mas ainda não chegou ao ponto de garantir resultado ao cliente. Essa insegurança limita seu ticket e sua autoridade na hora de fechar novos atendimentos.',
         2: 'Você tem um jeito de trabalhar que funciona, mas não consegue transmitir certeza ao cliente. Essa insegurança aparece no preço. O ticket que o mercado paga está diretamente ligado à confiança que você projeta.',
         3: 'Sem método replicável, é impossível garantir resultado. E sem garantia, é difícil justificar ticket premium. O que parece flexibilidade pode ser, na prática, o principal freio do seu negócio.'
       }
@@ -1311,7 +1311,7 @@
       const travas = [];
       for (const q of ['q3','q5','q6','q8']) {
         const score = S.answers[q] || 0;
-        if (score >= 2 && TRAVAS[q] && TRAVAS[q][score]) {
+        if (score >= 1 && TRAVAS[q] && TRAVAS[q][score]) {
           travas.push({ score, text: TRAVAS[q][score] });
         }
       }
