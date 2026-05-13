@@ -564,12 +564,25 @@
       gap: 10px;
     }
 
-    /* ── TRAVAS — texto corrido ── */
+    /* ── TRAVAS — texto corrido sem destaque ── */
+    .trava-titulo {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: block;
+    }
+
     .trava-item {
       font-size: clamp(0.9rem, 1.1vw, 0.975rem);
       color: var(--text-70);
       line-height: 1.7;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      background: none;
+      border: none;
+      padding: 0;
     }
 
     /* ── CONSULTORIA INLINE ── */
@@ -1057,8 +1070,8 @@
       <div class="result-desc" id="res-desc"></div>
 
       <!-- Travas personalizadas (dinâmico) -->
-      <div id="trava-section" style="display:none; margin-top:24px;">
-        <span class="losing-label">Sua trava profissional</span>
+      <div id="trava-section" style="display:none; margin-top:20px;">
+        <span class="trava-titulo">Sua trava profissional</span>
         <div id="trava-items"></div>
       </div>
 
@@ -1336,7 +1349,7 @@
       const travaSection = document.getElementById('trava-section');
       if (travas.length > 0) {
         document.getElementById('trava-items').innerHTML =
-          travas.map(t => `<div class="trava-item">${t.text}</div>`).join('');
+          travas.map(t => `<p class="trava-item">${t.text}</p>`).join('');
         travaSection.style.display = 'block';
       } else {
         travaSection.style.display = 'none';
