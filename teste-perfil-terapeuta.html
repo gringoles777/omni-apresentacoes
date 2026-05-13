@@ -643,15 +643,30 @@
       line-height: 1.5;
     }
 
-    /* ── IMAGEM DA PERGUNTA ── */
+    /* ── IMAGEM DO TOPO DA PERGUNTA ── */
+    .q-img-top {
+      display: block;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center top;
+      margin-bottom: 24px;
+      border: 1px solid var(--gray-dark);
+    }
+
+    /* ── IMAGEM INLINE (livro, etc) ── */
     .q-img {
       display: block;
       width: 100%;
-      max-width: 220px;
+      max-width: 180px;
       height: auto;
       margin: 0 auto 20px;
       border: 1px solid var(--gray-dark);
       object-fit: cover;
+    }
+
+    @media (max-width: 480px) {
+      .q-img-top { height: 160px; }
     }
 
     /* ── RESPONSIVE ── */
@@ -743,6 +758,7 @@
 
     <!-- ── Q3: AMBIENTE DE INFLUÊNCIA ── -->
     <div class="screen" id="screen-q3">
+      <img class="q-img-top" src="https://images.unsplash.com/photo-1590650046871-92c887180603?auto=format&fit=crop&w=600&q=80" alt="Profissionais em conversa" loading="lazy">
       <span class="mono-label">Pergunta 3 de 10</span>
       <h2 class="q-text">Como são seus ambientes de influência profissional?</h2>
       <p class="q-note">Afinal, somos a média das pessoas com quem mais convivemos.</p>
@@ -797,6 +813,7 @@
 
     <!-- ── Q5: NICHO E INSTAGRAM — formato afirmação ── -->
     <div class="screen" id="screen-q5">
+      <img class="q-img-top" src="https://images.unsplash.com/photo-1611262588024-d12430b98920?auto=format&fit=crop&w=600&q=80" alt="Criação de conteúdo para Instagram" loading="lazy">
       <span class="mono-label">Pergunta 5 de 10</span>
       <div class="q-statement">
         <span class="q-statement-label">Avalie a afirmação</span>
@@ -825,6 +842,7 @@
 
     <!-- ── Q6: USO DE IA — formato afirmação ── -->
     <div class="screen" id="screen-q6">
+      <img class="q-img-top" src="https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?auto=format&fit=crop&w=600&q=80" alt="Inteligência Artificial e tecnologia" loading="lazy">
       <span class="mono-label">Pergunta 6 de 10</span>
       <div class="q-statement">
         <span class="q-statement-label">Avalie a afirmação</span>
@@ -853,6 +871,7 @@
 
     <!-- ── Q7: CUIDADO EMOCIONAL — formato frequência ── -->
     <div class="screen" id="screen-q7">
+      <img class="q-img-top" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Meditação e autocuidado" loading="lazy">
       <span class="mono-label">Pergunta 7 de 10</span>
       <h2 class="q-text">Com que frequência você passa por processos terapêuticos e cuida da sua própria mente?</h2>
       <div class="scale-ends">
@@ -910,6 +929,7 @@
 
     <!-- ── Q9: BEM-ESTAR ── -->
     <div class="screen" id="screen-q9">
+      <img class="q-img-top" src="https://images.unsplash.com/photo-1524758870432-af57e54afa26?auto=format&fit=crop&w=600&q=80" alt="Bem-estar e qualidade de vida" loading="lazy">
       <span class="mono-label">Pergunta 9 de 10</span>
       <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
       <div class="options" role="radiogroup" aria-label="Bem-estar pessoal recente">
