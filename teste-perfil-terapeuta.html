@@ -591,6 +591,27 @@
       white-space: nowrap;
     }
 
+    /* ── NOTA DA PERGUNTA ── */
+    .q-note {
+      font-size: clamp(0.78rem, 1vw, 0.85rem);
+      color: var(--gray);
+      font-style: italic;
+      margin-top: -16px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* ── IMAGEM DA PERGUNTA ── */
+    .q-img {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      margin: 0 auto 20px;
+      border: 1px solid var(--gray-dark);
+      object-fit: cover;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 480px) {
       main { padding: 106px 16px 72px; }
@@ -606,7 +627,7 @@
   </header>
 
   <!-- Progress Bar -->
-  <div class="progress-wrap" id="progressWrap" role="progressbar" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0">
+  <div class="progress-wrap" id="progressWrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
     <div class="progress-track">
       <div class="progress-fill" id="progressFill"></div>
     </div>
@@ -617,38 +638,37 @@
 
     <!-- ── WELCOME ── -->
     <div class="screen active" id="screen-welcome">
-      <div class="badge">Teste de Perfil · Gratuito</div>
+      <div class="badge">Teste de Perfil Profissional · Gratuito</div>
       <h1 class="welcome-hl">
-        Existem 3 perfis de terapeuta que já chegaram no topo... e ficaram presos lá de formas <em>completamente diferentes</em>.
+        Teste de Perfil<br><em>Profissional do Terapeuta</em>
       </h1>
-      <p class="welcome-sub">Qual é o seu?</p>
-      <p class="welcome-desc">O perfil revela não só onde você está — mas onde você está desperdiçando energia sem perceber.</p>
-      <button class="btn-primary" style="max-width:300px;" onclick="go('q1')">
-        Descobrir meu perfil &rarr;
+      <p class="welcome-sub">Descubra qual o seu perfil profissional, onde está o seu gargalo e o que fazer para atingir o próximo nível.</p>
+      <button class="btn-primary" style="max-width:320px;" onclick="go('q1')">
+        Iniciar teste gratuito &rarr;
       </button>
-      <p class="welcome-meta" style="margin-top:14px;">5 minutos &nbsp;&middot;&nbsp; Gratuito &nbsp;&middot;&nbsp; Sem compromisso</p>
+      <p class="welcome-meta" style="margin-top:14px;">10 perguntas &nbsp;&middot;&nbsp; Gratuito &nbsp;&middot;&nbsp; Resultado imediato</p>
     </div>
 
     <!-- ── Q1: TICKET MÉDIO ── -->
     <div class="screen" id="screen-q1">
-      <span class="mono-label">Pergunta 1 de 7</span>
-      <h2 class="q-text">Qual é o investimento que seu cliente faz por sessão com você?</h2>
+      <span class="mono-label">Pergunta 1 de 10</span>
+      <h2 class="q-text">Qual é o valor que você cobra por sessão individual?</h2>
       <div class="options" role="radiogroup" aria-label="Ticket médio por sessão">
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',150,this)" onkeydown="kd(event,'q1',150,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',200,this)" onkeydown="kd(event,'q1',200,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">Até R$150</span>
+          <span class="opt-txt">Até R$300</span>
         </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',225,this)" onkeydown="kd(event,'q1',225,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',500,this)" onkeydown="kd(event,'q1',500,this)">
           <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">R$151 a R$300</span>
+          <span class="opt-txt">Entre R$300 e R$750</span>
         </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',400,this)" onkeydown="kd(event,'q1',400,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',1100,this)" onkeydown="kd(event,'q1',1100,this)">
           <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">R$301 a R$500</span>
+          <span class="opt-txt">Entre R$750 e R$1.500</span>
         </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',600,this)" onkeydown="kd(event,'q1',600,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',1800,this)" onkeydown="kd(event,'q1',1800,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Acima de R$500</span>
+          <span class="opt-txt">Acima de R$1.500</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q1')">&larr; Voltar</button>
@@ -656,7 +676,7 @@
 
     <!-- ── Q2: VOLUME ── -->
     <div class="screen" id="screen-q2">
-      <span class="mono-label">Pergunta 2 de 7</span>
+      <span class="mono-label">Pergunta 2 de 10</span>
       <h2 class="q-text">Quantos atendimentos você realiza por mês?</h2>
       <div class="options" role="radiogroup" aria-label="Volume de atendimentos por mês">
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',8,this)" onkeydown="kd(event,'q2',8,this)">
@@ -679,129 +699,208 @@
       <button class="btn-back" onclick="back('q2')">&larr; Voltar</button>
     </div>
 
-    <!-- ── Q3: MÉTODO / GARANTIA ── -->
+    <!-- ── Q3: AMBIENTE DE INFLUÊNCIA ── -->
     <div class="screen" id="screen-q3">
-      <span class="mono-label">Pergunta 3 de 7</span>
-      <h2 class="q-text">Você tem segurança para dar garantia de resultado para seus clientes?</h2>
-      <div class="options" role="radiogroup" aria-label="Segurança para garantir resultado">
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',3,this)" onkeydown="kd(event,'q3',3,this)">
+      <span class="mono-label">Pergunta 3 de 10</span>
+      <h2 class="q-text">Como são seus ambientes de influência profissional?</h2>
+      <p class="q-note">Afinal, somos a média das pessoas com quem mais convivemos.</p>
+      <div class="options" role="radiogroup" aria-label="Ambiente de influência profissional">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',0,this)" onkeydown="kd(event,'q3',0,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">Sim — uso um método validado com protocolo claro e me sinto seguro para garantir resultado</span>
-        </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',2,this)" onkeydown="kd(event,'q3',2,this)">
-          <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">Tenho meu jeito de trabalhar, mas não me sinto seguro para garantir resultado</span>
+          <span class="opt-txt">É comum para mim estar em grupos onde colegas de profissão faturam acima de R$50.000 por mês</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',1,this)" onkeydown="kd(event,'q3',1,this)">
-          <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">Depende muito do caso — não consigo garantir resultado</span>
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Meu círculo profissional tem pessoas que faturam bem, mas não é o caso da maioria</span>
         </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',0,this)" onkeydown="kd(event,'q3',0,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',2,this)" onkeydown="kd(event,'q3',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Troco experiências com colegas, mas a maioria está no mesmo nível financeiro que eu</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',3,this)" onkeydown="kd(event,'q3',3,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Meu trabalho é muito particular para isso</span>
+          <span class="opt-txt">Troco pouco com colegas, e quem conheço está num nível igual ou abaixo do meu financeiramente</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q3')">&larr; Voltar</button>
     </div>
 
-    <!-- ── Q4: BEM-ESTAR ── -->
+    <!-- ── Q4: LIVRO DESBLOQUEIO ── -->
     <div class="screen" id="screen-q4">
-      <span class="mono-label">Pergunta 4 de 7</span>
-      <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
-      <div class="options" role="radiogroup" aria-label="Bem-estar pessoal">
+      <span class="mono-label">Pergunta 4 de 10</span>
+      <h2 class="q-text">Você já leu e aplica conceitos do best-seller "Desbloqueio e o Poder da sua Mente"?</h2>
+      <p class="q-note">O livro mais vendido do Brasil sobre intervenção terapêutica rápida.</p>
+      <img class="q-img" src="https://m.media-amazon.com/images/I/71Qn7KkFkAL._SY466_.jpg"
+           alt="Capa do livro Desbloqueio e o Poder da sua Mente" loading="lazy">
+      <div class="options" role="radiogroup" aria-label="Leitura do livro Desbloqueio">
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',0,this)" onkeydown="kd(event,'q4',0,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">Estou bem — tenho rituais e consigo me recuperar entre as semanas</span>
+          <span class="opt-txt">Li e aplico os conceitos no meu trabalho</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',1,this)" onkeydown="kd(event,'q4',1,this)">
           <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">Tenho dias bons e ruins. Me cuido menos do que deveria</span>
-        </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',3,this)" onkeydown="kd(event,'q4',3,this)">
-          <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">Honestamente, estou no limite. Cuido de todo mundo menos de mim</span>
+          <span class="opt-txt">Li, mas ainda não implementei de forma consistente</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',2,this)" onkeydown="kd(event,'q4',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Conheço, mas ainda não li</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',3,this)" onkeydown="kd(event,'q4',3,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Já percebi que estou operando no piloto automático emocional</span>
+          <span class="opt-txt">Ainda não conheço</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q4')">&larr; Voltar</button>
     </div>
 
-    <!-- ── Q5: RESULTADOS DOS CLIENTES ── -->
+    <!-- ── Q5: NICHO E INSTAGRAM ── -->
     <div class="screen" id="screen-q5">
-      <span class="mono-label">Pergunta 5 de 7</span>
-      <h2 class="q-text">Quando você olha para os resultados dos seus clientes, como se sente com mais frequência?</h2>
-      <div class="options" role="radiogroup" aria-label="Percepção sobre resultados dos clientes">
+      <span class="mono-label">Pergunta 5 de 10</span>
+      <h2 class="q-text">Você tem um nicho definido e produz conteúdo estratégico para seu Instagram profissional?</h2>
+      <div class="options" role="radiogroup" aria-label="Nicho e presença no Instagram">
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',0,this)" onkeydown="kd(event,'q5',0,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">Satisfeito — vejo transformações reais e consistentes</span>
+          <span class="opt-txt">Sim. Tenho nicho definido e publico conteúdo estratégico com frequência</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',1,this)" onkeydown="kd(event,'q5',1,this)">
           <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">Parcialmente satisfeito — alguns evoluem muito, outros pouco</span>
-        </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',3,this)" onkeydown="kd(event,'q5',3,this)">
-          <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">Frustrado — sinto que o processo fica na superfície com frequência</span>
+          <span class="opt-txt">Tenho um nicho, mas ainda não produzo conteúdo de forma consistente</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',2,this)" onkeydown="kd(event,'q5',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Ainda não defini um nicho claro</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',3,this)" onkeydown="kd(event,'q5',3,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Angustiado — sei que poderia ir muito mais fundo, mas algo trava o cliente</span>
+          <span class="opt-txt">Não trabalho com Instagram profissional</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q5')">&larr; Voltar</button>
     </div>
 
-    <!-- ── Q6: ENGAJAMENTO DOS CLIENTES ── -->
+    <!-- ── Q6: USO DE IA ── -->
     <div class="screen" id="screen-q6">
-      <span class="mono-label">Pergunta 6 de 7</span>
-      <h2 class="q-text">Como os seus clientes se comportam em relação ao processo terapêutico?</h2>
-      <div class="options" role="radiogroup" aria-label="Comportamento dos clientes no processo">
+      <span class="mono-label">Pergunta 6 de 10</span>
+      <h2 class="q-text">Você usa Inteligência Artificial no seu trabalho como terapeuta?</h2>
+      <div class="options" role="radiogroup" aria-label="Uso de Inteligência Artificial">
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',0,this)" onkeydown="kd(event,'q6',0,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">A maioria está comprometida e engajada com o processo</span>
+          <span class="opt-txt">Sim. Tenho um sistema completo que me ajuda tanto na divulgação quanto no atendimento aos pacientes</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',1,this)" onkeydown="kd(event,'q6',1,this)">
           <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">Metade engaja bem, metade é resistente ou inconsistente</span>
+          <span class="opt-txt">Uso para me ajudar com os pacientes</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',2,this)" onkeydown="kd(event,'q6',2,this)">
           <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">Sinto que muitos não valorizam o trabalho como deveriam — faltam sessões, não seguem o que foi acordado</span>
+          <span class="opt-txt">Uso ChatGPT ou Gemini para ter algumas ideias pontuais</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',3,this)" onkeydown="kd(event,'q6',3,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Percebo um padrão: chegam com expectativa alta, mas desengajam antes de completar o processo</span>
+          <span class="opt-txt">Não uso IA no meu trabalho</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q6')">&larr; Voltar</button>
     </div>
 
-    <!-- ── Q7: FUTURE PACING ── -->
+    <!-- ── Q7: CUIDADO EMOCIONAL ── -->
     <div class="screen" id="screen-q7">
-      <span class="mono-label">Pergunta 7 de 7</span>
-      <h2 class="q-text">Se pudesse mudar uma coisa na sua prática hoje, o que seria?</h2>
-      <div class="options" role="radiogroup" aria-label="Principal mudança desejada na prática">
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',2,this)" onkeydown="kd(event,'q7',2,this)">
+      <span class="mono-label">Pergunta 7 de 10</span>
+      <h2 class="q-text">Você cuida de si mesmo passando por processos terapêuticos e cuidando da própria mente? Com qual frequência?</h2>
+      <div class="options" role="radiogroup" aria-label="Frequência de cuidado emocional próprio">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',0,this)" onkeydown="kd(event,'q7',0,this)">
           <span class="opt-ltr" aria-hidden="true">A</span>
-          <span class="opt-txt">Ter mais tempo para mim e para as pessoas que amo fora da clínica</span>
+          <span class="opt-txt">Com frequência. Faço check-ups emocionais regulares e tenho mentores que me ajudam a cuidar da mente</span>
         </div>
-        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',3,this)" onkeydown="kd(event,'q7',3,this)">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',1,this)" onkeydown="kd(event,'q7',1,this)">
           <span class="opt-ltr" aria-hidden="true">B</span>
-          <span class="opt-txt">Gerar transformações mais profundas e duradouras nos meus clientes</span>
+          <span class="opt-txt">Passo por processos terapêuticos ocasionalmente, quando sinto necessidade</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',2,this)" onkeydown="kd(event,'q7',2,this)">
           <span class="opt-ltr" aria-hidden="true">C</span>
-          <span class="opt-txt">Sentir que meu trabalho é genuinamente reconhecido e valorizado</span>
+          <span class="opt-txt">Raramente. O dia a dia não deixa muito espaço para isso</span>
         </div>
         <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',3,this)" onkeydown="kd(event,'q7',3,this)">
           <span class="opt-ltr" aria-hidden="true">D</span>
-          <span class="opt-txt">Recuperar minha energia — me sentir vivo após as sessões, não esgotado</span>
+          <span class="opt-txt">Honestamente, cuido muito mais dos outros do que de mim mesmo</span>
         </div>
       </div>
       <button class="btn-back" onclick="back('q7')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q8: MÉTODO E GARANTIA ── -->
+    <div class="screen" id="screen-q8">
+      <span class="mono-label">Pergunta 8 de 10</span>
+      <h2 class="q-text">Você tem segurança para dar garantia de resultado para seus clientes?</h2>
+      <div class="options" role="radiogroup" aria-label="Segurança para garantir resultado">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',0,this)" onkeydown="kd(event,'q8',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Sim. Uso um método validado com protocolo claro e me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',1,this)" onkeydown="kd(event,'q8',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho meu jeito de trabalhar, mas não me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',2,this)" onkeydown="kd(event,'q8',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Depende muito do caso. Não consigo garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',3,this)" onkeydown="kd(event,'q8',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Meu trabalho é muito particular para isso</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q8')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q9: BEM-ESTAR ── -->
+    <div class="screen" id="screen-q9">
+      <span class="mono-label">Pergunta 9 de 10</span>
+      <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
+      <div class="options" role="radiogroup" aria-label="Bem-estar pessoal recente">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',0,this)" onkeydown="kd(event,'q9',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Estou bem. Tenho rituais e consigo me recuperar entre as semanas</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',1,this)" onkeydown="kd(event,'q9',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho dias bons e ruins. Me cuido menos do que deveria</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',2,this)" onkeydown="kd(event,'q9',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Já percebi que estou operando no piloto automático emocional</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',3,this)" onkeydown="kd(event,'q9',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Honestamente, estou no limite. Cuido de todo mundo menos de mim</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q9')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q10: RESULTADOS DOS CLIENTES ── -->
+    <div class="screen" id="screen-q10">
+      <span class="mono-label">Pergunta 10 de 10</span>
+      <h2 class="q-text">Quando você olha para os resultados dos seus clientes, como se sente com mais frequência?</h2>
+      <div class="options" role="radiogroup" aria-label="Percepção sobre resultados dos clientes">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',0,this)" onkeydown="kd(event,'q10',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Satisfeito. Vejo transformações reais e consistentes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',1,this)" onkeydown="kd(event,'q10',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Parcialmente satisfeito. Alguns evoluem muito, outros pouco</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',2,this)" onkeydown="kd(event,'q10',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Sei que poderia ir muito mais fundo, mas algo trava o cliente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',3,this)" onkeydown="kd(event,'q10',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Frustrado. Sinto que o processo fica na superfície com frequência</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q10')">&larr; Voltar</button>
     </div>
 
     <!-- ── OPT-IN ── -->
@@ -915,7 +1014,8 @@
     const S = { answers: {}, faturamento: 0, qualificado: false, previewPerfil: null };
 
     /* ── NAVIGATION ── */
-    const QMAP = { q1:1, q2:2, q3:3, q4:4, q5:5, q6:6, q7:7 };
+    const QMAP = { q1:1, q2:2, q3:3, q4:4, q5:5, q6:6, q7:7, q8:8, q9:9, q10:10 };
+    const TOTAL_Q = 10;
 
     function go(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -931,8 +1031,8 @@
 
       if (num) {
         pw.classList.add('show');
-        fill.style.width = (num / 7 * 100) + '%';
-        lbl.textContent  = 'Pergunta ' + num + ' de 7';
+        fill.style.width = (num / TOTAL_Q * 100) + '%';
+        lbl.textContent  = 'Pergunta ' + num + ' de ' + TOTAL_Q;
         document.getElementById('progressWrap').setAttribute('aria-valuenow', num);
       } else {
         pw.classList.remove('show');
@@ -940,8 +1040,8 @@
     }
 
     /* ── NAVIGATION MAPS ── */
-    const NEXT = { q1:'q2', q2:'q3', q3:'q4', q4:'q5', q5:'q6', q6:'q7', q7:'optin' };
-    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q4:'q3', q5:'q4', q6:'q5', q7:'q6' };
+    const NEXT = { q1:'q2', q2:'q3', q3:'q4', q4:'q5', q5:'q6', q6:'q7', q7:'q8', q8:'q9', q9:'q10', q10:'optin' };
+    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q4:'q3', q5:'q4', q6:'q5', q7:'q6', q8:'q7', q9:'q8', q10:'q9' };
 
     /* ── OPTION SELECTION + AUTO-ADVANCE ── */
     function pick(q, val, el) {
@@ -1005,12 +1105,12 @@
     function calcPerfil() {
       if (S.previewPerfil !== null) return S.previewPerfil;
       if (!S.qualificado) return 0;
-      // Q1 e Q2 = qualificação financeira. Q7 = levantamento de dor, não classifica.
-      // Score baseado apenas nas 4 perguntas de dor: Q3 a Q6 (máx 12 pts)
-      const score = ['q3','q4','q5','q6'].reduce((a,k) => a + (S.answers[k] || 0), 0);
-      if (score <= 3)  return 1;  // baixa dor: Preso no Teto
-      if (score <= 8)  return 2;  // dor moderada: Invisível para Si Mesmo
-      return 3;                   // dor alta: No Limite da Chama
+      // Q1 e Q2 = qualificação financeira (não entram no score)
+      // Score: Q3 a Q10 — 8 perguntas × máx 3 pts = 24 pts
+      const score = ['q3','q4','q5','q6','q7','q8','q9','q10'].reduce((a,k) => a + (S.answers[k] || 0), 0);
+      if (score <= 7)  return 1;  // 0-7: Preso no Teto
+      if (score <= 15) return 2;  // 8-15: Invisível para Si Mesmo
+      return 3;                   // 16-24: No Limite da Chama
     }
 
     function showResult() {
