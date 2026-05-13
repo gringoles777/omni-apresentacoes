@@ -1378,6 +1378,25 @@
       go('result');
     }
 
+    /* ── MONTA LISTA DE OPORTUNIDADES PARA O MICHAEL ── */
+    function buildOportunidades() {
+      const MAP = {
+        q3: { 1: 'Networking fraco — círculo profissional no mesmo nível', 2: 'Networking fraco — círculo profissional no mesmo nível', 3: 'Networking muito fraco — colegas abaixo do potencial' },
+        q5: { 1: 'Nicho definido mas sem conteúdo consistente no Instagram', 2: 'Sem nicho claro e sem presença digital estratégica', 3: 'Sem nicho e sem Instagram profissional ativo' },
+        q6: { 1: 'Usa IA apenas nos atendimentos, não na divulgação', 2: 'Usa IA de forma pontual, sem integração real', 3: 'Não usa IA no trabalho' },
+        q8: { 1: 'Tem método próprio mas sem segurança para garantir resultado', 2: 'Sem método estruturado — não consegue garantir resultado', 3: 'Sem método — trabalho muito particular, sem replicabilidade' },
+        q7: { 1: 'Cuida pouco de si mesmo emocionalmente', 2: 'Opera no piloto automático emocional', 3: 'Burnout — cuida de todos menos de si' },
+        q9: { 1: 'Bem-estar inconsistente nos últimos meses', 2: 'Piloto automático emocional no dia a dia', 3: 'Bem-estar comprometido, no limite' },
+        q10: { 1: 'Resultados dos clientes inconsistentes', 2: 'Sente que poderia ir mais fundo nos resultados', 3: 'Frustrado com resultados — processo fica na superfície' }
+      };
+      const ops = [];
+      for (const [q, levels] of Object.entries(MAP)) {
+        const score = S.answers[q] || 0;
+        if (score >= 1 && levels[score]) ops.push({ score, text: levels[score] });
+      }
+      return ops.sort((a,b) => b.score - a.score).slice(0, 5).map(o => o.text);
+    }
+
     /* ── ENVIAR CONSULTORIA ── */
     async function enviarConsultoria(e) {
       e.preventDefault();
@@ -1388,20 +1407,26 @@
       if (!nome || phone.length < 6 || !email) return;
       btn.disabled    = true;
       btn.textContent = 'Enviando...';
-      const payload = {
-        nome, email,
-        telefone:    '55' + phone,
-        perfil_id:   calcPerfil(),
-        perfil_nome: PERFIS[calcPerfil()].name,
-        origem:      'quiz-resultado-consultoria',
-        ts:          new Date().toISOString()
-      };
+
+      const perfilId  = calcPerfil();
+      const telefone  = '55' + phone;
+      const oportunidades = buildOportunidades();
+
+      // Notifica o Michael via Prisma
       try {
-        await fetch('http://76.13.169.211:3002/webhook/inscricao-consultoria-terapeuta', {
-          method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+        await fetch('/api/quiz-lead-notification', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            nome, email, telefone,
+            perfil_id:   perfilId,
+            perfil_nome: PERFIS[perfilId].name,
+            oportunidades
+          })
         });
       } catch(_) {}
-      try { localStorage.setItem('omni_consultoria', JSON.stringify(payload)); } catch(_) {}
+
+      try { localStorage.setItem('omni_consultoria', JSON.stringify({ nome, email, telefone, perfilId, oportunidades })); } catch(_) {}
       document.getElementById('consultoria-form').style.display = 'none';
       document.getElementById('consultoria-ok').style.display   = 'block';
     }
