@@ -894,9 +894,9 @@
         hl:      'Você tem um dom raro.',
         sub:     'E está pagando um preço alto por ele.',
         desc:    'Tem uma ironia dolorosa no perfil de quem cuida profissionalmente: quanto mais habilidoso você é em sustentar o outro, mais invisível você fica para si mesmo.\n\nSeu resultado mostra um padrão claro: você entrega profundidade real, mas sai dos atendimentos com menos do que entrou. Energia, presença, motivação: saem com o cliente. O que fica é o cansaço e, muitas vezes, a dúvida silenciosa sobre se vale a pena continuar nesse ritmo.\n\nIsso não é fraqueza. É a consequência direta de um modelo de trabalho construído para servir sem se proteger.\n\nO problema central não é você. É que ninguém te ensinou a estruturar um processo onde a transformação do cliente não dependa do seu esvaziamento.\n\nTerapeutas que saem desse ciclo não trabalham menos. Trabalham diferente. Têm um método que carrega o processo e não os obriga a carregar o cliente no ombro sessão após sessão.\n\nO que está em jogo não é só sua sustentabilidade. É a qualidade do que você consegue oferecer quando opera no limite.',
-        losing:  'Você foi selecionado para ganhar uma consultoria gratuita que te ajudará a se aprofundar nesse resultado e melhorar sua qualidade de vida. Responda essa mensagem com "quero" para agendarmos!',
-        cta:     'Agendar Consultoria Gratuita',
-        url:     'https://wa.me/5511951360623?text=quero'
+        losing:  'Terapeutas com o seu perfil são exatamente os que mais evoluem quando encontram o suporte certo. A combinação de profundidade técnica com o desgaste que você está carregando cria o cenário ideal para uma virada real. Por isso, você pode se inscrever para uma consultoria gratuita voltada especificamente para quem está no seu momento. As vagas são limitadas.',
+        cta:     'Quero me inscrever para a Consultoria Gratuita',
+        url:     'inscricao-consultoria-terapeuta.html?perfil=2'
       },
       3: {
         badge:   'Seu Perfil',
@@ -905,9 +905,9 @@
         hl:      'Você está carregando muito.',
         sub:     'E tem a maior capacidade de transformação represada.',
         desc:    'Seu resultado é o mais direto que podemos oferecer: você está no limite.\n\nNão o limite de competência. Você não chegaria onde chegou sem habilidade real. O limite de um modelo de trabalho que exige demais de quem o sustenta.\n\nO que seu resultado revela é um acúmulo. Não de um único problema, mas de vários em paralelo: a energia que não se renova, os clientes que não chegam onde você sabe que poderiam chegar, a sensação de que seu trabalho não está sendo recebido com o peso que tem. E a pergunta que você raramente diz em voz alta: por quanto tempo ainda?\n\nExiste um padrão específico que leva terapeutas ao seu perfil. Não é falta de dedicação. É excesso dela, aplicada num formato que não foi desenhado para ser sustentável.\n\nO que está faltando não é mais esforço. É estrutura. Um método que produza resultados sem depender do seu esvaziamento. Um posicionamento que atraia clientes prontos para se transformar, não para ser convencidos disso sessão após sessão.\n\nEsse perfil é o que mais nos preocupa. E também o que mais muda quando encontra o caminho certo.',
-        losing:  'Você foi selecionado para ganhar uma consultoria gratuita que te ajudará a se aprofundar nesse resultado e melhorar sua qualidade de vida. Responda essa mensagem com "quero" para agendarmos!',
-        cta:     'Agendar Consultoria Gratuita',
-        url:     'https://wa.me/5511951360623?text=quero'
+        losing:  'Quem chega ao seu perfil tem, quase sempre, o maior potencial de transformação. Não porque o caminho seja fácil, mas porque quando alguém com o seu nível de entrega encontra a estrutura certa, a mudança é rápida e profunda. Por isso, você pode se inscrever para uma consultoria gratuita exclusiva. Priorizamos quem chegou até aqui pelo teste de perfil.',
+        cta:     'Quero me inscrever para a Consultoria Gratuita',
+        url:     'inscricao-consultoria-terapeuta.html?perfil=3'
       }
     };
 
@@ -972,15 +972,6 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q, val, el); }
     }
 
-    /* ── MONTA TEXTO DO WHATSAPP ── */
-    function buildWaText(p, nome) {
-      let txt = `Olá ${nome}! Aqui está o resultado do seu Teste de Perfil do Terapeuta.\n\n`;
-      txt += `*${p.name.toUpperCase()}*\n\n`;
-      txt += p.desc.replace(/\n\n/g, '\n\n');
-      if (p.losing) txt += '\n\n' + p.losing;
-      return txt;
-    }
-
     /* ── OPT-IN SUBMIT ── */
     async function handleSubmit(e) {
       e.preventDefault();
@@ -988,51 +979,26 @@
       const nome  = document.getElementById('inp-name').value.trim();
       const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
 
-      if (!nome || phone.length < 6) {
-        console.warn('[Quiz] Validação falhou — nome:', nome, '| telefone dígitos:', phone.length);
-        return;
-      }
+      if (!nome || phone.length < 6) return;
 
       btn.disabled    = true;
       btn.textContent = 'Analisando...';
 
-      const perfilId  = calcPerfil();
-      const p         = PERFIS[perfilId];
-      const waText    = buildWaText(p, nome);
+      S.userData = { nome, telefone: '55' + phone };
 
-      const payload = {
-        nome,
-        telefone:            '55' + phone,
-        perfil_id:           perfilId,
-        perfil_nome:         p.name,
-        qualificado:         S.qualificado,
-        faturamento_estimado: S.faturamento,
-        mensagem_whatsapp:   waText,
-        respostas:           S.answers,
-        ts:                  new Date().toISOString()
-      };
-
-      console.log('[Quiz] Payload:', payload);
-
-      // Dispara webhook — n8n envia WhatsApp para o lead
-      // Endpoint configurado via @n8n-chief
-      const WEBHOOK_URL = 'http://76.13.169.211:3002/webhook/quiz-perfil-terapeuta';
-
+      // Salva para a página de inscrição recuperar
       try {
-        await fetch(WEBHOOK_URL, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload)
-        });
-        console.log('[Quiz] Webhook disparado com sucesso.');
-      } catch (err) {
-        console.warn('[Quiz] Webhook indisponível (será configurado via n8n):', err.message);
-      }
+        localStorage.setItem('omni_quiz_lead', JSON.stringify({
+          nome, telefone: '55' + phone,
+          faturamento: S.faturamento,
+          qualificado: S.qualificado,
+          answers: S.answers,
+          ts: new Date().toISOString()
+        }));
+      } catch (_) {}
 
-      // Salva localmente para debug
-      try { localStorage.setItem('omni_quiz_lead', JSON.stringify(payload)); } catch (_) {}
-
-      go('obrigado');
+      await new Promise(r => setTimeout(r, 800));
+      showResult();
     }
 
     /* ── RESULT ── */
