@@ -1420,8 +1420,9 @@
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({
             nome, email, telefone,
-            perfil_id:   perfilId,
-            perfil_nome: PERFIS[perfilId].name,
+            perfil_id:          perfilId,
+            perfil_nome:        PERFIS[perfilId].name,
+            faturamento_estimado: S.faturamento,
             oportunidades
           })
         });
