@@ -1205,11 +1205,21 @@
 
     /* ── NAVIGATION MAPS — intercalando formatos (cenário / afirmação / frequência) ── */
     // Ordem: Q1→Q2→Q3(cenário) → Q8(afirmação) → Q4(cenário+img) → Q5(afirmação) → Q7(freq) → Q6(afirmação+img) → Q9(cenário) → Q10(cenário)
-    const NEXT = { q1:'q2', q2:'q3', q3:'q8', q8:'q7', q7:'q4', q4:'q10', q10:'q5', q5:'q9', q9:'q6', q6:'optin' };
+    const NEXT = { q1:'q2', q2:'q3', q3:'q8', q8:'q7', q7:'q4', q4:'q10', q10:'q5', q5:'q9', q9:'q6', q6:'result' };
     const PREV = { q1:'welcome', q2:'q1', q3:'q2', q8:'q3', q7:'q8', q4:'q7', q10:'q4', q5:'q10', q9:'q5', q6:'q9' };
 
     /* ── OPTION SELECTION + AUTO-ADVANCE ── */
     function pick(q, val, el) {
+      // Se for a última pergunta, chama showResult diretamente
+      if (NEXT[q] === 'result') {
+        const screen = el.closest('.screen');
+        screen.querySelectorAll('.opt').forEach(o => { o.classList.remove('sel'); o.setAttribute('aria-checked','false'); });
+        el.classList.add('sel');
+        el.setAttribute('aria-checked','true');
+        S.answers[q] = val;
+        setTimeout(showResult, 360);
+        return;
+      }
       const screen = el.closest('.screen');
       screen.querySelectorAll('.opt').forEach(o => {
         o.classList.remove('sel');
