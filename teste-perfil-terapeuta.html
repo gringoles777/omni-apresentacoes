@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Perfil do Terapeuta — OMNI Brasil</title>
+  <meta name="description" content="Existem 3 perfis de terapeuta que já chegaram no topo e ficaram presos lá de formas completamente diferentes. Descubra o seu — 5 minutos, gratuito.">
+  <meta property="og:title" content="Teste de Perfil do Terapeuta — OMNI Brasil">
+  <meta property="og:description" content="Existem 3 perfis de terapeuta que já chegaram no topo e ficaram presos lá de formas completamente diferentes. Qual é o seu?">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gringoles777.github.io/omni-apresentacoes/teste-perfil-terapeuta.html">
+  <link rel="canonical" href="https://gringoles777.github.io/omni-apresentacoes/teste-perfil-terapeuta.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS — Light Theme ── */
+    :root {
+      --black:        #F7F3EC;   /* page background — warm off-white */
+      --dark:         #EDE8DF;   /* secondary background */
+      --dark-el:      #FFFFFF;   /* elevated surfaces (cards, options) */
+      --dark-tx:      #E4DDD2;   /* hover texture */
+      --gold:         #B8943A;   /* slightly deeper gold — better contrast on light */
+      --gold-light:   #C8A84B;
+      --gold-deep:    #8A6A22;
+      --gold-10:      rgba(184,148,58,0.10);
+      --gold-15:      rgba(184,148,58,0.15);
+      --gold-20:      rgba(184,148,58,0.20);
+      --gold-30:      rgba(184,148,58,0.30);
+      --cream:        #1C1814;   /* primary text — near-black warm */
+      --cream-70:     rgba(28,24,20,0.62);
+      --cream-50:     rgba(28,24,20,0.42);
+      --gray:         #8C877E;   /* secondary text */
+      --gray-dark:    #D8D2C8;   /* borders */
+      --glow:         0 0 20px rgba(184,148,58,0.22);
+      --glow-h:       0 0 28px rgba(184,148,58,0.32);
+      --ease:         cubic-bezier(0.4,0,0.2,1);
+      --serif:        'DM Serif Display', Georgia, serif;
+      --mono:         'IBM Plex Mono', 'Courier New', monospace;
+      --body:         'Inter', 'Open Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── DOT PATTERN — subtle on light ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(28,24,20,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 40%, black 0%, transparent 70%);
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      background: rgba(247,243,236,0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-dark);
+      box-shadow: 0 1px 0 var(--gray-dark);
+    }
+
+    .logo-text {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .logo-text span {
+      color: var(--cream-50);
+      font-size: 0.55rem;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      position: fixed;
+      top: 49px; left: 0; right: 0;
+      z-index: 199;
+      background: rgba(247,243,236,0.97);
+      border-bottom: 1px solid var(--gray-dark);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease);
+    }
+
+    .progress-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 2px;
+      background: var(--gray-dark);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.45s var(--ease);
+    }
+
+    .progress-lbl {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 112px 24px 80px;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── SCREENS ── */
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeUp 0.4s var(--ease) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MONO LABEL ── */
+    .mono-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--gold-10);
+      color: var(--gold);
+      border: 1px solid var(--gold-20);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 24px;
+    }
+
+    /* ══════════════════════════════
+       WELCOME SCREEN
+    ══════════════════════════════ */
+    .welcome-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .welcome-hl em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .welcome-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .welcome-desc {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      color: var(--cream-70);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .welcome-meta {
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ══════════════════════════════
+       QUESTION SCREEN
+    ══════════════════════════════ */
+    .q-text {
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 3.5vw, 1.9rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      background: var(--dark-el);
+      border: 1px solid var(--gray-dark);
+      cursor: pointer;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 1px 3px rgba(28,24,20,0.06);
+    }
+
+    .opt:hover {
+      border-color: var(--gold-30);
+      background: var(--dark-tx);
+      box-shadow: 0 2px 8px rgba(28,24,20,0.10);
+    }
+
+    .opt.sel {
+      border-color: var(--gold);
+      background: var(--gold-10);
+    }
+
+    .opt-ltr {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--gray-dark);
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--gray);
+      transition: all 0.2s var(--ease);
+      margin-top: 1px;
+    }
+
+    .opt.sel .opt-ltr {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .opt-txt {
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--cream);
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════
+       BUTTONS
+    ══════════════════════════════ */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 2rem;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+      width: 100%;
+      line-height: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      box-shadow: var(--glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.6rem 1rem;
+      background: transparent;
+      color: var(--gray);
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: color 0.2s var(--ease);
+      width: 100%;
+    }
+
+    .btn-back:hover { color: var(--cream-70); }
+
+    .btn-secondary {
+      display: block;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--cream-70);
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--gray-dark);
+      border-radius: 0;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+      width: 100%;
+      line-height: 1;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════
+       OPT-IN SCREEN
+    ══════════════════════════════ */
+    .optin-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .optin-sub {
+      font-size: clamp(0.875rem, 1.2vw, 0.975rem);
+      color: var(--cream-70);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .optin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 15px;
+      background: var(--dark-el);
+      border: 1px solid var(--gray-dark);
+      border-radius: 0;
+      color: var(--cream);
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.25s var(--ease);
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--gold);
+    }
+
+    .form-input::placeholder {
+      color: var(--gray);
+    }
+
+    .privacy {
+      font-size: 0.72rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════
+       RESULT SCREEN
+    ══════════════════════════════ */
+    .result-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .result-name {
+      font-family: var(--serif);
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .result-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--cream);   /* near-black on light bg = dark, high contrast */
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .result-sub {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream-70);
+      margin-bottom: 24px;
+      line-height: 1.35;
+    }
+
+    .divider-gold {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 24px 0;
+    }
+
+    .result-desc {
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      color: var(--cream-70);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .result-desc p { margin-bottom: 14px; }
+    .result-desc p:last-child { margin-bottom: 0; }
+
+    .losing-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .losing-box {
+      border-left: 2px solid var(--gold);
+      padding: 14px 18px;
+      background: var(--dark-el);
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(28,24,20,0.07);
+    }
+
+    .cta-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── TRAVAS — texto corrido sem destaque ── */
+    .trava-titulo {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .trava-item {
+      font-size: clamp(0.9rem, 1.1vw, 0.975rem);
+      color: var(--cream-70);
+      line-height: 1.7;
+      margin-bottom: 10px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* ── CONSULTORIA INLINE ── */
+    .consultoria-banner {
+      background: var(--gold-10);
+      border: 1px solid var(--gold-20);
+      border-left: 3px solid var(--gold);
+      padding: 16px 20px;
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .consultoria-desc {
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--text-70);
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    .consultoria-form-title {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    /* ── PRODUTOS P0/P1 ── */
+    .produtos-intro {
+      font-size: clamp(0.875rem, 1.1vw, 0.975rem);
+      color: var(--text-70);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px solid var(--gray-dark);
+    }
+
+    .footer-txt {
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ── SR ONLY ── */
+    .sr-only {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    /* ── AFIRMAÇÃO — card lateral gold (Q5, Q6, Q8) ── */
+    .q-statement {
+      background: var(--dark-el);
+      border-left: 3px solid var(--gold);
+      padding: 18px 20px;
+      margin-bottom: 28px;
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      box-shadow: 0 1px 4px rgba(28,24,20,0.06);
+    }
+
+    .q-statement-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* ── ESCALA DE FREQUÊNCIA (Q7) ── */
+    .scale-ends {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .scale-end {
+      font-family: var(--mono);
+      font-size: 0.46rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* ── NOTA DA PERGUNTA ── */
+    .q-note {
+      font-size: clamp(0.78rem, 1vw, 0.85rem);
+      color: var(--gray);
+      font-style: italic;
+      margin-top: -16px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* ── IMAGEM DO TOPO DA PERGUNTA ── */
+    .q-img-top {
+      display: block;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center center; /* imagens baixadas em 800x250 com crop faces */
+      margin-bottom: 24px;
+      border: 1px solid var(--gray-dark);
+    }
+    /* Ajustes finos de crop por pergunta — sujeito posicionado conforme a foto */
+
+    /* ── IMAGEM INLINE (livro, etc) ── */
+    .q-img {
+      display: block;
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      margin: 0 auto 20px;
+      border: 1px solid var(--gray-dark);
+      object-fit: cover;
+    }
+
+    @media (max-width: 480px) {
+      .q-img-top { height: 160px; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      main { padding: 106px 16px 72px; }
+      .opt { padding: 13px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <span class="logo-text">OMNI Brasil <span>— Transformação que se prova.</span></span>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-wrap" id="progressWrap" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-lbl" id="progressLbl" aria-live="polite">Pergunta 1 de 7</span>
+  </div>
+
+  <main>
+
+    <!-- ── WELCOME ── -->
+    <div class="screen active" id="screen-welcome">
+      <div class="badge">Teste de Perfil Profissional · Gratuito</div>
+      <h1 class="welcome-hl">
+        Teste de<br><em>Perfil Profissional do Terapeuta</em>
+      </h1>
+      <p class="welcome-sub">Descubra qual o seu perfil profissional, onde está o seu gargalo e o que fazer para atingir o próximo nível.</p>
+      <button class="btn-primary" style="max-width:320px;" onclick="go('q1')">
+        Iniciar teste gratuito &rarr;
+      </button>
+      <p class="welcome-meta" style="margin-top:14px;">10 perguntas &nbsp;&middot;&nbsp; Gratuito &nbsp;&middot;&nbsp; Resultado imediato</p>
+    </div>
+
+    <!-- ── Q1: TICKET MÉDIO ── -->
+    <div class="screen" id="screen-q1">
+      <span class="mono-label">Pergunta 1 de 10</span>
+      <h2 class="q-text">Qual é o valor que você cobra por sessão individual?</h2>
+      <div class="options" role="radiogroup" aria-label="Ticket médio por sessão">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',200,this)" onkeydown="kd(event,'q1',200,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Até R$300</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',500,this)" onkeydown="kd(event,'q1',500,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Entre R$300 e R$750</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',1100,this)" onkeydown="kd(event,'q1',1100,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Entre R$750 e R$1.500</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q1',1800,this)" onkeydown="kd(event,'q1',1800,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Acima de R$1.500</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q1')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q2: VOLUME ── -->
+    <div class="screen" id="screen-q2">
+      <span class="mono-label">Pergunta 2 de 10</span>
+      <h2 class="q-text">Quantos atendimentos você realiza por mês?</h2>
+      <div class="options" role="radiogroup" aria-label="Volume de atendimentos por mês">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',8,this)" onkeydown="kd(event,'q2',8,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Até 8 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',12,this)" onkeydown="kd(event,'q2',12,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Entre 9 e 15 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',20,this)" onkeydown="kd(event,'q2',20,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Entre 16 e 25 atendimentos</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q2',30,this)" onkeydown="kd(event,'q2',30,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Mais de 25 atendimentos</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q2')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q3: AMBIENTE DE INFLUÊNCIA ── -->
+    <div class="screen" id="screen-q3">
+      <img class="q-img-top" src="img/quiz/q3-ambiente.jpg" alt="Profissionais em reunião" loading="lazy">
+      <span class="mono-label">Pergunta 3 de 10</span>
+      <h2 class="q-text">Como são seus ambientes de influência profissional?</h2>
+      <p class="q-note">Afinal, somos a média das pessoas com quem mais convivemos.</p>
+      <div class="options" role="radiogroup" aria-label="Ambiente de influência profissional">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',0,this)" onkeydown="kd(event,'q3',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">É comum para mim estar em grupos onde colegas de profissão faturam acima de R$50.000 por mês</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',1,this)" onkeydown="kd(event,'q3',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Meu círculo profissional tem pessoas que faturam bem, mas não é o caso da maioria</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',2,this)" onkeydown="kd(event,'q3',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Troco experiências com colegas, mas a maioria está no mesmo nível financeiro que eu</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q3',3,this)" onkeydown="kd(event,'q3',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Troco pouco com colegas, e quem conheço está num nível igual ou abaixo do meu financeiramente</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q3')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q4: LIVRO DESBLOQUEIO ── -->
+    <div class="screen" id="screen-q4">
+      <span class="mono-label">Pergunta 4 de 10</span>
+      <h2 class="q-text">Você já leu e aplica conceitos do best-seller "Desbloqueio e o Poder da sua Mente"?</h2>
+      <p class="q-note">O livro mais vendido do Brasil sobre intervenção terapêutica rápida.</p>
+      <img class="q-img" src="https://editoragente.vtexassets.com/arquivos/ids/155620-800-800?v=637837397658070000&width=800&height=800&aspect=true"
+           alt="Capa do livro Desbloqueio e o Poder da sua Mente" loading="lazy">
+      <div class="options" role="radiogroup" aria-label="Leitura do livro Desbloqueio">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',0,this)" onkeydown="kd(event,'q4',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Li e aplico os conceitos no meu trabalho</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',1,this)" onkeydown="kd(event,'q4',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Li, mas ainda não implementei de forma consistente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',2,this)" onkeydown="kd(event,'q4',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Conheço, mas ainda não li</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q4',3,this)" onkeydown="kd(event,'q4',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Ainda não conheço</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q4')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q5: NICHO E INSTAGRAM ── -->
+    <div class="screen" id="screen-q5">
+      <img class="q-img-top" src="img/quiz/q5-instagram.jpg" alt="Criadora de conteúdo capturando o mundo pelo celular" loading="lazy">
+      <span class="mono-label">Pergunta 5 de 10</span>
+      <h2 class="q-text">Você tem um nicho definido e produz conteúdo estratégico para seu Instagram profissional?</h2>
+      <div class="options" role="radiogroup" aria-label="Nicho e presença no Instagram">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',0,this)" onkeydown="kd(event,'q5',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Sim. Tenho nicho definido e publico conteúdo estratégico com frequência</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',1,this)" onkeydown="kd(event,'q5',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho um nicho, mas ainda não produzo conteúdo de forma consistente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',2,this)" onkeydown="kd(event,'q5',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Ainda não defini um nicho claro</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q5',3,this)" onkeydown="kd(event,'q5',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Não trabalho com Instagram profissional</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q5')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q6: USO DE IA ── -->
+    <div class="screen" id="screen-q6">
+      <img class="q-img-top" src="img/quiz/q6-ia.jpg" alt="Profissionais usando tecnologia em ambiente acolhedor" loading="lazy">
+      <span class="mono-label">Pergunta 6 de 10</span>
+      <h2 class="q-text">Você usa Inteligência Artificial no seu trabalho como terapeuta?</h2>
+      <div class="options" role="radiogroup" aria-label="Uso de Inteligência Artificial">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',0,this)" onkeydown="kd(event,'q6',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Sim. Tenho um sistema completo que me ajuda tanto na divulgação quanto no atendimento aos pacientes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',1,this)" onkeydown="kd(event,'q6',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Uso para me ajudar com os pacientes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',2,this)" onkeydown="kd(event,'q6',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Uso ChatGPT ou Gemini para ter algumas ideias pontuais</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q6',3,this)" onkeydown="kd(event,'q6',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Não uso IA no meu trabalho</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q6')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q7: CUIDADO EMOCIONAL ── -->
+    <div class="screen" id="screen-q7">
+      <img class="q-img-top" src="img/quiz/q7-cuidado.jpg" alt="Mulher contemplando o pôr do sol no topo da montanha" loading="lazy">
+      <span class="mono-label">Pergunta 7 de 10</span>
+      <h2 class="q-text">Você cuida de si mesmo passando por processos terapêuticos e cuidando da própria mente? Com qual frequência?</h2>
+      <div class="options" role="radiogroup" aria-label="Frequência de cuidado emocional próprio">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',0,this)" onkeydown="kd(event,'q7',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Com frequência. Faço check-ups emocionais regulares e tenho mentores que me ajudam a cuidar da mente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',1,this)" onkeydown="kd(event,'q7',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Passo por processos terapêuticos ocasionalmente, quando sinto necessidade</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',2,this)" onkeydown="kd(event,'q7',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Raramente. O dia a dia não deixa muito espaço para isso</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q7',3,this)" onkeydown="kd(event,'q7',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Honestamente, cuido muito mais dos outros do que de mim mesmo</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q7')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q8: MÉTODO E GARANTIA ── -->
+    <div class="screen" id="screen-q8">
+      <span class="mono-label">Pergunta 8 de 10</span>
+      <h2 class="q-text">Você tem segurança para dar garantia de resultado para seus clientes?</h2>
+      <div class="options" role="radiogroup" aria-label="Segurança para garantir resultado">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',0,this)" onkeydown="kd(event,'q8',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Sim. Uso um método validado com protocolo claro e me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',1,this)" onkeydown="kd(event,'q8',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho meu jeito de trabalhar, mas não me sinto seguro para garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',2,this)" onkeydown="kd(event,'q8',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Depende muito do caso. Não consigo garantir resultado</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q8',3,this)" onkeydown="kd(event,'q8',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Meu trabalho é muito particular para isso</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q8')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q9: BEM-ESTAR ── -->
+    <div class="screen" id="screen-q9">
+      <img class="q-img-top" src="img/quiz/q9-bemestar.jpg" alt="Bem-estar e alegria" loading="lazy">
+      <span class="mono-label">Pergunta 9 de 10</span>
+      <h2 class="q-text">Como está seu próprio bem-estar nos últimos 3 meses?</h2>
+      <div class="options" role="radiogroup" aria-label="Bem-estar pessoal recente">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',0,this)" onkeydown="kd(event,'q9',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Estou bem. Tenho rituais e consigo me recuperar entre as semanas</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',1,this)" onkeydown="kd(event,'q9',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Tenho dias bons e ruins. Me cuido menos do que deveria</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',2,this)" onkeydown="kd(event,'q9',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Já percebi que estou operando no piloto automático emocional</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q9',3,this)" onkeydown="kd(event,'q9',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Honestamente, estou no limite. Cuido de todo mundo menos de mim</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q9')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── Q10: RESULTADOS DOS CLIENTES ── -->
+    <div class="screen" id="screen-q10">
+      <span class="mono-label">Pergunta 10 de 10</span>
+      <h2 class="q-text">Quando você olha para os resultados dos seus clientes, como se sente com mais frequência?</h2>
+      <div class="options" role="radiogroup" aria-label="Percepção sobre resultados dos clientes">
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',0,this)" onkeydown="kd(event,'q10',0,this)">
+          <span class="opt-ltr" aria-hidden="true">A</span>
+          <span class="opt-txt">Satisfeito. Vejo transformações reais e consistentes</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',1,this)" onkeydown="kd(event,'q10',1,this)">
+          <span class="opt-ltr" aria-hidden="true">B</span>
+          <span class="opt-txt">Parcialmente satisfeito. Alguns evoluem muito, outros pouco</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',2,this)" onkeydown="kd(event,'q10',2,this)">
+          <span class="opt-ltr" aria-hidden="true">C</span>
+          <span class="opt-txt">Sei que poderia ir muito mais fundo, mas algo trava o cliente</span>
+        </div>
+        <div class="opt" role="radio" aria-checked="false" tabindex="0" onclick="pick('q10',3,this)" onkeydown="kd(event,'q10',3,this)">
+          <span class="opt-ltr" aria-hidden="true">D</span>
+          <span class="opt-txt">Frustrado. Sinto que o processo fica na superfície com frequência</span>
+        </div>
+      </div>
+      <button class="btn-back" onclick="back('q10')">&larr; Voltar</button>
+    </div>
+
+    <!-- ── OPT-IN ── -->
+    <div class="screen" id="screen-optin">
+      <h2 class="optin-hl">Seu perfil está pronto.</h2>
+      <p class="optin-sub">Antes de revelar, precisamos de um endereço para enviar seu diagnóstico completo e material complementar direto no WhatsApp.</p>
+      <form class="optin-form" id="optin-form" onsubmit="handleSubmit(event)" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="inp-name">Seu nome</label>
+          <input class="form-input" type="text" id="inp-name" name="name"
+                 placeholder="Como prefere ser chamado"
+                 autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-phone">WhatsApp com DDD</label>
+          <input class="form-input" type="tel" id="inp-phone" name="phone"
+                 placeholder="(11) 99999-9999"
+                 autocomplete="tel" required maxlength="15">
+        </div>
+        <button class="btn-primary" type="submit" id="btn-submit" style="margin-top:4px;">
+          Quero ver meu perfil agora &rarr;
+        </button>
+      </form>
+      <p class="privacy">Seus dados ficam só com a OMNI Brasil. Sem spam. Só conteúdo relevante para o seu perfil.</p>
+    </div>
+
+    <!-- ── OBRIGADO ── -->
+    <div class="screen" id="screen-obrigado">
+      <div class="badge">Resultado enviado</div>
+      <h2 class="optin-hl" style="margin-top: 16px;">Recebemos suas respostas.</h2>
+      <p class="optin-sub">Você receberá seu resultado no WhatsApp em instantes. Fique de olho na mensagem.</p>
+      <p style="margin-top: 40px; font-family: var(--mono); font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray);">OMNI Brasil &nbsp;&middot;&nbsp; Transformação que se prova.</p>
+    </div>
+
+    <!-- ── RESULT (preview interno via ?perfil=N) ── -->
+    <div class="screen" id="screen-result">
+
+      <!-- Identificação do perfil -->
+      <div class="badge" id="res-badge">Seu Perfil</div>
+      <span class="result-eyebrow" id="res-eyebrow"></span>
+      <span class="result-name" id="res-name"></span>
+      <h2 class="result-hl" id="res-hl"></h2>
+      <p class="result-sub" id="res-sub"></p>
+      <div class="divider-gold"></div>
+      <div class="result-desc" id="res-desc"></div>
+
+      <!-- Travas personalizadas (dinâmico) -->
+      <div id="trava-section" style="display:none; margin-top:20px;">
+        <span class="trava-titulo">Sua trava profissional</span>
+        <div id="trava-items"></div>
+      </div>
+
+      <div class="divider-gold" style="margin-top:28px;"></div>
+
+      <!-- P2/P3: Consultoria inline -->
+      <div id="consultoria-section" style="display:none;">
+        <div class="consultoria-banner">
+          Parabéns, você foi uma das pessoas selecionadas para receber uma consultoria gratuita de crescimento profissional.
+        </div>
+        <p class="consultoria-desc">É uma chamada de 45 minutos, onde um mentor de terapeutas de alto ticket vai aprofundar em mais questões e te dar direcionamentos personalizados para você aumentar o faturamento e ter uma agenda mais leve.</p>
+        <h3 class="consultoria-form-title">Quero agendar minha consultoria</h3>
+        <form class="optin-form" id="consultoria-form" onsubmit="enviarConsultoria(event)" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="cons-nome">Seu nome</label>
+            <input class="form-input" type="text" id="cons-nome" name="nome"
+                   placeholder="Como prefere ser chamado" autocomplete="name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cons-phone">WhatsApp com DDD</label>
+            <input class="form-input" type="tel" id="cons-phone" name="phone"
+                   placeholder="(11) 99999-9999" autocomplete="tel" required maxlength="15">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cons-email">Seu melhor e-mail</label>
+            <input class="form-input" type="email" id="cons-email" name="email"
+                   placeholder="seu@email.com" autocomplete="email" required>
+          </div>
+          <div class="form-group" style="flex-direction:row; align-items:center; gap:10px; margin-top:4px;">
+            <input type="checkbox" id="cons-omniterapeuta" name="omniterapeuta"
+                   style="width:18px; height:18px; accent-color:var(--gold); cursor:pointer; flex-shrink:0;">
+            <label for="cons-omniterapeuta" style="font-size:clamp(0.875rem,1.1vw,0.975rem); color:var(--text); cursor:pointer; margin:0;">
+              Já sou Omniterapeuta
+            </label>
+          </div>
+          <button class="btn-primary" type="submit" id="btn-consultoria" style="margin-top:6px;">
+            Confirmar minha vaga &rarr;
+          </button>
+        </form>
+        <div id="consultoria-ok" style="display:none; text-align:center; padding:28px 0;">
+          <span class="result-name" style="display:block; margin-bottom:8px;">Vaga reservada!</span>
+          <p class="consultoria-desc" style="margin-bottom:0;">Entraremos em contato no WhatsApp em breve para confirmar o horário da sua consultoria.</p>
+        </div>
+        <p class="privacy" style="margin-top:10px;">Seus dados ficam só com a OMNI Brasil.</p>
+      </div>
+
+      <!-- P0/P1: Presente HypnoFlash -->
+      <div id="produtos-section" style="display:none;">
+        <h3 class="consultoria-form-title" style="margin-bottom:12px;">Temos um presente para você!</h3>
+        <p class="result-desc" style="margin-bottom:14px;">Quanto mais rápido você gerar uma pequena transformação no seu paciente, maior será a confiança dele em você, e essa é uma maneira muito simples de aumentar sua autoridade e melhorar seu posicionamento. Pensando nisso, criamos uma ferramenta capaz de eliminar dores ou fobias em menos de um minuto! E estamos liberando um treinamento em vídeo desta técnica por um valor especial temporariamente.</p>
+        <p class="result-desc" style="margin-bottom:24px; font-style:italic;">Observação: se você for um Omniterapeuta, lembre-se que na sua comunidade há reuniões de direcionamento gratuito para o seu crescimento. Fale com a nossa equipe!</p>
+        <a class="btn-primary" href="https://sun.eduzz.com/KW8KPPYR01?utm_source=instagram-bio&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGnuWbAb9vxrHGbynxI1iz0grKa395cv-F4-sFCBR_GOgxsU2sZW6z6crSf0ZE_aem_hVFoJpvIOLsb13vKCZGUcQ&utm_id=97760_v0_s00_e0_tv3_a1denngp68r1h9" target="_blank" rel="noopener" style="display:block; text-align:center;">Quero conhecer o HypnoFlash &rarr;</a>
+        <img src="img/quiz/hypnoflash-demo.jpg" alt="Michael Arruda aplicando técnica HypnoFlash" style="width:100%; display:block; margin-top:20px; border:1px solid var(--gray-dark);" loading="lazy">
+        <a class="btn-secondary" href="https://instagram.com/omnibr" target="_blank" rel="noopener" style="margin-top:12px; display:block; text-align:center;">Seguir @OmniBr no Instagram &rarr;</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="footer-txt">&copy; 2026 OMNI Brasil &nbsp;&middot;&nbsp; ISO 9001 &nbsp;&middot;&nbsp; EST. 1979 &nbsp;&middot;&nbsp; Transformação que se prova.</p>
+  </footer>
+
+  <script>
+    /* ── PERFIS DE RESULTADO ── */
+    const PERFIS = {
+      0: {
+        badge:   'Perfil Identificado',
+        eyebrow: 'Resultado da sua análise',
+        name:    'Terapeuta em Construção',
+        hl:      'Você está construindo sua base.',
+        sub:     'E essa base merece atenção antes de escalar.',
+        desc:    'Você está num momento que a maioria dos terapeutas atravessa em silêncio: sabe que tem capacidade, atende bem, mas o número no final do mês ainda não reflete o valor real do que você entrega.\n\nIsso não é falta de competência. É falta de posicionamento.\n\nExiste uma diferença entre um terapeuta que pratica terapia e um terapeuta que conduz processos de transformação com autoridade. O primeiro compete por preço. O segundo define o preço.\n\nO que trava quem está no seu momento não é falta de cliente. É falta de clareza sobre qual problema específico você resolve, para quem, e de que forma isso pode ser prometido com segurança. Quando isso muda, o ticket sobe, a agenda muda de qualidade, e o trabalho passa a parecer o que sempre deveria ter sido: uma troca justa.',
+        losing:  '',
+        cta:     'Siga @omnihypnosis no Instagram',
+        url:     'https://instagram.com/omnihypnosis'
+      },
+      1: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta Preso no Teto',
+        hl:      'Você chegou onde a maioria nunca chega.',
+        sub:     'E está sentindo que poderia ir muito mais fundo.',
+        desc:    'Sua prática funciona. Você atende bem, tem resultados, sua agenda não é um problema. Em tudo que parece importar, você está razoavelmente bem.\n\nMas tem algo que você sente, mesmo que raramente coloque em palavras: um teto. Não financeiro, não técnico. A sensação de que você e seu trabalho poderiam ir muito mais longe do que estão indo.\n\nO que acontece com terapeutas no seu perfil é sutil: quando tudo funciona razoavelmente bem, é difícil justificar uma mudança. O conforto protege. E também paralisa.\n\nA diferença entre quem fica no mesmo nível por anos e quem dá o próximo salto raramente é talento. É método. É ter um processo claro o suficiente para ser garantido.\n\nVocê está num momento onde o próximo passo ainda não é urgente. Mas quando aparecer, você vai querer ter pensado nisso antes.',
+        losing:  '',
+        cta:     'Siga @omnihypnosis no Instagram',
+        url:     'https://instagram.com/omnihypnosis'
+      },
+      2: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta Invisível para Si Mesmo',
+        hl:      'Você tem um dom raro.',
+        sub:     'E está pagando um preço alto por ele.',
+        desc:    'Tem uma ironia dolorosa no perfil de quem cuida profissionalmente: quanto mais habilidoso você é em sustentar o outro, mais invisível você fica para si mesmo.\n\nSeu resultado mostra um padrão claro: você entrega profundidade real, mas sai dos atendimentos com menos do que entrou. Energia, presença, motivação: saem com o cliente. O que fica é o cansaço e, muitas vezes, a dúvida silenciosa sobre se vale a pena continuar nesse ritmo.\n\nIsso não é fraqueza. É a consequência direta de um modelo de trabalho construído para servir sem se proteger.\n\nO problema central não é você. É que ninguém te ensinou a estruturar um processo onde a transformação do cliente não dependa do seu esvaziamento.\n\nTerapeutas que saem desse ciclo não trabalham menos. Trabalham diferente. Têm um método que carrega o processo e não os obriga a carregar o cliente no ombro sessão após sessão.\n\nO que está em jogo não é só sua sustentabilidade. É a qualidade do que você consegue oferecer quando opera no limite.',
+        losing:  '',
+        cta:     '',
+        url:     ''
+      },
+      3: {
+        badge:   'Seu Perfil',
+        eyebrow: 'Resultado da sua análise',
+        name:    'O Terapeuta no Limite da Chama',
+        hl:      'Você está carregando muito.',
+        sub:     'E tem a maior capacidade de transformação represada.',
+        desc:    'Seu resultado é o mais direto que podemos oferecer: você está no limite.\n\nNão o limite de competência. Você não chegaria onde chegou sem habilidade real. O limite de um modelo de trabalho que exige demais de quem o sustenta.\n\nO que seu resultado revela é um acúmulo. Não de um único problema, mas de vários em paralelo: a energia que não se renova, os clientes que não chegam onde você sabe que poderiam chegar, a sensação de que seu trabalho não está sendo recebido com o peso que tem. E a pergunta que você raramente diz em voz alta: por quanto tempo ainda?\n\nExiste um padrão específico que leva terapeutas ao seu perfil. Não é falta de dedicação. É excesso dela, aplicada num formato que não foi desenhado para ser sustentável.\n\nO que está faltando não é mais esforço. É estrutura. Um método que produza resultados sem depender do seu esvaziamento. Um posicionamento que atraia clientes prontos para se transformar, não para ser convencidos disso sessão após sessão.\n\nEsse perfil é o que mais nos preocupa. E também o que mais muda quando encontra o caminho certo.',
+        losing:  'Quem chega ao seu perfil tem, quase sempre, o maior potencial de transformação. Não porque o caminho seja fácil, mas porque quando alguém com o seu nível de entrega encontra a estrutura certa, a mudança é rápida e profunda. Por isso, você pode se inscrever para uma consultoria gratuita exclusiva. Priorizamos quem chegou até aqui pelo teste de perfil.',
+        cta:     'Quero me inscrever para a Consultoria Gratuita',
+        url:     'inscricao-consultoria-terapeuta.html?perfil=3'
+      }
+    };
+
+    /* ── STATE ── */
+    const S = { answers: {}, faturamento: 0, qualificado: false, previewPerfil: null };
+
+    /* ── NAVIGATION ── */
+    // QMAP: posição na sequência de exibição (não o número do ID)
+    // Ordem por tema: financeiro → rede → competência → pessoal → conhecimento → impacto → marketing → pessoal → tecnologia
+    const QMAP = { q1:1, q2:2, q3:3, q8:4, q7:5, q4:6, q10:7, q5:8, q9:9, q6:10 };
+    const TOTAL_Q = 10;
+
+    function go(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const el = document.getElementById('screen-' + screenId);
+      if (!el) return;
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const pw   = document.getElementById('progressWrap');
+      const fill = document.getElementById('progressFill');
+      const lbl  = document.getElementById('progressLbl');
+      const num  = QMAP[screenId];
+
+      if (num) {
+        pw.classList.add('show');
+        fill.style.width = (num / TOTAL_Q * 100) + '%';
+        lbl.textContent  = 'Pergunta ' + num + ' de ' + TOTAL_Q;
+        document.getElementById('progressWrap').setAttribute('aria-valuenow', num);
+        // Atualiza label interno da pergunta dinamicamente
+        const monoLbl = el.querySelector('.mono-label');
+        if (monoLbl) monoLbl.textContent = 'Pergunta ' + num + ' de ' + TOTAL_Q;
+      } else {
+        pw.classList.remove('show');
+      }
+    }
+
+    /* ── NAVIGATION MAPS — intercalando formatos (cenário / afirmação / frequência) ── */
+    // Ordem: Q1→Q2→Q3(cenário) → Q8(afirmação) → Q4(cenário+img) → Q5(afirmação) → Q7(freq) → Q6(afirmação+img) → Q9(cenário) → Q10(cenário)
+    const NEXT = { q1:'q2', q2:'q3', q3:'q8', q8:'q7', q7:'q4', q4:'q10', q10:'q5', q5:'q9', q9:'q6', q6:'result' };
+    const PREV = { q1:'welcome', q2:'q1', q3:'q2', q8:'q3', q7:'q8', q4:'q7', q10:'q4', q5:'q10', q9:'q5', q6:'q9' };
+
+    /* ── OPTION SELECTION + AUTO-ADVANCE ── */
+    function pick(q, val, el) {
+      // Se for a última pergunta, chama showResult diretamente
+      if (NEXT[q] === 'result') {
+        const screen = el.closest('.screen');
+        screen.querySelectorAll('.opt').forEach(o => { o.classList.remove('sel'); o.setAttribute('aria-checked','false'); });
+        el.classList.add('sel');
+        el.setAttribute('aria-checked','true');
+        S.answers[q] = val;
+        setTimeout(showResult, 360);
+        return;
+      }
+      const screen = el.closest('.screen');
+      screen.querySelectorAll('.opt').forEach(o => {
+        o.classList.remove('sel');
+        o.setAttribute('aria-checked', 'false');
+      });
+      el.classList.add('sel');
+      el.setAttribute('aria-checked', 'true');
+      S.answers[q] = val;
+
+      // Compute faturamento after Q2
+      if (q === 'q2' && S.answers.q1 !== undefined) {
+        S.faturamento = S.answers.q1 * S.answers.q2;
+        S.qualificado = S.faturamento >= 12000;
+      }
+
+      // Auto-advance after brief delay so selection animation is visible
+      setTimeout(() => { if (NEXT[q]) go(NEXT[q]); }, 360);
+    }
+
+    /* ── BACK NAVIGATION ── */
+    function back(q) { if (PREV[q]) go(PREV[q]); }
+
+    /* keyboard support */
+    function kd(e, q, val, el) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(q, val, el); }
+    }
+
+    /* ── OPT-IN SUBMIT ── */
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const btn   = document.getElementById('btn-submit');
+      const nome  = document.getElementById('inp-name').value.trim();
+      const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
+
+      if (!nome || phone.length < 6) return;
+
+      btn.disabled    = true;
+      btn.textContent = 'Analisando...';
+
+      S.userData = { nome, telefone: '55' + phone };
+
+      // Salva para a página de inscrição recuperar
+      try {
+        localStorage.setItem('omni_quiz_lead', JSON.stringify({
+          nome, telefone: '55' + phone,
+          faturamento: S.faturamento,
+          qualificado: S.qualificado,
+          answers: S.answers,
+          ts: new Date().toISOString()
+        }));
+      } catch (_) {}
+
+      await new Promise(r => setTimeout(r, 800));
+      showResult();
+    }
+
+    /* ── RESULT — PERFIL ── */
+    function calcPerfil() {
+      if (S.previewPerfil !== null) return S.previewPerfil;
+      if (!S.qualificado) return 0;
+      // Score de dor: Q7 (cuidado emocional) + Q9 (bem-estar) + Q10 (resultados) — máx 9 pts
+      const score = ['q7','q9','q10'].reduce((a,k) => a + (S.answers[k] || 0), 0);
+      if (score <= 2) return 1;  // 0-2: Preso no Teto
+      if (score <= 5) return 2;  // 3-5: Invisível para Si Mesmo
+      return 3;                  // 6-9: No Limite da Chama
+    }
+
+    /* ── TRAVAS PERSONALIZADAS (Q3, Q5, Q6, Q8) ── */
+    const TRAVAS = {
+      q3: {
+        1: 'Seu círculo tem algumas boas referências, mas elas ainda não são o seu ambiente principal. Frequentar mais espaços onde faturamento alto é a norma muda sua percepção do que é possível para você.',
+        2: 'Seu círculo profissional está calibrando inconscientemente o seu teto. Quando todos ao redor faturam na mesma faixa, isso passa a parecer normal. Ampliar esse círculo para quem fatura 2 a 3 vezes mais muda completamente a sua régua do que é possível.',
+        3: 'Você está trabalhando num vácuo de referências. Terapeutas que deram saltos significativos de faturamento quase sempre citam uma mudança no círculo profissional como parte da virada. O ambiente determina o teto do que parece alcançável.'
+      },
+      q5: {
+        1: 'Você já tem o nicho definido, que é a base. O que falta é tornar sua presença digital consistente. Conteúdo inconsistente gera audiência inconsistente, e audiência inconsistente gera captação inconsistente.',
+        2: 'Você sabe para quem trabalha, mas o cliente ideal ainda não te encontra com frequência. Conteúdo estratégico consistente é o que transforma nicho definido em agenda cheia e em clientes que chegam já entendendo o seu valor.',
+        3: 'Sem nicho, você compete por preço com qualquer terapeuta da cidade, independente da sua experiência. E sem presença digital, 100% da sua captação depende de indicação: um modelo frágil que limita crescimento.'
+      },
+      q6: {
+        1: 'Você usa IA na prática clínica, mas ainda não a integrou à sua comunicação e divulgação. Terapeutas que usam IA nos dois fronts relatam ganhos significativos de tempo e alcance sem aumentar a carga de trabalho.',
+        2: 'Usar IA de forma pontual é diferente de ter ela integrada ao seu processo. Quem fez essa transição relata ganhos reais de tempo e consistência, liberando espaço para o que só o terapeuta humano pode oferecer.',
+        3: 'IA já é vantagem competitiva real no mercado terapêutico. Quem a usa de forma integrada atende com mais consistência, produz conteúdo com mais frequência e se diferencia sem aumentar horas trabalhadas.'
+      },
+      q8: {
+        1: 'Você tem um método em desenvolvimento, mas ainda não chegou ao ponto de garantir resultado ao cliente. Essa insegurança limita seu ticket e sua autoridade na hora de fechar novos atendimentos.',
+        2: 'Você tem um jeito de trabalhar que funciona, mas não consegue transmitir certeza ao cliente. Essa insegurança aparece no preço. O ticket que o mercado paga está diretamente ligado à confiança que você projeta.',
+        3: 'Sem método replicável, é impossível garantir resultado. E sem garantia, é difícil justificar ticket premium. O que parece flexibilidade pode ser, na prática, o principal freio do seu negócio.'
+      }
+    };
+
+    function buildTravas() {
+      const travas = [];
+      for (const q of ['q3','q5','q6','q8']) {
+        const score = S.answers[q] || 0;
+        if (score >= 1 && TRAVAS[q] && TRAVAS[q][score]) {
+          travas.push({ score, text: TRAVAS[q][score] });
+        }
+      }
+      return travas.sort((a,b) => b.score - a.score).slice(0, 3);
+    }
+
+    function showResult() {
+      const perfilId = calcPerfil();
+      const p = PERFIS[perfilId];
+
+      document.getElementById('res-badge').textContent   = p.badge;
+      document.getElementById('res-eyebrow').textContent = p.eyebrow;
+      document.getElementById('res-name').textContent    = p.name;
+      document.getElementById('res-hl').textContent      = p.hl;
+      document.getElementById('res-sub').textContent     = p.sub;
+
+      const descEl = document.getElementById('res-desc');
+      descEl.innerHTML = p.desc.split('\n\n').map(t => `<p>${t}</p>`).join('');
+
+      // Travas personalizadas
+      const travas = buildTravas();
+      const travaSection = document.getElementById('trava-section');
+      if (travas.length > 0) {
+        document.getElementById('trava-items').innerHTML =
+          travas.map(t => `<p class="trava-item">${t.text}</p>`).join('');
+        travaSection.style.display = 'block';
+      } else {
+        travaSection.style.display = 'none';
+      }
+
+      // CTA por perfil
+      if (perfilId >= 2) {
+        document.getElementById('consultoria-section').style.display = 'block';
+        document.getElementById('produtos-section').style.display    = 'none';
+        // Pré-preenche nome e WA do opt-in
+        try {
+          const lead = JSON.parse(localStorage.getItem('omni_quiz_lead') || '{}');
+          if (lead.nome) document.getElementById('cons-nome').value = lead.nome;
+          if (lead.telefone) {
+            const n = lead.telefone.replace(/^55/, '');
+            let v = n.length > 6
+              ? '(' + n.slice(0,2) + ') ' + n.slice(2,7) + '-' + n.slice(7)
+              : n;
+            document.getElementById('cons-phone').value = v;
+          }
+        } catch(_) {}
+      } else {
+        document.getElementById('consultoria-section').style.display = 'none';
+        document.getElementById('produtos-section').style.display    = 'block';
+      }
+
+      go('result');
+    }
+
+    /* ── MONTA LISTA DE OPORTUNIDADES PARA O MICHAEL ── */
+    function buildOportunidades() {
+      const MAP = {
+        q3: { 1: 'Networking fraco — círculo profissional no mesmo nível', 2: 'Networking fraco — círculo profissional no mesmo nível', 3: 'Networking muito fraco — colegas abaixo do potencial' },
+        q4: { 1: 'Leu o Livro Desbloqueio mas ainda não aplica na prática', 2: 'Conhece mas ainda não leu o Livro Desbloqueio', 3: 'Não conhece o Livro Desbloqueio' },
+        q5: { 1: 'Nicho definido mas sem conteúdo consistente no Instagram', 2: 'Sem nicho claro e sem presença digital estratégica', 3: 'Sem nicho e sem Instagram profissional ativo' },
+        q6: { 1: 'Usa IA apenas nos atendimentos, não na divulgação', 2: 'Usa IA de forma pontual, sem integração real', 3: 'Não usa IA no trabalho' },
+        q8: { 1: 'Tem método próprio mas sem segurança para garantir resultado', 2: 'Sem método estruturado — não consegue garantir resultado', 3: 'Sem método — trabalho muito particular, sem replicabilidade' },
+        q7: { 1: 'Cuida pouco de si mesmo emocionalmente', 2: 'Opera no piloto automático emocional', 3: 'Burnout — cuida de todos menos de si' },
+        q9: { 1: 'Bem-estar inconsistente nos últimos meses', 2: 'Piloto automático emocional no dia a dia', 3: 'Bem-estar comprometido, no limite' },
+        q10: { 1: 'Resultados dos clientes inconsistentes', 2: 'Sente que poderia ir mais fundo nos resultados', 3: 'Frustrado com resultados — processo fica na superfície' }
+      };
+      const ops = [];
+      for (const [q, levels] of Object.entries(MAP)) {
+        const score = S.answers[q] || 0;
+        if (score >= 1 && levels[score]) ops.push({ score, text: levels[score] });
+      }
+      return ops.sort((a,b) => b.score - a.score).slice(0, 5).map(o => o.text);
+    }
+
+    /* ── ENVIAR CONSULTORIA ── */
+    async function enviarConsultoria(e) {
+      e.preventDefault();
+      const btn   = document.getElementById('btn-consultoria');
+      const nome  = document.getElementById('cons-nome').value.trim();
+      const phone = document.getElementById('cons-phone').value.replace(/\D/g,'');
+      const email = document.getElementById('cons-email').value.trim();
+      if (!nome || phone.length < 6 || !email) return;
+      btn.disabled    = true;
+      btn.textContent = 'Enviando...';
+
+      const perfilId  = calcPerfil();
+      const telefone  = '55' + phone;
+      const oportunidades = buildOportunidades();
+
+      // Notifica o Michael via Prisma
+      try {
+        await fetch('/api/quiz-lead-notification', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            nome, email, telefone,
+            perfil_id:            perfilId,
+            perfil_nome:          PERFIS[perfilId].name,
+            faturamento_estimado: S.faturamento,
+            is_omniterapeuta:     document.getElementById('cons-omniterapeuta').checked,
+            oportunidades
+          })
+        });
+      } catch(_) {}
+
+      try { localStorage.setItem('omni_consultoria', JSON.stringify({ nome, email, telefone, perfilId, oportunidades })); } catch(_) {}
+      document.getElementById('consultoria-form').style.display = 'none';
+      document.getElementById('consultoria-ok').style.display   = 'block';
+    }
+
+    /* ── PREVIEW MODE — ?perfil=N pula direto para o resultado ── */
+    (function() {
+      const p = new URLSearchParams(location.search).get('perfil');
+      if (p !== null && PERFIS[+p] !== undefined) {
+        S.previewPerfil = +p;
+        window.addEventListener('load', showResult);
+      }
+    })();
+
+    /* ── PHONE MASK ── */
+    function phoneMask(el) {
+      el.addEventListener('input', function () {
+        let v = this.value.replace(/\D/g,'').substring(0, 11);
+        if      (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+        else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+        else if (v.length > 0) v = '(' + v;
+        this.value = v;
+      });
+    }
+    phoneMask(document.getElementById('inp-phone'));
+    // Máscara do formulário de consultoria (aplicada quando o elemento existir)
+    document.addEventListener('DOMContentLoaded', () => {
+      const cp = document.getElementById('cons-phone');
+      if (cp) phoneMask(cp);
+    });
+  </script>
+
+</body>
+</html>

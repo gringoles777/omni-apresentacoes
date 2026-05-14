@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrição — Consultoria Gratuita para Terapeutas · OMNI Brasil</title>
+  <meta name="description" content="Inscreva-se para a consultoria gratuita e descubra como transformar sua prática terapêutica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #F7F3EC;
+      --dark-el:  #FFFFFF;
+      --dark-tx:  #E4DDD2;
+      --gold:     #B8943A;
+      --gold-lt:  #C8A84B;
+      --gold-10:  rgba(184,148,58,0.10);
+      --gold-20:  rgba(184,148,58,0.20);
+      --gold-30:  rgba(184,148,58,0.30);
+      --text:     #1C1814;
+      --text-70:  rgba(28,24,20,0.62);
+      --text-50:  rgba(28,24,20,0.42);
+      --gray:     #8C877E;
+      --border:   #D8D2C8;
+      --glow:     0 0 20px rgba(184,148,58,0.22);
+      --ease:     cubic-bezier(0.4,0,0.2,1);
+      --serif:    'DM Serif Display', Georgia, serif;
+      --mono:     'IBM Plex Mono', 'Courier New', monospace;
+      --body:     'Inter', 'Open Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: radial-gradient(rgba(28,24,20,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 0%, transparent 70%);
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      background: rgba(247,243,236,0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .logo span { color: var(--text-50); }
+
+    /* ── LAYOUT ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      background: var(--gold-10);
+      color: var(--gold);
+      border: 1px solid var(--gold-20);
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    /* ── HEADLINE ── */
+    .hl {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hl em { color: var(--gold); font-style: italic; }
+
+    .sub {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      color: var(--text-70);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    /* ── O QUE ACONTECE ── */
+    .o-que {
+      background: var(--dark-el);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 36px;
+      box-shadow: 0 1px 4px rgba(28,24,20,0.06);
+    }
+
+    .o-que-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .o-que ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .o-que li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: clamp(0.875rem, 1.1vw, 0.95rem);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .o-que li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      margin-top: 7px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 32px 0;
+    }
+
+    /* ── FORM ── */
+    .form-title {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .form { display: flex; flex-direction: column; gap: 14px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-label {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 15px;
+      background: var(--dark-el);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 400;
+      outline: none;
+      transition: border-color 0.25s var(--ease);
+      box-shadow: 0 1px 3px rgba(28,24,20,0.05);
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: var(--gray); }
+
+    .btn-submit {
+      margin-top: 6px;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: var(--gold);
+      color: #1C1814;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .btn-submit:hover { background: var(--gold-lt); box-shadow: var(--glow); }
+    .btn-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .privacy {
+      font-size: 0.72rem;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* ── CONFIRMAÇÃO ── */
+    .confirmacao {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .confirmacao.show { display: block; }
+
+    .confirmacao-hl {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .confirmacao-sub {
+      font-size: clamp(0.9rem, 1.2vw, 1rem);
+      color: var(--text-70);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-txt {
+      font-family: var(--mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 48px 16px 64px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="logo">OMNI Brasil <span>— Transformação que se prova.</span></span>
+  </header>
+
+  <main>
+
+    <div id="form-wrap">
+      <div class="badge">Consultoria Gratuita</div>
+
+      <h1 class="hl" id="page-hl">
+        Você se qualificou para uma <em>consultoria gratuita.</em>
+      </h1>
+
+      <p class="sub" id="page-sub">
+        Com base no seu perfil, você foi selecionado para uma conversa gratuita com um especialista da OMNI Brasil. Em 45 minutos, vamos aprofundar o seu resultado e traçar um caminho claro para o que você quer mudar.
+      </p>
+
+      <div class="o-que">
+        <span class="o-que-label">O que acontece na consultoria</span>
+        <ul>
+          <li>Análise aprofundada do seu perfil e dos padrões que estão travando seu crescimento</li>
+          <li>Clareza sobre o que está impedindo mais resultado com menos desgaste</li>
+          <li>Um direcionamento honesto sobre o próximo passo certo para o seu momento</li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="form-title">Confirme seus dados para reservar sua vaga</p>
+
+      <form class="form" id="inscricao-form" onsubmit="enviar(event)" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="inp-nome">Seu nome</label>
+          <input class="form-input" type="text" id="inp-nome" name="nome"
+                 placeholder="Como prefere ser chamado" autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-email">Seu melhor e-mail</label>
+          <input class="form-input" type="email" id="inp-email" name="email"
+                 placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inp-phone">WhatsApp com DDD</label>
+          <input class="form-input" type="tel" id="inp-phone" name="phone"
+                 placeholder="(11) 99999-9999" autocomplete="tel" required maxlength="15">
+        </div>
+        <button class="btn-submit" type="submit" id="btn-enviar">
+          Confirmar minha inscrição &rarr;
+        </button>
+      </form>
+      <p class="privacy">Seus dados ficam só com a OMNI Brasil. Entraremos em contato em até 24 horas.</p>
+    </div>
+
+    <div class="confirmacao" id="confirmacao">
+      <div class="badge" style="margin-bottom: 20px;">Inscrição confirmada</div>
+      <h2 class="confirmacao-hl">Sua vaga está reservada.</h2>
+      <p class="confirmacao-sub">
+        Entraremos em contato no WhatsApp em até 24 horas para confirmar o horário da sua consultoria.<br><br>
+        Fique de olho na mensagem.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p class="footer-txt">&copy; 2026 OMNI Brasil &nbsp;&middot;&nbsp; ISO 9001 &nbsp;&middot;&nbsp; EST. 1979</p>
+  </footer>
+
+  <script>
+    /* ── PERSONALIZAR POR PERFIL ── */
+    const COPY = {
+      2: {
+        hl:  'Seu perfil mostra que você está <em>pronto para uma virada real.</em>',
+        sub: 'Terapeutas com o seu perfil são os que mais evoluem quando encontram o suporte certo. Por isso abrimos vagas para uma consultoria gratuita voltada especificamente para quem está no seu momento. Vagas limitadas.'
+      },
+      3: {
+        hl:  'Seu perfil é o que mais nos interessa <em>trabalhar.</em>',
+        sub: 'Quem chega ao seu perfil tem quase sempre o maior potencial de transformação. Quando alguém com o seu nível de entrega encontra a estrutura certa, a mudança é rápida e profunda. Por isso criamos vagas exclusivas para consultoria gratuita para quem chegou até aqui pelo teste.'
+      }
+    };
+
+    (function init() {
+      const params  = new URLSearchParams(location.search);
+      const perfilN = +params.get('perfil');
+      const copy    = COPY[perfilN];
+
+      if (copy) {
+        document.getElementById('page-hl').innerHTML  = copy.hl;
+        document.getElementById('page-sub').textContent = copy.sub;
+      }
+
+      // Pré-preencher dados do quiz se existirem
+      try {
+        const lead = JSON.parse(localStorage.getItem('omni_quiz_lead') || '{}');
+        if (lead.nome)      document.getElementById('inp-nome').value  = lead.nome;
+        if (lead.telefone) {
+          // Formatar número para exibição
+          const n = lead.telefone.replace(/^\55/, '');
+          let v = n;
+          if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+          document.getElementById('inp-phone').value = v;
+        }
+      } catch (_) {}
+    })();
+
+    /* ── ENVIO ── */
+    async function enviar(e) {
+      e.preventDefault();
+      const btn   = document.getElementById('btn-enviar');
+      const nome  = document.getElementById('inp-nome').value.trim();
+      const email = document.getElementById('inp-email').value.trim();
+      const phone = document.getElementById('inp-phone').value.replace(/\D/g,'');
+
+      if (!nome || !email || phone.length < 6) return;
+
+      btn.disabled    = true;
+      btn.textContent = 'Enviando...';
+
+      const params  = new URLSearchParams(location.search);
+      const perfilN = +params.get('perfil') || 0;
+
+      const payload = {
+        nome, email,
+        telefone:  '55' + phone,
+        perfil_id: perfilN,
+        origem:    'quiz-perfil-terapeuta',
+        ts:        new Date().toISOString()
+      };
+
+      console.log('[Inscrição] Payload:', payload);
+
+      // Webhook — configurar via @n8n-chief
+      try {
+        await fetch('http://76.13.169.211:3002/webhook/inscricao-consultoria-terapeuta', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload)
+        });
+      } catch (_) {}
+
+      // Salva no localStorage
+      try { localStorage.setItem('omni_inscricao', JSON.stringify(payload)); } catch (_) {}
+
+      document.getElementById('form-wrap').style.display  = 'none';
+      document.getElementById('confirmacao').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── MÁSCARA TELEFONE ── */
+    document.getElementById('inp-phone').addEventListener('input', function () {
+      let v = this.value.replace(/\D/g,'').substring(0, 11);
+      if      (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) v = '(' + v;
+      this.value = v;
+    });
+  </script>
+
+</body>
+</html>
