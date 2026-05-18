@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Pré-Vendas SDR — OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --color-black:        #050505;
+  --color-dark:         #0D0D0D;
+  --color-dark-elevated:#1A1A1A;
+  --color-dark-texture: #2D2D2D;
+  --color-gold:         #C8A84B;
+  --color-gold-light:   #E8C86A;
+  --color-gold-deep:    #9A7A2E;
+  --color-cream:        #F5F0E8;
+  --color-cream-70:     rgba(245,240,232,0.70);
+  --color-cream-50:     rgba(245,240,232,0.50);
+  --color-teal:         #2A9D8F;
+  --color-gray:         #6B6B6B;
+  --color-gray-dark:    #242424;
+  --font-display:       'Oswald', sans-serif;
+  --font-body:          'Inter', sans-serif;
+  --gradient-gold:      linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+}
+
+body {
+  background: var(--color-black);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 80px 40px 60px;
+  max-width: 960px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(200,168,75,0.12);
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-tag::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero h1 span {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--color-cream-70);
+  max-width: 540px;
+  line-height: 1.65;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  font-size: 12px;
+  color: var(--color-cream-50);
+  letter-spacing: 1px;
+}
+
+.hero-meta-item strong {
+  color: var(--color-cream-70);
+  font-weight: 500;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(200,168,75,0.1);
+  border: 1px solid rgba(200,168,75,0.3);
+  color: var(--color-gold);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.status-badge.backlog {
+  background: rgba(52,152,219,0.1);
+  border-color: rgba(52,152,219,0.3);
+  color: #5dade2;
+}
+
+/* ── METRICS ── */
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  border-bottom: 1px solid rgba(200,168,75,0.08);
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  margin-bottom: 36px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: var(--color-dark);
+  border: 1px solid var(--color-dark-texture);
+  border-radius: 8px;
+  padding: 24px 20px;
+  transition: border-color 0.2s;
+}
+
+.metric-card:hover { border-color: rgba(200,168,75,0.25); }
+
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.metric-value.teal { color: var(--color-teal); }
+
+.metric-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-cream-50);
+  line-height: 1.4;
+}
+
+.metric-note {
+  font-size: 11px;
+  color: var(--color-gray);
+  margin-top: 6px;
+}
+
+/* ── ROOT CAUSES ── */
+.causes-list { display: flex; flex-direction: column; gap: 16px; }
+
+.cause-card {
+  background: var(--color-dark);
+  border: 1px solid var(--color-dark-texture);
+  border-radius: 8px;
+  padding: 24px 28px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+
+.cause-card:hover { border-color: rgba(200,168,75,0.2); }
+
+.cause-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: rgba(200,168,75,0.2);
+  line-height: 1;
+  min-width: 48px;
+}
+
+.cause-body {}
+
+.cause-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-cream);
+  margin-bottom: 8px;
+}
+
+.cause-desc {
+  font-size: 14px;
+  color: var(--color-cream-70);
+  line-height: 1.6;
+}
+
+.cause-impact {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(231,76,60,0.08);
+  border: 1px solid rgba(231,76,60,0.2);
+  color: #e74c3c;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* ── TABLE ── */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.comparison-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border-bottom: 1px solid rgba(200,168,75,0.2);
+  background: rgba(200,168,75,0.05);
+}
+
+.comparison-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-dark-texture);
+  color: var(--color-cream-70);
+  vertical-align: top;
+}
+
+.comparison-table tr:last-child td { border-bottom: none; }
+.comparison-table tr:hover td { background: rgba(200,168,75,0.03); color: var(--color-cream); }
+
+.tag-bad {
+  display: inline-flex;
+  background: rgba(231,76,60,0.1);
+  color: #e74c3c;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-ok {
+  display: inline-flex;
+  background: rgba(243,156,18,0.1);
+  color: #f39c12;
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-good {
+  display: inline-flex;
+  background: rgba(42,157,143,0.1);
+  color: var(--color-teal);
+  padding: 2px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ── PLAN ── */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.plan-card {
+  background: var(--color-dark);
+  border: 1px solid var(--color-dark-texture);
+  border-radius: 8px;
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.plan-card:hover {
+  border-color: rgba(200,168,75,0.3);
+  transform: translateY(-2px);
+}
+
+.plan-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-gold);
+}
+
+.plan-phase {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 12px;
+}
+
+.plan-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-cream);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.plan-desc {
+  font-size: 13px;
+  color: var(--color-cream-70);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+.plan-impact {
+  font-size: 12px;
+  color: var(--color-teal);
+  font-weight: 500;
+}
+
+.plan-priority {
+  position: absolute;
+  top: 16px; right: 16px;
+  font-size: 11px;
+  color: var(--color-cream-50);
+}
+
+/* ── RECOMMENDATION ── */
+.rec-box {
+  background: var(--color-dark);
+  border: 1px solid rgba(200,168,75,0.25);
+  border-radius: 8px;
+  padding: 32px 36px;
+  position: relative;
+}
+
+.rec-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: var(--gradient-gold);
+  border-radius: 8px 0 0 8px;
+}
+
+.rec-box .rec-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.rec-box p {
+  font-size: 15px;
+  color: var(--color-cream-70);
+  line-height: 1.7;
+}
+
+.rec-box strong { color: var(--color-cream); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 48px 20px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.15);
+  border-top: 1px solid rgba(200,168,75,0.08);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero, .section { padding: 40px 20px; }
+  .cause-card { flex-direction: column; gap: 8px; }
+  .cause-number { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Comercial Ops — Diagnóstico</div>
+  <h1>Pré-Vendas <span>SDR</span></h1>
+  <p class="hero-sub">Diagnóstico das causas raiz de velocidade de atendimento, conversas perdidas e conflito entre SDRs. Plano de melhoria em 4 fases.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><strong>Data</strong> Maio 2026</div>
+    <div class="hero-meta-item"><strong>Responsável</strong> Rafa Mendes</div>
+    <div class="hero-meta-item"><strong>Squad</strong> Comercial Ops</div>
+    <div class="hero-meta-item" style="margin-left:auto"><span class="status-badge backlog">📋 Backlog · OMNI-009</span></div>
+  </div>
+</div>
+
+<!-- MÉTRICAS ATUAIS -->
+<div class="section">
+  <div class="section-label">Situação atual</div>
+  <div class="section-title">Números do Funil</div>
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">1.200</div>
+      <div class="metric-label">Leads / mês</div>
+      <div class="metric-note">~40 por dia útil</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">2</div>
+      <div class="metric-label">SDRs ativos</div>
+      <div class="metric-note">Rodízio automático n8n</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value teal">140</div>
+      <div class="metric-label">Reuniões / mês</div>
+      <div class="metric-note">Agendadas pelos SDRs</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">11,7%</div>
+      <div class="metric-label">Conversão</div>
+      <div class="metric-note">Lead → reunião agendada</div>
+    </div>
+  </div>
+</div>
+
+<!-- CAUSAS RAIZ -->
+<div class="section">
+  <div class="section-label">Diagnóstico</div>
+  <div class="section-title">3 Causas Raiz</div>
+  <div class="causes-list">
+
+    <div class="cause-card">
+      <div class="cause-number">01</div>
+      <div class="cause-body">
+        <div class="cause-title">Configuração errada do Chatwoot</div>
+        <div class="cause-desc">Todas as conversas de ambos os SDRs estão em fila única. A intenção era boa (cobertura mútua), mas com 40 leads/dia entrando no mesmo pool, ninguém tem clareza de responsabilidade — conversas se perdem no volume e o conflito de propriedade é inevitável.</div>
+        <div class="cause-impact">Conversas perdidas · Conflito entre SDRs · Dono indefinido</div>
+      </div>
+    </div>
+
+    <div class="cause-card">
+      <div class="cause-number">02</div>
+      <div class="cause-body">
+        <div class="cause-title">Sem integração Chatwoot → Pipedrive</div>
+        <div class="cause-desc">O SDR atualiza o CRM manualmente após cada atendimento. Isso gera atrasos, esquecimentos e dados defasados no Pipedrive — tornando impossível medir SLA de primeiro contato com precisão e diagnosticar performance com base em dados reais.</div>
+        <div class="cause-impact">Dados defasados · Trabalho manual · Diagnóstico cego</div>
+      </div>
+    </div>
+
+    <div class="cause-card">
+      <div class="cause-number">03</div>
+      <div class="cause-body">
+        <div class="cause-title">Sem SLA visível de primeiro contato</div>
+        <div class="cause-desc">Nenhum mecanismo indica, em tempo real, qual lead está esperando há quanto tempo. A velocidade de atendimento depende inteiramente da disciplina individual do SDR — não do processo. Ausências pontuais (reunião, almoço) deixam leads sem cobertura sem que a gestora saiba.</div>
+        <div class="cause-impact">Velocidade não controlada · Ausências invisíveis · Sem alerta</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ANÁLISE DO MODELO PROPOSTO -->
+<div class="section">
+  <div class="section-label">Análise de alternativa</div>
+  <div class="section-title">Modelo Proposto vs. Atual</div>
+  <p style="font-size:14px;color:var(--color-cream-50);margin-bottom:24px">A ideia de "dono quem agenda" resolve velocidade, mas piora os problemas que mais importam.</p>
+  <div style="overflow-x:auto">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Dimensão</th>
+          <th>Rodízio fixo (atual)</th>
+          <th>Pool sem dono (proposto)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Conflito entre SDRs</strong></td>
+          <td><span class="tag-ok">Médio</span></td>
+          <td><span class="tag-bad">Alto — corrida pelo lead</span></td>
+        </tr>
+        <tr>
+          <td><strong>Rastreamento de remuneração</strong></td>
+          <td><span class="tag-ok">Rastreável</span></td>
+          <td><span class="tag-bad">Ambíguo — quem fez o esforço?</span></td>
+        </tr>
+        <tr>
+          <td><strong>Atendimento ao lead</strong></td>
+          <td><span class="tag-ok">Consistente</span></td>
+          <td><span class="tag-bad">Fragmentado — pode receber 2 SDRs</span></td>
+        </tr>
+        <tr>
+          <td><strong>Velocidade de atendimento</strong></td>
+          <td><span class="tag-bad">Limitada por ausências</span></td>
+          <td><span class="tag-ok">Melhora, com efeitos colaterais</span></td>
+        </tr>
+        <tr>
+          <td><strong>Comportamento perverso</strong></td>
+          <td><span class="tag-good">Nenhum</span></td>
+          <td><span class="tag-bad">SDR agenda sem qualificar pra "marcar"</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PLANO 4 FASES -->
+<div class="section">
+  <div class="section-label">Plano de ação</div>
+  <div class="section-title">4 Fases de Melhoria</div>
+  <div class="plan-grid">
+
+    <div class="plan-card">
+      <div class="plan-phase">Fase 1 — Ferramenta</div>
+      <div class="plan-title">Reconfigurar Chatwoot</div>
+      <div class="plan-desc">Criar caixas separadas por SDR com visibilidade cruzada estruturada. Cobertura mútua sem fila caótica — cada conversa tem dono claro.</div>
+      <div class="plan-impact">↗ Elimina conversas perdidas e conflito</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-phase">Fase 2 — Integração</div>
+      <div class="plan-title">Chatwoot → Pipedrive</div>
+      <div class="plan-desc">Via n8n: quando SDR agenda, Pipedrive atualiza automaticamente. Dados em tempo real, fim do update manual.</div>
+      <div class="plan-impact">↗ Dados reais · diagnóstico possível</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-phase">Fase 3 — Controle</div>
+      <div class="plan-title">SLA Visual de Primeiro Contato</div>
+      <div class="plan-desc">Alerta (não redistribuição automática) quando lead está sem resposta há mais de X minutos. Visibilidade para a gestora, sem automação frágil.</div>
+      <div class="plan-impact">↗ Velocidade controlada sem risco</div>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-phase">Fase 4 — Incentivo</div>
+      <div class="plan-title">Modelo Híbrido de Remuneração</div>
+      <div class="plan-desc">Dono fixo na atribuição (sem corrida). Comissão: 60% na atribuição + 40% no agendamento. Alinha incentivo com velocidade sem conflito de propriedade.</div>
+      <div class="plan-impact">↗ Incentivo certo · sem atrito</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RECOMENDAÇÃO -->
+<div class="section" style="border-bottom:none">
+  <div class="section-label">Conclusão</div>
+  <div class="section-title">Recomendação</div>
+  <div class="rec-box">
+    <div class="rec-label">Diagnóstico Comercial Chief</div>
+    <p>O problema de <strong>velocidade e conversas perdidas não é o modelo de SDR</strong> — é a configuração da ferramenta e a ausência de integração com o CRM. Mudar quem é dono do lead <strong>piora o conflito e a remuneração</strong>, que são exatamente os pontos mais sensíveis do time. A sequência correta é: primeiro resolver o Chatwoot, depois integrar ao Pipedrive, depois criar visibilidade de SLA, e por último ajustar o modelo de incentivo. Cada fase entregue e validada antes de avançar.</p>
+  </div>
+</div>
+
+<footer>OMNI Brasil // Diagnóstico Pré-Vendas SDR // Maio 2026 // OMNI-009</footer>
+
+</body>
+</html>
