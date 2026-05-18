@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cenas — Anúncio Terapeutas</title>
+<style>
+  :root {
+    --bg: #0f0e0c;
+    --bg-card: #1a1814;
+    --gold: #c9a874;
+    --gold-soft: #8b7755;
+    --cream: #efe6d3;
+    --text: #e8dfc9;
+    --muted: #8b8478;
+    --border: #2a261f;
+    --danger: #d4624d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+    padding: 0;
+  }
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(180deg, #0f0e0c 0%, rgba(15,14,12,0.95) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  h1 {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .actions {
+    display: flex; gap: 10px; align-items: center;
+  }
+  button {
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    padding: 12px 24px;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+  }
+  button:hover {
+    background: var(--cream);
+    transform: translateY(-1px);
+  }
+  button.secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+  }
+  button.secondary:hover {
+    border-color: var(--gold);
+    color: var(--cream);
+    background: rgba(201,168,116,0.05);
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+  }
+  .scene {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+  }
+  .scene:focus-within {
+    border-color: var(--gold-soft);
+  }
+  .scene-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .scene-num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    color: var(--gold);
+    font-weight: 400;
+    min-width: 60px;
+  }
+  .scene-fn {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+  }
+  .scene-badge {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .badge-refeita {
+    background: rgba(201,168,116,0.15);
+    color: var(--gold);
+    border: 1px solid var(--gold-soft);
+  }
+  .badge-mantida {
+    background: rgba(139,132,120,0.15);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .field {
+    margin-bottom: 14px;
+  }
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--gold-soft);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .field-label .icon { font-size: 14px; }
+  textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--cream);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 12px 14px;
+    resize: vertical;
+    min-height: 50px;
+    transition: border-color 0.15s;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(0,0,0,0.4);
+  }
+  textarea.narration {
+    font-style: italic;
+    color: #e8d8b0;
+    min-height: 60px;
+  }
+  .global-notes {
+    background: rgba(201,168,116,0.05);
+    border: 1px solid var(--gold-soft);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .global-notes h3 {
+    margin: 0 0 8px 0;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .global-notes p {
+    margin: 0;
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--gold);
+    color: var(--bg);
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .footer-actions {
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(0deg, var(--bg) 70%, transparent 100%);
+    padding: 24px 0 30px 0;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  footer button {
+    padding: 16px 32px;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Cenas — Anúncio Terapeutas</h1>
+    <div class="subtitle">Roteiro v3 · 18 cenas · estilo cinematográfico OMNI</div>
+  </div>
+  <div class="actions">
+    <button class="secondary" onclick="resetAll()">Resetar</button>
+    <button onclick="copyAll()">📋 Copiar tudo</button>
+  </div>
+</header>
+
+<main>
+
+  <div class="global-notes">
+    <h3>Notas globais</h3>
+    <p><strong>Personagem:</strong> terapeuta brasileira, fim dos 30s, blazer cinza. Aparece em todas as cenas com pessoa visível.<br>
+    <strong>Fio condutor:</strong> recepção amadora vs condução personalizada — materializado em situações + metáforas surreais quando faz sentido.<br>
+    <strong>Pontes visuais:</strong> 01→06 (tentáculos da agenda continuam), 04→05 (telefone tocando→atende), 06→07 (tentáculos somem, ambiente vira premium), 07→08 (continua falando no telefone), 13 (script no celular).</p>
+  </div>
+
+  <!-- Cenas -->
+  <div id="scenes"></div>
+
+  <div class="footer-actions">
+    <button onclick="copyAll()">📋 Copiar tudo formatado</button>
+  </div>
+
+</main>
+
+<div id="toast" class="toast">Copiado!</div>
+
+<script>
+const SCENES = [
+  {
+    n: "01", fn: "hook", refeita: true,
+    narr: "É assim que terapeuta experiente vira refém da própria agenda em 30 segundos.",
+    frame: "Terapeuta na cadeira do consultório, fim do dia. Sobre a mesa, agenda de couro aberta — dela saem tentáculos de páginas se enrolando como polvo, prestes a agarrar os pulsos dela.",
+    motion: "Tentáculos avançam em câmera lenta em direção aos pulsos, ela percebe tarde demais."
+  },
+  {
+    n: "02", fn: "quebra de objeção", refeita: true,
+    narr: "Já adianto: não é o número de pacientes, não é o seu valor de sessão.",
+    frame: "Terapeuta segura uma carteira de couro nas mãos, dedos prestes a abrir.",
+    motion: "Ela abre a carteira — uma borboleta sai voando de dentro, ela acompanha com o olhar surpresa."
+  },
+  {
+    n: "03", fn: "paga fio condutor", refeita: true,
+    narr: "É sempre o jeito amador como você embala o seu trabalho.",
+    frame: "Sobre mesa escura, um anel de diamante brilhando muito caro. Ao lado, saco de pão de papel pardo amassado e barbante sujo.",
+    motion: "Mão dela pega o anel, enfia dentro do saco de pão amassado e amarra com barbante sujo."
+  },
+  {
+    n: "04", fn: "dor amador — setup", refeita: true,
+    narr: "Terapeuta dedicado fala com paciente novo como se estivesse na recepção de plano de saúde.",
+    frame: "Ela atrás de mesa/balcão lixando a unha com cara totalmente vazia. Telefone antigo de mesa (anos 80) toca ao lado. Luz fluorescente fria.",
+    motion: "Telefone continua tocando, ela continua lixando sem pressa, olhar de canto pro telefone mas não para."
+  },
+  {
+    n: "05", fn: "transação fria — payoff", refeita: true,
+    narr: "'Quanto custa a sessão?' '200 reais.' 'Tem horário quinta?' 'Tenho.'",
+    frame: "Continuação direta da 04. Mão dela já no movimento de pegar o fone, lixa caindo da mesa.",
+    motion: "Atende, encosta fone na orelha, fala com voz mecânica/plana o diálogo todo enquanto volta a olhar a unha."
+  },
+  {
+    n: "06", fn: "escalada — continuação da 01", refeita: true,
+    narr: "Lá vai mais uma vida grudada na sua agenda eterna — 200 reais por uma hora, pra sempre.",
+    frame: "Mesma terapeuta, mesma cadeira, mesma agenda da 01 — tentáculos de papel já próximos dos braços.",
+    motion: "Tentáculos avançam mais e agarram os pulsos/braços dela, ela tenta se debater. Cena começa a escurecer no fim — preparando virada."
+  },
+  {
+    n: "07", fn: "virada — 'personalize'", refeita: true,
+    narr: "Em vez disso, personalize. Diga: antes de falar de preço, preciso entender o que você quer transformar na sua vida?",
+    frame: "Cena anterior se transforma — tentáculos somem, fundo muda para consultório premium sofisticado (madeira, luz quente, vibe luxo). Ela com o mesmo telefone antigo da 05 na mão, postura confiante.",
+    motion: "Leva fone à orelha com calma, fala com voz firme e calorosa o novo script."
+  },
+  {
+    n: "08", fn: "continuação da 07 — 'qualidade'", refeita: true,
+    narr: "Para garantir um trabalho de excelência, preciso primeiro saber como posso te ajudar. Isso é qualidade, e não ser só mais um.",
+    frame: "Continuação direta da 07 — mesmo consultório premium, mesma terapeuta com telefone. Agora levemente mais relaxada (no meio da conversa).",
+    motion: "Ela continua a fala 'Para garantir um trabalho de excelência...', expressão de domínio, postura totalmente presente."
+  },
+  {
+    n: "09", fn: "dica extra", refeita: true,
+    narr: "Dica extra: pare de vender sessão e venda transformação.",
+    frame: "Split. Cima: ela em ateliê esculpindo peça única em argila (paciente real é o 'material'). Baixo: ela em linha de produção entregando objetos idênticos a pacientes enfileirados.",
+    motion: "Cima: ela molda com cuidado, paciente muda postura. Baixo: produção mecânica continua."
+  },
+  {
+    n: "10", fn: "injustiça matemática", refeita: true,
+    narr: "Quem vende hora trabalha 12h pra ganhar mil. Quem vende transformação trabalha 4h e ganha cinco mil.",
+    frame: "Split. Cima: arrastando carroça pesada cheia de dezenas de pastas, ofegante. Baixo: serena segurando uma única pasta grossa com cuidado.",
+    motion: "Cima: puxa com esforço; Baixo: folheia tranquila."
+  },
+  {
+    n: "11", fn: "alívio vs transformação", refeita: false,
+    narr: "Quem busca só alívio paga uma coisa. Quem busca virada na vida paga outra.",
+    frame: "Split. Cima: paciente saindo após sessão única, sorriso superficial. Baixo: outro paciente no 3º mês, postura mudada, conversa profunda.",
+    motion: "Cima: paciente acena e sai; Baixo: 'aha' visível no rosto."
+  },
+  {
+    n: "12", fn: "você não acredita", refeita: true,
+    narr: "Você não cobra mais caro porque não acredita no tamanho do que você entrega.",
+    frame: "Ela curvada/pequena na cadeira do consultório, olhar pra própria mão no colo. Na parede atrás, sombra projetada é gigante e em postura heroica — ela não vê.",
+    motion: "Sombra se ergue ainda mais; ela mantém olhar pra mão — desconexão entre tamanho real e percebido."
+  },
+  {
+    n: "13", fn: "paga — script reunião", refeita: false,
+    narr: "Se te perguntarem o preço diga: vamos fazer uma reunião rápida para eu entender o que você precisa.",
+    frame: "Em casa, celular na mão, tela legível com o script sendo digitado no WhatsApp.",
+    motion: "Dedos digitam, balão de mensagem completo aparece, ela aperta enviar — postura confiante."
+  },
+  {
+    n: "14", fn: "autoridade ativa", refeita: false,
+    narr: "Quem mostra que você é bom é a sua abordagem, não seu currículo no Instagram.",
+    frame: "Split. Cima: ela gravando bio pro Instagram com celular em tripé, postura ensaiada. Baixo: mesma ela em sessão real, presente sem câmera.",
+    motion: "Cima: repete frase com ensaio artificial; Baixo: escuta em silêncio com olhar firme."
+  },
+  {
+    n: "15", fn: "só mais um", refeita: true,
+    narr: "Teste isso. Ou seu paciente vai continuar te vendo como mais um terapeuta.",
+    frame: "Vitrine de loja com vários 'rostos' de terapeutas como manequins/produtos em prateleira. Ela entre eles, indistinguível. Paciente do lado de fora olhando todos por igual.",
+    motion: "Paciente passa lento na frente da vitrine, foca num qualquer, segue caminho — sem reconhecimento."
+  },
+  {
+    n: "16", fn: "vida não vivida", refeita: false,
+    narr: "Você vai continuar trabalhando 12h por dia, com a vida que queria ter no domingo.",
+    frame: "Split. Cima: noite, ela sozinha na mesa do consultório, laptop ligado, papéis. Baixo: mesma hora, mesa de família com luz quente, cadeira dela vazia com blazer pendurado.",
+    motion: "Cima: ela boceja e digita; Baixo: família ri, gesto da mãe convida a cadeira vazia."
+  },
+  {
+    n: "17", fn: "pre-CTA", refeita: false,
+    narr: "Você quer o script completo que está fazendo terapeutas faturarem o dobro trabalhando metade?",
+    frame: "Close médio dela olhando direto pra câmera (quebra 4ª parede), consultório no fundo, luz natural.",
+    motion: "Inclina sutilmente em direção à câmera, levanta sobrancelha, sorri leve."
+  },
+  {
+    n: "18", fn: "CTA", refeita: false,
+    narr: "Toque no botão, preencha seu cadastro e agende uma sessão de estratégia gratuita.",
+    frame: "Plano médio dela no consultório aconchegante (mesmo da 07), mão direita estendida pra câmera em gesto de 'vem'.",
+    motion: "Mão estende até quase tocar a câmera, sorri suave, espaço atrás fica mais aberto/iluminado."
+  }
+];
+
+const ORIGINAL = JSON.parse(JSON.stringify(SCENES));
+
+function render() {
+  const container = document.getElementById('scenes');
+  container.innerHTML = '';
+  SCENES.forEach((s, idx) => {
+    const card = document.createElement('div');
+    card.className = 'scene';
+    card.innerHTML = `
+      <div class="scene-header">
+        <div class="scene-num">${s.n}</div>
+        <div>
+          <div class="scene-fn">${s.fn}</div>
+        </div>
+        <div class="scene-badge ${s.refeita ? 'badge-refeita' : 'badge-mantida'}">
+          ${s.refeita ? 'Refeita' : 'Mantida'}
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="icon">🎙️</span> Narração</div>
+        <textarea class="narration" data-idx="${idx}" data-field="narr" rows="2">${s.narr}</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="icon">🎬</span> Frame (primeira imagem)</div>
+        <textarea data-idx="${idx}" data-field="frame" rows="3">${s.frame}</textarea>
+      </div>
+      <div class="field">
+        <div class="field-label"><span class="icon">▶️</span> Motion (animação 5-7s)</div>
+        <textarea data-idx="${idx}" data-field="motion" rows="3">${s.motion}</textarea>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // Listener pra atualizar dados ao editar
+  document.querySelectorAll('textarea').forEach(t => {
+    t.addEventListener('input', e => {
+      const idx = parseInt(e.target.dataset.idx);
+      const field = e.target.dataset.field;
+      SCENES[idx][field] = e.target.value;
+    });
+  });
+}
+
+function copyAll() {
+  let txt = `# Roteiro Anúncio Terapeutas — v3\n\n`;
+  txt += `**Personagem:** terapeuta brasileira, fim dos 30s, blazer cinza.\n`;
+  txt += `**Fio condutor:** recepção amadora vs condução personalizada (metáforas surreais + situações).\n\n`;
+  txt += `---\n\n`;
+  SCENES.forEach(s => {
+    txt += `## ${s.n} — ${s.fn}\n`;
+    txt += `**Narração:** "${s.narr}"\n\n`;
+    txt += `**Frame:** ${s.frame}\n\n`;
+    txt += `**Motion:** ${s.motion}\n\n`;
+    txt += `---\n\n`;
+  });
+  navigator.clipboard.writeText(txt).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+function resetAll() {
+  if (!confirm('Resetar todas as cenas pro estado original?')) return;
+  SCENES.forEach((s, i) => {
+    s.narr = ORIGINAL[i].narr;
+    s.frame = ORIGINAL[i].frame;
+    s.motion = ORIGINAL[i].motion;
+  });
+  render();
+}
+
+render();
+</script>
+
+</body>
+</html>
