@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ads High Ticket — Guia Completo | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:        #050505;
+    --dark:         #0D0D0D;
+    --dark-el:      #1A1A1A;
+    --dark-tx:      #2D2D2D;
+    --gold:         #C8A84B;
+    --gold-light:   #E8C86A;
+    --gold-deep:    #9A7A2E;
+    --cream:        #F5F0E8;
+    --cream-70:     rgba(245,240,232,0.70);
+    --cream-50:     rgba(245,240,232,0.50);
+    --teal:         #2A9D8F;
+    --gray:         #6B6B6B;
+    --gray-dark:    #242424;
+    --gold-10:      rgba(200,168,75,0.10);
+    --gold-20:      rgba(200,168,75,0.20);
+    --gold-30:      rgba(200,168,75,0.30);
+    --gradient-gold: linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--black);
+    border-bottom: 1px solid var(--gold-20);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+  .header-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .header-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    padding: 100px 32px 80px;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-20);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 1px;
+    background: var(--gradient-gold);
+    opacity: 0.6;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid var(--gold-30);
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--cream-70);
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+  .hero-quote {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 28px 32px;
+    border-left: 3px solid var(--gold);
+    background: var(--gold-10);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .hero-quote span {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  /* ── MÉTRICAS ── */
+  .metrics {
+    background: var(--black);
+    padding: 60px 32px;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .metrics-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+  .metric-card {
+    text-align: center;
+    padding: 32px 24px;
+    background: var(--dark-el);
+    border: 1px solid var(--gold-20);
+    border-radius: 8px;
+  }
+  .metric-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .metric-label {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--cream-50);
+    text-transform: uppercase;
+  }
+
+  /* ── SEÇÕES ── */
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
+
+  .section {
+    padding: 80px 32px;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .section:nth-child(even) { background: var(--dark-el); }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: var(--cream);
+  }
+  .section-title span {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── FRAMEWORK CARD ── */
+  .fw-grid {
+    display: grid;
+    gap: 24px;
+  }
+  .fw-grid-2 { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+  .fw-grid-1 { grid-template-columns: 1fr; }
+
+  .fw-card {
+    background: var(--dark);
+    border: 1px solid var(--gold-20);
+    border-radius: 8px;
+    padding: 32px;
+    transition: border-color 0.25s;
+  }
+  .fw-card:hover { border-color: var(--gold-30); }
+  .fw-number {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold-deep);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .fw-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .fw-desc {
+    font-size: 0.9rem;
+    color: var(--cream-70);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .fw-body {
+    font-size: 0.88rem;
+    color: var(--cream-50);
+    line-height: 1.7;
+  }
+
+  /* ── TAGS ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 1px solid var(--gold-30);
+    color: var(--gold);
+    background: var(--gold-10);
+  }
+
+  /* ── AVATAR CARDS ── */
+  .avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .avatar-card {
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid;
+  }
+  .avatar-card.novo { border-color: var(--teal); background: rgba(42,157,143,0.08); }
+  .avatar-card.acomodado { border-color: var(--gold); background: var(--gold-10); }
+  .avatar-card.cansado { border-color: #7B5EA7; background: rgba(123,94,167,0.08); }
+  .avatar-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .avatar-card.novo h4 { color: var(--teal); }
+  .avatar-card.acomodado h4 { color: var(--gold); }
+  .avatar-card.cansado h4 { color: #B39DDB; }
+  .avatar-card p { font-size: 0.85rem; color: var(--cream-70); line-height: 1.6; }
+  .avatar-card .gancho {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--cream-50);
+    font-style: italic;
+  }
+
+  /* ── STEPS ── */
+  .steps { margin-top: 20px; }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--gold-20);
+    border: 1px solid var(--gold-30);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-top: 2px;
+  }
+  .step-text { font-size: 0.88rem; color: var(--cream-70); line-height: 1.6; }
+
+  /* ── COMPARATIVO ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .compare-bad {
+    padding: 20px;
+    background: rgba(200,50,50,0.08);
+    border: 1px solid rgba(200,50,50,0.25);
+    border-radius: 8px;
+  }
+  .compare-good {
+    padding: 20px;
+    background: rgba(42,157,143,0.08);
+    border: 1px solid rgba(42,157,143,0.3);
+    border-radius: 8px;
+  }
+  .compare h5 {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .compare-bad h5 { color: #e57373; }
+  .compare-good h5 { color: var(--teal); }
+  .compare p { font-size: 0.83rem; color: var(--cream-70); line-height: 1.6; font-style: italic; }
+  .compare .result {
+    margin-top: 10px;
+    font-size: 11px;
+    font-style: normal;
+    letter-spacing: 1px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  /* ── CALENDAR ── */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .cal-card {
+    padding: 24px 20px;
+    border: 1px solid var(--gold-20);
+    border-radius: 8px;
+    background: var(--dark);
+  }
+  .cal-period {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .cal-card ul {
+    list-style: none;
+    font-size: 0.84rem;
+    color: var(--cream-70);
+    line-height: 1.8;
+  }
+  .cal-card ul li::before {
+    content: '→ ';
+    color: var(--gold-deep);
+  }
+
+  /* ── STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .stack-item {
+    padding: 20px;
+    background: var(--dark-el);
+    border: 1px solid var(--gray-dark);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .stack-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .stack-name { font-family: 'Oswald', sans-serif; font-size: 1rem; color: var(--gold); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
+  .stack-desc { font-size: 0.78rem; color: var(--cream-50); }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    margin: 20px 0;
+    padding: 20px 24px;
+    background: var(--gold-10);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: var(--cream-70);
+    line-height: 1.7;
+  }
+  .highlight strong { color: var(--gold-light); }
+
+  /* ── RULE BOX ── */
+  .rule-box {
+    margin-top: 16px;
+    padding: 14px 20px;
+    background: rgba(200,168,75,0.08);
+    border: 1px dashed var(--gold-30);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+  }
+  .rule-box::before { content: '⚡ REGRA: '; font-weight: 600; }
+
+  /* ── TIAGO BIO ── */
+  .bio-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .bio-side {
+    padding: 28px;
+    background: var(--black);
+    border: 1px solid var(--gold-20);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .bio-icon { font-size: 3rem; margin-bottom: 12px; }
+  .bio-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .bio-role { font-size: 0.78rem; color: var(--gray); letter-spacing: 1.5px; text-transform: uppercase; }
+  .bio-stats { margin-top: 20px; }
+  .bio-stat { padding: 8px 0; border-bottom: 1px solid var(--gray-dark); font-size: 0.8rem; color: var(--cream-50); text-align: left; }
+  .bio-stat strong { color: var(--gold-light); }
+  .bio-content { }
+  .bio-content p { font-size: 0.9rem; color: var(--cream-70); line-height: 1.7; margin-bottom: 16px; }
+  .bio-creds { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .bio-cred {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px;
+    background: var(--dark-el);
+    border-radius: 6px;
+    font-size: 0.83rem;
+    color: var(--cream-70);
+  }
+  .bio-cred::before { content: '✦'; color: var(--gold); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--black);
+    padding: 48px 32px;
+    text-align: center;
+    border-top: 1px solid var(--gold-20);
+  }
+  .footer-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer-sub { font-size: 11px; letter-spacing: 2px; color: var(--gray); text-transform: uppercase; }
+
+  /* ── ÍNDICE ── */
+  .toc {
+    background: var(--black);
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--gray-dark);
+  }
+  .toc-inner { max-width: 900px; margin: 0 auto; }
+  .toc-title { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+  .toc-link {
+    display: block;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: var(--cream-50);
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .toc-link:hover { border-color: var(--gold-20); color: var(--gold-light); background: var(--gold-10); }
+  .toc-link span { color: var(--gold-deep); margin-right: 8px; font-family: 'Oswald', sans-serif; }
+
+  @media (max-width: 640px) {
+    .bio-card { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .fw-grid-2 { grid-template-columns: 1fr; }
+    .section { padding: 60px 20px; }
+    .hero { padding: 60px 20px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">OMNI Brasil</div>
+  <div class="header-tag">Ads High Ticket — Guia Fernanda</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Squad Ads High Ticket · 18 Frameworks</div>
+  <h1>Geração de Leads<br>para High Ticket</h1>
+  <p class="hero-sub">O método completo do Tiago Kiss para atrair leads qualificados para ofertas de R$10k+ usando funil de Sessão Estratégica 1-1, branding artístico e copy de boteco.</p>
+  <div class="hero-quote">
+    "Quem domina a qualidade da dor, domina a qualidade do lead. Para de focar nos caras de boleto, foca nos caras com cara de pix."
+    <span>— Davi Oliveira · base do método Tiago Kiss</span>
+  </div>
+</section>
+
+<!-- MÉTRICAS -->
+<section class="metrics">
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-number">R$23</div>
+      <div class="metric-label">por reunião agendada<br>(mercado paga R$150–200)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">R$30k</div>
+      <div class="metric-label">tráfego/mês gera<br>R$450–550k de receita</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">6 em 7</div>
+      <div class="metric-label">semanas com vendas<br>sem depender de lançamento</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-number">5.400</div>
+      <div class="metric-label">alunos em todos<br>os cursos do Tiago Kiss</div>
+    </div>
+  </div>
+</section>
+
+<!-- ÍNDICE -->
+<nav class="toc">
+  <div class="toc-inner">
+    <div class="toc-title">Índice de Conteúdo</div>
+    <div class="toc-grid">
+      <a class="toc-link" href="#quem"><span>00</span>Quem é Tiago Kiss</a>
+      <a class="toc-link" href="#avatares"><span>01</span>Os 3 Avatares</a>
+      <a class="toc-link" href="#subnichos"><span>02</span>Sub-nichos + Isentão</a>
+      <a class="toc-link" href="#funil"><span>03</span>Funil Sessão 1-1</a>
+      <a class="toc-link" href="#indicacao"><span>04</span>Indicação Oculta</a>
+      <a class="toc-link" href="#sessaovenda"><span>05</span>Toda Sessão é Venda</a>
+      <a class="toc-link" href="#raiz"><span>06</span>Anúncio Raiz vs Nutella</a>
+      <a class="toc-link" href="#boteco"><span>07</span>Copy de Boteco</a>
+      <a class="toc-link" href="#branding"><span>08</span>Branding Artístico</a>
+      <a class="toc-link" href="#dores"><span>09</span>Dores de Rico vs Pobre</a>
+      <a class="toc-link" href="#cta"><span>10</span>CTA não é Diagnóstico</a>
+      <a class="toc-link" href="#daily"><span>11</span>Daily do Closer</a>
+      <a class="toc-link" href="#sobras"><span>12</span>Lançamento das Sobras</a>
+      <a class="toc-link" href="#nicho"><span>13</span>Novo Nicho Inesperado</a>
+      <a class="toc-link" href="#reels"><span>14–15</span>Reels + Stories</a>
+      <a class="toc-link" href="#criativo"><span>16</span>Variação de Criativo</a>
+      <a class="toc-link" href="#lovart"><span>17</span>Lovart para Criativos</a>
+      <a class="toc-link" href="#bicicleta"><span>18</span>Ganchos de Bicicleta</a>
+      <a class="toc-link" href="#calendario"><span>⚡</span>Calendário Operacional</a>
+      <a class="toc-link" href="#stack"><span>⚡</span>Stack Recomendada</a>
+    </div>
+  </div>
+</nav>
+
+<!-- QUEM É TIAGO KISS -->
+<section class="section" id="quem">
+  <div class="container">
+    <div class="section-label">Contexto</div>
+    <div class="section-title">Quem é <span>Tiago Kiss</span></div>
+    <div class="bio-card">
+      <div class="bio-side">
+        <div class="bio-icon">🎸</div>
+        <div class="bio-name">Tiago Kiss</div>
+        <div class="bio-role">Diretor de Branding Artístico<br>para High Ticket</div>
+        <div class="bio-stats">
+          <div class="bio-stat"><strong>R$5M+</strong> em vendas no nicho de músicos</div>
+          <div class="bio-stat"><strong>5.400</strong> alunos em todos os cursos</div>
+          <div class="bio-stat"><strong>R$23</strong> custo por reunião agendada</div>
+          <div class="bio-stat"><strong>Mentoria:</strong> R$25k · Mastermind: R$50k</div>
+        </div>
+      </div>
+      <div class="bio-content">
+        <p>Músico de carreira que se tornou um dos maiores estrategistas de branding e geração de leads para high ticket do Brasil. Sócio do Estúdio 62 (gravou mais de 80 artistas nacionais, de Seu Jorge a Marcelo Bedouras).</p>
+        <p>Hoje é Diretor Estratégico de Branding do <strong>Érico Rocha</strong> (lançamento atual: Segunda Fórmula) e do <strong>Ladeira</strong> (case icônico da banheira/máquina de escrever). Aluno do Pedro Moura, que desbloqueou seu funil 1-1.</p>
+        <div class="bio-creds">
+          <div class="bio-cred">Faturou +R$5M com produto para músicos no nicho mais difícil do Brasil</div>
+          <div class="bio-cred">Diretor estratégico do Érico Rocha (Segunda Fórmula) e do Ladeira</div>
+          <div class="bio-cred">Produziu DVDs/clipes para Plantinamp, Xamã, Marcelo Bedouras, Jeff Scott Soto</div>
+          <div class="bio-cred">Palestra original: Mastermind do Pedro Moura (abril/2026, ~64min)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OS 3 AVATARES -->
+<section class="section" id="avatares">
+  <div class="container">
+    <div class="section-label">Framework 01 — Copy</div>
+    <div class="section-title">Os <span>3 Avatares</span></div>
+    <p class="fw-desc">Toda copy de anúncio é feita em 3 camadas — uma para cada estado psicológico do lead. <strong>Sempre crie as 3 versões.</strong> O Avatar Acomodado é o que mais compra.</p>
+    <div class="avatar-grid">
+      <div class="avatar-card novo">
+        <h4>🌱 Novo</h4>
+        <p>Empolgado, baixa barreira de entrada, pouco dinheiro disponível. Cai no pitch fácil, mas tem dificuldade de pagar.</p>
+        <div class="gancho">"Para você que percebeu X, entrou no jogo Y, vai precisar Z..."</div>
+      </div>
+      <div class="avatar-card acomodado">
+        <h4>🦕 Acomodado</h4>
+        <p>Dinossauro do nicho, cheio de objeções. <strong>É o que mais compra</strong> — tem dinheiro e conhece o potencial do mercado.</p>
+        <div class="gancho">"Você está perdendo mercado para X porque não se atualizou em Y..."</div>
+      </div>
+      <div class="avatar-card cansado">
+        <h4>😤 Cansado</h4>
+        <p>Machucado, "última chance que dou". Compra, mas é difícil de converter. Precisa que o método prove que é diferente.</p>
+        <div class="gancho">"Sei que você já tentou X várias vezes. Dessa vez é diferente porque..."</div>
+      </div>
+    </div>
+    <div class="rule-box">Sempre crie 3 anúncios — um para cada avatar. Nunca tente cobrir os 3 em um só anúncio.</div>
+  </div>
+</section>
+
+<!-- SUB-NICHOS + ISENTÃO -->
+<section class="section" id="subnichos">
+  <div class="container">
+    <div class="section-label">Framework 02 — Copy</div>
+    <div class="section-title">Sub-nichos <span>+ Isentão</span></div>
+    <p class="fw-desc">Quando a oferta serve múltiplos sub-nichos (médico, dentista, advogado), crie um anúncio específico para cada sub-nicho + 1 anúncio "isentão" que passa por todos.</p>
+    <div class="fw-card">
+      <div class="fw-body">
+        <p style="margin-bottom:16px">A primeira frase de cada anúncio identifica o sub-nicho. O bônus/CTA também leva o nome do sub-nicho. Isso aumenta muito a identificação do lead.</p>
+        <p><strong style="color:var(--gold-light)">Exemplo — Banda para eventos:</strong></p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Casamento:</strong> "Se você vai casar e acha que banda de casamento é tudo igual..."</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Formatura:</strong> "Se você procura banda pra formatura e todas as faculdades usam as mesmas bandinhas..."</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Corporativo:</strong> "Se o RH da sua empresa repete as mesmas atrações todo ano..."</div></div>
+          <div class="step"><div class="step-num">★</div><div class="step-text"><strong>Isentão:</strong> "Se você procura banda pro seu evento — social, corporativo, casamento, aniversário..."</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNIL SESSÃO 1-1 -->
+<section class="section" id="funil">
+  <div class="container">
+    <div class="section-label">Framework 03 — Estratégia</div>
+    <div class="section-title">Funil <span>Sessão Estratégica 1-1</span></div>
+    <div class="highlight">
+      <strong>Sessão 1-1 bate lançamento em previsibilidade.</strong> Lançamento é pico de receita uma vez por trimestre. Sessão 1-1 diária é R$6 em 7 toda semana, todo mês, o ano inteiro.
+    </div>
+    <div class="fw-grid fw-grid-2" style="margin-top:24px">
+      <div class="fw-card">
+        <div class="fw-title">4 Vantagens Estruturais</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Previsibilidade:</strong> Agenda lotada = faturamento previsto. Sem depender de lançamento.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Melhoria de Oferta:</strong> Toda sessão revela uma dor oculta nova → a tela de venda evolui toda semana.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Condições Malucas:</strong> No privado você pode ajustar parcelamento, cheque pré, condições especiais.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Métrica Certa:</strong> Custo por reunião agendada — não custo por lead. Isso muda o jogo.</div></div>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">Métrica que importa</div>
+        <div class="fw-body">
+          <p style="margin-bottom:16px">A maioria mede <strong style="color:#e57373">custo por lead</strong>. Isso é errado para high ticket.</p>
+          <p>O que medir: <strong style="color:var(--teal)">custo por reunião agendada.</strong></p>
+          <p style="margin-top:16px">Lead qualificado que entra na sessão já vale muito — mesmo que não feche na hora. Ele vai indicar, virar case ou entrar no lançamento das sobras.</p>
+          <div class="rule-box" style="margin-top:16px">Meta do Tiago Kiss: R$23 por reunião agendada. Mercado paga R$150–200.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDICAÇÃO OCULTA -->
+<section class="section" id="indicacao">
+  <div class="container">
+    <div class="section-label">Framework 04 — Operação</div>
+    <div class="section-title">Funil de <span>Indicação Oculta</span></div>
+    <p class="fw-desc">Lead qualificado a custo zero, gerado diretamente na sessão estratégica. O closer não pode mais sair de uma sessão sem ao menos 1 indicação.</p>
+    <div class="fw-card">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text">Durante a sessão: <em>"Quem é seu maior concorrente ou referência que você se inspira?"</em></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text">Lead cita 3–5 nomes. Você anota todos.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><em>"Algum deles é amigo seu ou você nem tem acesso a ele?"</em> — lead separa amigos de desconhecidos.</div></div>
+        <div class="step"><div class="step-num">4A</div><div class="step-text"><strong>Para amigos:</strong> começa a seguir, curte um vídeo, manda DM: <em>"Doutor X, a Doutora Y falou muito bem de você. Parabéns pela comunicação, dá pra ver por que é referência."</em></div></div>
+        <div class="step"><div class="step-num">4B</div><div class="step-text"><strong>Para desconhecidos:</strong> mesma abordagem, sem citar quem indicou: <em>"Estava vendo sua comunicação, muito bacana, dá pra ver que é referência no nicho."</em></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text">Quando responder: levanta a dor → leva para sessão estratégica → <strong style="color:var(--teal)">zero tráfego pago.</strong></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TODA SESSÃO JÁ ERA VENDA -->
+<section class="section" id="sessaovenda">
+  <div class="container">
+    <div class="section-label">Framework 05 — Filosofia</div>
+    <div class="section-title">Toda Sessão <span>Já Era Venda</span></div>
+    <div class="highlight">
+      <strong>"Toda sessão já era venda."</strong> Mesmo o lead que não compra na hora tem 3 caminhos de gerar resultado — nenhum lead é perdido.
+    </div>
+    <div class="fw-grid fw-grid-2" style="margin-top:24px">
+      <div class="fw-card">
+        <div class="fw-number">Caminho 1</div>
+        <div class="fw-title">Indica quem compra</div>
+        <div class="fw-body">Funil de indicação oculta ativado no final de toda sessão. Um lead pode trazer 2–3 outros leads qualificados gratuitamente.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-number">Caminho 2</div>
+        <div class="fw-title">Vira conteúdo e anúncio</div>
+        <div class="fw-body">Depoimento, case, dor extraída da sessão vira Reel, carrossel ou copy de anúncio. Lead "ruim" é matéria-prima de conteúdo.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-number">Caminho 3</div>
+        <div class="fw-title">Atualiza a tela de venda</div>
+        <div class="fw-body">Dor oculta revelada na sessão entra na página de vendas ou na copy do anúncio. Cada sessão melhora a oferta.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-number">Caminho 4</div>
+        <div class="fw-title">Entra no lançamento das sobras</div>
+        <div class="fw-body">Lead que não fechou entra na lista de "sobras" e recebe o lançamento mensal via WhatsApp API Oficial.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANÚNCIO RAIZ vs NUTELLA -->
+<section class="section" id="raiz">
+  <div class="container">
+    <div class="section-label">Framework 06 — Criativos</div>
+    <div class="section-title">Anúncio <span>Raiz vs Nutella</span></div>
+    <div class="fw-grid fw-grid-2">
+      <div class="fw-card">
+        <div class="fw-number">Raiz — 1 por mês</div>
+        <div class="fw-title">O Anúncio Mãe</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px">Vídeo de <strong style="color:var(--gold-light)">5 minutos</strong> com tudo que você tem. Você mesmo fala — não precisa de copywriter.</p>
+          <p>Inclui: procedência, autoridade (prêmios, ISO), clientes que atendeu, dores mais frequentes, maiores resultados, maiores sacadas.</p>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-number">Nutella — 30+ por mês</div>
+        <div class="fw-title">As Variações</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px">Editor pega <strong style="color:var(--gold-light)">3 frases-chave</strong> do raiz e gera um Reel de 30s. 1 raiz = 30+ Nutellas.</p>
+          <p><strong>Case Érico Rocha:</strong> raiz de 6min → editor extraiu 3 frases → anúncios <strong style="color:var(--teal)">3x mais baratos</strong>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box">1 Raiz novo por mês. Editor faz 30+ Nutellas. Nunca fique sem variações rodando.</div>
+  </div>
+</section>
+
+<!-- COPY DE BOTECO -->
+<section class="section" id="boteco">
+  <div class="container">
+    <div class="section-label">Framework 07 — Copy</div>
+    <div class="section-title">Copy de <span>Boteco</span></div>
+    <p class="fw-desc">Anti-anúncio-automático. Fale como se estivesse no bar contando pro seu melhor amigo sobre um cliente bizarro. <em>O que você fala no bar é o que entra no anúncio</em> (com tato).</p>
+    <div class="compare">
+      <div class="compare-bad">
+        <h5>❌ Copy Robô</h5>
+        <p>"Para você que é médico e tem dificuldade de aumentar o consultório, saiba que estou há 20 anos ajudando médicos a crescerem..."</p>
+        <p class="result">→ R$500 por lead</p>
+      </div>
+      <div class="compare-good">
+        <h5>✓ Copy de Boteco</h5>
+        <p>"Se você é médico, referência máxima na sua especialização, consegue fazer cirurgias que pessoas na Europa não conseguem, mas se sente burro na hora de abrir um CRM — é isso que a gente faz. A gente pega gênios da medicina e instala processos que trazem clientes infinitos."</p>
+        <p class="result">→ R$23 por lead qualificado</p>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:24px">
+      <strong>Como aplicar:</strong> Qual a coisa mais ridícula, engraçada ou absurda que você fala dos seus clientes quando está relaxado com amigos? Essa é a copy do seu próximo anúncio.
+    </div>
+  </div>
+</section>
+
+<!-- BRANDING ARTÍSTICO -->
+<section class="section" id="branding">
+  <div class="container">
+    <div class="section-label">Framework 08 — Marca</div>
+    <div class="section-title">Branding <span>Artístico</span></div>
+    <p class="fw-desc">Marca é a história única que ninguém pode copiar. Quanto mais real e pessoal, mais difícil para o concorrente imitar. Case: Ladeira.</p>
+    <div class="fw-grid fw-grid-2">
+      <div class="fw-card">
+        <div class="fw-title">O Briefing (Ladeira)</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px">Tiago não pediu referências de marcas. Pediu histórias pessoais profundas:</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">→</div><div class="step-text">Vergonha do pai com Fusca enquanto outros tinham carro importado</div></div>
+            <div class="step"><div class="step-num">→</div><div class="step-text">Primeira máquina de escrever (do pai)</div></div>
+            <div class="step"><div class="step-num">→</div><div class="step-text">Caderninho onde anota insights no banho</div></div>
+            <div class="step"><div class="step-num">→</div><div class="step-text">"Não me encaixo nos caras de terno na frente do Porsche"</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">O Resultado (Ladeira)</div>
+        <div class="fw-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">✦</div><div class="step-text">Foto com a máquina de escrever real do pai</div></div>
+            <div class="step"><div class="step-num">✦</div><div class="step-text">Caderninho de insights na mão, filho brincando na cena</div></div>
+            <div class="step"><div class="step-num">✦</div><div class="step-text">Banheira com chuva — ideia vindo no banho</div></div>
+            <div class="step"><div class="step-num">✦</div><div class="step-text">Terno molhado — disrupção total do estereótipo do guru de marketing</div></div>
+            <div class="step"><div class="step-num">✦</div><div class="step-text">Banheira física na entrada do evento → todos tiram foto</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box">Pergunta-chave: Qual é a marca de verdade? Não o que parece bom, mas o que é real e ninguém pode copiar.</div>
+  </div>
+</section>
+
+<!-- DORES DE RICO -->
+<section class="section" id="dores">
+  <div class="container">
+    <div class="section-label">Framework 09 — Copy</div>
+    <div class="section-title">Dores de <span>Rico vs Pobre</span></div>
+    <p class="fw-desc">Lead high ticket tem os mesmos sentimentos que lead de baixo ticket — só que as dores são diferentes. Audite sua copy atual e substitua dores de pobre por dores de rico.</p>
+    <div class="compare">
+      <div class="compare-bad">
+        <h5>❌ Dores de Pobre</h5>
+        <p>"Não consigo pagar as contas... Estou sem dinheiro... Preciso de uma renda extra... Quero sair do salário mínimo..."</p>
+        <p class="result">→ Atrai lead que não tem dinheiro para pagar</p>
+      </div>
+      <div class="compare-good">
+        <h5>✓ Dores de Rico</h5>
+        <p>"Não consigo delegar sem sentir que vai dar errado... Minha agenda está cheia mas o resultado não vem... Trabalho mais que meus funcionários... Cresci mas perdi a liberdade que queria..."</p>
+        <p class="result">→ Atrai lead que já tem dinheiro e quer otimizar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA NÃO É DIAGNÓSTICO -->
+<section class="section" id="cta">
+  <div class="container">
+    <div class="section-label">Framework 10 — Funil</div>
+    <div class="section-title">CTA não é <span>Diagnóstico</span></div>
+    <div class="highlight">
+      Lead qualificado sabe que "sessão de diagnóstico" = pitch. Ele escapa. Troque o nome para um <strong>benefício real</strong> que ele vai receber na sessão.
+    </div>
+    <div class="fw-grid fw-grid-2" style="margin-top:24px">
+      <div class="fw-card">
+        <div class="fw-title" style="color:#e57373">❌ Evite</div>
+        <div class="fw-body">
+          <p>• Sessão de diagnóstico</p>
+          <p>• Consultoria de diagnóstico</p>
+          <p>• Avaliação gratuita</p>
+          <p>• Chamada estratégica</p>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title" style="color:var(--teal)">✓ Use</div>
+        <div class="fw-body">
+          <p>• <strong>Consultoria gratuita</strong> para te levar a [resultado X]</p>
+          <p>• <strong>Script de clientes infinitos</strong> gratuito</p>
+          <p>• <strong>Análise de perfil</strong> gratuita</p>
+          <p>• <strong>Plano personalizado</strong> para [resultado específico]</p>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box">O closer DEVE entregar UM benefício real na sessão — mesmo que não feche venda. Lead sai satisfeito, indica e volta.</div>
+  </div>
+</section>
+
+<!-- DAILY DO CLOSER -->
+<section class="section" id="daily">
+  <div class="container">
+    <div class="section-label">Framework 11 — Operação</div>
+    <div class="section-title">Daily do <span>Closer</span></div>
+    <p class="fw-desc">Closer não precisa ser especialista no nicho. Você prepara ele diariamente com uma daily curta antes das sessões.</p>
+    <div class="fw-card">
+      <div class="fw-body">
+        <p style="margin-bottom:16px"><strong style="color:var(--gold-light)">Exemplo de daily:</strong></p>
+        <p style="font-style:italic; color:var(--cream-50); margin-bottom:16px">"Você anota aí: o destaque 1, 2 e 3 do perfil dela não fazem sentido. Diga pra ela colocar X em destaque, porque isso não está posicionando ela por causa de Y, Z e W. Ela vai perguntar sobre pricing — responde com a story de caso que o João fechou na semana passada."</p>
+        <p>O closer chega na sessão com contexto específico sobre aquele lead → entrega valor real → lead fica feliz mesmo se não comprar → indica outros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANÇAMENTO DAS SOBRAS -->
+<section class="section" id="sobras">
+  <div class="container">
+    <div class="section-label">Framework 12 — Receita</div>
+    <div class="section-title">Lançamento das <span>Sobras</span></div>
+    <p class="fw-desc">No fim de cada mês, recupere os leads que fizeram sessão e não fecharam. Via API Oficial WhatsApp — não e-mail, não grupo.</p>
+    <div class="fw-card">
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Promessa:</strong> Debriefing dos maiores cases do mercado que VOCÊ gerou esse mês.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Conteúdo:</strong> Resultados concretos + depoimentos de quem entrou.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Pitch:</strong> Apresentação completa da mentoria — preço, entregáveis, formato.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text"><strong>NÃO</strong> coloca link de pagamento direto. Pede formulário de interesse.</div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Sessão:</strong> Quem preenche o formulário agenda mais 1 sessão 1-1 → fecha no Zoom.</div></div>
+      </div>
+      <div class="rule-box">Transmissão em Zoom fechado — não YouTube, não lives públicas. Cria escassez e exclusividade.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NOVO NICHO INESPERADO -->
+<section class="section" id="nicho">
+  <div class="container">
+    <div class="section-label">Framework 13 — Estratégia</div>
+    <div class="section-title">Novo Nicho <span>Inesperado</span></div>
+    <div class="highlight">
+      <strong>Quem é o cara que você não queria vender e pagou à vista?</strong> Esse é o seu próximo nicho.
+    </div>
+    <div class="fw-card" style="margin-top:24px">
+      <div class="fw-title">Case Real: O DJ</div>
+      <div class="fw-body">
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Tiago não queria vender para DJ. Um DJ entrou em uma sessão estratégica.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Quando Tiago falou R$25k, o DJ respondeu: <em>"passa o link que eu faço agora"</em> — pagou no cartão sem objeção.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Tiago fez 1 anúncio teste: <em>"Se você é DJ e quer limpar o seu cachê..."</em></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text">Resultado: <strong style="color:var(--gold-light)">dobrou o faturamento.</strong> Hoje a comunidade dele é majoritariamente composta por DJs.</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-text">Próximos: empresas de som, produtores. 1 produtor vendeu R$500k em 90 dias.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-box">Após 3+ vendas para um perfil inesperado: crie 1 anúncio testando aquele nicho antes de descartar.</div>
+  </div>
+</section>
+
+<!-- REELS + STORIES -->
+<section class="section" id="reels">
+  <div class="container">
+    <div class="section-label">Frameworks 14 e 15 — Conteúdo Orgânico</div>
+    <div class="section-title">Reels + Stories <span>+ Tráfego</span></div>
+    <div class="fw-grid fw-grid-2">
+      <div class="fw-card">
+        <div class="fw-number">Framework 14 — Estratégia</div>
+        <div class="fw-title">Reels + Stories</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px"><strong style="color:var(--gold-light)">Reels:</strong> CTA para ManyChat ou Direct</p>
+          <p style="font-style:italic; color:var(--cream-50); margin-bottom:16px">"Comenta ANÁLISE que mando no Direct" ou "Me chama no Direct se quiser ajuda"</p>
+          <p><strong style="color:var(--gold-light)">Stories:</strong> 100% depoimentos + provas + CTA Direct</p>
+          <p style="font-style:italic; color:var(--cream-50);">"Mentorado vendeu 100k em 1 semana — me chama se quiser saber como"</p>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-number">Framework 15 — Loop Semanal</div>
+        <div class="fw-title">Reel que Performou → Tráfego</div>
+        <div class="fw-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Identifica o Reel que mais performou na semana</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Adiciona CTA padrão no final do vídeo</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Gestor de tráfego impulsiona para formulário de qualificação</div></div>
+          </div>
+          <p style="margin-top:12px; font-size:0.8rem; color:var(--gray)">Repete toda semana sem produzir nada novo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VARIAÇÃO DE CRIATIVO -->
+<section class="section" id="criativo">
+  <div class="container">
+    <div class="section-label">Framework 16 — Criativos</div>
+    <div class="section-title">Variação de <span>Criativo</span></div>
+    <p class="fw-desc">Sempre tenha os 2 tipos de criativo rodando ao mesmo tempo. A combinação dos dois cria certeza absoluta de autoridade no lead.</p>
+    <div class="fw-grid fw-grid-2">
+      <div class="fw-card">
+        <div class="fw-title">Sessão Filmada</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px"><strong style="color:var(--gold-light)">Vantagem:</strong> Mostra você atendendo cliente real → autoridade prática.</p>
+          <p style="font-style:italic; color:var(--cream-50)">"Acabei de atender uma banda que fez 10 shows em setembro e zero em outubro porque o funil deles estava assim..."</p>
+          <div class="tag-row"><span class="tag">Autoridade prática</span><span class="tag">Prova social</span></div>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">Câmera Direta</div>
+        <div class="fw-body">
+          <p style="margin-bottom:12px"><strong style="color:var(--gold-light)">Vantagem:</strong> Mais tempo para estruturar dor/oportunidade com profundidade.</p>
+          <p style="color:var(--cream-50)">Ganchos longos, narrativas filosóficas, posicionamento de autoridade intelectual.</p>
+          <div class="tag-row"><span class="tag">Profundidade</span><span class="tag">Posicionamento</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOVART -->
+<section class="section" id="lovart">
+  <div class="container">
+    <div class="section-label">Framework 17 — Ferramentas</div>
+    <div class="section-title">Lovart para <span>Criativos em Escala</span></div>
+    <div class="highlight">
+      <strong>60 variações de criativo em 20 minutos</strong> — vs 4 variações em 4 dias com time tradicional de design.
+    </div>
+    <div class="fw-card" style="margin-top:24px">
+      <div class="fw-body">
+        <p style="margin-bottom:12px">Quando precisar de 30+ variações de arte para testar diferentes ganchos, fundos, cores e textos sem depender de designer, use o Lovart.</p>
+        <p>Integra com o workflow de Nutellas: você tem o Raiz, o editor transcreve os trechos, e o Lovart gera as artes estáticas para variação de criativos.</p>
+        <div class="tag-row">
+          <span class="tag">lovart.ai</span>
+          <span class="tag">60 criativos / 20min</span>
+          <span class="tag">Testes A/B em escala</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GANCHOS DE BICICLETA -->
+<section class="section" id="bicicleta">
+  <div class="container">
+    <div class="section-label">Framework 18 — Conteúdo</div>
+    <div class="section-title">Ganchos de <span>Bicicleta</span></div>
+    <p class="fw-desc">Preguiça inteligente. Não produz conteúdo do zero. Pega o maior absurdo da sessão estratégica e posta como conteúdo bruto, sem produção.</p>
+    <div class="fw-card">
+      <div class="fw-body">
+        <p style="margin-bottom:16px"><strong style="color:var(--gold-light)">Como funciona:</strong></p>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Termina uma sessão estratégica com lead qualificado.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">Identifica o maior erro ou absurdo que o lead trouxe — algo que provavelmente outros 1.000 leads também fazem.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Grava um Reel de 30–60s indo buscar a filha na escola, no carro, no celular — sem produção nenhuma.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-text"><em>"Acabei de sair de uma sessão e o cara estava fazendo [erro absurdo]. Se você também faz isso, para agora porque..."</em></div></div>
+        </div>
+        <div class="rule-box" style="margin-top:20px">O erro de 1 lead é o erro de 1.000 leads → vira lead em escala.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDÁRIO OPERACIONAL -->
+<section class="section" id="calendario">
+  <div class="container">
+    <div class="section-label">Operação</div>
+    <div class="section-title">Calendário <span>Operacional</span></div>
+    <p class="fw-desc">O sistema rodando completo. R$30k de tráfego/mês → R$450–550k de receita constante, 6 em 7 toda semana.</p>
+    <div class="calendar-grid" style="margin-top:32px">
+      <div class="cal-card">
+        <div class="cal-period">⚡ Diariamente</div>
+        <ul>
+          <li>Sessões 1-1 com leads</li>
+          <li>Indicação oculta no fim de toda sessão</li>
+          <li>Atualizar tela de venda com dor nova</li>
+          <li>Daily de preparação do closer</li>
+        </ul>
+      </div>
+      <div class="cal-card">
+        <div class="cal-period">📅 Semanalmente</div>
+        <ul>
+          <li>Produzir Reels (incluindo ganchos de bicicleta)</li>
+          <li>Identificar Reel que mais performou</li>
+          <li>Adicionar CTA padrão + mandar pra tráfego</li>
+          <li>Atualizar Stories com novos depoimentos</li>
+        </ul>
+      </div>
+      <div class="cal-card">
+        <div class="cal-period">🗓️ Mensalmente</div>
+        <ul>
+          <li>Gravar 1 Anúncio Raiz novo (5min)</li>
+          <li>Editor gera 30+ Nutellas do Raiz</li>
+          <li>Lovart: 60+ variações de arte</li>
+          <li>Revisão de métricas (custo/reunião)</li>
+        </ul>
+      </div>
+      <div class="cal-card">
+        <div class="cal-period">🔚 Fim do Mês</div>
+        <ul>
+          <li>Lançamento das Sobras (WhatsApp API)</li>
+          <li>Zoom fechado com leads que não fecharam</li>
+          <li>Nova onda de sessões 1-1</li>
+          <li>Medir: R$/reunião do mês</li>
+        </ul>
+      </div>
+    </div>
+    <div class="metric-card" style="max-width:500px; margin:32px auto 0; background:var(--dark)">
+      <div class="metric-number">R$450–550k</div>
+      <div class="metric-label">receita mensal com R$30k de tráfego<br>6 em 7 semanas · R$23 por reunião</div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK RECOMENDADA -->
+<section class="section" id="stack">
+  <div class="container">
+    <div class="section-label">Infraestrutura</div>
+    <div class="section-title">Stack <span>Recomendada</span></div>
+    <div class="stack-grid" style="margin-bottom:40px">
+      <div class="stack-item">
+        <div class="stack-icon">🎨</div>
+        <div class="stack-name">Lovart</div>
+        <div class="stack-desc">60 criativos em 20min</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">💬</div>
+        <div class="stack-name">ManyChat</div>
+        <div class="stack-desc">Direct automatizado nos Reels</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">📱</div>
+        <div class="stack-name">WhatsApp API Oficial</div>
+        <div class="stack-desc">Lançamento das Sobras mensal</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-icon">🤖</div>
+        <div class="stack-name">ChatGPT</div>
+        <div class="stack-desc">Transcrição de Reel → carrossel</div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-bottom:16px">Time necessário</div>
+    <div class="fw-grid fw-grid-2">
+      <div class="fw-card">
+        <div class="fw-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text"><strong style="color:var(--gold-light)">Social Selling</strong> — Indicação oculta + abordagem em DM</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text"><strong style="color:var(--gold-light)">SDR</strong> — Triagem de formulário + agendamento</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text"><strong style="color:var(--gold-light)">Closer</strong> — Sessão 1-1, daily, indicação oculta</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">4</div><div class="step-text"><strong style="color:var(--gold-light)">Editor de Vídeo</strong> — Nutellas a partir do Raiz</div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-text"><strong style="color:var(--gold-light)">Gestor de Tráfego</strong> — CTA em Reels que performaram</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">OMNI Brasil</div>
+  <div class="footer-sub">Squad Ads High Ticket · Método Tiago Kiss · 2026</div>
+  <div style="margin-top:16px; font-size:11px; color:var(--gray)">
+    Conteúdo extraído da palestra de Tiago Kiss no Mastermind do Pedro Moura (abril/2026)
+  </div>
+</footer>
+
+</body>
+</html>
