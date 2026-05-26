@@ -2327,6 +2327,39 @@ const CAPABILITIES = [
       "Criativo C2 (ROAS 3,05) guardado para Fase 4"
     ],
     apis:["Meta Marketing API v21","Pixel OMNI Brasil (350927791962526)"],nota:null}
+  ,
+  {id:"CAP-040",nome:"Auditor de Marketing (p/ Thiago Kiss)",categoria:"ferramenta-comercial",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"26/05",atualizado:"26/05",
+    link:"https://go.omnihypnosis.com.br/audit",
+    depende:["Claude CLI 2.1.150 (VPS, OAuth Max)","Next.js 15.5","@react-pdf/renderer","nginx + PM2","CAP-036 (Squad Ads-high-ticket Thiago Kiss)"],dependentes:[],
+    descricao:"Ferramenta web pública de auditoria de marketing branded Thiago Kiss. Cola um URL e em ~3min recebe um PDF executivo de 17 páginas com score 0-100 ponderado em 6 dimensões, análise real de 3 concorrentes (scraping HTML), reescritas de copy e plano de ação em 3 horizontes. Construída como value bomb para a Consultoria do Thiago — Michael apresenta como demo de \"como cada aluno pode rodar auditoria antes da call\". Reescrita do zero em Next.js inspirada na suite zubair-trabzada/ai-marketing-claude, mas usando Claude CLI da subscrição Max (custo $0 por audit, sem API key).",
+    habilidades:[
+      "5 subagentes Claude em paralelo (Conteúdo, Conversão, SEO, Competitivo, Marca/Crescimento)",
+      "Score global ponderado 0-100 com nota A+/A/B/C/D/F",
+      "Identificação automática de 3 concorrentes reais via Claude (não fake)",
+      "Scraping HTML real dos concorrentes — headline, pricing, CTAs, social, depoimentos",
+      "Tabela comparativa concorrente vs site analisado",
+      "Síntese de maior ameaça + maior oportunidade competitiva",
+      "Reescritas before/after de copy por dimensão",
+      "Plano de ação em 3 horizontes (Quick Wins / 1-3 meses / 3-6 meses)",
+      "PDF executivo de ~17 páginas com design Thiago Kiss (dark/gold, logo embedado base64)",
+      "Frontend dark/minimalista com loading animado em 7 estágios",
+      "Custo zero por audit (usa Claude CLI da subscrição Max via OAuth)"
+    ],
+    apis:["Claude CLI 2.1.150 (Max via OAuth)","Next.js 15.5 + React 19","@react-pdf/renderer 4.3","Tailwind 3.4 + TypeScript 5"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar</div>
+  <div class="note-step"><div class="note-num">1</div><div>Acessar <a href="https://go.omnihypnosis.com.br/audit" style="color:var(--color-gold)">go.omnihypnosis.com.br/audit</a></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Colar o URL do site a ser auditado (ex: <code>thiagokiss.com</code>)</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Clicar <em>Auditar agora</em> e aguardar ~3min (5 subagentes Claude rodam em paralelo)</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Ver score + 6 dimensões na tela e clicar <em>Baixar relatório completo (PDF)</em></div></div>
+  <div class="note-ids">
+    <span>Repo:</span> <code>apps/audit-thiagokiss/</code> &nbsp;|&nbsp;
+    <span>VPS:</span> <code>~/apps/audit-thiagokiss</code> &nbsp;|&nbsp;
+    <span>PM2:</span> <code>audit-thiagokiss:3010</code> &nbsp;|&nbsp;
+    <span>Custo:</span> <code>$0 por audit</code>
+  </div>
+</div>`}
 ];
 
 const INFRA = [
