@@ -587,7 +587,7 @@ footer {
 
 <footer>
   OMNI Brasil · Plano vivo · Atualizado em tempo real via Supabase · Prisma diaria 17h seg-sex
-  <br><span style="opacity:0.4;font-size:9px;">build v1.3 — 2026-04-23 21h50</span>
+  <br><span style="opacity:0.4;font-size:9px;">build v1.4 — 2026-05-28 (fix: optimistic update apos save)</span>
 </footer>
 
 <!-- Supabase JS — versao fixa pra evitar cache de CDN -->
@@ -905,10 +905,12 @@ async function saveTask(id) {
     return;
   }
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from('plano_acao_tasks')
     .update(payload)
-    .eq('id', id);
+    .eq('id', id)
+    .select()
+    .single();
 
   btn.disabled = false;
   if (error) {
@@ -916,6 +918,15 @@ async function saveTask(id) {
     statusSpan.textContent = 'Erro: ' + error.message;
     return;
   }
+
+  // Optimistic local update (nao depende do realtime estar habilitado)
+  const idx = tasks.findIndex(t => t.id === id);
+  if (idx >= 0) {
+    tasks[idx] = data || { ...tasks[idx], ...payload, atualizado_em: new Date().toISOString() };
+    renderStats();
+    card.className = 'action-card ' + tasks[idx].status + (card.classList.contains('expanded') ? ' expanded' : '');
+  }
+
   statusSpan.className = 'save-status ok';
   statusSpan.textContent = 'Salvo!';
   setTimeout(() => statusSpan.textContent = '', 3000);
