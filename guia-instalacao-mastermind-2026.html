@@ -385,44 +385,6 @@
 </head>
 <body>
 
-<!-- ============ GATE DE SENHA (estilo OMNI) ============ -->
-<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#050505;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;padding:24px;">
-  <div style="width:min(92vw,400px);background:#1A1A1A;border:1px solid #C8A84B;border-radius:8px;padding:44px 32px;text-align:center;box-shadow:0 0 32px rgba(200,168,75,0.25);">
-    <div style="font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.12em;font-size:13px;color:#C8A84B;margin-bottom:18px;">OMNI Brasil</div>
-    <div style="font-size:34px;margin-bottom:14px;color:#C8A84B;">&#128274;</div>
-    <h2 style="font-family:'DM Serif Display',serif;font-style:italic;color:#F5F0E8;font-size:24px;font-weight:400;margin:0 0 8px;">Aliança de Ouro</h2>
-    <p style="color:rgba(245,240,232,0.7);font-size:14px;margin:0 0 26px;line-height:1.6;">Digite a senha para acessar o guia.</p>
-    <input id="gatePass" type="password" placeholder="Senha" autocomplete="off"
-      style="width:100%;box-sizing:border-box;padding:14px 16px;border-radius:4px;border:1px solid #242424;background:#050505;color:#F5F0E8;font-size:15px;outline:none;margin-bottom:14px;font-family:'IBM Plex Mono',monospace;text-align:center;letter-spacing:0.1em;">
-    <button id="gateBtn"
-      style="width:100%;padding:14px;border:0;border-radius:4px;background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);color:#050505;font-size:13px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.12em;">Entrar</button>
-    <p id="gateErr" style="color:#C8A84B;font-size:13px;margin:16px 0 0;height:16px;visibility:hidden;">Senha incorreta. Tente de novo.</p>
-  </div>
-</div>
-<script>
-  (function(){
-    var SENHA="mastermind2026";
-    var gate=document.getElementById('gate'),
-        inp=document.getElementById('gatePass'),
-        btn=document.getElementById('gateBtn'),
-        err=document.getElementById('gateErr');
-    document.body.style.overflow='hidden';
-    function tryUnlock(){
-      if(inp.value===SENHA){
-        gate.style.display='none';
-        document.body.style.overflow='';
-      } else {
-        err.style.visibility='visible';
-        inp.value='';
-        inp.focus();
-      }
-    }
-    btn.addEventListener('click',tryUnlock);
-    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') tryUnlock(); });
-    inp.focus();
-  })();
-</script>
-
 <!-- ============ HERO ============ -->
 <header class="hero">
   <img class="hero-logo" src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro">
