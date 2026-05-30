@@ -463,19 +463,20 @@
     <article class="step reveal">
       <div class="num">2</div>
       <div class="body">
-        <h3>Instalar o GitHub Desktop
+        <h3>Instalar o Git
           <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
         </h3>
-        <p>É o programa que conecta seu computador ao GitHub usando botões, sem necessidade de digitar comandos.</p>
+        <p>O Git é o programa que baixa o projeto para o seu computador e salva as suas alterações. Ele trabalha por baixo dos panos, junto com o terminal.</p>
         <div class="resource">
-          <a class="url" href="https://desktop.github.com" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> desktop.github.com</a>
+          <a class="url" href="https://git-scm.com" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> git-scm.com</a>
           <span class="tag-go">Download</span>
         </div>
         <ol class="mini">
-          <li>Acesse o site e clique em <strong>Download</strong>.</li>
-          <li>Abra o arquivo baixado e conclua a instalação. O programa abre ao terminar.</li>
-          <li>Faça login com a conta do GitHub criada no Passo 1.</li>
+          <li>Acesse o site e baixe para o seu sistema (Windows ou Mac).</li>
+          <li>Abra o arquivo baixado e avance a instalação.</li>
+          <li>Pode manter todas as opções no padrão e avançar até concluir.</li>
         </ol>
+        <div class="note"><span class="ico">Dica</span><span>Não precisa entender cada tela do instalador. Mantenha o padrão e clique para avançar até o fim.</span></div>
       </div>
     </article>
 
@@ -524,17 +525,18 @@
     <article class="step reveal">
       <div class="num">5</div>
       <div class="body">
-        <h3>Instalar o Claude Code pelo terminal
+        <h3>Instalar o Claude Code
           <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
         </h3>
-        <p>O Claude Code é o assistente de inteligência artificial da Aliança de Ouro. Ele é instalado e usado pelo terminal. O Node.js do Passo 3 é o que permite rodar o comando de instalação.</p>
+        <p>O Claude Code é o assistente de inteligência artificial da Aliança de Ouro. Ele é instalado pelo terminal que já vem dentro do VS Code. O Node.js do Passo 3 é o que permite rodar o comando de instalação.</p>
         <ol class="mini">
-          <li>Abra o terminal. No <strong>Windows</strong>, abra o <strong>PowerShell</strong> pelo menu Iniciar. No <strong>Mac</strong>, abra o <strong>Terminal</strong>.</li>
-          <li>Digite o comando abaixo e pressione <strong>Enter</strong>.</li>
+          <li>Abra o <strong>VS Code</strong>.</li>
+          <li>Abra o terminal integrado pelo menu <strong>Terminal</strong>, depois <strong>New Terminal</strong>. O atalho é <strong>Ctrl + crase</strong>.</li>
+          <li>No terminal que abrir na parte de baixo, digite o comando abaixo e pressione <strong>Enter</strong>.</li>
           <li>Aguarde a instalação terminar. O terminal volta a aceitar comandos quando concluir.</li>
         </ol>
         <div class="typebox"><span class="lbl">digite</span> npm install -g @anthropic-ai/claude-code</div>
-        <div class="note"><span class="ico">Dica</span><span>Digite o comando exatamente como está, incluindo o sinal de arroba. Você pode copiar e colar para evitar erros.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>Digite o comando exatamente como está, incluindo o sinal de arroba. Você pode copiar e colar para evitar erros. A crase fica na tecla acima do Tab, no canto superior esquerdo do teclado.</span></div>
       </div>
     </article>
 
@@ -543,17 +545,14 @@
       <div class="num">6</div>
       <div class="body">
         <h3>Baixar o seu repositório</h3>
-        <p>Agora você vai baixar a sua pasta de trabalho da Aliança de Ouro para o seu computador, usando o GitHub Desktop.</p>
+        <p>Agora você vai baixar a sua pasta de trabalho da Aliança de Ouro para o seu computador, usando o mesmo terminal do VS Code.</p>
         <ol class="mini">
-          <li>Abra o <strong>GitHub Desktop</strong>.</li>
-          <li>No menu superior, clique em <strong>File</strong>, depois <strong>Clone repository</strong>.</li>
-          <li>Vá na aba <strong>URL</strong>.</li>
-          <li>No campo de endereço, digite o seu repositório, trocando <strong>SEU-NOME</strong> pelo seu nome:</li>
+          <li>Ainda no terminal do VS Code, digite o comando abaixo, trocando <strong>SEU-NOME</strong> pelo seu nome.</li>
+          <li>Pressione <strong>Enter</strong>.</li>
+          <li>Na primeira vez, vai abrir uma janela pedindo para entrar na sua conta do <strong>GitHub</strong>. Faça o login.</li>
+          <li>A cópia do projeto vai ser baixada para o seu computador.</li>
         </ol>
-        <div class="typebox"><span class="lbl">digite</span> gringoles777/mastermind-SEU-NOME</div>
-        <ul class="mini" style="margin-top:12px">
-          <li>Clique em <strong>Clone</strong> e aguarde o download terminar.</li>
-        </ul>
+        <div class="typebox"><span class="lbl">digite</span> git clone https://github.com/gringoles777/mastermind-SEU-NOME.git</div>
         <div class="note"><span class="ico">Dica</span><span>O nome exato do seu repositório é informado pela Julia. Em caso de dúvida sobre o nome, entre em contato com ela.</span></div>
       </div>
     </article>
@@ -562,13 +561,12 @@
     <article class="step reveal">
       <div class="num">7</div>
       <div class="body">
-        <h3>Abrir a pasta no VS Code</h3>
+        <h3>Abrir o projeto no VS Code</h3>
         <p>Agora você vai abrir no VS Code a pasta que baixou no Passo 6. É dentro dela que você vai trabalhar.</p>
         <ol class="mini">
-          <li>Abra o <strong>VS Code</strong>.</li>
-          <li>No menu superior, clique em <strong>File</strong>, depois <strong>Open Folder</strong> (Arquivo, Abrir Pasta).</li>
-          <li>Navegue até a pasta clonada pelo GitHub Desktop no Passo 6.</li>
-          <li>Selecione a pasta e clique em <strong>Abrir</strong>.</li>
+          <li>No menu superior do VS Code, clique em <strong>File</strong>, depois <strong>Open Folder</strong> (Arquivo, Abrir Pasta).</li>
+          <li>Selecione a pasta que acabou de ser baixada. O nome dela é <strong>mastermind-SEU-NOME</strong>.</li>
+          <li>Clique em <strong>Abrir</strong>.</li>
         </ol>
         <div class="note"><span class="ico">Dica</span><span>O nome da pasta aparece na barra lateral esquerda do VS Code quando ela é aberta corretamente.</span></div>
       </div>
@@ -578,17 +576,17 @@
     <article class="step reveal">
       <div class="num">8</div>
       <div class="body">
-        <h3>Abrir o Claude Code e começar</h3>
-        <p>Com a pasta do projeto aberta no VS Code, você vai abrir o terminal integrado e iniciar o Claude Code.</p>
+        <h3>Começar a usar</h3>
+        <p>Com a pasta do projeto aberta no VS Code, você vai abrir o terminal integrado de novo e iniciar o Claude Code.</p>
         <ol class="mini">
-          <li>No menu superior do VS Code, clique em <strong>Terminal</strong>, depois <strong>New Terminal</strong>. O atalho é <strong>Ctrl + crase</strong>.</li>
-          <li>No terminal que abrir na parte de baixo, digite <strong>claude</strong> e pressione <strong>Enter</strong>.</li>
-          <li>Na primeira vez, será solicitado o login na sua conta <strong>Anthropic</strong>. Conclua o login.</li>
-          <li>Para começar a trabalhar, digite o comando abaixo e pressione <strong>Enter</strong>:</li>
+          <li>Abra o terminal integrado pelo menu <strong>Terminal</strong>, depois <strong>New Terminal</strong>.</li>
+          <li>Digite <strong>claude</strong> e pressione <strong>Enter</strong>.</li>
+          <li>Na primeira vez, vai pedir para fazer login na conta da <strong>Anthropic</strong>. Conclua o login.</li>
+          <li>Depois de entrar, digite o comando abaixo e pressione <strong>Enter</strong> para começar a trabalhar:</li>
         </ol>
         <div class="typebox"><span class="lbl">primeiro</span> claude</div>
         <div class="typebox"><span class="lbl">depois</span> @workspace-chief</div>
-        <div class="note"><span class="ico">Dica</span><span>A crase fica na tecla acima do Tab, no canto superior esquerdo do teclado. Após o login inicial, o comando claude não pede login de novo.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>Após o login inicial, o comando claude não pede login de novo.</span></div>
       </div>
     </article>
 
@@ -607,22 +605,22 @@
     <div class="panel reveal">
       <span class="ptag">Salvar</span>
       <h3>Como salvar seu trabalho</h3>
-      <p>Sempre que terminar algo, salve para guardar na nuvem com segurança. No GitHub Desktop:</p>
+      <p>Quando terminar, peça ao próprio Claude Code para salvar. No terminal onde ele está aberto:</p>
       <div class="flow">
-        <div class="row"><span class="n">1</span><span>Escreva uma <strong>descrição</strong> curta do que você fez.</span></div>
-        <div class="row"><span class="n">2</span><span>Clique em <code>Commit to master</code>.</span></div>
-        <div class="row"><span class="n">3</span><span>Clique em <code>Push origin</code> para enviar.</span></div>
+        <div class="row"><span class="n">1</span><span>Escreva algo como: <code>salve e suba meu trabalho</code>.</span></div>
+        <div class="row"><span class="n">2</span><span>Pressione <strong>Enter</strong>.</span></div>
+        <div class="row"><span class="n">3</span><span>Ele guarda as alterações e envia para o GitHub automaticamente.</span></div>
       </div>
     </div>
 
     <div class="panel reveal">
       <span class="ptag">Atualizar</span>
       <h3>Como receber atualizações</h3>
-      <p>Para trazer as novidades mais recentes para o seu computador. No GitHub Desktop:</p>
+      <p>Para receber as novidades do material, é só pedir ao Claude Code. No terminal onde ele está aberto:</p>
       <div class="flow">
-        <div class="row"><span class="n">1</span><span>Clique em <code>Fetch origin</code> para verificar.</span></div>
-        <div class="row"><span class="n">2</span><span>Se aparecer, clique em <code>Pull origin</code> para baixar.</span></div>
-        <div class="row"><span class="n">3</span><span>Pronto. Você está com a versão mais nova.</span></div>
+        <div class="row"><span class="n">1</span><span>Escreva: <code>baixe as últimas atualizações do projeto</code>.</span></div>
+        <div class="row"><span class="n">2</span><span>Pressione <strong>Enter</strong>.</span></div>
+        <div class="row"><span class="n">3</span><span>Ele cuida disso para você. Pronto, você está com a versão mais nova.</span></div>
       </div>
     </div>
 
