@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bem-vindo ao Mastermind AIOX | Guia de Primeiros Passos</title>
+<title>Bem-vindo à Aliança de Ouro | Guia de Primeiros Passos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -96,18 +96,10 @@
   }
   header.hero > *{position:relative;z-index:1}
 
-  .seal{
-    width:64px;height:64px;margin:0 auto 28px;
-    border:1px solid var(--color-gold);border-radius:50%;
-    display:grid;place-items:center;position:relative;
-    box-shadow:var(--shadow-gold-subtle);
-  }
-  .seal::after{
-    content:"";position:absolute;inset:6px;border:1px solid var(--gold-30);border-radius:50%;
-  }
-  .seal span{
-    font-family:var(--font-display);font-weight:600;font-size:1rem;
-    letter-spacing:.06em;color:var(--color-gold);
+  .hero-logo{
+    display:block;width:auto;max-width:220px;height:auto;
+    margin:0 auto 30px;
+    filter:drop-shadow(0 0 24px rgba(200,168,75,.22));
   }
 
   .kicker-top{
@@ -386,7 +378,7 @@
   <div style="width:min(92vw,400px);background:#1A1A1A;border:1px solid #C8A84B;border-radius:8px;padding:44px 32px;text-align:center;box-shadow:0 0 32px rgba(200,168,75,0.25);">
     <div style="font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.12em;font-size:13px;color:#C8A84B;margin-bottom:18px;">OMNI Brasil</div>
     <div style="font-size:34px;margin-bottom:14px;color:#C8A84B;">&#128274;</div>
-    <h2 style="font-family:'DM Serif Display',serif;font-style:italic;color:#F5F0E8;font-size:24px;font-weight:400;margin:0 0 8px;">Mastermind AIOX</h2>
+    <h2 style="font-family:'DM Serif Display',serif;font-style:italic;color:#F5F0E8;font-size:24px;font-weight:400;margin:0 0 8px;">Aliança de Ouro</h2>
     <p style="color:rgba(245,240,232,0.7);font-size:14px;margin:0 0 26px;line-height:1.6;">Digite a senha para acessar o guia.</p>
     <input id="gatePass" type="password" placeholder="Senha" autocomplete="off"
       style="width:100%;box-sizing:border-box;padding:14px 16px;border-radius:4px;border:1px solid #242424;background:#050505;color:#F5F0E8;font-size:15px;outline:none;margin-bottom:14px;font-family:'IBM Plex Mono',monospace;text-align:center;letter-spacing:0.1em;">
@@ -421,11 +413,11 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero">
-  <div class="seal"><span>AIOX</span></div>
-  <span class="kicker-top"><span class="dot"></span> Mastermind AIOX | Guia de Boas-Vindas</span>
-  <h1>Seus Primeiros Passos<br><span class="serif-line">um de cada vez, com calma.</span></h1>
-  <p class="sub">Vamos preparar tudo o que você precisa para começar. Sem pressa e sem complicação. Basta seguir os 8 passos na ordem.</p>
-  <p class="reassure">Você não precisa entender de tecnologia. <strong>É só clicar, baixar e seguir.</strong> Estamos com você em cada etapa.</p>
+  <img class="hero-logo" src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro">
+  <span class="kicker-top"><span class="dot"></span> Aliança de Ouro | Guia de Boas-Vindas</span>
+  <h1>Aliança de Ouro<br><span class="serif-line">seus primeiros passos.</span></h1>
+  <p class="sub">Este guia prepara tudo o que você precisa para começar. São 8 passos, na ordem apresentada. Dentro do programa você vai aprender a usar a ferramenta AIOX.</p>
+  <p class="reassure">O conteúdo é direto e em linguagem simples. <strong>Cada passo diz exatamente o que clicar, baixar e digitar.</strong></p>
 
   <div class="rail" id="rail">
     <span class="pill"></span><span class="pill"></span><span class="pill"></span><span class="pill"></span>
@@ -439,7 +431,7 @@
   <div class="sec-head reveal">
     <span class="kicker">Comece por aqui</span>
     <h2>A configuração inicial</h2>
-    <p>Faça uma vez só. Depois, é só usar.</p>
+    <p>Esta configuração é feita uma vez. Depois dela, basta usar.</p>
     <hr class="divider-tech">
   </div>
 
@@ -450,7 +442,7 @@
       <div class="num">1</div>
       <div class="body">
         <h3>Criar sua conta no GitHub</h3>
-        <p>O GitHub é onde seus projetos vão morar com segurança, na nuvem. Pense nele como o seu "Google Drive" para o Mastermind.</p>
+        <p>O GitHub é um serviço online que armazena seus projetos na nuvem e mantém o histórico de versões de cada arquivo.</p>
         <div class="resource">
           <span class="url"><span class="arrow">&rsaquo;</span> github.com</span>
           <span class="tag-go">Clique em Sign up</span>
@@ -461,8 +453,7 @@
           <li>Informe seu e-mail, crie uma senha e escolha um nome de usuário.</li>
           <li>Confirme o e-mail que o GitHub vai te enviar. Pronto.</li>
         </ol>
-        <div class="note"><span class="ico">Dica</span><span>Anote seu nome de usuário e senha em um lugar seguro. Você vai usá-los nos próximos passos.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>Respira fundo: é um cadastro comum, igual a qualquer site. Se travar em alguma etapa, fale com a Julia.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>Anote seu nome de usuário e senha em um lugar seguro. Eles serão usados nos passos seguintes.</span></div>
       </div>
     </article>
 
@@ -473,17 +464,16 @@
         <h3>Instalar o GitHub Desktop
           <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
         </h3>
-        <p>É o programa que conecta seu computador ao GitHub, com botões simples, sem precisar digitar comandos.</p>
+        <p>É o programa que conecta seu computador ao GitHub usando botões, sem necessidade de digitar comandos.</p>
         <div class="resource">
           <span class="url"><span class="arrow">&rsaquo;</span> desktop.github.com</span>
           <span class="tag-go">Download</span>
         </div>
         <ol class="mini">
           <li>Acesse o site e clique em <strong>Download</strong>.</li>
-          <li>Abra o arquivo baixado e instale (o programa abre sozinho ao terminar).</li>
-          <li>Faça login com a conta do GitHub que você criou no Passo 1.</li>
+          <li>Abra o arquivo baixado e conclua a instalação. O programa abre ao terminar.</li>
+          <li>Faça login com a conta do GitHub criada no Passo 1.</li>
         </ol>
-        <div class="calm"><span class="ico">Calma</span><span>Não se preocupe, é só clicar em Next. A instalação cuida de tudo sozinha.</span></div>
       </div>
     </article>
 
@@ -494,18 +484,17 @@
         <h3>Instalar o Node.js
           <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
         </h3>
-        <p>É um motor que o Mastermind usa por baixo dos panos. Você não vai mexer nele, só precisa estar instalado.</p>
+        <p>O Node.js é um programa base. Ele não é usado diretamente por você, mas é necessário para instalar o Claude Code no Passo 5.</p>
         <div class="resource">
           <span class="url"><span class="arrow">&rsaquo;</span> nodejs.org</span>
           <span class="tag-go">Botão LTS</span>
         </div>
         <ol class="mini">
-          <li>Acesse o site e clique no botão grande que diz <strong>LTS</strong> (a versão recomendada).</li>
+          <li>Acesse o site e clique no botão <strong>LTS</strong>, que é a versão recomendada.</li>
           <li>Abra o arquivo baixado.</li>
-          <li>Na instalação, é só clicar em <strong>Next</strong> (avançar) em tudo, até <strong>Finish</strong>.</li>
+          <li>Avance a instalação clicando em <strong>Next</strong> até chegar em <strong>Finish</strong>.</li>
         </ol>
-        <div class="note"><span class="ico">Dica</span><span>Não precisa mudar nenhuma opção. Os valores que já vêm marcados são os corretos.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>Não se preocupe, é só clicar em Next. Se ficar na dúvida, fale com a Julia.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>Mantenha as opções já marcadas por padrão. Elas são as corretas para este uso.</span></div>
       </div>
     </article>
 
@@ -516,17 +505,16 @@
         <h3>Instalar o VS Code
           <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
         </h3>
-        <p>O VS Code é o programa onde tudo vai acontecer. É a "mesa de trabalho" do Mastermind, e é dentro dele que o seu assistente de IA vai viver.</p>
+        <p>O VS Code é o programa onde você vai trabalhar. É dentro dele que você abre a pasta do projeto e usa o Claude Code pelo terminal.</p>
         <div class="resource">
           <span class="url"><span class="arrow">&rsaquo;</span> code.visualstudio.com</span>
           <span class="tag-go">Download Windows / Mac</span>
         </div>
         <ol class="mini">
           <li>Acesse o site acima no seu navegador.</li>
-          <li>Clique no botão <strong>Download for Windows</strong> (ou <strong>Mac</strong>, se for o seu caso).</li>
-          <li>Abra o arquivo baixado e instale normalmente, com <strong>Next</strong> em tudo.</li>
+          <li>Clique em <strong>Download for Windows</strong>, ou <strong>Mac</strong>, conforme o seu sistema.</li>
+          <li>Abra o arquivo baixado e avance a instalação clicando em <strong>Next</strong>.</li>
         </ol>
-        <div class="calm"><span class="ico">Calma</span><span>Não se preocupe, é só clicar em Next. Não precisa mexer em nenhuma configuração.</span></div>
       </div>
     </article>
 
@@ -534,17 +522,17 @@
     <article class="step reveal">
       <div class="num">5</div>
       <div class="body">
-        <h3>Instalar a extensão Claude Code no VS Code</h3>
-        <p>Este é o seu assistente de inteligência artificial, o coração do Mastermind AIOX. Ele se instala <strong>dentro do VS Code</strong>, como uma extensão. É bem simples.</p>
+        <h3>Instalar o Claude Code pelo terminal
+          <span class="os-badges"><span class="os">Windows</span><span class="os">Mac</span></span>
+        </h3>
+        <p>O Claude Code é o assistente de inteligência artificial da Aliança de Ouro. Ele é instalado e usado pelo terminal. O Node.js do Passo 3 é o que permite rodar o comando de instalação.</p>
         <ol class="mini">
-          <li>Abra o <strong>VS Code</strong> que você acabou de instalar.</li>
-          <li>Na barra lateral esquerda, clique no ícone de <strong>extensões</strong> (o ícone de quatro quadradinhos).</li>
-          <li>Na caixa de busca, pesquise por <strong>Claude Code</strong>.</li>
-          <li>Clique no botão <strong>Install</strong> (instalar).</li>
-          <li>Quando ele pedir, faça login com a sua conta <strong>Anthropic</strong>.</li>
+          <li>Abra o terminal. No <strong>Windows</strong>, abra o <strong>PowerShell</strong> pelo menu Iniciar. No <strong>Mac</strong>, abra o <strong>Terminal</strong>.</li>
+          <li>Digite o comando abaixo e pressione <strong>Enter</strong>.</li>
+          <li>Aguarde a instalação terminar. O terminal volta a aceitar comandos quando concluir.</li>
         </ol>
-        <div class="note"><span class="ico">Dica</span><span>O ícone de extensões fica do lado esquerdo da tela. Parece quatro quadradinhos, com um deles se soltando.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>É só pesquisar e clicar em Install. Se não achar o ícone ou travar, fale com a Julia. Ela te mostra em 1 minuto.</span></div>
+        <div class="typebox"><span class="lbl">digite</span> npm install -g @anthropic-ai/claude-code</div>
+        <div class="note"><span class="ico">Dica</span><span>Digite o comando exatamente como está, incluindo o sinal de arroba. Você pode copiar e colar para evitar erros.</span></div>
       </div>
     </article>
 
@@ -553,19 +541,18 @@
       <div class="num">6</div>
       <div class="body">
         <h3>Baixar o seu repositório</h3>
-        <p>Agora vamos trazer a sua pasta de trabalho do Mastermind para o seu computador, usando o GitHub Desktop.</p>
+        <p>Agora você vai baixar a sua pasta de trabalho da Aliança de Ouro para o seu computador, usando o GitHub Desktop.</p>
         <ol class="mini">
           <li>Abra o <strong>GitHub Desktop</strong>.</li>
           <li>No menu superior, clique em <strong>File</strong>, depois <strong>Clone repository</strong>.</li>
           <li>Vá na aba <strong>URL</strong>.</li>
-          <li>No campo de endereço, digite o seu repositório (troque <strong>SEU-NOME</strong> pelo seu nome):</li>
+          <li>No campo de endereço, digite o seu repositório, trocando <strong>SEU-NOME</strong> pelo seu nome:</li>
         </ol>
         <div class="typebox"><span class="lbl">digite</span> gringoles777/mastermind-SEU-NOME</div>
         <ul class="mini" style="margin-top:12px">
           <li>Clique em <strong>Clone</strong> e aguarde o download terminar.</li>
         </ul>
-        <div class="note"><span class="ico">Dica</span><span>Não tem certeza do nome exato do seu repositório? Chame a Julia. Ela te passa em segundos.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>Tranquilo: o GitHub Desktop faz o download sozinho. Se travar em alguma etapa, fale com a Julia.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>O nome exato do seu repositório é informado pela Julia. Em caso de dúvida sobre o nome, entre em contato com ela.</span></div>
       </div>
     </article>
 
@@ -574,15 +561,14 @@
       <div class="num">7</div>
       <div class="body">
         <h3>Abrir a pasta no VS Code</h3>
-        <p>Vamos abrir a pasta que você acabou de baixar dentro do VS Code. A partir daqui, é tudo num lugar só.</p>
+        <p>Agora você vai abrir no VS Code a pasta que baixou no Passo 6. É dentro dela que você vai trabalhar.</p>
         <ol class="mini">
           <li>Abra o <strong>VS Code</strong>.</li>
           <li>No menu superior, clique em <strong>File</strong>, depois <strong>Open Folder</strong> (Arquivo, Abrir Pasta).</li>
-          <li>Navegue até a pasta que você clonou no GitHub Desktop (no Passo 6).</li>
+          <li>Navegue até a pasta clonada pelo GitHub Desktop no Passo 6.</li>
           <li>Selecione a pasta e clique em <strong>Abrir</strong>.</li>
         </ol>
-        <div class="note"><span class="ico">Dica</span><span>O Claude Code vai aparecer na barra lateral do VS Code. Sinal de que está tudo certo.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>É só escolher a pasta e abrir, nada além disso. Se não encontrar a pasta, fale com a Julia.</span></div>
+        <div class="note"><span class="ico">Dica</span><span>O nome da pasta aparece na barra lateral esquerda do VS Code quando ela é aberta corretamente.</span></div>
       </div>
     </article>
 
@@ -590,17 +576,17 @@
     <article class="step reveal">
       <div class="num">8</div>
       <div class="body">
-        <h3>Como usar o Claude Code</h3>
-        <p>Último passo. Agora você vai conversar com os agentes do Mastermind. A partir daqui, a jornada começa.</p>
+        <h3>Abrir o Claude Code e começar</h3>
+        <p>Com a pasta do projeto aberta no VS Code, você vai abrir o terminal integrado e iniciar o Claude Code.</p>
         <ol class="mini">
-          <li>Clique no ícone do <strong>Claude Code</strong> na barra lateral do VS Code.</li>
-          <li>Uma janela de <strong>chat</strong> vai abrir do lado.</li>
-          <li>É por ali que você vai conversar com os agentes do Mastermind.</li>
-          <li>Para começar, digite o comando abaixo e pressione <strong>Enter</strong>:</li>
+          <li>No menu superior do VS Code, clique em <strong>Terminal</strong>, depois <strong>New Terminal</strong>. O atalho é <strong>Ctrl + crase</strong>.</li>
+          <li>No terminal que abrir na parte de baixo, digite <strong>claude</strong> e pressione <strong>Enter</strong>.</li>
+          <li>Na primeira vez, será solicitado o login na sua conta <strong>Anthropic</strong>. Conclua o login.</li>
+          <li>Para começar a trabalhar, digite o comando abaixo e pressione <strong>Enter</strong>:</li>
         </ol>
-        <div class="typebox"><span class="lbl">digite</span> @workspace-chief</div>
-        <div class="note"><span class="ico">Pronto</span><span>Você está dentro do Mastermind AIOX. Bem-vindo(a) ao time.</span></div>
-        <div class="calm"><span class="ico">Calma</span><span>Não tem certo ou errado aqui. É só conversar como você faria por mensagem. Qualquer dúvida, fale com a Julia.</span></div>
+        <div class="typebox"><span class="lbl">primeiro</span> claude</div>
+        <div class="typebox"><span class="lbl">depois</span> @workspace-chief</div>
+        <div class="note"><span class="ico">Dica</span><span>A crase fica na tecla acima do Tab, no canto superior esquerdo do teclado. Após o login inicial, o comando claude não pede login de novo.</span></div>
       </div>
     </article>
 
@@ -647,11 +633,10 @@
   <div class="help-card reveal">
     <div class="av">J</div>
     <h3>Dúvidas? Fale com a Julia.</h3>
-    <p>Travou em algum passo? Não entendeu uma palavra? Sem problema nenhum.</p>
-    <p>A Julia está aqui para te ajudar do começo ao fim.</p>
-    <p class="small">Nenhuma pergunta é boba. Chame sempre que precisar.</p>
+    <p>Em caso de dúvida em qualquer passo deste guia, entre em contato com a Julia.</p>
+    <p class="small">Ela acompanha o processo de configuração e uso da Aliança de Ouro.</p>
   </div>
-  <p class="sign">Mastermind AIOX &middot; feito com cuidado para você começar com o pé direito</p>
+  <p class="sign">Aliança de Ouro &middot; guia de primeiros passos</p>
 </footer>
 
 <script>
