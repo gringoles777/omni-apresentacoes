@@ -269,6 +269,16 @@
     color:var(--color-gray);font-family:var(--font-mono);font-weight:500;
     font-size:.6rem;letter-spacing:var(--tracking-label);text-transform:uppercase;flex-shrink:0;
   }
+  .typebox .cmd{flex:1;white-space:pre-wrap;word-break:break-all}
+  .typebox .copy-btn{
+    flex-shrink:0;font-family:var(--font-display);text-transform:uppercase;
+    letter-spacing:var(--tracking-label);font-size:.62rem;font-weight:600;cursor:pointer;
+    background:var(--gold-10);color:var(--color-gold);
+    border:1px solid var(--gold-30);border-radius:var(--radius-soft);
+    padding:8px 14px;transition:background .2s,border-color .2s,color .2s;
+  }
+  .typebox .copy-btn:hover{background:var(--gold-20);border-color:var(--color-gold)}
+  .typebox .copy-btn.ok{background:var(--color-gold);color:var(--color-black);border-color:var(--color-gold)}
 
   /* notes */
   .note,.calm{
@@ -418,12 +428,11 @@
   <img class="hero-logo" src="slides/_assets/alianca-logo.png" alt="Aliança de Ouro">
   <span class="kicker-top"><span class="dot"></span> Aliança de Ouro | Guia de Boas-Vindas</span>
   <h1>Aliança de Ouro<br><span class="serif-line">seus primeiros passos.</span></h1>
-  <p class="sub">Este guia prepara tudo o que você precisa para começar. São 8 passos, na ordem apresentada. Dentro do programa você vai aprender a usar a ferramenta AIOX.</p>
+  <p class="sub">Este guia prepara tudo o que você precisa para começar. São 5 passos, na ordem apresentada. Dentro do programa você vai aprender a usar a ferramenta AIOX.</p>
   <p class="reassure">O conteúdo é direto e em linguagem simples. <strong>Cada passo diz exatamente o que clicar, baixar e digitar.</strong></p>
 
   <div class="rail" id="rail">
-    <span class="pill"></span><span class="pill"></span><span class="pill"></span><span class="pill"></span>
-    <span class="pill"></span><span class="pill"></span><span class="pill"></span><span class="pill"></span>
+    <span class="pill"></span><span class="pill"></span><span class="pill"></span><span class="pill"></span><span class="pill"></span>
   </div>
 </header>
 
@@ -538,99 +547,27 @@
         <ol class="mini">
           <li>Abra o <strong>VS Code</strong>. Essa primeira tela escrita "Visual Studio Code" é normal, pode deixar como está.</li>
           <li>Agora abra o terminal. Na barra de menu lá em cima, clique em <strong>View</strong> (Exibir) e depois em <strong>Terminal</strong>. Vai abrir uma faixa preta na parte de baixo da tela: esse é o terminal.</li>
-          <li>Clique dentro dessa faixa preta, digite o comando abaixo e pressione <strong>Enter</strong>.</li>
-          <li>Aguarde a instalação terminar. Pode levar um ou dois minutos. Quando o terminal parar de escrever sozinho e voltar a piscar o cursor, terminou.</li>
+          <li>Copie e cole o comando abaixo dentro dessa faixa preta e pressione <strong>Enter</strong>.</li>
         </ol>
-        <div class="typebox"><span class="lbl">digite</span> npm install -g @anthropic-ai/claude-code</div>
-        <div class="note"><span class="ico">Dica</span><span>Se você não achar o menu Terminal ou View, use o atalho do teclado: segure a tecla <strong>Ctrl</strong> e aperte a tecla de crase, que fica logo acima do Tab, no canto superior esquerdo do teclado. Digite o comando exatamente como está, incluindo o sinal de arroba. O ideal é copiar e colar para não errar.</span></div>
+        <div class="typebox">
+          <span class="lbl">copie e cole</span>
+          <code class="cmd">npm install -g @anthropic-ai/claude-code</code>
+          <button class="copy-btn" type="button" onclick="copyCmd(this)">Copiar</button>
+        </div>
+        <div class="note"><span class="ico">Dica</span><span>Aguarde a instalação terminar. Pode levar um ou dois minutos. Quando o terminal parar de escrever sozinho e voltar a piscar o cursor, terminou. Se não achar o menu View ou Terminal, use o atalho: segure <strong>Ctrl</strong> e aperte a tecla de crase, que fica acima do Tab, no canto superior esquerdo do teclado.</span></div>
         <div class="note" style="border-color:var(--gold-30)"><span class="ico">Observação</span><span>Se aparecer um painel escrito "Chat" ou "Build with Agent" do lado direito da tela, pode fechá-lo no X do canto superior direito dele. Não é o Claude Code, é outra ferramenta que você não vai usar.</span></div>
-      </div>
-    </article>
-
-    <!-- STEP 6 -->
-    <article class="step reveal">
-      <div class="num">6</div>
-      <div class="body">
-        <h3>Baixar o seu repositório</h3>
-        <p>Agora você vai baixar a sua pasta de trabalho da Aliança de Ouro para o seu computador, usando o mesmo terminal do VS Code.</p>
-        <ol class="mini">
-          <li>Ainda no terminal do VS Code, digite o comando abaixo, trocando <strong>SEU-NOME</strong> pelo seu nome.</li>
-          <li>Pressione <strong>Enter</strong>.</li>
-          <li>Na primeira vez, vai abrir uma janela pedindo para entrar na sua conta do <strong>GitHub</strong>. Faça o login.</li>
-          <li>A cópia do projeto vai ser baixada para o seu computador.</li>
-        </ol>
-        <div class="typebox"><span class="lbl">digite</span> git clone https://github.com/gringoles777/mastermind-SEU-NOME.git</div>
-        <div class="note"><span class="ico">Dica</span><span>O nome exato do seu repositório é informado pela Julia. Em caso de dúvida sobre o nome, entre em contato com ela.</span></div>
-      </div>
-    </article>
-
-    <!-- STEP 7 -->
-    <article class="step reveal">
-      <div class="num">7</div>
-      <div class="body">
-        <h3>Abrir o projeto no VS Code</h3>
-        <p>Agora você vai abrir no VS Code a pasta que baixou no Passo 6. É dentro dela que você vai trabalhar.</p>
-        <ol class="mini">
-          <li>No menu superior do VS Code, clique em <strong>File</strong>, depois <strong>Open Folder</strong> (Arquivo, Abrir Pasta).</li>
-          <li>Selecione a pasta que acabou de ser baixada. O nome dela é <strong>mastermind-SEU-NOME</strong>.</li>
-          <li>Clique em <strong>Abrir</strong>.</li>
-        </ol>
-        <div class="note"><span class="ico">Dica</span><span>O nome da pasta aparece na barra lateral esquerda do VS Code quando ela é aberta corretamente.</span></div>
-      </div>
-    </article>
-
-    <!-- STEP 8 -->
-    <article class="step reveal">
-      <div class="num">8</div>
-      <div class="body">
-        <h3>Começar a usar</h3>
-        <p>Com a pasta do projeto aberta no VS Code, você vai abrir o terminal integrado de novo e iniciar o Claude Code.</p>
-        <ol class="mini">
-          <li>Abra o terminal integrado pelo menu <strong>Terminal</strong>, depois <strong>New Terminal</strong>.</li>
-          <li>Digite <strong>claude</strong> e pressione <strong>Enter</strong>.</li>
-          <li>Na primeira vez, vai pedir para fazer login na conta da <strong>Anthropic</strong>. Conclua o login.</li>
-          <li>Depois de entrar, digite o comando abaixo e pressione <strong>Enter</strong> para começar a trabalhar:</li>
-        </ol>
-        <div class="typebox"><span class="lbl">primeiro</span> claude</div>
-        <div class="typebox"><span class="lbl">depois</span> @workspace-chief</div>
-        <div class="note"><span class="ico">Dica</span><span>Após o login inicial, o comando claude não pede login de novo.</span></div>
+        <div class="note" style="border-color:var(--gold-30)"><span class="ico">Windows</span><span>Se aparecer uma janela escura falando em "Subsistema do Windows para Linux" ou "WSL", feche essa janela. Você não precisa do WSL. No VS Code, ao lado do botão <strong>+</strong> do terminal tem uma <strong>setinha para baixo</strong>: clique nela e escolha <strong>PowerShell</strong>. Vai abrir um terminal novo, e aí você cola o comando de novo.</span></div>
       </div>
     </article>
 
   </div>
 
-  <!-- ============ DAY-TO-DAY ============ -->
+  <!-- ============ ENCERRAMENTO ============ -->
   <div class="sec-head reveal">
-    <span class="kicker">No dia a dia</span>
-    <h2>Salvar e atualizar</h2>
-    <p>Duas rotinas simples que você vai repetir sempre.</p>
+    <span class="kicker">Tudo pronto</span>
+    <h2>Você concluiu a preparação</h2>
+    <p>Com o GitHub, o Git, o Node.js, o VS Code e o Claude Code instalados, sua máquina está pronta. O restante (baixar o material e começar a trabalhar) vamos fazer juntos no dia.</p>
     <hr class="divider-tech">
-  </div>
-
-  <div class="panels">
-
-    <div class="panel reveal">
-      <span class="ptag">Salvar</span>
-      <h3>Como salvar seu trabalho</h3>
-      <p>Quando terminar, peça ao próprio Claude Code para salvar. No terminal onde ele está aberto:</p>
-      <div class="flow">
-        <div class="row"><span class="n">1</span><span>Escreva algo como: <code>salve e suba meu trabalho</code>.</span></div>
-        <div class="row"><span class="n">2</span><span>Pressione <strong>Enter</strong>.</span></div>
-        <div class="row"><span class="n">3</span><span>Ele guarda as alterações e envia para o GitHub automaticamente.</span></div>
-      </div>
-    </div>
-
-    <div class="panel reveal">
-      <span class="ptag">Atualizar</span>
-      <h3>Como receber atualizações</h3>
-      <p>Para receber as novidades do material, é só pedir ao Claude Code. No terminal onde ele está aberto:</p>
-      <div class="flow">
-        <div class="row"><span class="n">1</span><span>Escreva: <code>baixe as últimas atualizações do projeto</code>.</span></div>
-        <div class="row"><span class="n">2</span><span>Pressione <strong>Enter</strong>.</span></div>
-        <div class="row"><span class="n">3</span><span>Ele cuida disso para você. Pronto, você está com a versão mais nova.</span></div>
-      </div>
-    </div>
-
   </div>
 
 </div>
@@ -658,6 +595,19 @@
     const pills=document.querySelectorAll('#rail .pill');
     pills.forEach((p,i)=>setTimeout(()=>p.classList.add('on'), 250 + i*150));
   });
+
+  // Copiar comando
+  function copyCmd(btn){
+    var code = btn.parentNode.querySelector('.cmd');
+    if(!code) return;
+    var text = code.innerText;
+    navigator.clipboard.writeText(text).then(function(){
+      var original = btn.innerText;
+      btn.innerText = 'Copiado';
+      btn.classList.add('ok');
+      setTimeout(function(){ btn.innerText = original; btn.classList.remove('ok'); }, 1800);
+    });
+  }
 </script>
 
 </body>
