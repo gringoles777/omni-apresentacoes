@@ -67,6 +67,15 @@
   .risk h3{font-family:var(--font-display);font-weight:600;font-size:1.35rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.01em}
   .risk p{color:var(--cream-70);font-size:.96rem}
 
+  /* ───── Novidade (vs ChatGPT) ───── */
+  .novidade{background:linear-gradient(180deg,var(--black) 0%,#0a0f1a 100%)}
+  .nov-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:8px}
+  .nov{background:var(--dark-elev);border:1px solid var(--teal);border-top:3px solid var(--teal);border-radius:10px;padding:24px}
+  .nov .ico{font-size:1.6rem;margin-bottom:10px}
+  .nov h4{font-family:var(--font-display);font-weight:600;font-size:1.02rem;margin-bottom:7px;letter-spacing:.01em;color:#7fd8cc}
+  .nov p{color:var(--cream-70);font-size:.9rem}
+  .nov .vs{display:block;margin-top:10px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.5px;color:var(--cream-30)}
+
   /* ───── Fase Zero ───── */
   .phase0{background:var(--black)}
   .phase0-card{background:linear-gradient(160deg,var(--navy) 0%,var(--dark) 100%);border:1px solid var(--teal);border-radius:12px;padding:34px;box-shadow:var(--shadow-elev)}
@@ -82,18 +91,25 @@
   .day-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
   .day-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.6rem,7vw,4.2rem);line-height:.9;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .day-title{font-family:var(--font-serif);font-size:clamp(1.2rem,2.6vw,1.8rem);color:var(--cream);font-style:italic}
-  .day-goal{display:inline-flex;align-items:center;gap:8px;background:var(--gold-10);border:1px solid var(--gold-20);color:var(--gold-light);font-size:.84rem;font-family:var(--font-mono);letter-spacing:.5px;padding:8px 14px;border-radius:8px;margin-bottom:30px}
+  .day-goal{display:inline-flex;align-items:center;gap:8px;background:var(--gold-10);border:1px solid var(--gold-20);color:var(--gold-light);font-size:.84rem;font-family:var(--font-mono);letter-spacing:.5px;padding:8px 14px;border-radius:8px;margin-bottom:14px}
+  .period{display:flex;align-items:center;gap:12px;margin:26px 0 16px;color:var(--gold);font-family:var(--font-display);font-size:.9rem;letter-spacing:3px;text-transform:uppercase}
+  .period::after{content:"";flex:1;height:1px;background:var(--gold-15)}
+  .period.free{color:var(--teal)}
+  .period.free::after{background:rgba(42,157,143,.25)}
 
   .timeline{display:grid;gap:0;border-left:2px solid var(--gold-15);margin-left:8px}
   .block{position:relative;padding:0 0 26px 30px}
   .block:last-child{padding-bottom:0}
   .block::before{content:"";position:absolute;left:-9px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--dark);border:2px solid var(--gold);box-shadow:0 0 12px var(--gold-20)}
   .block.lunch::before{border-color:var(--cream-30);box-shadow:none}
+  .block.tealdot::before{border-color:var(--teal);box-shadow:0 0 12px rgba(42,157,143,.3)}
   .block .slot{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
   .block.lunch .slot{color:var(--cream-30)}
+  .block.tealdot .slot{color:var(--teal)}
   .block h4{font-family:var(--font-display);font-weight:500;font-size:1.18rem;margin-bottom:6px;letter-spacing:.01em}
   .block p{color:var(--cream-70);font-size:.95rem}
   .block .pill{display:inline-block;margin-top:8px;background:var(--dark-elev);border:1px solid var(--gold-15);color:var(--gold-light);font-size:.74rem;font-family:var(--font-mono);letter-spacing:1px;padding:4px 10px;border-radius:50px}
+  .block .pill.teal{border-color:var(--teal);color:#7fd8cc}
 
   /* ───── Decisões ───── */
   .decisions{background:linear-gradient(180deg,var(--black) 0%,var(--navy) 100%);border-top:1px solid var(--gold-15)}
@@ -111,7 +127,7 @@
 
   @media (max-width:600px){
     .day-head{gap:12px}
-    .risk,.phase0-card,.dec{padding:24px}
+    .risk,.phase0-card,.dec,.nov{padding:24px}
   }
 </style>
 </head>
@@ -133,8 +149,8 @@
   <section class="hero">
     <div class="wrap">
       <div class="eyebrow">Evento presencial · 3 dias · Imersão</div>
-      <h1>Da curiosidade ao<br><span class="accent">primeiro resultado</span></h1>
-      <p class="lead">Ensinando mentores e terapeutas a instalar e usar o AIOX nos próprios negócios — mesmo começando do zero absoluto.</p>
+      <h1>Da primeira página no ar<br><span class="accent">ao projeto próprio</span></h1>
+      <p class="lead">Ensinando mentores e terapeutas a usar o AIOX nos próprios negócios — fazendo o que o ChatGPT não faz, mesmo começando sem nenhuma bagagem técnica.</p>
       <div class="hero-meta">
         <span class="chip">👥 Público: mentores & terapeutas</span>
         <span class="chip">🎯 Nível: zero experiência técnica</span>
@@ -149,17 +165,52 @@
     <div class="wrap">
       <span class="sec-label">Leitura estratégica</span>
       <h2 class="sec-title">O sucesso não está no conteúdo</h2>
-      <p class="sec-intro">Está em vencer dois gargalos. Todo o cronograma foi desenhado em torno deles — ignorá-los é onde eventos assim costumam desandar.</p>
+      <p class="sec-intro">Está em vencer dois pontos sensíveis. O cronograma foi desenhado em torno deles.</p>
       <div class="risk-grid">
         <div class="risk">
-          <div class="num">Risco 01</div>
-          <h3>A instalação</h3>
-          <p>Público zero-técnico instalando Node, terminal, Git e chaves de API ao vivo é onde 80% dos eventos travam. Se 30 pessoas empacam no setup, perde-se o Dia 1 inteiro e o clima cai. <strong style="color:var(--gold-light)">Solução: Fase Zero + regra "ninguém avança travado".</strong></p>
+          <div class="num">Ponto 01</div>
+          <h3>A conferência de ambiente</h3>
+          <p>Os alunos já chegam com tudo instalado (Fase Zero), então a manhã do Dia 1 é só <strong style="color:var(--gold-light)">conferir</strong> — rápido. Mesmo assim, vale ter monitores para resgatar quem instalou errado, sem segurar a turma. Regra: ninguém avança travado.</p>
         </div>
         <div class="risk">
-          <div class="num">Risco 02</div>
+          <div class="num">Ponto 02</div>
           <h3>O choque de paradigma</h3>
-          <p>Eles só conhecem o ChatGPT — uma caixinha no navegador. AIOX é CLI + agentes: outro planeta mental. Sem um momento "uau" logo cedo, desistem antes de entender o valor. <strong style="color:var(--gold-light)">Solução: caso real funcionando na 1ª hora.</strong></p>
+          <p>Eles só conhecem o ChatGPT — uma caixinha no navegador. AIOX é outra coisa: comanda uma equipe de IAs que <strong style="color:var(--gold-light)">cria e publica coisas de verdade</strong>. Sem um "uau" cedo, não entendem o valor. Por isso o Dia 1 já coloca algo real no ar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE É NOVIDADE (vs ChatGPT) -->
+  <section class="novidade">
+    <div class="wrap">
+      <span class="sec-label">O diferencial</span>
+      <h2 class="sec-title">O que eles vão construir<br>(e o ChatGPT não faz)</h2>
+      <p class="sec-intro">Nada de "escreva uma copy" ou "me dê ideias de post" — isso eles já fazem no ChatGPT. Os entregáveis do evento são coisas que saem prontas, publicadas e funcionando no mundo real.</p>
+      <div class="nov-grid">
+        <div class="nov">
+          <div class="ico">🌐</div>
+          <h4>Página no ar</h4>
+          <p>Uma landing/página de captação publicada com link real, pronta pra mandar pro cliente.</p>
+          <span class="vs">ChatGPT só escreve o texto — não publica.</span>
+        </div>
+        <div class="nov">
+          <div class="ico">🧩</div>
+          <h4>Quiz / funil interativo</h4>
+          <p>Um teste de perfil que o lead responde e cai num resultado — captando contato automaticamente.</p>
+          <span class="vs">ChatGPT não monta a página interativa.</span>
+        </div>
+        <div class="nov">
+          <div class="ico">🎨</div>
+          <h4>Carrossel renderizado</h4>
+          <p>Os cards do Instagram já como imagens prontas pra postar — não só a ideia do texto.</p>
+          <span class="vs">ChatGPT entrega ideia; o AIOX entrega a arte.</span>
+        </div>
+        <div class="nov">
+          <div class="ico">⚙️</div>
+          <h4>Automação simples</h4>
+          <p>Uma resposta ou rotina automática (ex: mensagem de WhatsApp) rodando sozinha.</p>
+          <span class="vs">ChatGPT não executa nem integra nada.</span>
         </div>
       </div>
     </div>
@@ -170,12 +221,12 @@
     <div class="wrap">
       <span class="sec-label">Antes de tudo</span>
       <h2 class="sec-title">Fase Zero — Pré-evento</h2>
-      <p class="sec-intro">Uma semana antes. Inegociável. O objetivo é simples: ninguém chega no Dia 1 com a máquina "crua".</p>
+      <p class="sec-intro">Uma semana antes. É o que permite o Dia 1 ser rápido: todos já chegam com o ambiente instalado.</p>
       <div class="phase0-card">
         <span class="tag">1 semana antes · Online</span>
         <ul class="check-list">
-          <li><span><strong>Checklist de pré-requisitos enviado</strong> — Node 18+, conta GitHub e Claude Code instalado, com vídeo curtinho passo a passo.</span></li>
-          <li><span><strong>Sessão de "setup assistido" (opcional, 1h)</strong> — online, 2 dias antes, para resgatar quem travou na instalação.</span></li>
+          <li><span><strong>Checklist de instalação enviado</strong> — Node 18+, conta GitHub e Claude Code, com vídeo curtinho passo a passo. Todos instalam ANTES do evento.</span></li>
+          <li><span><strong>Sessão de "setup assistido" (opcional, 1h)</strong> — online, 2 dias antes, para resgatar quem travou na instalação em casa.</span></li>
           <li><span><strong>Kit de boas-vindas</strong> — o que é o AIOX em 1 página + o que cada um vai sair construindo no fim dos 3 dias.</span></li>
         </ul>
       </div>
@@ -187,41 +238,43 @@
     <div class="wrap">
       <div class="day-head">
         <div class="day-num">01</div>
-        <div class="day-title">Da curiosidade ao primeiro resultado</div>
+        <div class="day-title">Primeiro contato e direção</div>
       </div>
-      <div class="day-goal">🎯 Meta do dia: todos com AIOX rodando + 1 entregável real nas mãos</div>
+      <div class="day-goal">🎯 Meta: ambiente confirmado · 1 coisa simples publicada no ar · projeto definido</div>
+
+      <div class="period">☀️ Manhã</div>
       <div class="timeline">
         <div class="block">
-          <div class="slot">Manhã · Bloco 1</div>
+          <div class="slot">Bloco 1</div>
           <h4>Abertura + mudança de mentalidade</h4>
-          <p>"Você não vai usar uma IA — vai comandar uma equipe de IAs." Demonstração de um caso real OMNI funcionando. O efeito "uau" que ancora o resto do evento.</p>
+          <p>"Você não vai usar uma IA — vai comandar uma equipe de IAs que cria e publica coisas." Enquadramento do que torna o AIOX diferente de tudo que eles já viram.</p>
         </div>
         <div class="block">
-          <div class="slot">Manhã · Bloco 2</div>
-          <h4>Setup garantido</h4>
-          <p>Instalação com monitores circulando pela sala. Checkpoint coletivo: todo mundo com o AIOX instalado e respondendo antes de avançar.</p>
-          <span class="pill">⚠ Regra: ninguém avança travado</span>
-        </div>
-        <div class="block lunch">
-          <div class="slot">Almoço</div>
-          <h4>Intervalo</h4>
-          <p>Pausa e networking.</p>
+          <div class="slot">Bloco 2</div>
+          <h4>Conferência de ambiente</h4>
+          <p>Como já chegam instalados, é só checar que o AIOX responde em cada máquina. Monitores resolvem exceções pontuais sem segurar a turma.</p>
+          <span class="pill">⚡ Rápido · ninguém avança travado</span>
         </div>
         <div class="block">
-          <div class="slot">Tarde · Bloco 1</div>
-          <h4>Os 5 comandos que importam</h4>
-          <p>Falar com um agente, pedir uma tarefa, entender o fluxo — sem decoreba técnica. O mínimo viável para se virar sozinho.</p>
+          <div class="slot">Bloco 3</div>
+          <h4>Mão na massa: algo bem simples (mas real)</h4>
+          <p>Primeiro "uau": cada aluno publica <strong>uma paginazinha simples no ar</strong> (ex: um cartão/bio profissional com link). Simples de fazer — impossível de fazer no ChatGPT. Saem da manhã com um link vivo nas mãos.</p>
+          <span class="pill">📦 Entregável-novidade</span>
+        </div>
+      </div>
+
+      <div class="period">🌙 Tarde</div>
+      <div class="timeline">
+        <div class="block">
+          <div class="slot">Bloco 1</div>
+          <h4>Vitrine de cases OMNI</h4>
+          <p>Mostramos projetos reais que a OMNI já construiu com o AIOX — quiz de perfil publicado, páginas no ar, carrosséis automáticos, automações de WhatsApp. Inspiração concreta do que é possível.</p>
         </div>
         <div class="block">
-          <div class="slot">Tarde · Bloco 2</div>
-          <h4>Mão na massa guiada</h4>
-          <p>Cada aluno gera <strong>1 entregável simples do próprio negócio</strong> — copy de uma oferta, ideia de conteúdo, roteiro de atendimento. Resultado visível no Dia 1.</p>
-          <span class="pill">📦 Entregável do dia</span>
-        </div>
-        <div class="block">
-          <div class="slot">Encerramento</div>
-          <h4>Lição de casa leve + gancho</h4>
-          <p>Cada um define QUAL projeto vai atacar nos próximos 2 dias. Sai com tarefa e ansiedade boa para o Dia 2.</p>
+          <div class="slot">Bloco 2</div>
+          <h4>Brainstorming: definindo os projetos</h4>
+          <p>Sessão guiada onde cada aluno escolhe o projeto que vai construir nos Dias 2 e 3, ancorado no próprio negócio. Saem do Dia 1 com direção clara.</p>
+          <span class="pill">🎯 Projeto definido</span>
         </div>
       </div>
     </div>
@@ -234,25 +287,26 @@
         <div class="day-num">02</div>
         <div class="day-title">Construindo no meu negócio</div>
       </div>
-      <div class="day-goal">🎯 Meta do dia: cada aluno tira um projeto real do papel, com suporte</div>
+      <div class="day-goal">🎯 Meta: o projeto real saindo do papel, com suporte de perto</div>
+
+      <div class="period">☀️ Manhã</div>
       <div class="timeline">
         <div class="block">
-          <div class="slot">Manhã · Bloco 1</div>
-          <h4>Escolhendo o projeto certo</h4>
-          <p>Mini-aula: o que dá para entregar em 2 dias. Como recortar o escopo para terminar com algo pronto — e não com 5 coisas pela metade.</p>
+          <div class="slot">Bloco 1</div>
+          <h4>Recorte de escopo</h4>
+          <p>Mini-aula: como recortar o projeto pra terminar com algo pronto em 2 dias — e não com 5 coisas pela metade.</p>
         </div>
         <div class="block">
-          <div class="slot">Manhã · Bloco 2</div>
+          <div class="slot">Bloco 2</div>
           <h4>Hands-on 1</h4>
           <p>Começam o projeto, com mentores circulando (≈ 1 monitor para cada 6–8 alunos). Suporte de perto é o que mantém o ritmo de gente zero-técnica.</p>
         </div>
-        <div class="block lunch">
-          <div class="slot">Almoço</div>
-          <h4>Intervalo</h4>
-          <p>Pausa e networking.</p>
-        </div>
+      </div>
+
+      <div class="period">🌙 Tarde</div>
+      <div class="timeline">
         <div class="block">
-          <div class="slot">Tarde</div>
+          <div class="slot">Bloco 1</div>
           <h4>Hands-on 2 + pitstops coletivos</h4>
           <p>Continuação com paradas de dúvida em grupo: travou no mesmo ponto que vários? Para todo mundo, resolve junto, segue. Evita gargalo individual virar gargalo da sala.</p>
         </div>
@@ -270,27 +324,39 @@
     <div class="wrap">
       <div class="day-head">
         <div class="day-num">03</div>
-        <div class="day-title">Finalizando e levando pra vida</div>
+        <div class="day-title">Finalizar, mostrar e respirar</div>
       </div>
-      <div class="day-goal">🎯 Meta do dia: projeto entregue + autonomia para continuar sozinho</div>
+      <div class="day-goal">🎯 Meta: projeto entregue · autonomia pra continuar sozinho</div>
+
+      <div class="period">☀️ Manhã</div>
       <div class="timeline">
         <div class="block">
-          <div class="slot">Manhã</div>
+          <div class="slot">Bloco 1</div>
           <h4>Hands-on final</h4>
           <p>Bloco dedicado a fechar o projeto. Foco total em cruzar a linha de chegada com algo funcionando.</p>
         </div>
         <div class="block">
-          <div class="slot">Tarde · Bloco 1</div>
+          <div class="slot">Bloco 2</div>
           <h4>Showcase</h4>
           <p>Cada aluno apresenta o que construiu. O momento mais poderoso do evento — prova viva de que saíram do zero e entregaram algo real.</p>
           <span class="pill">⭐ Ponto alto do evento</span>
         </div>
-        <div class="block">
-          <div class="slot">Tarde · Bloco 2</div>
-          <h4>"E agora?"</h4>
-          <p>Como continuar sozinho depois do evento: onde pedir ajuda, como evoluir o projeto, próximos passos práticos. Transição da mão dada para a autonomia.</p>
+      </div>
+
+      <div class="period free">🌙 Tarde — mais livre</div>
+      <div class="timeline">
+        <div class="block tealdot">
+          <div class="slot">Bloco leve</div>
+          <h4>"E agora?" — continuando sozinho</h4>
+          <p>Conversa curta: como evoluir o projeto depois do evento, onde pedir ajuda, próximos passos. Transição da mão dada para a autonomia.</p>
         </div>
-        <div class="block">
+        <div class="block tealdot">
+          <div class="slot">Tarde aberta</div>
+          <h4>Mentorias, networking & respiro</h4>
+          <p>Tarde propositalmente mais leve: mentorias individuais para quem quiser destravar algo específico, networking entre os alunos e fechamento sem pressa.</p>
+          <span class="pill teal">🌿 Ritmo leve</span>
+        </div>
+        <div class="block tealdot">
           <div class="slot">Encerramento</div>
           <h4>Celebração + comunidade</h4>
           <p>Fechamento emocional e convite para o suporte/comunidade pós-evento. Eles saem pertencendo a algo.</p>
@@ -306,24 +372,24 @@
       <h2 class="sec-title">Decisões que sustentam o evento</h2>
       <div class="dec-grid">
         <div class="dec">
+          <div class="ico">📦</div>
+          <h4>Entregável = novidade</h4>
+          <p>Nada que o ChatGPT já faça. Todo entregável é algo publicado, renderizado ou rodando — resultado que eles não conseguiriam sozinhos.</p>
+        </div>
+        <div class="dec">
           <div class="ico">🧑‍🏫</div>
           <h4>Proporção de monitores</h4>
           <p>1 para cada 6–8 alunos nos blocos hands-on. Sem isso, gente zero-técnica empaca e o ritmo da sala morre.</p>
         </div>
         <div class="dec">
-          <div class="ico">🚦</div>
-          <h4>Ninguém avança travado</h4>
-          <p>Regra de ouro no setup do Dia 1 — o ponto de maior risco do evento inteiro. Checkpoint coletivo antes de seguir.</p>
-        </div>
-        <div class="dec">
-          <div class="ico">📦</div>
-          <h4>Entregável visível por dia</h4>
-          <p>Gente de negócio precisa VER resultado, não teoria. Cada dia fecha com algo concreto nas mãos.</p>
-        </div>
-        <div class="dec">
           <div class="ico">🗂️</div>
           <h4>Trilhas de projeto prontas</h4>
-          <p>4–5 projetos pré-mapeados (landing page, calendário de conteúdo, roteiro de atendimento…) para quem não souber o que escolher.</p>
+          <p>4–5 projetos pré-mapeados (página de captação, quiz, carrossel, automação) pro brainstorming do Dia 1 não travar quem não souber o que escolher.</p>
+        </div>
+        <div class="dec">
+          <div class="ico">🌿</div>
+          <h4>Tarde do Dia 3 leve</h4>
+          <p>Depois de 3 dias intensos, a tarde final é de respiro: mentorias sob demanda e networking. Fecha o evento no clima certo.</p>
         </div>
       </div>
     </div>
