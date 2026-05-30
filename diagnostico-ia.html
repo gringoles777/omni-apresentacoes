@@ -380,6 +380,19 @@
       <p class="field-help">Como podemos te chamar?</p>
     </article>
 
+    <!-- EMAIL -->
+    <article class="q-card reveal">
+      <div class="q-head">
+        <div class="q-num">&middot;</div>
+        <div class="q-meta">
+          <span class="q-kicker">Antes de começar</span>
+          <p class="q-text">Insira aqui seu e-mail atual (o mesmo que você vai usar para se cadastrar no GitHub)</p>
+        </div>
+      </div>
+      <input type="email" id="email" class="field-input" placeholder="Digite seu e-mail" autocomplete="email">
+      <p class="field-help">Use o mesmo e-mail que vai cadastrar no GitHub.</p>
+    </article>
+
     <!-- Q1 -->
     <article class="q-card reveal" data-q="0">
       <div class="q-head">
@@ -465,7 +478,7 @@
   <!-- ============ CALCULATE ============ -->
   <div class="calc-zone" id="calcZone">
     <button type="button" class="btn-calc" id="btnCalc">Ver meu resultado</button>
-    <div class="alert" id="alert">Por favor, preencha seu nome, responda as 4 perguntas e descreva seu objetivo antes de ver o resultado.</div>
+    <div class="alert" id="alert">Por favor, preencha seu nome, um e-mail válido, responda as 4 perguntas e descreva seu objetivo antes de ver o resultado.</div>
   </div>
 
   <!-- ============ RESULT ============ -->
@@ -562,8 +575,10 @@
 
   document.getElementById('btnCalc').addEventListener('click', function(){
     var nome = document.getElementById('nome').value.trim();
+    var email = document.getElementById('email').value.trim();
     var objetivo = document.getElementById('objetivo').value.trim();
-    if(!nome || answeredCount() < TOTAL || !objetivo){
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!nome || !emailOk || answeredCount() < TOTAL || !objetivo){
       var alertEl = document.getElementById('alert');
       alertEl.classList.add('show');
       alertEl.scrollIntoView({behavior:'smooth', block:'center'});
@@ -578,6 +593,7 @@
     // Envio para planilha (segundo plano, nao trava o resultado)
     var payload = {
       nome: nome,
+      email: email,
       pergunta1: parseInt(document.querySelector('input[name="q0"]:checked').value, 10),
       pergunta2: parseInt(document.querySelector('input[name="q1"]:checked').value, 10),
       pergunta3: parseInt(document.querySelector('input[name="q2"]:checked').value, 10),
@@ -610,6 +626,7 @@
   document.getElementById('btnRetry').addEventListener('click', function(){
     document.querySelectorAll('.opt input').forEach(function(i){ i.checked = false; });
     document.getElementById('nome').value = '';
+    document.getElementById('email').value = '';
     document.getElementById('objetivo').value = '';
     document.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('selected'); });
     document.querySelectorAll('.q-card').forEach(function(c){ c.classList.remove('answered'); });
