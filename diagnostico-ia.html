@@ -198,6 +198,28 @@
   .opt.selected .marker::after{transform:scale(1)}
   .opt.selected .opt-text{color:var(--color-cream)}
 
+  /* ===== TEXT FIELDS (name + open question) ===== */
+  .field-help{
+    font-size:.9rem;line-height:1.55;color:var(--color-cream-50);margin-top:14px;
+  }
+  .field-input,.field-textarea{
+    width:100%;margin-top:16px;
+    font-family:var(--font-body);font-size:.98rem;color:var(--color-cream);
+    background:var(--color-black);
+    border:1px solid var(--gold-30);
+    border-radius:var(--radius-soft);
+    padding:15px 16px;line-height:1.55;
+    transition:border-color .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);
+  }
+  .field-input::placeholder,.field-textarea::placeholder{color:var(--color-cream-50)}
+  .field-input:focus,.field-textarea:focus{
+    outline:none;
+    border-color:var(--color-gold);
+    background:var(--gold-10);
+    box-shadow:var(--shadow-gold-subtle);
+  }
+  .field-textarea{resize:vertical;min-height:120px}
+
   /* ===== CALCULATE BUTTON + ALERT ===== */
   .calc-zone{margin:40px 0 0;text-align:center}
   .btn-calc{
@@ -345,6 +367,19 @@
   <!-- ============ QUIZ ============ -->
   <form id="quiz" class="quiz">
 
+    <!-- NOME -->
+    <article class="q-card reveal">
+      <div class="q-head">
+        <div class="q-num">&middot;</div>
+        <div class="q-meta">
+          <span class="q-kicker">Antes de começar</span>
+          <p class="q-text">Seu nome</p>
+        </div>
+      </div>
+      <input type="text" id="nome" class="field-input" placeholder="Digite seu nome" autocomplete="name">
+      <p class="field-help">Como podemos te chamar?</p>
+    </article>
+
     <!-- Q1 -->
     <article class="q-card reveal" data-q="0">
       <div class="q-head">
@@ -413,12 +448,24 @@
       </div>
     </article>
 
+    <!-- Q5 (aberta) -->
+    <article class="q-card reveal">
+      <div class="q-head">
+        <div class="q-num">5</div>
+        <div class="q-meta">
+          <span class="q-kicker">Pergunta 5: Seu objetivo</span>
+          <p class="q-text">Qual a primeira coisa que você gostaria de criar ou fazer com a IA? Seja o mais específico possível.</p>
+        </div>
+      </div>
+      <textarea id="objetivo" class="field-textarea" placeholder="Descreva com suas palavras..." rows="4"></textarea>
+    </article>
+
   </form>
 
   <!-- ============ CALCULATE ============ -->
   <div class="calc-zone" id="calcZone">
     <button type="button" class="btn-calc" id="btnCalc">Ver meu resultado</button>
-    <div class="alert" id="alert">Responda todas as 4 perguntas antes de ver o seu resultado.</div>
+    <div class="alert" id="alert">Por favor, preencha seu nome, responda as 4 perguntas e descreva seu objetivo antes de ver o resultado.</div>
   </div>
 
   <!-- ============ RESULT ============ -->
@@ -447,6 +494,8 @@
 </footer>
 
 <script>
+  var SHEET_ENDPOINT = "";
+
   // Reveal on scroll
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
@@ -512,7 +561,9 @@
   }
 
   document.getElementById('btnCalc').addEventListener('click', function(){
-    if(answeredCount() < TOTAL){
+    var nome = document.getElementById('nome').value.trim();
+    var objetivo = document.getElementById('objetivo').value.trim();
+    if(!nome || answeredCount() < TOTAL || !objetivo){
       var alertEl = document.getElementById('alert');
       alertEl.classList.add('show');
       alertEl.scrollIntoView({behavior:'smooth', block:'center'});
@@ -523,6 +574,28 @@
       sum += parseInt(document.querySelector('input[name="q'+i+'"]:checked').value, 10);
     }
     var r = classify(sum);
+
+    // Envio para planilha (segundo plano, nao trava o resultado)
+    var payload = {
+      nome: nome,
+      pergunta1: parseInt(document.querySelector('input[name="q0"]:checked').value, 10),
+      pergunta2: parseInt(document.querySelector('input[name="q1"]:checked').value, 10),
+      pergunta3: parseInt(document.querySelector('input[name="q2"]:checked').value, 10),
+      pergunta4: parseInt(document.querySelector('input[name="q3"]:checked').value, 10),
+      pontuacao: sum,
+      nivel: r.level,
+      objetivo: objetivo,
+      data: new Date().toISOString()
+    };
+    if(SHEET_ENDPOINT){
+      fetch(SHEET_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      }).catch(function(){});
+    }
+
     document.getElementById('resLevel').innerText = r.level;
     document.getElementById('resProfile').innerText = r.profile;
     document.getElementById('resDesc').innerHTML = r.desc;
@@ -536,6 +609,8 @@
 
   document.getElementById('btnRetry').addEventListener('click', function(){
     document.querySelectorAll('.opt input').forEach(function(i){ i.checked = false; });
+    document.getElementById('nome').value = '';
+    document.getElementById('objetivo').value = '';
     document.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('selected'); });
     document.querySelectorAll('.q-card').forEach(function(c){ c.classList.remove('answered'); });
     updateRail();
