@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cronograma — Evento AIOX para Mentores & Terapeutas (3 dias)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#050505; --dark:#0D0D0D; --dark-elev:#1A1A1A; --dark-tex:#2D2D2D;
+    --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --cream-50:rgba(245,240,232,.50); --cream-30:rgba(245,240,232,.30);
+    --teal:#2A9D8F; --navy:#0A1628; --gray-dark:#242424;
+    --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-20:rgba(200,168,75,.20);
+    --grad-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+    --font-display:'Oswald','Arial Black',sans-serif;
+    --font-serif:'DM Serif Display','Georgia',serif;
+    --font-mono:'IBM Plex Mono','Courier New',monospace;
+    --font-body:'Inter','Open Sans',sans-serif;
+    --shadow-card:0 2px 12px rgba(0,0,0,.4);
+    --shadow-elev:0 8px 32px rgba(0,0,0,.6);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--cream);font-family:var(--font-body);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+  /* ───── Gate de senha ───── */
+  #gate{position:fixed;inset:0;background:var(--black);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:24px;padding:24px;text-align:center}
+  #gate.hidden{display:none}
+  #gate .logo{font-family:var(--font-display);font-size:30px;letter-spacing:7px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;font-weight:700}
+  #gate .sub{font-size:12px;letter-spacing:3px;color:var(--cream-50);text-transform:uppercase}
+  #gate input{background:var(--dark-elev);border:1px solid var(--dark-tex);color:var(--cream);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none;font-family:var(--font-body)}
+  #gate input:focus{border-color:var(--gold)}
+  #gate .error{color:#e74c3c;font-size:13px;display:none}
+  #gate .hint{font-size:11px;color:var(--cream-30);letter-spacing:1px}
+
+  #app{display:none}
+  #app.visible{display:block}
+
+  /* ───── Layout ───── */
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  section{padding:clamp(56px,9vh,104px) 0}
+
+  /* ───── Hero ───── */
+  .hero{position:relative;background:linear-gradient(180deg,var(--navy) 0%,var(--black) 100%);border-bottom:1px solid var(--gold-15);overflow:hidden}
+  .hero::after{content:"";position:absolute;top:-40%;right:-10%;width:520px;height:520px;background:radial-gradient(circle,var(--gold-10) 0%,transparent 70%);pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05;text-transform:uppercase;letter-spacing:.02em;margin-bottom:18px}
+  .hero h1 .accent{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero .lead{font-family:var(--font-serif);font-size:clamp(1.1rem,2.4vw,1.6rem);color:var(--cream-70);max-width:680px;font-style:italic}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold-20);background:var(--gold-10);color:var(--gold-light);padding:9px 16px;border-radius:50px;font-size:13px;font-family:var(--font-mono);letter-spacing:1px}
+
+  /* ───── Section headers ───── */
+  .sec-label{font-family:var(--font-mono);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:12px;display:block}
+  .sec-title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.7rem,3.6vw,2.7rem);text-transform:uppercase;letter-spacing:.02em;line-height:1.15;margin-bottom:14px}
+  .sec-intro{color:var(--cream-70);max-width:720px;margin-bottom:40px;font-size:1.02rem}
+
+  /* ───── Riscos ───── */
+  .risks{background:var(--dark)}
+  .risk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .risk{background:linear-gradient(160deg,#1d1206 0%,var(--dark-elev) 100%);border:1px solid var(--gold-15);border-left:3px solid var(--gold);border-radius:10px;padding:30px}
+  .risk .num{font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  .risk h3{font-family:var(--font-display);font-weight:600;font-size:1.35rem;margin-bottom:12px;text-transform:uppercase;letter-spacing:.01em}
+  .risk p{color:var(--cream-70);font-size:.96rem}
+
+  /* ───── Fase Zero ───── */
+  .phase0{background:var(--black)}
+  .phase0-card{background:linear-gradient(160deg,var(--navy) 0%,var(--dark) 100%);border:1px solid var(--teal);border-radius:12px;padding:34px;box-shadow:var(--shadow-elev)}
+  .phase0-card .tag{display:inline-block;background:rgba(42,157,143,.15);border:1px solid var(--teal);color:#6fd3c7;font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:50px;margin-bottom:16px}
+  .check-list{list-style:none;display:grid;gap:14px;margin-top:8px}
+  .check-list li{display:flex;gap:14px;align-items:flex-start;color:var(--cream-70);font-size:.98rem}
+  .check-list li::before{content:"✓";color:var(--teal);font-weight:700;font-size:1.1rem;flex-shrink:0;line-height:1.4}
+  .check-list strong{color:var(--cream);font-weight:600}
+
+  /* ───── Dias ───── */
+  .day{border-top:1px solid var(--gray-dark)}
+  .day:nth-child(odd){background:var(--dark)}
+  .day-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:8px}
+  .day-num{font-family:var(--font-display);font-weight:700;font-size:clamp(2.6rem,7vw,4.2rem);line-height:.9;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .day-title{font-family:var(--font-serif);font-size:clamp(1.2rem,2.6vw,1.8rem);color:var(--cream);font-style:italic}
+  .day-goal{display:inline-flex;align-items:center;gap:8px;background:var(--gold-10);border:1px solid var(--gold-20);color:var(--gold-light);font-size:.84rem;font-family:var(--font-mono);letter-spacing:.5px;padding:8px 14px;border-radius:8px;margin-bottom:30px}
+
+  .timeline{display:grid;gap:0;border-left:2px solid var(--gold-15);margin-left:8px}
+  .block{position:relative;padding:0 0 26px 30px}
+  .block:last-child{padding-bottom:0}
+  .block::before{content:"";position:absolute;left:-9px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--dark);border:2px solid var(--gold);box-shadow:0 0 12px var(--gold-20)}
+  .block.lunch::before{border-color:var(--cream-30);box-shadow:none}
+  .block .slot{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+  .block.lunch .slot{color:var(--cream-30)}
+  .block h4{font-family:var(--font-display);font-weight:500;font-size:1.18rem;margin-bottom:6px;letter-spacing:.01em}
+  .block p{color:var(--cream-70);font-size:.95rem}
+  .block .pill{display:inline-block;margin-top:8px;background:var(--dark-elev);border:1px solid var(--gold-15);color:var(--gold-light);font-size:.74rem;font-family:var(--font-mono);letter-spacing:1px;padding:4px 10px;border-radius:50px}
+
+  /* ───── Decisões ───── */
+  .decisions{background:linear-gradient(180deg,var(--black) 0%,var(--navy) 100%);border-top:1px solid var(--gold-15)}
+  .dec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:8px}
+  .dec{background:var(--dark-elev);border:1px solid var(--gray-dark);border-radius:10px;padding:26px;transition:border-color .25s ease,transform .25s ease}
+  .dec:hover{border-color:var(--gold);transform:translateY(-4px)}
+  .dec .ico{font-size:1.7rem;margin-bottom:12px}
+  .dec h4{font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin-bottom:8px;text-transform:uppercase;letter-spacing:.02em;color:var(--gold-light)}
+  .dec p{color:var(--cream-70);font-size:.92rem}
+
+  /* ───── Footer ───── */
+  footer{background:var(--black);border-top:1px solid var(--gold-15);padding:46px 24px;text-align:center}
+  footer .logo{font-family:var(--font-display);font-weight:700;letter-spacing:6px;font-size:18px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase}
+  footer .meta{color:var(--cream-30);font-size:12px;font-family:var(--font-mono);letter-spacing:1px;margin-top:10px}
+
+  @media (max-width:600px){
+    .day-head{gap:12px}
+    .risk,.phase0-card,.dec{padding:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ───── GATE ───── -->
+<div id="gate">
+  <div class="logo">OMNI BRASIL</div>
+  <div class="sub">Cronograma do Evento AIOX</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')tryLogin()" autofocus>
+  <div class="error" id="err">Senha incorreta</div>
+  <div class="hint">Acesso restrito · Equipe & convidados</div>
+</div>
+
+<!-- ───── APP ───── -->
+<div id="app">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Evento presencial · 3 dias · Imersão</div>
+      <h1>Da curiosidade ao<br><span class="accent">primeiro resultado</span></h1>
+      <p class="lead">Ensinando mentores e terapeutas a instalar e usar o AIOX nos próprios negócios — mesmo começando do zero absoluto.</p>
+      <div class="hero-meta">
+        <span class="chip">👥 Público: mentores & terapeutas</span>
+        <span class="chip">🎯 Nível: zero experiência técnica</span>
+        <span class="chip">📆 Formato: presencial · 3 dias</span>
+        <span class="chip">🛠️ Saída: projeto real entregue</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISCOS ESTRATÉGICOS -->
+  <section class="risks">
+    <div class="wrap">
+      <span class="sec-label">Leitura estratégica</span>
+      <h2 class="sec-title">O sucesso não está no conteúdo</h2>
+      <p class="sec-intro">Está em vencer dois gargalos. Todo o cronograma foi desenhado em torno deles — ignorá-los é onde eventos assim costumam desandar.</p>
+      <div class="risk-grid">
+        <div class="risk">
+          <div class="num">Risco 01</div>
+          <h3>A instalação</h3>
+          <p>Público zero-técnico instalando Node, terminal, Git e chaves de API ao vivo é onde 80% dos eventos travam. Se 30 pessoas empacam no setup, perde-se o Dia 1 inteiro e o clima cai. <strong style="color:var(--gold-light)">Solução: Fase Zero + regra "ninguém avança travado".</strong></p>
+        </div>
+        <div class="risk">
+          <div class="num">Risco 02</div>
+          <h3>O choque de paradigma</h3>
+          <p>Eles só conhecem o ChatGPT — uma caixinha no navegador. AIOX é CLI + agentes: outro planeta mental. Sem um momento "uau" logo cedo, desistem antes de entender o valor. <strong style="color:var(--gold-light)">Solução: caso real funcionando na 1ª hora.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASE ZERO -->
+  <section class="phase0">
+    <div class="wrap">
+      <span class="sec-label">Antes de tudo</span>
+      <h2 class="sec-title">Fase Zero — Pré-evento</h2>
+      <p class="sec-intro">Uma semana antes. Inegociável. O objetivo é simples: ninguém chega no Dia 1 com a máquina "crua".</p>
+      <div class="phase0-card">
+        <span class="tag">1 semana antes · Online</span>
+        <ul class="check-list">
+          <li><span><strong>Checklist de pré-requisitos enviado</strong> — Node 18+, conta GitHub e Claude Code instalado, com vídeo curtinho passo a passo.</span></li>
+          <li><span><strong>Sessão de "setup assistido" (opcional, 1h)</strong> — online, 2 dias antes, para resgatar quem travou na instalação.</span></li>
+          <li><span><strong>Kit de boas-vindas</strong> — o que é o AIOX em 1 página + o que cada um vai sair construindo no fim dos 3 dias.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIA 1 -->
+  <section class="day">
+    <div class="wrap">
+      <div class="day-head">
+        <div class="day-num">01</div>
+        <div class="day-title">Da curiosidade ao primeiro resultado</div>
+      </div>
+      <div class="day-goal">🎯 Meta do dia: todos com AIOX rodando + 1 entregável real nas mãos</div>
+      <div class="timeline">
+        <div class="block">
+          <div class="slot">Manhã · Bloco 1</div>
+          <h4>Abertura + mudança de mentalidade</h4>
+          <p>"Você não vai usar uma IA — vai comandar uma equipe de IAs." Demonstração de um caso real OMNI funcionando. O efeito "uau" que ancora o resto do evento.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Manhã · Bloco 2</div>
+          <h4>Setup garantido</h4>
+          <p>Instalação com monitores circulando pela sala. Checkpoint coletivo: todo mundo com o AIOX instalado e respondendo antes de avançar.</p>
+          <span class="pill">⚠ Regra: ninguém avança travado</span>
+        </div>
+        <div class="block lunch">
+          <div class="slot">Almoço</div>
+          <h4>Intervalo</h4>
+          <p>Pausa e networking.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Tarde · Bloco 1</div>
+          <h4>Os 5 comandos que importam</h4>
+          <p>Falar com um agente, pedir uma tarefa, entender o fluxo — sem decoreba técnica. O mínimo viável para se virar sozinho.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Tarde · Bloco 2</div>
+          <h4>Mão na massa guiada</h4>
+          <p>Cada aluno gera <strong>1 entregável simples do próprio negócio</strong> — copy de uma oferta, ideia de conteúdo, roteiro de atendimento. Resultado visível no Dia 1.</p>
+          <span class="pill">📦 Entregável do dia</span>
+        </div>
+        <div class="block">
+          <div class="slot">Encerramento</div>
+          <h4>Lição de casa leve + gancho</h4>
+          <p>Cada um define QUAL projeto vai atacar nos próximos 2 dias. Sai com tarefa e ansiedade boa para o Dia 2.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIA 2 -->
+  <section class="day">
+    <div class="wrap">
+      <div class="day-head">
+        <div class="day-num">02</div>
+        <div class="day-title">Construindo no meu negócio</div>
+      </div>
+      <div class="day-goal">🎯 Meta do dia: cada aluno tira um projeto real do papel, com suporte</div>
+      <div class="timeline">
+        <div class="block">
+          <div class="slot">Manhã · Bloco 1</div>
+          <h4>Escolhendo o projeto certo</h4>
+          <p>Mini-aula: o que dá para entregar em 2 dias. Como recortar o escopo para terminar com algo pronto — e não com 5 coisas pela metade.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Manhã · Bloco 2</div>
+          <h4>Hands-on 1</h4>
+          <p>Começam o projeto, com mentores circulando (≈ 1 monitor para cada 6–8 alunos). Suporte de perto é o que mantém o ritmo de gente zero-técnica.</p>
+        </div>
+        <div class="block lunch">
+          <div class="slot">Almoço</div>
+          <h4>Intervalo</h4>
+          <p>Pausa e networking.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Tarde</div>
+          <h4>Hands-on 2 + pitstops coletivos</h4>
+          <p>Continuação com paradas de dúvida em grupo: travou no mesmo ponto que vários? Para todo mundo, resolve junto, segue. Evita gargalo individual virar gargalo da sala.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Encerramento</div>
+          <h4>Check-in de 1 minuto</h4>
+          <p>Cada aluno mostra rapidamente onde chegou. Accountability leve que aumenta o engajamento para o último dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIA 3 -->
+  <section class="day">
+    <div class="wrap">
+      <div class="day-head">
+        <div class="day-num">03</div>
+        <div class="day-title">Finalizando e levando pra vida</div>
+      </div>
+      <div class="day-goal">🎯 Meta do dia: projeto entregue + autonomia para continuar sozinho</div>
+      <div class="timeline">
+        <div class="block">
+          <div class="slot">Manhã</div>
+          <h4>Hands-on final</h4>
+          <p>Bloco dedicado a fechar o projeto. Foco total em cruzar a linha de chegada com algo funcionando.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Tarde · Bloco 1</div>
+          <h4>Showcase</h4>
+          <p>Cada aluno apresenta o que construiu. O momento mais poderoso do evento — prova viva de que saíram do zero e entregaram algo real.</p>
+          <span class="pill">⭐ Ponto alto do evento</span>
+        </div>
+        <div class="block">
+          <div class="slot">Tarde · Bloco 2</div>
+          <h4>"E agora?"</h4>
+          <p>Como continuar sozinho depois do evento: onde pedir ajuda, como evoluir o projeto, próximos passos práticos. Transição da mão dada para a autonomia.</p>
+        </div>
+        <div class="block">
+          <div class="slot">Encerramento</div>
+          <h4>Celebração + comunidade</h4>
+          <p>Fechamento emocional e convite para o suporte/comunidade pós-evento. Eles saem pertencendo a algo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISÕES ESTRATÉGICAS -->
+  <section class="decisions">
+    <div class="wrap">
+      <span class="sec-label">Recomendações do PM</span>
+      <h2 class="sec-title">Decisões que sustentam o evento</h2>
+      <div class="dec-grid">
+        <div class="dec">
+          <div class="ico">🧑‍🏫</div>
+          <h4>Proporção de monitores</h4>
+          <p>1 para cada 6–8 alunos nos blocos hands-on. Sem isso, gente zero-técnica empaca e o ritmo da sala morre.</p>
+        </div>
+        <div class="dec">
+          <div class="ico">🚦</div>
+          <h4>Ninguém avança travado</h4>
+          <p>Regra de ouro no setup do Dia 1 — o ponto de maior risco do evento inteiro. Checkpoint coletivo antes de seguir.</p>
+        </div>
+        <div class="dec">
+          <div class="ico">📦</div>
+          <h4>Entregável visível por dia</h4>
+          <p>Gente de negócio precisa VER resultado, não teoria. Cada dia fecha com algo concreto nas mãos.</p>
+        </div>
+        <div class="dec">
+          <div class="ico">🗂️</div>
+          <h4>Trilhas de projeto prontas</h4>
+          <p>4–5 projetos pré-mapeados (landing page, calendário de conteúdo, roteiro de atendimento…) para quem não souber o que escolher.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">OMNI BRASIL</div>
+    <div class="meta">Cronograma estratégico · Evento AIOX para Mentores &amp; Terapeutas · 2026</div>
+    <div class="meta">Planejado por Morgan (PM) · Gerado com AIOX</div>
+  </footer>
+
+</div>
+
+<script>
+function tryLogin(){
+  var pwd=document.getElementById('pwd').value;
+  if(pwd==='omni777'){
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+  }else{
+    document.getElementById('err').style.display='block';
+  }
+}
+</script>
+</body>
+</html>
