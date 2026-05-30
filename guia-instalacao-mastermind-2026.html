@@ -249,6 +249,8 @@
     display:inline-flex;align-items:center;gap:9px;
   }
   .url .arrow{color:var(--color-gold-deep)}
+  a.url{text-decoration:none;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
+  a.url:hover{border-color:var(--color-gold);box-shadow:0 0 12px rgba(200,168,75,0.18)}
   .tag-go{
     font-family:var(--font-mono);font-size:.6rem;font-weight:500;text-transform:uppercase;letter-spacing:var(--tracking-label);
     color:var(--color-gold);background:var(--gold-10);border:1px solid var(--gold-20);
@@ -444,7 +446,7 @@
         <h3>Criar sua conta no GitHub</h3>
         <p>O GitHub é um serviço online que armazena seus projetos na nuvem e mantém o histórico de versões de cada arquivo.</p>
         <div class="resource">
-          <span class="url"><span class="arrow">&rsaquo;</span> github.com</span>
+          <a class="url" href="https://github.com" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> github.com</a>
           <span class="tag-go">Clique em Sign up</span>
         </div>
         <ol class="mini">
@@ -466,7 +468,7 @@
         </h3>
         <p>É o programa que conecta seu computador ao GitHub usando botões, sem necessidade de digitar comandos.</p>
         <div class="resource">
-          <span class="url"><span class="arrow">&rsaquo;</span> desktop.github.com</span>
+          <a class="url" href="https://desktop.github.com" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> desktop.github.com</a>
           <span class="tag-go">Download</span>
         </div>
         <ol class="mini">
@@ -486,7 +488,7 @@
         </h3>
         <p>O Node.js é um programa base. Ele não é usado diretamente por você, mas é necessário para instalar o Claude Code no Passo 5.</p>
         <div class="resource">
-          <span class="url"><span class="arrow">&rsaquo;</span> nodejs.org</span>
+          <a class="url" href="https://nodejs.org" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> nodejs.org</a>
           <span class="tag-go">Botão LTS</span>
         </div>
         <ol class="mini">
@@ -507,7 +509,7 @@
         </h3>
         <p>O VS Code é o programa onde você vai trabalhar. É dentro dele que você abre a pasta do projeto e usa o Claude Code pelo terminal.</p>
         <div class="resource">
-          <span class="url"><span class="arrow">&rsaquo;</span> code.visualstudio.com</span>
+          <a class="url" href="https://code.visualstudio.com" target="_blank" rel="noopener"><span class="arrow">&rsaquo;</span> code.visualstudio.com</a>
           <span class="tag-go">Download Windows / Mac</span>
         </div>
         <ol class="mini">
