@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentes & Skills — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111111; --panel2:#151510;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.55); --ink-faint:rgba(244,244,232,.3);
+    --gold:#C9A84C; --gold-deep:#A9842A; --gold-10:rgba(201,168,76,.12); --gold-line:rgba(201,168,76,.18);
+    --font:'Oswald','Arial Black',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  /* GATE */
+  #gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+  body:not(.locked) #gate{display:none}
+  body.locked{overflow:hidden}
+  #gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  #gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-soft);text-transform:uppercase}
+  #gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-line);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+  #gate input:focus{border-color:var(--gold)}
+  #gate .gerr{color:#e07a5f;font-size:13px;font-family:var(--mono);display:none}
+  #gate .ghint{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--ink-faint)}
+
+  /* HEADER */
+  header{padding:48px 24px 0;text-align:center;max-width:1180px;margin:0 auto}
+  .logo{font-family:var(--font);font-weight:700;font-size:26px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  .subtitle{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--ink-soft);text-transform:uppercase;margin-top:8px}
+  h1{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:clamp(1.8rem,4vw,2.8rem);margin-top:26px;line-height:1.05}
+  h1 .gold{color:var(--gold)}
+  .lead{color:var(--ink-soft);max-width:640px;margin:14px auto 0;font-size:15px;line-height:1.6}
+
+  /* STATS */
+  .stats{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:34px auto 0;max-width:900px}
+  .stat{background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:18px 26px;min-width:130px}
+  .stat .num{font-family:var(--font);font-weight:700;font-size:34px;color:var(--gold);line-height:1}
+  .stat .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--ink-soft);text-transform:uppercase;margin-top:6px}
+
+  /* SEARCH */
+  .searchwrap{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--bg) 70%,transparent);padding:26px 24px 16px;max-width:1180px;margin:30px auto 0}
+  #search{width:100%;font-family:var(--mono);background:var(--panel);border:1px solid var(--gold-line);color:var(--ink);padding:15px 20px;border-radius:10px;font-size:15px;outline:none}
+  #search:focus{border-color:var(--gold)}
+  #search::placeholder{color:var(--ink-faint)}
+  .noresult{display:none;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:14px;padding:40px}
+
+  /* SECTIONS */
+  main{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+  section{margin-top:46px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--gold-line);padding-bottom:12px;margin-bottom:22px}
+  .sec-head h2{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:1px}
+  .sec-head .count{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px}
+  .sec-head .desc{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-left:auto;letter-spacing:1px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:18px 20px;transition:border-color .2s,background .2s}
+  .card:hover{border-color:var(--gold);background:#181712}
+  .card .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px}
+  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase}
+  .card .persona{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.5px;margin-top:4px}
+  .card .body{color:var(--ink-soft);font-size:13.5px;line-height:1.55;margin-top:9px}
+
+  footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media(max-width:600px){
+    .searchwrap{padding-top:18px}
+    header{padding-top:34px}
+    .stat{padding:14px 18px;min-width:104px}
+    .stat .num{font-size:26px}
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- GATE -->
+<div id="gate">
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">Agentes &amp; Skills · Catálogo Interno</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Acesso restrito · Equipe &amp; convidados</div>
+</div>
+
+<header>
+  <div class="logo">OMNI BRASIL</div>
+  <div class="subtitle">AIOX · Catálogo Interno</div>
+  <h1>Nossos <span class="gold">Agentes</span> &amp; <span class="gold">Skills</span></h1>
+  <p class="lead">Panorama do enxame AIOX da OMNI Brasil: squads especializadas, agentes core e skills disponíveis. Use a busca para filtrar por nome ou tema.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">36</div><div class="lbl">Squads</div></div>
+    <div class="stat"><div class="num">12</div><div class="lbl">Agentes Core</div></div>
+    <div class="stat"><div class="num">160+</div><div class="lbl">Agentes (squads)</div></div>
+    <div class="stat"><div class="num">25+</div><div class="lbl">Skills</div></div>
+  </div>
+</header>
+
+<div class="searchwrap">
+  <input type="text" id="search" placeholder="🔎 Buscar agente, squad ou skill (ex: copy, ads, vídeo, n8n)..." oninput="filter(this.value)">
+</div>
+
+<main>
+  <section id="sec-squads" data-sec>
+    <div class="sec-head">
+      <h2>Squads</h2><span class="count" id="cnt-squads"></span>
+      <span class="desc">times especializados por domínio</span>
+    </div>
+    <div class="grid" id="grid-squads"></div>
+  </section>
+
+  <section id="sec-core" data-sec>
+    <div class="sec-head">
+      <h2>Agentes Core AIOX</h2><span class="count" id="cnt-core"></span>
+      <span class="desc">o time base do framework</span>
+    </div>
+    <div class="grid" id="grid-core"></div>
+  </section>
+
+  <section id="sec-skills" data-sec>
+    <div class="sec-head">
+      <h2>Skills</h2><span class="count" id="cnt-skills"></span>
+      <span class="desc">habilidades invocáveis</span>
+    </div>
+    <div class="grid" id="grid-skills"></div>
+  </section>
+
+  <div class="noresult" id="noresult">Nenhum resultado para a busca.</div>
+</main>
+
+<footer>OMNI Brasil // AIOX // Uso Interno · Mai 2026</footer>
+
+<script>
+  function tryLogin(){
+    if(document.getElementById('pwd').value==='omni777'){
+      document.body.classList.remove('locked');
+    }else{
+      document.getElementById('gerr').style.display='block';
+    }
+  }
+
+  /* ---- DADOS ---- */
+  const squads = [
+    ["ads-high-ticket","Leads high ticket (R$10k+): funil de sessão estratégica 1-1, branding artístico, anúncio raiz/Nutella.",2],
+    ["aiox-ads","Tráfego pago multi-plataforma no modelo concierge. 10 agentes em 3 tiers + 38 skills.",10],
+    ["aiox-copy","Time de 25 copywriters lendários (Halbert, Schwartz, Kennedy, Ogilvy…) organizados por tiers.",25],
+    ["aiox-design","Design System completo: tokens, componentes, acessibilidade, Storybook, geração de imagens.",9],
+    ["aiox-sop","SOPs world-class (Deming, Toyota, ISO 9001, FDA/GMP, Six Sigma): cria, extrai e audita processos.",6],
+    ["aiox-workspace","Gestão de workspace/businesses com visão C-level (CEO, CMO, CTO, CIO, CAIO).",6],
+    ["analytics-intelligence","Dados e BI: dashboards, análise de funil, relatórios semanais e coorte.",1],
+    ["arquivista","Upload e organização de arquivos no Google Drive a partir de qualquer canal.",7],
+    ["avaliacao-reunioes","Avaliação diária das reuniões das closers via Script FPH (rotina autônoma + coaching).",1],
+    ["brand","Naming, branding e go-to-market (SNP, É-Faz-Fala) + 11 especialistas globais de marca.",15],
+    ["ceo-assistant","Secretária executiva (GTD) do Michael: triagem de e-mail, agenda e revisão semanal.",1],
+    ["ceo-omni","Conselheiro estratégico do CEO: diagnóstico 360, Pareto ao Cubo, oportunidades de crescimento.",4],
+    ["claude-code-mastery","Especialista em todas as dimensões do Claude Code: hooks, skills, subagents, MCP, plugins.",10],
+    ["clickup-ops","Materializa processos no ClickUp via API: spaces, fields, automations, views e tasks.",5],
+    ["comercial-ops","Diagnostica, documenta e melhora o processo comercial (Pipedrive, SPIN Selling, SLA).",5],
+    ["community-retention","Engajamento e retenção da Black Mentoring: churn radar, ativação e renovação.",1],
+    ["customer-success","Sucesso do cliente e onboarding (planos de 90 dias, milestone reviews).",1],
+    ["dash-omni","Construção e manutenção do Dashboard OMNI com protocolo de aprovação e validação.",6],
+    ["dev-motor-infantil","Equipe multidisciplinar de desenvolvimento motor de bebês (torcicolo, atraso motor).",5],
+    ["direct-response-lt","Tráfego direto low ticket (R$37-97): mineração, oferta, página, criativo, campanha e escala.",7],
+    ["drive-sync-auditor","Compara e sincroniza pastas via rclone (detecta divergências e corrige na VPS).",5],
+    ["go-to-market-war-room","War game: simula ataques ao modelo de negócio e gera plano de posicionamento.",6],
+    ["meta-templates","Ciclo completo de templates WhatsApp Business via Meta Cloud API.",6],
+    ["n8n-integration","Gestão completa do n8n: audit → plan → build → doc → validate.",6],
+    ["ns-welcome-engine","Motor de mensagens de boas-vindas: leitura de perfil, qualificação, redação e métricas.",6],
+    ["orientacao-parental","Orientação parental baseada em neurociência infantil (Siegel & Bryson, Telma Abrahão).",4],
+    ["pmbok","Squad educacional PMBOK 7th Edition: PM Chief + 10 áreas de conhecimento.",11],
+    ["sales-intelligence","Inteligência comercial: análise de calls, scripts SDR, pipeline review e coaching.",1],
+    ["sales-ops","Infraestrutura comercial: discador, CRM, automações, SLA Monitor e dashboards.",1],
+    ["squad-creator","Meta-squad canônico: cria squads, agentes, workflows e tasks via templates.",1],
+    ["squad-creator-pro","Upgrade Pro: mind cloning, DNA extraction, model routing e quality gates.",7],
+    ["trend-ig","Descobre trending topics (via EXA) e cria briefs de conteúdo para Instagram.",4],
+    ["video-editing","Edição de vídeo OMNI (modos REELS 9:16 e GERAL) via CAP-032 + análise Gemini.",5],
+    ["video-studio","Criação de vídeos com IA (modos AD e CONTENT): roteiro, direção visual e animação.",8],
+    ["viral-instagram","Conteúdo viral de IG focado em resultado e dinheiro (frameworks GICA, Sherlock…).",5],
+    ["vsl-kinshu","Scripts de VSL pelo método Kinshu (narrativa de doramas coreanos).",4],
+  ];
+
+  const core = [
+    ["dev","Dex · Pickle Rick","Implementação de código, debugging e refactoring."],
+    ["qa","Quinn · Morty","Test architecture, quality gates e revisão de código."],
+    ["architect","Aria · Tiny Rick","Arquitetura de sistemas, stack, design de API e segurança."],
+    ["pm","Morgan · Beth","PRD, epics, estratégia de produto, priorização e roadmap."],
+    ["po","Pax · Summer","Backlog, refinamento, critérios de aceite e sprint planning."],
+    ["sm","River · Mr. Meeseeks","Criação e validação de stories, retrospectivas e standup."],
+    ["analyst","Alex · Jerry","Pesquisa de mercado, análise competitiva e discovery brownfield."],
+    ["data-engineer","Dara · Birdperson","Database design, Supabase, RLS, migrations e otimização."],
+    ["ux-design-expert","Uma · Jessica","UX/UI, wireframes, design systems e extração de tokens."],
+    ["devops","Gage · Rick Sanchez","Repositório, CI/CD, push (exclusivo) e release management."],
+    ["aiox-master","Unity","Governança do framework e orquestração cross-domain."],
+    ["squad-creator","—","Criação de squads, agentes e workflows."],
+  ];
+
+  const skills = [
+    ["carrosseleiro","Carrosséis de IG (framework Suellen Warmling), pipeline híbrido Gemini + Canvas.","projeto"],
+    ["landing-page","Landing pages premium para iscas digitais OMNI (copy → design → deploy → ActiveCampaign).","projeto"],
+    ["deep-strategic-planning","\"Modo Dr. Estranho\": analisa 7-10 futuros por 12 lentes mentais e acha o caminho vencedor.","projeto"],
+    ["tech-research","Pesquisa técnica profunda com documentação padronizada. Nunca implementa código.","projeto"],
+    ["trend-ig","Descobre trending topics (EXA) e cria briefs de conteúdo para Instagram.","projeto"],
+    ["doc-rot","Detector de documentação podre para deletar (TODOs stale, comentários mentirosos).","projeto"],
+    ["lancamentos","Processa extratos/faturas, categoriza lançamentos e gera planilha de finanças.","projeto"],
+    ["cli-router","Roteia tarefas para a persona/agente correto via CLI (Gemini, Claude, Codex).","projeto"],
+    ["telegram","Gerencia o AIOX Message Gateway (setup, deploy, status, logs, webhook).","projeto"],
+    ["slide-creator","Criação de apresentações de slides no padrão OMNI Brasil.","OMNI"],
+    ["onde-salvar","Assistente de organização: decide o melhor local para salvar arquivos.","OMNI"],
+    ["subir-drive","Upload manual de arquivos para o Google Drive.","OMNI"],
+    ["video-editor","Edita vídeo na VPS via squad video-editing (modos REELS/GERAL).","OMNI"],
+    ["brand-me","Aplicação de identidade de marca em artefatos.","OMNI"],
+    ["deep-research","Harness de pesquisa profunda multi-fonte com verificação e relatório citado.","OMNI"],
+    ["aiox-ads (skills)","38 skills de tráfego pago: diagnostic, generative, operational, optimization, strategic.","squad"],
+    ["architect-first","Filosofia de arquitetura-primeiro: design completo antes do código.","framework"],
+    ["coderabbit-review","Execução do CodeRabbit CLI via WSL com loop de auto-correção.","framework"],
+    ["skill-creator","Guia para criar novas skills de forma eficaz.","framework"],
+    ["mcp-builder","Guia para construir servidores MCP de alta qualidade.","framework"],
+    ["synapse","Motor de contexto SYNAPSE: domínios, regras de contexto e pipeline.","framework"],
+    ["checklist-runner","Engine genérica de execução de checklists (.md) com verdicts.","framework"],
+    ["code-review","Revisa o diff atual em busca de bugs e melhorias de qualidade.","framework"],
+    ["verify","Verifica se uma mudança de código faz o que deveria, rodando o app.","framework"],
+    ["update-config","Configura o harness do Claude Code via settings.json (hooks, permissões).","framework"],
+  ];
+
+  /* ---- RENDER ---- */
+  const tplSquad = (s)=>`<div class="card" data-search="${(s[0]+' '+s[1]).toLowerCase()}">
+      <div class="top"><span class="name">${s[0]}</span><span class="badge">${s[2]} ${s[2]>1?'agentes':'agente'}</span></div>
+      <div class="body">${s[1]}</div></div>`;
+  const tplCore = (a)=>`<div class="card" data-search="${(a[0]+' '+a[1]+' '+a[2]).toLowerCase()}">
+      <div class="top"><span class="name">${a[0]}</span></div>
+      <div class="persona">${a[1]}</div>
+      <div class="body">${a[2]}</div></div>`;
+  const tplSkill = (k)=>`<div class="card" data-search="${(k[0]+' '+k[1]+' '+k[2]).toLowerCase()}">
+      <div class="top"><span class="name">${k[0]}</span><span class="badge">${k[2]}</span></div>
+      <div class="body">${k[1]}</div></div>`;
+
+  document.getElementById('grid-squads').innerHTML = squads.map(tplSquad).join('');
+  document.getElementById('grid-core').innerHTML = core.map(tplCore).join('');
+  document.getElementById('grid-skills').innerHTML = skills.map(tplSkill).join('');
+  document.getElementById('cnt-squads').textContent = squads.length;
+  document.getElementById('cnt-core').textContent = core.length;
+  document.getElementById('cnt-skills').textContent = skills.length;
+
+  /* ---- FILTRO ---- */
+  function filter(q){
+    q = q.trim().toLowerCase();
+    let total = 0;
+    document.querySelectorAll('[data-sec]').forEach(sec=>{
+      let shown = 0;
+      sec.querySelectorAll('.card').forEach(c=>{
+        const hit = !q || c.dataset.search.includes(q);
+        c.style.display = hit ? '' : 'none';
+        if(hit) shown++;
+      });
+      sec.style.display = shown ? '' : 'none';
+      total += shown;
+    });
+    document.getElementById('noresult').style.display = total ? 'none' : 'block';
+  }
+</script>
+</body>
+</html>
