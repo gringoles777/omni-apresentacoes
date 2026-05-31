@@ -61,9 +61,11 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
   .card{background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:18px 20px;transition:border-color .2s,background .2s}
   .card:hover{border-color:var(--gold);background:#181712}
-  .card .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px}
-  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase}
+  .card .top{display:flex;align-items:center;gap:11px}
+  .card .icon{flex:0 0 38px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;background:var(--gold-10);border:1px solid var(--gold-line);border-radius:10px}
+  .card:hover .icon{border-color:var(--gold)}
+  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase;margin-left:auto;flex-shrink:0}
   .card .persona{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:.5px;margin-top:4px}
   .card .body{color:var(--ink-soft);font-size:13.5px;line-height:1.55;margin-top:9px}
 
@@ -146,97 +148,97 @@
 
   /* ---- DADOS ---- */
   const squads = [
-    ["ads-high-ticket","Leads high ticket (R$10k+): funil de sessão estratégica 1-1, branding artístico, anúncio raiz/Nutella.",2],
-    ["aiox-ads","Tráfego pago multi-plataforma no modelo concierge. 10 agentes em 3 tiers + 38 skills.",10],
-    ["aiox-copy","Time de 25 copywriters lendários (Halbert, Schwartz, Kennedy, Ogilvy…) organizados por tiers.",25],
-    ["aiox-design","Design System completo: tokens, componentes, acessibilidade, Storybook, geração de imagens.",9],
-    ["aiox-sop","SOPs world-class (Deming, Toyota, ISO 9001, FDA/GMP, Six Sigma): cria, extrai e audita processos.",6],
-    ["aiox-workspace","Gestão de workspace/businesses com visão C-level (CEO, CMO, CTO, CIO, CAIO).",6],
-    ["analytics-intelligence","Dados e BI: dashboards, análise de funil, relatórios semanais e coorte.",1],
-    ["arquivista","Upload e organização de arquivos no Google Drive a partir de qualquer canal.",7],
-    ["avaliacao-reunioes","Avaliação diária das reuniões das closers via Script FPH (rotina autônoma + coaching).",1],
-    ["brand","Naming, branding e go-to-market (SNP, É-Faz-Fala) + 11 especialistas globais de marca.",15],
-    ["ceo-assistant","Secretária executiva (GTD) do Michael: triagem de e-mail, agenda e revisão semanal.",1],
-    ["ceo-omni","Conselheiro estratégico do CEO: diagnóstico 360, Pareto ao Cubo, oportunidades de crescimento.",4],
-    ["claude-code-mastery","Especialista em todas as dimensões do Claude Code: hooks, skills, subagents, MCP, plugins.",10],
-    ["clickup-ops","Materializa processos no ClickUp via API: spaces, fields, automations, views e tasks.",5],
-    ["comercial-ops","Diagnostica, documenta e melhora o processo comercial (Pipedrive, SPIN Selling, SLA).",5],
-    ["community-retention","Engajamento e retenção da Black Mentoring: churn radar, ativação e renovação.",1],
-    ["customer-success","Sucesso do cliente e onboarding (planos de 90 dias, milestone reviews).",1],
-    ["dash-omni","Construção e manutenção do Dashboard OMNI com protocolo de aprovação e validação.",6],
-    ["dev-motor-infantil","Equipe multidisciplinar de desenvolvimento motor de bebês (torcicolo, atraso motor).",5],
-    ["direct-response-lt","Tráfego direto low ticket (R$37-97): mineração, oferta, página, criativo, campanha e escala.",7],
-    ["drive-sync-auditor","Compara e sincroniza pastas via rclone (detecta divergências e corrige na VPS).",5],
-    ["go-to-market-war-room","War game: simula ataques ao modelo de negócio e gera plano de posicionamento.",6],
-    ["meta-templates","Ciclo completo de templates WhatsApp Business via Meta Cloud API.",6],
-    ["n8n-integration","Gestão completa do n8n: audit → plan → build → doc → validate.",6],
-    ["ns-welcome-engine","Motor de mensagens de boas-vindas: leitura de perfil, qualificação, redação e métricas.",6],
-    ["orientacao-parental","Orientação parental baseada em neurociência infantil (Siegel & Bryson, Telma Abrahão).",4],
-    ["pmbok","Squad educacional PMBOK 7th Edition: PM Chief + 10 áreas de conhecimento.",11],
-    ["sales-intelligence","Inteligência comercial: análise de calls, scripts SDR, pipeline review e coaching.",1],
-    ["sales-ops","Infraestrutura comercial: discador, CRM, automações, SLA Monitor e dashboards.",1],
-    ["squad-creator","Meta-squad canônico: cria squads, agentes, workflows e tasks via templates.",1],
-    ["squad-creator-pro","Upgrade Pro: mind cloning, DNA extraction, model routing e quality gates.",7],
-    ["trend-ig","Descobre trending topics (via EXA) e cria briefs de conteúdo para Instagram.",4],
-    ["video-editing","Edição de vídeo OMNI (modos REELS 9:16 e GERAL) via CAP-032 + análise Gemini.",5],
-    ["video-studio","Criação de vídeos com IA (modos AD e CONTENT): roteiro, direção visual e animação.",8],
-    ["viral-instagram","Conteúdo viral de IG focado em resultado e dinheiro (frameworks GICA, Sherlock…).",5],
-    ["vsl-kinshu","Scripts de VSL pelo método Kinshu (narrativa de doramas coreanos).",4],
+    ["ads-high-ticket","Leads high ticket (R$10k+): funil de sessão estratégica 1-1, branding artístico, anúncio raiz/Nutella.",2,"💎"],
+    ["aiox-ads","Tráfego pago multi-plataforma no modelo concierge. 10 agentes em 3 tiers + 38 skills.",10,"📣"],
+    ["aiox-copy","Time de 25 copywriters lendários (Halbert, Schwartz, Kennedy, Ogilvy…) organizados por tiers.",25,"✍️"],
+    ["aiox-design","Design System completo: tokens, componentes, acessibilidade, Storybook, geração de imagens.",9,"🎨"],
+    ["aiox-sop","SOPs world-class (Deming, Toyota, ISO 9001, FDA/GMP, Six Sigma): cria, extrai e audita processos.",6,"📋"],
+    ["aiox-workspace","Gestão de workspace/businesses com visão C-level (CEO, CMO, CTO, CIO, CAIO).",6,"🏢"],
+    ["analytics-intelligence","Dados e BI: dashboards, análise de funil, relatórios semanais e coorte.",1,"📊"],
+    ["arquivista","Upload e organização de arquivos no Google Drive a partir de qualquer canal.",7,"🗂️"],
+    ["avaliacao-reunioes","Avaliação diária das reuniões das closers via Script FPH (rotina autônoma + coaching).",1,"🎙️"],
+    ["brand","Naming, branding e go-to-market (SNP, É-Faz-Fala) + 11 especialistas globais de marca.",15,"🏷️"],
+    ["ceo-assistant","Secretária executiva (GTD) do Michael: triagem de e-mail, agenda e revisão semanal.",1,"🗓️"],
+    ["ceo-omni","Conselheiro estratégico do CEO: diagnóstico 360, Pareto ao Cubo, oportunidades de crescimento.",4,"🧭"],
+    ["claude-code-mastery","Especialista em todas as dimensões do Claude Code: hooks, skills, subagents, MCP, plugins.",10,"🤖"],
+    ["clickup-ops","Materializa processos no ClickUp via API: spaces, fields, automations, views e tasks.",5,"✅"],
+    ["comercial-ops","Diagnostica, documenta e melhora o processo comercial (Pipedrive, SPIN Selling, SLA).",5,"🤝"],
+    ["community-retention","Engajamento e retenção da Black Mentoring: churn radar, ativação e renovação.",1,"🔁"],
+    ["customer-success","Sucesso do cliente e onboarding (planos de 90 dias, milestone reviews).",1,"🌟"],
+    ["dash-omni","Construção e manutenção do Dashboard OMNI com protocolo de aprovação e validação.",6,"📟"],
+    ["dev-motor-infantil","Equipe multidisciplinar de desenvolvimento motor de bebês (torcicolo, atraso motor).",5,"👶"],
+    ["direct-response-lt","Tráfego direto low ticket (R$37-97): mineração, oferta, página, criativo, campanha e escala.",7,"⚡"],
+    ["drive-sync-auditor","Compara e sincroniza pastas via rclone (detecta divergências e corrige na VPS).",5,"🔄"],
+    ["go-to-market-war-room","War game: simula ataques ao modelo de negócio e gera plano de posicionamento.",6,"♟️"],
+    ["meta-templates","Ciclo completo de templates WhatsApp Business via Meta Cloud API.",6,"💬"],
+    ["n8n-integration","Gestão completa do n8n: audit → plan → build → doc → validate.",6,"🔗"],
+    ["ns-welcome-engine","Motor de mensagens de boas-vindas: leitura de perfil, qualificação, redação e métricas.",6,"👋"],
+    ["orientacao-parental","Orientação parental baseada em neurociência infantil (Siegel & Bryson, Telma Abrahão).",4,"🧠"],
+    ["pmbok","Squad educacional PMBOK 7th Edition: PM Chief + 10 áreas de conhecimento.",11,"🎓"],
+    ["sales-intelligence","Inteligência comercial: análise de calls, scripts SDR, pipeline review e coaching.",1,"🔍"],
+    ["sales-ops","Infraestrutura comercial: discador, CRM, automações, SLA Monitor e dashboards.",1,"⚙️"],
+    ["squad-creator","Meta-squad canônico: cria squads, agentes, workflows e tasks via templates.",1,"🛠️"],
+    ["squad-creator-pro","Upgrade Pro: mind cloning, DNA extraction, model routing e quality gates.",7,"🧬"],
+    ["trend-ig","Descobre trending topics (via EXA) e cria briefs de conteúdo para Instagram.",4,"🔥"],
+    ["video-editing","Edição de vídeo OMNI (modos REELS 9:16 e GERAL) via CAP-032 + análise Gemini.",5,"🎬"],
+    ["video-studio","Criação de vídeos com IA (modos AD e CONTENT): roteiro, direção visual e animação.",8,"🎥"],
+    ["viral-instagram","Conteúdo viral de IG focado em resultado e dinheiro (frameworks GICA, Sherlock…).",5,"🚀"],
+    ["vsl-kinshu","Scripts de VSL pelo método Kinshu (narrativa de doramas coreanos).",4,"🎭"],
   ];
 
   const core = [
-    ["dev","Dex · Pickle Rick","Implementação de código, debugging e refactoring."],
-    ["qa","Quinn · Morty","Test architecture, quality gates e revisão de código."],
-    ["architect","Aria · Tiny Rick","Arquitetura de sistemas, stack, design de API e segurança."],
-    ["pm","Morgan · Beth","PRD, epics, estratégia de produto, priorização e roadmap."],
-    ["po","Pax · Summer","Backlog, refinamento, critérios de aceite e sprint planning."],
-    ["sm","River · Mr. Meeseeks","Criação e validação de stories, retrospectivas e standup."],
-    ["analyst","Alex · Jerry","Pesquisa de mercado, análise competitiva e discovery brownfield."],
-    ["data-engineer","Dara · Birdperson","Database design, Supabase, RLS, migrations e otimização."],
-    ["ux-design-expert","Uma · Jessica","UX/UI, wireframes, design systems e extração de tokens."],
-    ["devops","Gage · Rick Sanchez","Repositório, CI/CD, push (exclusivo) e release management."],
-    ["aiox-master","Unity","Governança do framework e orquestração cross-domain."],
-    ["squad-creator","—","Criação de squads, agentes e workflows."],
+    ["dev","Dex · Pickle Rick","Implementação de código, debugging e refactoring.","💻"],
+    ["qa","Quinn · Morty","Test architecture, quality gates e revisão de código.","🧪"],
+    ["architect","Aria · Tiny Rick","Arquitetura de sistemas, stack, design de API e segurança.","📐"],
+    ["pm","Morgan · Beth","PRD, epics, estratégia de produto, priorização e roadmap.","🗺️"],
+    ["po","Pax · Summer","Backlog, refinamento, critérios de aceite e sprint planning.","📌"],
+    ["sm","River · Mr. Meeseeks","Criação e validação de stories, retrospectivas e standup.","🏃"],
+    ["analyst","Alex · Jerry","Pesquisa de mercado, análise competitiva e discovery brownfield.","🔬"],
+    ["data-engineer","Dara · Birdperson","Database design, Supabase, RLS, migrations e otimização.","🗄️"],
+    ["ux-design-expert","Uma · Jessica","UX/UI, wireframes, design systems e extração de tokens.","🎨"],
+    ["devops","Gage · Rick Sanchez","Repositório, CI/CD, push (exclusivo) e release management.","🔧"],
+    ["aiox-master","Unity","Governança do framework e orquestração cross-domain.","👑"],
+    ["squad-creator","—","Criação de squads, agentes e workflows.","🛠️"],
   ];
 
   const skills = [
-    ["carrosseleiro","Carrosséis de IG (framework Suellen Warmling), pipeline híbrido Gemini + Canvas.","projeto"],
-    ["landing-page","Landing pages premium para iscas digitais OMNI (copy → design → deploy → ActiveCampaign).","projeto"],
-    ["deep-strategic-planning","\"Modo Dr. Estranho\": analisa 7-10 futuros por 12 lentes mentais e acha o caminho vencedor.","projeto"],
-    ["tech-research","Pesquisa técnica profunda com documentação padronizada. Nunca implementa código.","projeto"],
-    ["trend-ig","Descobre trending topics (EXA) e cria briefs de conteúdo para Instagram.","projeto"],
-    ["doc-rot","Detector de documentação podre para deletar (TODOs stale, comentários mentirosos).","projeto"],
-    ["lancamentos","Processa extratos/faturas, categoriza lançamentos e gera planilha de finanças.","projeto"],
-    ["cli-router","Roteia tarefas para a persona/agente correto via CLI (Gemini, Claude, Codex).","projeto"],
-    ["telegram","Gerencia o AIOX Message Gateway (setup, deploy, status, logs, webhook).","projeto"],
-    ["slide-creator","Criação de apresentações de slides no padrão OMNI Brasil.","OMNI"],
-    ["onde-salvar","Assistente de organização: decide o melhor local para salvar arquivos.","OMNI"],
-    ["subir-drive","Upload manual de arquivos para o Google Drive.","OMNI"],
-    ["video-editor","Edita vídeo na VPS via squad video-editing (modos REELS/GERAL).","OMNI"],
-    ["brand-me","Aplicação de identidade de marca em artefatos.","OMNI"],
-    ["deep-research","Harness de pesquisa profunda multi-fonte com verificação e relatório citado.","OMNI"],
-    ["aiox-ads (skills)","38 skills de tráfego pago: diagnostic, generative, operational, optimization, strategic.","squad"],
-    ["architect-first","Filosofia de arquitetura-primeiro: design completo antes do código.","framework"],
-    ["coderabbit-review","Execução do CodeRabbit CLI via WSL com loop de auto-correção.","framework"],
-    ["skill-creator","Guia para criar novas skills de forma eficaz.","framework"],
-    ["mcp-builder","Guia para construir servidores MCP de alta qualidade.","framework"],
-    ["synapse","Motor de contexto SYNAPSE: domínios, regras de contexto e pipeline.","framework"],
-    ["checklist-runner","Engine genérica de execução de checklists (.md) com verdicts.","framework"],
-    ["code-review","Revisa o diff atual em busca de bugs e melhorias de qualidade.","framework"],
-    ["verify","Verifica se uma mudança de código faz o que deveria, rodando o app.","framework"],
-    ["update-config","Configura o harness do Claude Code via settings.json (hooks, permissões).","framework"],
+    ["carrosseleiro","Carrosséis de IG (framework Suellen Warmling), pipeline híbrido Gemini + Canvas.","projeto","🎠"],
+    ["landing-page","Landing pages premium para iscas digitais OMNI (copy → design → deploy → ActiveCampaign).","projeto","📄"],
+    ["deep-strategic-planning","\"Modo Dr. Estranho\": analisa 7-10 futuros por 12 lentes mentais e acha o caminho vencedor.","projeto","🔮"],
+    ["tech-research","Pesquisa técnica profunda com documentação padronizada. Nunca implementa código.","projeto","🔬"],
+    ["trend-ig","Descobre trending topics (EXA) e cria briefs de conteúdo para Instagram.","projeto","🔥"],
+    ["doc-rot","Detector de documentação podre para deletar (TODOs stale, comentários mentirosos).","projeto","🧹"],
+    ["lancamentos","Processa extratos/faturas, categoriza lançamentos e gera planilha de finanças.","projeto","💰"],
+    ["cli-router","Roteia tarefas para a persona/agente correto via CLI (Gemini, Claude, Codex).","projeto","🧭"],
+    ["telegram","Gerencia o AIOX Message Gateway (setup, deploy, status, logs, webhook).","projeto","✈️"],
+    ["slide-creator","Criação de apresentações de slides no padrão OMNI Brasil.","OMNI","🖼️"],
+    ["onde-salvar","Assistente de organização: decide o melhor local para salvar arquivos.","OMNI","📁"],
+    ["subir-drive","Upload manual de arquivos para o Google Drive.","OMNI","☁️"],
+    ["video-editor","Edita vídeo na VPS via squad video-editing (modos REELS/GERAL).","OMNI","🎬"],
+    ["brand-me","Aplicação de identidade de marca em artefatos.","OMNI","🏷️"],
+    ["deep-research","Harness de pesquisa profunda multi-fonte com verificação e relatório citado.","OMNI","📚"],
+    ["aiox-ads (skills)","38 skills de tráfego pago: diagnostic, generative, operational, optimization, strategic.","squad","🎯"],
+    ["architect-first","Filosofia de arquitetura-primeiro: design completo antes do código.","framework","📐"],
+    ["coderabbit-review","Execução do CodeRabbit CLI via WSL com loop de auto-correção.","framework","🐰"],
+    ["skill-creator","Guia para criar novas skills de forma eficaz.","framework","✨"],
+    ["mcp-builder","Guia para construir servidores MCP de alta qualidade.","framework","🔌"],
+    ["synapse","Motor de contexto SYNAPSE: domínios, regras de contexto e pipeline.","framework","🧠"],
+    ["checklist-runner","Engine genérica de execução de checklists (.md) com verdicts.","framework","☑️"],
+    ["code-review","Revisa o diff atual em busca de bugs e melhorias de qualidade.","framework","🔎"],
+    ["verify","Verifica se uma mudança de código faz o que deveria, rodando o app.","framework","✔️"],
+    ["update-config","Configura o harness do Claude Code via settings.json (hooks, permissões).","framework","⚙️"],
   ];
 
   /* ---- RENDER ---- */
   const tplSquad = (s)=>`<div class="card" data-search="${(s[0]+' '+s[1]).toLowerCase()}">
-      <div class="top"><span class="name">${s[0]}</span><span class="badge">${s[2]} ${s[2]>1?'agentes':'agente'}</span></div>
+      <div class="top"><span class="icon">${s[3]}</span><span class="name">${s[0]}</span><span class="badge">${s[2]} ${s[2]>1?'agentes':'agente'}</span></div>
       <div class="body">${s[1]}</div></div>`;
   const tplCore = (a)=>`<div class="card" data-search="${(a[0]+' '+a[1]+' '+a[2]).toLowerCase()}">
-      <div class="top"><span class="name">${a[0]}</span></div>
+      <div class="top"><span class="icon">${a[3]}</span><span class="name">${a[0]}</span></div>
       <div class="persona">${a[1]}</div>
       <div class="body">${a[2]}</div></div>`;
   const tplSkill = (k)=>`<div class="card" data-search="${(k[0]+' '+k[1]+' '+k[2]).toLowerCase()}">
-      <div class="top"><span class="name">${k[0]}</span><span class="badge">${k[2]}</span></div>
+      <div class="top"><span class="icon">${k[3]}</span><span class="name">${k[0]}</span><span class="badge">${k[2]}</span></div>
       <div class="body">${k[1]}</div></div>`;
 
   document.getElementById('grid-squads').innerHTML = squads.map(tplSquad).join('');
