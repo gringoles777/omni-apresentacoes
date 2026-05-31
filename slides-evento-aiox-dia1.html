@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slides — Evento AIOX · Dia 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --ink:#0A0A0A;
+    --ink-soft:#3A3A3A;
+    --gold:#C8A84B;
+    --gold-deep:#A9842A;
+    --gold-10:rgba(200,168,75,.12);
+    --font-display:'Oswald','Arial Black',sans-serif;
+    --font-mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:var(--font-display);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ───── Marca topo ───── */
+  .brand{
+    position:fixed;top:28px;left:34px;z-index:30;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:4px;
+    text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:9px;
+  }
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+  /* ───── Slides ───── */
+  .deck{position:fixed;inset:0}
+  .slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:8vw;
+    opacity:0;transform:scale(.985);
+    transition:opacity .55s ease,transform .55s ease;
+    pointer-events:none;
+  }
+  .slide.active{opacity:1;transform:scale(1);pointer-events:auto}
+
+  .kicker{
+    font-family:var(--font-mono);font-weight:500;
+    font-size:clamp(.7rem,1.5vw,1rem);letter-spacing:5px;text-transform:uppercase;
+    color:var(--gold-deep);margin-bottom:30px;
+  }
+  .title{
+    font-weight:700;text-transform:uppercase;
+    font-size:clamp(2.6rem,9vw,8rem);line-height:1.0;letter-spacing:-.01em;
+    max-width:18ch;
+  }
+  .title .gold{color:var(--gold-deep)}
+  .rule{width:64px;height:5px;background:var(--gold);margin-top:38px;border-radius:3px}
+
+  /* Capa */
+  .cover .daynum{
+    font-weight:700;font-size:clamp(5rem,22vw,18rem);line-height:.85;letter-spacing:-.02em;
+  }
+  .cover .daynum .accent{color:var(--gold-deep)}
+  .cover .subtitle{
+    font-family:var(--font-mono);font-size:clamp(.85rem,2vw,1.25rem);
+    letter-spacing:6px;text-transform:uppercase;color:var(--ink-soft);margin-top:26px;
+  }
+
+  /* ───── Rodapé / progresso ───── */
+  .counter{
+    position:fixed;bottom:26px;right:34px;z-index:30;
+    font-family:var(--font-mono);font-size:13px;letter-spacing:2px;color:var(--ink-soft);
+  }
+  .counter b{color:var(--gold-deep);font-weight:500}
+  .progress{position:fixed;left:0;bottom:0;height:4px;background:var(--gold-10);width:100%;z-index:30}
+  .progress .bar{height:100%;background:var(--gold);width:0;transition:width .45s ease}
+
+  /* ───── Setas ───── */
+  .nav{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:30;
+    width:54px;height:54px;border:1px solid rgba(10,10,10,.12);border-radius:50%;
+    background:rgba(255,255,255,.6);backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-size:22px;color:var(--ink-soft);user-select:none;transition:all .2s ease;
+  }
+  .nav:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .nav.prev{left:26px}
+  .nav.next{right:26px}
+
+  .hint{
+    position:fixed;bottom:26px;left:34px;z-index:30;
+    font-family:var(--font-mono);font-size:11px;letter-spacing:1px;color:rgba(10,10,10,.3);
+  }
+
+  /* ───── Gate de senha ───── */
+  #gate{position:fixed;inset:0;background:var(--white);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+  body:not(.locked) #gate{display:none}
+  body.locked .deck,body.locked .brand,body.locked .nav,body.locked .counter,body.locked .progress,body.locked .hint{display:none}
+  #gate .glogo{font-family:var(--font-display);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold-deep);text-transform:uppercase}
+  #gate .gsub{font-family:var(--font-mono);font-size:12px;letter-spacing:3px;color:var(--ink-soft);text-transform:uppercase}
+  #gate input{font-family:var(--font-mono);background:#fff;border:1px solid rgba(10,10,10,.2);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+  #gate input:focus{border-color:var(--gold)}
+  #gate .gerr{color:#c0392b;font-size:13px;font-family:var(--font-mono);display:none}
+  #gate .ghint{font-family:var(--font-mono);font-size:11px;letter-spacing:1px;color:rgba(10,10,10,.3)}
+
+  @media (max-width:600px){
+    .brand{top:18px;left:20px}
+    .counter{bottom:18px;right:20px}
+    .hint{display:none}
+    .nav{width:44px;height:44px}
+    .nav.prev{left:12px}.nav.next{right:12px}
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- ───── GATE ───── -->
+<div id="gate">
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">Slides · Evento AIOX · Dia 1</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Acesso restrito · Equipe &amp; convidados</div>
+</div>
+
+<div class="brand"><span class="dot"></span>OMNI BRASIL · EVENTO AIOX</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · CAPA -->
+  <section class="slide cover active">
+    <div class="kicker">Imersão presencial · 3 dias</div>
+    <div class="daynum">DIA <span class="accent">01</span></div>
+    <div class="subtitle">Primeiro contato e direção</div>
+  </section>
+
+  <!-- 2 · CHOQUE DE PARADIGMA -->
+  <section class="slide">
+    <div class="kicker">o que muda a partir de hoje</div>
+    <h1 class="title">ChatGPT responde.<br><span class="gold">AIOX realiza.</span></h1>
+  </section>
+
+  <!-- 3 · MENTALIDADE (parte 1) -->
+  <section class="slide">
+    <div class="kicker">mudança de mentalidade</div>
+    <h1 class="title">Você não veio<br>usar uma IA.</h1>
+  </section>
+
+  <!-- 4 · MENTALIDADE (parte 2 — virada) -->
+  <section class="slide">
+    <div class="kicker">mudança de mentalidade</div>
+    <h1 class="title">Veio comandar uma <span class="gold">equipe</span> delas.</h1>
+    <div class="rule"></div>
+  </section>
+
+  <!-- 5 · CONFERÊNCIA DE AMBIENTE -->
+  <section class="slide">
+    <div class="kicker">conferência de ambiente</div>
+    <h1 class="title">Tá todo mundo<br>no ar?</h1>
+  </section>
+
+  <!-- 6 · PRIMEIRA PÁGINA (o uau) -->
+  <section class="slide">
+    <div class="kicker">mão na massa · em menos de 1 hora</div>
+    <h1 class="title">Sua primeira página.<br><span class="gold">Ao vivo.</span></h1>
+  </section>
+
+  <!-- 7 · VITRINE DE CASES -->
+  <section class="slide">
+    <div class="kicker">vitrine de cases OMNI</div>
+    <h1 class="title">Tudo isso foi<br>feito com <span class="gold">AIOX.</span></h1>
+  </section>
+
+  <!-- 8 · BRAINSTORMING -->
+  <section class="slide">
+    <div class="kicker">agora é com você</div>
+    <h1 class="title">Qual vai ser<br>o seu projeto?</h1>
+  </section>
+
+  <!-- 9 · FECHO -->
+  <section class="slide">
+    <div class="kicker">amanhã a gente constrói</div>
+    <h1 class="title">Você <span class="gold">já</span><br>começou.</h1>
+    <div class="rule"></div>
+  </section>
+
+</div>
+
+<!-- Controles -->
+<div class="nav prev" id="prev">‹</div>
+<div class="nav next" id="next">›</div>
+<div class="counter"><b id="cur">01</b> / <span id="total">09</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="hint">← → navegar · F tela cheia</div>
+
+<script>
+  function tryLogin(){
+    if(document.getElementById('pwd').value==='omni777'){
+      document.body.classList.remove('locked');
+      show(0);
+    }else{
+      document.getElementById('gerr').style.display='block';
+    }
+  }
+
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const curEl=document.getElementById('cur');
+  const bar=document.getElementById('bar');
+  document.getElementById('total').textContent=String(total).padStart(2,'0');
+
+  function show(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+    curEl.textContent=String(i+1).padStart(2,'0');
+    bar.style.width=((i+1)/total*100)+'%';
+  }
+  function next(){show(i+1)}
+  function prev(){show(i-1)}
+
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}
+    else if(e.key==='Home'){show(0);}
+    else if(e.key==='End'){show(total-1);}
+    else if(e.key==='f'||e.key==='F'){
+      if(!document.fullscreenElement){document.documentElement.requestFullscreen();}
+      else{document.exitFullscreen();}
+    }
+  });
+
+  // Clique na tela: metade direita avança, esquerda volta
+  document.getElementById('deck').addEventListener('click',e=>{
+    (e.clientX > window.innerWidth/2) ? next() : prev();
+  });
+
+  // Swipe touch
+  let x0=null;
+  document.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>45){dx<0?next():prev();}
+    x0=null;
+  },{passive:true});
+
+  show(0);
+</script>
+</body>
+</html>
