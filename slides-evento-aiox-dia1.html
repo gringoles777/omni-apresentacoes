@@ -61,6 +61,15 @@
   .title .gold{color:var(--gold-deep)}
   .rule{width:64px;height:5px;background:var(--gold);margin-top:38px;border-radius:3px}
 
+  /* Slide mais denso: gancho menor + título compacto */
+  .lead-line{
+    font-family:var(--font-display);font-weight:600;text-transform:uppercase;
+    font-size:clamp(1.25rem,3.2vw,2.2rem);letter-spacing:.01em;line-height:1.12;
+    color:var(--ink-soft);margin-bottom:26px;max-width:24ch;
+  }
+  .lead-line .gold{color:var(--gold-deep)}
+  .title.compact{font-size:clamp(1.9rem,5.6vw,4.6rem);max-width:22ch}
+
   /* Capa */
   .cover .daynum{
     font-weight:700;font-size:clamp(5rem,22vw,18rem);line-height:.85;letter-spacing:-.02em;
@@ -139,10 +148,11 @@
     <div class="subtitle">Primeiro contato e direção</div>
   </section>
 
-  <!-- 2 · CHOQUE DE PARADIGMA + MENTALIDADE (resumo) -->
+  <!-- 2 · CHOQUE DE PARADIGMA + MENTALIDADE (3 mensagens em 1) -->
   <section class="slide">
     <div class="kicker">o que muda a partir de hoje</div>
-    <h1 class="title">Você não veio usar uma IA. Veio comandar uma <span class="gold">equipe</span> delas.</h1>
+    <p class="lead-line">ChatGPT responde. <span class="gold">AIOX realiza.</span></p>
+    <h1 class="title compact">Você não veio usar uma IA.<br>Veio comandar uma <span class="gold">equipe</span> delas.</h1>
     <div class="rule"></div>
   </section>
 
