@@ -2440,6 +2440,40 @@ const CAPABILITIES = [
     <span>Custo:</span> <code>$0 por audit</code>
   </div>
 </div>`}
+  ,
+  {id:"CAP-043",nome:"OMNI Video Studio (webapp)",categoria:"ferramenta-criativa",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"22/05",atualizado:"01/06",
+    link:"https://studio.omnihypnosis.com.br",
+    depende:["Higgsfield API (nano-banana-pro, Kling)","Gemini 3.1 Flash TTS","Edge TTS pt-BR (fallback)","Groq Whisper large-v3","ffmpeg + ASS rendering","Cloudflare named tunnel","CAP-001 Prisma (envio Telegram/WhatsApp)"],dependentes:[],
+    descricao:"Webapp completo para criar reels/anúncios e legendar vídeos com identidade OMNI ponta a ponta — pelo navegador, sem precisar de prompt. Dois fluxos: (1) Pipeline criativo — briefing → persona → copy → cenas-descrições (art-director) → imagens (Higgsfield nano-banana-pro) → motion (Kling) → TTS Gemini com vozes Aoede/Charon/Kore/Leda → compose final ffmpeg com legendas word-level (DejaVu Sans Bold, palavras-chave em ouro #C8A84B). (2) Feature Legendar vídeo standalone (/subtitle) — upload .mp4 → Whisper Groq word-level → cues editáveis com auto-highlight (stop-words PT) → quebra em \"?\" → render ASS overlay → botão Enviar via Prisma (Michael=Telegram, outros=Evolution omni-layslla). Modos AD, CASE OMNI (style Makoto Shinkai obrigatório) e CONTENT. Auto-renew cookie Higgsfield via Puppeteer + Gmail API. Pré-aprovação por fase, contador de chars, auto-regen quando narração muda, tracking de créditos por geração.",
+    habilidades:[
+      "Briefing assistido com brand-lock injetado + selector aspect/duração",
+      "Pipeline visual completo: persona → copy → cenas → imagens → motion → TTS → compose",
+      "TTS Gemini 3.1 Flash com vozes Aoede/Charon/Kore/Leda e tags emocionais",
+      "Fallback automático Gemini→Edge gender-aware quando Safety Filter bloqueia",
+      "Compose ffmpeg com legendas word-level burned in ouro #C8A84B (padrão Studio)",
+      "Legendar vídeo standalone via /subtitle (Whisper + auto-highlight + quebra em ?)",
+      "Roteamento Prisma: Michael=Telegram sendVideo, outros=Evolution omni-layslla",
+      "Cache-busting automático no final_url pra burlar cache CDN",
+      "Auto-renew cookie Higgsfield (Puppeteer + Gmail API code)",
+      "Pré-aprovação por fase com check-box reversível",
+      "Modo Case OMNI com style Makoto Shinkai obrigatório (REGRA 16 art-director)",
+      "Tracking de créditos estimados por geração"
+    ],
+    apis:["Higgsfield API (curl_cffi + Clerk JWT + DataDome)","Gemini 3.1 Flash TTS preview","Edge TTS pt-BR","Groq Whisper large-v3","ffmpeg + ASS","Telegram Bot API","Evolution API (omni-layslla)","Cloudflare named tunnel"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar</div>
+  <div class="note-step"><div class="note-num">1</div><div>Acessar <a href="https://studio.omnihypnosis.com.br" style="color:var(--color-gold)">studio.omnihypnosis.com.br</a> e fazer login</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Para criar reel/anúncio: clicar <em>+ Novo projeto</em> → preencher briefing → aprovar cada fase</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Para apenas legendar: clicar <em>📝 Legendar vídeo</em> no menu → upload .mp4 → editar palavras em ouro → baixar v1, v2…</div></div>
+  <div class="note-step"><div class="note-num">4</div><div>Vídeo final cai pelo Telegram (Michael) ou WhatsApp (outros números)</div></div>
+  <div class="note-ids">
+    <span>Repo:</span> <code>apps/video-studio-webapp/</code> &nbsp;|&nbsp;
+    <span>VPS:</span> <code>~/omni_brasil/apps/video-studio-webapp</code> &nbsp;|&nbsp;
+    <span>PM2:</span> <code>video-studio-webapp:7777</code> &nbsp;|&nbsp;
+    <span>Tunnel:</span> <code>cf-tunnel-studio</code>
+  </div>
+</div>`}
 ];
 
 const INFRA = [
