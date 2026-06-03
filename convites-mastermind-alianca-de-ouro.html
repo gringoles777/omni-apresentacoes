@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convites Mastermind — Aliança de Ouro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111111; --panel2:#151510;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.55); --ink-faint:rgba(244,244,232,.3);
+    --gold:#C9A84C; --gold-deep:#A9842A; --gold-10:rgba(201,168,76,.12); --gold-line:rgba(201,168,76,.18);
+    --green:#2A9D8F; --green-10:rgba(42,157,143,.14);
+    --font:'Oswald','Arial Black',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  /* GATE */
+  #gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+  body:not(.locked) #gate{display:none}
+  body.locked{overflow:hidden}
+  #gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  #gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-soft);text-transform:uppercase}
+  #gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-line);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+  #gate input:focus{border-color:var(--gold)}
+  #gate .gerr{color:#e07a5f;font-size:13px;font-family:var(--mono);display:none}
+  #gate .ghint{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--ink-faint)}
+
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+  header{text-align:center;padding:54px 24px 10px}
+  .logo{font-family:var(--font);font-weight:700;font-size:24px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  .subtitle{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--ink-soft);text-transform:uppercase;margin-top:8px}
+  h1{font-family:var(--font);font-weight:700;font-size:clamp(28px,5vw,42px);line-height:1.08;margin-top:18px}
+  h1 .gold{color:var(--gold)}
+  .lead{color:var(--ink-soft);max-width:600px;margin:14px auto 0;font-size:15px;line-height:1.6}
+
+  /* PROGRESSO */
+  .progress-box{background:var(--panel);border:1px solid var(--gold-line);border-radius:14px;padding:20px 24px;margin:30px auto 0;max-width:860px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .progress-box .pnum{font-family:var(--font);font-weight:700;font-size:38px;color:var(--gold);line-height:1}
+  .progress-box .plbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--ink-soft);text-transform:uppercase;margin-top:4px}
+  .bar{flex:1;min-width:180px;height:10px;background:#000;border-radius:20px;overflow:hidden;border:1px solid var(--gold-line)}
+  .bar > div{height:100%;width:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold));border-radius:20px;transition:width .35s ease}
+  .reset{font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:none;border:1px solid var(--gold-line);border-radius:8px;padding:8px 12px;cursor:pointer;letter-spacing:1px}
+  .reset:hover{border-color:var(--gold);color:var(--ink-soft)}
+
+  /* INSTRUÇÕES */
+  .howto{background:var(--panel2);border:1px solid var(--gold-line);border-radius:14px;padding:22px 26px;margin:18px auto 0;max-width:860px}
+  .howto h3{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+  .howto ol{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:9px}
+  .howto li{counter-increment:s;position:relative;padding-left:34px;font-size:14px;color:var(--ink-soft);line-height:1.5}
+  .howto li::before{content:counter(s);position:absolute;left:0;top:-1px;width:23px;height:23px;background:var(--gold-10);border:1px solid var(--gold-line);border-radius:50%;color:var(--gold);font-family:var(--mono);font-size:12px;display:flex;align-items:center;justify-content:center}
+  .howto b{color:var(--ink)}
+  .howto .perm{color:var(--green);font-weight:600}
+
+  /* LISTA */
+  main{padding:30px 0 20px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--gold-line);padding-bottom:12px;margin:0 0 18px}
+  .sec-head h2{font-family:var(--font);font-weight:500;font-size:20px;letter-spacing:.5px}
+  .sec-head .count{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px}
+
+  .invite{display:flex;align-items:center;gap:16px;background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:15px 18px;margin-bottom:11px;transition:border-color .2s,background .2s,opacity .2s}
+  .invite:hover{border-color:var(--gold)}
+  .invite.done{opacity:.5;background:#0e120f;border-color:var(--green-10)}
+  .invite.done .name{text-decoration:line-through;text-decoration-color:var(--green)}
+
+  .chk{flex:0 0 auto;cursor:pointer;display:flex}
+  .chk input{appearance:none;-webkit-appearance:none;width:26px;height:26px;border:2px solid var(--gold-line);border-radius:7px;cursor:pointer;position:relative;background:#000;transition:.2s}
+  .chk input:hover{border-color:var(--gold)}
+  .chk input:checked{background:var(--green);border-color:var(--green)}
+  .chk input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#06140f;font-size:15px;font-weight:700}
+
+  .info{flex:1;min-width:0}
+  .name{font-size:15.5px;font-weight:600;color:var(--ink)}
+  .emailrow{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+  .addr{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);word-break:break-all}
+  .copy{font-family:var(--mono);font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:6px;padding:3px 8px;cursor:pointer;flex-shrink:0}
+  .copy:hover{color:var(--gold);border-color:var(--gold)}
+  .copy.ok{color:var(--green);border-color:var(--green)}
+  .repo{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:5px;letter-spacing:.3px}
+  .repo .twobadge{color:var(--gold);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:1px 7px;margin-left:6px;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase}
+
+  .open{flex:0 0 auto;font-family:var(--mono);font-size:12px;letter-spacing:.5px;color:var(--bg);background:var(--gold);border-radius:8px;padding:10px 14px;text-decoration:none;font-weight:500;white-space:nowrap;transition:.2s}
+  .open:hover{background:#e3c870}
+
+  footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media(max-width:620px){
+    .invite{flex-wrap:wrap}
+    .open{width:100%;text-align:center;margin-top:6px}
+    header{padding-top:38px}
+  }
+</style>
+</head>
+<body class="locked">
+
+<!-- GATE -->
+<div id="gate">
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">Convites Mastermind · Aliança de Ouro</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Acesso restrito · Equipe OMNI</div>
+</div>
+
+<header>
+  <div class="logo">OMNI BRASIL</div>
+  <div class="subtitle">Aliança de Ouro · Onboarding</div>
+  <h1>Convites dos <span class="gold">Repositórios</span><br>dos Aliados</h1>
+  <p class="lead">Checklist para convidar cada aliado ao seu repositório Mastermind no GitHub. Todos com permissão <b style="color:var(--green)">Write</b>. Vá marcando conforme convida — o progresso fica salvo neste navegador.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="progress-box">
+    <div>
+      <div class="pnum"><span id="doneN">0</span><span style="color:var(--ink-faint);font-size:24px">/18</span></div>
+      <div class="plbl">Convites enviados</div>
+    </div>
+    <div class="bar"><div id="barfill"></div></div>
+    <button class="reset" onclick="resetAll()">Zerar progresso</button>
+  </div>
+
+  <div class="howto">
+    <h3>Como convidar cada um</h3>
+    <ol>
+      <li>Clique em <b>Abrir convite ↗</b> — abre a página do repositório no GitHub (faça login como <b>gringoles777</b> se pedir).</li>
+      <li>Na página, clique no botão verde <b>Add people</b>.</li>
+      <li>Cole o <b>email</b> (use o botão <b>copiar</b> ao lado do nome) e selecione a pessoa.</li>
+      <li>Em "Role", escolha <b class="perm">Write</b> e confirme em <b>Add to repository</b>.</li>
+      <li>Volte aqui e marque o <b>quadradinho ✓</b> do aliado.</li>
+    </ol>
+  </div>
+
+  <main>
+    <div class="sec-head">
+      <h2>Aliados</h2>
+      <span class="count">17 repositórios · 18 convites</span>
+    </div>
+    <div id="list"></div>
+  </main>
+
+</div>
+
+<footer>OMNI Brasil // Aliança de Ouro // Uso Interno · Jun 2026</footer>
+
+<script>
+  function tryLogin(){
+    if(document.getElementById('pwd').value==='omni777'){
+      document.body.classList.remove('locked');
+    }else{
+      document.getElementById('gerr').style.display='block';
+    }
+  }
+
+  /* ---- DADOS: [id, nome, email, repo, par?] ---- */
+  const ALIADOS = [
+    ["diego","Diego Moreira da Silva","d.moreira.silva2010@gmail.com","mastermind-diego"],
+    ["matheus","Matheus","neuro.receita@gmail.com","mastermind-matheus"],
+    ["flavia","Flávia Nunes Tavares Machado","nunesmachadoadv@gmail.com","mastermind-flavia"],
+    ["raphael","Raphael Freitas","raphaelrfreitas@icloud.com","mastermind-raphael"],
+    ["jeferson","Jeferson Barboza","jefersoncbarboza@gmail.com","mastermind-jeferson"],
+    ["alexandre","Alexandre Campos","alexandre@oalexandrecampos.com","mastermind-alexandre"],
+    ["simone-carneiro","Simone Carneiro","simone.neurociencias@gmail.com","mastermind-simone-carneiro"],
+    ["lauriane","Lauriane Silva","lauriane@conquerconsultoria.com.br","mastermind-lauriane"],
+    ["galbiatti-1","Gustavo Mioto Galbiati","gumiga@yahoo.com.br","mastermind-galbiatti",true],
+    ["galbiatti-2","Simone Parra Galbiati","simone.parragalbiati@gmail.com","mastermind-galbiatti",true],
+    ["gabi-artz","Gabi Artz","contato.gabiartz@gmail.com","mastermind-gabi-artz"],
+    ["andre","Andre","veiga.mr@gmail.com","mastermind-andre"],
+    ["barbara","Bárbara Quercetti","barbara.quercetti@gmail.com","mastermind-barbara"],
+    ["henrique","Henrique Lucena","henriquenl@gmail.com","mastermind-henrique"],
+    ["thiago-kiss","Thiago Kiss","thiagokissdirector@gmail.com","mastermind-thiago-kiss"],
+    ["sarita","Sarita","sarita.hipnoterapia@gmail.com","mastermind-sarita"],
+    ["yasmin","Yasmin Rodrigues e Rodrigues","yasmin.institutosalvatore@gmail.com","mastermind-yasmin"],
+    ["italo","Italo Lettieri","italo.lettieri@omnihypnosis.com.br","mastermind-italo"],
+  ];
+  const TOTAL = ALIADOS.length;
+  const KEY = "ao-convites-v1";
+  const BASE = "https://github.com/gringoles777/";
+
+  function loadState(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {}; }catch(e){ return {}; } }
+  function saveState(s){ localStorage.setItem(KEY, JSON.stringify(s)); }
+
+  function esc(t){ return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function render(){
+    const st = loadState();
+    const list = document.getElementById('list');
+    list.innerHTML = ALIADOS.map(a=>{
+      const [id,nome,email,repo,par] = a;
+      const done = st[id] ? " done" : "";
+      const ck = st[id] ? "checked" : "";
+      const badge = par ? '<span class="twobadge">2 no mesmo repo</span>' : '';
+      return `<div class="invite${done}" id="row-${id}">
+        <label class="chk"><input type="checkbox" ${ck} onchange="toggle('${id}',this.checked)"></label>
+        <div class="info">
+          <div class="name">${esc(nome)}</div>
+          <div class="emailrow">
+            <span class="addr">${esc(email)}</span>
+            <button class="copy" onclick="copyEmail(this,'${email}')">copiar</button>
+          </div>
+          <div class="repo">${repo}${badge}</div>
+        </div>
+        <a class="open" href="${BASE}${repo}/settings/access" target="_blank" rel="noopener">Abrir convite ↗</a>
+      </div>`;
+    }).join('');
+    updateProgress();
+  }
+
+  function toggle(id,val){
+    const st = loadState();
+    if(val){ st[id]=true; } else { delete st[id]; }
+    saveState(st);
+    document.getElementById('row-'+id).classList.toggle('done',val);
+    updateProgress();
+  }
+
+  function updateProgress(){
+    const st = loadState();
+    const n = Object.keys(st).filter(k=>st[k]).length;
+    document.getElementById('doneN').textContent = n;
+    document.getElementById('barfill').style.width = (n/TOTAL*100)+"%";
+  }
+
+  function copyEmail(btn,email){
+    navigator.clipboard.writeText(email).then(()=>{
+      const orig = btn.textContent;
+      btn.textContent = "copiado ✓"; btn.classList.add('ok');
+      setTimeout(()=>{ btn.textContent = orig; btn.classList.remove('ok'); }, 1400);
+    });
+  }
+
+  function resetAll(){
+    if(confirm("Zerar todo o progresso desta lista?")){
+      localStorage.removeItem(KEY);
+      render();
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>
