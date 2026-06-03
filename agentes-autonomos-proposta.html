@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentes Autônomos — Proposta OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black:      #050505;
+    --dark:       #0D0D0D;
+    --dark-el:    #1A1A1A;
+    --dark-tx:    #2D2D2D;
+    --gold:       #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep:  #9A7A2E;
+    --cream:      #F5F0E8;
+    --cream-70:   rgba(245,240,232,0.70);
+    --cream-50:   rgba(245,240,232,0.50);
+    --cream-30:   rgba(245,240,232,0.30);
+    --gold-10:    rgba(200,168,75,0.10);
+    --gold-20:    rgba(200,168,75,0.20);
+    --gold-30:    rgba(200,168,75,0.30);
+    --teal:       #2A9D8F;
+    --grad-gold:  linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(5,5,5,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+    padding: 18px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header-logo { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; }
+  .header-sub  { font-size: 11px; letter-spacing: 2px; color: var(--cream-50); text-transform: uppercase; margin-top: 2px; }
+  .header-tag  { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; border: 1px solid var(--gold-30); padding: 6px 14px; border-radius: 50px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,168,75,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    border: 1px solid var(--gold-30); padding: 8px 20px; border-radius: 50px;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    line-height: 1.05;
+    background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero h2 {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--cream-70); margin-bottom: 48px;
+  }
+  .hero-divider { width: 60px; height: 2px; background: var(--grad-gold); margin: 0 auto 48px; }
+
+  .hero-numbers {
+    display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .hero-num { text-align: center; }
+  .hero-num .n {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3rem;
+    background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+  }
+  .hero-num .l { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-50); margin-top: 4px; }
+
+  .scroll-hint { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-30); }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 960px; margin: 0 auto;
+    padding: 96px 24px;
+  }
+  .section-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--cream); margin-bottom: 48px; line-height: 1.1;
+  }
+  .section-title span {
+    background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .divider { width: 60px; height: 2px; background: var(--grad-gold); margin-bottom: 48px; }
+
+  /* ── SEPARATOR ── */
+  .sep {
+    max-width: 960px; margin: 0 auto;
+    border: none; border-top: 1px solid rgba(200,168,75,0.15);
+  }
+
+  /* ── GRID CARDS ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .card {
+    background: var(--dark-el);
+    border: 1px solid rgba(200,168,75,0.20);
+    border-radius: 8px; padding: 32px;
+  }
+  .card.highlight { border-color: var(--gold); }
+  .card.teal-card  { border-color: rgba(42,157,143,0.40); }
+
+  .card-icon { font-size: 28px; margin-bottom: 16px; }
+  .card-title { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 12px; }
+  .card-body  { font-size: 0.9rem; color: var(--cream-70); line-height: 1.7; }
+
+  /* ── COMPARISON TABLE ── */
+  .compare {
+    width: 100%; border-collapse: collapse; margin-top: 8px;
+  }
+  .compare th {
+    font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; font-size: 0.85rem;
+    padding: 16px 20px; text-align: left;
+    border-bottom: 2px solid rgba(200,168,75,0.30);
+    color: var(--cream-50);
+  }
+  .compare th:last-child { color: var(--gold); }
+  .compare td {
+    padding: 16px 20px; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(200,168,75,0.08);
+    color: var(--cream-70);
+    vertical-align: top;
+  }
+  .compare td:first-child { color: var(--cream-50); font-size: 0.85rem; }
+  .compare td.good  { color: #4CAF50; font-weight: 500; }
+  .compare td.bad   { color: rgba(245,240,232,0.35); }
+  .compare td.gold  { color: var(--gold); font-weight: 600; }
+  .compare tr:hover td { background: var(--gold-10); }
+
+  /* ── COST BOX ── */
+  .cost-box {
+    background: var(--dark-el);
+    border: 1px solid var(--gold);
+    border-radius: 8px; padding: 48px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cost-box::before {
+    content: '';
+    position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 200px;
+    background: radial-gradient(ellipse, rgba(200,168,75,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cost-main {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    background: var(--grad-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1;
+  }
+  .cost-label { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream-50); margin-top: 8px; margin-bottom: 32px; }
+  .cost-items { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+  .cost-item { text-align: center; }
+  .cost-item .val { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.6rem; color: var(--cream); }
+  .cost-item .lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cream-50); margin-top: 4px; }
+  .cost-item .sub { font-size: 11px; color: var(--gold); margin-top: 2px; }
+
+  /* ── QUOTE ── */
+  .quote {
+    border-left: 3px solid var(--gold);
+    padding: 24px 32px;
+    background: var(--gold-10);
+    border-radius: 0 8px 8px 0;
+    margin: 32px 0;
+  }
+  .quote p {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.2rem; color: var(--cream-70); line-height: 1.6;
+  }
+  .quote cite { display: block; margin-top: 12px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-style: normal; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 24px; padding: 28px 0;
+    border-bottom: 1px solid rgba(200,168,75,0.10);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
+    color: var(--gold);
+  }
+  .step-content {}
+  .step-title { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--cream); margin-bottom: 6px; }
+  .step-body  { font-size: 0.88rem; color: var(--cream-50); }
+  .step-time  { font-size: 11px; color: var(--gold); margin-top: 4px; letter-spacing: 1px; }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 50px;
+  }
+  .badge-gold  { background: var(--gold-20); color: var(--gold); border: 1px solid var(--gold-30); }
+  .badge-green { background: rgba(76,175,80,0.15); color: #4CAF50; border: 1px solid rgba(76,175,80,0.30); }
+  .badge-teal  { background: rgba(42,157,143,0.15); color: var(--teal); border: 1px solid rgba(42,157,143,0.30); }
+
+  /* ── CTA FINAL ── */
+  .cta-section {
+    background: var(--dark-el);
+    border-top: 1px solid rgba(200,168,75,0.15);
+    padding: 96px 24px; text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.5rem); text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--cream); margin-bottom: 16px;
+  }
+  .cta-section p { font-size: 1rem; color: var(--cream-50); max-width: 480px; margin: 0 auto 40px; }
+  .btn {
+    display: inline-block;
+    background: var(--gold); color: var(--black);
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 16px 48px; border-radius: 4px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--gold-light); }
+
+  /* ── FULL-WIDTH BAND ── */
+  .band {
+    background: var(--dark-el);
+    border-top: 1px solid rgba(200,168,75,0.10);
+    border-bottom: 1px solid rgba(200,168,75,0.10);
+    padding: 64px 24px;
+  }
+  .band-inner { max-width: 960px; margin: 0 auto; }
+
+  /* ── CHECKLIST ── */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.95rem; color: var(--cream-70); }
+  .check-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .check-list li.no::before { content: '✗'; color: rgba(245,240,232,0.25); }
+  .check-list li.no { color: var(--cream-30); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    header { padding: 16px 20px; }
+    .header-tag { display: none; }
+    .hero-numbers { gap: 32px; }
+    .cost-items { gap: 32px; }
+    .cost-box { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="header-logo">OMNI Brasil</div>
+    <div class="header-sub">Inteligência Artificial Aplicada</div>
+  </div>
+  <div class="header-tag">Proposta Interna</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Decisão estratégica · 2026</div>
+  <h1>Agentes que<br>trabalham por nós</h1>
+  <h2>Por que implementar o sistema de IA autônoma agora</h2>
+  <div class="hero-divider"></div>
+  <div class="hero-numbers">
+    <div class="hero-num">
+      <div class="n">R$44</div>
+      <div class="l">custo novo / mês</div>
+    </div>
+    <div class="hero-num">
+      <div class="n">1 dia</div>
+      <div class="l">para ter o sistema base</div>
+    </div>
+    <div class="hero-num">
+      <div class="n">24/7</div>
+      <div class="l">agentes trabalhando</div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ continue lendo</div>
+</div>
+
+<hr class="sep">
+
+<!-- SEÇÃO 1 — O problema -->
+<section>
+  <div class="section-label">01 · O problema hoje</div>
+  <h2 class="section-title">O que está <span>faltando</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon">💤</div>
+      <div class="card-title">Agentes dormem</div>
+      <div class="card-body">Nosso sistema só funciona quando alguém abre o computador. Quando a Rafa fecha o notebook, os agentes param. Não há nada rodando por nós à noite.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <div class="card-title">Sem acesso fácil</div>
+      <div class="card-body">Para acionar um agente hoje é preciso abrir o terminal, digitar comandos. É impossível fazer isso pelo celular, em reunião, ou fora do escritório.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔁</div>
+      <div class="card-title">Retrabalho manual</div>
+      <div class="card-body">Disparos de WhatsApp, lembretes de reunião, follow-ups de leads — tudo ainda depende de alguém lembrar e executar. Isso não escala.</div>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top:40px">
+    <p>"Hoje tenho dificuldade com memórias e não tenho agentes autônomos ainda. Quero agentes trabalhando 24h por dia, 7 dias por semana."</p>
+    <cite>— Rafa Mendes</cite>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SEÇÃO 2 — A solução -->
+<section>
+  <div class="section-label">02 · A solução</div>
+  <h2 class="section-title">OpenClaw + <span>Telegram</span></h2>
+  <div class="divider"></div>
+
+  <p style="color:var(--cream-70); max-width:640px; margin-bottom:40px; font-size:1rem; line-height:1.8;">
+    OpenClaw é o software que a mentora Isis Moreira usa para rodar seus agentes de IA.
+    Ele instala em um servidor pequeno e conecta ao Telegram como interface.
+    Os agentes ficam ligados 24h, agem de forma autônoma e se comunicam via chat.
+  </p>
+
+  <div class="grid-2">
+    <div class="card highlight">
+      <div class="card-title">Como funciona</div>
+      <div class="card-body" style="color:var(--cream-70)">
+        <ul class="check-list">
+          <li>Servidor pequeno (VPS) fica ligado 24/7 na internet</li>
+          <li>OpenClaw roda no servidor, conectado ao Claude (Anthropic)</li>
+          <li>Você conversa com o agente pelo Telegram — do celular, qualquer hora</li>
+          <li>Agente executa tarefas automaticamente por cron</li>
+          <li>Subagentes especializados para marketing, vendas, suporte</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">O que muda na prática</div>
+      <div class="card-body" style="color:var(--cream-70)">
+        <ul class="check-list">
+          <li>Rafa abre o Telegram e fala: "como estão os leads de hoje?"</li>
+          <li>Agente envia lembretes de reunião automaticamente (12h, 1h, na hora)</li>
+          <li>Disparo comercial no Pipedrive executa sem ninguém acionar</li>
+          <li>Agente reporta o que fez — Rafa supervisiona, não executa</li>
+          <li>Memória persistente — agente lembra de tudo entre conversas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="band-inner">
+    <div class="section-label">Validado em produção</div>
+    <div class="quote" style="margin-top:16px; margin-bottom:0">
+      <p>"Custo estimado médio de oitenta a quinhentos reais, se você realmente usar muito, que é o meu caso. Você consegue ter um custo muito baixo comparado até a 10 colaboradores."</p>
+      <cite>— Isis Moreira, no curso Dona System (transcrição oficial)</cite>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 3 — Custo real -->
+<section>
+  <div class="section-label">03 · Custo real</div>
+  <h2 class="section-title">Sem surpresa no <span>bolso</span></h2>
+  <div class="divider"></div>
+
+  <div class="cost-box" style="margin-bottom:40px">
+    <div class="cost-main">R$ 44</div>
+    <div class="cost-label">único custo novo por mês</div>
+    <div class="cost-items">
+      <div class="cost-item">
+        <div class="val">R$ 44/mês</div>
+        <div class="lbl">VPS novo (Hostinger KVM2)</div>
+        <div class="sub">servidor dedicado para os agentes</div>
+      </div>
+      <div class="cost-item">
+        <div class="val">R$ 0 extra</div>
+        <div class="lbl">Claude Code</div>
+        <div class="sub">já pagamos — assinatura fixa</div>
+      </div>
+      <div class="cost-item">
+        <div class="val">R$ 0</div>
+        <div class="lbl">Infraestrutura atual</div>
+        <div class="sub">n8n, Chatwoot, Pipedrive — inalterados</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="color:var(--cream-50); font-size:0.85rem; text-align:center; margin-bottom:40px">
+    ⚠️ Por que um VPS novo e não o atual? Nosso servidor (76.13.169.211) está com 88% do disco ocupado.
+    A Isis Moreira recomenda no curso: use VPS separado para projetos diferentes.
+  </p>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Situação atual</th>
+        <th>Com OpenClaw</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Claude Code (IA)</td>
+        <td class="good">já pago</td>
+        <td class="good">mesmo plano, sem aumento</td>
+      </tr>
+      <tr>
+        <td>VPS servidor</td>
+        <td class="good">já pago (uso atual)</td>
+        <td class="gold">+ R$ 44/mês (novo, separado)</td>
+      </tr>
+      <tr>
+        <td>n8n / Chatwoot / Pipedrive</td>
+        <td class="good">já pago</td>
+        <td class="good">inalterado</td>
+      </tr>
+      <tr>
+        <td>Cobrança por token/uso</td>
+        <td class="bad">não se aplica</td>
+        <td class="good">não — assinatura fixa</td>
+      </tr>
+      <tr>
+        <td><strong>Total mensal novo</strong></td>
+        <td>—</td>
+        <td class="gold"><strong>R$ 44/mês</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="sep">
+
+<!-- SEÇÃO 4 — O que já temos -->
+<section>
+  <div class="section-label">04 · Ponto de partida</div>
+  <h2 class="section-title">O que já <span>construímos</span></h2>
+  <div class="divider"></div>
+
+  <p style="color:var(--cream-70); max-width:640px; margin-bottom:40px; font-size:1rem; line-height:1.8;">
+    Não começamos do zero. A maior parte da inteligência já foi construída no AIOX.
+    O OpenClaw vira a interface que dá vida a esse conteúdo.
+  </p>
+
+  <div class="grid-3">
+    <div class="card teal-card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">35+ Squads prontas</div>
+      <div class="card-body">Copy, ads, design, vendas, suporte, avaliação de reuniões — todo o conhecimento da OMNI já está configurado como agentes especializados.</div>
+    </div>
+    <div class="card teal-card">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">Script de disparo pronto</div>
+      <div class="card-body">O robô que lê atividades do Pipedrive e envia WhatsApp via Chatwoot já está 100% escrito e o cron já roda a cada minuto no servidor. Falta só o copy das mensagens.</div>
+    </div>
+    <div class="card teal-card">
+      <div class="card-icon">🔗</div>
+      <div class="card-title">Integrações ativas</div>
+      <div class="card-body">Pipedrive, Chatwoot, Evolution API, n8n, ActiveCampaign — todos conectados e funcionando. OpenClaw usa essas integrações sem mudar nada.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SEÇÃO 5 — Casos de uso -->
+<section>
+  <div class="section-label">05 · Na prática</div>
+  <h2 class="section-title">O que o agente <span>fará por nós</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2" style="margin-bottom:32px">
+    <div class="card highlight">
+      <div style="margin-bottom:12px"><span class="badge badge-green">Pronto para ativar</span></div>
+      <div class="card-title">Disparo Comercial</div>
+      <div class="card-body">
+        Agente lê atividades vencidas no Pipedrive, envia a mensagem WhatsApp certa para cada lead, conclui a atividade e cria a próxima. Tudo sem ninguém acionar. Roda a cada minuto, dias úteis, 10h–18h.<br><br>
+        <strong style="color:var(--gold)">Bloqueio atual:</strong> só falta escrever as mensagens reais (copy).
+      </div>
+    </div>
+    <div class="card">
+      <div style="margin-bottom:12px"><span class="badge badge-teal">Próximo a implementar</span></div>
+      <div class="card-title">Lembretes de Reunião</div>
+      <div class="card-body">
+        Agente verifica reuniões agendadas no CRM e envia lembretes automáticos: 12 horas antes, 1 hora antes e na hora marcada. O agente raciocina sozinho — não precisa de atividade pré-criada.<br><br>
+        <strong style="color:var(--gold)">Por que OpenClaw?</strong> Só com agente autônomo 24/7 isso é possível.
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title">Briefing diário</div>
+      <div class="card-body">Todo dia de manhã o agente manda no Telegram: leads novos, reuniões do dia, atividades pendentes, alertas.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Supervisão fácil</div>
+      <div class="card-body">Rafa abre o Telegram e pergunta "o que foi enviado hoje?". O agente responde com relatório completo. Sem abrir terminal.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Evolução contínua</div>
+      <div class="card-body">Para ajustar o comportamento do agente basta falar no chat. Sem editar arquivos de configuração.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SEÇÃO 6 — Timeline -->
+<section>
+  <div class="section-label">06 · Implementação</div>
+  <h2 class="section-title">1 dia para <span>começar</span></h2>
+  <div class="divider"></div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Contratar VPS na Hostinger</div>
+        <div class="step-body">KVM 2, Ubuntu 24.04, São Paulo. Anota IP, usuário e senha.</div>
+        <div class="step-time">⏱ 10 minutos</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Instalar o OpenClaw</div>
+        <div class="step-body">Seguindo a aula M1_A2 do curso — tutorial passo a passo. Criar bot no Telegram via @BotFather e conectar.</div>
+        <div class="step-time">⏱ 2 horas</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Configurar o agente principal</div>
+        <div class="step-body">Soul (personalidade), Identity (papel) e User (contexto OMNI) — usando os prompts prontos do curso.</div>
+        <div class="step-time">⏱ 1 hora</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Segurança do servidor</div>
+        <div class="step-body">Jogar o prompt do módulo 3 no Telegram. O próprio agente instala firewall, Fail2Ban e atualizações automáticas.</div>
+        <div class="step-time">⏱ 30 minutos</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Ativar disparo comercial</div>
+        <div class="step-body">Escrever as mensagens reais das etapas M0 e M1. Agente roda em dry-run, Rafa valida, libera modo real.</div>
+        <div class="step-time">⏱ 2 horas</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content">
+        <div class="step-title">Configurar lembretes de reunião</div>
+        <div class="step-body">Cron a cada 30 min → agente consulta Pipedrive → envia WhatsApp nos momentos certos.</div>
+        <div class="step-time">⏱ 1 hora (semana 2)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- SEÇÃO 7 — Por que agora -->
+<section>
+  <div class="section-label">07 · Por que agora</div>
+  <h2 class="section-title">O custo de <span>não fazer</span></h2>
+  <div class="divider"></div>
+
+  <div class="grid-2">
+    <div>
+      <p style="color:var(--cream-70); font-size:1rem; line-height:1.8; margin-bottom:24px">
+        Cada semana sem o disparo automático é uma semana onde leads estão resfriando porque alguém esqueceu de enviar a mensagem certa na hora certa.
+      </p>
+      <p style="color:var(--cream-70); font-size:1rem; line-height:1.8; margin-bottom:24px">
+        Cada reunião sem lembrete é um no-show evitável. Cada follow-up feito manualmente é tempo que poderia estar em produto, conteúdo ou estratégia.
+      </p>
+      <p style="color:var(--cream-70); font-size:1rem; line-height:1.8;">
+        A infraestrutura já existe. O script de disparo já está pronto. O curso já foi pago.
+        O investimento novo é R$ 44 por mês.
+      </p>
+    </div>
+    <div class="card" style="background:var(--gold-10); border-color:var(--gold)">
+      <div class="card-title" style="margin-bottom:20px">Resumo da decisão</div>
+      <ul class="check-list">
+        <li>Curso comprado e assistido ✓</li>
+        <li>Script de disparo 100% pronto ✓</li>
+        <li>VPS atual com infra rodando ✓</li>
+        <li>Claude Code já pago ✓</li>
+        <li>Custo novo: R$ 44/mês ✓</li>
+        <li>Tutorial completo disponível ✓</li>
+        <li>Agente de suporte (grupo Isis) ✓</li>
+        <li class="no">Agentes autônomos ativos</li>
+        <li class="no">Lembrete de reunião automático</li>
+        <li class="no">Interface móvel pelo Telegram</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section">
+  <h2>Próximo passo</h2>
+  <p>Contratar o VPS na Hostinger e começar a instalação. Todo o resto já está pronto.</p>
+  <a href="https://hostinger.com" class="btn" target="_blank">hostinger.com — KVM 2 · R$ 44/mês</a>
+  <p style="margin-top:24px; font-size:12px; color:var(--cream-30); letter-spacing:1px;">OMNI BRASIL · INTELIGÊNCIA ARTIFICIAL APLICADA · 2026</p>
+</div>
+
+</body>
+</html>
