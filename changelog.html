@@ -2487,7 +2487,14 @@ const CAPABILITIES = [
     <span>PM2:</span> <code>video-studio-webapp:7777</code> &nbsp;|&nbsp;
     <span>Tunnel:</span> <code>cf-tunnel-studio</code>
   </div>
-</div>`}
+</div>`},
+  {id:"CAP-044",nome:"Gerador de Áudios de Omniterapia",categoria:"ferramenta-criativa",status:"ativo",statusLabel:"Ativo",
+    criador:"Julia",responsavel:"Julia",versao:"1.0",inicio:"04/06",atualizado:"04/06",
+    link:"App local — skill /audio-motivacao (127.0.0.1:7791)",
+    depende:["Voxtral TTS (Mistral)","Google AI Studio / Gemini","ffmpeg","Node.js + Express"],dependentes:[],
+    descricao:"App local que gera áudios de omniterapia: tema → roteiro no molde OMNI → áudio com a voz escolhida, clonada via Voxtral (Mistral). Acionado pela skill /audio-motivacao, que prepara o ambiente, sobe o app e abre no navegador. Onboarding guiado valida e grava as chaves (Mistral + Google AI Studio) e, na versão do aluno, grava a voz do próprio aluno em 3 tons (microfone ou upload). Duas variantes: OMNI (vozes Rafa/Michael, uso interno) e Aluno (white-label no template mastermind — cada aluno usa a própria voz, mantendo molde e marca OMNI).",
+    habilidades:["Tema → roteiro (molde OMNI) → áudio com voz clonada","Skill /audio-motivacao prepara ambiente, sobe o app e abre o navegador","Onboarding de chaves com validação real (rejeita chave inválida na hora)","Tutorial passo a passo de como pegar cada chave (alunos leigos)","Gravação da voz do aluno em 3 tons (microfone ou upload)","Instaladores setup.ps1 (Windows) e setup.sh (Mac/Linux)","Durações curta/média/completa com fallback de provedor"],
+    apis:["Voxtral TTS (Mistral)","Google AI Studio / Gemini","OpenRouter/Anthropic/Claude CLI (fallback)","ffmpeg","Node.js + Express"],nota:""}
 ];
 
 const INFRA = [
