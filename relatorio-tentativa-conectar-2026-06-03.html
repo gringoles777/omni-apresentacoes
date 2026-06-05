@@ -75,6 +75,7 @@
   </select>
   <select id="filterLabel" onchange="filterTable()">
     <option value="">Todas as etiquetas</option>
+    <option value="__none__">Sem etiqueta</option>
     <option value="M0">M0 (71)</option>
     <option value="M-TC1">M-TC1 (22)</option>
     <option value="M-TC2">M-TC2 (7)</option>
@@ -3276,7 +3277,7 @@ function filterTable() {
     const noConv   = r.classList.contains('no-conv');
     const rowLabels = (r.getAttribute('data-labels') || '').split(',');
     const mq = !q  || txt.includes(q);
-    const ml = !fl || rowLabels.includes(fl);
+    const ml = !fl || (fl === "__none__" ? rowLabels.join("") === "" : rowLabels.includes(fl));
     let mc = true;
     if (fc === 'with')    mc = !noConv;
     if (fc === 'without') mc =  noConv;
