@@ -1,0 +1,37 @@
+name: Atualizar Relatório de Leads — Conectado
+
+on:
+  schedule:
+    # 8h, 10h, 12h, 14h, 16h e 18h BRT (UTC-3) — seg a sáb
+    - cron: "0 11,13,15,17,19,21 * * 1-6"
+  workflow_dispatch:
+    # Permite rodar manualmente pelo GitHub Actions
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rodar script de atualização
+        env:
+          PIPEDRIVE_API_KEY: ${{ secrets.PIPEDRIVE_API_KEY }}
+          CHATWOOT_TOKEN: ${{ secrets.CHATWOOT_TOKEN }}
+        run: python scripts/update-conectado.py
+
+      - name: Commit e push se houver mudanças
+        run: |
+          git config user.name "AURA Bot"
+          git config user.email "aura-bot@omnihypnosis.com.br"
+          git add leads-responderam-conectado.html
+          git diff --staged --quiet || git commit -m "chore(auto): atualiza relatório de leads conectados $(date +'%d/%m/%Y %H:%M BRT')"
+          git push
