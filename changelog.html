@@ -508,6 +508,7 @@ const DATA = [
 {"hash": "64b87987", "author": "Michael Arruda", "date": "2026-06-01", "type": "fix", "scope": "video-studio", "message": "remove carga duplicada do Alpine.js no editor", "status": "correcao", "friendly": "Remove carga duplicada do Alpine.js no editor"},
 {"hash": "93e8f64b", "author": "Michael Arruda", "date": "2026-06-01", "type": "feat", "scope": "mentoria", "message": "fluxo /demo-mentoria via Telegram (pagina + video)", "status": "novo", "friendly": "Fluxo /demo-mentoria via Telegram (pagina + video)"},
 {"hash": "9acc01ea", "author": "Michael Arruda", "date": "2026-06-01", "type": "fix", "scope": "prisma-telegram", "message": "bridge /terminal, transcricao de documento e fix do digitando", "status": "correcao", "friendly": "Bridge /terminal, transcricao de documento e fix do digitando"},
+{"hash": "00000000", "author": "Michael Arruda", "date": "2026-06-07", "type": "feat", "scope": "social-selling", "message": "CAP-047 Social Selling Bot SS — auto-reply Instagram DM + sentinela 12h", "status": "novo", "friendly": "CAP-047 Social Selling Bot SS — auto-reply Instagram DM + sentinela 12h"},
 {"hash": "21478688", "author": "Michael Arruda", "date": "2026-06-01", "type": "docs", "scope": "capabilities", "message": "registra CAP-043 OMNI Video Studio (webapp)", "status": "documentacao", "friendly": "Registra CAP-043 OMNI Video Studio (webapp)"},
 {"hash": "efbdd0de", "author": "Michael Arruda", "date": "2026-06-01", "type": "feat", "scope": "video-studio/subtitle", "message": "auto-highlight + quebra em \"?\" + Telegram/Evolution routing", "status": "novo", "friendly": "Auto-highlight + quebra em \"?\" + Telegram/Evolution routing"},
 {"hash": "e08cc383", "author": "Michael Arruda", "date": "2026-06-01", "type": "feat", "scope": "prisma", "message": "migra assistente pessoal pro Telegram + roteamento de entrega", "status": "novo", "friendly": "Migra assistente pessoal pro Telegram + roteamento de entrega"},
@@ -2599,6 +2600,33 @@ const CAPABILITIES = [
     descricao:"App local que gera áudios de omniterapia: tema → roteiro no molde OMNI → áudio com a voz escolhida, clonada via Voxtral (Mistral). Acionado pela skill /audio-motivacao, que prepara o ambiente, sobe o app e abre no navegador. Onboarding guiado valida e grava as chaves (Mistral + Google AI Studio) e, na versão do aluno, grava a voz do próprio aluno em 3 tons (microfone ou upload). Duas variantes: OMNI (vozes Rafa/Michael, uso interno) e Aluno (white-label no template mastermind — cada aluno usa a própria voz, mantendo molde e marca OMNI).",
     habilidades:["Tema → roteiro (molde OMNI) → áudio com voz clonada","Skill /audio-motivacao prepara ambiente, sobe o app e abre o navegador","Onboarding de chaves com validação real (rejeita chave inválida na hora)","Tutorial passo a passo de como pegar cada chave (alunos leigos)","Gravação da voz do aluno em 3 tons (microfone ou upload)","Instaladores setup.ps1 (Windows) e setup.sh (Mac/Linux)","Durações curta/média/completa com fallback de provedor"],
     apis:["Voxtral TTS (Mistral)","Google AI Studio / Gemini","OpenRouter/Anthropic/Claude CLI (fallback)","ffmpeg","Node.js + Express"],nota:""}
+  ,
+  {id:"CAP-047",nome:"Social Selling Bot SS — Auto-reply Instagram DM + Sentinela 12h",categoria:"ferramenta-comercial",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"07/06",atualizado:"07/06",
+    link:"workspace/businesses/omni_brasil/operations/social-selling/scripts/",
+    depende:["instagrapi (Instagram private API)","Telegram Bot API","CAP-001 Prisma/AIOX (controle via Telegram)"],dependentes:[],
+    descricao:"Automação de DMs do Instagram @michaelarruda para social selling. Dois scripts na VPS: (1) auto_reply.py em loop contínuo — detecta lead de anúncio (\"tenho interesse...\") e responde com 3 mensagens qualificadoras baseadas na bio do perfil; detecta omni terapeuta (bio com \"omniterapeuta\", \"terapeuta omni\" ou \"@omnibr\") e envia check-in do portal uma única vez. (2) sentinela.py via cron a cada 30min — alerta Michael no Telegram quando qualquer lead ficou mais de 12h sem resposta. Controlado pelo Telegram via Prisma/AIOX com os comandos: liga o bot ss / desliga o bot ss / status do bot ss.",
+    habilidades:[
+      "Detecta lead de anúncio pelo template 'tenho interesse' e responde em 3 msgs com delay humano (40-90s)",
+      "Lê bio do perfil para detectar profissão e personalizar a pergunta de motivacional",
+      "4 variações de pergunta: saúde/bem-estar, empresária, estudante, genérico",
+      "Detecta omni terapeuta pela bio e envia check-in do portal (1x por pessoa, nunca repete)",
+      "Sentinela varre DMs a cada 30min e alerta no Telegram: nome + horas esperando + trecho da mensagem",
+      "Estado persistente em state.json — nunca duplica auto-reply na mesma thread",
+      "Controlado por Telegram via Prisma/AIOX: liga o bot ss / desliga o bot ss / status do bot ss"
+    ],
+    apis:["instagrapi (sessão autenticada /home/michael/ig-dms/device_settings.json)","Telegram Bot API (BOT_TOKEN + CHAT_ID Michael)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como controlar</div>
+  <div class="note-step"><div class="note-num">1</div><div>No Telegram: <code>liga o bot ss</code> / <code>desliga o bot ss</code> / <code>status do bot ss</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Direto na VPS: <code>bash ss-control.sh ligar | desligar | status</code></div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Sentinela roda automático via cron — não precisa ligar/desligar</div></div>
+  <div class="note-ids">
+    <span>Scripts:</span> <code>operations/social-selling/scripts/</code> &nbsp;|&nbsp;
+    <span>Log:</span> <code>auto_reply.log</code> &nbsp;|&nbsp;
+    <span>Estado:</span> <code>state.json</code>
+  </div>
+</div>`}
 ];
 
 const INFRA = [
