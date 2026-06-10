@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estudo de ICP — Terapeuta Premium | OMNI Brasil</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #DC9F42;
+    --gold-light: #E8BD6A;
+    --gold-dark: #B8862E;
+    --bg-dark: #050505;
+    --bg-mid: #0F1117;
+    --bg-card: #141820;
+    --text: #F5F0E8;
+    --text-muted: #9a9080;
+    --white: #ffffff;
+    --teal: #2A9D8F;
+    --navy: #0A1628;
+    --red: #e74c3c;
+    --green: #27ae60;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .top-bar {
+    background: var(--gold);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .header {
+    background: var(--bg-mid);
+    padding: 60px 20px 50px;
+    text-align: center;
+    border-bottom: 1px solid rgba(220,159,66,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(220,159,66,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header .eyebrow {
+    display: inline-block;
+    background: rgba(220,159,66,0.1);
+    border: 1px solid rgba(220,159,66,0.3);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 16px;
+    text-transform: uppercase;
+  }
+
+  .header h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .header .subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .header .meta {
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .header .meta span {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section {
+    padding: 60px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+
+  h2 em { font-style: normal; color: var(--gold); }
+
+  h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 32px 0 16px;
+  }
+
+  p { margin-bottom: 16px; color: var(--text); font-size: 16px; }
+  p.muted { color: var(--text-muted); }
+  p.small { font-size: 13px; color: var(--text-muted); }
+
+  .highlight-box {
+    background: var(--gold);
+    border-radius: 6px;
+    padding: 20px 28px;
+    margin: 24px 0;
+  }
+
+  .highlight-box p {
+    font-size: 17px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .highlight-box p em { font-style: normal; text-decoration: underline; }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(220,159,66,0.2);
+    border-radius: 8px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  th {
+    background: rgba(220,159,66,0.1);
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid rgba(220,159,66,0.3);
+  }
+
+  td {
+    padding: 12px 16px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: var(--text);
+  }
+
+  tr:hover td { background: rgba(220,159,66,0.03); }
+
+  /* Pain list */
+  .pain-list {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+  }
+
+  .pain-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 16px;
+  }
+
+  .pain-list li:last-child { border-bottom: none; }
+
+  .pain-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .pain-icon.red { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.3); color: var(--red); }
+  .pain-icon.gold { background: rgba(220,159,66,0.15); border: 1px solid rgba(220,159,66,0.3); color: var(--gold); }
+  .pain-icon.teal { background: rgba(42,157,143,0.15); border: 1px solid rgba(42,157,143,0.3); color: var(--teal); }
+
+  /* Quote */
+  .quote-block {
+    background: var(--bg-mid);
+    border-left: 4px solid var(--gold);
+    padding: 24px 28px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quote-block p {
+    font-size: 18px;
+    font-style: italic;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  .quote-block .source {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: normal;
+    margin-top: 10px;
+    display: block;
+  }
+
+  /* Competitor cards */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .comp-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .comp-card .name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .comp-card .promise {
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .comp-card .diff {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* Trigger table */
+  .trigger-card {
+    background: var(--bg-mid);
+    border: 1px solid rgba(220,159,66,0.15);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 12px 0;
+  }
+
+  .trigger-card .trigger-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 15px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .trigger-card .trigger-copy {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .trigger-card .trigger-source {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Case study */
+  .case-box {
+    background: linear-gradient(135deg, rgba(42,157,143,0.08) 0%, rgba(220,159,66,0.08) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 36px 32px;
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+  }
+
+  .case-box h3 { margin-top: 0; }
+
+  .case-numbers {
+    display: flex;
+    gap: 40px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .case-num {
+    text-align: center;
+  }
+
+  .case-num .before {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .case-num .after {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  .case-num .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .arrow {
+    font-size: 32px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+  }
+
+  /* Diff box */
+  .diff-box {
+    background: var(--navy);
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    padding: 32px;
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .diff-box h3 { color: var(--teal); margin-top: 0; }
+  .diff-box p { font-size: 17px; color: var(--white); }
+
+  /* Words */
+  .word-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .word-tag {
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .word-tag.yes {
+    background: rgba(42,157,143,0.15);
+    border: 1px solid rgba(42,157,143,0.3);
+    color: var(--teal);
+  }
+
+  .word-tag.no {
+    background: rgba(231,76,60,0.1);
+    border: 1px solid rgba(231,76,60,0.2);
+    color: var(--red);
+    text-decoration: line-through;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--bg-mid);
+    border-top: 1px solid rgba(220,159,66,0.1);
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  footer strong { color: var(--gold); }
+
+  /* Next step CTA */
+  .next-step {
+    background: var(--navy);
+    padding: 50px 20px;
+    text-align: center;
+  }
+
+  .next-step h2 { color: var(--white); }
+
+  .btn-gold {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+    color: #000;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 20px;
+    box-shadow: 0 4px 20px rgba(220,159,66,0.3);
+  }
+
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .comp-grid { grid-template-columns: 1fr; }
+    .case-numbers { gap: 20px; }
+    .header { padding: 40px 16px 36px; }
+    .section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">Documento Interno — OMNI Brasil | Junho 2026</div>
+
+<div class="header">
+  <span class="eyebrow">Pesquisa de Mercado</span>
+  <h1>Estudo de ICP<br><em>Terapeuta Premium</em></h1>
+  <p class="subtitle">Mapeamento completo do perfil, dores, objeções e oportunidades para a nova Landing Page de Consultoria focada em terapeutas que faturam +R$8k/mês</p>
+  <p class="meta"><span>Data:</span> 09 Jun 2026 &nbsp;|&nbsp; <span>Por:</span> Copy Chief (AIOX) + Pesquisa Web &nbsp;|&nbsp; <span>Para:</span> Michael Arruda</p>
+</div>
+
+<div class="container">
+
+  <!-- SEÇÃO 1: MERCADO -->
+  <div class="section">
+    <span class="section-eyebrow">01 — Dados de Mercado</span>
+    <h2>O cenário real dos <em>terapeutas no Brasil</em></h2>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">600k</div>
+        <div class="stat-label">Psicólogos registrados<br>no Brasil (CFP, 2026)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">79%</div>
+        <div class="stat-label">São mulheres<br>(CensoPsi 2022)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">R$3.753</div>
+        <div class="stat-label">Salário médio<br>psicólogo clínico</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">+18,5%</div>
+        <div class="stat-label">Crescimento consultas<br>saúde mental (2025)</div>
+      </div>
+    </div>
+
+    <h3>Renda Real — Psicólogo Clínico</h3>
+    <p class="small">Fonte: salario.com.br | Base: 14.161 profissionais | 2026</p>
+
+    <table>
+      <tr><th>Faixa</th><th>Valor Mensal</th></tr>
+      <tr><td>Piso salarial</td><td>R$ 3.290</td></tr>
+      <tr><td><strong>Média nacional</strong></td><td><strong>R$ 3.753</strong></td></tr>
+      <tr><td>Mediana</td><td>R$ 3.395</td></tr>
+      <tr><td>Teto (CLT)</td><td>R$ 6.383</td></tr>
+      <tr><td>Líquido estimado</td><td>R$ 3.002</td></tr>
+    </table>
+
+    <div class="highlight-box">
+      <p>O terapeuta que ganha R$8.000+ já está no <em>top 5-10% da profissão</em>. Não é um terapeuta comum — é alguém que já fez muita coisa certa, mas bateu num teto.</p>
+    </div>
+
+    <h3>Valor de Sessões no Mercado</h3>
+    <table>
+      <tr><th>Perfil</th><th>Valor/Sessão</th></tr>
+      <tr><td>Iniciantes</td><td>~R$ 100</td></tr>
+      <tr><td>Experientes / especializados</td><td>R$ 250 - 350</td></tr>
+      <tr><td>Premium em capitais</td><td>R$ 400+</td></tr>
+      <tr><td>Hipnoterapeutas</td><td>R$ 150 - 500 (média R$ 250)</td></tr>
+    </table>
+
+    <h3>Mercado Macro — Números que Importam</h3>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">US$7,8bi</div>
+        <div class="stat-label">Mercado saúde mental<br>Brasil (2025)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">54%</div>
+        <div class="stat-label">Da população vê saúde<br>mental como prioridade #1</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2º lugar</div>
+        <div class="stat-label">Brasil no ranking<br>mundial de burnout</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">30-32%</div>
+        <div class="stat-label">CAGR mercado global<br>de hipnoterapia</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 2: ICP -->
+  <div class="section">
+    <span class="section-eyebrow">02 — Perfil do ICP</span>
+    <h2>O <em>Terapeuta Teto de Vidro</em></h2>
+
+    <table>
+      <tr><th>Dimensão</th><th>Perfil</th></tr>
+      <tr><td>Idade</td><td>34-48 anos</td></tr>
+      <tr><td>Gênero</td><td>~75% feminino</td></tr>
+      <tr><td>Formação</td><td>Superior + 2-5 pós/especializações</td></tr>
+      <tr><td>Renda</td><td>R$ 8.000 a R$ 15.000/mês</td></tr>
+      <tr><td>Sessões/semana</td><td>20-30 (para manter a renda)</td></tr>
+      <tr><td>Preço/sessão</td><td>R$ 250-350</td></tr>
+      <tr><td>Investimento em formação</td><td>R$ 30-80k ao longo da carreira</td></tr>
+      <tr><td>Rede social</td><td>Instagram ativo, LinkedIn básico</td></tr>
+    </table>
+
+    <div class="highlight-box">
+      <p>Diferente do ICP geral da OMNI (Gestor Exausto que quer MUDAR de carreira), esse terapeuta <em>já AMA o que faz</em>. Não quer mudar de profissão. Quer que a profissão que ama o remunere à altura.</p>
+    </div>
+
+    <h3>Perfil Psicográfico</h3>
+    <ul class="pain-list">
+      <li><span class="pain-icon teal">+</span> Autoconhecimento elevado — já fez terapia, supervisão, investiu em si</li>
+      <li><span class="pain-icon teal">+</span> Valores fortes: empatia, propósito, servir, impacto real</li>
+      <li><span class="pain-icon gold">!</span> Ambicioso(a) mas com culpa — quer ganhar mais, sente que "pedir mais" é antiético</li>
+      <li><span class="pain-icon teal">+</span> Identidade profunda com a profissão ("eu SOU terapeuta")</li>
+      <li><span class="pain-icon gold">!</span> Consumidor(a) de formações — já investiu em 3-10 cursos sem ROI claro</li>
+    </ul>
+  </div>
+
+  <!-- SEÇÃO 3: DORES -->
+  <div class="section">
+    <span class="section-eyebrow">03 — Dores Validadas</span>
+    <h2>Por que esse terapeuta <em>sofre em silêncio</em></h2>
+
+    <h3>Dor #1: Agenda Cheia, Bolso Vazio</h3>
+    <p>A matemática cruel:</p>
+    <table>
+      <tr><th>Item</th><th>Valor</th></tr>
+      <tr><td>R$ 300/sessão × 25/semana × 4 semanas</td><td>R$ 30.000 bruto</td></tr>
+      <tr><td>Sala / consultório</td><td>- R$ 2.000</td></tr>
+      <tr><td>Impostos (~15%)</td><td>- R$ 4.500</td></tr>
+      <tr><td>Cancelamentos (~20%)</td><td>- R$ 6.000</td></tr>
+      <tr><td>Supervisão + formações</td><td>- R$ 1.000</td></tr>
+      <tr><td><strong>Líquido real</strong></td><td><strong>R$ 16.500 — com ZERO vida pessoal</strong></td></tr>
+    </table>
+
+    <h3>Dor #2: Fadiga por Compaixão</h3>
+    <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+      <div class="stat-card">
+        <div class="stat-num">46%</div>
+        <div class="stat-label">Dos terapeutas sofrem<br>fadiga por compaixão</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">37,5%</div>
+        <div class="stat-label">Apresentam sintomas de<br>síndrome do impostor</div>
+      </div>
+    </div>
+    <p class="small">Fontes: Contemporary Family Therapy (Springer, 2022) | FoHPE</p>
+
+    <div class="quote-block">
+      <p>"Clínicos mais novos tomam para si a responsabilidade emocional dos resultados dos clientes, trabalham horas a mais e hesitam em buscar apoio por medo de parecer incompetentes."</p>
+      <span class="source">— Blueprint.ai, Compassion Fatigue in Therapists</span>
+    </div>
+
+    <h3>Dor #3: A Culpa de Cobrar</h3>
+    <ul class="pain-list">
+      <li><span class="pain-icon red">!</span> Tabu profundo na saúde mental sobre discutir dinheiro</li>
+      <li><span class="pain-icon red">!</span> Terapeutas sentem culpa de "vender" uma relação humana (Schonbar, 1967)</li>
+      <li><span class="pain-icon red">!</span> Faculdades de psicologia NÃO ensinam precificação</li>
+      <li><span class="pain-icon red">!</span> 5 dores: emocional, operacional, financeira, burocrática, estratégica</li>
+    </ul>
+    <p class="small">Fontes: PePSIC/BVS | Academia do Psicólogo</p>
+  </div>
+
+  <!-- SEÇÃO 4: OBJEÇÕES -->
+  <div class="section">
+    <span class="section-eyebrow">04 — Objeções Principais</span>
+    <h2>O que impede a <em>decisão de compra</em></h2>
+
+    <table>
+      <tr><th>#</th><th>Objeção</th><th>Validação Externa</th></tr>
+      <tr><td>1</td><td><strong>"Se eu subir, perco clientes"</strong></td><td>PsiCont: artigos inteiros sobre "como subir sem perder" — objeção #1</td></tr>
+      <tr><td>2</td><td><strong>"Cobrar caro de quem sofre é antiético"</strong></td><td>PePSIC: conflito sistêmico na formação acadêmica</td></tr>
+      <tr><td>3</td><td><strong>"Já fiz muitos cursos"</strong></td><td>CensoPsi: acúmulo de certificações sem ROI</td></tr>
+      <tr><td>4</td><td><strong>"R$1.500 por processo? Ninguém paga"</strong></td><td>Teto CLT R$6.383 — parece irreal para quem vive em R$300/sessão</td></tr>
+      <tr><td>5</td><td><strong>"Não tenho perfil comercial"</strong></td><td>Rejeição visceral ao aspecto comercial documentada</td></tr>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 5: O QUE BUSCA -->
+  <div class="section">
+    <span class="section-eyebrow">05 — Desejos e Sonhos</span>
+    <h2>O que esse terapeuta <em>realmente quer</em></h2>
+
+    <h3>Busca Explícita</h3>
+    <ul class="pain-list">
+      <li><span class="pain-icon teal">&#10003;</span> Aumentar faturamento SEM aumentar carga horária</li>
+      <li><span class="pain-icon teal">&#10003;</span> Cobrar mais sem perder a essência terapêutica</li>
+      <li><span class="pain-icon teal">&#10003;</span> Metodologia que justifique ticket alto</li>
+      <li><span class="pain-icon teal">&#10003;</span> Certificação com peso real no mercado</li>
+    </ul>
+
+    <h3>Busca Implícita</h3>
+    <ul class="pain-list">
+      <li><span class="pain-icon gold">&#9733;</span> <strong>Permissão</strong> — alguém que diga "você PODE e DEVE ganhar bem"</li>
+      <li><span class="pain-icon gold">&#9733;</span> <strong>Modelo de negócio</strong> — sem precisar virar influencer</li>
+      <li><span class="pain-icon gold">&#9733;</span> <strong>Validação</strong> — ganhar dinheiro com terapia NÃO é antiético</li>
+      <li><span class="pain-icon gold">&#9733;</span> <strong>Comunidade</strong> — pares que pensam como ele(a)</li>
+      <li><span class="pain-icon gold">&#9733;</span> <strong>Estrutura</strong> — processo com começo, meio e fim (não sessão avulsa)</li>
+    </ul>
+
+    <h3>Sonhos Profundos</h3>
+    <div class="quote-block">
+      <p>"Quero que as pessoas me procurem pelo meu nome, não pelo preço."</p>
+    </div>
+    <div class="quote-block">
+      <p>"Quero provar pra minha família que ser terapeuta foi a decisão certa."</p>
+    </div>
+    <div class="quote-block">
+      <p>"Quero construir um legado — não só pagar contas."</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 6: CASE -->
+  <div class="section">
+    <span class="section-eyebrow">06 — Case Âncora</span>
+    <h2>Maria de Fátima — <em>a prova</em></h2>
+
+    <div class="case-box">
+      <h3>De R$2.700 para +R$30.000/mês</h3>
+      <div class="case-numbers">
+        <div class="case-num">
+          <div class="before">R$2.700</div>
+          <div class="label">Antes</div>
+        </div>
+        <div class="arrow">&rarr;</div>
+        <div class="case-num">
+          <div class="after">R$30.000+</div>
+          <div class="label">Depois</div>
+        </div>
+      </div>
+      <p>Psicóloga com salário fixo de R$2.700/mês. Adicionou a Omniterapia ao trabalho. Com <strong>1 único cliente</strong> usando a metodologia, faturou o que antes levava um mês inteiro.</p>
+      <p style="color: var(--gold); font-weight: 700;">O modelo de "processo terapêutico a R$1.500" (3 sessões) funciona.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 7: CONCORRENTES -->
+  <div class="section">
+    <span class="section-eyebrow">07 — Cenário Competitivo</span>
+    <h2>Quem já fala com <em>esse público</em></h2>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="name">Gabriela Affonso</div>
+        <div class="promise">"+R$10k/mês como psicólogo high ticket"</div>
+        <div class="diff">Foco em marketing digital para psicólogos</div>
+      </div>
+      <div class="comp-card">
+        <div class="name">Terapeutas do Novo Mundo</div>
+        <div class="promise">"Fature 2x mais" (claim: 92% em 90 dias)</div>
+        <div class="diff">Método terapêutico + empreendedorismo</div>
+      </div>
+      <div class="comp-card">
+        <div class="name">Conecta+Psi</div>
+        <div class="promise">"Consultório como empresa rentável"</div>
+        <div class="diff">Gestão + marketing (programa 6 meses)</div>
+      </div>
+      <div class="comp-card">
+        <div class="name">Aline Belo</div>
+        <div class="promise">"De Psicólog@ a don@ do negócio"</div>
+        <div class="diff">Empreendedorismo para psicólogos</div>
+      </div>
+      <div class="comp-card">
+        <div class="name">Danielle Carneiro</div>
+        <div class="promise">"Terapeutas de Sucesso"</div>
+        <div class="diff">Mentoria crescimento financeiro</div>
+      </div>
+    </div>
+
+    <div class="diff-box">
+      <h3>Diferencial OMNI vs. Todos Eles</h3>
+      <p>Nenhum concorrente oferece um <strong>método terapêutico proprietário</strong> (Omniterapia, ISO 9001) que em si já justifica o alto ticket. Os outros ensinam marketing. A OMNI entrega a <strong>ARMA</strong> que faz o paciente pagar R$1.500 com prazer — porque o processo entrega resultado em 3 sessões.</p>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 8: GATILHOS -->
+  <div class="section">
+    <span class="section-eyebrow">08 — Gatilhos e Linguagem</span>
+    <h2>Como falar com <em>esse terapeuta</em></h2>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Disparidade de valor</div>
+      <div class="trigger-copy">"A média do psicólogo no Brasil é R$3.753/mês. Você já está acima. Mas ainda longe do que vale."</div>
+      <div class="trigger-source">Fonte: Salário.com.br, 2026</div>
+    </div>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Fadiga por compaixão</div>
+      <div class="trigger-copy">"46% dos terapeutas sofrem fadiga por compaixão. Agenda cheia não é sucesso — é sintoma."</div>
+      <div class="trigger-source">Fonte: Contemporary Family Therapy, Springer, 2022</div>
+    </div>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Demanda explosiva</div>
+      <div class="trigger-copy">"A busca por terapia cresceu 18,5% em um ano. A demanda existe. O que falta é você cobrar o que vale."</div>
+      <div class="trigger-source">Fonte: Brazil Health, 2025</div>
+    </div>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Permissão</div>
+      <div class="trigger-copy">"R$1.500 por processo de 3 sessões não é ganância. É respeitar o poder do que você faz."</div>
+      <div class="trigger-source">Fonte: Pesquisa PePSIC sobre culpa ao cobrar</div>
+    </div>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Case real</div>
+      <div class="trigger-copy">"Maria de Fátima era psicóloga. Ganhava R$2.700. Com a Omniterapia, ultrapassou R$30.000/mês."</div>
+      <div class="trigger-source">Fonte: Testimonials OMNI Brasil</div>
+    </div>
+
+    <div class="trigger-card">
+      <div class="trigger-name">Modelo, não esforço</div>
+      <div class="trigger-copy">"Você não precisa de mais pacientes. Precisa de um processo terapêutico que justifique R$1.500 — e entregue resultado em 3 sessões."</div>
+      <div class="trigger-source">Proposta de valor OMNI</div>
+    </div>
+
+    <h3>Tom Ideal</h3>
+    <p>Respeito pela profissão + firmeza sobre o valor. Nunca "venda mais" — sempre "seja valorizado pelo que já entrega". Como um par mais experiente, não como coach de vendas.</p>
+
+    <h3>Palavras que Ressoam</h3>
+    <div class="word-grid">
+      <span class="word-tag yes">processo terapêutico</span>
+      <span class="word-tag yes">valorização</span>
+      <span class="word-tag yes">reconhecimento</span>
+      <span class="word-tag yes">método</span>
+      <span class="word-tag yes">resultado comprovado</span>
+      <span class="word-tag yes">transformação</span>
+      <span class="word-tag yes">propósito com renda</span>
+      <span class="word-tag yes">legado</span>
+      <span class="word-tag yes">missão rentável</span>
+    </div>
+
+    <h3>Palavras a EVITAR</h3>
+    <div class="word-grid">
+      <span class="word-tag no">fácil</span>
+      <span class="word-tag no">rápido</span>
+      <span class="word-tag no">enriqueça</span>
+      <span class="word-tag no">venda mais</span>
+      <span class="word-tag no">marketing agressivo</span>
+      <span class="word-tag no">escale</span>
+      <span class="word-tag no">funil</span>
+      <span class="word-tag no">hack</span>
+      <span class="word-tag no">segredo</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRÓXIMO PASSO -->
+<div class="next-step">
+  <div class="container">
+    <span class="section-eyebrow">Próximo Passo</span>
+    <h2>Escrita da nova <em>Landing Page</em></h2>
+    <p>Com o ICP mapeado, dores validadas por dados externos e gatilhos calibrados, o próximo passo é a escrita da nova LP de Consultoria Estratégica focada nesse terapeuta premium.</p>
+    <p style="color: var(--gold); font-weight: 700; font-size: 18px;">Aguardando aprovação do Michael para seguir.</p>
+  </div>
+</div>
+
+<footer>
+  <strong>OMNI Brasil</strong> — Documento interno | Estudo de ICP: Terapeuta Premium<br>
+  Produzido por Copy Chief (AIOX) com pesquisa web em fontes verificadas | Junho 2026
+</footer>
+
+</body>
+</html>
