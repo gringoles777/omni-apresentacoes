@@ -193,28 +193,28 @@ const LS_RESP_KEY      = 'pm_responsavel';
 const RESPONSAVEIS     = ['Michael','Rafaela','Fernanda','Julia'];
 
 const TASKS = [
-  {id:'pm-mv-01',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Montar nova apresentação comercial',ice_i:3,ice_c:4,ice_e:3,com:'Alta alavancagem imediata — vendedores fecham mais com material forte'},
-  {id:'pm-mv-02',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Coletar depoimentos para cada persona',ice_i:3,ice_c:3,ice_e:2,com:'Prova social reduz objeções na hora do fechamento'},
-  {id:'pm-mv-03',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Implementar treino e rotina de alta performance comercial',ice_i:4,ice_c:3,ice_e:2,com:'Maior impacto de médio prazo — exige consistência e gestão da Rafa'},
-  {id:'pm-ss-01',cat:'NOVAS VENDAS',proj:'Social Selling',titulo:'Criar novo processo/script de vendas',ice_i:3,ice_c:3,ice_e:3,com:'Problema atual é script fraco — resolver isso destrava o que a CLT já faz'},
-  {id:'pm-ss-02',cat:'NOVAS VENDAS',proj:'Social Selling',titulo:'Criar gestor de SS com AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Controle + evolução constante sem depender da memória do Michael'},
-  {id:'pm-mkt-01',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Otimizar tráfego Meta (ad-midas + Tiago Kiss)',ice_i:4,ice_c:3,ice_e:3,com:'Canal de maior retorno imediato — já roda, otimizar é mais rápido que construir'},
-  {id:'pm-mkt-02',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Lançar workshop de aquecimento para a base',ice_i:3,ice_c:3,ice_e:2,com:'Aquece quem já confia. Custo principal: tempo do Michael para preparar'},
-  {id:'pm-mkt-03',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo OMNI Brasil',ice_i:3,ice_c:3,ice_e:2,com:'Sem sistema, o conteúdo falha por inconsistência, não por falta de ideia'},
-  {id:'pm-mkt-04',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo michaelarruda',ice_i:3,ice_c:3,ice_e:2,com:'Audiência pessoal tem mais alcance — prioridade ligeiramente maior que @omnibr'},
-  {id:'pm-lf-01',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Checar o planejamento atual do Legacy',ice_i:3,ice_c:4,ice_e:4,com:'Antes de qualquer passo, saber onde está. Rápido de fazer',link:'https://gringoles777.github.io/omni-apresentacoes/legacy-experience-canvas.html'},
-  {id:'pm-lf-02',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Atualizar cronograma do Planejamento Legacy Família',ice_i:3,ice_c:4,ice_e:3,com:'Desbloqueador de tudo — define próximos passos e deadline de vendas (julho)'},
-  {id:'pm-lf-03',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Executar o plano Legacy Família (com responsável)',ice_i:4,ice_c:2,ice_e:1,com:'Alto potencial de receita + upsell interno. Risco: logística e responsável dedicado'},
-  {id:'pm-ax-01',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA CMO autônoma',ice_i:4,ice_c:3,ice_e:2,com:'Orquestra ads, conteúdo e social selling, delega para agentes e pessoas — elimina gargalo do Michael no marketing'},
-  {id:'pm-ax-02',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA de suporte personalizada',ice_i:3,ice_c:3,ice_e:2,com:'Conhece cada aluno, melhora retenção e abre porta para upsell pelo contexto'},
-  {id:'pm-ax-03',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Módulo de gamificação para incentivar indicação',ice_i:3,ice_c:2,ice_e:1,com:'Alta alavancagem em indicação qualificada — depende do portal estar maduro'},
-  {id:'pm-bm-01',cat:'UPSELL',proj:'Black Mentoring',titulo:'Ativar bot de acompanhamento no WhatsApp/IG',ice_i:3,ice_c:3,ice_e:2,com:'Reduz churn silencioso — alunos que somem antes de renovar'},
-  {id:'pm-bm-02',cat:'UPSELL',proj:'Black Mentoring',titulo:'Estruturar método claro para alunos atingirem resultado',ice_i:4,ice_c:3,ice_e:2,com:'Resultado do aluno = renovação + depoimento + indicação. Tudo deriva daqui'},
-  {id:'pm-ot-01',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Migrar n8n para AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Urgente — se n8n parar, operação para. Não é crescimento, é segurança'},
-  {id:'pm-ot-02',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Integrar vendas → CS → financeiro',ice_i:3,ice_c:3,ice_e:2,com:'Hoje cada área é uma ilha — integrar elimina retrabalho e esquecimento'},
-  {id:'pm-ot-03',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Colocar financeiro no AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Decisão financeira hoje depende de Excel e memória — AIOX dá visibilidade em tempo real'},
-  {id:'pm-gt-01',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Gestão',titulo:'Montar Executor Matrix + organograma',ice_i:3,ice_c:3,ice_e:2,com:'Mapa de cada função: contratar, automatizar ou eliminar. Desbloqueador de decisões de custo'},
-  {id:'pm-hf-01',cat:'PROJETOS PARALELOS',proj:'HypnoFlash',titulo:'Estruturar funil com fornecedor externo',ice_i:3,ice_c:2,ice_e:2,com:'Upside real mas depende de fornecedor externo — incerteza alta'},
+  {id:'pm-mv-01',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Montar nova apresentação comercial',ice_i:3,ice_c:4,ice_e:3,com:'Alta alavancagem imediata — vendedores fecham mais com material forte',resp:'Michael'},
+  {id:'pm-mv-02',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Coletar depoimentos para cada persona',ice_i:3,ice_c:3,ice_e:2,com:'Prova social reduz objeções na hora do fechamento',resp:'Rafaela'},
+  {id:'pm-mv-03',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Implementar treino e rotina de alta performance comercial',ice_i:4,ice_c:3,ice_e:2,com:'Maior impacto de médio prazo — exige consistência e gestão da Rafa',resp:'Rafaela'},
+  {id:'pm-ss-01',cat:'NOVAS VENDAS',proj:'Social Selling',titulo:'Criar novo processo/script de vendas',ice_i:3,ice_c:3,ice_e:3,com:'Problema atual é script fraco — resolver isso destrava o que a CLT já faz',resp:'Michael'},
+  {id:'pm-ss-02',cat:'NOVAS VENDAS',proj:'Social Selling',titulo:'Criar gestor de SS com AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Controle + evolução constante sem depender da memória do Michael',resp:'Julia'},
+  {id:'pm-mkt-01',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Otimizar tráfego Meta (ad-midas + Tiago Kiss)',ice_i:4,ice_c:3,ice_e:3,com:'Canal de maior retorno imediato — já roda, otimizar é mais rápido que construir',resp:'Fernanda'},
+  {id:'pm-mkt-02',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Lançar workshop de aquecimento para a base',ice_i:3,ice_c:3,ice_e:2,com:'Aquece quem já confia. Custo principal: tempo do Michael para preparar',resp:'Michael'},
+  {id:'pm-mkt-03',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo OMNI Brasil',ice_i:3,ice_c:3,ice_e:2,com:'Sem sistema, o conteúdo falha por inconsistência, não por falta de ideia',resp:'Fernanda'},
+  {id:'pm-mkt-04',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo michaelarruda',ice_i:3,ice_c:3,ice_e:2,com:'Audiência pessoal tem mais alcance — prioridade ligeiramente maior que @omnibr',resp:'Michael'},
+  {id:'pm-lf-01',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Checar o planejamento atual do Legacy',ice_i:3,ice_c:4,ice_e:4,com:'Antes de qualquer passo, saber onde está. Rápido de fazer',link:'https://gringoles777.github.io/omni-apresentacoes/legacy-experience-canvas.html',resp:'Michael'},
+  {id:'pm-lf-02',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Atualizar cronograma do Planejamento Legacy Família',ice_i:3,ice_c:4,ice_e:3,com:'Desbloqueador de tudo — define próximos passos e deadline de vendas (julho)',resp:'Michael'},
+  {id:'pm-lf-03',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Executar o plano Legacy Família (com responsável)',ice_i:4,ice_c:2,ice_e:1,com:'Alto potencial de receita + upsell interno. Risco: logística e responsável dedicado',resp:'Michael'},
+  {id:'pm-ax-01',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA CMO autônoma',ice_i:4,ice_c:3,ice_e:2,com:'Orquestra ads, conteúdo e social selling, delega para agentes e pessoas — elimina gargalo do Michael no marketing',resp:'Julia'},
+  {id:'pm-ax-02',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA de suporte personalizada',ice_i:3,ice_c:3,ice_e:2,com:'Conhece cada aluno, melhora retenção e abre porta para upsell pelo contexto',resp:'Julia'},
+  {id:'pm-ax-03',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Módulo de gamificação para incentivar indicação',ice_i:3,ice_c:2,ice_e:1,com:'Alta alavancagem em indicação qualificada — depende do portal estar maduro',resp:'Julia'},
+  {id:'pm-bm-01',cat:'UPSELL',proj:'Black Mentoring',titulo:'Ativar bot de acompanhamento no WhatsApp/IG',ice_i:3,ice_c:3,ice_e:2,com:'Reduz churn silencioso — alunos que somem antes de renovar',resp:'Julia'},
+  {id:'pm-bm-02',cat:'UPSELL',proj:'Black Mentoring',titulo:'Estruturar método claro para alunos atingirem resultado',ice_i:4,ice_c:3,ice_e:2,com:'Resultado do aluno = renovação + depoimento + indicação. Tudo deriva daqui',resp:'Michael'},
+  {id:'pm-ot-01',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Migrar n8n para AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Urgente — se n8n parar, operação para. Não é crescimento, é segurança',resp:'Julia'},
+  {id:'pm-ot-02',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Integrar vendas → CS → financeiro',ice_i:3,ice_c:3,ice_e:2,com:'Hoje cada área é uma ilha — integrar elimina retrabalho e esquecimento',resp:'Julia'},
+  {id:'pm-ot-03',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Colocar financeiro no AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Decisão financeira hoje depende de Excel e memória — AIOX dá visibilidade em tempo real',resp:'Julia'},
+  {id:'pm-gt-01',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Gestão',titulo:'Montar Executor Matrix + organograma',ice_i:3,ice_c:3,ice_e:2,com:'Mapa de cada função: contratar, automatizar ou eliminar. Desbloqueador de decisões de custo',resp:'Michael'},
+  {id:'pm-hf-01',cat:'PROJETOS PARALELOS',proj:'HypnoFlash',titulo:'Estruturar funil HypnoFlash com fornecedor externo',ice_i:3,ice_c:2,ice_e:2,com:'Upside real mas depende de fornecedor externo — incerteza alta',resp:'Michael'},
 ];
 
 const CAT_ICONS={'NOVAS VENDAS':'💰','UPSELL':'🔄','OTIMIZAÇÃO DE TEMPO':'⚙️','PROJETOS PARALELOS':'🔵'};
@@ -225,7 +225,7 @@ function loadIceOverrides(){ try{ iceOverrides=JSON.parse(localStorage.getItem(L
 function saveIceOverrides(){ localStorage.setItem(LS_ICE_KEY, JSON.stringify(iceOverrides)); }
 function loadRespOverrides(){ try{ respOverrides=JSON.parse(localStorage.getItem(LS_RESP_KEY)||'{}'); }catch(e){ respOverrides={}; } }
 function saveRespOverrides(){ localStorage.setItem(LS_RESP_KEY, JSON.stringify(respOverrides)); }
-function getResp(id){ return respOverrides[id]||''; }
+function getResp(task){ return respOverrides[task.id]||task.resp||''; }
 
 function getIce(task){
   const ov=iceOverrides[task.id]||{};
@@ -278,7 +278,7 @@ function render(){
         <span class="category-count">${catTasks.length} ações</span>
       </div>`;
 
-    const visibleByResp=t=>activeResp==='all'||getResp(t.id)===activeResp;
+    const visibleByResp=t=>activeResp==='all'||getResp(t)===activeResp;
 
     if(sortIce){
       const sorted=catTasks.slice().sort((a,b)=>iceTotal(b)-iceTotal(a)).filter(visibleByResp);
@@ -324,7 +324,7 @@ function cardHTML(task,state,showProj){
             <span class="ice-badge score ${cls}">ICE ${total}</span>
           </div>
           ${showProj?`<span class="proj-tag">${escapeHTML(task.proj)}</span>`:''}
-          ${getResp(task.id)?`<span class="resp-badge">👤 ${getResp(task.id)}</span>`:''}
+          ${getResp(task)?`<span class="resp-badge">👤 ${getResp(task)}</span>`:''}
         </div>
       </div>
       <span class="chevron">▼</span>
@@ -333,9 +333,9 @@ function cardHTML(task,state,showProj){
       ${task.link?`<a class="card-link" href="${task.link}" target="_blank" onclick="event.stopPropagation()">🔗 Abrir canvas de planejamento</a>`:''}
       <div class="resp-row" onclick="event.stopPropagation()">
         <span class="resp-label">Responsável:</span>
-        <select class="resp-sel ${getResp(task.id)?'assigned':''}" data-id="${task.id}" onchange="updateResp(this)">
+        <select class="resp-sel ${getResp(task)?'assigned':''}" data-id="${task.id}" onchange="updateResp(this)">
           <option value="">— sem responsável —</option>
-          ${RESPONSAVEIS.map(r=>`<option value="${r}" ${getResp(task.id)===r?'selected':''}>${r}</option>`).join('')}
+          ${RESPONSAVEIS.map(r=>`<option value="${r}" ${getResp(task)===r?'selected':''}>${r}</option>`).join('')}
         </select>
       </div>
       <div class="claude-comment">
