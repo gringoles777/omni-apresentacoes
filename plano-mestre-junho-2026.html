@@ -360,14 +360,14 @@ async function saveTask(id,btn){
   const whoami=whoamiEl.value.trim()||'anon';
   localStorage.setItem('whoami',whoamiEl.value.trim());
 
-  const payload={status:statusSel.value,nota_atual:noteInput.value,updated_at:new Date().toISOString(),updated_by:whoami};
+  const payload={status:statusSel.value,nota_atual:noteInput.value,atualizado_por:whoami};
   dbData[id]={...(dbData[id]||{}),id,...payload};
   card.className=`action-card expanded ${payload.status}`;
 
   if(!supabase){statusEl.className='save-status ok';statusEl.textContent='✓ local';return;}
   btn.disabled=true;statusEl.className='save-status';statusEl.textContent='Salvando...';
 
-  const {error}=await supabase.from('plano_acao_tasks').upsert({id,...payload},{onConflict:'id'}).select();
+  const {error}=await supabase.from('plano_acao_tasks').upsert({id,...payload},{onConflict:'id',ignoreDuplicates:false}).select();
   btn.disabled=false;
   if(error){statusEl.className='save-status err';statusEl.textContent='Erro: '+error.message;}
   else{statusEl.className='save-status ok';statusEl.textContent='✓ Salvo';setTimeout(()=>{statusEl.textContent='';},3000);}
