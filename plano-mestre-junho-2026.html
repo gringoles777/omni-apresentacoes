@@ -94,6 +94,8 @@ header.topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backd
 .ice-sel{background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);border-radius:5px;padding:4px 6px;font-size:12px;font-family:'IBM Plex Mono',monospace;cursor:pointer;transition:border-color .2s;}
 .ice-sel:focus{outline:none;border-color:var(--gold);}
 .proj-tag{font-size:10px;letter-spacing:.5px;color:var(--gold);border:1px solid var(--gold-20);border-radius:10px;padding:1px 8px;white-space:nowrap;}
+.card-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--gold);text-decoration:none;border:1px solid var(--gold-20);border-radius:6px;padding:4px 10px;margin-bottom:10px;transition:background .2s;}
+.card-link:hover{background:var(--gold-10);}
 .ice-legend{max-width:1200px;margin:8px auto 0;padding:0 32px;font-size:11px;color:var(--gray);letter-spacing:.3px;}
 .ice-hint{font-size:10px;color:var(--gray);font-style:italic;}
 
@@ -184,9 +186,9 @@ const TASKS = [
   {id:'pm-mkt-02',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Lançar workshop de aquecimento para a base',ice_i:3,ice_c:3,ice_e:2,com:'Aquece quem já confia. Custo principal: tempo do Michael para preparar'},
   {id:'pm-mkt-03',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo OMNI Brasil',ice_i:3,ice_c:3,ice_e:2,com:'Sem sistema, o conteúdo falha por inconsistência, não por falta de ideia'},
   {id:'pm-mkt-04',cat:'NOVAS VENDAS',proj:'Marketing',titulo:'Montar plano de execução sem falha de conteúdo michaelarruda',ice_i:3,ice_c:3,ice_e:2,com:'Audiência pessoal tem mais alcance — prioridade ligeiramente maior que @omnibr'},
-  {id:'pm-lf-01',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Checar o planejamento atual',ice_i:3,ice_c:4,ice_e:4,com:'Antes de qualquer passo, saber onde está. Rápido de fazer'},
-  {id:'pm-lf-02',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Atualizar cronograma',ice_i:3,ice_c:4,ice_e:3,com:'Desbloqueador de tudo — define próximos passos e deadline de vendas (julho)'},
-  {id:'pm-lf-03',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Executar o evento (definir responsável)',ice_i:4,ice_c:2,ice_e:1,com:'Alto potencial de receita + upsell interno. Risco: logística e responsável dedicado'},
+  {id:'pm-lf-01',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Checar o planejamento atual do Legacy',ice_i:3,ice_c:4,ice_e:4,com:'Antes de qualquer passo, saber onde está. Rápido de fazer',link:'https://gringoles777.github.io/omni-apresentacoes/legacy-experience-canvas.html'},
+  {id:'pm-lf-02',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Atualizar cronograma do Planejamento Legacy Família',ice_i:3,ice_c:4,ice_e:3,com:'Desbloqueador de tudo — define próximos passos e deadline de vendas (julho)'},
+  {id:'pm-lf-03',cat:'NOVAS VENDAS',proj:'Legacy Família',titulo:'Executar o plano Legacy Família (com responsável)',ice_i:4,ice_c:2,ice_e:1,com:'Alto potencial de receita + upsell interno. Risco: logística e responsável dedicado'},
   {id:'pm-ax-01',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA CMO autônoma',ice_i:4,ice_c:3,ice_e:2,com:'Orquestra ads, conteúdo e social selling, delega para agentes e pessoas — elimina gargalo do Michael no marketing'},
   {id:'pm-ax-02',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Construir IA de suporte personalizada',ice_i:3,ice_c:3,ice_e:2,com:'Conhece cada aluno, melhora retenção e abre porta para upsell pelo contexto'},
   {id:'pm-ax-03',cat:'NOVAS VENDAS',proj:'AIOX',titulo:'Módulo de gamificação para incentivar indicação',ice_i:3,ice_c:2,ice_e:1,com:'Alta alavancagem em indicação qualificada — depende do portal estar maduro'},
@@ -197,7 +199,6 @@ const TASKS = [
   {id:'pm-ot-03',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Automação & Infra',titulo:'Colocar financeiro no AIOX',ice_i:3,ice_c:3,ice_e:2,com:'Decisão financeira hoje depende de Excel e memória — AIOX dá visibilidade em tempo real'},
   {id:'pm-gt-01',cat:'OTIMIZAÇÃO DE TEMPO',proj:'Gestão',titulo:'Montar Executor Matrix + organograma',ice_i:3,ice_c:3,ice_e:2,com:'Mapa de cada função: contratar, automatizar ou eliminar. Desbloqueador de decisões de custo'},
   {id:'pm-hf-01',cat:'PROJETOS PARALELOS',proj:'HypnoFlash',titulo:'Estruturar funil com fornecedor externo',ice_i:3,ice_c:2,ice_e:2,com:'Upside real mas depende de fornecedor externo — incerteza alta'},
-  {id:'pm-hf-02',cat:'PROJETOS PARALELOS',proj:'HypnoFlash',titulo:'Gravar aulas',ice_i:2,ice_c:3,ice_e:1,com:'Necessário para o produto existir — fazer quando houver espaço no Michael'},
 ];
 
 const CAT_ICONS={'NOVAS VENDAS':'💰','UPSELL':'🔄','OTIMIZAÇÃO DE TEMPO':'⚙️','PROJETOS PARALELOS':'🔵'};
@@ -304,6 +305,7 @@ function cardHTML(task,state,showProj){
       <span class="chevron">▼</span>
     </div>
     <div class="action-detail">
+      ${task.link?`<a class="card-link" href="${task.link}" target="_blank" onclick="event.stopPropagation()">🔗 Abrir canvas de planejamento</a>`:''}
       <div class="claude-comment">
         <div class="clabel">Sugestão Claude</div>
         ${escapeHTML(task.com)}
