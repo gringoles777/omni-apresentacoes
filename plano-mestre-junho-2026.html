@@ -367,9 +367,10 @@ async function saveTask(id,btn){
   if(!supabase){statusEl.className='save-status ok';statusEl.textContent='✓ local';return;}
   btn.disabled=true;statusEl.className='save-status';statusEl.textContent='Salvando...';
 
-  const {error}=await supabase.from('plano_acao_tasks').upsert({id,...payload},{onConflict:'id',ignoreDuplicates:false}).select();
+  const {data,error}=await supabase.from('plano_acao_tasks').update(payload).eq('id',id).select();
   btn.disabled=false;
   if(error){statusEl.className='save-status err';statusEl.textContent='Erro: '+error.message;}
+  else if(!data||data.length===0){statusEl.className='save-status err';statusEl.textContent='Erro: registro não existe no banco (rodar seed)';}
   else{statusEl.className='save-status ok';statusEl.textContent='✓ Salvo';setTimeout(()=>{statusEl.textContent='';},3000);}
   updateStats();
 }
