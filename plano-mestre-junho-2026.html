@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Plano Mestre · OMNI Brasil · Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --dark: #0D0D0D;
+  --dark-elevated: #1A1A1A;
+  --dark-texture: #2D2D2D;
+  --gold: #C8A84B;
+  --gold-light: #E8C86A;
+  --gold-deep: #9A7A2E;
+  --cream: #F5F0E8;
+  --cream-70: rgba(245,240,232,0.70);
+  --cream-50: rgba(245,240,232,0.50);
+  --cream-30: rgba(245,240,232,0.30);
+  --teal: #2A9D8F;
+  --teal-soft: rgba(42,157,143,0.12);
+  --rosa: #C4707A;
+  --gray: #6B6B6B;
+  --gray-dark: #242424;
+  --gold-10: rgba(200,168,75,0.10);
+  --gold-20: rgba(200,168,75,0.20);
+  --gold-30: rgba(200,168,75,0.30);
+  --status-pending: #6B6B6B;
+  --status-in_progress: #E8C86A;
+  --status-blocked: #E74C3C;
+  --status-done: #2A9D8F;
+  --ice-high: #2A9D8F;
+  --ice-mid: #E8C86A;
+  --ice-low: #6B6B6B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{background:var(--black);color:var(--cream);min-height:100vh;font-family:'Inter',system-ui,sans-serif;line-height:1.5;padding-bottom:80px;}
+a{color:var(--gold);text-decoration:none;}
+
+/* TOPBAR */
+header.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(5,5,5,0.96);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--gold-20);
+  padding:18px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.logo{font-family:'Oswald',sans-serif;font-weight:700;font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.title-block{text-align:center;flex:1;}
+.page-title{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--cream);}
+.page-sub{font-size:11px;color:var(--gray);letter-spacing:1px;margin-top:2px;}
+.status-pill{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid var(--gold-20);color:var(--gold);}
+.status-pill.live::before,.status-pill.offline::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;}
+.status-pill.live::before{background:var(--teal);box-shadow:0 0 6px var(--teal);}
+.status-pill.offline::before{background:var(--gray);}
+
+/* STATS */
+.stats-bar{max-width:1200px;margin:24px auto 0;padding:0 32px;display:flex;gap:12px;flex-wrap:wrap;}
+.stat-card{flex:1;min-width:100px;background:var(--dark-elevated);border:1px solid var(--gray-dark);border-radius:8px;padding:14px 18px;text-align:center;}
+.stat-card .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:4px;}
+.stat-card .value{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;color:var(--cream);}
+.stat-card.gold .value{color:var(--gold);}
+.stat-card.teal .value{color:var(--teal);}
+
+/* OFFLINE BANNER */
+.offline-banner{display:none;max-width:1200px;margin:16px auto 0;padding:0 32px;}
+.offline-inner{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.30);border-radius:8px;padding:12px 18px;font-size:12px;color:#E74C3C;line-height:1.6;}
+
+/* FILTER */
+.filter-row{max-width:1200px;margin:20px auto 0;padding:0 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.filter-row label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray);cursor:pointer;}
+.filter-row input[type=checkbox]{accent-color:var(--gold);cursor:pointer;}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--gray-dark);background:transparent;color:var(--cream-50);font-size:11px;letter-spacing:1px;cursor:pointer;transition:all .2s;}
+.filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-10);}
+
+/* CATEGORY */
+.category-section{max-width:1200px;margin:32px auto 0;padding:0 32px;}
+.category-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--gold-20);}
+.category-icon{font-size:20px;}
+.category-title{font-family:'Oswald',sans-serif;font-size:18px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+.category-count{font-size:11px;color:var(--gray);background:var(--dark-elevated);border:1px solid var(--gray-dark);border-radius:12px;padding:2px 10px;font-family:'IBM Plex Mono',monospace;}
+
+/* PROJECT GROUP */
+.project-group{margin-bottom:28px;}
+.project-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;padding-left:4px;border-left:2px solid var(--gold-deep);padding-left:10px;}
+
+/* ACTION CARD */
+.action-card{
+  background:var(--dark-elevated);border:1px solid var(--gray-dark);
+  border-radius:8px;margin-bottom:8px;cursor:pointer;
+  transition:border-color .2s,background .2s;
+  overflow:hidden;
+}
+.action-card:hover{border-color:var(--gold-20);background:#1F1F1F;}
+.action-card.done{border-color:rgba(42,157,143,0.25);opacity:0.65;}
+.action-card.blocked{border-color:rgba(231,76,60,0.25);}
+.action-card.in_progress{border-color:rgba(232,200,106,0.30);}
+
+.action-head{display:grid;grid-template-columns:1fr auto;align-items:start;padding:14px 18px;gap:12px;}
+.action-left{display:flex;flex-direction:column;gap:8px;}
+.action-title{font-size:14px;font-weight:500;color:var(--cream);line-height:1.4;}
+.action-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+
+/* ICE BADGES */
+.ice-group{display:flex;align-items:center;gap:4px;}
+.ice-badge{display:inline-flex;align-items:center;gap:3px;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid;}
+.ice-badge.dim{color:var(--gray);border-color:var(--gray-dark);background:rgba(107,107,107,0.08);}
+.ice-badge.score{font-size:11px;font-weight:700;padding:3px 9px;}
+.ice-badge.high{color:var(--teal);border-color:rgba(42,157,143,0.35);background:rgba(42,157,143,0.10);}
+.ice-badge.mid{color:var(--gold);border-color:rgba(200,168,75,0.35);background:var(--gold-10);}
+.ice-badge.low{color:var(--gray);border-color:var(--gray-dark);background:rgba(107,107,107,0.08);}
+
+.chevron{color:var(--gray);font-size:12px;transition:transform .2s;align-self:center;flex-shrink:0;}
+.action-card.expanded .chevron{transform:rotate(180deg);}
+
+/* DETAIL */
+.action-detail{display:none;padding:0 18px 16px;border-top:1px solid var(--gray-dark);}
+.action-card.expanded .action-detail{display:block;}
+
+.claude-comment{
+  background:rgba(200,168,75,0.06);border:1px solid var(--gold-20);
+  border-radius:6px;padding:10px 14px;margin:14px 0 12px;
+  font-size:12px;color:var(--cream-70);line-height:1.6;
+}
+.claude-comment .label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-deep);margin-bottom:5px;font-weight:600;}
+
+.status-select{
+  background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);
+  border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;
+  font-family:'Inter',system-ui,sans-serif;
+  transition:border-color .2s;
+}
+.status-select:focus{outline:none;border-color:var(--gold);}
+.status-select.pending{color:var(--status-pending);}
+.status-select.in_progress{color:var(--status-in_progress);}
+.status-select.blocked{color:var(--status-blocked);}
+.status-select.done{color:var(--status-done);}
+
+.note-input{
+  width:100%;background:var(--dark);color:var(--cream);
+  border:1px solid var(--gray-dark);border-radius:6px;
+  padding:10px 12px;font-size:13px;font-family:'Inter',system-ui,sans-serif;
+  line-height:1.5;resize:vertical;min-height:70px;
+  transition:border-color .2s;margin-top:10px;
+}
+.note-input:focus{outline:none;border-color:var(--gold);}
+.note-input::placeholder{color:var(--gray);}
+
+.save-row{display:flex;align-items:center;gap:10px;margin-top:8px;}
+.save-btn{
+  background:var(--gold);color:var(--black);border:none;
+  border-radius:6px;padding:7px 18px;font-size:12px;font-weight:700;
+  letter-spacing:.5px;cursor:pointer;font-family:'Inter',system-ui,sans-serif;
+  transition:background .2s;
+}
+.save-btn:hover{background:var(--gold-light);}
+.save-btn:disabled{opacity:.5;cursor:not-allowed;}
+.whoami-input{
+  background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);
+  border-radius:6px;padding:6px 10px;font-size:12px;width:130px;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.whoami-input:focus{outline:none;border-color:var(--gold);}
+.save-status{font-size:11px;color:var(--gray);}
+.save-status.ok{color:var(--teal);}
+.save-status.err{color:#E74C3C;}
+
+/* FOOTER */
+footer{max-width:1200px;margin:48px auto 0;padding:0 32px 32px;text-align:center;font-size:11px;color:var(--gray);letter-spacing:.5px;}
+
+@media(max-width:768px){
+  header.topbar{padding:14px 20px;}
+  .stats-bar,.category-section,.filter-row,.offline-banner{padding:0 16px;}
+  .action-head{grid-template-columns:1fr auto;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">OMNI</div>
+  <div class="title-block">
+    <div class="page-title">Plano Mestre</div>
+    <div class="page-sub">Junho 2026 · ICE Framework · 23 ações</div>
+  </div>
+  <div class="status-pill live" id="conn-pill">Conectado</div>
+</header>
+
+<div class="offline-banner" id="offline-banner">
+  <div class="offline-inner" id="offline-msg">Modo offline — notas não serão salvas.</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="label">Total</div><div class="value" id="stat-total">23</div></div>
+  <div class="stat-card teal"><div class="label">Concluídas</div><div class="value" id="stat-done">0</div></div>
+  <div class="stat-card gold"><div class="label">Em progresso</div><div class="value" id="stat-progress">0</div></div>
+  <div class="stat-card"><div class="label">Bloqueadas</div><div class="value" id="stat-blocked">0</div></div>
+  <div class="stat-card"><div class="label">Pendentes</div><div class="value" id="stat-pending">0</div></div>
+</div>
+
+<div class="filter-row">
+  <label><input type="checkbox" id="hide-done"> Ocultar concluídas</label>
+  <button class="filter-btn active" data-cat="all" onclick="filterCat(this)">Todos</button>
+  <button class="filter-btn" data-cat="NOVAS VENDAS" onclick="filterCat(this)">Novas Vendas</button>
+  <button class="filter-btn" data-cat="UPSELL" onclick="filterCat(this)">Upsell</button>
+  <button class="filter-btn" data-cat="OTIMIZAÇÃO DE TEMPO" onclick="filterCat(this)">Otimização</button>
+  <button class="filter-btn" data-cat="PROJETOS PARALELOS" onclick="filterCat(this)">Paralelos</button>
+</div>
+
+<div id="board"></div>
+
+<footer>
+  Plano-Mestre OMNI Brasil · Atualizado em 11/06/2026 · <a href="plano-acao-omni.html">← Plano de Ação</a>
+  <br><span style="opacity:.4;font-size:9px;">build v1.0 — 2026-06-11</span>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://gdizgxysttvhvuetesvn.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_lxOqb25rvaA2oykxwIZ-Dg_0g33kwgS';
+
+const TASKS = [
+  // ── NOVAS VENDAS / Máquina de Vendas ──
+  {id:'pm-mv-01', categoria:'NOVAS VENDAS', projeto:'Máquina de Vendas',
+   titulo:'Montar nova apresentação comercial',
+   ice_i:8, ice_c:9, ice_e:7,
+   comentario:'Alta alavancagem imediata — vendedores fecham mais com material forte', status:'pending'},
+  {id:'pm-mv-02', categoria:'NOVAS VENDAS', projeto:'Máquina de Vendas',
+   titulo:'Coletar depoimentos para cada persona',
+   ice_i:8, ice_c:8, ice_e:6,
+   comentario:'Prova social reduz objeções na hora do fechamento', status:'pending'},
+  {id:'pm-mv-03', categoria:'NOVAS VENDAS', projeto:'Máquina de Vendas',
+   titulo:'Implementar treino e rotina de alta performance comercial',
+   ice_i:9, ice_c:7, ice_e:5,
+   comentario:'Maior impacto de médio prazo — exige consistência e gestão da Rafa', status:'pending'},
+  // ── NOVAS VENDAS / Social Selling ──
+  {id:'pm-ss-01', categoria:'NOVAS VENDAS', projeto:'Social Selling',
+   titulo:'Criar novo processo/script de vendas',
+   ice_i:8, ice_c:8, ice_e:7,
+   comentario:'Problema atual é script fraco — resolver isso destrava o que a CLT já faz', status:'pending'},
+  {id:'pm-ss-02', categoria:'NOVAS VENDAS', projeto:'Social Selling',
+   titulo:'Criar gestor de SS com AIOX',
+   ice_i:7, ice_c:7, ice_e:6,
+   comentario:'Controle + evolução constante sem depender da memória do Michael', status:'pending'},
+  // ── NOVAS VENDAS / Marketing ──
+  {id:'pm-mkt-01', categoria:'NOVAS VENDAS', projeto:'Marketing',
+   titulo:'Otimizar tráfego Meta (ad-midas + Tiago Kiss)',
+   ice_i:9, ice_c:7, ice_e:7,
+   comentario:'Canal de maior retorno imediato — já roda, otimizar é mais rápido que construir', status:'pending'},
+  {id:'pm-mkt-02', categoria:'NOVAS VENDAS', projeto:'Marketing',
+   titulo:'Lançar workshop de aquecimento para a base',
+   ice_i:8, ice_c:8, ice_e:5,
+   comentario:'Aquece quem já confia. Custo principal: tempo do Michael para preparar', status:'pending'},
+  {id:'pm-mkt-03', categoria:'NOVAS VENDAS', projeto:'Marketing',
+   titulo:'Montar plano de execução sem falha de conteúdo OMNI Brasil',
+   ice_i:7, ice_c:7, ice_e:6,
+   comentario:'Sem sistema, o conteúdo falha por inconsistência, não por falta de ideia', status:'pending'},
+  {id:'pm-mkt-04', categoria:'NOVAS VENDAS', projeto:'Marketing',
+   titulo:'Montar plano de execução sem falha de conteúdo michaelarruda',
+   ice_i:8, ice_c:7, ice_e:6,
+   comentario:'Audiência pessoal tem mais alcance — prioridade ligeiramente maior que @omnibr', status:'pending'},
+  // ── NOVAS VENDAS / Legacy Família ──
+  {id:'pm-lf-01', categoria:'NOVAS VENDAS', projeto:'Legacy Família',
+   titulo:'Checar o planejamento atual',
+   ice_i:7, ice_c:9, ice_e:9,
+   comentario:'Antes de qualquer passo, saber onde está. Rápido de fazer', status:'pending'},
+  {id:'pm-lf-02', categoria:'NOVAS VENDAS', projeto:'Legacy Família',
+   titulo:'Atualizar cronograma',
+   ice_i:7, ice_c:9, ice_e:8,
+   comentario:'Desbloqueador de tudo — define os próximos passos e deadline de vendas (julho)', status:'pending'},
+  {id:'pm-lf-03', categoria:'NOVAS VENDAS', projeto:'Legacy Família',
+   titulo:'Executar o evento (definir responsável)',
+   ice_i:9, ice_c:6, ice_e:4,
+   comentario:'Alto potencial de receita + upsell interno. Risco: logística e ter responsável dedicado', status:'pending'},
+  // ── NOVAS VENDAS / AIOX ──
+  {id:'pm-ax-01', categoria:'NOVAS VENDAS', projeto:'AIOX',
+   titulo:'Construir IA CMO autônoma',
+   ice_i:9, ice_c:7, ice_e:5,
+   comentario:'Orquestra ads, conteúdo e social selling, delega para agentes e pessoas — elimina gargalo do Michael no marketing', status:'pending'},
+  {id:'pm-ax-02', categoria:'NOVAS VENDAS', projeto:'AIOX',
+   titulo:'Construir IA de suporte personalizada',
+   ice_i:8, ice_c:7, ice_e:5,
+   comentario:'Conhece cada aluno, melhora retenção e abre porta para upsell pelo contexto', status:'pending'},
+  {id:'pm-ax-03', categoria:'NOVAS VENDAS', projeto:'AIOX',
+   titulo:'Módulo de gamificação para incentivar indicação',
+   ice_i:8, ice_c:6, ice_e:4,
+   comentario:'Alta alavancagem em indicação qualificada — depende do portal estar maduro', status:'pending'},
+  // ── UPSELL / Black Mentoring ──
+  {id:'pm-bm-01', categoria:'UPSELL', projeto:'Black Mentoring',
+   titulo:'Ativar bot de acompanhamento no WhatsApp/IG',
+   ice_i:8, ice_c:8, ice_e:6,
+   comentario:'Reduz churn silencioso — alunos que somem antes de renovar', status:'pending'},
+  {id:'pm-bm-02', categoria:'UPSELL', projeto:'Black Mentoring',
+   titulo:'Estruturar método claro para alunos atingirem resultado',
+   ice_i:9, ice_c:8, ice_e:5,
+   comentario:'Resultado do aluno = renovação + depoimento + indicação. Tudo deriva daqui', status:'pending'},
+  // ── OTIMIZAÇÃO DE TEMPO / Automação & Infra ──
+  {id:'pm-ot-01', categoria:'OTIMIZAÇÃO DE TEMPO', projeto:'Automação & Infra',
+   titulo:'Migrar n8n para AIOX',
+   ice_i:7, ice_c:8, ice_e:5,
+   comentario:'Urgente — se n8n parar, operação para. Não é crescimento, é segurança', status:'pending'},
+  {id:'pm-ot-02', categoria:'OTIMIZAÇÃO DE TEMPO', projeto:'Automação & Infra',
+   titulo:'Integrar vendas → CS → financeiro',
+   ice_i:8, ice_c:7, ice_e:5,
+   comentario:'Hoje cada área é uma ilha — integrar elimina retrabalho e esquecimento', status:'pending'},
+  {id:'pm-ot-03', categoria:'OTIMIZAÇÃO DE TEMPO', projeto:'Automação & Infra',
+   titulo:'Colocar financeiro no AIOX',
+   ice_i:7, ice_c:7, ice_e:6,
+   comentario:'Decisão financeira hoje depende de Excel e memória — AIOX dá visibilidade em tempo real', status:'pending'},
+  // ── OTIMIZAÇÃO DE TEMPO / Gestão ──
+  {id:'pm-gt-01', categoria:'OTIMIZAÇÃO DE TEMPO', projeto:'Gestão',
+   titulo:'Montar Executor Matrix + organograma',
+   ice_i:8, ice_c:8, ice_e:6,
+   comentario:'Mapa de cada função: contratar, automatizar ou eliminar. Desbloqueador de decisões de custo', status:'pending'},
+  // ── PROJETOS PARALELOS / HypnoFlash ──
+  {id:'pm-hf-01', categoria:'PROJETOS PARALELOS', projeto:'HypnoFlash',
+   titulo:'Estruturar funil com fornecedor externo',
+   ice_i:7, ice_c:5, ice_e:6,
+   comentario:'Upside real mas depende de fornecedor externo — incerteza alta', status:'pending'},
+  {id:'pm-hf-02', categoria:'PROJETOS PARALELOS', projeto:'HypnoFlash',
+   titulo:'Gravar aulas',
+   ice_i:6, ice_c:8, ice_e:4,
+   comentario:'Necessário para o produto existir — fazer quando houver espaço no Michael', status:'pending'},
+];
+
+const CAT_ICONS = {
+  'NOVAS VENDAS': '💰',
+  'UPSELL': '🔄',
+  'OTIMIZAÇÃO DE TEMPO': '⚙️',
+  'PROJETOS PARALELOS': '🔵',
+};
+
+const SUPABASE_READY =
+  SUPABASE_URL !== 'REPLACE_ME' &&
+  SUPABASE_ANON_KEY !== 'REPLACE_ME' &&
+  SUPABASE_URL && SUPABASE_ANON_KEY;
+
+let supabase = null;
+let dbData = {};
+let activeCat = 'all';
+
+function iceClass(score){ return score >= 22 ? 'high' : score >= 19 ? 'mid' : 'low'; }
+function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+async function init(){
+  const pill = document.getElementById('conn-pill');
+  const banner = document.getElementById('offline-banner');
+  const msg = document.getElementById('offline-msg');
+
+  if(!SUPABASE_READY){
+    pill.className='status-pill offline'; pill.textContent='Offline';
+    banner.style.display='block'; msg.innerHTML='<strong>Config:</strong> credenciais Supabase não configuradas.';
+    render(); return;
+  }
+
+  if(typeof window.supabase === 'undefined'){
+    pill.className='status-pill offline'; pill.textContent='Offline';
+    banner.style.display='block'; msg.innerHTML='<strong>CDN Supabase não carregou.</strong> Verifique conexão.';
+    render(); return;
+  }
+
+  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Buscar dados existentes
+  const ids = TASKS.map(t=>`'${t.id}'`).join(',');
+  const { data, error } = await supabase
+    .from('plano_acao_tasks')
+    .select('*')
+    .in('id', TASKS.map(t=>t.id));
+
+  if(error){
+    pill.className='status-pill offline'; pill.textContent='Erro DB';
+    banner.style.display='block'; msg.innerHTML=`<strong>Erro Supabase:</strong> ${error.message}`;
+  } else {
+    (data||[]).forEach(row=>{ dbData[row.id]=row; });
+    pill.className='status-pill live'; pill.textContent='Conectado';
+  }
+
+  render();
+}
+
+function getTaskState(task){
+  const row = dbData[task.id];
+  return {
+    status: row?.status || task.status,
+    nota: row?.nota_atual || '',
+  };
+}
+
+function render(){
+  const hideDone = document.getElementById('hide-done').checked;
+  const board = document.getElementById('board');
+
+  // Group by category > project
+  const cats = [...new Set(TASKS.map(t=>t.categoria))];
+
+  let html = '';
+  cats.forEach(cat => {
+    if(activeCat !== 'all' && activeCat !== cat) return;
+
+    const catTasks = TASKS.filter(t => t.categoria === cat);
+    const projects = [...new Set(catTasks.map(t=>t.projeto))];
+
+    html += `<div class="category-section" data-cat="${cat}">
+      <div class="category-header">
+        <span class="category-icon">${CAT_ICONS[cat]||'📌'}</span>
+        <span class="category-title">${cat}</span>
+        <span class="category-count">${catTasks.length} ações</span>
+      </div>`;
+
+    projects.forEach(proj => {
+      const projTasks = catTasks.filter(t => t.projeto === proj);
+      html += `<div class="project-group"><div class="project-label">${proj}</div>`;
+
+      projTasks.forEach(task => {
+        const state = getTaskState(task);
+        if(hideDone && state.status === 'done') return;
+
+        const ice = task.ice_i + task.ice_c + task.ice_e;
+        const cls = iceClass(ice);
+
+        html += `<div class="action-card ${state.status}" data-id="${task.id}" data-cat="${cat}" onclick="toggleCard(this)">
+          <div class="action-head">
+            <div class="action-left">
+              <div class="action-title">${escapeHTML(task.titulo)}</div>
+              <div class="action-meta">
+                <div class="ice-group">
+                  <span class="ice-badge dim">I:${task.ice_i}</span>
+                  <span class="ice-badge dim">C:${task.ice_c}</span>
+                  <span class="ice-badge dim">E:${task.ice_e}</span>
+                  <span class="ice-badge score ${cls}">ICE ${ice}</span>
+                </div>
+              </div>
+            </div>
+            <span class="chevron">▼</span>
+          </div>
+          <div class="action-detail">
+            <div class="claude-comment">
+              <div class="label">Análise Claude</div>
+              ${escapeHTML(task.comentario)}
+            </div>
+            <select class="status-select ${state.status}" data-id="${task.id}" onclick="event.stopPropagation()" onchange="event.stopPropagation();this.className='status-select '+this.value">
+              <option value="pending" ${state.status==='pending'?'selected':''}>Pendente</option>
+              <option value="in_progress" ${state.status==='in_progress'?'selected':''}>Em progresso</option>
+              <option value="blocked" ${state.status==='blocked'?'selected':''}>Bloqueada</option>
+              <option value="done" ${state.status==='done'?'selected':''}>Concluída</option>
+            </select>
+            <textarea class="note-input" data-id="${task.id}" placeholder="Seu comentário — contexto, decisão, próximo passo...">${state.nota ? escapeHTML(state.nota) : ''}</textarea>
+            <div class="save-row">
+              <button class="save-btn" data-id="${task.id}" onclick="event.stopPropagation();saveTask('${task.id}',this)">Salvar</button>
+              <input class="whoami-input" data-id="${task.id}" type="text" placeholder="Seu nome" value="${escapeHTML(localStorage.getItem('whoami')||'')}" onclick="event.stopPropagation()">
+              <span class="save-status" id="save-status-${task.id}"></span>
+            </div>
+          </div>
+        </div>`;
+      });
+
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  board.innerHTML = html;
+  updateStats();
+}
+
+function toggleCard(card){
+  if(event.target.closest('.status-select,.note-input,.save-btn,.whoami-input')) return;
+  card.classList.toggle('expanded');
+}
+
+function filterCat(btn){
+  activeCat = btn.dataset.cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+async function saveTask(id, btn){
+  const card = document.querySelector(`.action-card[data-id="${id}"]`);
+  const statusSel = card.querySelector('.status-select');
+  const noteInput = card.querySelector('.note-input');
+  const whoamiInput = card.querySelector('.whoami-input');
+  const statusEl = document.getElementById(`save-status-${id}`);
+
+  const whoami = whoamiInput.value.trim() || 'anon';
+  localStorage.setItem('whoami', whoamiInput.value.trim());
+
+  const payload = {
+    status: statusSel.value,
+    nota_atual: noteInput.value,
+    updated_at: new Date().toISOString(),
+    updated_by: whoami,
+  };
+
+  // Optimistic update
+  dbData[id] = { ...(dbData[id]||{}), id, ...payload };
+  card.className = `action-card expanded ${payload.status}`;
+
+  if(!supabase){ statusEl.className='save-status ok'; statusEl.textContent='✓ local'; return; }
+
+  btn.disabled = true;
+  statusEl.className='save-status'; statusEl.textContent='Salvando...';
+
+  const { error } = await supabase
+    .from('plano_acao_tasks')
+    .upsert({ id, ...payload }, { onConflict: 'id' })
+    .select();
+
+  btn.disabled = false;
+  if(error){
+    statusEl.className='save-status err'; statusEl.textContent='Erro: '+error.message;
+  } else {
+    statusEl.className='save-status ok'; statusEl.textContent='✓ Salvo';
+    setTimeout(()=>{ statusEl.textContent=''; }, 3000);
+  }
+  updateStats();
+}
+
+function updateStats(){
+  const all = TASKS.map(t => getTaskState(t).status);
+  document.getElementById('stat-done').textContent     = all.filter(s=>s==='done').length;
+  document.getElementById('stat-progress').textContent = all.filter(s=>s==='in_progress').length;
+  document.getElementById('stat-blocked').textContent  = all.filter(s=>s==='blocked').length;
+  document.getElementById('stat-pending').textContent  = all.filter(s=>s==='pending').length;
+}
+
+document.getElementById('hide-done').addEventListener('change', render);
+
+init();
+</script>
+</body>
+</html>
