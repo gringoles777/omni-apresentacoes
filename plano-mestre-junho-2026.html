@@ -96,6 +96,12 @@ header.topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backd
 .proj-tag{font-size:10px;letter-spacing:.5px;color:var(--gold);border:1px solid var(--gold-20);border-radius:10px;padding:1px 8px;white-space:nowrap;}
 .card-link{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--gold);text-decoration:none;border:1px solid var(--gold-20);border-radius:6px;padding:4px 10px;margin-bottom:10px;transition:background .2s;}
 .card-link:hover{background:var(--gold-10);}
+.resp-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.resp-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);font-weight:600;white-space:nowrap;}
+.resp-sel{background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);border-radius:5px;padding:4px 8px;font-size:12px;font-family:'Inter',system-ui,sans-serif;cursor:pointer;transition:border-color .2s;}
+.resp-sel:focus{outline:none;border-color:var(--gold);}
+.resp-sel.assigned{border-color:var(--gold-20);color:var(--gold);}
+.resp-badge{font-size:10px;color:var(--gold);background:var(--gold-10);border:1px solid var(--gold-20);border-radius:10px;padding:1px 8px;white-space:nowrap;}
 .ice-legend{max-width:1200px;margin:8px auto 0;padding:0 32px;font-size:11px;color:var(--gray);letter-spacing:.3px;}
 .ice-hint{font-size:10px;color:var(--gray);font-style:italic;}
 
@@ -161,6 +167,14 @@ footer{max-width:1200px;margin:48px auto 0;padding:0 32px 32px;text-align:center
   <button class="filter-btn" data-cat="OTIMIZAÇÃO DE TEMPO" onclick="filterCat(this)">Otimização</button>
   <button class="filter-btn" data-cat="PROJETOS PARALELOS" onclick="filterCat(this)">Paralelos</button>
 </div>
+<div class="filter-row" style="margin-top:6px;">
+  <span style="font-size:11px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;">Responsável:</span>
+  <button class="filter-btn active" data-resp="all" onclick="filterResp(this)">Todos</button>
+  <button class="filter-btn" data-resp="Michael" onclick="filterResp(this)">Michael</button>
+  <button class="filter-btn" data-resp="Rafaela" onclick="filterResp(this)">Rafaela</button>
+  <button class="filter-btn" data-resp="Fernanda" onclick="filterResp(this)">Fernanda</button>
+  <button class="filter-btn" data-resp="Julia" onclick="filterResp(this)">Julia</button>
+</div>
 <div class="ice-legend">I = Impacto · C = Confiança · E = Facilidade (4 = horas · 3 = até 3 dias · 2 = até 1 semana · 1 = + de 1 semana) — quanto mais fácil, maior a nota</div>
 
 <div id="board"></div>
@@ -175,6 +189,8 @@ footer{max-width:1200px;margin:48px auto 0;padding:0 32px 32px;text-align:center
 const SUPABASE_URL     = 'https://gdizgxysttvhvuetesvn.supabase.co';
 const SUPABASE_ANON_KEY= 'sb_publishable_lxOqb25rvaA2oykxwIZ-Dg_0g33kwgS';
 const LS_ICE_KEY       = 'pm_ice_overrides';
+const LS_RESP_KEY      = 'pm_responsavel';
+const RESPONSAVEIS     = ['Michael','Rafaela','Fernanda','Julia'];
 
 const TASKS = [
   {id:'pm-mv-01',cat:'NOVAS VENDAS',proj:'Máquina de Vendas',titulo:'Montar nova apresentação comercial',ice_i:3,ice_c:4,ice_e:3,com:'Alta alavancagem imediata — vendedores fecham mais com material forte'},
@@ -203,10 +219,13 @@ const TASKS = [
 
 const CAT_ICONS={'NOVAS VENDAS':'💰','UPSELL':'🔄','OTIMIZAÇÃO DE TEMPO':'⚙️','PROJETOS PARALELOS':'🔵'};
 
-let supabase=null, dbData={}, iceOverrides={}, activeCat='all';
+let supabase=null, dbData={}, iceOverrides={}, respOverrides={}, activeCat='all', activeResp='all';
 
 function loadIceOverrides(){ try{ iceOverrides=JSON.parse(localStorage.getItem(LS_ICE_KEY)||'{}'); }catch(e){ iceOverrides={}; } }
 function saveIceOverrides(){ localStorage.setItem(LS_ICE_KEY, JSON.stringify(iceOverrides)); }
+function loadRespOverrides(){ try{ respOverrides=JSON.parse(localStorage.getItem(LS_RESP_KEY)||'{}'); }catch(e){ respOverrides={}; } }
+function saveRespOverrides(){ localStorage.setItem(LS_RESP_KEY, JSON.stringify(respOverrides)); }
+function getResp(id){ return respOverrides[id]||''; }
 
 function getIce(task){
   const ov=iceOverrides[task.id]||{};
@@ -219,6 +238,7 @@ function getState(task){ const r=dbData[task.id]; return {status:r?.status||'pen
 
 async function init(){
   loadIceOverrides();
+  loadRespOverrides();
   const pill=document.getElementById('conn-pill');
   const banner=document.getElementById('offline-banner');
 
@@ -258,9 +278,11 @@ function render(){
         <span class="category-count">${catTasks.length} ações</span>
       </div>`;
 
+    const visibleByResp=t=>activeResp==='all'||getResp(t.id)===activeResp;
+
     if(sortIce){
-      // ordem de prioridade: ICE total decrescente, categorias intactas
-      catTasks.slice().sort((a,b)=>iceTotal(b)-iceTotal(a)).forEach(task=>{
+      const sorted=catTasks.slice().sort((a,b)=>iceTotal(b)-iceTotal(a)).filter(visibleByResp);
+      sorted.forEach(task=>{
         const state=getState(task);
         if(hideDone&&state.status==='done') return;
         html+=cardHTML(task,state,true);
@@ -268,8 +290,10 @@ function render(){
     } else {
       const projs=[...new Set(catTasks.map(t=>t.proj))];
       projs.forEach(proj=>{
+        const projTasks=catTasks.filter(t=>t.proj===proj&&visibleByResp(t));
+        if(!projTasks.length) return;
         html+=`<div class="project-group"><div class="project-label">${proj}</div>`;
-        catTasks.filter(t=>t.proj===proj).forEach(task=>{
+        projTasks.forEach(task=>{
           const state=getState(task);
           if(hideDone&&state.status==='done') return;
           html+=cardHTML(task,state,false);
@@ -300,12 +324,20 @@ function cardHTML(task,state,showProj){
             <span class="ice-badge score ${cls}">ICE ${total}</span>
           </div>
           ${showProj?`<span class="proj-tag">${escapeHTML(task.proj)}</span>`:''}
+          ${getResp(task.id)?`<span class="resp-badge">👤 ${getResp(task.id)}</span>`:''}
         </div>
       </div>
       <span class="chevron">▼</span>
     </div>
     <div class="action-detail">
       ${task.link?`<a class="card-link" href="${task.link}" target="_blank" onclick="event.stopPropagation()">🔗 Abrir canvas de planejamento</a>`:''}
+      <div class="resp-row" onclick="event.stopPropagation()">
+        <span class="resp-label">Responsável:</span>
+        <select class="resp-sel ${getResp(task.id)?'assigned':''}" data-id="${task.id}" onchange="updateResp(this)">
+          <option value="">— sem responsável —</option>
+          ${RESPONSAVEIS.map(r=>`<option value="${r}" ${getResp(task.id)===r?'selected':''}>${r}</option>`).join('')}
+        </select>
+      </div>
       <div class="claude-comment">
         <div class="clabel">Sugestão Claude</div>
         ${escapeHTML(task.com)}
@@ -343,7 +375,7 @@ function cardHTML(task,state,showProj){
 }
 
 function toggleCard(card){
-  if(event.target.closest('.status-select,.note-input,.save-btn,.whoami-input,.ice-num,.ice-sel')) return;
+  if(event.target.closest('.status-select,.note-input,.save-btn,.whoami-input,.ice-num,.ice-sel,.resp-sel')) return;
   card.classList.toggle('expanded');
 }
 
@@ -373,9 +405,41 @@ function updateIce(input){
 
 function filterCat(btn){
   activeCat=btn.dataset.cat;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   render();
+}
+
+function filterResp(btn){
+  activeResp=btn.dataset.resp;
+  document.querySelectorAll('[data-resp]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function updateResp(sel){
+  const id=sel.dataset.id;
+  const val=sel.value;
+  if(val) respOverrides[id]=val;
+  else delete respOverrides[id];
+  saveRespOverrides();
+  sel.className='resp-sel'+(val?' assigned':'');
+  // atualiza badge no cabeçalho sem re-render completo
+  const card=document.querySelector(`.action-card[data-id="${id}"]`);
+  const existing=card.querySelector('.resp-badge');
+  const meta=card.querySelector('.action-meta');
+  if(existing) existing.remove();
+  if(val){
+    const badge=document.createElement('span');
+    badge.className='resp-badge';
+    badge.textContent=`👤 ${val}`;
+    meta.appendChild(badge);
+  }
+  // se filtro de responsável ativo e card não bate, esconde
+  if(activeResp!=='all'&&activeResp!==val){
+    card.closest('.project-group')||card.style.setProperty('display','none');
+    render();
+  }
 }
 
 async function saveTask(id,btn){
