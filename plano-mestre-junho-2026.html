@@ -91,6 +91,10 @@ header.topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backd
 .ice-edit-group label{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--cream-70);}
 .ice-num{width:46px;background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);border-radius:5px;padding:4px 6px;font-size:13px;font-family:'IBM Plex Mono',monospace;text-align:center;transition:border-color .2s;}
 .ice-num:focus{outline:none;border-color:var(--gold);}
+.ice-sel{background:var(--dark);color:var(--cream);border:1px solid var(--gray-dark);border-radius:5px;padding:4px 6px;font-size:12px;font-family:'IBM Plex Mono',monospace;cursor:pointer;transition:border-color .2s;}
+.ice-sel:focus{outline:none;border-color:var(--gold);}
+.proj-tag{font-size:10px;letter-spacing:.5px;color:var(--gold);border:1px solid var(--gold-20);border-radius:10px;padding:1px 8px;white-space:nowrap;}
+.ice-legend{max-width:1200px;margin:8px auto 0;padding:0 32px;font-size:11px;color:var(--gray);letter-spacing:.3px;}
 .ice-hint{font-size:10px;color:var(--gray);font-style:italic;}
 
 .detail-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;}
@@ -147,13 +151,15 @@ footer{max-width:1200px;margin:48px auto 0;padding:0 32px 32px;text-align:center
 </div>
 
 <div class="filter-row">
-  <label><input type="checkbox" id="hide-done"> Ocultar concluídas</label>
+  <label><input type="checkbox" id="hide-done" onchange="render()"> Ocultar concluídas</label>
+  <label><input type="checkbox" id="sort-ice" onchange="render()"> Ordenar por prioridade (ICE)</label>
   <button class="filter-btn active" data-cat="all" onclick="filterCat(this)">Todos</button>
   <button class="filter-btn" data-cat="NOVAS VENDAS" onclick="filterCat(this)">Novas Vendas</button>
   <button class="filter-btn" data-cat="UPSELL" onclick="filterCat(this)">Upsell</button>
   <button class="filter-btn" data-cat="OTIMIZAÇÃO DE TEMPO" onclick="filterCat(this)">Otimização</button>
   <button class="filter-btn" data-cat="PROJETOS PARALELOS" onclick="filterCat(this)">Paralelos</button>
 </div>
+<div class="ice-legend">I = Impacto · C = Confiança · E = Facilidade (4 = horas · 3 = até 3 dias · 2 = até 1 semana · 1 = + de 1 semana) — quanto mais fácil, maior a nota</div>
 
 <div id="board"></div>
 
@@ -236,13 +242,13 @@ async function init(){
 
 function render(){
   const hideDone=document.getElementById('hide-done').checked;
+  const sortIce=document.getElementById('sort-ice').checked;
   const cats=[...new Set(TASKS.map(t=>t.cat))];
   let html='';
 
   cats.forEach(cat=>{
     if(activeCat!=='all'&&activeCat!==cat) return;
     const catTasks=TASKS.filter(t=>t.cat===cat);
-    const projs=[...new Set(catTasks.map(t=>t.proj))];
 
     html+=`<div class="category-section">
       <div class="category-header">
@@ -251,63 +257,25 @@ function render(){
         <span class="category-count">${catTasks.length} ações</span>
       </div>`;
 
-    projs.forEach(proj=>{
-      html+=`<div class="project-group"><div class="project-label">${proj}</div>`;
-      catTasks.filter(t=>t.proj===proj).forEach(task=>{
+    if(sortIce){
+      // ordem de prioridade: ICE total decrescente, categorias intactas
+      catTasks.slice().sort((a,b)=>iceTotal(b)-iceTotal(a)).forEach(task=>{
         const state=getState(task);
         if(hideDone&&state.status==='done') return;
-        const ice=getIce(task);
-        const total=ice.i+ice.c+ice.e;
-        const cls=iceClass(total);
-
-        html+=`<div class="action-card ${state.status}" data-id="${task.id}" onclick="toggleCard(this)">
-          <div class="action-head">
-            <div class="action-left">
-              <div class="action-title">${escapeHTML(task.titulo)}</div>
-              <div class="action-meta">
-                <div class="ice-group" id="ice-badges-${task.id}">
-                  <span class="ice-badge dim">I:${ice.i}</span>
-                  <span class="ice-badge dim">C:${ice.c}</span>
-                  <span class="ice-badge dim">E:${ice.e}</span>
-                  <span class="ice-badge score ${cls}">ICE ${total}</span>
-                </div>
-              </div>
-            </div>
-            <span class="chevron">▼</span>
-          </div>
-          <div class="action-detail">
-            <div class="claude-comment">
-              <div class="clabel">Sugestão Claude</div>
-              ${escapeHTML(task.com)}
-            </div>
-            <div class="ice-edit-row" onclick="event.stopPropagation()">
-              <span class="ice-edit-label">Ajustar ICE:</span>
-              <div class="ice-edit-group">
-                <label>I <input type="number" class="ice-num" min="1" max="4" value="${ice.i}" data-id="${task.id}" data-dim="i" oninput="updateIce(this)"></label>
-                <label>C <input type="number" class="ice-num" min="1" max="4" value="${ice.c}" data-id="${task.id}" data-dim="c" oninput="updateIce(this)"></label>
-                <label>E <input type="number" class="ice-num" min="1" max="4" value="${ice.e}" data-id="${task.id}" data-dim="e" oninput="updateIce(this)"></label>
-              </div>
-              <span class="ice-hint">escala 1–4, salva no seu browser</span>
-            </div>
-            <div class="detail-controls" onclick="event.stopPropagation()">
-              <select class="status-select ${state.status}" data-id="${task.id}" onchange="event.stopPropagation();this.className='status-select '+this.value">
-                <option value="pending"     ${state.status==='pending'    ?'selected':''}>Pendente</option>
-                <option value="in_progress" ${state.status==='in_progress'?'selected':''}>Em progresso</option>
-                <option value="blocked"     ${state.status==='blocked'    ?'selected':''}>Bloqueada</option>
-                <option value="done"        ${state.status==='done'       ?'selected':''}>Concluída</option>
-              </select>
-            </div>
-            <textarea class="note-input" data-id="${task.id}" placeholder="Seu comentário — contexto, decisão, próximo passo..." onclick="event.stopPropagation()">${state.nota?escapeHTML(state.nota):''}</textarea>
-            <div class="save-row">
-              <button class="save-btn" onclick="event.stopPropagation();saveTask('${task.id}',this)">Salvar</button>
-              <input class="whoami-input" type="text" placeholder="Seu nome" value="${escapeHTML(localStorage.getItem('whoami')||'')}" onclick="event.stopPropagation()">
-              <span class="save-status" id="ss-${task.id}"></span>
-            </div>
-          </div>
-        </div>`;
+        html+=cardHTML(task,state,true);
       });
-      html+=`</div>`;
-    });
+    } else {
+      const projs=[...new Set(catTasks.map(t=>t.proj))];
+      projs.forEach(proj=>{
+        html+=`<div class="project-group"><div class="project-label">${proj}</div>`;
+        catTasks.filter(t=>t.proj===proj).forEach(task=>{
+          const state=getState(task);
+          if(hideDone&&state.status==='done') return;
+          html+=cardHTML(task,state,false);
+        });
+        html+=`</div>`;
+      });
+    }
     html+=`</div>`;
   });
 
@@ -315,8 +283,65 @@ function render(){
   updateStats();
 }
 
+function cardHTML(task,state,showProj){
+  const ice=getIce(task);
+  const total=ice.i+ice.c+ice.e;
+  const cls=iceClass(total);
+  return `<div class="action-card ${state.status}" data-id="${task.id}" onclick="toggleCard(this)">
+    <div class="action-head">
+      <div class="action-left">
+        <div class="action-title">${escapeHTML(task.titulo)}</div>
+        <div class="action-meta">
+          <div class="ice-group" id="ice-badges-${task.id}">
+            <span class="ice-badge dim">I:${ice.i}</span>
+            <span class="ice-badge dim">C:${ice.c}</span>
+            <span class="ice-badge dim">E:${ice.e}</span>
+            <span class="ice-badge score ${cls}">ICE ${total}</span>
+          </div>
+          ${showProj?`<span class="proj-tag">${escapeHTML(task.proj)}</span>`:''}
+        </div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="action-detail">
+      <div class="claude-comment">
+        <div class="clabel">Sugestão Claude</div>
+        ${escapeHTML(task.com)}
+      </div>
+      <div class="ice-edit-row" onclick="event.stopPropagation()">
+        <span class="ice-edit-label">Ajustar ICE:</span>
+        <div class="ice-edit-group">
+          <label>I <input type="number" class="ice-num" min="1" max="4" value="${ice.i}" data-id="${task.id}" data-dim="i" oninput="updateIce(this)"></label>
+          <label>C <input type="number" class="ice-num" min="1" max="4" value="${ice.c}" data-id="${task.id}" data-dim="c" oninput="updateIce(this)"></label>
+          <label>E <select class="ice-sel" data-id="${task.id}" data-dim="e" onchange="updateIce(this)">
+            <option value="4" ${ice.e===4?'selected':''}>4 — horas</option>
+            <option value="3" ${ice.e===3?'selected':''}>3 — até 3 dias</option>
+            <option value="2" ${ice.e===2?'selected':''}>2 — até 1 semana</option>
+            <option value="1" ${ice.e===1?'selected':''}>1 — + de 1 semana</option>
+          </select></label>
+        </div>
+        <span class="ice-hint">escala 1–4, salva no seu browser</span>
+      </div>
+      <div class="detail-controls" onclick="event.stopPropagation()">
+        <select class="status-select ${state.status}" data-id="${task.id}" onchange="event.stopPropagation();this.className='status-select '+this.value">
+          <option value="pending"     ${state.status==='pending'    ?'selected':''}>Pendente</option>
+          <option value="in_progress" ${state.status==='in_progress'?'selected':''}>Em progresso</option>
+          <option value="blocked"     ${state.status==='blocked'    ?'selected':''}>Bloqueada</option>
+          <option value="done"        ${state.status==='done'       ?'selected':''}>Concluída</option>
+        </select>
+      </div>
+      <textarea class="note-input" data-id="${task.id}" placeholder="Seu comentário — contexto, decisão, próximo passo..." onclick="event.stopPropagation()">${state.nota?escapeHTML(state.nota):''}</textarea>
+      <div class="save-row">
+        <button class="save-btn" onclick="event.stopPropagation();saveTask('${task.id}',this)">Salvar</button>
+        <input class="whoami-input" type="text" placeholder="Seu nome" value="${escapeHTML(localStorage.getItem('whoami')||'')}" onclick="event.stopPropagation()">
+        <span class="save-status" id="ss-${task.id}"></span>
+      </div>
+    </div>
+  </div>`;
+}
+
 function toggleCard(card){
-  if(event.target.closest('.status-select,.note-input,.save-btn,.whoami-input,.ice-num')) return;
+  if(event.target.closest('.status-select,.note-input,.save-btn,.whoami-input,.ice-num,.ice-sel')) return;
   card.classList.toggle('expanded');
 }
 
@@ -361,17 +386,24 @@ async function saveTask(id,btn){
   localStorage.setItem('whoami',whoamiEl.value.trim());
 
   const payload={status:statusSel.value,nota_atual:noteInput.value,atualizado_por:whoami};
-  dbData[id]={...(dbData[id]||{}),id,...payload};
-  card.className=`action-card expanded ${payload.status}`;
 
-  if(!supabase){statusEl.className='save-status ok';statusEl.textContent='✓ local';return;}
+  if(!supabase){
+    dbData[id]={...(dbData[id]||{}),id,...payload};
+    card.className=`action-card expanded ${payload.status}`;
+    statusEl.className='save-status ok';statusEl.textContent='✓ local';updateStats();return;
+  }
   btn.disabled=true;statusEl.className='save-status';statusEl.textContent='Salvando...';
 
   const {data,error}=await supabase.from('plano_acao_tasks').update(payload).eq('id',id).select();
   btn.disabled=false;
   if(error){statusEl.className='save-status err';statusEl.textContent='Erro: '+error.message;}
   else if(!data||data.length===0){statusEl.className='save-status err';statusEl.textContent='Erro: registro não existe no banco (rodar seed)';}
-  else{statusEl.className='save-status ok';statusEl.textContent='✓ Salvo';setTimeout(()=>{statusEl.textContent='';},3000);}
+  else{
+    // só atualiza o visual depois que o banco confirmou
+    dbData[id]={...(dbData[id]||{}),id,...payload};
+    card.className=`action-card expanded ${payload.status}`;
+    statusEl.className='save-status ok';statusEl.textContent='✓ Salvo';setTimeout(()=>{statusEl.textContent='';},3000);
+  }
   updateStats();
 }
 
