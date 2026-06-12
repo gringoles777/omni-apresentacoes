@@ -111,6 +111,9 @@ header.topbar{position:sticky;top:0;z-index:100;background:rgba(5,5,5,.96);backd
 .edit-title-btn:hover{opacity:1!important;color:var(--gold);}
 .title-edit-input{background:var(--dark);color:var(--cream);border:1px solid var(--gold);border-radius:4px;padding:1px 6px;font-size:inherit;font-family:inherit;font-weight:inherit;width:100%;outline:none;}
 .action-title-wrap{display:flex;align-items:center;gap:6px;flex:1;min-width:0;}
+.title-save-fb{font-size:10px;color:var(--gray);white-space:nowrap;flex-shrink:0;}
+.title-save-fb.ok{color:var(--teal);}
+.title-save-fb.err{color:#E74C3C;}
 
 /* ADD BUTTON */
 .add-task-btn{padding:5px 16px;border-radius:20px;border:1px solid var(--gold-30);background:var(--gold-10);color:var(--gold);font-size:11px;letter-spacing:1px;cursor:pointer;transition:all .2s;white-space:nowrap;}
@@ -327,7 +330,11 @@ function saveRespOverrides(){ localStorage.setItem(LS_RESP_KEY, JSON.stringify(r
 function getResp(task){ return respOverrides[task.id]||task.resp||''; }
 function loadTitleOverrides(){ try{ titleOverrides=JSON.parse(localStorage.getItem(LS_TITLE_KEY)||'{}'); }catch(e){ titleOverrides={}; } }
 function saveTitleOverrides(){ localStorage.setItem(LS_TITLE_KEY, JSON.stringify(titleOverrides)); }
-function getTitle(task){ return titleOverrides[task.id]||task.titulo; }
+function getTitle(task){
+  if(titleOverrides[task.id]) return titleOverrides[task.id];           // edição offline pendente
+  if(dbData[task.id]&&dbData[task.id].titulo) return dbData[task.id].titulo; // título do servidor (compartilhado)
+  return task.titulo;                                                    // padrão fixo
+}
 function loadUserTasks(){ try{ userTasks=JSON.parse(localStorage.getItem(LS_USER_TASKS)||'[]'); }catch(e){ userTasks=[]; } }
 function saveUserTasks(){ localStorage.setItem(LS_USER_TASKS, JSON.stringify(userTasks)); }
 function allTasks(){ return TASKS.concat(userTasks); }
@@ -527,11 +534,41 @@ function startEditTitle(e, id){
   titleEl.appendChild(inp);
   inp.focus(); inp.select();
   let done=false;
-  const commit=()=>{
+  const commit=async ()=>{
     if(done) return; done=true;
     const val=inp.value.trim();
-    if(val&&val!==current){ titleOverrides[id]=val; saveTitleOverrides(); }
     titleEl.textContent=val||current;
+    if(!val||val===current) return;
+
+    const fb=document.createElement('span');
+    fb.className='title-save-fb';
+    fb.textContent='salvando…';
+    titleEl.parentElement.appendChild(fb);
+
+    // offline: salva só no browser
+    if(!supabase){
+      titleOverrides[id]=val; saveTitleOverrides();
+      fb.textContent='✓ local'; fb.classList.add('ok');
+      setTimeout(()=>fb.remove(),2500);
+      return;
+    }
+
+    const whoami=localStorage.getItem('whoami')||'anon';
+    const {data,error}=await supabase.from('plano_acao_tasks')
+      .update({titulo:val,atualizado_por:whoami}).eq('id',id).select();
+
+    if(error||!data||!data.length){
+      // servidor falhou (ex: linha ainda não existe) — preserva no browser pra não perder
+      titleOverrides[id]=val; saveTitleOverrides();
+      fb.textContent='⚠ salvo só local'; fb.classList.add('err');
+      setTimeout(()=>fb.remove(),4000);
+    } else {
+      if(!dbData[id]) dbData[id]={id};
+      dbData[id].titulo=val;
+      delete titleOverrides[id]; saveTitleOverrides();
+      fb.textContent='✓ salvo'; fb.classList.add('ok');
+      setTimeout(()=>fb.remove(),2500);
+    }
   };
   inp.addEventListener('keydown',ev=>{
     ev.stopPropagation();
