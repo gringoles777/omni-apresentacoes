@@ -192,7 +192,8 @@ footer{max-width:1200px;margin:48px auto 0;padding:0 32px 32px;text-align:center
 <div class="filter-row">
   <button class="add-task-btn" onclick="openAddModal()">+ Nova ação</button>
   <label><input type="checkbox" id="hide-done" onchange="render()"> Ocultar concluídas</label>
-  <label><input type="checkbox" id="sort-ice" onchange="render()"> Ordenar por prioridade (ICE)</label>
+  <label><input type="checkbox" id="sort-ice" onchange="onSortChange('ice')"> Ordenar por prioridade (ICE)</label>
+  <label><input type="checkbox" id="sort-e" onchange="onSortChange('e')"> Ordenar por esforço (mais fácil primeiro)</label>
   <button class="filter-btn active" data-cat="all" onclick="filterCat(this)">Todos</button>
   <button class="filter-btn" data-cat="NOVAS VENDAS" onclick="filterCat(this)">Novas Vendas</button>
   <button class="filter-btn" data-cat="UPSELL" onclick="filterCat(this)">Upsell</button>
@@ -378,6 +379,8 @@ async function init(){
 function render(){
   const hideDone=document.getElementById('hide-done').checked;
   const sortIce=document.getElementById('sort-ice').checked;
+  const sortE=document.getElementById('sort-e').checked;
+  const sortMode=sortE?'e':(sortIce?'ice':null);
   const cats=[...new Set(allTasks().map(t=>t.cat))];
   let html='';
 
@@ -394,8 +397,12 @@ function render(){
 
     const visibleByResp=t=>activeResp==='all'||getResp(t)===activeResp;
 
-    if(sortIce){
-      const sorted=catTasks.slice().sort((a,b)=>iceTotal(b)-iceTotal(a)).filter(visibleByResp);
+    if(sortMode){
+      const sorted=catTasks.slice().filter(visibleByResp).sort((a,b)=>
+        sortMode==='e'
+          ? (getIce(b).e-getIce(a).e)||(iceTotal(b)-iceTotal(a))   // mais fácil primeiro, desempate por ICE
+          : (iceTotal(b)-iceTotal(a))                              // maior ICE primeiro
+      );
       sorted.forEach(task=>{
         const state=getState(task);
         if(hideDone&&state.status==='done') return;
@@ -692,6 +699,15 @@ function deleteUserTask(){
   userTasks=userTasks.filter(t=>t.id!==id);
   saveUserTasks();
   closeAddModal();
+  render();
+}
+
+function onSortChange(which){
+  const ice=document.getElementById('sort-ice');
+  const e=document.getElementById('sort-e');
+  // as duas ordenações são mutuamente exclusivas
+  if(which==='ice'&&ice.checked) e.checked=false;
+  if(which==='e'&&e.checked) ice.checked=false;
   render();
 }
 
