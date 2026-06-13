@@ -69,9 +69,13 @@ nav.scrolled {
   border-bottom-color: var(--border);
   padding: 14px 48px;
 }
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.nav-logo-img { height: 36px; width: auto; background: rgba(255,255,255,0.93); border-radius: 6px; padding: 3px 6px; flex-shrink: 0; }
-.nav-logo-name { font-family: var(--font-h); font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; line-height: 1; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-img { height: 40px; width: auto; flex-shrink: 0; animation: glow-pulse 6s ease-in-out infinite; }
+.nav-logo-name { font-family: var(--font-el); font-style: italic; font-size: 22px; font-weight: 300; color: rgba(245,240,232,0.85); letter-spacing: 3px; line-height: 1; }
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(120,180,255,0.45)) drop-shadow(0 0 20px rgba(180,120,255,0.30)); }
+  50% { filter: drop-shadow(0 0 18px rgba(120,180,255,0.75)) drop-shadow(0 0 36px rgba(180,120,255,0.55)); }
+}
 .nav-links { display: flex; align-items: center; gap: 36px; }
 .nav-links a { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
 .nav-links a:hover { color: var(--gold); }
@@ -333,8 +337,8 @@ section { padding: 120px 48px; }
 /* ─── FOOTER ─── */
 footer { background: var(--dark); border-top: 1px solid var(--border); padding: 60px 48px 40px; }
 .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; flex-wrap: wrap; }
-.footer-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.footer-logo-text span { display: block; font-family: var(--font-h); font-size: 18px; font-weight: 700; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; }
+.footer-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.footer-logo-text span { display: block; font-family: var(--font-el); font-style: italic; font-size: 20px; font-weight: 300; color: rgba(245,240,232,0.7); letter-spacing: 3px; }
 .footer-links { display: flex; gap: 40px; flex-wrap: wrap; }
 .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
 .footer-links a:hover { color: var(--gold); }
@@ -860,7 +864,7 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
 <footer>
   <div class="footer-top">
     <a href="https://omniachat.pro" class="footer-logo">
-      <img src="assets/omnia-logo.webp" alt="omnIA" style="height:40px;width:auto;background:rgba(255,255,255,0.93);border-radius:6px;padding:4px 8px;flex-shrink:0;">
+      <img src="assets/omnia-logo.webp" alt="omnIA" class="nav-logo-img" style="height:44px;">
       <div class="footer-logo-text">
         <span>omnIA</span>
       </div>
