@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>omnIA — 5 AI Mentors Built for Hypnotherapists | omniachat.pro</title>
+<meta name="description" content="Content strategy, business clarity, storytelling, hypnosis scripts, and digital products — all in one AI platform, trained for OMNI Brasil students.">
+<meta property="og:title" content="omnIA — Your AI Mentor Suite for Hypnotherapists">
+<meta property="og:description" content="5 specialized AI mentors. Always available. Built for OMNI Brasil students.">
+<meta property="og:image" content="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011721_13eae95a-f8a0-4927-95fa-9ad36c1441d4.png">
+<meta property="og:url" content="https://omniachat.pro">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C8A84B;
+  --gold-light: #E8C86A;
+  --gold-deep: #9A7A2E;
+  --gold-grad: linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%);
+  --black: #0D0D0D;
+  --dark: #151515;
+  --dark2: #1E1E1E;
+  --offwhite: #F5F0E8;
+  --muted: rgba(245,240,232,0.5);
+  --muted2: rgba(245,240,232,0.25);
+  --border: rgba(200,168,75,0.18);
+  --border-hover: rgba(200,168,75,0.5);
+  --font-h: 'Oswald', 'Arial Black', sans-serif;
+  --font-el: 'Cormorant Garamond', Georgia, serif;
+  --font-b: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--offwhite);
+  font-family: var(--font-b);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection { background: var(--gold); color: var(--black); }
+
+/* ─── CUSTOM CURSOR ─── */
+#cursor { position: fixed; width: 10px; height: 10px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, opacity .2s; mix-blend-mode: difference; }
+#cursor-ring { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(200,168,75,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .4s, height .4s, left .1s, top .1s, opacity .3s; }
+body:hover #cursor { opacity: 1; }
+
+/* ─── SCROLL PROGRESS ─── */
+#progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold-grad); z-index: 10000; width: 0%; transition: width .1s; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid transparent;
+  transition: all .4s;
+}
+nav.scrolled {
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+  padding: 14px 48px;
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo svg { width: 52px; fill: var(--gold); flex-shrink: 0; }
+.nav-logo-text { display: flex; flex-direction: column; }
+.nav-logo-text span:first-child { font-family: var(--font-h); font-size: 15px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; line-height: 1; }
+.nav-logo-text span:last-child { font-family: var(--font-b); font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold); color: var(--black); font-family: var(--font-b); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 28px; border: none; cursor: none; text-decoration: none; transition: background .2s, transform .2s; display: inline-block; }
+.nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 120px 48px 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011721_13eae95a-f8a0-4927-95fa-9ad36c1441d4.png');
+  background-size: cover; background-position: center;
+  transform: scale(1.1);
+  transition: transform 12s ease;
+}
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(13,13,13,0.65) 0%, rgba(13,13,13,0.82) 60%, rgba(13,13,13,1) 100%);
+}
+.hero-bg.loaded { transform: scale(1); }
+#particles { position: absolute; inset: 0; z-index: 1; }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; }
+.hero-eyebrow {
+  display: inline-block; margin-bottom: 28px;
+  font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--border); padding: 8px 20px;
+  opacity: 0; transform: translateY(20px); transition: all .8s ease .2s;
+}
+.hero-eyebrow.visible { opacity: 1; transform: translateY(0); }
+.hero-h1 {
+  font-family: var(--font-h); font-size: clamp(52px, 8vw, 110px); font-weight: 700;
+  text-transform: uppercase; line-height: .95; letter-spacing: -.02em;
+  margin-bottom: 20px;
+  opacity: 0; transform: translateY(30px); transition: all 1s ease .4s;
+}
+.hero-h1.visible { opacity: 1; transform: translateY(0); }
+.hero-h1 .gold { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub {
+  font-family: var(--font-el); font-style: italic; font-size: clamp(18px, 2.2vw, 24px);
+  color: var(--muted); max-width: 640px; margin: 0 auto 48px;
+  opacity: 0; transform: translateY(20px); transition: all .8s ease .6s;
+}
+.hero-sub.visible { opacity: 1; transform: translateY(0); }
+.hero-ctas {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px); transition: all .8s ease .8s;
+}
+.hero-ctas.visible { opacity: 1; transform: translateY(0); }
+.btn-primary { background: var(--gold); color: var(--black); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 18px 44px; text-decoration: none; display: inline-block; transition: background .2s, transform .15s; cursor: none; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--gold); font-weight: 600; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; padding: 17px 44px; border: 1px solid var(--border-hover); text-decoration: none; display: inline-block; transition: background .2s, border-color .2s, transform .15s; cursor: none; }
+.btn-ghost:hover { background: rgba(200,168,75,0.08); border-color: var(--gold); transform: translateY(-2px); }
+.hero-agents {
+  display: flex; gap: 12px; justify-content: center; margin-top: 64px; flex-wrap: wrap;
+  opacity: 0; transition: all .8s ease 1.1s;
+}
+.hero-agents.visible { opacity: 1; }
+.agent-bubble {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(13,13,13,0.7); border: 1px solid var(--border);
+  backdrop-filter: blur(10px); padding: 8px 16px 8px 8px;
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); transition: border-color .2s, color .2s;
+}
+.agent-bubble:hover { border-color: var(--gold); color: var(--gold); }
+.agent-bubble img { width: 32px; height: 32px; object-fit: cover; border-radius: 0; filter: grayscale(30%); }
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted2);
+  opacity: 0; animation: fadeUp .8s ease 1.8s forwards;
+}
+.scroll-hint::after {
+  content: ''; display: block; width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: drip 1.8s ease infinite;
+}
+@keyframes drip { 0%,100% { opacity: .3; transform: scaleY(.3); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+@keyframes fadeUp { to { opacity: 1; } }
+
+/* ─── STATS ─── */
+.stats {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 60px 48px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.stat { text-align: center; padding: 0 24px; border-right: 1px solid var(--border); }
+.stat:last-child { border-right: none; }
+.stat-number { font-family: var(--font-h); font-size: 56px; font-weight: 700; color: var(--gold); line-height: 1; }
+.stat-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+/* ─── SECTION BASICS ─── */
+section { padding: 120px 48px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.section-h2 { font-family: var(--font-h); font-size: clamp(36px, 5vw, 72px); font-weight: 700; text-transform: uppercase; line-height: .95; letter-spacing: -.02em; color: var(--offwhite); margin-bottom: 20px; }
+.section-h2 .gold { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.section-sub { font-family: var(--font-el); font-style: italic; font-size: 20px; color: var(--muted); max-width: 560px; line-height: 1.6; }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── PROBLEM ─── */
+.problem { background: var(--dark); }
+.problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.problem-text { }
+.problem-body { font-size: 18px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
+.problem-body strong { color: var(--offwhite); }
+.problem-cards { display: flex; flex-direction: column; gap: 1px; }
+.problem-card {
+  background: var(--dark2); border-left: 3px solid var(--gold);
+  padding: 24px 28px;
+  transition: background .2s;
+}
+.problem-card:hover { background: #232323; }
+.problem-card-title { font-family: var(--font-h); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 6px; }
+.problem-card-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ─── AGENTS ─── */
+.agents { background: var(--black); }
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 64px; background: var(--border); }
+.agent-card {
+  background: var(--black); padding: 0;
+  position: relative; overflow: hidden;
+  cursor: none;
+  transition: background .3s;
+}
+.agent-card:hover { background: var(--dark); }
+.agent-img-wrap { position: relative; height: 280px; overflow: hidden; }
+.agent-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: grayscale(20%) contrast(1.05); transition: transform .6s ease, filter .3s; }
+.agent-card:hover .agent-img-wrap img { transform: scale(1.04); filter: grayscale(0%) contrast(1.1); }
+.agent-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13,13,13,0.9) 100%);
+}
+.agent-badge {
+  position: absolute; bottom: 16px; left: 16px;
+  background: var(--gold); color: var(--black);
+  font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  padding: 5px 12px;
+}
+.agent-body { padding: 28px 28px 32px; }
+.agent-name { font-family: var(--font-h); font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--offwhite); margin-bottom: 4px; }
+.agent-role { font-family: var(--font-el); font-style: italic; font-size: 15px; color: var(--gold); margin-bottom: 16px; }
+.agent-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.agent-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.agent-skill { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 4px 10px; transition: border-color .2s, color .2s; }
+.agent-card:hover .agent-skill { border-color: rgba(200,168,75,0.35); color: var(--gold); }
+/* last card wide */
+.agent-card:nth-child(4) { grid-column: span 1; }
+.agents-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 1px; background: var(--border); }
+.agents-row2 .agent-card { background: var(--black); }
+.agents-row2 .agent-card:hover { background: var(--dark); }
+
+/* ─── HOW IT WORKS ─── */
+.how { background: var(--dark); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 64px; position: relative; }
+.steps::before {
+  content: ''; position: absolute; top: 32px; left: calc(16.66% + 16px); right: calc(16.66% + 16px);
+  height: 1px; background: linear-gradient(90deg, var(--gold), transparent 50%, var(--gold));
+  opacity: .3;
+}
+.step { padding: 0 48px; text-align: center; }
+.step:first-child { padding-left: 0; }
+.step:last-child { padding-right: 0; }
+.step-num { font-family: var(--font-h); font-size: 80px; font-weight: 700; color: var(--border); line-height: 1; margin-bottom: 24px; position: relative; display: inline-block; }
+.step-num::after { content: attr(data-num); position: absolute; inset: 0; background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0; transition: opacity .3s; }
+.step:hover .step-num::after { opacity: 1; }
+.step-icon { width: 48px; height: 48px; margin: 0 auto 20px; opacity: .6; }
+.step-title { font-family: var(--font-h); font-size: 22px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--offwhite); margin-bottom: 12px; }
+.step-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ─── CHAT DEMO ─── */
+.chat-demo-section { background: var(--black); }
+.chat-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.chat-left { }
+.chat-mockup {
+  background: #0F0F0F; border: 1px solid var(--border);
+  height: 480px; display: flex; flex-direction: column; overflow: hidden;
+  position: relative;
+}
+.chat-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+.chat-header-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+.chat-header-name { font-size: 13px; font-weight: 600; color: var(--offwhite); }
+.chat-header-status { font-size: 11px; color: var(--gold); margin-left: auto; font-family: var(--font-el); font-style: italic; }
+.chat-messages { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow: hidden; }
+.chat-msg { max-width: 75%; font-size: 13px; line-height: 1.6; padding: 12px 16px; animation: msgIn .4s ease both; }
+@keyframes msgIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.chat-msg.user { background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.2); color: var(--offwhite); align-self: flex-end; }
+.chat-msg.ai { background: var(--dark2); border: 1px solid var(--border); color: var(--offwhite); align-self: flex-start; }
+.chat-msg .agent-tag { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-weight: 600; }
+.chat-input-bar { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+.chat-input-bar input { flex: 1; background: transparent; border: none; outline: none; color: var(--muted); font-size: 13px; font-family: var(--font-b); }
+.chat-input-bar button { background: var(--gold); color: var(--black); border: none; width: 36px; height: 36px; cursor: none; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.chat-input-bar button:hover { background: var(--gold-light); }
+
+/* ─── FEATURES ─── */
+.features { background: var(--dark); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 64px; background: var(--border); }
+.feature-card { background: var(--dark); padding: 40px 32px; transition: background .2s; }
+.feature-card:hover { background: #1a1a1a; }
+.feature-icon { width: 40px; height: 40px; margin-bottom: 20px; color: var(--gold); }
+.feature-title { font-family: var(--font-h); font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--offwhite); margin-bottom: 10px; }
+.feature-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ─── TESTIMONIALS ─── */
+.testimonials { background: var(--black); overflow: hidden; padding-bottom: 120px; }
+.marquee-wrap { margin-top: 64px; overflow: hidden; }
+.marquee { display: flex; gap: 24px; animation: marquee 32s linear infinite; width: max-content; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.tcard {
+  width: 380px; flex-shrink: 0; background: var(--dark); border: 1px solid var(--border);
+  padding: 32px; position: relative;
+}
+.tcard::before { content: '\201C'; font-family: var(--font-el); font-size: 80px; color: var(--gold); opacity: .3; position: absolute; top: 16px; left: 24px; line-height: 1; }
+.tcard-text { font-family: var(--font-el); font-style: italic; font-size: 17px; color: var(--offwhite); line-height: 1.7; margin-bottom: 24px; padding-top: 32px; }
+.tcard-author { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+.tcard-role { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* ─── ACCESS ─── */
+.access { background: var(--dark); }
+.access-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 64px; background: var(--border); }
+.plan-card { background: var(--dark); padding: 48px 36px; position: relative; transition: background .2s; }
+.plan-card.featured { background: #141414; }
+.plan-card:hover { background: #1a1a1a; }
+.plan-badge { position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--black); font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 16px; }
+.plan-name { font-family: var(--font-h); font-size: 28px; font-weight: 700; text-transform: uppercase; color: var(--offwhite); margin-bottom: 8px; }
+.plan-tagline { font-family: var(--font-el); font-style: italic; font-size: 15px; color: var(--gold); margin-bottom: 28px; }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+.plan-features li { font-size: 14px; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; }
+.plan-features li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+.plan-cta { display: block; text-align: center; background: transparent; border: 1px solid var(--border-hover); color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 14px; text-decoration: none; transition: background .2s, border-color .2s; }
+.plan-cta:hover { background: rgba(200,168,75,0.1); border-color: var(--gold); }
+.plan-card.featured .plan-cta { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.plan-card.featured .plan-cta:hover { background: var(--gold-light); }
+
+/* ─── FAQ ─── */
+.faq { background: var(--black); }
+.faq-list { margin-top: 64px; max-width: 800px; border-top: 1px solid var(--border); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  width: 100%; background: none; border: none; color: var(--offwhite);
+  font-family: var(--font-b); font-size: 16px; font-weight: 500;
+  padding: 24px 0; text-align: left; cursor: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  transition: color .2s;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-q-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--gold); transition: transform .3s; }
+.faq-item.open .faq-q-icon { transform: rotate(45deg); }
+.faq-a { font-size: 15px; color: var(--muted); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s; }
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+
+/* ─── FINAL CTA ─── */
+.final-cta {
+  background: var(--black); text-align: center; padding: 160px 48px;
+  position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(200,168,75,0.07) 0%, transparent 70%);
+}
+.final-cta-content { position: relative; z-index: 1; }
+.final-cta h2 { font-family: var(--font-h); font-size: clamp(48px, 7vw, 100px); font-weight: 700; text-transform: uppercase; line-height: .9; letter-spacing: -.02em; margin-bottom: 28px; }
+.final-cta h2 .gold { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.final-cta p { font-family: var(--font-el); font-style: italic; font-size: 20px; color: var(--muted); margin-bottom: 48px; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--dark); border-top: 1px solid var(--border); padding: 60px 48px 40px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 48px; margin-bottom: 48px; flex-wrap: wrap; }
+.footer-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.footer-logo svg { width: 56px; fill: var(--gold); }
+.footer-logo-text span:first-child { display: block; font-family: var(--font-h); font-size: 15px; font-weight: 700; color: var(--gold); letter-spacing: 5px; text-transform: uppercase; }
+.footer-logo-text span:last-child { display: block; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+.footer-links { display: flex; gap: 40px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.footer-copy { font-size: 12px; color: var(--muted); }
+.footer-powered { font-size: 11px; color: var(--muted2); letter-spacing: 1px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  nav { padding: 18px 32px; }
+  .nav-links { display: none; }
+  section { padding: 80px 32px; }
+  .hero { padding: 100px 32px 60px; }
+  .stats { grid-template-columns: repeat(2, 1fr); padding: 48px 32px; }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3) { border-top: 1px solid var(--border); }
+  .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+  .agents-row2 { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; gap: 48px; }
+  .steps::before { display: none; }
+  .chat-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .access-grid { grid-template-columns: 1fr; gap: 1px; }
+  footer { padding: 48px 32px 32px; }
+  .footer-top { flex-direction: column; }
+}
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .nav-cta { display: none; }
+  .hero { padding: 90px 20px 60px; }
+  section { padding: 64px 20px; }
+  .stats { grid-template-columns: repeat(2, 1fr); padding: 40px 20px; gap: 0; }
+  .stat { padding: 0 12px; }
+  .stat-number { font-size: 40px; }
+  .agents-grid { grid-template-columns: 1fr; }
+  .agents-row2 { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .hero-agents { gap: 8px; }
+  footer { padding: 40px 20px 28px; }
+  .footer-links { gap: 24px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .final-cta { padding: 100px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress"></div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="https://omniachat.pro" class="nav-logo">
+    <svg viewBox="0 0 566.93 226.77" xmlns="http://www.w3.org/2000/svg"><path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/></svg>
+    <div class="nav-logo-text">
+      <span>OMNI BRASIL</span>
+      <span>omnIA Platform</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#agents">Agents</a>
+    <a href="#how">How It Works</a>
+    <a href="#features">Features</a>
+    <a href="#access">Access</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="https://omniachat.pro" class="nav-cta">Access omnIA</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">Exclusive for OMNI Brasil Students</div>
+    <h1 class="hero-h1" id="heroH1">
+      Five AI<br>Specialists.<br><span class="gold">Always On.</span>
+    </h1>
+    <p class="hero-sub" id="heroSub">
+      omnIA gives every OMNI-trained hypnotherapist an always-on team of specialized AI mentors — for content, strategy, storytelling, scripts, and digital products.
+    </p>
+    <div class="hero-ctas" id="heroCtas">
+      <a href="https://omniachat.pro" class="btn-primary">Access omnIA</a>
+      <a href="#agents" class="btn-ghost">Meet Your Team</a>
+    </div>
+    <div class="hero-agents" id="heroAgents">
+      <div class="agent-bubble">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011723_f31a995f-4157-4f19-a1bd-7d43a998a1ea.png" alt="LÍVIA">
+        <span>LÍVIA</span>
+      </div>
+      <div class="agent-bubble">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011725_0fb10652-78be-4b73-a54e-4b8946dd135f.png" alt="MENTOR">
+        <span>MENTOR</span>
+      </div>
+      <div class="agent-bubble">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011728_2b2000c4-5863-4543-9e69-6550869fcb82.png" alt="DIRETOR">
+        <span>DIRETOR</span>
+      </div>
+      <div class="agent-bubble">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011731_914e0dd6-7b02-4e87-a3db-59216b94c59b.png" alt="HUGO">
+        <span>HUGO</span>
+      </div>
+      <div class="agent-bubble">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011734_75524b15-f39f-4c52-a52f-baa7b4c6f6ca.png" alt="LORA">
+        <span>LORA</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat">
+    <div class="stat-number" data-target="500">0</div>
+    <div class="stat-label">Active Therapists</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" data-target="5">0</div>
+    <div class="stat-label">AI Specialists</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number" data-target="3">0</div>
+    <div class="stat-label">Languages</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">24/7</div>
+    <div class="stat-label">Always Available</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-text reveal">
+        <div class="section-eyebrow">The Reality</div>
+        <h2 class="section-h2">Running a practice means <span class="gold">wearing every hat.</span></h2>
+        <p class="problem-body" style="margin-top:24px;">
+          Content creator. Business strategist. Product developer. Script writer. Personal brand storyteller — <strong>all at once</strong>, all demanding your best thinking, often at the worst moments.
+        </p>
+        <p class="problem-body">
+          Most therapists spend thousands hiring coaches and consultants for each area. And they're <strong>never available at 2am before a launch</strong>, when you actually need them.
+        </p>
+      </div>
+      <div class="problem-cards reveal" style="transition-delay:.2s">
+        <div class="problem-card">
+          <div class="problem-card-title">Content Overwhelm</div>
+          <div class="problem-card-text">"I know I need to post, but I spend hours staring at a blank page and post nothing."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">No Strategic Clarity</div>
+          <div class="problem-card-text">"I'm doing everything but nothing feels like it's moving the needle."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">Script Paralysis</div>
+          <div class="problem-card-text">"My clients need personalized inductions but writing from scratch takes me forever."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">Product Fear</div>
+          <div class="problem-card-text">"I want to create an online course but I don't know where to start or if it will sell."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents" id="agents">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Your AI Team</div>
+      <h2 class="section-h2">Meet your <span class="gold">five specialists.</span></h2>
+      <p class="section-sub">Each agent is trained in the OMNI methodology and specializes in a critical area of your practice growth.</p>
+    </div>
+  </div>
+
+  <div style="max-width:1200px;margin:64px auto 0;padding:0 48px;">
+    <div class="agents-grid reveal" style="transition-delay:.1s">
+      <div class="agent-card">
+        <div class="agent-img-wrap">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011723_f31a995f-4157-4f19-a1bd-7d43a998a1ea.png" alt="LÍVIA">
+          <div class="agent-img-overlay"></div>
+          <div class="agent-badge">Content & Instagram</div>
+        </div>
+        <div class="agent-body">
+          <div class="agent-name">LÍVIA</div>
+          <div class="agent-role">Content & Instagram Strategist</div>
+          <div class="agent-desc">From blank page to viral reel strategy in minutes. LÍVIA thinks like a full-time content team — strategic, creative, and always ahead of the trends.</div>
+          <div class="agent-skills">
+            <span class="agent-skill">Content Planning</span>
+            <span class="agent-skill">Reels Strategy</span>
+            <span class="agent-skill">Copywriting</span>
+            <span class="agent-skill">Trend Analysis</span>
+            <span class="agent-skill">Monetization</span>
+          </div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-img-wrap">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011725_0fb10652-78be-4b73-a54e-4b8946dd135f.png" alt="MENTOR">
+          <div class="agent-img-overlay"></div>
+          <div class="agent-badge">Business Strategy</div>
+        </div>
+        <div class="agent-body">
+          <div class="agent-name">MENTOR</div>
+          <div class="agent-role">Business Strategy & Clarity</div>
+          <div class="agent-desc">Cuts through the noise and tells you exactly what to do next. MENTOR prioritizes ruthlessly — no theory, no complexity, just your clearest path forward.</div>
+          <div class="agent-skills">
+            <span class="agent-skill">Strategic Clarity</span>
+            <span class="agent-skill">Prioritization</span>
+            <span class="agent-skill">Business Vision</span>
+            <span class="agent-skill">Next Steps</span>
+            <span class="agent-skill">Decisions</span>
+          </div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-img-wrap">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011728_2b2000c4-5863-4543-9e69-6550869fcb82.png" alt="DIRETOR">
+          <div class="agent-img-overlay"></div>
+          <div class="agent-badge">Storytelling</div>
+        </div>
+        <div class="agent-body">
+          <div class="agent-name">DIRETOR</div>
+          <div class="agent-role">Personal Transformation & Storytelling</div>
+          <div class="agent-desc">Helps you find the story only you can tell. DIRETOR excavates your authentic narrative and turns it into the brand that attracts the right clients.</div>
+          <div class="agent-skills">
+            <span class="agent-skill">Storytelling</span>
+            <span class="agent-skill">Brand Voice</span>
+            <span class="agent-skill">Transformation</span>
+            <span class="agent-skill">Authenticity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="agents-row2 reveal" style="transition-delay:.2s">
+      <div class="agent-card">
+        <div class="agent-img-wrap" style="height:240px">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011731_914e0dd6-7b02-4e87-a3db-59216b94c59b.png" alt="HUGO">
+          <div class="agent-img-overlay"></div>
+          <div class="agent-badge">Hypnosis Scripts</div>
+        </div>
+        <div class="agent-body">
+          <div class="agent-name">HUGO</div>
+          <div class="agent-role">Hypnosis Script Specialist</div>
+          <div class="agent-desc">Professional-grade scripts for any therapeutic goal — past life regression, weight loss, confidence, trauma resolution. HUGO structures every induction with clinical precision.</div>
+          <div class="agent-skills">
+            <span class="agent-skill">Induction Techniques</span>
+            <span class="agent-skill">Therapeutic Scripts</span>
+            <span class="agent-skill">Self-Hypnosis</span>
+            <span class="agent-skill">Script Structure</span>
+            <span class="agent-skill">Customization</span>
+          </div>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-img-wrap" style="height:240px">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3DEmLw5buElfPKhg4FY0y2EMRRq/hf_20260613_011734_75524b15-f39f-4c52-a52f-baa7b4c6f6ca.png" alt="LORA">
+          <div class="agent-img-overlay"></div>
+          <div class="agent-badge">Digital Products</div>
+        </div>
+        <div class="agent-body">
+          <div class="agent-name">LORA</div>
+          <div class="agent-role">Digital Products & Launches</div>
+          <div class="agent-desc">From course idea to live sales page in days, not months. LORA validates demand, structures your offer, and builds the launch machine so you can scale beyond 1-on-1.</div>
+          <div class="agent-skills">
+            <span class="agent-skill">Course Structuring</span>
+            <span class="agent-skill">Launch Strategy</span>
+            <span class="agent-skill">Sales Funnels</span>
+            <span class="agent-skill">Pricing</span>
+            <span class="agent-skill">Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">The Process</div>
+      <h2 class="section-h2">Three steps.<br><span class="gold">Infinite guidance.</span></h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal" style="transition-delay:.1s">
+        <div class="step-num" data-num="01">01</div>
+        <svg class="step-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" color="#C8A84B"><rect x="4" y="8" width="40" height="32" rx="2"/><path d="M14 20h20M14 28h12"/></svg>
+        <div class="step-title">Ask Your Question</div>
+        <div class="step-body">Type any challenge, goal, or idea you're working on. No formatting required — just talk like you'd talk to a mentor.</div>
+      </div>
+      <div class="step reveal" style="transition-delay:.2s">
+        <div class="step-num" data-num="02">02</div>
+        <svg class="step-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" color="#C8A84B"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l6 6"/></svg>
+        <div class="step-title">omnIA Routes It</div>
+        <div class="step-body">Our smart intent engine reads your message and automatically connects you to the most relevant specialist. No manual selection needed.</div>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step-num" data-num="03">03</div>
+        <svg class="step-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" color="#C8A84B"><path d="M8 12l8 8 8-8 8 8 8-8M8 28l8 8 8-8 8 8 8-8"/></svg>
+        <div class="step-title">Get Expert Guidance</div>
+        <div class="step-body">Tailored, specific, immediately actionable. Not generic AI answers — focused expertise trained on the OMNI methodology and your professional context.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT DEMO -->
+<section class="chat-demo-section" id="demo">
+  <div class="container">
+    <div class="chat-wrap">
+      <div class="chat-left reveal">
+        <div class="section-eyebrow">See It In Action</div>
+        <h2 class="section-h2" style="font-size:clamp(32px,4vw,52px)">Real answers.<br><span class="gold">Real fast.</span></h2>
+        <p class="section-sub" style="margin-top:16px;font-size:17px;">Watch how omnIA routes a single message to the right specialist and delivers expert guidance in seconds.</p>
+        <div style="margin-top:36px;display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)">
+            <span style="color:var(--gold);font-size:20px">→</span> No setup. No prompting. Just ask.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)">
+            <span style="color:var(--gold);font-size:20px">→</span> Session history saved automatically.
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted)">
+            <span style="color:var(--gold);font-size:20px">→</span> Available in PT, EN, and DE.
+          </div>
+        </div>
+      </div>
+      <div class="chat-mockup reveal" style="transition-delay:.2s" id="chatMockup">
+        <div class="chat-header">
+          <div class="chat-header-dot"></div>
+          <div class="chat-header-name">omnIA</div>
+          <div class="chat-header-status">Connected</div>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-bar">
+          <input type="text" placeholder="Ask anything about your practice..." readonly>
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2 12L22 2 12 22 10 13 2 12z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Built Different</div>
+      <h2 class="section-h2">Everything you need.<br><span class="gold">Nothing you don't.</span></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal" style="transition-delay:.05s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="16"/><path d="M13 20l5 5 9-9"/></svg>
+        <div class="feature-title">Smart Routing</div>
+        <div class="feature-body">omnIA reads your message and connects you to the right specialist instantly. No menus, no manual selection — the AI decides.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.1s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 32V16l12-8 12 8v16"/><path d="M16 32v-8h8v8"/></svg>
+        <div class="feature-title">Session Memory</div>
+        <div class="feature-body">Your conversations are saved and accessible across sessions. Pick up exactly where you left off — on any device, any time.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.15s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="14"/><path d="M14 20c0-4 6-8 6 0s6 4 6 0"/></svg>
+        <div class="feature-title">Multilingual</div>
+        <div class="feature-body">Full support for Portuguese, English, and German. Set your language once and every agent responds in kind — no switching needed.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.2s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="24" height="24" rx="2"/><path d="M14 16h12M14 22h8"/></svg>
+        <div class="feature-title">OMNI Knowledge Base</div>
+        <div class="feature-body">Built on the full OMNI Brasil curriculum and methodology. Answers are grounded in the same framework you learned — not generic AI platitudes.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.25s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="14" r="6"/><path d="M8 34c0-7 5.4-12 12-12s12 5 12 12"/></svg>
+        <div class="feature-title">Profile Memory</div>
+        <div class="feature-body">omnIA learns your niche, goals, and professional context over time. Advice gets more personalized the more you use it.</div>
+      </div>
+      <div class="feature-card reveal" style="transition-delay:.3s">
+        <svg class="feature-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="14"/><path d="M20 12v8l5 5"/></svg>
+        <div class="feature-title">Always Available</div>
+        <div class="feature-body">No appointments. No waiting rooms. Access your full team of AI specialists 24/7 — from your phone, tablet, or desktop.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">From the Community</div>
+      <h2 class="section-h2">What OMNI<br><span class="gold">students say.</span></h2>
+    </div>
+  </div>
+  <div class="marquee-wrap" style="margin-top:64px">
+    <div class="marquee" id="marquee">
+      <div class="tcard">
+        <div class="tcard-text">"I used LÍVIA to plan my entire month of reels in 40 minutes. What used to take me a whole week."</div>
+        <div class="tcard-author">Ana Paula M.</div>
+        <div class="tcard-role">Hypnotherapy Practitioner, São Paulo</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"HUGO wrote me a complete past-life regression script while I was on the bus to my clinic. Clients loved the session."</div>
+        <div class="tcard-author">Roberto C.</div>
+        <div class="tcard-role">Clinical Hypnotherapist, Rio de Janeiro</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"The MENTOR helped me see what I was doing wrong with my pricing strategy. I raised my rates the following week and kept every client."</div>
+        <div class="tcard-author">Fernanda B.</div>
+        <div class="tcard-role">OMNI Graduate, Belo Horizonte</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"I launched my first online course using LORA's step-by-step guidance. I made R$12.000 in the first seven days."</div>
+        <div class="tcard-author">Thiago A.</div>
+        <div class="tcard-role">Hypnotherapist & Course Creator</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"DIRETOR helped me finally articulate my story in a way that doesn't sound like everyone else's. My DMs literally tripled."</div>
+        <div class="tcard-author">Juliana R.</div>
+        <div class="tcard-role">OMNI Hypnotherapy Professional</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"I was spending R$3.000/month on business coaching. omnIA replaced 90% of what I was getting — and it's instant."</div>
+        <div class="tcard-author">Marcus V.</div>
+        <div class="tcard-role">Therapist & Business Owner, Curitiba</div>
+      </div>
+      <!-- duplicate for seamless loop -->
+      <div class="tcard">
+        <div class="tcard-text">"I used LÍVIA to plan my entire month of reels in 40 minutes. What used to take me a whole week."</div>
+        <div class="tcard-author">Ana Paula M.</div>
+        <div class="tcard-role">Hypnotherapy Practitioner, São Paulo</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"HUGO wrote me a complete past-life regression script while I was on the bus to my clinic. Clients loved the session."</div>
+        <div class="tcard-author">Roberto C.</div>
+        <div class="tcard-role">Clinical Hypnotherapist, Rio de Janeiro</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"The MENTOR helped me see what I was doing wrong with my pricing strategy. I raised my rates the following week and kept every client."</div>
+        <div class="tcard-author">Fernanda B.</div>
+        <div class="tcard-role">OMNI Graduate, Belo Horizonte</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"I launched my first online course using LORA's step-by-step guidance. I made R$12.000 in the first seven days."</div>
+        <div class="tcard-author">Thiago A.</div>
+        <div class="tcard-role">Hypnotherapist & Course Creator</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"DIRETOR helped me finally articulate my story in a way that doesn't sound like everyone else's. My DMs literally tripled."</div>
+        <div class="tcard-author">Juliana R.</div>
+        <div class="tcard-role">OMNI Hypnotherapy Professional</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"I was spending R$3.000/month on business coaching. omnIA replaced 90% of what I was getting — and it's instant."</div>
+        <div class="tcard-author">Marcus V.</div>
+        <div class="tcard-role">Therapist & Business Owner, Curitiba</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access" id="access">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Exclusive Access</div>
+      <h2 class="section-h2">Designed for<br><span class="gold">OMNI students.</span></h2>
+      <p class="section-sub" style="margin-top:16px;">omnIA is built into your OMNI Brasil journey. Every student gets access — and every plan is designed for where you are right now.</p>
+    </div>
+    <div class="access-grid reveal" style="transition-delay:.1s;margin-top:64px">
+      <div class="plan-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-tagline">For new OMNI students</div>
+        <ul class="plan-features">
+          <li>Access to MENTOR & LÍVIA</li>
+          <li>20 conversations per month</li>
+          <li>Session history (30 days)</li>
+          <li>Portuguese support</li>
+        </ul>
+        <a href="https://omniachat.pro" class="plan-cta">Get Started</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-name">Advanced</div>
+        <div class="plan-tagline">For active paid students</div>
+        <ul class="plan-features">
+          <li>All 5 AI specialists</li>
+          <li>Unlimited conversations</li>
+          <li>Full session history</li>
+          <li>PT, EN & DE support</li>
+          <li>Profile memory & personalization</li>
+          <li>Knowledge base access</li>
+        </ul>
+        <a href="https://omniachat.pro" class="plan-cta">Access Now</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Master</div>
+        <div class="plan-tagline">For Black Mentoring members</div>
+        <ul class="plan-features">
+          <li>Everything in Advanced</li>
+          <li>Priority response speed</li>
+          <li>Advanced profile analysis</li>
+          <li>Early access to new agents</li>
+          <li>Direct integration with OMNI curriculum</li>
+        </ul>
+        <a href="https://omniachat.pro" class="plan-cta">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-h2">Questions.<br><span class="gold">Answered.</span></h2>
+    </div>
+    <div class="faq-list reveal" style="transition-delay:.1s">
+      <div class="faq-item">
+        <button class="faq-q">
+          What exactly is omnIA?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">omnIA is an AI-powered mentor suite built exclusively for OMNI Brasil's hypnotherapy students and graduates. It gives you instant access to five specialized AI mentors — each trained in the OMNI methodology — to help you build and grow your practice.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Which AI agents are included?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">You get LÍVIA (content & Instagram strategy), MENTOR (business strategy & clarity), DIRETOR (personal transformation & storytelling), HUGO (hypnosis script writing), and LORA (digital products & launches). Each is a distinct specialist with deep expertise in their area.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          How does omnIA know which agent to use?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">omnIA uses smart intent routing — it analyzes your message and automatically selects the most relevant specialist. You never have to choose manually. If your message touches multiple areas, omnIA picks the most critical one and can reference others in its response.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Is omnIA available in my language?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">Yes. omnIA currently supports Portuguese (default), English, and German. You set your language preference in your profile and every agent responds accordingly — no need to switch mid-conversation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Do I need to be an active OMNI student?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">Access to omnIA is tied to your OMNI Brasil enrollment. Different plan levels (Starter, Advanced, Master) correspond to different stages of your OMNI journey. Contact us if you're a graduate and want to maintain access.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">
+          Can I use omnIA on my phone?
+          <svg class="faq-q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-a">Absolutely. omnIA is designed to work seamlessly on any device — phone, tablet, or desktop. The interface is fully responsive and optimized for mobile use, so you can get expert guidance anywhere, anytime.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-content reveal">
+    <h2><span class="gold">Your team</span><br>is waiting.</h2>
+    <p>Five specialists. Zero scheduling. Always ready.</p>
+    <a href="https://omniachat.pro" class="btn-primary" style="font-size:14px;padding:20px 56px">Access omnIA Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <a href="https://omniachat.pro" class="footer-logo">
+      <svg viewBox="0 0 566.93 226.77" xmlns="http://www.w3.org/2000/svg"><path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/></svg>
+      <div class="footer-logo-text">
+        <span>OMNI BRASIL</span>
+        <span>omnIA Platform</span>
+      </div>
+    </a>
+    <div class="footer-links">
+      <a href="#agents">Agents</a>
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#access">Access</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://omnihypnosis.com.br">omnihypnosis.com.br</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 OMNI Brasil. All rights reserved.</div>
+    <div class="footer-powered">Powered by OMNI Brasil's AI Methodology</div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * .12; ry += (my - ry) * .12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='18px'; cursor.style.height='18px'; ring.style.width='60px'; ring.style.height='60px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='40px'; ring.style.height='40px'; });
+});
+
+// SCROLL PROGRESS
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const st = window.scrollY, dh = document.body.scrollHeight - window.innerHeight;
+  prog.style.width = (st / dh * 100) + '%';
+}, { passive: true });
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// HERO ANIMATIONS
+setTimeout(() => {
+  document.getElementById('heroBg').classList.add('loaded');
+  document.getElementById('heroEyebrow').classList.add('visible');
+  setTimeout(() => document.getElementById('heroH1').classList.add('visible'), 200);
+  setTimeout(() => document.getElementById('heroSub').classList.add('visible'), 400);
+  setTimeout(() => document.getElementById('heroCtas').classList.add('visible'), 600);
+  setTimeout(() => document.getElementById('heroAgents').classList.add('visible'), 800);
+}, 100);
+
+// PARTICLES
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+for (let i = 0; i < 60; i++) {
+  particles.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.5+.3, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, o: Math.random()*.4+.1 });
+}
+function drawParticles() {
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(200,168,75,${p.o})`; ctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    if (p.x<0) p.x=W; if (p.x>W) p.x=0;
+    if (p.y<0) p.y=H; if (p.y>H) p.y=0;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// REVEAL ON SCROLL
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// COUNTER
+const counters = document.querySelectorAll('.stat-number[data-target]');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.target;
+    let start = 0, step = target / 60;
+    const tick = () => { start = Math.min(start + step, target); el.textContent = Math.round(start) + (target >= 100 ? '+' : ''); if (start < target) requestAnimationFrame(tick); };
+    tick(); counterObs.unobserve(el);
+  });
+}, { threshold: .5 });
+counters.forEach(el => counterObs.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// CHAT DEMO ANIMATION
+const chatMessages = document.getElementById('chatMessages');
+const conversation = [
+  { role: 'user', text: "I need help planning my content for the next 30 days. I have no idea where to start." },
+  { role: 'ai', agent: 'LÍVIA — Content Strategist', text: "Perfect — let's build your full month in one session. First: what's your primary goal this month? Growing followers, generating leads, or launching a service?" },
+  { role: 'user', text: "I want to generate leads for my in-person hypnotherapy sessions." },
+  { role: 'ai', agent: 'LÍVIA — Content Strategist', text: "Got it. For lead-gen, we'll focus 70% on authority content (demonstrating results) and 30% on direct CTAs. I'll give you 4 reels, 8 carousels, and 12 stories — all mapped to your niche. Ready to start with week one?" },
+];
+let chatIdx = 0, chatStarted = false;
+const chatObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !chatStarted) { chatStarted = true; runChat(); }
+}, { threshold: .4 });
+const mockup = document.getElementById('chatMockup');
+if (mockup) chatObs.observe(mockup);
+function runChat() {
+  if (chatIdx >= conversation.length) return;
+  const msg = conversation[chatIdx++];
+  const el = document.createElement('div');
+  el.className = 'chat-msg ' + msg.role;
+  if (msg.agent) el.innerHTML = `<div class="agent-tag">${msg.agent}</div>${msg.text}`;
+  else el.textContent = msg.text;
+  el.style.animationDelay = '0s';
+  chatMessages.appendChild(el);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+  setTimeout(runChat, chatIdx % 2 === 1 ? 1400 : 2200);
+}
+</script>
+</body>
+</html>
