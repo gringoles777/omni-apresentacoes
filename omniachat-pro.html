@@ -190,15 +190,6 @@ section { padding: 120px 48px; }
 .problem-text { }
 .problem-body { font-size: 18px; color: var(--muted); line-height: 1.8; margin-bottom: 32px; }
 .problem-body strong { color: var(--offwhite); }
-.problem-video-wrap { display: flex; align-items: center; justify-content: center; }
-.problem-video {
-  width: 100%; max-width: 520px; height: auto; display: block;
-  filter: drop-shadow(0 0 28px rgba(120,180,255,0.40)) drop-shadow(0 0 56px rgba(180,120,255,0.22));
-}
-.problem-cards-row {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
-  margin-top: 64px; background: var(--border);
-}
 .problem-cards { display: flex; flex-direction: column; gap: 1px; }
 .problem-card {
   background: var(--dark2); border-left: 3px solid var(--gold);
@@ -363,7 +354,6 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
   .hero { padding: 100px 32px 60px; }
   .stats { grid-template-columns: repeat(3, 1fr); padding: 48px 32px; }
   .problem-grid { grid-template-columns: 1fr; gap: 48px; }
-  .problem-cards-row { grid-template-columns: repeat(2,1fr); }
   .agents-grid { grid-template-columns: repeat(2, 1fr); }
   .agents-row2 { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; gap: 48px; }
@@ -488,26 +478,23 @@ footer { background: var(--dark); border-top: 1px solid var(--border); padding: 
           Most therapists spend thousands hiring coaches and consultants for each area. And they're <strong>never available at 2am before a launch</strong>, when you actually need them.
         </p>
       </div>
-      <div class="problem-video-wrap reveal" style="transition-delay:.2s">
-        <video id="logoVideo3D" class="problem-video" muted playsinline preload="auto" src="assets/omnia-logo-3d.mp4"></video>
-      </div>
-    </div>
-    <div class="problem-cards-row reveal" style="transition-delay:.35s">
-      <div class="problem-card">
-        <div class="problem-card-title">Content Overwhelm</div>
-        <div class="problem-card-text">"I know I need to post, but I spend hours staring at a blank page and post nothing."</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">No Strategic Clarity</div>
-        <div class="problem-card-text">"I'm doing everything but nothing feels like it's moving the needle."</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Script Paralysis</div>
-        <div class="problem-card-text">"My clients need personalized inductions but writing from scratch takes me forever."</div>
-      </div>
-      <div class="problem-card">
-        <div class="problem-card-title">Product Fear</div>
-        <div class="problem-card-text">"I want to create an online course but I don't know where to start or if it will sell."</div>
+      <div class="problem-cards reveal" style="transition-delay:.2s">
+        <div class="problem-card">
+          <div class="problem-card-title">Content Overwhelm</div>
+          <div class="problem-card-text">"I know I need to post, but I spend hours staring at a blank page and post nothing."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">No Strategic Clarity</div>
+          <div class="problem-card-text">"I'm doing everything but nothing feels like it's moving the needle."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">Script Paralysis</div>
+          <div class="problem-card-text">"My clients need personalized inductions but writing from scratch takes me forever."</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-title">Product Fear</div>
+          <div class="problem-card-text">"I want to create an online course but I don't know where to start or if it will sell."</div>
+        </div>
       </div>
     </div>
   </div>
@@ -928,20 +915,6 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
-
-// SCROLL-DRIVEN VIDEO (section-relative)
-const logoVideo = document.getElementById('logoVideo3D');
-const problemSection = document.getElementById('problem');
-if (logoVideo && problemSection) {
-  logoVideo.pause();
-  logoVideo.currentTime = 0;
-  window.addEventListener('scroll', () => {
-    const top = problemSection.getBoundingClientRect().top;
-    const h = problemSection.offsetHeight;
-    const fraction = Math.max(0, Math.min(-top / (h - window.innerHeight * 0.5), 1));
-    if (logoVideo.readyState >= 2) logoVideo.currentTime = fraction * logoVideo.duration;
-  }, { passive: true });
-}
 
 // HERO ANIMATIONS
 setTimeout(() => {
