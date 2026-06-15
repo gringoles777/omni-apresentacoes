@@ -499,7 +499,9 @@
 
   .bio-photo {
     width: 600px;
-    height: 760px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 600 / 760;
     background: var(--bg-card);
     border: 2px solid var(--gold);
     border-radius: 10px;
@@ -814,7 +816,7 @@
   @media (max-width: 600px) {
     .section { padding: 50px 16px; }
     .form-box { padding: 24px 20px; }
-    .bio-photo { width: 480px; height: 600px; margin: 0 auto; }
+    .bio-photo { width: 100%; max-width: 100%; height: auto; margin: 0 auto; }
   }
 </style>
 </head>
