@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central Estratégica — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111111; --panel2:#151008;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.55); --ink-faint:rgba(244,244,232,.3);
+    --gold:#C9A84C; --gold-deep:#A9842A; --gold-10:rgba(201,168,76,.12); --gold-line:rgba(201,168,76,.18);
+    --warm:rgba(220,159,66,.45);
+    --font:'Oswald','Arial Black',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  /* GATE */
+  #gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+  body:not(.locked) #gate{display:none}
+  body.locked{overflow:hidden}
+  #gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  #gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-soft);text-transform:uppercase}
+  #gate .glock{font-size:40px;margin-bottom:4px}
+  #gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-line);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+  #gate input:focus{border-color:var(--gold)}
+  #gate .gerr{color:#e07a5f;font-size:13px;font-family:var(--mono);display:none}
+  #gate .ghint{font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--ink-faint)}
+
+  /* HEADER */
+  header{padding:48px 24px 0;text-align:center;max-width:1180px;margin:0 auto}
+  .logo{font-family:var(--font);font-weight:700;font-size:26px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  .subtitle{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--ink-soft);text-transform:uppercase;margin-top:8px}
+  h1{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,4vw,3rem);margin-top:26px;line-height:1.05}
+  h1 .gold{color:var(--gold)}
+  .lead{color:var(--ink-soft);max-width:660px;margin:14px auto 0;font-size:15px;line-height:1.6}
+  .backlink{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:12px;letter-spacing:1px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--gold-line);border-radius:20px;padding:7px 16px;transition:border-color .2s,color .2s}
+  .backlink:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* SEARCH */
+  .searchwrap{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--bg) 72%,transparent);padding:26px 24px 16px;max-width:1180px;margin:24px auto 0}
+  #search{width:100%;font-family:var(--mono);background:var(--panel);border:1px solid var(--gold-line);color:var(--ink);padding:15px 20px;border-radius:10px;font-size:15px;outline:none}
+  #search:focus{border-color:var(--gold)}
+  #search::placeholder{color:var(--ink-faint)}
+  .noresult{display:none;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:14px;padding:40px}
+
+  /* SECTIONS */
+  main{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+  section{margin-top:46px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--warm);padding-bottom:12px;margin-bottom:22px}
+  .sec-head h2{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:1px}
+  .sec-head .count{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px}
+  .sec-head .desc{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-left:auto;letter-spacing:1px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  a.card{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--warm);border-radius:12px;padding:20px 22px;transition:border-color .2s,background .2s,transform .15s}
+  a.card:hover{border-color:var(--gold);background:#181410;transform:translateY(-2px)}
+  .card .top{display:flex;align-items:center;gap:11px}
+  .card .icon{font-size:21px;line-height:1}
+  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px;min-width:0}
+  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase;margin-left:auto;flex-shrink:0}
+  .card.hist{border-color:rgba(220,159,66,.15);background:#0e0e0e}
+  .card .body{color:var(--ink-soft);font-size:13.5px;line-height:1.55;margin-top:10px}
+
+  /* LIVE pill */
+  a.live{border-color:rgba(42,157,143,.6)}
+  a.live .badge{color:#2a9d8f;border-color:rgba(42,157,143,.4);background:rgba(42,157,143,.1)}
+
+  footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media(max-width:600px){header{padding-top:34px}.searchwrap{padding-top:18px}}
+</style>
+</head>
+<body class="locked">
+
+<!-- GATE -->
+<div id="gate">
+  <div class="glock">🔒</div>
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">Central Estratégica · Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Liderança OMNI · dados confidenciais</div>
+</div>
+
+<header>
+  <div class="logo">OMNI BRASIL</div>
+  <div class="subtitle">Central Estratégica</div>
+  <h1>Dados <span class="gold">estratégicos</span> da OMNI</h1>
+  <p class="lead">Comercial, performance de funil, tráfego, diagnósticos e planos. Material sensível — restrito à liderança. Use a busca para localizar rápido.</p>
+  <a class="backlink" href="intranet.html">← Voltar para a Intranet</a>
+</header>
+
+<div class="searchwrap">
+  <input type="text" id="search" placeholder="🔎 Buscar (ex: SDR, funil, dashboard, ads, war game)..." oninput="filter(this.value)">
+</div>
+
+<main>
+  <!-- COMERCIAL -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Comercial &amp; Funil</h2><span class="count"></span>
+      <span class="desc">SDR · pré-vendas · CRM</span>
+    </div>
+    <div class="grid">
+      <a class="card live" href="https://dash.omnihypnosis.com.br" target="_blank" data-item>
+        <div class="top"><span class="icon">📊</span><span class="name">Dashboard OMNI</span><span class="badge">ao vivo</span></div>
+        <div class="body">Painel comercial em tempo real — closers, SDR, AQRC, tráfego Meta e Google.</div>
+      </a>
+      <a class="card" href="dashboard-spec.html" data-item>
+        <div class="top"><span class="icon">🧩</span><span class="name">Dashboard — Doc Técnica</span></div>
+        <div class="body">Arquitetura, endpoints, telas e regras. Fonte da verdade do dashboard.</div>
+      </a>
+      <a class="card" href="manual-pre-vendas-sdr.html" data-item>
+        <div class="top"><span class="icon">📋</span><span class="name">Manual de Pré-Vendas SDR</span></div>
+        <div class="body">Guia operacional: automações, SLAs, mensagens exatas e responsabilidades.</div>
+      </a>
+      <a class="card" href="diagnostico-pre-vendas-sdr-2026-05.html" data-item>
+        <div class="top"><span class="icon">🔍</span><span class="name">Diagnóstico Pré-Vendas SDR</span></div>
+        <div class="body">3 causas raiz, plano 4 fases, backlog OMNI-009. Reestruturação de processo.</div>
+      </a>
+      <a class="card" href="projeto-reestruturacao-prevenda-2026.html" data-item>
+        <div class="top"><span class="icon">🏗️</span><span class="name">Reestruturação Pré-Venda</span></div>
+        <div class="body">Projeto completo de reestruturação da pré-venda 2026.</div>
+      </a>
+      <a class="card" href="auditoria-w000x-20260505.html" data-item>
+        <div class="top"><span class="icon">✅</span><span class="name">Auditoria W000X</span></div>
+        <div class="body">Qualidade dos workflows SDR: issues rankeados por risco e plano de correção.</div>
+      </a>
+      <a class="card" href="relatorio-tentativa-conectar-2026-06-03.html" data-item>
+        <div class="top"><span class="icon">📞</span><span class="name">Relatório Tentativa de Conectar</span></div>
+        <div class="body">406 leads na etapa Tentativa de Conectar com Pipedrive, Chatwoot e última mensagem.</div>
+      </a>
+      <a class="card" href="leads-responderam-tentativa-conectar.html" data-item>
+        <div class="top"><span class="icon">💬</span><span class="name">Leads com Resposta — Conectado</span></div>
+        <div class="body">Leads com resposta real na etapa Conectado, divididos por SDR.</div>
+      </a>
+      <a class="card" href="plano-performance-vendas-rafa.html" data-item>
+        <div class="top"><span class="icon">🎯</span><span class="name">Plano de Performance Comercial</span></div>
+        <div class="body">Diagnóstico do funil, 4 fases de execução, projeção 90 dias.</div>
+      </a>
+      <a class="card hist" href="auditoria-inside-sales-sdr-2026-v6.html" data-item>
+        <div class="top"><span class="icon">🗂️</span><span class="name">Auditoria Inside Sales v6</span><span class="badge">+ v3–v5</span></div>
+        <div class="body">Validação de implementação das automações SDR. Versões históricas v3/v4/v5 disponíveis.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ESTRATÉGIA & MERCADO -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Estratégia &amp; Mercado</h2><span class="count"></span>
+      <span class="desc">posicionamento · expansão</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="war-game-report.html" data-item>
+        <div class="top"><span class="icon">♟️</span><span class="name">War Game Report 2026</span></div>
+        <div class="body">Análise estratégica e competitiva: onde dobrar, onde pivotar, fossos competitivos.</div>
+      </a>
+      <a class="card" href="relatorio-potencial-mercado-omni-2026.html" data-item>
+        <div class="top"><span class="icon">🌎</span><span class="name">Potencial de Mercado OMNI</span></div>
+        <div class="body">Mercado, SWOT, cenários, moats e projeção 2026–2030.</div>
+      </a>
+      <a class="card" href="benchmark-externo-2026-04.html" data-item>
+        <div class="top"><span class="icon">🏆</span><span class="name">Benchmark Externo — 9 Players</span></div>
+        <div class="body">Marisa Peer, Tony Robbins, Mindvalley e mais. Esteira proposta + projeção ARR.</div>
+      </a>
+      <a class="card" href="pesquisa-icp-gestor-exausto-2026-04.html" data-item>
+        <div class="top"><span class="icon">🧠</span><span class="name">Pesquisa ICP</span></div>
+        <div class="body">Pesquisa de público-alvo e dores do avatar.</div>
+      </a>
+      <a class="card" href="lancamento-nova-era-omni-2026.html" data-item>
+        <div class="top"><span class="icon">🚀</span><span class="name">Plano Lançamento Nova Era</span></div>
+        <div class="body">Rebranding em 4 fases, evento ao vivo, funil, ofertas e projeção R$527k.</div>
+      </a>
+      <a class="card" href="ideias-ia-omni-2026-04-11.html" data-item>
+        <div class="top"><span class="icon">💡</span><span class="name">Ideias de IA com Fit OMNI</span></div>
+        <div class="body">10 jogadas de IA, top 3, convergências e alertas regulatórios.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- TRÁFEGO & ADS -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Tráfego &amp; Ads</h2><span class="count"></span>
+      <span class="desc">Meta · Google · performance</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="relatorio-google-ads-abril-2026.html" data-item>
+        <div class="top"><span class="icon">🟢</span><span class="name">Relatório Google Ads</span></div>
+        <div class="body">Performance das campanhas, CPL, diagnóstico Midas e recomendações.</div>
+      </a>
+      <a class="card" href="resumo-meta-ads-13mai-2026.html" data-item>
+        <div class="top"><span class="icon">🔵</span><span class="name">Resumo Meta Ads (13/Mai)</span></div>
+        <div class="body">6 campanhas, R$730/dia, funil frio + quente + remarketing CRM.</div>
+      </a>
+      <a class="card" href="analise-meta-ads-formacao-2026-04-06.html" data-item>
+        <div class="top"><span class="icon">📈</span><span class="name">Análise Meta Ads — Formação</span></div>
+        <div class="body">Campanhas ativas, CPR por conjunto, cruzamento Pipedrive e recomendações.</div>
+      </a>
+      <a class="card" href="plano-campanha-aquecimento-abril-2026.html" data-item>
+        <div class="top"><span class="icon">🔥</span><span class="name">Campanha de Aquecimento</span></div>
+        <div class="body">3 vídeos isca + retargeting. Meta ROAS 2,72 → 8,8. Budget R$5k.</div>
+      </a>
+      <a class="card" href="diagnostico-hipnoflash-2026-03-27.html" data-item>
+        <div class="top"><span class="icon">⚡</span><span class="name">Diagnóstico HypnoFlash</span></div>
+        <div class="body">Análise de campanhas ativas, ranking CPA e plano de ação.</div>
+      </a>
+      <a class="card" href="relatorio-acoes-hipnoflash-2026-03-27.html" data-item>
+        <div class="top"><span class="icon">🎬</span><span class="name">Ações + Criativos HypnoFlash</span></div>
+        <div class="body">Ações executadas, ranking de 29 ads, padrões vencedores e 3 briefs novos.</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="noresult" id="noresult">Nenhum resultado para a busca.</div>
+</main>
+
+<footer>OMNI Brasil // Central Estratégica // Confidencial · 2026</footer>
+
+<script>
+  function tryLogin(){
+    if(document.getElementById('pwd').value==='omni777'){
+      document.body.classList.remove('locked');
+    }else{
+      document.getElementById('gerr').style.display='block';
+    }
+  }
+  function filter(q){
+    q=(q||'').toLowerCase().trim();
+    var items=document.querySelectorAll('[data-item]');
+    var anyVisible=false;
+    items.forEach(function(el){
+      var hit=el.textContent.toLowerCase().indexOf(q)>-1;
+      el.style.display=hit?'':'none';
+      if(hit)anyVisible=true;
+    });
+    document.querySelectorAll('[data-sec]').forEach(function(sec){
+      var vis=sec.querySelectorAll('[data-item]');
+      var show=Array.prototype.some.call(vis,function(c){return c.style.display!=='none'});
+      sec.style.display=show?'':'none';
+    });
+    document.getElementById('noresult').style.display=anyVisible?'none':'block';
+  }
+</script>
+</body>
+</html>

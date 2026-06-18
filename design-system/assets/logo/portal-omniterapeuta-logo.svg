@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Portal do Omniterapeuta — Logo
+  Inspirado no symbol-infinity.svg da OMNI Brasil
+  Marca original: arco duplo em perspectiva + wordmark
+  Versão: 3.0 | Mai 2026
+-->
+<svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#9A7A2E"/>
+      <stop offset="40%"  stop-color="#C8A84B"/>
+      <stop offset="60%"  stop-color="#E8C86A"/>
+      <stop offset="80%"  stop-color="#C8A84B"/>
+      <stop offset="100%" stop-color="#9A7A2E"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#9A7A2E" stop-opacity="0.4"/>
+      <stop offset="50%"  stop-color="#C8A84B" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#9A7A2E" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ════════════════════════════════
+       MARCA — Arco portal em perspectiva
+       Três arcos concêntricos criando profundidade,
+       sugerindo a entrada em um portal/limiar —
+       a mesma linguagem de curvas fluidas do infinito
+       mas com movimento único de dentro para fora
+       ════════════════════════════════ -->
+
+  <!-- Arco externo — banda principal -->
+  <path d="
+    M 28,210
+    C 28,96 88,22 185,22
+    C 282,22 342,96 342,210
+    L 316,210
+    C 316,110 264,48 185,48
+    C 106,48 54,110 54,210
+    Z
+  " fill="url(#g1)"/>
+
+  <!-- Arco médio — profundidade -->
+  <path d="
+    M 68,210
+    C 68,118 114,62 185,62
+    C 256,62 302,118 302,210
+    L 282,210
+    C 282,126 242,82 185,82
+    C 128,82 88,126 88,210
+    Z
+  " fill="url(#g2)"/>
+
+  <!-- Arco interno — ponto focal do portal -->
+  <path d="
+    M 104,210
+    C 104,138 138,98 185,98
+    C 232,98 266,138 266,210
+    L 251,210
+    C 251,146 220,113 185,113
+    C 150,113 119,146 119,210
+    Z
+  " fill="url(#g1)" opacity="0.55"/>
+
+  <!-- Pilares base (esquerda) -->
+  <rect x="28"  y="210" width="26" height="8" rx="0" fill="url(#g1)"/>
+  <rect x="54"  y="210" width="14" height="5" rx="0" fill="url(#g1)" opacity="0.5"/>
+
+  <!-- Pilares base (direita) -->
+  <rect x="316" y="210" width="26" height="8" rx="0" fill="url(#g1)"/>
+  <rect x="302" y="210" width="14" height="5" rx="0" fill="url(#g1)" opacity="0.5"/>
+
+  <!-- ════════════════════════════════
+       WORDMARK
+       ════════════════════════════════ -->
+
+  <!-- Divisor vertical entre marca e texto -->
+  <line x1="386" y1="60" x2="386" y2="220" stroke="#C8A84B" stroke-width="0.8" stroke-opacity="0.3"/>
+
+  <!-- PORTAL -->
+  <text
+    x="406" y="158"
+    font-family="'IBM Plex Mono', monospace"
+    font-size="62"
+    font-weight="500"
+    letter-spacing="6"
+    fill="url(#g1)">PORTAL</text>
+
+  <!-- DO OMNITERAPEUTA -->
+  <text
+    x="408" y="192"
+    font-family="'IBM Plex Mono', monospace"
+    font-size="13.5"
+    font-weight="400"
+    letter-spacing="5.5"
+    fill="#C8A84B"
+    fill-opacity="0.6">DO OMNITERAPEUTA</text>
+
+</svg>

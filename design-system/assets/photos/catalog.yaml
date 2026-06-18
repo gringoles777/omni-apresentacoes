@@ -1,0 +1,293 @@
+# ═══════════════════════════════════════════════════════════
+#  CATÁLOGO DE FOTOS — Michael Arruda
+#  OMNI Brasil Design System
+#  Registrado: 2026-03-20
+# ═══════════════════════════════════════════════════════════
+#
+#  SESSÕES IDENTIFICADAS:
+#  [A] Estúdio Navy       — fundo azul navy profissional (IMG_70xx)
+#  [B] Mansão/Biblioteca  — ambiente vintage com livros e lustre (IMG_71xx + DSC08xx)
+#  [C] Estúdio Cinza      — fundo cinza neutro, poses dinâmicas (IMGL50xx)
+#  [D] WhatsApp           — variações da sessão Mansão
+#
+#  ATENÇÃO: IMGL50xx estão rotacionadas 90° nos metadados EXIF.
+#  Ao usar em web/print, aplicar: transform: rotate(90deg) ou corrigir na exportação.
+# ═══════════════════════════════════════════════════════════
+
+sessions:
+
+  # ─────────────────────────────────────────────
+  # SESSÃO A — Estúdio Navy
+  # Fundo: azul navy profundo (#0A1628 visual)
+  # Mood: Autoridade, institucional, premium
+  # Uso: Hero de landing page, about, LinkedIn
+  # ─────────────────────────────────────────────
+  studio_navy:
+    mood: "Autoridade máxima — institucional premium"
+    background_color: "Navy profundo (~#0A1628)"
+    alinhamento_design_system: "Voz INSTITUCIONAL + ÉPICA"
+
+    photos:
+
+      IMG_7036-alta:
+        file: "IMG_7036-alta.jpg"
+        pose: "De pé, braços cruzados, olhar sério"
+        expressao: "Seriedade, poder, controle"
+        enquadramento: "3/4 corpo"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Hero principal de landing page FPH"
+          - "Above the fold — primeira impressão de autoridade"
+          - "LinkedIn banner"
+        nota: "MELHOR FOTO para autoridade. Fundo navy perfeito com o design system."
+        prioridade: HERO
+
+      IMG_7046-alta:
+        file: "IMG_7046-alta.jpg"
+        pose: "De pé, sorrindo, relaxado"
+        expressao: "Acolhimento, confiança, abertura"
+        enquadramento: "3/4 corpo"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Seção 'Sobre Michael' / bio"
+          - "Testimonials section — warmth"
+          - "Social media — posts de conexão"
+        prioridade: ALTA
+
+      IMG_7093-alta:
+        file: "IMG_7093-alta.jpg"
+        pose: "Sentado na poltrona de couro, mãos entrelaçadas, olhar sério"
+        expressao: "Contemplação, poder, método"
+        enquadramento: "Corpo inteiro"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Seção de produto/oferta (autoridade sentada)"
+          - "Email marketing — header"
+          - "Capa de material digital"
+        prioridade: ALTA
+
+  # ─────────────────────────────────────────────
+  # SESSÃO B — Mansão/Biblioteca Vintage
+  # Ambiente: madeira nobre, estantes de livros, lustre, luz quente
+  # Mood: Legado, conhecimento, linhagem, herança
+  # Uso: Storytelling, conteúdo editorial, authority content
+  # ─────────────────────────────────────────────
+  mansion_library:
+    mood: "Legado, conhecimento, linhagem — Heritage Meets Precision"
+    background_color: "Marrom escuro, madeira nobre, luz dourada"
+    alinhamento_design_system: "Voz ÉPICA — máximo alinhamento com Heritage"
+
+    photos:
+
+      IMG_7186-alta:
+        file: "IMG_7186-alta.jpg"
+        pose: "Sentado à mesa, mãos no queixo, lustre ao fundo"
+        expressao: "Seriedade, profundidade, autoridade"
+        enquadramento: "Busto + mesa"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "HERO ÉPICO — capa de produto OMNI Legacy/Master"
+          - "Thumbnail YouTube — autoridade máxima"
+          - "Stories de impacto"
+        nota: "Lustre dourado ao fundo ativa naturalmente a paleta gold do design system."
+        prioridade: HERO
+
+      IMG_7215-alta:
+        file: "IMG_7215-alta.jpg"
+        pose: "Perfil olhando pela janela, biblioteca ao fundo, luz lateral"
+        expressao: "Contemplação, visão, legado"
+        enquadramento: "Corpo inteiro — perfil"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Seção narrativa — 'A jornada de Michael'"
+          - "Editorial / artigo / blog"
+          - "Slides de apresentação — slide de transição"
+        nota: "Foto cinematográfica — luz lateral perfeita para o mood épico."
+        prioridade: ALTA
+
+      IMG_7233-alta:
+        file: "IMG_7233-alta.jpg"
+        pose: "Perfil olhando pela janela, silhueta escura, luz dramática"
+        expressao: "Poder, mistério, visão"
+        enquadramento: "Corpo inteiro — perfil escuro"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Capa de produto — versão com silhueta"
+          - "Thumbnail épico (fundo pode receber efeito gold)"
+          - "Hero section com texto sobreposto à esquerda"
+        nota: "Foto com maior potencial épico. Fundo escuro aceita overlay de ouro."
+        prioridade: ÉPICO
+
+      IMG_7266-alta:
+        file: "IMG_7266-alta.jpg"
+        pose: "Lendo livro à mesa, luz de abajur"
+        expressao: "Método, conhecimento, estudo"
+        enquadramento: "3/4 lateral"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Seção 'O Método' ou 'A Formação'"
+          - "Conteúdo sobre hipnoterapia e ciência"
+          - "Posts educativos no Instagram"
+        prioridade: MEDIA
+
+      IMG_7374-alta:
+        file: "IMG_7374-alta.jpg"
+        pose: "Sentado na poltrona de couro, sorrindo, biblioteca ao fundo"
+        expressao: "Acolhimento, confiança, autoridade acessível"
+        enquadramento: "Corpo inteiro"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Seção de depoimentos (warmth + autoridade)"
+          - "Bio acessível — versão sorrindo"
+          - "Social proof sections"
+        prioridade: ALTA
+
+      DSC08490:
+        file: "DSC08490.jpg"
+        pose: "Sentado à mesa, braços cruzados, pôsteres de celebridades ao fundo"
+        expressao: "Seriedade, controle, autoridade"
+        enquadramento: "Corpo inteiro"
+        orientacao: "Landscape"
+        uso_recomendado:
+          - "Seção de credenciais/clientes"
+          - "About com prova social implícita"
+        nota: "Pôsteres ao fundo (Claudia Rodrigues, Cátia Damasceno) reforçam credencial de atendimento a celebridades."
+        prioridade: MEDIA
+
+      DSC08515:
+        file: "DSC08515.jpg"
+        pose: "De pé, sorrindo, braços cruzados, estante de livros ao fundo"
+        expressao: "Acolhimento, confiança"
+        enquadramento: "3/4 corpo"
+        orientacao: "Portrait"
+        uso_recomendado:
+          - "Bio / Sobre Michael — versão acessível"
+          - "Social media — carrossel"
+        prioridade: MEDIA
+
+      DSC08525:
+        file: "DSC08525.jpg"
+        pose: "Sentado em poltrona com celular, P&B, abajur"
+        expressao: "Descontração, humanização"
+        enquadramento: "Ambiental"
+        orientacao: "Landscape"
+        tratamento: "Preto e branco já aplicado"
+        uso_recomendado:
+          - "Stories humanizados"
+          - "Conteúdo 'nos bastidores'"
+        prioridade: BAIXA
+
+      DSC08528:
+        file: "DSC08528.jpg"
+        pose: "Sentado com celular, fundo vermelho dramático"
+        expressao: "Dinamismo, presença"
+        enquadramento: "Ambiental"
+        orientacao: "Portrait"
+        nota: "Fundo vermelho conflita com a paleta do design system — usar com cautela."
+        uso_recomendado:
+          - "Conteúdo casual / behind the scenes"
+        prioridade: BAIXA
+
+  # ─────────────────────────────────────────────
+  # SESSÃO C — Estúdio Cinza
+  # Fundo: cinza neutro escuro
+  # Mood: Dinâmico, moderno, versátil
+  # Atenção: IMGL5059–IMGL5115 estão rotacionadas 90° (EXIF)
+  # Correção: rotate(-90deg) em CSS ou girar na exportação
+  # ─────────────────────────────────────────────
+  studio_gray:
+    mood: "Dinâmico, versátil — poses de impacto"
+    background_color: "Cinza escuro neutro (~#2D2D2D)"
+    alinhamento_design_system: "Voz ÉPICA — fundo neutro aceita overlay dourado"
+    exif_rotation_issue: true
+    correcao: "Aplicar rotação -90° antes de usar"
+
+    photos:
+
+      IMGL5059:
+        file: "IMGL5059.JPG"
+        pose: "Mãos abertas para cima, expressivo"
+        expressao: "Abertura, ensinamento"
+        uso_recomendado: ["Seção de método", "Conteúdo educativo"]
+        prioridade: MEDIA
+
+      IMGL5063:
+        file: "IMGL5063.JPG"
+        pose: "Apontando com dedo — óculos de sol"
+        expressao: "Direção, foco, call to action"
+        uso_recomendado: ["CTA section", "Anúncio direto"]
+        prioridade: MEDIA
+
+      IMGL5070:
+        file: "IMGL5070.JPG"
+        pose: "Sorrindo, gesto com a mão"
+        expressao: "Energia, acolhimento"
+        uso_recomendado: ["Social media", "Stories"]
+        prioridade: MEDIA
+
+      IMGL5081:
+        file: "IMGL5081.JPG"
+        pose: "De pé, neutro"
+        uso_recomendado: ["Composição com texto sobreposto"]
+        prioridade: MEDIA
+
+      IMGL5102:
+        file: "IMGL5102.JPG"
+        pose: "Sentado em cubo, seriedade"
+        expressao: "Poder, autoridade urbana"
+        uso_recomendado: ["Thumbnail", "Capa de produto"]
+        prioridade: ALTA
+
+      IMGL5104:
+        file: "IMGL5104.JPG"
+        pose: "Semi-reclinado no cubo, relaxado"
+        expressao: "Confiança, presença"
+        uso_recomendado: ["Editorial", "Hero alternativo"]
+        prioridade: MEDIA
+
+      IMGL5115:
+        file: "IMGL5115.JPG"
+        pose: "Sorrindo, detalhe do relógio/punho"
+        expressao: "Charme, status, detalhe premium"
+        uso_recomendado: ["Stories de produto", "Detalhe de conteúdo premium"]
+        nota: "Relógio de pulso visível — detalhe de status que reforça posicionamento premium."
+        prioridade: MEDIA
+
+  # ─────────────────────────────────────────────
+  # SESSÃO D — WhatsApp (variações)
+  # ─────────────────────────────────────────────
+  whatsapp_variants:
+    nota: "Variações da sessão Mansão — resolução pode ser menor"
+
+    photos:
+      "WhatsApp (1)":
+        file: "WhatsApp Image 2024-09-06 at 19.03.46.jpeg"
+        pose: "Mesa com lustre — variação do IMG_7186"
+        uso_recomendado: ["Backup do IMG_7186"]
+        prioridade: BAIXA
+
+# ═══════════════════════════════════════════════════════════
+#  SELEÇÃO CURADA — TOP 5 PARA USO IMEDIATO
+# ═══════════════════════════════════════════════════════════
+
+top_selection:
+
+  hero_autoridade:
+    file: "IMG_7036-alta.jpg"
+    motivo: "Máxima autoridade. Fundo navy do design system. Pose de liderança."
+
+  hero_epico:
+    file: "IMG_7233-alta.jpg"
+    motivo: "Silhueta dramática. Fundo escuro aceita overlay dourado. Cinematográfico."
+
+  bio_acolhedor:
+    file: "IMG_7046-alta.jpg"
+    motivo: "Sorriso + fundo navy. Equilíbrio autoridade + warmth."
+
+  produto_legado:
+    file: "IMG_7186-alta.jpg"
+    motivo: "Mesa + lustre = poder + herança. Perfeito para OMNI Legacy/Master."
+
+  narrativa_editorial:
+    file: "IMG_7215-alta.jpg"
+    motivo: "Perfil na janela. Mood contemplativo. Ideal para storytelling e bio longa."

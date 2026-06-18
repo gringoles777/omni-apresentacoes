@@ -1,0 +1,88 @@
+# ─────────────────────────────────────────────
+# OMNI — Símbolo do Infinito | Guia de Uso
+# ─────────────────────────────────────────────
+# Arquivo: symbol-infinity.svg
+# ViewBox: 0 0 566.93 226.77
+# Proporção: ~5:2 (horizontal)
+# Path: único elemento — facilita colorização via CSS/SVG fill
+# ─────────────────────────────────────────────
+
+versions:
+
+  # 1. PADRÃO — ouro sobre fundo escuro
+  standard_gold:
+    name: "Gold sobre Dark"
+    context: "Uso padrão — digital e impresso"
+    background: "#0D0D0D"
+    fill: "#C8A84B"
+    html: |
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566.93 226.77"
+           style="fill: #C8A84B; width: 200px;">
+        <!-- path do symbol-infinity.svg -->
+      </svg>
+    css_class: |
+      .logo-symbol { fill: #C8A84B; }
+
+  # 2. INVERSÃO — dark sobre fundo dourado
+  inverted_dark:
+    name: "Dark sobre Gold"
+    context: "Seções com fundo dourado, selos, certificados"
+    background: "#C8A84B"
+    fill: "#0D0D0D"
+    css_class: |
+      .logo-symbol-inverted { fill: #0D0D0D; }
+
+  # 3. SILHUETA — cream/branco sobre escuro
+  silhouette:
+    name: "Cream sobre Dark"
+    context: "Rodapés, marca d'água sutil, versão monocromática"
+    background: "#0D0D0D"
+    fill: "#F5F0E8"
+    css_class: |
+      .logo-symbol-cream { fill: #F5F0E8; }
+
+  # 4. MARCA D'ÁGUA — ultra-sutil
+  watermark:
+    name: "Marca d'água"
+    context: "Background de slides, PDFs, certificados"
+    fill: "#F5F0E8"
+    opacity: 0.06
+    css_class: |
+      .logo-symbol-watermark { fill: #F5F0E8; opacity: 0.06; }
+
+  # 5. GRADIENTE PREMIUM — hero sections
+  gradient_premium:
+    name: "Gradiente Metálico"
+    context: "Hero de landing page, capa de produtos, thumbnails épicos"
+    fill: "url(#omni-gold-gradient)"
+    svg_defs: |
+      <defs>
+        <linearGradient id="omni-gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#9A7A2E"/>
+          <stop offset="40%"  stop-color="#C8A84B"/>
+          <stop offset="60%"  stop-color="#E8C86A"/>
+          <stop offset="80%"  stop-color="#C8A84B"/>
+          <stop offset="100%" stop-color="#9A7A2E"/>
+        </linearGradient>
+      </defs>
+
+sizing:
+  favicon: "16x7px — não usar abaixo de 32px de largura"
+  social_icon: "48x20px mínimo"
+  header: "120-160px de largura"
+  hero: "280-400px de largura"
+  watermark: "60-80% da largura do container, opacity 0.06"
+
+rules:
+  - "NUNCA adicionar texto junto ao símbolo isolado"
+  - "NUNCA distorcer a proporção (~5:2)"
+  - "NUNCA usar abaixo de 48px de largura — perda de legibilidade"
+  - "Zona de exclusão mínima: 20% da largura do símbolo em cada lado"
+  - "Em uso digital: sempre SVG vetorial — nunca PNG pixelado"
+  - "Em uso combinado com o selo OHTC: posicionar à esquerda ou abaixo, nunca sobreposto"
+
+notes: |
+  Símbolo entregue pelo founder em 2026-03-20.
+  Path único — ideal para animações CSS (stroke-dasharray, fill transition).
+  A forma remete à corrente/conexão infinita — alinhada com o conceito
+  de linhagem e transmissão de conhecimento da OMNI.

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Squads do Dia-a-Dia — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --dark:#0D0D0D; --elevated:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --cream-50:rgba(245,240,232,.50);
+  --teal:#2A9D8F; --gray:#6B6B6B; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+  --grad-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  --grad-gold-text:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 30%,#E8C86A 50%,#C8A84B 70%,#9A7A2E 100%);
+  --font-display:'Oswald',sans-serif; --font-serif:'DM Serif Display',serif; --font-body:'Inter',sans-serif; --font-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:var(--font-body);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(200,168,75,.06),transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(42,157,143,.05),transparent 45%);pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+header{padding:90px 0 50px;text-align:center}
+.kicker{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:18px}
+h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.05;letter-spacing:.01em;text-transform:uppercase}
+h1 .grad{background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-family:var(--font-serif);font-size:clamp(1.05rem,2.2vw,1.5rem);color:var(--cream-70);margin-top:18px;font-style:italic}
+.lead{max-width:680px;margin:22px auto 0;color:var(--cream-70);font-size:1.02rem}
+.divider{width:70px;height:2px;background:var(--grad-gold);margin:38px auto;border:none}
+
+/* HOW TO USE */
+.howto{background:linear-gradient(135deg,var(--elevated),var(--dark));border:1px solid var(--gold-20);border-radius:16px;padding:32px 34px;margin:0 auto 60px;max-width:920px}
+.howto h3{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.06em;font-size:1.05rem;color:var(--gold-light);margin-bottom:16px}
+.howto .row{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px}
+.howto .row:last-child{margin-bottom:0}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.78rem;background:var(--gold-10);border:1px solid var(--gold-30);color:var(--gold-light);padding:3px 10px;border-radius:6px;white-space:nowrap;min-width:130px;text-align:center}
+.howto p{color:var(--cream-70);font-size:.95rem}
+
+/* SECTIONS */
+.section{margin:72px 0}
+.section-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.section-num{font-family:var(--font-display);font-size:2.4rem;color:var(--gold-deep);opacity:.55;line-height:1}
+.section-title{font-family:var(--font-display);text-transform:uppercase;font-weight:600;letter-spacing:.05em;font-size:clamp(1.5rem,3vw,2.1rem)}
+.section-desc{color:var(--cream-50);font-size:.95rem;margin:0 0 28px 56px;max-width:680px}
+
+/* GRID + CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+.card{background:linear-gradient(160deg,var(--elevated) 0%,var(--dark) 100%);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:24px;transition:.35s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--grad-gold);opacity:0;transition:.35s}
+.card:hover{transform:translateY(-5px);border-color:var(--gold-30);box-shadow:0 18px 40px -18px rgba(200,168,75,.4)}
+.card:hover::before{opacity:1}
+.card .icon{font-size:1.5rem;margin-bottom:10px;display:block}
+.card h4{font-family:var(--font-display);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.18rem;color:var(--cream)}
+.card .func{color:var(--cream-70);font-size:.92rem;margin:10px 0 16px}
+.card .invoke{font-family:var(--font-mono);font-size:.82rem;color:var(--gold-light);background:var(--black);border:1px solid var(--gold-20);border-radius:8px;padding:8px 12px;display:inline-block;word-break:break-word}
+.card .when{font-size:.82rem;color:var(--cream-50);margin-top:14px;border-top:1px dashed rgba(255,255,255,.08);padding-top:12px}
+.card .when b{color:var(--teal);font-weight:600}
+
+/* protected badge */
+.badge{position:absolute;top:18px;right:18px;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;background:rgba(42,157,143,.12);border:1px solid rgba(42,157,143,.4);color:var(--teal);padding:3px 8px;border-radius:5px}
+
+/* FOOTER */
+footer{margin:90px 0 60px;text-align:center;border-top:1px solid rgba(255,255,255,.07);padding-top:36px}
+footer .note{color:var(--cream-50);font-size:.88rem;max-width:640px;margin:0 auto}
+footer .sig{font-family:var(--font-mono);font-size:.74rem;color:var(--gold);opacity:.7;margin-top:20px;letter-spacing:.1em}
+
+@media(max-width:600px){.section-desc{margin-left:0}.howto .row{flex-direction:column;gap:4px}.tag{min-width:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">OMNI Brasil · Mapa Operacional de Squads</div>
+    <h1>Suas Squads do<br><span class="grad">Dia-a-Dia</span></h1>
+    <p class="sub">As squads que você mais usa — com nome, função e como acionar.</p>
+    <p class="lead">Um mapa enxuto para a rotina da Rafa. Cada squad tem um ponto de entrada (o agente "chief") que conduz todo o pipeline. Você só descreve o que precisa.</p>
+    <hr class="divider">
+  </header>
+
+  <div class="howto">
+    <h3>Como acionar uma squad</h3>
+    <div class="row"><span class="tag">@nome-chief</span><p>Digite o agente de entrada (ex.: <b>@disparo-chief</b>). A squad assume o briefing, execução e validação. Você não opera por fora — ela conduz tudo.</p></div>
+    <div class="row"><span class="tag">/skill</span><p>Algumas têm atalho de skill (ex.: <b>/landing-page</b>, <b>/chatwoot-audit</b>). Funciona igual: dispara o fluxo completo.</p></div>
+    <div class="row"><span class="tag">Regra de ouro</span><p>Pediu a squad → ela executa. AURA só ativa e faz a ponte. Domínios sensíveis (n8n, templates Meta, dashboard, vídeo) <b>só</b> a squad dona toca.</p></div>
+  </div>
+
+  <!-- 1. COMERCIAL -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">01</span><h2 class="section-title">Comercial &amp; Vendas</h2></div>
+    <p class="section-desc">O coração da sua operação como Diretora Comercial — funil, disparos, avaliação de calls e SLA.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="icon">💬</span>
+        <h4>Disparo Comercial</h4>
+        <p class="func">Disparos de WhatsApp para leads do Pipedrive via Chatwoot. Copy anti-spam com variações, revisão de português, preview e aprovação antes do disparo real, e auditoria de execução.</p>
+        <span class="invoke">@disparo-chief</span>
+        <p class="when"><b>Use quando:</b> precisar disparar uma régua de cadência, revisar copy de mensagem ou auditar o que foi enviado.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🎯</span>
+        <h4>Comercial-Ops</h4>
+        <p class="func">Diagnostica e melhora o processo comercial: analisa Pipedrive, mapeia processos (SPIN), avalia SDRs e closers, propõe automações de SLA. Inclui o monitor headless de SLA do Chatwoot.</p>
+        <span class="invoke">@comercial-chief</span>
+        <p class="when"><b>Use quando:</b> quiser diagnóstico do funil, performance de time ou melhoria de processo comercial.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">📞</span>
+        <h4>Avaliação de Reuniões</h4>
+        <p class="func">Avalia as calls de consultoria das closers pelo Script FPH. Roda autônoma às 18h, gera relatório para a gestora e coaching para a closer. Nunca avalie transcrições à mão — use a squad.</p>
+        <span class="invoke">@avaliacao-chief</span>
+        <p class="when"><b>Use quando:</b> tiver transcrições de call para avaliar ou quiser o relatório de coaching.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🧭</span>
+        <h4>Jeff — Gestor Comercial</h4>
+        <p class="func">Camada de gestão acima das squads comerciais. Roteia o pedido para a squad certa, faz health-check das squads e diagnóstico do funil, e reporta para você. Coordena — não opera domínios protegidos.</p>
+        <span class="invoke">@jeff</span>
+        <p class="when"><b>Use quando:</b> não souber qual squad comercial acionar, ou quiser uma visão de gestão do comercial.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🔍</span>
+        <h4>Auditoria Chatwoot <span style="font-size:.7rem;color:var(--gold)">/skill</span></h4>
+        <p class="func">Audita conversas de leads humanos no Chatwoot por período: timing, follow-ups, personalização e taxa de conversão em agendamentos. Gera relatório em HTML ou Markdown.</p>
+        <span class="invoke">/chatwoot-audit</span>
+        <p class="when"><b>Use quando:</b> quiser auditar o atendimento humano de um período específico.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. AUTOMACAO & DOMINIOS PROTEGIDOS -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Automação &amp; Infra</h2></div>
+    <p class="section-desc">Domínios sensíveis — só a squad dona pode tocar. AURA bloqueia operação direta e aciona o chief.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="badge">domínio protegido</span>
+        <span class="icon">⚙️</span>
+        <h4>n8n Integration</h4>
+        <p class="func">Gestão completa do n8n: planeja antes de construir, audita workflows, detecta erros, cria integrações sem quebrar as existentes e valida qualidade. Ciclo: audit → plan → build → doc → validate.</p>
+        <span class="invoke">@n8n-chief</span>
+        <p class="when"><b>Use quando:</b> qualquer mexida em workflow, automação ou erro de n8n.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">domínio protegido</span>
+        <span class="icon">📊</span>
+        <h4>Dashboard OMNI</h4>
+        <p class="func">Constrói e mantém o Dashboard OMNI (dash.omnihypnosis.com.br). Protocolo rígido: auditoria → documento de mudança → sua aprovação → execução cirúrgica → validação. Nunca altera o que não foi pedido.</p>
+        <span class="invoke">@dashomni-chief</span>
+        <p class="when"><b>Use quando:</b> quiser nova tela, ajuste ou correção no dashboard.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">domínio protegido</span>
+        <span class="icon">📨</span>
+        <h4>Meta Templates</h4>
+        <p class="func">Único caminho para criar, revisar, submeter e monitorar templates WhatsApp Business no Meta. Ciclo: briefing → redação → revisão → sua aprovação → submissão → monitoramento.</p>
+        <span class="invoke">@template-chief</span>
+        <p class="when"><b>Use quando:</b> precisar de um template Meta aprovado para disparo oficial.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge">domínio protegido</span>
+        <span class="icon">🎬</span>
+        <h4>Edição de Vídeo</h4>
+        <p class="func">Edição de vídeo OMNI em 2 modos: REELS (vertical 9:16 opinativo) e GERAL (corte cirúrgico). Corta, legenda, remove silêncios, compõe motion graphics, sobe no Drive e te notifica.</p>
+        <span class="invoke">@video-chief · /video-editor</span>
+        <p class="when"><b>Use quando:</b> quiser editar reels, cortar trecho, tirar filler ou legendar vídeo.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. CONTEUDO & MARKETING -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Conteúdo &amp; Marketing</h2></div>
+    <p class="section-desc">Tráfego, copy, conteúdo viral e páginas de captura — a máquina de atração.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="icon">🚀</span>
+        <h4>Tráfego Pago (aiox-ads)</h4>
+        <p class="func">Squad de tráfego pago multi-plataforma com modelo concierge. 14 agentes em tiers, frameworks de experts (Kasim, Ralph Burns, Tom Breeze), integração com Meta/Google Ads e safety systems.</p>
+        <span class="invoke">@ad-midas</span>
+        <p class="when"><b>Use quando:</b> quiser criar, auditar ou escalar campanhas de tráfego pago.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">✍️</span>
+        <h4>Copywriting (aiox-copy)</h4>
+        <p class="func">24 lendas do copy num só lugar (Halbert, Schwartz, Kennedy, Jeff Walker, Stefan Georgi...). O chief orquestra e escolhe o especialista certo para a peça.</p>
+        <span class="invoke">@copy-chief</span>
+        <p class="when"><b>Use quando:</b> precisar de copy de venda, e-mail, anúncio ou VSL — e não souber qual estilo usar.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">📱</span>
+        <h4>Viral Instagram</h4>
+        <p class="func">Conteúdo viral para @omnibr e @michaelarruda, focado em RESULTADO e DINHEIRO via hipnoterapia. Frameworks GICA, Efeito DI, Sherlock. Entrega em 3 formatos: Reels, Carrossel, Stories.</p>
+        <span class="invoke">@viral-chief</span>
+        <p class="when"><b>Use quando:</b> quiser pauta/copy de conteúdo viral para Instagram.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🔥</span>
+        <h4>Trend IG <span style="font-size:.7rem;color:var(--gold)">/skill</span></h4>
+        <p class="func">Descobre pautas quentes do momento (trending topics, virais) e cria briefs de conteúdo conectando cada trend ao seu nicho. Busca real via EXA + ranqueamento por relevância.</p>
+        <span class="invoke">@trend-chief · /trend-ig</span>
+        <p class="when"><b>Use quando:</b> quiser surfar uma trend conectada à hipnoterapia.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🌐</span>
+        <h4>Landing Page <span style="font-size:.7rem;color:var(--gold)">/skill</span></h4>
+        <p class="func">Cria landing pages de alto padrão para iscas digitais: briefing, copy, design, build, deploy e integração com ActiveCampaign. Animações, scroll, tipografia premium, brandbook OMNI.</p>
+        <span class="invoke">/landing-page</span>
+        <p class="when"><b>Use quando:</b> precisar de uma página de captura nova.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🎨</span>
+        <h4>Design / Carrosséis</h4>
+        <p class="func">Squad de Design System + geração de imagens (Nano Banana) e composição de carrosséis. O chief orquestra design de peças e identidade visual.</p>
+        <span class="invoke">@design-chief · /carrosseleiro</span>
+        <p class="when"><b>Use quando:</b> quiser carrossel, peça visual ou trabalho de design system.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. LANCAMENTOS & ESTRATEGIA -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Lançamentos &amp; Estratégia</h2></div>
+    <p class="section-desc">Da decisão estratégica ao lançamento orquestrado de ponta a ponta.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="icon">🎁</span>
+        <h4>Gestão de Lançamentos</h4>
+        <p class="func">Executa lançamentos de ponta a ponta: a partir de um briefing escolhe o modelo, monta o cronograma, aciona as squads (copy, LP, templates, disparo, tráfego) e agenda os crons. Pede aprovação só nos GATES.</p>
+        <span class="invoke">@lancamento-chief</span>
+        <p class="when"><b>Use quando:</b> for rodar um lançamento ou mini-lançamento.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">👑</span>
+        <h4>CEO OMNI — Conselheiro</h4>
+        <p class="func">Conselheiro estratégico CEO: diagnóstico completo, planos priorizados (Pareto ao Cubo), ritmo advisory semanal/mensal/trimestral, e sugestões de squads/automações com ROI.</p>
+        <span class="invoke">@ceo-omni</span>
+        <p class="when"><b>Use quando:</b> quiser conselho estratégico de negócio ou priorização de alto nível.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🧠</span>
+        <h4>Planejamento Estratégico <span style="font-size:.7rem;color:var(--gold)">/skill</span></h4>
+        <p class="func">"Modo Dr. Estranho" — analisa 7-10 futuros possíveis por 12 lentes mentais, calcula probabilidade de cada cenário e identifica o Caminho Vencedor. Para decisões de alto impacto.</p>
+        <span class="invoke">/deep-strategic-planning</span>
+        <p class="when"><b>Use quando:</b> tiver uma decisão grande com vários caminhos possíveis.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">⚔️</span>
+        <h4>GTM War Room</h4>
+        <p class="func">Simula ataques ao modelo de negócio para revelar vulnerabilidades ocultas e forças subestimadas. Produz um War Game Report com plano de posicionamento: onde dobrar, onde pivotar, o que blindar.</p>
+        <span class="invoke">@gtm-war-chief</span>
+        <p class="when"><b>Use quando:</b> quiser stress-testar posicionamento ou estratégia de mercado.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. PRODUTIVIDADE & APOIO -->
+  <section class="section">
+    <div class="section-head"><span class="section-num">05</span><h2 class="section-title">Produtividade &amp; Apoio</h2></div>
+    <p class="section-desc">Organização, arquivamento e criação de novas squads quando surge uma necessidade nova.</p>
+    <div class="grid">
+
+      <div class="card">
+        <span class="icon">📁</span>
+        <h4>Arquivista (Drive) <span style="font-size:.7rem;color:var(--gold)">/skill</span></h4>
+        <p class="func">Recebe arquivos de qualquer canal, decide o path certo no Google Drive OMNI consultando o onde-salvar, confirma com você e faz upload via Drive API. Mantém tudo organizado.</p>
+        <span class="invoke">@arquivista-chief · /subir-drive</span>
+        <p class="when"><b>Use quando:</b> tiver arquivo para subir e organizar no Drive.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🛠️</span>
+        <h4>Squad Creator Pro</h4>
+        <p class="func">Cria novas squads AIOX para qualquer domínio, com metodologia de arquitetos de processo (Sidney, Pedro Valério, Thiago Finch). Pipeline completo de criação.</p>
+        <span class="invoke">@squad-chief</span>
+        <p class="when"><b>Use quando:</b> identificar uma tarefa recorrente que merece uma squad própria.</p>
+      </div>
+
+      <div class="card">
+        <span class="icon">🔧</span>
+        <h4>Dona System — Melhoria de IA</h4>
+        <p class="func">Clone consultor (Isis Moreira) que avalia maturidade de agentes/squads (escala 1-10), audita memória, desenha orquestração (PRD + briefing) e prioriza sempre o problema mais caro primeiro.</p>
+        <span class="invoke">@dona-system</span>
+        <p class="when"><b>Use quando:</b> quiser melhorar uma squad/agente existente ou organizar o workspace de IA.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p class="note">Este mapa cobre as squads de maior uso na sua rotina. O ecossistema completo tem mais de 40 squads — peça à AURA "lista todas as squads" se quiser o inventário inteiro. Para acionar qualquer uma, basta digitar o agente de entrada (ex.: <b style="color:var(--gold-light)">@disparo-chief</b>) e descrever o que precisa.</p>
+    <p class="sig">OMNI BRASIL · AIOX · gerado para Rafa Mendes</p>
+  </footer>
+
+</div>
+</body>
+</html>

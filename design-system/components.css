@@ -1,0 +1,414 @@
+/* ═══════════════════════════════════════════════════════════
+   OMNI Hypnosis Training Center Brasil — Components
+   Heritage Meets Precision
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   BUTTONS
+   Cantos retos = precisao institucional (Sage + ISO 9001)
+   ───────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.65rem 1.5rem;
+  background: var(--color-gold);
+  color: var(--color-dark);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  border: none;
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn-primary:hover {
+  background: var(--color-gold-light);
+  box-shadow: var(--shadow-gold-glow);
+}
+
+.btn-primary:active {
+  background: var(--color-gold-deep);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.65rem 1.5rem;
+  background: transparent;
+  color: var(--color-cream);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0.65rem 1.5rem;
+  background: transparent;
+  color: var(--color-gold);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  border: none;
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn-ghost:hover {
+  color: var(--color-gold-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   CARDS
+   ───────────────────────────────────────────── */
+
+.card-dark {
+  background: var(--color-dark-elevated);
+  border: 1px solid var(--color-gray-dark);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  color: var(--color-cream);
+  transition: border-color var(--duration-normal) var(--ease-standard),
+              box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card-dark:hover {
+  border-color: var(--color-gold-20);
+  box-shadow: inset 0 0 0 1px var(--color-gold-15);
+}
+
+.card-institutional {
+  background: var(--color-dark-elevated);
+  border: var(--border-gold);
+  border-radius: var(--radius-sharp);
+  padding: var(--space-xl);
+  color: var(--color-cream);
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card-institutional:hover {
+  box-shadow: var(--shadow-gold-subtle);
+}
+
+/* ─────────────────────────────────────────────
+   BADGES
+   ───────────────────────────────────────────── */
+
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--color-gold-10);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-soft);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: 1;
+}
+
+.badge-iso {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--color-gold-10);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-20);
+  border-radius: var(--radius-soft);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  line-height: 1;
+}
+
+.badge-iso::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.badge-teal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--color-teal-10);
+  color: var(--color-teal);
+  border: 1px solid var(--color-teal-20);
+  border-radius: var(--radius-soft);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: 1;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY COMPONENTS
+   ───────────────────────────────────────────── */
+
+.text-hero {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  color: var(--color-gold);
+}
+
+.text-hero-serif {
+  font-family: var(--font-serif);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: var(--leading-tight);
+  color: var(--color-cream);
+}
+
+.text-section {
+  font-family: var(--font-serif);
+  font-size: var(--text-section);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: var(--leading-snug);
+  color: var(--color-cream);
+}
+
+.text-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: 1;
+  color: var(--color-gold);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 400;
+  line-height: var(--leading-normal);
+  color: var(--color-cream);
+}
+
+.text-body-secondary {
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-cream-70);
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-gray);
+}
+
+.text-gold-gradient {
+  background: var(--gradient-gold-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────────
+   DIVIDERS
+   ───────────────────────────────────────────── */
+
+.divider-gold {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gold-deep) 20%,
+    var(--color-gold) 50%,
+    var(--color-gold-deep) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.divider-tech {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-gray-dark) 15%,
+    var(--color-gold-30) 50%,
+    var(--color-gray-dark) 85%,
+    transparent 100%
+  );
+}
+
+.divider-subtle {
+  border: none;
+  height: 1px;
+  background: var(--color-gray-dark);
+  opacity: 0.5;
+}
+
+/* ─────────────────────────────────────────────
+   QUOTE BLOCK
+   ───────────────────────────────────────────── */
+
+.quote-block {
+  border-left: 3px solid var(--color-gold);
+  padding-left: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.quote-block p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-cream);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.quote-block cite {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-gold);
+  font-style: normal;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION WRAPPERS
+   ───────────────────────────────────────────── */
+
+.section-dark {
+  background: var(--color-black);
+  color: var(--color-cream);
+  padding: var(--section-padding) 0;
+}
+
+.section-navy {
+  background: var(--color-navy);
+  color: var(--color-cream);
+  padding: var(--section-padding) 0;
+}
+
+.section-elevated {
+  background: var(--color-dark);
+  color: var(--color-cream);
+  padding: var(--section-padding) 0;
+}
+
+/* ─────────────────────────────────────────────
+   LOGO CONTAINERS
+   ───────────────────────────────────────────── */
+
+.logo-symbol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-symbol svg {
+  fill: var(--color-gold);
+  transition: fill var(--duration-normal) var(--ease-standard);
+}
+
+.logo-symbol--cream svg {
+  fill: var(--color-cream);
+}
+
+.logo-symbol--gradient svg {
+  fill: url(#gold-gradient);
+}
+
+.logo-symbol--watermark {
+  opacity: 0.06;
+}
+
+.logo-symbol--watermark svg {
+  fill: var(--color-cream);
+}
+
+/* ─────────────────────────────────────────────
+   BRACKET FRAME (credencial highlight)
+   ───────────────────────────────────────────── */
+
+.bracket-frame {
+  position: relative;
+  padding: var(--space-lg);
+}
+
+.bracket-frame::before,
+.bracket-frame::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--color-gold);
+  border-style: solid;
+}
+
+.bracket-frame::before {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.bracket-frame::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1px 1px 0;
+}

@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════
+   OMNI Hypnosis Training Center Brasil — Patterns & Textures
+   Heritage Meets Precision
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   CROSSHAIR GRID
+   Grid de linhas finas douradas — precisao tecnica (Sage)
+   CSS puro, sem imagem
+   ───────────────────────────────────────────── */
+
+.pattern-crosshair {
+  position: relative;
+}
+
+.pattern-crosshair::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent calc(50% - 0.5px),
+      var(--color-gold-15) 50%,
+      transparent calc(50% + 0.5px),
+      transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent calc(50% - 0.5px),
+      var(--color-gold-15) 50%,
+      transparent calc(50% + 0.5px),
+      transparent 100%
+    );
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.pattern-crosshair > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   DOT GRID
+   Grid de pontos — mais leve, para secoes de conteudo
+   ───────────────────────────────────────────── */
+
+.pattern-dot {
+  position: relative;
+}
+
+.pattern-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle,
+    var(--color-gold-15) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+
+.pattern-dot > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   RADIANT GLOW
+   Halo dourado radiante no centro — efeito cinematografico
+   Referencia: Capa OMNI Legacy
+   ───────────────────────────────────────────── */
+
+.radiant-glow {
+  position: relative;
+}
+
+.radiant-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 50% at center,
+    rgba(200, 168, 75, 0.12) 0%,
+    rgba(200, 168, 75, 0.06) 30%,
+    rgba(200, 168, 75, 0.02) 50%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.radiant-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Variante intensa — para hero sections */
+.radiant-glow--intense::before {
+  background: radial-gradient(
+    ellipse 60% 60% at center,
+    rgba(200, 168, 75, 0.20) 0%,
+    rgba(200, 168, 75, 0.10) 25%,
+    rgba(200, 168, 75, 0.04) 50%,
+    transparent 70%
+  );
+}
+
+/* ─────────────────────────────────────────────
+   GOLD OVERLAY
+   Overlay dourado semi-transparente
+   ───────────────────────────────────────────── */
+
+.gold-overlay {
+  position: relative;
+}
+
+.gold-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 168, 75, 0.05) 0%,
+    rgba(200, 168, 75, 0.10) 50%,
+    rgba(200, 168, 75, 0.03) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gold-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   DIAMOND PATTERN
+   Losangos sobrepostos — voz institucional (apostilas, certificados)
+   ───────────────────────────────────────────── */
+
+.pattern-diamond {
+  position: relative;
+}
+
+.pattern-diamond::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, var(--color-gray-dark) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-gray-dark) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-gray-dark) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-gray-dark) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pattern-diamond > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────
+   VIGNETTE
+   Escurecimento nas bordas — foco central
+   ───────────────────────────────────────────── */
+
+.vignette {
+  position: relative;
+}
+
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(5, 5, 5, 0.6) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.vignette > * {
+  position: relative;
+  z-index: 1;
+}

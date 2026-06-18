@@ -1,0 +1,418 @@
+# ─────────────────────────────────────────────
+# IDENTIFICAÇÃO DO DESIGN SYSTEM
+# ─────────────────────────────────────────────
+id: "omni-hypnosis-ds"
+name: "OMNI Hypnosis Design System"
+source: "Design Chief session — logo PDF, Legacy cover, apostila formação, Pinterest ref"
+default_theme: "dark-gold"
+
+themes:
+  dark-gold:
+    name: "Dark Gold"
+    description: "Tema principal — preto profundo com acentos dourados. Autoridade premium."
+    mode: "dark"
+  institutional:
+    name: "Institutional"
+    description: "Tema institucional — cinza escuro com textura diamond e ouro sóbrio."
+    mode: "dark"
+  epic:
+    name: "Epic"
+    description: "Tema épico — preto máximo com efeito dourado radiante. Michael como autoridade."
+    mode: "dark"
+
+metadata:
+  schema: omni.design-system
+  version: "1.0"
+  status: ACTIVE
+  owner: michael_arruda
+  created: "2026-03-20"
+  source: "Design Chief session — logo PDF, Legacy cover, apostila formação, Pinterest ref (Lidere Você), brandbook v3"
+  notes: |
+    Design system construído a partir de materiais existentes da marca.
+    Duas vozes visuais identificadas: ÉPICA (Legacy) e INSTITUCIONAL (Apostila).
+    Símbolo do infinito isolado (SVG) entregue em 2026-03-20 — assets/logo/symbol-infinity.svg.
+    Fonte Aharoni confirmada pelo founder. Ouro calibrado na capa Legacy.
+
+# ─────────────────────────────────────────────
+# 1. TOKENS DE COR
+# ─────────────────────────────────────────────
+color_tokens:
+
+  # Bases
+  black:
+    value: "#0D0D0D"
+    role: "Fundo primário — autoridade máxima"
+    usage: "Hero sections, fundo padrão, headers"
+
+  dark:
+    value: "#1A1A1A"
+    role: "Fundo secundário — profundidade"
+    usage: "Cards, seções alternadas, overlays"
+
+  dark_texture:
+    value: "#2D2D2D"
+    role: "Fundo com textura diamond — institucional"
+    usage: "Materiais impressos, apostilas, certificados"
+
+  # Ouro — família principal
+  gold_primary:
+    value: "#C8A84B"
+    role: "Acento primário — legado e autoridade"
+    usage: "Headlines, CTAs, bordas de destaque, ícones"
+    source: "Calibrado na capa OMNI Legacy (criação Michael Arruda)"
+
+  gold_light:
+    value: "#E8C86A"
+    role: "Ouro claro — hover, gradientes, brilho"
+    usage: "Hover states, efeitos de luz, highlights"
+
+  gold_deep:
+    value: "#9A7A2E"
+    role: "Ouro profundo — sombras, textos secundários em ouro"
+    usage: "Texto secundário em fundos claros, sombras de botão"
+
+  gold_gradient:
+    value: "linear-gradient(135deg, #9A7A2E 0%, #C8A84B 40%, #E8C86A 60%, #C8A84B 80%, #9A7A2E 100%)"
+    role: "Gradiente metálico — efeito premium"
+    usage: "Logo dourado, títulos principais, selos"
+
+  # Neutros claros
+  offwhite:
+    value: "#F5F0E8"
+    role: "Texto principal em fundos escuros"
+    usage: "Body text, subtítulos em dark backgrounds"
+
+  white:
+    value: "#FFFFFF"
+    role: "Máximo contraste — símbolo isolado"
+    usage: "Símbolo infinito em versão clara, texto em fundos ouro"
+
+  # Cinza
+  gray_mid:
+    value: "#6B6B6B"
+    role: "Texto terciário, separadores"
+    usage: "Captions, metadata, linhas divisórias"
+
+# ─────────────────────────────────────────────
+# 2. TIPOGRAFIA
+# ─────────────────────────────────────────────
+typography:
+
+  display:
+    family: "Aharoni"
+    fallback: "'Arial Black', sans-serif"
+    weight: "Bold"
+    style: "normal"
+    case: "UPPERCASE"
+    role: "Títulos épicos — voz principal da marca"
+    usage: "Hero headlines, nome do produto, seções principais"
+    color: gold_primary
+    sizes:
+      hero: "80-120px"
+      section: "48-64px"
+      card_title: "28-36px"
+    notes: "Confirmado pelo founder. Fonte da capa OMNI LEGACY. Usar sempre em caixa alta."
+    license:
+      status: "Microsoft proprietary — NÃO usar em produção web sem licença"
+      uso_permitido: "Print (Office/Windows) e materiais offline"
+
+  display_web_alternative:
+    family: "Oswald"
+    source: "Google Fonts — gratuita, open source (OFL)"
+    google_fonts_url: "https://fonts.google.com/specimen/Oswald"
+    import_css: "@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap')"
+    weight: "700"
+    case: "UPPERCASE"
+    letter_spacing: "0.04em"
+    role: "Substituto web do Aharoni — uso em produção digital"
+    similarity: "Alta — bold condensed, geométrico, autoridade similar"
+    usage: "Hero headlines em web/landing pages quando Aharoni não disponível"
+    color: gold_primary
+    sizes:
+      hero: "80-120px"
+      section: "48-64px"
+      card_title: "28-36px"
+    notes: |
+      Oswald 700 é o equivalente gratuito mais próximo do Aharoni para web.
+      Diferença mínima: Oswald é levemente mais condensado. Usar letter-spacing: 0.04em
+      para aproximar ao ritmo visual do Aharoni. Estratégia: Aharoni em prints e PDFs,
+      Oswald em web/digital.
+    alternativas_testadas:
+      - name: "Bebas Neue"
+        weight: "100% condensado — muito estreito para OMNI"
+        recomendacao: "NÃO usar — perde autoridade"
+      - name: "Anton"
+        weight: "Muito estreito e agressivo — não combina com heritage"
+        recomendacao: "NÃO usar"
+      - name: "Oswald"
+        recomendacao: "APROVADO — melhor equivalente gratuito"
+
+  display_italic:
+    family: "Cormorant Garamond"
+    fallback: "'Georgia', serif"
+    weight: "Light Italic"
+    style: "italic"
+    role: "Subtítulos elegantes — contraste com Aharoni"
+    usage: "Taglines, subtítulos de seção, citações do founder"
+    color: offwhite
+    sizes:
+      large: "24-32px"
+      medium: "18-22px"
+    notes: "Contraste refinado com a força do Aharoni. Ver 'O caminho para deixar o seu Legado' na capa Legacy."
+
+  body:
+    family: "Open Sans"
+    fallback: "sans-serif"
+    weight: "300-500"
+    role: "Texto corrido — legibilidade premium"
+    usage: "Parágrafos, bullets, descrições"
+    color: offwhite
+    sizes:
+      large: "18-20px"
+      medium: "15-16px"
+      small: "13-14px"
+    notes: "Já usada no site omnihypnosis.com.br. Manter consistência."
+
+  label:
+    family: "Open Sans"
+    weight: "600-700"
+    case: "UPPERCASE"
+    letter_spacing: "0.1em"
+    role: "Labels, tags, categorias"
+    usage: "Badges, etiquetas de seção, metadados"
+    color: gold_primary
+
+# ─────────────────────────────────────────────
+# 3. SÍMBOLOS E LOGO
+# ─────────────────────────────────────────────
+logo:
+
+  seal_complete:
+    description: "Selo circular OHTC — logo oficial da franquia global"
+    versions:
+      - name: "black"
+        file: "input/Logo OMNI preto - Vetor.pdf"
+        usage: "Materiais formais, documentos oficiais"
+      - name: "gold"
+        file: "PENDENTE — versão dourada (extraída da apostila)"
+        usage: "Capas de materiais, apresentações premium"
+    rule: "FIXO pela franquia. Não adaptar proporcões ou elementos."
+
+  symbol_infinity:
+    description: "Símbolo do infinito/corrente isolado — marca minimalista"
+    file: "assets/logo/symbol-infinity.svg"
+    source_file: "inputs/infinto-omni.svg"
+    viewbox: "0 0 566.93 226.77"
+    aspect_ratio: "~5:2 (landscape horizontal)"
+    status: ENTREGUE
+    usage: "Uso geral, social media, marca d'água, favicon, rodapés"
+    versions:
+      - background: dark
+        color: gold_primary
+        fill: "#C8A84B"
+        context: "Uso padrão — digital e impresso"
+        css: "fill: #C8A84B"
+      - background: gold
+        color: dark
+        fill: "#0D0D0D"
+        context: "Inversão em seções douradas"
+        css: "fill: #0D0D0D"
+      - background: any_dark
+        color: white
+        fill: "#FFFFFF"
+        context: "Versão silhouette — ver OMNI Legacy rodapé"
+        css: "fill: #F5F0E8"
+      - background: any
+        color: gold_gradient
+        fill: "url(#gold-gradient)"
+        context: "Versão premium — hero sections, capa de produtos"
+        css: "fill: url(#gold-gradient)"
+    implementation_notes: |
+      SVG é um path único. Para colorir, aplicar fill no elemento SVG ou no path.
+      Exemplo de uso inline com cor dourada:
+        <svg ... style="fill: #C8A84B">
+      Para versão marca d'água: fill: currentColor + opacity: 0.08
+    rule: "Preferência do founder para uso geral. Minimalista. Não adicionar texto junto."
+    notes: "Já em uso na capa OMNI Legacy (rodapé, versão branca). SVG entregue em 2026-03-20."
+
+# ─────────────────────────────────────────────
+# 4. TEXTURAS E PADRÕES
+# ─────────────────────────────────────────────
+textures:
+
+  diamond_pattern:
+    description: "Padrão geométrico de losangos sobrepostos em cinza escuro"
+    usage: "Apostilas, certificados, materiais impressos institucionais"
+    color_base: dark_texture
+    color_pattern: "#242424"
+    context: "Voz INSTITUCIONAL. Não usar em landing pages digitais — reservar para print."
+
+  radiant_glow:
+    description: "Halo dourado radiante emanando do centro — efeito cinematográfico"
+    usage: "Hero sections, capa de produtos premium, thumbnails"
+    reference: "Capa OMNI Legacy — efeito de luz dourada ao redor da silhueta"
+    context: "Voz ÉPICA. Usar com parcimônia — apenas em momentos de máximo impacto."
+
+# ─────────────────────────────────────────────
+# 5. VOZES VISUAIS
+# ─────────────────────────────────────────────
+visual_voices:
+
+  epic:
+    name: "Voz Épica"
+    trigger: "Michael como autoridade, lançamentos, produtos aspiracionais, conteúdo de transformação"
+    palette: [black, gold_primary, gold_light, offwhite]
+    typography: [display, display_italic]
+    textures: [radiant_glow]
+    mood: "Cinematográfico, herói, legado, poder, transformação"
+    reference_asset: "Capa OMNI Legacy (criação Michael Arruda)"
+    examples:
+      - "Hero de landing page FPH"
+      - "Thumbnails de YouTube/Reels"
+      - "Capa de produto Master/Legacy"
+      - "Stories de autoridade"
+
+  institutional:
+    name: "Voz Institucional"
+    trigger: "Credenciais, materiais de formação, documentos oficiais, ISO 9001"
+    palette: [dark_texture, gold_primary, gold_gradient, offwhite]
+    typography: [display, body]
+    textures: [diamond_pattern]
+    mood: "Autoridade global, método certificado, tradição, rigor"
+    reference_asset: "Apostila Manual de Treinamento Hipnoterapia OMNI"
+    examples:
+      - "Apostilas e manuais"
+      - "Certificados de conclusão"
+      - "Apresentações institucionais"
+      - "Materiais para parceiros"
+
+# ─────────────────────────────────────────────
+# 6. ESPAÇAMENTO E LAYOUT
+# ─────────────────────────────────────────────
+spacing:
+  base_unit: 8px
+  scale: [4, 8, 16, 24, 32, 48, 64, 96, 128]
+  section_padding: "80-120px vertical"
+  container_max_width: "1200px"
+  content_width: "720px"
+
+border_radius:
+  sharp: "0px"
+  soft: "4px"
+  card: "8px"
+  pill: "50px"
+  rule: "Preferência por bordas mais retas — reforça autoridade. Soft apenas em tags/badges."
+
+borders:
+  gold_accent:
+    style: "1px solid #C8A84B"
+    usage: "Cards de destaque, separadores premium"
+  gold_thick:
+    style: "2-3px solid #C8A84B"
+    usage: "Bordas de seção, destaques de quote"
+
+# ─────────────────────────────────────────────
+# 7. COMPONENTES BASE
+# ─────────────────────────────────────────────
+components:
+
+  button_primary:
+    background: gold_primary
+    text: dark
+    font: "Open Sans 700 uppercase"
+    letter_spacing: "0.08em"
+    border_radius: soft
+    padding: "16px 40px"
+    hover:
+      background: gold_light
+    example: "QUERO MINHA VAGA"
+
+  button_secondary:
+    background: transparent
+    border: "2px solid #C8A84B"
+    text: gold_primary
+    hover:
+      background: gold_primary
+      text: dark
+
+  card_dark:
+    background: dark
+    border: "1px solid #C8A84B"
+    border_radius: card
+    padding: "32px"
+    text: offwhite
+    icon_color: gold_primary
+
+  section_divider:
+    style: "1px solid"
+    color: gold_deep
+    opacity: 0.4
+
+  quote_block:
+    border_left: "3px solid #C8A84B"
+    padding_left: "24px"
+    font: display_italic
+    color: offwhite
+
+# ─────────────────────────────────────────────
+# 8. FOTOGRAFIA / DIREÇÃO DE IMAGEM
+# ─────────────────────────────────────────────
+photography:
+
+  authority_portrait:
+    subject: "Michael Arruda — rosto e autoridade da OMNI Brasil"
+    style: "Iluminação dramática, fundo escuro ou neutro escuro"
+    color_grade: "Tons quentes dourados, alto contraste"
+    mood: "Confiança, poder, acolhimento"
+    avoid: "Poses casuais, fundo claro, iluminação flat"
+
+  silhouette_epic:
+    style: "Silhueta em contraluz dourado — ver OMNI Legacy"
+    usage: "Hero de produtos, thumbnails épicos"
+    note: "Recurso já estabelecido e validado pelo founder"
+
+# ─────────────────────────────────────────────
+# 9. GAPS PENDENTES
+# ─────────────────────────────────────────────
+pending:
+  - item: "Versão SVG do logo OHTC dourado"
+    priority: MEDIUM
+    notes: "Arquivo não disponível. Opções: (a) solicitar SVG original à OMNI Global, (b) extrair e vetorizar da apostila em alta resolução."
+
+resolved:
+  - item: "SVG do símbolo infinito isolado"
+    resolved: "2026-03-20"
+    file: "assets/logo/symbol-infinity.svg"
+
+  - item: "Fotos oficiais de Michael Arruda"
+    resolved: "2026-03-20"
+    total: 25
+    catalog: "assets/photos/catalog.yaml"
+    top5: ["IMG_7036-alta.jpg", "IMG_7233-alta.jpg", "IMG_7046-alta.jpg", "IMG_7186-alta.jpg", "IMG_7215-alta.jpg"]
+
+  - item: "Fonte Aharoni — licença para uso web"
+    resolved: "2026-03-20"
+    solucao: "Oswald 700 (Google Fonts, gratuita, OFL) como substituto web. Aharoni mantida para print/PDF."
+    nota: "Ver typography.display_web_alternative no config.yaml"
+
+# ─────────────────────────────────────────────
+# COMPONENTE: PAGE HEADER (obrigatorio em toda pagina HTML)
+# ─────────────────────────────────────────────
+components:
+  page_header:
+    description: "Cabecalho padrao obrigatorio em todas as paginas HTML da OMNI Brasil"
+    logo_text: "OMNI BRASIL"
+    logo_font: "Oswald"
+    logo_weight: 700
+    logo_color: "#C8A84B"
+    logo_letter_spacing: "5px"
+    logo_transform: "uppercase"
+    subtitle_font: "Inter"
+    subtitle_color: "rgba(245,240,232,0.5)"
+    subtitle_letter_spacing: "2px"
+    subtitle_transform: "uppercase"
+    subtitle_size: "13px"
+    background: "#050505"
+    position: "sticky"
+    border_bottom: "1px solid rgba(200,168,75,0.15)"
+    reference: "changelog.html, backlog.html no repo omni-apresentacoes"

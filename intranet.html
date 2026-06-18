@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intranet OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111111; --panel2:#151510;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.55); --ink-faint:rgba(244,244,232,.3);
+    --gold:#C9A84C; --gold-deep:#A9842A; --gold-10:rgba(201,168,76,.12); --gold-line:rgba(201,168,76,.18);
+    --font:'Oswald','Arial Black',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+  /* HEADER */
+  header{padding:54px 24px 0;text-align:center;max-width:1180px;margin:0 auto}
+  .logo{font-family:var(--font);font-weight:700;font-size:26px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+  .subtitle{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--ink-soft);text-transform:uppercase;margin-top:8px}
+  h1{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,4vw,3rem);margin-top:26px;line-height:1.05}
+  h1 .gold{color:var(--gold)}
+  .lead{color:var(--ink-soft);max-width:640px;margin:14px auto 0;font-size:15px;line-height:1.6}
+
+  /* SEARCH */
+  .searchwrap{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--bg) 72%,transparent);padding:26px 24px 16px;max-width:1180px;margin:24px auto 0}
+  #search{width:100%;font-family:var(--mono);background:var(--panel);border:1px solid var(--gold-line);color:var(--ink);padding:15px 20px;border-radius:10px;font-size:15px;outline:none}
+  #search:focus{border-color:var(--gold)}
+  #search::placeholder{color:var(--ink-faint)}
+  .noresult{display:none;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:14px;padding:40px}
+
+  /* SECTIONS */
+  main{max-width:1180px;margin:0 auto;padding:0 24px 80px}
+  section{margin-top:46px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--gold-line);padding-bottom:12px;margin-bottom:22px}
+  .sec-head h2{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:1px}
+  .sec-head .count{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px}
+  .sec-head .desc{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-left:auto;letter-spacing:1px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  a.card{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:20px 22px;transition:border-color .2s,background .2s,transform .15s}
+  a.card:hover{border-color:var(--gold);background:#181712;transform:translateY(-2px)}
+  .card .top{display:flex;align-items:center;gap:11px}
+  .card .icon{font-size:21px;line-height:1}
+  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px;min-width:0}
+  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase;margin-left:auto;flex-shrink:0}
+  .card .body{color:var(--ink-soft);font-size:13.5px;line-height:1.55;margin-top:10px}
+
+  /* DESTAQUE — Central Estratégica */
+  .featured{margin:34px auto 0;max-width:1180px;padding:0 24px}
+  a.strat{display:flex;align-items:center;gap:20px;text-decoration:none;color:var(--ink);background:linear-gradient(135deg,#151008,#0e0e0e);border:1px solid rgba(220,159,66,.4);border-radius:14px;padding:24px 28px;transition:border-color .2s,transform .15s}
+  a.strat:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .strat .lock{font-size:32px}
+  .strat .txt h3{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:19px;letter-spacing:.5px}
+  .strat .txt p{color:var(--ink-soft);font-size:13px;margin-top:5px;line-height:1.5}
+  .strat .arrow{margin-left:auto;color:var(--gold);font-family:var(--mono);font-size:13px;letter-spacing:1px;white-space:nowrap}
+
+  footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint)}
+
+  @media(max-width:600px){
+    header{padding-top:36px}
+    .searchwrap{padding-top:18px}
+    .strat{flex-wrap:wrap}
+    .strat .arrow{margin-left:0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">OMNI BRASIL</div>
+  <div class="subtitle">Intranet · Uso Interno</div>
+  <h1>O <span class="gold">hub central</span> da OMNI</h1>
+  <p class="lead">Tudo da empresa em um lugar só: squads, marca, produtos e guias operacionais. Use a busca para encontrar rápido o que precisa.</p>
+</header>
+
+<!-- DESTAQUE: Central Estratégica -->
+<div class="featured" data-item>
+  <a class="strat" href="central-estrategica.html">
+    <span class="lock">🔒</span>
+    <span class="txt">
+      <h3>Central Estratégica</h3>
+      <p>Dados sensíveis — comercial, performance de funil, diagnósticos e planos. Acesso restrito por senha.</p>
+    </span>
+    <span class="arrow">ACESSAR →</span>
+  </a>
+</div>
+
+<div class="searchwrap">
+  <input type="text" id="search" placeholder="🔎 Buscar (ex: design, squad, produto, guia, dashboard)..." oninput="filter(this.value)">
+</div>
+
+<main>
+  <!-- SQUADS & AUTOMAÇÕES -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Squads &amp; Automações</h2><span class="count"></span>
+      <span class="desc">o enxame AIOX da OMNI</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="squads-do-dia-a-dia.html" data-item>
+        <div class="top"><span class="icon">🎯</span><span class="name">Squads do Dia-a-Dia</span><span class="badge">novo</span></div>
+        <div class="body">Mapa visual das squads que você mais usa, com função, como acionar e quando usar. Organizado por área.</div>
+      </a>
+      <a class="card" href="agentes-skills-omni.html" data-item>
+        <div class="top"><span class="icon">🤖</span><span class="name">Catálogo Agentes &amp; Skills</span><span class="badge">🔐</span></div>
+        <div class="body">Dashboard com busca: todas as squads, agentes core e skills do AIOX. Acesso por senha.</div>
+      </a>
+      <a class="card" href="guia-aiox.html" data-item>
+        <div class="top"><span class="icon">📘</span><span class="name">Guia AIOX — Iniciantes</span></div>
+        <div class="body">Guia completo de agentes, squads, comandos e skills. Ponto de partida para quem está começando.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- MARCA & DESIGN SYSTEM -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Marca &amp; Design System</h2><span class="count"></span>
+      <span class="desc">identidade visual oficial</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="design-system/index.html" data-item>
+        <div class="top"><span class="icon">🎨</span><span class="name">Design System OMNI</span><span class="badge">tokens</span></div>
+        <div class="body">Paleta, tipografia, componentes e padrões. A fonte da verdade visual para todo material da OMNI.</div>
+      </a>
+      <a class="card" href="https://omni-brasil-ds.vercel.app/brandbook/guidelines" target="_blank" data-item>
+        <div class="top"><span class="icon">📐</span><span class="name">Brandbook Interativo</span><span class="badge">vercel</span></div>
+        <div class="body">Identidade completa: Heritage Gold, tipografia, logos, tokens, movimento e produtos. App na Vercel.</div>
+      </a>
+      <a class="card" href="culture-deck-validacao.html" data-item>
+        <div class="top"><span class="icon">🧭</span><span class="name">Culture Deck</span><span class="badge">🔐</span></div>
+        <div class="body">Liderança, contratação, frameworks de decisão e símbolos da cultura OMNI.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUTOS -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Produtos</h2><span class="count"></span>
+      <span class="desc">o que a OMNI vende</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="portal-omniterapeuta-apresentacao-2026.html" data-item>
+        <div class="top"><span class="icon">🌐</span><span class="name">Portal do Omniterapeuta</span></div>
+        <div class="body">Apresentação do portal do aluno/omniterapeuta — funcionalidades e jornada.</div>
+      </a>
+      <a class="card" href="lp-formacao-omniterapia.html" data-item>
+        <div class="top"><span class="icon">🎓</span><span class="name">Formação em Omniterapia</span></div>
+        <div class="body">Landing da Formação (OBA) — o produto principal da OMNI Brasil.</div>
+      </a>
+      <a class="card" href="landing-alianca-de-ouro.html" data-item>
+        <div class="top"><span class="icon">💎</span><span class="name">Aliança de Ouro</span></div>
+        <div class="body">Mastermind exclusivo para empresários R$100k+/mês. Acesso por convite.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- GUIAS & OPERAÇÕES -->
+  <section data-sec>
+    <div class="sec-head">
+      <h2>Guias &amp; Operações</h2><span class="count"></span>
+      <span class="desc">como fazer no dia-a-dia</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="boas-praticas-de-onde-salvar.html" data-item>
+        <div class="top"><span class="icon">📂</span><span class="name">Onde Salvar — Boas Práticas</span></div>
+        <div class="body">Onde guardar cada tipo de arquivo no Google Drive para manter tudo organizado.</div>
+      </a>
+      <a class="card" href="tutorial-migracao-onedrive-google.html" data-item>
+        <div class="top"><span class="icon">🔄</span><span class="name">Migração OneDrive → Google</span></div>
+        <div class="body">Tutorial passo a passo de migração de arquivos para o Google Drive.</div>
+      </a>
+      <a class="card" href="guia-google-ads-setup.html" data-item>
+        <div class="top"><span class="icon">🟢</span><span class="name">Setup Google Ads</span></div>
+        <div class="body">Passo a passo para conectar o Google Ads ao Ad-Midas (4 etapas).</div>
+      </a>
+      <a class="card" href="guia-configuracao-meta-ads.html" data-item>
+        <div class="top"><span class="icon">🔵</span><span class="name">Setup Meta Ads</span></div>
+        <div class="body">Passo a passo para conectar o Meta Ads (Hypnoflash) ao AIOX.</div>
+      </a>
+      <a class="card" href="changelog.html" data-item>
+        <div class="top"><span class="icon">📝</span><span class="name">Changelog</span><span class="badge">🔐</span></div>
+        <div class="body">Evolução do projeto por data, autor e tipo. Atualizado automaticamente.</div>
+      </a>
+      <a class="card" href="backlog.html" data-item>
+        <div class="top"><span class="icon">💡</span><span class="name">Backlog de Ideias</span></div>
+        <div class="body">Ideias da equipe — lista e kanban. Conectado ao WhatsApp.</div>
+      </a>
+    </div>
+  </section>
+
+  <div class="noresult" id="noresult">Nenhum resultado para a busca.</div>
+</main>
+
+<footer>OMNI Brasil // Intranet // Uso Interno · 2026</footer>
+
+<script>
+  function filter(q){
+    q=(q||'').toLowerCase().trim();
+    var items=document.querySelectorAll('[data-item]');
+    var anyVisible=false;
+    items.forEach(function(el){
+      var hit=el.textContent.toLowerCase().indexOf(q)>-1;
+      el.style.display=hit?'':'none';
+      if(hit)anyVisible=true;
+    });
+    // esconde seções vazias
+    document.querySelectorAll('[data-sec]').forEach(function(sec){
+      var vis=sec.querySelectorAll('[data-item]');
+      var show=Array.prototype.some.call(vis,function(c){return c.style.display!=='none'});
+      sec.style.display=show?'':'none';
+    });
+    document.getElementById('noresult').style.display=anyVisible?'none':'block';
+  }
+</script>
+</body>
+</html>

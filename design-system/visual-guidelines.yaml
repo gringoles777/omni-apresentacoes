@@ -1,0 +1,287 @@
+# ============================================================================
+#  OMNI Hypnosis Training Center Brasil — Visual Design Guidelines
+#  Principle: Heritage Meets Precision
+#  Generated: 2026-03-20
+# ============================================================================
+
+metadata:
+  schema: omni.visual_guidelines
+  version: "1.0"
+  status: ACTIVE
+  design_principle: "Heritage Meets Precision"
+  archetype_expression:
+    sage_45: "Credibilidade, metodo, autoridade institucional"
+    caregiver_35: "Calor, transformacao pessoal, acolhimento"
+    explorer_20: "Novo caminho, descoberta, possibilidade"
+
+# ============================================================================
+#  LOGO
+# ============================================================================
+
+logo:
+  description: >
+    Selo circular institucional com texto "OMNI HYPNOSIS TRAINING CENTER"
+    ao redor, "EST. 1979" na base, acronimo "OHTC" no centro sobre um
+    escudo pentagonal, e simbolo de ondas/espirais representando hipnose.
+    Estetica de selo de certificacao — reforça heritage e autoridade.
+
+  usage_rules:
+    - "SEMPRE manter o selo completo — nunca recortar ou fragmentar"
+    - "Zona de exclusao minima: 1x a altura do texto 'EST. 1979'"
+    - "Sobre fundo escuro: usar versao gold (#DC9F42) ou branco (#F5F0E8)"
+    - "Sobre fundo claro: usar versao dark (#050505)"
+    - "Nunca rotacionar o selo"
+    - "Tamanho minimo: 48px de diametro em digital"
+
+  file_reference: "https://omnihypnosis.com.br/wp-content/uploads/2023/03/logo-omni-hypnosis.png"
+
+# ============================================================================
+#  COLOR SYSTEM — USAGE GUIDELINES
+# ============================================================================
+
+color_usage:
+
+  primary_gold:
+    hex: "#DC9F42"
+    when_to_use:
+      - "CTAs primarios (botoes de acao principal)"
+      - "Headlines em destaque sobre fundo escuro"
+      - "Bordas de certificacao e selos"
+      - "Icones de destaque"
+      - "Badges de 'ISO 9001' e credenciais"
+      - "Glow sutil em cards hover"
+    when_NOT_to_use:
+      - "Textos longos de corpo — usar cream (#F5F0E8)"
+      - "Fundos solidos extensos — gold e accent, nao background"
+      - "Mais de 2 elementos gold simultaneos por viewport"
+
+  foundation_dark:
+    hex: "#050505"
+    when_to_use:
+      - "Background principal do site/brandbook"
+      - "Base de contraste para todo o design system"
+    note: >
+      O dark mode e o modo PADRAO da OMNI, nao uma alternativa.
+      Heritage gold sobre fundo escuro e a expressao primaria da marca.
+
+  heritage_cream:
+    hex: "#F5F0E8"
+    when_to_use:
+      - "Texto principal sobre fundo escuro"
+      - "Titulos secundarios que nao usam gold"
+      - "Texto de corpo"
+    why_not_white: >
+      Branco puro (#FFFFFF) e frio demais para uma marca com
+      35% Caregiver. Heritage cream tem calor de documento antigo,
+      de certificado. Comunica legado.
+
+  therapeutic_teal:
+    hex: "#2A9D8F"
+    when_to_use:
+      - "Secoes sobre hipnoterapia e conteudo terapeutico"
+      - "Depoimentos de transformacao"
+      - "Elementos que ativam Caregiver/Explorer"
+    when_NOT_to_use:
+      - "Paginas institucionais (usar gold)"
+      - "CTAs primarios (usar gold)"
+
+  navy:
+    hex: "#0A1628"
+    when_to_use:
+      - "Secoes institucionais premium"
+      - "Background alternativo para separacao visual"
+      - "Certificacao e documentos oficiais"
+
+# ============================================================================
+#  TYPOGRAPHY GUIDELINES
+# ============================================================================
+
+typography_usage:
+
+  headline_patterns:
+    hero:
+      font: "DM Serif Display"
+      weight: 400
+      size: "clamp(2.5rem, 5vw, 4rem)"
+      letter_spacing: "-0.02em"
+      color: "var(--bb-accent) [gold] ou var(--bb-cream)"
+      example: "46 Anos de Metodo. Uma Linhagem. Um Padrao."
+      note: "Serif display comunica heritage. Usar para statements institucionais."
+
+    section_title:
+      font: "DM Serif Display"
+      weight: 400
+      size: "clamp(1.5rem, 3vw, 2.25rem)"
+      letter_spacing: "-0.01em"
+      color: "var(--bb-cream)"
+
+    label:
+      font: "IBM Plex Mono"
+      weight: 500
+      size: "0.6rem"
+      letter_spacing: "0.08em"
+      text_transform: "uppercase"
+      color: "var(--bb-accent)"
+      example: "ISO 9001 CERTIFIED | EST. 1979"
+      note: "Mono labels em gold comunicam precisao tecnica (Sage)."
+
+  body_patterns:
+    primary:
+      font: "Inter"
+      weight: 400
+      size: "clamp(0.9rem, 1.2vw, 1.05rem)"
+      line_height: 1.65
+      color: "var(--bb-cream)"
+      note: "Line-height generoso (1.65) para leitura confortavel — Caregiver."
+
+    secondary:
+      font: "Inter"
+      weight: 400
+      size: "clamp(0.75rem, 1vw, 0.85rem)"
+      line_height: 1.5
+      color: "var(--color-text-secondary) [cream 70%]"
+
+  forbidden_combinations:
+    - "DM Serif Display em body text — serif e apenas display"
+    - "Inter Bold (700) em headlines — usar DM Serif Display"
+    - "Qualquer font-weight acima de 400 em DM Serif Display"
+    - "Letter-spacing negativo em mono labels"
+
+# ============================================================================
+#  COMPONENT EXPRESSION
+# ============================================================================
+
+component_guidelines:
+
+  buttons:
+    primary:
+      background: "var(--bb-accent) [gold]"
+      text: "var(--bb-dark)"
+      hover: "box-shadow: 0 0 24px rgba(220, 159, 66, 0.3)"
+      font: "IBM Plex Mono, 0.65rem, weight 500, uppercase"
+      padding: "0.65rem 1.5rem"
+      radius: "0px"
+      note: >
+        Botoes primarios sao gold solido com texto escuro. SEM border-radius —
+        cantos retos comunicam precisao institucional (Sage + ISO 9001).
+        O site atual usa 15px radius — estamos deliberadamente quebrando isso
+        para maior alinhamento com Heritage Meets Precision.
+
+    secondary:
+      background: "transparent"
+      border: "1px solid var(--bb-border)"
+      text: "var(--bb-cream)"
+      hover: "border-color: var(--bb-accent); color: var(--bb-accent)"
+      note: "Borda sutil que ganha gold no hover."
+
+  cards:
+    default:
+      background: "var(--bb-surface)"
+      border: "1px solid var(--bb-border)"
+      hover: "inset 0 0 0 1px var(--bb-accent-15)"
+      radius: "0px para institutional, 8px para conteudo"
+      note: >
+        Cards institucionais (credenciais, ISO, timeline) devem ter
+        cantos retos. Cards de conteudo (blog, depoimentos) podem
+        ter radius de 8px para suavizar (Caregiver).
+
+  badges:
+    iso_badge:
+      background: "var(--bb-accent-10)"
+      text: "var(--bb-accent)"
+      border: "1px solid var(--bb-accent-20)"
+      font: "IBM Plex Mono, 0.5rem, uppercase"
+      example: "ISO 9001"
+      note: "Badges de credencial SEMPRE em gold — e o maior asset visual."
+
+    therapeutic:
+      background: "rgba(42, 157, 143, 0.10)"
+      text: "#2A9D8F"
+      border: "1px solid rgba(42, 157, 143, 0.20)"
+      example: "HIPNOTERAPIA"
+
+  dividers:
+    preferred: "divider-tech"
+    note: >
+      Dividers tech (fade-in-from-center) com gold sao a expressao
+      padrao. Comunicam precisao e limpeza. Usar divider-dashed para
+      separacao de conteudo editorial.
+
+# ============================================================================
+#  PATTERN & TEXTURE USAGE
+# ============================================================================
+
+patterns:
+  preferred:
+    - name: "pattern-crosshair-grid"
+      when: "Backgrounds de secoes hero e destaque"
+      why: "Comunica precisao tecnica e rigor — Sage puro"
+
+    - name: "pattern-dot-grid"
+      when: "Backgrounds de secoes de conteudo"
+      why: "Mais leve, permite foco no texto"
+
+    - name: "frame-bracket"
+      when: "Destaque de quotes, certificacoes, dados de prova"
+      why: "HUD brackets em gold reforçam o frame de 'documento certificado'"
+
+  avoid:
+    - name: "pattern-hazard"
+      why: "Tom de alerta/perigo conflita com Caregiver (cuidado, conforto)"
+
+    - name: "pattern-circuit-board"
+      why: "Estetica tech/startup conflita com Heritage (legado institucional)"
+
+# ============================================================================
+#  IMAGERY & PHOTOGRAPHY DIRECTION
+# ============================================================================
+
+imagery:
+  tone: >
+    Fotografia com tratamento warm-neutral. Nunca fria/clinica pura.
+    Sombras profundas (navy) com highlights gold. Pessoas reais em
+    momentos de conexao — nao poses corporativas artificiais.
+
+  subjects:
+    primary: "Profissionais maduros em momento de aprendizado ou pratica"
+    secondary: "Ambientes de formacao — salas, certificados, diplomas"
+    tertiary: "Simbolos de legado — selos, documentos, linhagem"
+
+  color_treatment:
+    shadows: "Shift para navy (#0A1628)"
+    highlights: "Shift para gold quente (#E8B96A)"
+    saturation: "Levemente desaturada — nao vibrante, nao cinza"
+    contrast: "Medio-alto — definicao sem agressividade"
+
+  forbidden:
+    - "Imagens de stock genericas com modelos sorrindo artificialmente"
+    - "Estetica esoterica/mistica (mandalas, cosmos, aura)"
+    - "Neon ou cores vibrantes"
+    - "Imagens com tratamento frio/azul puro"
+
+# ============================================================================
+#  DO / DON'T QUICK REFERENCE
+# ============================================================================
+
+quick_reference:
+  DO:
+    - "Usar gold (#DC9F42) como accent principal em TODOS os temas"
+    - "Serif (DM Serif Display) para headlines institucionais"
+    - "Mono labels em gold para credenciais e dados"
+    - "Cantos retos para componentes institucionais"
+    - "Dark mode como padrao — gold sobre escuro"
+    - "Heritage cream como texto base — nunca branco puro"
+    - "Bracket frames para destacar prova social"
+    - "Citacoes de linhagem: Dave Elman, Gerald F. Kein, OMNI"
+    - "ISO 9001 como elemento visual recorrente (badge, label)"
+
+  DONT:
+    - "Usar bounce/spring animations — conflita com Sage"
+    - "Usar hazard patterns — conflita com Caregiver"
+    - "Escrever texto em cores vibrantes/neon — conflita com Heritage"
+    - "Usar emojis na interface — conflita com formalidade institucional"
+    - "Copiar estetica de startup tech — OMNI tem 46 anos de legado"
+    - "Misturar serif e sans-serif na mesma headline"
+    - "Usar teal como CTA primario — gold e SEMPRE o CTA primario"
+    - "Imagens com estetica mistica/esoterica"
+    - "Gradientes coloridos — apenas gold-to-transparent ou navy-to-dark"
