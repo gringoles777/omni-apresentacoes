@@ -1143,7 +1143,6 @@
         <input type="hidden" name="act" value="sub" />
         <input type="hidden" name="v" value="2" />
         <input type="hidden" name="or" value="115f9d6a-2eb1-40bc-895f-e82c2cca343c" />
-        <input type="hidden" name="returnUrl" value="https://cursos.omnihypnosis.com.br/obrigado-formacao-hipnoterapeuta-omni" />
 
         <label for="fullname">Nome completo <span class="required">*</span></label>
         <input type="text" id="fullname" name="fullname" placeholder="Seu nome completo" required />
@@ -1239,6 +1238,29 @@
       if (el) el.value = val;
     }
   }
+})();
+</script>
+
+<!-- ═══ FORM SUBMIT → AC + REDIRECT ═══ -->
+<script>
+(function() {
+  var form = document.getElementById('_form_terapeutas_');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('.submit-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'ENVIANDO...'; }
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      mode: 'no-cors'
+    }).then(function() {
+      window.location.href = 'https://cursos.omnihypnosis.com.br/obrigado-formacao-hipnoterapeuta-omni';
+    }).catch(function() {
+      window.location.href = 'https://cursos.omnihypnosis.com.br/obrigado-formacao-hipnoterapeuta-omni';
+    });
+  });
 })();
 </script>
 
