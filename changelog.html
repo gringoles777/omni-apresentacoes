@@ -2776,6 +2776,35 @@ const CAPABILITIES = [
     <span>Log:</span> <code>auto_reply.log</code> &nbsp;|&nbsp;
     <span>Estado:</span> <code>state.json</code>
   </div>
+</div>`},
+  {id:"CAP-052",nome:"Squad youtube-extractor — Destilador de Conhecimento de Canais",categoria:"squad-aiox",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"20/06",atualizado:"20/06",
+    link:"squads/youtube-extractor/",
+    depende:["yt-dlp (inventário local)","Apify (transcrição via actor)","CLI Claude","squad-creator-pro (lar dos clones/minds)"],dependentes:[],
+    descricao:"Squad AIOX que transforma um canal do YouTube em base de conhecimento estruturada em pt-BR e, opcionalmente, num 'clone' (mind) que pensa como a fonte. Pipeline: inventaria o canal sem login (contorna o anti-bot), tria por métrica objetiva (mais vistos/recentes), extrai as transcrições via Apify, destila (traduz + agrupa por tema + dedup por cluster + extrai heurísticas implícitas — o 'anti-papagaio'), mapeia e rankeia as referências citadas (livros, autores, ferramentas e outros canais), oferece recursão controlada nessas referências e, por fim, gera o clone. Princípio: Curadoria > Volume. Validado de ponta a ponta com o canal @tuann_lee (11 temas + 38 heurísticas + 13 frameworks + 47 referências; clone em minds/tuan_lee_viral).",
+    habilidades:[
+      "Inventaria o canal sem login (yt-dlp --flat-playlist; contorna o anti-bot do YouTube)",
+      "Triagem por métrica objetiva (mais vistos / mais recentes) — valor real filtrado só após a transcrição",
+      "Extrai transcrições via Apify (actor pintostudio~youtube-transcript-scraper)",
+      "Traduz para pt-BR preservando o jargão e agrupa por tema induzido do conteúdo",
+      "Dedup semântico DENTRO de cada tema (não global), preservando nuances de contexto",
+      "Extrai heurísticas implícitas + frameworks com rastreabilidade de fonte (anti-papagaio)",
+      "Mapeia e rankeia referências citadas, incluindo outros canais como candidatos a aprofundamento",
+      "Recursão controlada nas referências (padrão 0, máx 2 níveis, sempre com aprovação)",
+      "Gera clone V1 (system prompt denso) com teste de fidelidade e mapa de lacunas",
+      "Estima e apresenta custo/escopo antes de gastar Apify"
+    ],
+    apis:["yt-dlp","Apify API (APIFY_TOKEN no .env/vault)","Claude CLI (tradução, clustering, dedup, heurísticas, clone)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar</div>
+  <div class="note-step"><div class="note-num">1</div><div>Ativar o squad e mandar o canal: <code>*extract https://youtube.com/@canal</code></div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Aprovar o escopo/custo, deixar destilar, ver as referências e decidir se quer o clone</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>O clone nasce como um mind em <code>squads/squad-creator-pro/minds/{slug}/</code> (junto com Alan Nicolas)</div></div>
+  <div class="note-ids">
+    <span>Squad:</span> <code>squads/youtube-extractor/</code> &nbsp;|&nbsp;
+    <span>Base:</span> <code>outputs/youtube-{slug}/</code> &nbsp;|&nbsp;
+    <span>Clone:</span> <code>squad-creator-pro/minds/{slug}/</code>
+  </div>
 </div>`}
 ];
 
