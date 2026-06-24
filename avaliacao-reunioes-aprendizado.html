@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolução da Squad Avaliação de Reuniões — Diagnóstico Dona System</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#050505;--dark:#0D0D0D;--elev:#1A1A1A;--tex:#2D2D2D;
+    --gold:#C8A84B;--gold-light:#E8C86A;--gold-deep:#9A7A2E;
+    --cream:#F5F0E8;--cream70:rgba(245,240,232,.70);--cream50:rgba(245,240,232,.50);
+    --teal:#2A9D8F;--navy:#0A1628;--red:#C0564B;
+    --grad-gold:linear-gradient(135deg,#9A7A2E,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.65;font-size:16px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{background:linear-gradient(180deg,var(--navy),var(--black));border-bottom:1px solid var(--gold-deep);padding:64px 0 52px}
+  .kicker{font-family:'IBM Plex Mono',monospace;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:18px}
+  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:44px;line-height:1.1;text-transform:uppercase;letter-spacing:.5px}
+  h1 .g{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .sub{font-family:'DM Serif Display',serif;color:var(--cream70);font-size:20px;margin-top:16px;max-width:720px}
+  .meta{margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--cream50)}
+  section{padding:48px 0;border-bottom:1px solid var(--tex)}
+  h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:1px;color:var(--gold-light);margin-bottom:8px}
+  h2 .n{color:var(--gold-deep);margin-right:12px}
+  .lead{color:var(--cream70);margin-bottom:28px;max-width:780px}
+  .card{background:var(--dark);border:1px solid var(--tex);border-radius:10px;padding:24px 26px;margin-bottom:16px}
+  .card.gold{border-color:var(--gold-deep)}
+  .card.red{border-color:var(--red)}
+  .card h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:18px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;color:var(--cream)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .score{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .dial{font-family:'Oswald',sans-serif;font-weight:700;font-size:60px;line-height:1}
+  .dial small{font-size:22px;color:var(--cream50)}
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--gold-deep);color:var(--gold-light);margin:2px 4px 2px 0}
+  .pill.t{border-color:var(--teal);color:var(--teal)}
+  .pill.r{border-color:var(--red);color:var(--red)}
+  ul{list-style:none}
+  li{padding:7px 0 7px 26px;position:relative;color:var(--cream70)}
+  li::before{content:"›";position:absolute;left:6px;color:var(--gold);font-weight:700}
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .step{flex:1;min-width:150px;background:var(--elev);border:1px solid var(--tex);border-radius:8px;padding:14px}
+  .step .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px}
+  .step .t{font-family:'Oswald',sans-serif;font-size:15px;margin:6px 0 4px;color:var(--cream)}
+  .step .d{font-size:13px;color:var(--cream50)}
+  .arrow{align-self:center;color:var(--gold-deep);font-size:20px}
+  .motor{border-left:3px solid var(--gold);padding-left:20px;margin-bottom:24px}
+  .motor.m2{border-color:var(--teal)}
+  strong{color:var(--cream)}
+  code{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gold-light);background:var(--elev);padding:1px 6px;border-radius:4px}
+  .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal)}
+  .check{color:var(--teal);font-weight:700}
+  .todo{color:var(--gold)}
+  footer{padding:40px 0 60px;color:var(--cream50);font-size:13px;font-family:'IBM Plex Mono',monospace}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Consultoria @dona-system · OMNI Brasil</div>
+    <h1>Avaliação de Reuniões<br><span class="g">aprende sozinha</span></h1>
+    <p class="sub">De avaliadora estática a sistema que aprende com as próprias reuniões e com os treinamentos da Rafa — para virar a melhor avaliadora e o melhor repertório de venda da OMNI.</p>
+    <div class="meta">Diagnóstico + arquitetura · 23 jun 2026 · metodologia Dona System (Isis Moreira)</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">01</span>Diagnóstico</h2>
+    <p class="lead">Antes de propor, a Dona diagnostica. A squad fazia muito bem o que se propunha a fazer — mas tinha um teto invisível.</p>
+    <div class="score card gold">
+      <div>
+        <div class="dial">6<small>/10</small></div>
+        <div class="tag">como sistema que aprende</div>
+      </div>
+      <div style="flex:1;min-width:260px">
+        <p><strong>Como avaliadora operacional</strong> ela já valia ~8: pipeline sólido, idempotente, coaching v3 com trechos reais, alerta de falha. <strong>Como organismo que evolui</strong>, valia ~2 — e era esse o pedido.</p>
+      </div>
+    </div>
+    <div class="card red">
+      <h3>O problema mais caro (north star da Dona)</h3>
+      <p>Em <code>run-evaluation.py</code>, cada avaliação rica — gaps, trechos exatos, forças, objeções e depoimentos citados — era usada para gerar os 2 e-mails e <strong>descartada</strong>. O <code>log.jsonl</code> guardava só nota e status. <strong>Sem memória do que avalia, nenhum aprendizado era possível.</strong> Esse era o gargalo: não adiantava sofisticar o resto sem resolver isto primeiro.</p>
+      <div style="margin-top:12px">
+        <span class="pill r">RP-02 esquece / repete</span>
+        <span class="pill r">AP-02 sem memória persistente</span>
+        <span class="pill">não pular etapas: base antes do enfeite</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">02</span>A arquitetura — dois motores, uma memória</h2>
+    <p class="lead">Os dois pedidos da Rafa (aprender com as próprias reuniões + aprender com treinamentos e cursos) viram dois motores que alimentam o mesmo conhecimento, reinjetado em toda avaliação.</p>
+
+    <div class="motor">
+      <h3 style="font-family:'Oswald';color:var(--gold-light);font-size:18px;text-transform:uppercase;margin-bottom:6px">Motor 1 — aprende sozinha com as próprias reuniões</h3>
+      <p style="color:var(--cream70);margin-bottom:10px;font-size:15px">Totalmente autônomo: ela lê as reuniões que já avalia, identifica as melhores quebras e aprende o produto — <strong>sem você alimentar nada</strong>.</p>
+      <div class="flow">
+        <div class="step"><div class="lbl">extrai</div><div class="t">Objeção → resposta</div><div class="d">com a transcrição na mão: o que o lead objetou, como o closer respondeu, se funcionou</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="lbl">sintetiza</div><div class="t">Elege as melhores</div><div class="d">agrupa objeções, escolhe as quebras que fizeram fechar; aprende fatos do produto</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="lbl">escreve</div><div class="t">Direto no conhecimento</div><div class="d">com evidência de qual reunião veio; versionado p/ você auditar</div></div>
+      </div>
+    </div>
+
+    <div class="motor m2">
+      <h3 style="font-family:'Oswald';color:var(--teal);font-size:18px;text-transform:uppercase;margin-bottom:6px">Motor 2 — aprende com especialistas</h3>
+      <div class="flow">
+        <div class="step"><div class="lbl">sobe</div><div class="t">Transcrição de treino/curso</div><div class="d">data/training/inbox/</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="lbl">destila</div><div class="t">Princípios acionáveis</div><div class="d">cada um ligado ao bloco FPH que reforça</div></div>
+        <div class="arrow">→</div>
+        <div class="step"><div class="lbl">incorpora</div><div class="t">Playbook cresce</div><div class="d">afia avaliação e repertório de venda</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:8px">
+      <h3>O elo que fecha o ciclo</h3>
+      <p>Os dois motores alimentam <code>knowledge/</code> + <code>memory/</code>. Antes de cada avaliação, o <code>knowledge_base.py</code> injeta no prompt FPH: as <strong>objeções e melhores quebras</strong> da OMNI, os <strong>depoimentos por perfil</strong>, as <strong>lições já aprendidas</strong> e o <strong>histórico daquela closer</strong> (o STEP 6 do FPH, que antes ficava no vácuo). A avaliadora deixa de começar do zero toda vez — ela lembra.</p>
+      <p style="margin-top:10px"><span class="tag">Segurança:</span> base vazia → contexto vazio → avaliação idêntica à de hoje. Zero regressão. Nada altera a régua FPH nem os pesos.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">03</span>Os 5 tipos de memória (Dona System)</h2>
+    <p class="lead">A squad ganhou memória persistente real, não um log.</p>
+    <div class="grid3">
+      <div class="card"><h3>Lessons</h3><p class="d" style="color:var(--cream70)">Gaps que se repetem e abordagens que funcionaram — destilados das avaliações.</p></div>
+      <div class="card"><h3>People</h3><p style="color:var(--cream70)">Perfil evolutivo de cada closer: forças, gaps crônicos, tendência de score.</p></div>
+      <div class="card"><h3>Pending</h3><p style="color:var(--cream70)">O que falta curar e os candidatos auto-extraídos aguardando a Rafa.</p></div>
+      <div class="card"><h3>Knowledge</h3><p style="color:var(--cream70)">Produto, objeções, depoimentos e playbook — o conhecimento curado.</p></div>
+      <div class="card"><h3>Decisions</h3><p style="color:var(--cream70)">Por que a squad avalia assim e como o aprendizado evolui.</p></div>
+      <div class="card gold"><h3>+ Índice + Ciclo</h3><p style="color:var(--cream70)">MEMORY.md liga tudo. Ciclo: registrar → consolidar → consultar no boot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2><span class="n">04</span>O que já está pronto · o que depende de você</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="color:var(--teal)">Entregue e testado <span class="check">✓</span></h3>
+        <ul>
+          <li>Persistência de toda avaliação (o elo que faltava)</li>
+          <li>Consolidador de aprendizado (people / lessons / candidatos)</li>
+          <li>Base de conhecimento + injeção no prompt FPH</li>
+          <li>Ingestão de treinamentos e cursos de vendas</li>
+          <li>3 comandos novos: <code>*consolidar</code>, <code>*ingerir-treino</code>, <code>*conhecimento</code></li>
+          <li>Pipeline validado ponta a ponta · zero regressão</li>
+        </ul>
+      </div>
+      <div class="card gold">
+        <h3>Próximos passos <span class="todo">→</span></h3>
+        <ul>
+          <li><strong>Deploy na VPS</strong> + cron semanal de <code>*consolidar</code> (liga o aprendizado automático)</li>
+          <li><strong>Acumular avaliações</strong> — quanto mais reuniões, mais afiado o conhecimento</li>
+          <li><strong>Auditar pelo diff</strong> quando quiser: marque as melhores quebras como <code>approved</code> (ficam fixas)</li>
+          <li><strong>Opcional:</strong> subir um treinamento seu pro Motor 2 turbinar com sua didática</li>
+        </ul>
+        <p style="margin-top:10px;color:var(--cream70);font-size:14px">A curadoria deixou de ser pré-requisito — ela aprende sozinha. Você entra só para auditar e fixar o que for ouro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Squad avaliacao-reunioes v1.1.0 · evolução desenhada pela @dona-system · curadoria: Rafa Mendes<br>
+    Resolve o problema mais caro primeiro. Conserta a base antes do enfeite. Não pula etapas.
+  </div>
+</footer>
+</body>
+</html>
