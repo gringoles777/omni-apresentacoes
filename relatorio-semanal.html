@@ -1,30 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<!-- OMNI-GATE-START -->
-<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
-<script>(function(){
-  var K='omni_gate_v1';
-  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
-  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
-  function build(){
-    if(document.getElementById('omni-gate'))return;
-    var o=document.createElement('div');o.id='omni-gate';
-    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
-    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
-    document.body.appendChild(o);
-    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
-    function tryit(){
-      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
-      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
-    }
-    btn.addEventListener('click',tryit);
-    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
-    pw.focus();
-  }
-  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
-})();</script>
-<!-- OMNI-GATE-END -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OMNI Brasil — Relatorio Semanal</title>
@@ -109,26 +85,23 @@
 <div id="app">
   <header>
     <h1>Relatorio Semanal</h1>
-    <div class="period">Periodo: 06/04/2026 — 13/04/2026</div>
+    <div class="period">Periodo: 22/06/2026 — 29/06/2026</div>
   </header>
 
   <div class="stats-bar">
-    <div class="stat-card"><div class="num">87</div><div class="label">Commits</div></div>
-    <div class="stat-card"><div class="num">26</div><div class="label">Novidades</div></div>
-    <div class="stat-card"><div class="num">10</div><div class="label">Correcoes</div></div>
-    <div class="stat-card"><div class="num">27</div><div class="label">Manutencao</div></div>
-    <div class="stat-card"><div class="num">14</div><div class="label">Docs</div></div>
+    <div class="stat-card"><div class="num">190</div><div class="label">Commits</div></div>
+    <div class="stat-card"><div class="num">112</div><div class="label">Novidades</div></div>
+    <div class="stat-card"><div class="num">38</div><div class="label">Correcoes</div></div>
+    <div class="stat-card"><div class="num">15</div><div class="label">Manutencao</div></div>
+    <div class="stat-card"><div class="num">22</div><div class="label">Docs</div></div>
   </div>
 
   <div class="authors-section">
     <h2>Por Pessoa</h2>
-    <div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>36</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#2A9D8F'></span>Rafa Mendes: <strong>23</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#E87461'></span>Julia: <strong>13</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#6B6B6B'></span>AIOXsquad-bot: <strong>7</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>6</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#9B59B6'></span>Fernanda: <strong>1</strong> commits</div>
-<div class='stat-author'><span class='stat-dot' style='background:#6B6B6B'></span>AIOXsquad: <strong>1</strong> commits</div>
+    <div class='stat-author'><span class='stat-dot' style='background:#2A9D8F'></span>Rafa Mendes: <strong>97</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>50</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#E87461'></span>Julia: <strong>38</strong> commits</div>
+<div class='stat-author'><span class='stat-dot' style='background:#C8A84B'></span>Michael Arruda: <strong>5</strong> commits</div>
   </div>
 
   <div class="entries">
@@ -137,288 +110,12 @@
           <div class="entry-avatar" style="background:#C8A84B">MA</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">13/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">13/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">13/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-omniterapeuta</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">aplicar spec v1.2 consolidada</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-omniterapeuta</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">fechar MOD-PAC reformulado + Area Admin + Caminho A</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-omniterapeuta</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">atualizar decisoes pendentes — modulo IG</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-omniterapeuta</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">salvar decisoes pendentes para spec v1.2</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-omniterapeuta</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">spec v1.1 + rename terapeuta -&gt; omniterapeuta</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">sync: update from source (847d201 fix: restore claude-code-mastery validation (#2))</div>
-            <div class="entry-author">AIOXsquad-bot</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">sync: update from source (8fe867f fix: restore runner-lib for validate-squad)</div>
-            <div class="entry-author">AIOXsquad-bot</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">sync: update from source (915f834 feat(clickup-ops): add Claude Code slash commands for clickup-ops squad)</div>
-            <div class="entry-author">AIOXsquad-bot</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
               <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>w0003</span>
-              <span class="entry-date">10/04</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
             </div>
-            <div class="entry-msg">refatorar loop + corrigir modelo IA + validar primeiro disparo</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>gerenciador</span>
-              <span class="entry-date">10/04</span>
-            </div>
-            <div class="entry-msg">auto-expand campanhas/conjuntos + fallback share por clicks</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>dashboard</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">paginação completa Meta API + SDRs date filter + render functions</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              <span class=entry-scope>google</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">data(google): snapshot Google Ads abril 2026 (extraído por Michael)</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              <span class=entry-scope>meta</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">audit(meta): auditoria UTM completa — 4 contas, 90 ads, 2 bugs críticos corrigidos</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>aiox</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">atualizar agents e settings do framework</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>meta</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">adicionar fbAds a META_SOURCES (legacy utm_source)</div>
-            <div class="entry-author">Rafa Mendes</div>
+            <div class="entry-msg">regressões da 2ª passada de UX (textarea, buffering, código morto, confirmar)</div>
+            <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
         <div class="entry">
@@ -426,46 +123,262 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">rodada de UX (usuário exigente) — player, navegação, chat, premium, onboarding</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">capa padrao automatica por canal no daily</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">capa no audio do dia / pilula do dia (miniatura + player)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">capas padrao Audio do Dia (Mente Plena) e Pilula Diaria</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">editar nome/email, voltar+swipe no onboarding, concordância de gênero</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">remove travessões (—) de todo texto visível ao usuário</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">login rápido no teste (botões Admin/Cliente/Terapeuta)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">UI de plano do terapeuta (limite de áudios + vídeo só Pro)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">frontend de planos — cadeado premium, modal de upgrade, painel admin</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">gates do plano TERAPEUTA (áudios, vídeo, capa, categorias, clientes)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">gates do plano CLIENTE (chat trial, áudio premium, download)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">fundação de planos/tiers (cliente free/pago + terapeuta free/essential/pro)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">177 pilulas de terapeuta (canal therapist) + fila de controle</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">28/06</span>
+            </div>
+            <div class="entry-msg">169 transcricoes de audio diario na voz do Michael (insight-transcricao)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">27/06</span>
+            </div>
+            <div class="entry-msg">fixes menores do pente fino (feedback, offline, sw, validações)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">27/06</span>
+            </div>
+            <div class="entry-msg">pente fino pré-lançamento — reconciliação repo/teste + UX e robustez</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>claude</span>
+              <span class="entry-date">27/06</span>
+            </div>
+            <div class="entry-msg">novas permissoes em settings.local.json</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">27/06</span>
+            </div>
+            <div class="entry-msg">herda cor clara em button.card para legibilidade no tema escuro</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>portal+mentor</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">presenca nas aulas + abas Formacao/Mentoria</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">importacao dos alunos Black + cruzamento com a formacao</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
               <span class=entry-scope>capabilities</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">registrar CAP-017 a CAP-025 + corrigir IDs duplicados</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>dashboard</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">AQRC conta todos os pipelines + Gerenciador com nível adset</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>dashboard</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">funil cumulativo + closer field + endpoint gerenciador</div>
-            <div class="entry-author">Rafa Mendes</div>
+            <div class="entry-msg">CAP-063 captacao de cases dos alunos (portal -&gt; omni studio)</div>
+            <div class="entry-author">Julia</div>
           </div>
         </div>
         <div class="entry">
           <div class="entry-avatar" style="background:#E87461">JU</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#9B59B6">♻️ Refatoracao</span>
-              <span class=entry-scope>portal-terapeuta</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>portal</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">mover docs para apps/portal-do-terapeuta/</div>
+            <div class="entry-msg">banco de contexto do aluno + visao por categoria (formacao x mentoria)</div>
             <div class="entry-author">Julia</div>
           </div>
         </div>
@@ -474,10 +387,106 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>calendar</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">scripts de Google Calendar para Prisma (multi-conta)</div>
+            <div class="entry-msg">melhorias de UX no chat, indução e áudio do dia</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>profile-assessment</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">Diagnóstico Mapa de Mim v3 — roda 5 áreas, qualificação do presente, devolutiva por email (pipe pronto)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">regenera os 8 audios-cliente com ancoras distribuidas (anti-repeticao)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">diagnóstico Terapeutas Premium — gargalo é a landing page (form 6 campos), não criativo/público</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>outputs</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">modelos de copy pagina de vendas, diagnostico CRO terapeutas, operations site-refresh, plano-conteudo v3</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">rastreamento de clique no CTA (handleCtaClick + rota /intake/profile-assessment/cta)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>audio-motivacao</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">fallback de LLM dispara no limite semanal do CLI Claude</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>clone+skill</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">corrige frase-assinatura do Michael + 'é simples' vira maneirismo livre</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>insight-transcricao</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">v1.2 regra de variacao + piloto 8 audios cliente + fila de 177</div>
             <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
@@ -486,10 +495,22 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-terapeuta</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">breakdown da spec em 46 issues detalhadas</div>
+            <div class="entry-msg">CAP-060 copiloto v1.2.0 — cockpit 6 janelas + conhecimento da squad + latencia real CLI Max</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">atualiza conhecimento da squad (re-sintese 2026-06-25 via Frente D backfill)</div>
             <div class="entry-author">Julia</div>
           </div>
         </div>
@@ -498,10 +519,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>portal-terapeuta</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>design-system</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">especificação completa do Portal do Terapeuta v1</div>
+            <div class="entry-msg">adiciona guia LEIA-PRIMEIRO do design system OMNI</div>
             <div class="entry-author">Julia</div>
           </div>
         </div>
@@ -509,11 +530,11 @@
           <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>google</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">ativar Google Ads API direta com credenciais do vault</div>
+            <div class="entry-msg">registra campanha BANCARIOS na memória da squad</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -522,10 +543,82 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>vault</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>insight-transcricao</span>
+              <span class="entry-date">26/06</span>
             </div>
-            <div class="entry-msg">centralizar chaves e configs na VPS</div>
+            <div class="entry-msg">skill de fabrica de insights de audio na voz do Michael</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">scripts de áudio do dia 27 e 28/06</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">novo áudio do dia substitui automaticamente o anterior do mesmo canal+data</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">player do áudio do dia mostra Michael Arruda no lugar de Plenamente</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">exibir tempo atual / total no mini player</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">transcrição recolhida por padrão + remove espaço duplo entre linhas</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">26/06</span>
+            </div>
+            <div class="entry-msg">estrutura de scripts de conteúdo (áudios do dia + pílulas)</div>
             <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
@@ -534,10 +627,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>google</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">25/06</span>
             </div>
-            <div class="entry-msg">usar Windsor.ai diretamente — sem credenciais Google Ads diretas</div>
+            <div class="entry-msg">default do INTAKE_MODE = active (cutover concluido; evita descarte silencioso de leads em redeploy)</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -546,10 +639,286 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>dashboard-api</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>analytics</span>
+              <span class="entry-date">25/06</span>
             </div>
-            <div class="entry-msg">MQL Meta via MySQL + Por Página + Google Ads Account ID</div>
+            <div class="entry-msg">instala Microsoft Clarity na LP Terapeutas Premium [CAP-061]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">reconciliação desconta leads 'done' sem deal (dedup/desqual.) do gap</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">matching tolerante de falante-&gt;aluno por tokens (MO-2.2)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">v1 modo CLI com atraso — timeout 90s + gating 1-por-vez no front + servidor nao responde ping (evita backlog e nao apaga o cockpit)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">politica de privacidade LGPD completa</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mind-clone</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">fontes e topics de domínio do clone Michael Arruda</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">adiciona Privacy.jsx ausente (referenciado no App.jsx)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">gênero do usuário + textos da IA revisados</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>portal</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">UI da captacao de cases (Fase 1, parte 2/2)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>portal</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">camada de dados da captacao de cases (Fase 1, parte 1/2)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">detectar falha de auth do claude -p (RC=0 com erro no stdout) p/ nao ficar mudo em silencio (review @qa P0)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mind-clone</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">Michael Arruda V3 — fidelity 88→93/100</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>commands</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">adiciona skill /depoimento-extractor</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente</span>
+              <span class="entry-date">25/06</span>
+            </div>
+            <div class="entry-msg">reflexão do dia com saudação + transcrição e assistente Luz</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>claude.md</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">regra Git especifica da Rafa (3 camadas, branch Rafa vira pessoal)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">mapeamento de data do Fathom e indexacao RAG da aula</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">perf(copiloto-vendas): saida enxuta + devolutiva incremental + observabilidade de mudez no /health (review @architect P0)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">estado do cockpit 6 janelas (alerta persistente, devolutiva acumulada, historico)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>video-studio</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">hook open-loop + estrutura viral no modo CASE OMNI</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">cockpit visual de 6 janelas</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">sync do conhecimento curado da squad avaliacao-reunioes (objecoes, depoimentos, produto, playbook, lessons)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">schema cockpit 6 janelas + comportamento (sair do bloco, objetividade, devolutiva ao vivo) + hook conhecimento da squad</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>portal-crypto</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">decifrar envelope de texto vazio (ciphertext 0 bytes)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">vigia lê o aprendizado REAL do Meta (learning_stage_info)</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -558,95 +927,203 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>dashboard-api</span>
-              <span class="entry-date">09/04</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">Google Ads API direta — sem dependência do Windsor.ai</div>
+            <div class="entry-msg">vigia — sugestão de otimização prescritiva (como, não só &quot;otimize&quot;)</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">vigia v1.2 — corrige mudez + vira consultor</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>telegram</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">setup MichaelArrudaBot na VPS com plugin oficial</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">09/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
               <span class=entry-scope>prisma</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">instrucao cross-calendar para reunioes entre Michael e Rafa</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">Chat API autenticada + integração Microsoft To Do</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>prisma</span>
-              <span class="entry-date">09/04</span>
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">adicionar calendario do Michael e Agenda OMNI Brasil</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">backlog da squad — pendencias 2026-06-24</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>ads</span>
-              <span class="entry-date">08/04</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">integração Google Ads API + relatório Ads×Pipedrive</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">nova saudacao da resposta lead-ativo [v1.6.2]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">M0 por estagio (redesenho) — substitui supressao por texto</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">M0 por estagio (espera 5min + checa MQL/Tentativa) + lead-ativo move pra Conectado</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">reconcile com paginação+cruzamento Pipedrive (anti super-alerta) + deploy.sh disciplinado anti-drift</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">lead-ativo NO AR — cron real + inbound validado em producao</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">lead-ativo responde sem exigir deal no CRM [v1.6.1]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">fechamento sessao lead-ativo (pivot oficial + decisoes + pendencias)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">lead-ativo responde mesmo sem deal no CRM</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">cron de ingestao de aulas do Fathom -&gt; banco de contexto</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">port(avaliacao-reunioes): fix nome único + conhecimento aprendido da Rafa -&gt; main</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">camada LLM usa Claude CLI (OAuth assinatura) como primario, sem API key paga</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">embedding Gemini text-embedding-004 -&gt; gemini-embedding-001</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">migration 0022 faltante (proactive_message + opt_out_outreach + student_score)</div>
+            <div class="entry-author">Julia</div>
           </div>
         </div>
         <div class="entry">
@@ -654,10 +1131,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>w0003</span>
-              <span class="entry-date">08/04</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">corrigir tipo da credencial Google — oAuth2Api → googleOAuth2Api</div>
+            <div class="entry-msg">corrige 5 entradas YAML que quebravam o parser estrito</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -666,70 +1143,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>monitor</span>
-              <span class="entry-date">08/04</span>
+              <span class=entry-scope>copiloto-vendas</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">watchdog sempre envia email — OK ou Alerta</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>monitor</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">documentação e atualização do watchdog n8n</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">registra CAP-012 Landing Page Generator no capabilities</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">skill /landing-page + webhook de opt-in + LP teste FPH</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>monitor</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">workflows watchdog para checagem diária do n8n</div>
-            <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>w0001</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">check de etapa antes de cada disparo — v4.0</div>
+            <div class="entry-msg">roteia sugestoes pelo CLI do plano Max (custo zero)</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -738,10 +1155,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>w0003</span>
-              <span class="entry-date">08/04</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">atualizar documentação para arquitetura Drive-first</div>
+            <div class="entry-msg">fecha decisão de CPA — é custo por cadastro/lead, alvo R$20/teto R$30 p/ todas</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -749,204 +1166,12 @@
           <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>w0002</span>
-              <span class="entry-date">08/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">atualizar David para inbox 16 (oficial) — número trocado 2026-04-08</div>
+            <div class="entry-msg">calibra vigia com histórico real — CPM por segmento + CPA alvo</div>
             <div class="entry-author">Rafa Mendes</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#9B59B6">FA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>ads</span>
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">relatório Meta Ads Jan-Mar 2026 com dados da API</div>
-            <div class="entry-author">Fernanda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              
-              <span class="entry-date">08/04</span>
-            </div>
-            <div class="entry-msg">regras de branch e permissao para Fernanda Machado</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">add Fernanda Machado as CLI user</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>prisma</span>
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">regras obrigatorias de contatos e onde-salvar</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">versao HTML do guia intermediario AIOX para Julia</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#E87461">JU</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">guia intermediario AIOX + contatos centralizados da Prisma</div>
-            <div class="entry-author">Julia</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>ads</span>
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">relatório análise Meta Ads conta Formação com CPR e cruzamento Pipedrive</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>workspace</span>
-              <span class="entry-date">01/04</span>
-            </div>
-            <div class="entry-msg">preencher campos críticos — CRM, modelo IA, Julia</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">31/03</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">31/03</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">31/03</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">31/03</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>organico</span>
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">planos de aquecimento organico (Dan Koe + Frank Kern + Finch)</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              
-              <span class="entry-date">25/03</span>
-            </div>
-            <div class="entry-msg">atualizar tutorial migração com design system OMNI Brasil</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              <span class=entry-scope>operations</span>
-              <span class="entry-date">25/03</span>
-            </div>
-            <div class="entry-msg">adicionar tutorial migração OneDrive → Google Drive</div>
-            <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
         <div class="entry">
@@ -954,10 +1179,10 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>dashboard</span>
-              <span class="entry-date">07/04</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">servir frontend via Node.js na porta 3030</div>
+            <div class="entry-msg">reconhece contato repetido por email E telefone</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -966,10 +1191,454 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              <span class=entry-scope>w0003</span>
-              <span class="entry-date">07/04</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
             </div>
-            <div class="entry-msg">alterar filtro de hoje para janela de 24h</div>
+            <div class="entry-msg">corrige nota — token Meta está VÁLIDO (falso alarme do dry-run sem .env)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">alerta do vigia v1.1 — contextual, anti-ruído, 1x/hora</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">recadastro sobe novo card MQL com histórico no comentário</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">registra CAP-057 dentro da lista capabilities (estava fora do escopo no EOF)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">vigia ad-midas + correcoes da squad na main [ADS-1.1/1.2/1.3, CAP-057]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">squad v1.1.1 + fix de owner do intake para a main</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">monitor de SKIP por template oficial -&gt; alerta Jeff/Google Chat</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">extrator aceita pasta arbitrária + modo treinamento</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">move 3 ajustes do vigia para backlog do agente (pedir a Fernanda/Michael)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">deal nasce com owner correto e remove desvio do stage 433</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">forcar canal oficial para David e Layslla (anti-bloqueio)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">GO-LIVE lead-ativo — robô responde lead que puxa conversa [v1.6.0]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">aplica as 7 melhorias da pesquisa @analyst + doc de revisão</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">vigia ad-midas NO AR na VPS + registra CAP-057 [Story ADS-1.3]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">conecta vigia campaign-monitor aos dados reais do Meta [Story ADS-1.3]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">pesquisa de persona e engajamento (@analyst)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>migracao-intake</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">revisão técnica 4 lentes — fixes aplicados + lista estratégica</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">lote de robustez da revisão técnica (4 lentes) + sync repo↔produção</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">registra status do vigia — webhook+token OK, loop fetch ainda e stub (ADS-1.3)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">etapas silenciosas — M-TC2 sem disparo (anti-bloqueio) [v1.5.1]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">registra v2 jornada (CAP-056 v2.0.0 + sumário)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">redesenha como jornada por capítulos (copy-chief + ux-design-expert)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>teste-perfil</span>
+              <span class="entry-date">24/06</span>
+            </div>
+            <div class="entry-msg">avaliação de perfil transição de carreira — formulário + backend + relatório IA</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>sorteio-duplas</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">renomeia coluna &quot;Veio?&quot; para &quot;Presenca&quot;</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>sorteio-duplas</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">presenca diaria (tirar aluno do sorteio sem sair da turma)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">MO-5.8 orquestrador de ingestao Fathom -&gt; banco de contexto</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">MO-5.3 transcricao de aula ao vivo alimenta contexto</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">silencia M-TC2 temporariamente para teste anti-bloqueio</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">ad-midas proativo (vigia modo alerta) + memoria real OMNI [Story ADS-1.2]</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">correções de entrega, anti-queima, auditoria e monitor</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">cutover da ENTRADA concluído — n8n 100% OFF no intake</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dona-system</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">reavaliacao disparo-comercial 7,5 + L-04 + gate no painel</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">extrator enxuto de aprendizado + sales_learning no topo do schema</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>infra</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">script de backup generico dos sistemas OMNI (pedido Michael)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">MO-5.5 agente de contexto consultavel (CS e comercial)</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>agenda-consultoria</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">bloqueio de horarios autoatendivel no admin</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">monitor de instâncias usa jeff-bot (Chat API)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>aiox-ads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">religa ad-midas ao AIOX, instala memoria 5 tipos e recalibra autonomia [Story ADS-1.1]</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -978,35 +1647,35 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>lancamento</span>
-              <span class="entry-date">07/04</span>
+              <span class=entry-scope>sorteio-duplas</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">plano Nova Era OMNI 2026 — operacional + estrategia + apresentacao</div>
+            <div class="entry-msg">app de sorteio de duplas para aulas/dinamicas</div>
             <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-avatar" style="background:#E87461">JU</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              
-              <span class="entry-date">07/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">remove sync-supabase workflow</div>
-            <div class="entry-author">AIOXsquad</div>
+            <div class="entry-msg">MO-5.1 banco de contexto do aluno (reusa estrutura do Plenamente)</div>
+            <div class="entry-author">Julia</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">07/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">sync: update from source (fd7d14c feat(gateway): add cross-platform persistence (macOS/Linux/Windows) [Story 114.24])</div>
-            <div class="entry-author">AIOXsquad-bot</div>
+            <div class="entry-msg">CLI Max como caminho PRINCIPAL (decisão da Rafa)</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
@@ -1014,142 +1683,94 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
-              
-              <span class="entry-date">06/04</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">guia AIOX completo para iniciantes</div>
+            <div class="entry-msg">spec do Banco de Contexto do Aluno (pedido Michael 2026-06-23)</div>
             <div class="entry-author">Julia</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">MO-4.1 lead scoring + MO-4.3 teste de perfil</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">MO-3.1 outreach proativo + MO-4.2 tela financeiro</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">backfill de aprendizado do histórico + relatório por email</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">registra deploy v1.1 na VPS + cron semanal de aprendizado (CAP-055)</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">07/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dona-system</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">sync: update from source (9d197c9 refactor: reorganize skills and update message gateway)</div>
-            <div class="entry-author">AIOXsquad-bot</div>
+            <div class="entry-msg">painel visual de maturidade das squads (alavanca #2)</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">sync: update from source (9bf2ae6 feat: add Telegram integration, message gateway, and Claude Mastery squad)</div>
-            <div class="entry-author">AIOXsquad-bot</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#6B6B6B">AI</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
-              
-              <span class="entry-date">07/04</span>
-            </div>
-            <div class="entry-msg">sync: update from source (f5f4f10 feat(squads): update squad-creator and squad-creator-pro)</div>
-            <div class="entry-author">AIOXsquad-bot</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
+              <span class=entry-scope>dona-system</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
+            <div class="entry-msg">remove falso pendente fronteira Dona x Jeff (dominios nao se cruzam)</div>
+            <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
         <div class="entry">
           <div class="entry-avatar" style="background:#C8A84B">MA</div>
           <div class="entry-content">
             <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>hypnoflash</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              <span class=entry-scope>whatsbot</span>
-              <span class="entry-date">06/04</span>
-            </div>
-            <div class="entry-msg">backup audit log</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
-              
-              <span class="entry-date">06/04</span>
-            </div>
-            <div class="entry-msg">limpar repo — remover .env do tracking, deletar scripts de cleanup, adicionar STRUCTURE.md</div>
-            <div class="entry-author">Michael Arruda</div>
-          </div>
-        </div>
-        <div class="entry">
-          <div class="entry-avatar" style="background:#C8A84B">MA</div>
-          <div class="entry-content">
-            <div class="entry-header">
-              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
-              
-              <span class="entry-date">06/04</span>
-            </div>
-            <div class="entry-msg">resolve merge conflicts in settings and generated CSS</div>
+            <div class="entry-msg">V3 Protocolo Reset da Dor + 5 audios Reprogramando a Dor</div>
             <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
@@ -1158,10 +1779,346 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>w0003</span>
-              <span class="entry-date">06/04</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
             </div>
-            <div class="entry-msg">ativar workflow — credencial Google configurada</div>
+            <div class="entry-msg">aprendizado AUTÔNOMO de objeções/produto (síntese semântica)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dona-system</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">resgata historico de avaliacoes + promove tested:true</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">intake 100% nativo — n8n fora do caminho</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>rules</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">adiciona excecao de autonomia concedida na Secao 4</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">backup nao inclui mais os audios (pesados e estaticos)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">camada de aprendizado contínuo v1.1 (desenho @dona-system)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>dona-system</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">instala memoria dos 5 tipos + ciclo de boot</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">remove CTA de assinatura (temp) + registra plano de assinaturas</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">registra guardiao-leads (CAP-054, ativo v1.1.1)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">go-live na VPS — corrige webhook em producao + crons (v1.1.1)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">memoria dos 5 tipos (fix 5 da revisao @dona-system)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#6B6B6B">📄 outro</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">test(guardiao-leads): 1o dry-run real na VPS validado -&gt; tested: true</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>migracao-intake</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">runbook turnkey do repoint AC (opção A) + alternativa poll (C) com tradeoffs</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">registra CAP-053 chat reflexivo do Plenamente</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>rules</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">regra de autonomia com /goal (flexibiliza Secoes 4/6 do CLAUDE.md)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">chat reflexivo com streaming, memória e segurança de crise</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">revisao @dona-system — anti-spam, degrau 4 Pipedrive, limiar (v1.1.0)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">cutover xquiz(A0009)+LINK001 nativos; incidente A0001-B + 4 leads recuperados</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">porta correção do run-manual-batch p/ main (Meu Drive + detecção robusta de closer)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">avalia reuniões do Meu Drive + detecção robusta de closer</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">cutover ampliado — funnel/qualify/backfill nativos (n8n off A0004/A0005/G0001)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">23/06</span>
+            </div>
+            <div class="entry-msg">restaura ledger de reconciliação (34 leads reais 19-22/06)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">restaura ledger de reconciliação (34 leads reais recuperados 19-22/06)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">ignora ledgers de runtime + artefatos de validação de squad</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">ignora ledgers de runtime + artefatos de validação de squad</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">fluxo lead-ativo (dry-run) + fix bug de fuso utcnow().timestamp()</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>lead-intake</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">módulos nativos receivers/funnel/xquiz/backfill/link/reconcile (substituem n8n no intake)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>jeff-comercial</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">unit com EnvironmentFile do webhook + auto-start (linger)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>disparo-comercial</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">monitor de instancias Evolution -&gt; alerta Google Chat (Jeff)</div>
             <div class="entry-author">Rafa Mendes</div>
           </div>
         </div>
@@ -1170,11 +2127,263 @@
           <div class="entry-content">
             <div class="entry-header">
               <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
-              <span class=entry-scope>page-builder</span>
-              <span class="entry-date">06/04</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">22/06</span>
             </div>
-            <div class="entry-msg">editar pagina existente via slug</div>
+            <div class="entry-msg">Fase 2 - IG monitor, transcricao de reuniao, cadastro self-service, importador</div>
             <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#3498DB">📝 Documentacao</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">texto de decisao de base legal LGPD para o DPO Michael</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">visao do aluno (/minha-jornada + card dashboard) + modo preview local</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">offerbook HypnoFlash V3 + status AIOX</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">splash animado + remove login Google temporariamente</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">migra para plenamente.app (VITE_BASE=/)</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#E87461">JU</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>mentor-omni</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">MO-1.7/1.8 telas do aluno (portal) + migrations 0016-0018</div>
+            <div class="entry-author">Julia</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">aba Destaques no admin com adicionar/remover direto</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>bancarios</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">plano de produção + scripts de gravação dos 15 criativos</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">alerta crítico pelo Jeff no Google Chat comercial (não WhatsApp)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">alerta crítico pelo Jeff no Google Chat comercial (não WhatsApp)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">alerta resolve webhook GChat de env/vault/.env (robusto a rebuild)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">alerta resolve webhook GChat de env/vault/.env (robusto a rebuild)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">porta os fixes da branch Rafa para main (deploy durável)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">squad guardiã do intake de leads (reconciliação Meta→CRM)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>guardiao-leads</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">squad guardiã do intake de leads (reconciliação Meta→CRM)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#C8A84B">🔄 Manutencao</span>
+              <span class=entry-scope>capabilities</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">registra CAP-053 squad gestao-lancamentos (vigia diario no ar)</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">Destaques manuais via campo featured</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#E87461">🔧 Correcao</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">CSP imgSrc + connectSrc libera domínio do R2</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">R2 storage + audiolivro + thumbs anime renovadas</div>
+            <div class="entry-author">Michael Arruda</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#2A9D8F">RM</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>avaliacao-reunioes</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">alerta de falha via Google Chat (Jeff/comercial) em vez de WhatsApp</div>
+            <div class="entry-author">Rafa Mendes</div>
+          </div>
+        </div>
+        <div class="entry">
+          <div class="entry-avatar" style="background:#C8A84B">MA</div>
+          <div class="entry-content">
+            <div class="entry-header">
+              <span class="entry-badge" style="background:#2A9D8F">✨ Novidade</span>
+              <span class=entry-scope>plenamente-2</span>
+              <span class="entry-date">22/06</span>
+            </div>
+            <div class="entry-msg">catálogo real de 30 áudios com indução modular guided/direct + capas anime</div>
+            <div class="entry-author">Michael Arruda</div>
           </div>
         </div>
   </div>
