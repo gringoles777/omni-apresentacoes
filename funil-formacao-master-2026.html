@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funil de Vendas — Formação Master em Omniterapia | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505;--dark:#0D0D0D;--dark-el:#1A1A1A;--gold:#C8A84B;--gold-light:#E8C86A;--gold-deep:#9A7A2E;
+  --cream:#F5F0E8;--navy:#0A1628;--teal:#2A9D8F;--red:#C75D5D;--gray:#9A9A9A;--gray-dark:#242424;
+  --g-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  --g-gold-text:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 30%,#E8C86A 50%,#C8A84B 70%,#9A7A2E 100%);
+  --f-display:'Oswald',sans-serif;--f-serif:'DM Serif Display',Georgia,serif;--f-body:'Inter',sans-serif;--f-mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:var(--f-body);line-height:1.7;font-weight:300;overflow-x:hidden}
+::selection{background:var(--gold);color:var(--black)}
+#gate{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px}
+#gate h1{font-family:var(--f-display);font-weight:300;letter-spacing:.3em;font-size:clamp(20px,4vw,30px);background:var(--g-gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#gate p{color:var(--gray);font-size:14px;letter-spacing:.05em}
+#gate input{background:var(--dark-el);border:1px solid var(--gold-deep);color:var(--cream);padding:14px 18px;font-family:var(--f-mono);font-size:16px;border-radius:8px;text-align:center;width:min(280px,80vw);outline:none}
+#gate input:focus{border-color:var(--gold-light);box-shadow:0 0 18px rgba(200,168,75,.35)}
+#gate button{background:var(--g-gold);color:var(--black);border:none;padding:13px 40px;font-family:var(--f-display);font-weight:600;letter-spacing:.15em;text-transform:uppercase;border-radius:8px;cursor:pointer;font-size:14px}
+#gate .err{color:#e07a7a;font-size:13px;height:16px}
+#content{display:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+section{padding:80px 0;border-bottom:1px solid var(--gray-dark)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+h2{font-family:var(--f-display);font-weight:500;font-size:clamp(27px,4.4vw,44px);line-height:1.1;margin-bottom:14px}
+.gold,h2 .accent{background:var(--g-gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h3{font-family:var(--f-display);font-weight:500;font-size:21px;color:var(--gold-light);margin:26px 0 10px;letter-spacing:.02em}
+.lead{font-size:clamp(16px,2vw,19px);color:#d8d0c2;max-width:800px}
+p{margin-bottom:13px;color:#cfc8ba}strong{color:var(--cream);font-weight:600}
+.muted{color:var(--gray);font-size:13.5px}
+.omni-header{position:sticky;top:0;z-index:500;background:rgba(5,5,5,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-dark);display:flex;align-items:center;gap:14px;padding:12px 28px}
+.omni-header .bn{font-family:var(--f-display);font-weight:700;color:var(--gold);letter-spacing:5px;text-transform:uppercase;font-size:15px}
+.omni-header .bs{font-family:var(--f-body);color:rgba(245,240,232,.5);letter-spacing:2.5px;text-transform:uppercase;font-size:11px;border-left:1px solid var(--gray-dark);padding-left:14px}
+@media(max-width:600px){.omni-header .bs{display:none}}
+.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;position:relative;border-bottom:none;background:radial-gradient(ellipse at 75% 15%,rgba(200,168,75,.10),transparent 55%),var(--dark)}
+.hero .tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.hero h1{font-family:var(--f-serif);font-weight:400;font-size:clamp(36px,7vw,74px);line-height:1.05;margin:16px 0 8px}
+.hero h1 em{font-style:italic;background:var(--g-gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .sub{font-size:clamp(17px,2.4vw,22px);color:#d8d0c2;max-width:760px}
+.hero .meta{margin-top:36px;display:flex;gap:26px;flex-wrap:wrap;font-family:var(--f-mono);font-size:12px;color:var(--gray);letter-spacing:.06em}
+.hero .meta b{color:var(--gold-light)}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;letter-spacing:.25em;color:var(--gray);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.grid{display:grid;gap:18px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:linear-gradient(160deg,var(--dark-el),#141414);border:1px solid var(--gray-dark);border-radius:14px;padding:24px;transition:.3s}
+.card:hover{border-color:var(--gold-deep);transform:translateY(-3px)}
+.card h4{font-family:var(--f-display);font-weight:500;font-size:17px;color:var(--gold-light);margin-bottom:7px;letter-spacing:.02em}
+.card p{font-size:14px;margin:0}
+.stat{text-align:center;padding:18px 12px}
+.stat .num{font-family:var(--f-display);font-weight:600;font-size:clamp(30px,5vw,48px);background:var(--g-gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat .lab{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:7px}
+.shift{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;margin-top:26px}
+@media(max-width:860px){.shift{grid-template-columns:1fr}}
+.shift .box{border-radius:14px;padding:26px}
+.shift .before{background:rgba(199,93,93,.07);border:1px solid rgba(199,93,93,.3)}
+.shift .after{background:rgba(200,168,75,.08);border:1px solid var(--gold-deep)}
+.shift .tg{font-family:var(--f-mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.shift .before .tg{color:var(--red)}.shift .after .tg{color:var(--gold)}
+.shift .q{font-family:var(--f-serif);font-size:clamp(17px,2.4vw,22px);line-height:1.35;color:var(--cream)}
+.shift .arrow{font-size:30px;color:var(--gold);text-align:center}
+@media(max-width:860px){.shift .arrow{transform:rotate(90deg)}}
+.funnel{display:flex;flex-direction:column;gap:22px;margin-top:26px}
+.fstep{background:linear-gradient(160deg,var(--dark-el),#141414);border:1px solid var(--gray-dark);border-radius:12px;padding:18px 22px;display:flex;gap:18px;position:relative}
+.fstep .fn{font-family:var(--f-mono);color:var(--gold);font-size:12px;min-width:76px;letter-spacing:.08em;padding-top:3px}
+.fstep h4{font-family:var(--f-display);font-weight:500;color:var(--gold-light);font-size:17px;letter-spacing:.02em}
+.fstep p{font-size:13.5px;margin:3px 0 0;color:#bfb8aa}
+.fstep .who{font-family:var(--f-mono);font-size:10.5px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+.fstep::after{content:"↓";position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);color:var(--gold-deep);font-size:16px}
+.fstep:last-child::after{content:none}
+.ranktbl,.mathtbl,.mtbl{width:100%;border-collapse:collapse;margin-top:16px;font-size:13.5px}
+.ranktbl th,.mathtbl th,.mtbl th{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-align:left;padding:10px 12px;border-bottom:1px solid var(--gold-deep)}
+.ranktbl td,.mathtbl td,.mtbl td{padding:10px 12px;border-bottom:1px solid var(--gray-dark);color:#cfc8ba;vertical-align:top}
+.ranktbl tr.win td{background:rgba(200,168,75,.08);color:var(--cream)}
+.mathtbl td:not(:first-child),.mathtbl th:not(:first-child){text-align:right;font-family:var(--f-mono);font-size:13px}
+.badge{display:inline-block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--gold-deep);color:var(--gold-light);border-radius:20px;padding:2px 11px;margin-left:8px;vertical-align:middle}
+.badge.red{border-color:rgba(199,93,93,.5);color:#e0a0a0}
+.badge.teal{border-color:rgba(42,157,143,.5);color:#7fcfc4}
+.timeline{margin-top:26px;border-left:2px solid var(--gold-deep);padding-left:26px;display:flex;flex-direction:column;gap:24px}
+.tstep{position:relative}
+.tstep::before{content:"";position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(200,168,75,.6)}
+.tstep .td{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.tstep h4{font-family:var(--f-display);font-weight:500;font-size:18px;color:var(--cream);margin:3px 0 4px}
+.tstep p{font-size:14px;margin:0}
+details.cp{background:linear-gradient(160deg,var(--dark-el),#141414);border:1px solid var(--gray-dark);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:.25s}
+details.cp[open]{border-color:var(--gold-deep)}
+details.cp>summary{cursor:pointer;padding:16px 20px;list-style:none;display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-weight:500;font-size:16px;color:var(--cream);letter-spacing:.02em}
+details.cp>summary::-webkit-details-marker{display:none}
+details.cp>summary::before{content:"+";font-family:var(--f-mono);color:var(--gold);font-size:20px;transition:.25s;min-width:16px}
+details.cp[open]>summary::before{content:"–"}
+details.cp>summary .tagx{margin-left:auto;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;color:var(--gray);font-weight:400;text-transform:uppercase}
+.cpbody{padding:4px 22px 22px;border-top:1px solid var(--gray-dark)}
+.cpbody .why{font-style:italic;color:var(--teal);font-size:13.5px;margin:14px 0}
+.cplabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:16px 0 6px}
+.cptext{white-space:pre-line;background:#0c0c0c;border-left:2px solid var(--gold-deep);border-radius:0 8px 8px 0;padding:14px 16px;font-size:14.5px;color:#e2dccf;line-height:1.65}
+.cptext.chat{background:#0e1512;border-left-color:var(--teal)}
+.cpul{list-style:none;margin:6px 0}
+.cpul li{font-size:14px;color:#cfc8ba;padding:3px 0 3px 16px;position:relative}
+.cpul li::before{content:"›";position:absolute;left:0;color:var(--gold-deep)}
+.ctabox{background:var(--g-gold);color:var(--black);border-radius:18px;padding:42px 34px;margin-top:28px;box-shadow:0 12px 50px rgba(200,168,75,.3)}
+.ctabox h3{font-family:var(--f-display);color:var(--black);font-weight:600;font-size:clamp(21px,3.4vw,30px);margin:0 0 10px}
+.ctabox p,.ctabox li{color:#241c08;font-weight:500}
+.ctabox ol{max-width:720px;margin:16px 0 0 20px}
+.ctabox li{margin-bottom:6px}
+footer{padding:46px 0;text-align:center;color:var(--gray);font-family:var(--f-mono);font-size:12px;letter-spacing:.07em;border-bottom:none}
+.reveal{opacity:0;transform:translateY(22px);transition:.7s cubic-bezier(.2,.7,.3,1)}.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div id="gate">
+  <h1>OMNI BRASIL</h1>
+  <p>Documento estratégico restrito. Digite a senha.</p>
+  <input id="pw" type="password" placeholder="senha" autofocus autocomplete="off" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">Entrar</button>
+  <div class="err" id="err"></div>
+</div>
+
+<div id="content">
+<div class="omni-header"><span class="bn">OMNI Brasil</span><span class="bs">Funil de Vendas · Formação Master em Omniterapia · 07/2026</span></div>
+
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <div class="tag">Do primeiro anúncio à venda fechada</div>
+  <h1>O funil da <em>Formação Master em Omniterapia</em></h1>
+  <p class="sub">Máxima chance de venda com o menor esforço humano. Desenhado a partir do mercado, julgado por painel de 5 arquiteturas, e montado sobre a automação que a OMNI já tem em produção.</p>
+  <div class="meta">
+    <span>Meta 1: <b>15 vendas/mês · R$40k mídia</b></span>
+    <span>Meta 2: <b>28 vendas/mês · R$55-75k</b></span>
+    <span>MVP: <b>14 dias</b></span>
+    <span>Rafa em regime: <b>2-3h/semana</b></span>
+  </div>
+</div><div class="scroll-hint">ROLE PARA VER</div></section>
+
+<!-- SUMARIO -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Sumário executivo</div>
+  <h2>A aposta: matar os <span class="accent">dois vazamentos</span> que custam 2/3 das vendas</h2>
+  <p class="lead">Hoje 64% dos leads nunca falam com ninguém e 45% dos agendados não aparecem. O funil novo responde em menos de 1 minuto, 24/7, liga em menos de 30 minutos em horário comercial e blinda a agenda em 4 camadas. Humano só onde ele é insubstituível: fechar venda de R$15 mil.</p>
+  <div class="grid g4" style="margin-top:30px">
+    <div class="card stat"><div class="num">15</div><div class="lab">vendas/mês · degrau 1 (cenário conservador)</div></div>
+    <div class="card stat"><div class="num">23-24</div><div class="lab">vendas/mês · degrau 1 (cenário realista)</div></div>
+    <div class="card stat"><div class="num">14d</div><div class="lab">até o MVP no ar</div></div>
+    <div class="card stat"><div class="num">R$1.681</div><div class="lab">CAC realista (gate de escala: R$1.800)</div></div>
+  </div>
+  <p class="muted" style="margin-top:18px">Baseline atual: 13 vendas/mês, CAC R$2.307, conexão 36%, no-show 45%. A meta do degrau 1 (15) é atingida já no cenário conservador, que não dá nenhum crédito à IA além da velocidade de resposta.</p>
+</div></section>
+
+<!-- METODO -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Como esta estratégia foi construída</div>
+  <h2>Mercado primeiro, <span class="accent">funil atual por último</span></h2>
+  <div class="grid g4" style="margin-top:26px">
+    <div class="card"><h4>1 · Pesquisa real</h4><p>Demanda, regulação, 8+ concorrentes diretos com preços, benchmarks de funil high-ticket 2025-26 com fontes citadas.</p></div>
+    <div class="card"><h4>2 · Painel de arquiteturas</h4><p>5 funis desenhados de forma independente (call funnel, VSL, masterclass, lançamento, low-ticket) e julgados por 3 juízes céticos.</p></div>
+    <div class="card"><h4>3 · Painel de naming</h4><p>14 candidatos de nome gerados por 4 lentes e pontuados por 3 juízes (incluindo um protegendo a esteira Black).</p></div>
+    <div class="card"><h4>4 · Copy por etapa</h4><p>8 redatores especialistas, um por etapa do funil, revisados contra as regras OMNI. Tudo pronto para uso.</p></div>
+  </div>
+  <p class="muted" style="margin-top:16px">Mais de 30 agentes de IA orquestrados. Documentação completa: workspace/businesses/omni_brasil/outputs/funil-oba/</p>
+</div></section>
+
+<!-- POSICIONAMENTO -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Posicionamento e nome</div>
+  <h2>Nome: <span class="accent">Formação Master em Omniterapia</span></h2>
+  <p class="lead">"A única formação de terapeutas do mundo com processo certificado ISO 9001."</p>
+  <div class="shift">
+    <div class="box before"><div class="tg">A ideia testada: "mentoria" no nome</div><div class="q">"Mentoria Master em Omniterapia"</div><p style="margin-top:12px;font-size:14px">O painel vetou: canibaliza a âncora do Black Mentoring (R$39.900, exclusivo de clientes) e cria a objeção "já tenho mentoria" na hora do upsell.</p></div>
+    <div class="arrow">→</div>
+    <div class="box after"><div class="tg">A intuição da Rafa, com o nome seguro</div><div class="q">Supervisão Clínica Semanal</div><p style="margin-top:12px;font-size:14px">O acompanhamento semanal vira o elemento-coroa da OFERTA: "do primeiro treino ao primeiro atendimento". Nenhum concorrente de R$1,5-4k oferece. Ancora contra mentorias de R$20k+ sem gastar a palavra.</p></div>
+  </div>
+  <h3>Hierarquia de comunicação (sempre nesta ordem)</h3>
+  <ul class="cpul">
+    <li><strong>ISO 9001 como título</strong>: "o único processo terapêutico do mundo certificado ISO 9001"</li>
+    <li><strong>Resolução em 1 a 3 sessões</strong> como prova verificável</li>
+    <li><strong>Supervisão Clínica Semanal</strong> como diferencial de entrega</li>
+    <li><strong>Certificação tripla</strong> (136h extensão universitária + internacional 26+ países) como redutor de risco</li>
+    <li><strong>Linhagem Elman → Kein → Arruda + 4.000 alunos</strong> como lastro de 46 anos</li>
+  </ul>
+  <p class="muted">"Formação" dentro do nome cria o contraste que protege a esteira: formação é o que se compra na entrada; mentoria (Black) é o que se conquista depois. Preserva 100% do rebranding Omniterapia de maio.</p>
+</div></section>
+
+<!-- PUBLICO -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Público-alvo</div>
+  <h2>Dois públicos, <span class="accent">um quiz que separa</span></h2>
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card"><h4>P1 · Terapeuta em diferenciação <span class="badge">60% da verba</span></h4><p>Psicólogos, terapeutas, coaches, nutris, fisios frustrados com resultados lentos. Já atendem, já cobram, entendem supervisão clínica. Menor objeção de "funciona?", ciclo mais curto. O segmento mais qualificado do mercado segundo a pesquisa.</p></div>
+    <div class="card"><h4>P2 · Corporativo em transição <span class="badge">40% da verba</span></h4><p>O "Gestor Exausto": 35-55 anos, renda 10k+, insatisfeito, quer desenvolver pessoas com autonomia. Promessa de Propósito + Segurança: transição em paralelo, sem largar o emprego. ICP oficial validado pelo Projeto Vocação.</p></div>
+  </div>
+  <p class="muted" style="margin-top:16px">O quiz separa P1/P2 na pergunta 2 ("você já atende pessoas hoje?") e adapta copy, aquecimento e argumento dali em diante. O público "renda extra" fica fora do targeting: é o público do Romanni (R$1.497), não do ticket OMNI.</p>
+</div></section>
+
+<!-- ARQUITETURA -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Arquitetura do funil</div>
+  <h2>5 arquiteturas julgadas. <span class="accent">Venceu o perpétuo híbrido.</span></h2>
+  <table class="ranktbl">
+    <tr><th>#</th><th>Arquitetura</th><th>Nota</th><th>Veredicto do painel</th></tr>
+    <tr class="win"><td>1º</td><td><strong>A · Perpétuo: quiz → IA/ligação → consultoria</strong></td><td>6,67</td><td>Única com piso conservador ≥ baseline; mais rápida ao ar; ataca o gargalo nº1</td></tr>
+    <tr><td>2º</td><td>B · VSL + aplicação + agendamento</td><td>5,82</td><td>Enxertado: calendário self-service (score A) + VSL no fluxo</td></tr>
+    <tr><td>3º</td><td>C · Masterclass evergreen</td><td>5,63</td><td>Enxertado: aula gravada 20-30min aquece o score B</td></tr>
+    <tr><td>4º</td><td>E · Low-ticket → ascensão</td><td>4,95</td><td>Enxertado: R$97 só para lead reprovado, nunca front-end</td></tr>
+    <tr><td>5º</td><td>D · Lançamento cíclico</td><td>3,75</td><td>Enxertado: "Colheita" trimestral (1 noite com Michael)</td></tr>
+  </table>
+  <p class="muted" style="margin-top:10px">Critérios ponderados: probabilidade de venda 40% · tempo humano 25% · risco 20% · implementação 15%. Os 5 desenhos completos estão em outputs/funil-oba/arquiteturas/.</p>
+
+  <h3>O funil, do clique ao pagamento</h3>
+  <div class="funnel">
+    <div class="fstep"><div class="fn">ETAPA 0</div><div><h4>Anúncio (Meta; Google na semana 3+)</h4><p>Perpétuo, targeting manual, LP externa (nunca Instant Form). Criativos do dia único de gravação do Michael. P1 60% / P2 40%.</p><div class="who">EXECUTA: @ad-midas (automação) + Fernanda aprova · video-editing edita</div></div></div>
+    <div class="fstep"><div class="fn">ETAPA 1</div><div><h4>Quiz "Teste de Perfil" (10-12 perguntas)</h4><p>Ramificação P1/P2, proxies de renda (nunca pergunta direta), opt-in de WhatsApp cedo, score A/B/C. Resultado entregue no WhatsApp em menos de 1 minuto.</p><div class="who">EXECUTA: Teste de Perfil adaptado + lead-intake (produção)</div></div></div>
+    <div class="fstep"><div class="fn">ETAPA 2</div><div><h4>Conexão instantânea híbrida: IA 24/7 + ligação humana</h4><p>IA responde em &lt;1 min, sempre. Score A em horário 8h-20h: SDR humano liga em &lt;30 min (ligação converte mais). Madrugada e fim de semana: IA conduz e agenda; SDR liga no turno seguinte. A/B 50/50 IA × humano nos primeiros 30 dias.</p><div class="who">EXECUTA: SDR-IA v5 (pronto, implantar) + David/Layslla (escalas 8h-17h / 14h-20h)</div></div></div>
+    <div class="fstep"><div class="fn">ROTAS</div><div><h4>Score A → agenda · Score B → aula · Score C → nutrição</h4><p>A: calendário self-service na tela de resultado + WhatsApp. B: aula gravada de 20-30min do Michael + VSL; IA reavalia em 24-48h. C/silêncio: cadência disparo-comercial + nutrição; low-ticket R$97 após 21 dias (fase 3).</p><div class="who">EXECUTA: IA + disparo-comercial (produção) + calendário (construir, leve)</div></div></div>
+    <div class="fstep"><div class="fn">ETAPA 3</div><div><h4>Agendamento blindado (anti no-show em 4 camadas)</h4><p>Micro-compromisso de preparação + lembretes r24/r1/r0 + vídeo pré-call de 90s do Michael + no-show reagendado pela IA em 2h (máx. 2x). Alvo: no-show de 45% para ≤35%.</p><div class="who">EXECUTA: IA + disparo-comercial (produção)</div></div></div>
+    <div class="fstep"><div class="fn">ETAPA 4</div><div><h4>Consultoria com closer (50-60 min)</h4><p>Dossiê completo (quiz + resumo IA + score) → diagnóstico → visão → Formação → âncora R$23.900 → oferta R$14.900 / 12x R$1.290 → Garantia de Prontidão → condição de 48h. Piso R$12.900 verbal. FPH apenas resgate.</p><div class="who">EXECUTA: Diumara/Brandy (até 5/dia cada) + sales-intelligence audita 100% das calls</div></div></div>
+    <div class="fstep"><div class="fn">ETAPA 5</div><div><h4>Pagamento na call + pós-compra 48h</h4><p>Link na própria call. Depois: acesso imediato ao Módulo 1 + omnIA → vídeo de boas-vindas (2h) → ligação humana (24h) → grupo da turma + data da 1ª Supervisão (48h) → garantia por escrito. Protege a venda de R$15k do arrependimento.</p><div class="who">EXECUTA: closer + automação leve + SDR (10 min/venda)</div></div></div>
+    <div class="fstep"><div class="fn">TRIMESTRAL</div><div><h4>Colheita: 1 noite ao vivo com Michael</h4><p>Sobre a base não convertida do trimestre (2.000+ contatos). Demonstração ao vivo mata a objeção "funciona?". Janela honesta de 7 dias. Custo de mídia quase zero. A partir do mês 3-4.</p><div class="who">EXECUTA: Michael (~2h/tri) + gestao-lancamentos + disparo-comercial</div></div></div>
+  </div>
+</div></section>
+
+<!-- OFERTA -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Oferta, preço e garantia</div>
+  <h2>Âncora R$23.900 → <span class="accent">R$14.900 com condição de 48h</span></h2>
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card"><h4>O stack (ordem de apresentação)</h4>
+      <ul class="cpul">
+        <li>Formação completa: M1 online + M2 (7 dias ao vivo) + M3 (3 dias presenciais SP)</li>
+        <li><strong>Supervisão Clínica Semanal</strong> do primeiro treino ao primeiro atendimento</li>
+        <li>Certificação tripla: 136h extensão universitária + internacional OMNI (26+ países) + método ISO 9001</li>
+        <li>Suporte Vitalício OMNI (aula mensal, para sempre)</li>
+        <li>Acelerador de Agenda + "12 Passos" (ataca "vou ter clientes?")</li>
+        <li>OMNI Flix + omnIA vitalício</li>
+      </ul>
+    </div>
+    <div class="card"><h4>Garantia dupla (comunicada cedo)</h4>
+      <p style="margin-bottom:10px"><strong>7 dias incondicionais</strong> (CDC) + <strong>Garantia de Prontidão</strong>: conclui os Módulos 2 e 3 e, no último dia, se não se sentir pronto para atender, comunica e recebe 100% de volta.</p>
+      <p class="muted">Proposta adicional (decisão da Rafa): "Primeiro Cliente Acompanhado". Se 90 dias após o M3 o aluno não fez o primeiro atendimento pago, a Supervisão monta um plano dedicado e acompanha até o primeiro cliente. Compromisso de acompanhamento (horas), não de renda (caixa). Ataca frontalmente o medo nº1.</p>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:16px">Regras: piso R$12.900 exclusivo do closer, verbal, nunca escrito · condição de 48h expira de verdade (urgência honesta) · FPH (R$9.900) só como resgate após 2 tentativas reais de Master ou perdido por preço há 7+ dias · a palavra "mentoria" é proibida no funil de entrada.</p>
+</div></section>
+
+<!-- FUNNEL MATH -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Funnel math</div>
+  <h2>Dois degraus, <span class="accent">gates objetivos</span></h2>
+  <h3>Degrau 1 · R$40.000/mês de mídia · meta: 15 vendas</h3>
+  <table class="mathtbl">
+    <tr><th>Etapa</th><th>Conservador</th><th>Realista</th></tr>
+    <tr><td>CPL → leads</td><td>R$38 → 1.052</td><td>R$33 → 1.212</td></tr>
+    <tr><td>Lead → conversa</td><td>48% → 505</td><td>52% → 630</td></tr>
+    <tr><td>Qualificado A/B → agendada</td><td>40% → 202</td><td>55% × 62% → 215</td></tr>
+    <tr><td>Show-up → consultorias</td><td>55% → 111</td><td>65% → 140</td></tr>
+    <tr><td>Consultoria → venda</td><td>14%</td><td>17%</td></tr>
+    <tr><td><strong>Vendas/mês</strong></td><td><strong>15</strong></td><td><strong>23-24</strong></td></tr>
+    <tr><td><strong>CAC</strong></td><td><strong>R$2.667</strong></td><td><strong>R$1.681</strong></td></tr>
+    <tr><td>Receita (ticket ~R$14.200)</td><td>~R$213k</td><td>~R$338k</td></tr>
+  </table>
+  <p class="muted" style="margin-top:10px">O conservador não dá NENHUM crédito à IA além da velocidade de resposta e já entrega a meta. Capacidade das closers: 111-140 consultorias vs 220 disponíveis. Upside não somado: +1-2 vendas/mês de nutrição composta (mês 3+) e +1-3 da Colheita (mês 4+). Premissas com fonte em outputs/funil-oba/.</p>
+  <h3>Degrau 2 · R$55-75.000/mês · meta: 28 vendas (patamar do ano passado)</h3>
+  <table class="mathtbl">
+    <tr><th></th><th>Conservador (R$75k)</th><th>Realista (R$75k)</th></tr>
+    <tr><td>CPL com degradação de escala</td><td>R$44 → 1.705 leads</td><td>R$38 → 1.974 leads</td></tr>
+    <tr><td>Consultorias/mês</td><td>180</td><td>227 (gatilho do 3º closer)</td></tr>
+    <tr><td><strong>Vendas/mês</strong></td><td><strong>25</strong></td><td><strong>~38</strong></td></tr>
+    <tr><td><strong>CAC</strong></td><td><strong>R$3.000</strong></td><td><strong>~R$1.970</strong></td></tr>
+  </table>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><h4>Gate de passagem 1→2</h4><p>CAC ≤ R$1.800 sustentado por 60 dias + show-up ≥ 60% + ocupação de agenda &lt; 85%.</p></div>
+    <div class="card"><h4>Gatilho do 3º closer</h4><p>Ocupação &gt; 85% da agenda (≈190 consultorias/mês). Como a Rafa previu: fechamento nunca vira gargalo.</p></div>
+    <div class="card"><h4>Leitura honesta</h4><p>Com taxas realistas, ~R$55-60k já entregam as 28. Escalar R$40k → R$55k → R$75k em degraus de 2-3 semanas, seguindo o CAC, não o calendário.</p></div>
+  </div>
+</div></section>
+
+<!-- COPY -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Copy por etapa</div>
+  <h2>8 peças prontas, <span class="accent">revisadas contra as regras OMNI</span></h2>
+  <p class="lead">Cada etapa do funil tem copy-base pronta para uso (sem travessão, saudação OMNI, sem promessa de renda garantida, preços e garantia exatos). Arquivos completos em outputs/funil-oba/copy/.</p>
+<details class="cp"><summary>Anúncios Meta · Topo de funil <span class="tagx">01-anuncios-meta.md</span></summary><div class="cpbody">
+  <p class="why">Anúncio frio que não vende a formação: vende um clique de curiosidade qualificada ("descubra em 3 minutos se esse método é para você") rumo ao quiz, com CPL alvo de R$38.</p>
+  <div class="cplabel">Headline campeã (P1-A1, ISO 9001)</div>
+  <div class="cptext">A única formação de terapeutas do mundo com processo certificado ISO 9001</div>
+  <div class="cplabel">Primary text · contraste de identidade</div>
+  <div class="cptext">Existem dois tipos de terapeuta no Brasil hoje. O primeiro compete por preço com outros 500 profissionais de certificado idêntico na mesma cidade. O segundo trabalha com um processo que mais ninguém tem. [...] Não é para todo mundo. Por isso o primeiro passo é um teste, não uma compra: o Teste de Perfil em Omniterapia leva 3 minutos e te diz, com honestidade, se faz sentido para o seu momento.</div>
+  <div class="cplabel">Gancho do Vídeo 2 · "R$150 ou R$1.500" (3 primeiros segundos)</div>
+  <div class="cptext">"Tem terapeuta cobrando 150 reais a sessão. E tem terapeuta cobrando 1.500. A diferença não é marketing." [...] "Os alunos formados na Omniterapia cobram entre 1.300 e 1.800 reais por sessão. Por quê? Porque entregam resolução em 1 a 3 sessões. O cliente não paga pela hora, paga pela transformação."</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/01-anuncios-meta.md</p>
+</div></details>
+
+<details class="cp"><summary>Google Search · Canal de intenção <span class="tagx">02-google-search.md</span></summary><div class="cpbody">
+  <p class="why">Captura quem já busca formação, transição de carreira ou a marca OMNI e envia tudo para o quiz, nunca para LP de venda direta.</p>
+  <div class="cplabel">Headlines RSA · Grupo 1 (formação em hipnoterapia)</div>
+  <div class="cptext">Formação em Hipnoterapia · Método Certificado ISO 9001 · Resolução em 1 a 3 Sessões · 4.000+ Profissionais Formados · Faça o Teste de Perfil</div>
+  <div class="cplabel">Description de maior apelo (D2)</div>
+  <div class="cptext">Alunos formados cobram entre R$1.300 e R$1.800 por sessão. Descubra se é o seu perfil.</div>
+  <div class="cplabel">Headlines RSA · Grupo 2 (transição de carreira)</div>
+  <div class="cptext">Torne-se Terapeuta em 2 Meses · Sem Largar o Seu Emprego · Do Corporativo à Terapia · Transição com Segurança · Teste de Perfil em 3 Minutos</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/02-google-search.md</p>
+</div></details>
+
+<details class="cp"><summary>Quiz · Teste de Perfil em Omniterapia <span class="tagx">03-quiz-teste-perfil.md</span></summary><div class="cpbody">
+  <p class="why">Porta de entrada do funil: converte o clique em lead com WhatsApp válido, pontua A/B/C por proxies (sem perguntar renda) e entrega o resultado no WhatsApp em menos de 1 minuto.</p>
+  <div class="cplabel">Headline da LP do quiz</div>
+  <div class="cptext">Você tem o perfil de um terapeuta de alta performance? [...] Responda 11 perguntas em cerca de 3 minutos e receba uma análise personalizada do seu momento. Sem resposta certa. Sem pegadinha. Transformação que se prova.</div>
+  <div class="cplabel">Tela de resultado A · convite à consultoria</div>
+  <div class="cptext">Pelo seu resultado, você desbloqueou o próximo passo: a Consultoria de Direcionamento, uma sessão online de 50 minutos com um especialista OMNI, sem custo [...] Não é uma "call de vendas disfarçada": se não fizer sentido para o seu momento, você vai ouvir isso com todas as letras.</div>
+  <div class="cplabel">Mensagem de entrega no WhatsApp · Perfil Realizador</div>
+  <div class="cptext chat">{saudacao}, {nome}! Aqui é a {sdr}, da OMNI Brasil. Sua análise do Teste de Perfil ficou pronta. Resultado: PERFIL REALIZADOR. Suas respostas mostram clareza sobre o que você quer e prontidão para agir. [...] Pode escolher seu horário direto aqui: {link_agenda}</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/03-quiz-teste-perfil.md</p>
+</div></details>
+
+<details class="cp"><summary>Roteiros de vídeo do Michael <span class="tagx">04-roteiros-video-michael.md</span></summary><div class="cpbody">
+  <p class="why">As 4 peças de vídeo (VSL, pré-call 90s, aula para score B e boas-vindas) que sustentam agendamento de 62%, show-up de 65% e o pós-compra do funil.</p>
+  <div class="cplabel">VSL · abertura (roteiro nº 1, palavra por palavra)</div>
+  <div class="cptext">Você acabou de receber o seu resultado. E eu quero te falar uma coisa que o teste não mostra. Eu sou Michael Arruda. Desde 2015 eu lidero a OMNI no Brasil, e nesse tempo mais de 4.000 profissionais se formaram com a gente. Antes de cada um deles, teve uma pessoa exatamente onde você está agora. Lendo um resultado. Se perguntando se dá pra confiar.</div>
+  <div class="cplabel">VSL · bloco da garantia</div>
+  <div class="cptext">A gente não pede pra você acreditar. A gente convida você a verificar. [...] se você concluir os Módulos 2 e 3 e, no último dia, não se sentir pronto pra atender, você comunica ali mesmo e recebe 100% do valor de volta. Transformação que se prova não é slogan. É a régua que a gente aceita ser medido.</div>
+  <div class="cplabel">Pré-call 90s · anti no-show (a peça de maior ROI por minuto gravado)</div>
+  <div class="cptext">Ótimo dia! Aqui é o Michael Arruda. A sua consultoria está marcada, e eu gravei esse vídeo por um motivo simples: eu quero que você aproveite essa conversa de verdade. [...] Esse horário é seu. Individual e reservado. Te espero lá.</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/04-roteiros-video-michael.md</p>
+</div></details>
+
+<details class="cp"><summary>SDR-IA · Mensagens de WhatsApp <span class="tagx">05-sdr-ia-mensagens.md</span></summary><div class="cpbody">
+  <p class="why">Meio do funil: a SDR-IA entrega o resultado do quiz, trata as 4 objeções do mercado e conduz o lead até a consultoria agendada, 24/7, sem nunca falar preço.</p>
+  <div class="cplabel">Entrega do resultado · Perfil A (convite direto com agenda)</div>
+  <div class="cptext chat">{{saudacao}}, {{nome}}! Aqui é a {{nome_sdr}}, da OMNI Brasil. Seu resultado do Teste de Perfil acabou de chegar aqui e chamou atenção da equipe, no bom sentido. [...] Quer escolher seu horário direto na agenda? {{link_agenda}}</div>
+  <div class="cplabel">Follow-up 24h · pergunta direta</div>
+  <div class="cptext chat">{{saudacao}}, {{nome}}. Vou ser direta, do jeito que a gente gosta por aqui: transformar sua carreira ainda é prioridade pra você?</div>
+  <div class="cplabel">Objeção "não é golpe?" · resposta da IA</div>
+  <div class="cptext chat">A OMNI nasceu em 1979 nos Estados Unidos e está no Brasil desde 2015, com mais de 4.000 profissionais formados por aqui. Pesquisa "OMNI Brasil" e "Michael Arruda" no Google, com calma. Eu espero. 😊</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/05-sdr-ia-mensagens.md</p>
+</div></details>
+
+<details class="cp"><summary>Consultoria · Script do closer <span class="tagx">06-script-consultoria-closer.md</span></summary><div class="cpbody">
+  <p class="why">Fundo do funil: roteiro de 60 minutos em 9 blocos para converter a consultoria em matrícula na própria call (meta 17%), com liturgia de preço e garantia como clímax.</p>
+  <div class="cplabel">Contrato da call (Bloco 1)</div>
+  <div class="cptext">"Se em algum momento você sentir que não é para você, me fala na hora, combinado? Eu prefiro um 'não' honesto a um 'vou pensar' educado."</div>
+  <div class="cplabel">Âncora e oferta (Bloco 5, sempre nessa ordem)</div>
+  <div class="cptext">"O valor de tabela da Formação Master em Omniterapia, no boleto, é de R$23.900. [...] Só que você não vai investir R$23.900. Por ter passado pelo nosso processo de seleção, feito o Teste de Perfil e chegado até essa consultoria, a sua condição é outra: R$14.900 à vista, ou 12 parcelas de R$1.290 no cartão." [Silêncio. Quem fala primeiro depois do preço é o lead.]</div>
+  <div class="cplabel">Garantia de Prontidão (Bloco 6, momento central do fechamento)</div>
+  <div class="cptext">"E no último dia da formação, com tudo vivido, se você olhar para dentro e disser 'eu não me sinto pronta para atender', você comunica ali, no último dia, e recebe 100% do seu dinheiro de volta. [...] nesse acordo, quem carrega o risco não é você. É a OMNI."</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/06-script-consultoria-closer.md</p>
+</div></details>
+
+<details class="cp"><summary>Nutrição e recuperação · Score C <span class="tagx">07-nutricao-e-recuperacao.md</span></summary><div class="cpbody">
+  <p class="why">Educa por 21 dias quem não vai à consultoria agora, encerra com breakup honesto e reabre portas via low-ticket R$97, Colheita trimestral e indicação de ex-alunos.</p>
+  <div class="cplabel">WhatsApp Dia 1 · abertura da cadência</div>
+  <div class="cptext chat">Você fez o Teste de Perfil em Omniterapia e, pelo que vimos, ainda não é o momento da consultoria. Tudo bem. Ninguém vai ficar te empurrando nada por aqui. [...] A terapia tradicional trabalha com 20, 40, às vezes 100 sessões. O processo OMNI resolve a maioria dos casos em 1 a 3 sessões.</div>
+  <div class="cplabel">Breakup honesto · Dia 21</div>
+  <div class="cptext chat">Essa é a minha última mensagem desta sequência [...] Você não avançou, e está tudo bem: momento é uma coisa séria, e forçar timing dos outros não é o nosso jogo. [...] Se um dia quiser retomar, é só mandar um VOLTEI aqui neste número que a gente reabre a conversa do ponto onde parou.</div>
+  <div class="cplabel">Headline da LP do low-ticket R$97 (privada, pós-breakup)</div>
+  <div class="cptext">Sinta a Omniterapia funcionando em você antes de decidir qualquer coisa. Por R$97. [...] Uma sessão guiada por Michael Arruda com o mesmo protocolo certificado ISO 9001 usado por 4.000+ profissionais formados.</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/07-nutricao-e-recuperacao.md</p>
+</div></details>
+
+<details class="cp"><summary>Pós-compra · 48h anti-arrependimento <span class="tagx">08-pos-compra-48h.md</span></summary><div class="cpbody">
+  <p class="why">Protege a venda de R$14.900 nas 48 horas mais frágeis: acesso em 15 minutos, vídeo do Michael em 2h, ligação humana em 24h e garantia por escrito (consumo mata reembolso).</p>
+  <div class="cplabel">WhatsApp imediato · 0 a 15 min após o pagamento</div>
+  <div class="cptext chat">Sua matrícula na Formação Master em Omniterapia está confirmada. Bem-vindo(a) a um grupo de mais de 4.000 profissionais formados no Brasil, num método com 46 anos de estrada. [...] Seu primeiro passo leva 12 minutos: entre na plataforma e assista à Aula 0, "O Mapa do Master". [...] Este número tem gente de verdade do outro lado.</div>
+  <div class="cplabel">Ligação de 24h · frase-guia e antídoto do arrependimento</div>
+  <div class="cptext">"Me conta rapidinho: o que te fez dizer sim para a Formação?" Ouvir, não interromper, e ANOTAR literalmente no CRM. Essa frase é o antídoto que o time inteiro vai usar se o arrependimento aparecer depois. [...] "Foi uma excelente decisão, {{primeiro_nome}}, e agora ela é nossa responsabilidade também."</div>
+  <div class="cplabel">Fechamento da mensagem de 48h</div>
+  <div class="cptext chat">Recapitulando o que você já tem em mãos: plataforma do Módulo 1, omnIA vitalícia, grupo da turma, aula mensal do Acelerador e a Supervisão Clínica Semanal. O caminho que 4.000+ profissionais já percorreram está montado na sua frente. Transformação que se prova. A próxima prova é a sua.</div>
+  <div class="cplabel">Arquivo completo</div><p style="font-family:var(--f-mono);font-size:12px;color:#9A9A9A">outputs/funil-oba/copy/08-pos-compra-48h.md</p>
+</div></details>
+
+</div></section>
+
+<!-- IMPLEMENTACAO -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Implementação</div>
+  <h2>MVP no ar em <span class="accent">14 dias</span></h2>
+  <div class="timeline">
+    <div class="tstep"><div class="td">Dias 1-2</div><h4>Destravar os caminhos críticos</h4><p>Templates WhatsApp submetidos (@template-chief, aprovação Meta leva 1-7 dias) + campanha provisória no quiz atual (20-30% da verba) para gerar fluxo desde já (@ad-midas).</p></div>
+    <div class="tstep"><div class="td">Dias 3-7</div><h4>Integração e dry-run</h4><p>Quiz adaptado (ramificação, score, copy nova) → lead-intake → SDR-IA → agenda das closers. Dry-run ponta a ponta com leads-sombra e calibração do prompt v5.</p></div>
+    <div class="tstep"><div class="td">Dias 8-10</div><h4>GO LIVE controlado</h4><p>A/B 50/50: metade dos leads IA-first, metade humano-first. SDRs com fluxo de ligação &lt;30 min (8h-20h). Calibração diária nas 2 primeiras semanas.</p></div>
+    <div class="tstep"><div class="td">Dias 8-12</div><h4>Dia único de gravação do Michael</h4><p>8 criativos + VSL 3-5min + pré-call 90s + aula 20-30min + boas-vindas. Roteiros prontos, cada um com a justificativa por dados (para gravar com confiança). Se a agenda não permitir, o MVP roda com material atual e a gravação desliza sem travar o go-live.</p></div>
+    <div class="tstep"><div class="td">Dias 13-14</div><h4>MVP completo</h4><p>Criativos novos no ar, VSL na tela de resultado, painel do funil no dash-omni. Primeira venda esperada entre os dias 12 e 18.</p></div>
+    <div class="tstep"><div class="td">Semanas 3-6</div><h4>Rampa</h4><p>100% da verba se conexão ≥48% e show-up ≥55% · calendário self-service · aula para score B · Google Search (15-20%) · resgate FPH · leitura semanal de CAC.</p></div>
+    <div class="tstep"><div class="td">Semanas 7-10</div><h4>Recuperação e decisão de escala</h4><p>Low-ticket R$97 para score C/breakup · leitura de 60 dias contra o funnel math · decisão de passagem ao degrau 2 (gate CAC ≤ R$1.800).</p></div>
+    <div class="tstep"><div class="td">Mês 3-4 (recorrente)</div><h4>1ª Colheita trimestral</h4><p>1 noite ao vivo com Michael sobre a base não convertida, janela de 7 dias, consultorias de pico. Repetir a cada trimestre.</p></div>
+  </div>
+</div></section>
+
+<!-- AUTOMACAO x GENTE -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Automação × gente</div>
+  <h2>A máquina roda sozinha. <span class="accent">Humano onde fecha venda.</span></h2>
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card"><h4>Automação (existente ou leve)</h4>
+      <ul class="cpul">
+        <li>@ad-midas: campanhas, otimização, relatórios</li>
+        <li>lead-intake + guardiao-leads: ingestão vigiada</li>
+        <li>SDR-IA v5: resposta, qualificação e agenda 24/7</li>
+        <li>disparo-comercial: cadências, lembretes, reagendamento</li>
+        <li>@template-chief: templates oficiais WhatsApp</li>
+        <li>sales-intelligence: auditoria de 100% das calls</li>
+        <li>dash-omni: painel CAC/CCQA/no-show/ocupação</li>
+        <li>A construir (leve): quiz adaptado, calendário, entrega no WhatsApp, LP do R$97</li>
+      </ul>
+    </div>
+    <div class="card"><h4>Humano (em regime)</h4>
+      <ul class="cpul">
+        <li><strong>Closers</strong> (32-38h/sem): consultorias e fechamento. 3º closer no gatilho de 85%</li>
+        <li><strong>SDRs</strong> (12-18h/sem): ligação speed-to-lead 8h-20h + resgates. Liberados da perseguição em massa</li>
+        <li><strong>Michael</strong> (~2h/sem em média): 1 dia de gravação por ciclo de 6-8 semanas + 1 noite de Colheita por trimestre</li>
+        <li><strong>Fernanda</strong> (4-6h/sem): aprovação de criativos e verbas, leitura de CPL</li>
+        <li><strong>Rafa</strong> (2-3h/sem): ritual semanal de 30 min no painel + decisões de calibração. Zero operação de lead</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- METRICAS -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Métricas-alvo por etapa</div>
+  <h2>O painel que a Rafa lê <span class="accent">em 30 minutos por semana</span></h2>
+  <table class="mtbl">
+    <tr><th>Métrica</th><th>Baseline</th><th>Alvo degrau 1</th><th>Gate degrau 2</th></tr>
+    <tr><td>CPL (quiz completo)</td><td>R$33</td><td>≤ R$38</td><td>≤ R$44 na escala</td></tr>
+    <tr><td>Lead → conversa</td><td>36%</td><td>≥ 48%</td><td>≥ 50%</td></tr>
+    <tr><td>Conversa → agendada</td><td>~41%</td><td>≥ 40%</td><td>≥ 45%</td></tr>
+    <tr><td>Show-up</td><td>55%</td><td>≥ 60%</td><td>≥ 60%</td></tr>
+    <tr><td>Consultoria → venda</td><td>14%</td><td>≥ 15%</td><td>≥ 16%</td></tr>
+    <tr><td>CAC</td><td>R$2.307</td><td>≤ R$2.600</td><td><strong>≤ R$1.800 (gate)</strong></td></tr>
+    <tr><td>Vendas/mês</td><td>13</td><td><strong>≥ 15</strong></td><td><strong>28</strong></td></tr>
+    <tr><td>Speed-to-lead</td><td>horas</td><td colspan="2">&lt;1 min (IA) · &lt;30 min (ligação em horário comercial)</td></tr>
+    <tr><td>Ocupação da agenda</td><td>—</td><td>50-65%</td><td>&lt;85% (senão 3º closer)</td></tr>
+  </table>
+</div></section>
+
+<!-- RISCOS -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Riscos e plano B</div>
+  <h2>Cada risco com <span class="accent">rota de fuga pronta</span></h2>
+  <details class="cp"><summary>1 · SDR-IA abaixo do simulado em produção <span class="tagx">risco nº1</span></summary><div class="cpbody"><p class="why">34 simulações não garantem escala real. Se a IA agendar lead frio, polui a agenda e derruba show-up e conversão juntos.</p><p>A/B 50/50 desde o dia 1 · gate conservador nas 2 primeiras semanas (só score A agenda) · calibração diária com transcrições reais · rollback em 1 dia para o fluxo SDR humano + disparo-comercial, que segue em produção.</p></div></details>
+  <details class="cp"><summary>2 · Bloqueio/ban do WABA <span class="tagx">precedente 131049</span></summary><div class="cpbody"><p>2º WABA aquecido em standby com templates espelhados · opt-in explícito no quiz · fallback imediato: ligação humana para score A + email para o resto · monitor de qualidade do número no painel.</p></div></details>
+  <details class="cp"><summary>3 · Aprovação de templates Meta atrasar o MVP <span class="tagx">caminho crítico</span></summary><div class="cpbody"><p>Submeter no dia 1 (@template-chief) · a janela de 24h do WhatsApp cobre o fluxo pós-quiz sem template (o lead inicia a conversa) · ligação humana cobre o resto até aprovar.</p></div></details>
+  <details class="cp"><summary>4 · No-show persistir acima de 45% <span class="tagx">gargalo histórico</span></summary><div class="cpbody"><p>4 camadas (micro-compromisso, lembretes r24/r1/r0, vídeo pré-call, reagendamento em 2h) · se persistir: janela de agenda de 48h + overbooking controlado de 15%.</p></div></details>
+  <details class="cp"><summary>5 · Agenda das closers saturar com lead morno</summary><div class="cpbody"><p>Gate dinâmico por score (ocupação &gt;90% → só score A agenda) · score B vai para a aula gravada antes de qualquer slot · 3º closer no gatilho de 85%.</p></div></details>
+  <details class="cp"><summary>6 · Fadiga de criativo / CPL degradar</summary><div class="cpbody"><p>Biblioteca derivada de cada gravação (cortes, estáticos) · Colheita trimestral renova a atenção · Google Search imune à fadiga · célula de teste permanente com 10% da verba.</p></div></details>
+  <details class="cp"><summary>7 · Michael não gravar na janela (dias 8-12)</summary><div class="cpbody"><p>O MVP roda com criativos e vídeos atuais; a gravação desliza sem travar o go-live (só adia o ganho de CPL). Cada roteiro vem com a justificativa por dados para ele decidir com confiança.</p></div></details>
+  <details class="cp"><summary>8 · Ticket derreter na mão dos closers <span class="tagx">histórico: R$5.272</span></summary><div class="cpbody"><p>Piso travado em R$12.900 · condição de 48h por escrito · auditoria de 100% das calls pela sales-intelligence · comissão premiando ticket cheio.</p></div></details>
+</div></section>
+
+<!-- ALAVANCAS -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Ajustes e adaptações</div>
+  <h2>As alavancas de calibração <span class="accent">já previstas</span></h2>
+  <div class="grid g3" style="margin-top:26px">
+    <div class="card"><h4>Se CPL subir</h4><p>Trocar mix P1/P2 · célula Click-to-WhatsApp e Instant Form com score mais duro · subir peso do Google Search · novos ganchos da biblioteca de criativos.</p></div>
+    <div class="card"><h4>Se conexão ficar &lt;48%</h4><p>Rebalancear A/B para humano-first · antecipar ligação para &lt;15 min · revisar mensagem de entrega do resultado (1ª mensagem decide tudo).</p></div>
+    <div class="card"><h4>Se show-up ficar &lt;55%</h4><p>Encurtar janela de agenda para 48h · vídeo pré-call obrigatório · overbooking 15% · lembrete com pergunta que exige resposta.</p></div>
+    <div class="card"><h4>Se fechamento ficar &lt;14%</h4><p>Coaching semanal sales-intelligence · revisar dossiê pré-call · testar consultoria em 2 tempos (diagnóstico + decisão) · endurecer score que libera agenda.</p></div>
+    <div class="card"><h4>Se sobrar agenda</h4><p>Abrir score B direto para consultoria · subir verba em degraus de 15% · reativar base de ex-alunos (indicação premiada).</p></div>
+    <div class="card"><h4>Se faltar agenda</h4><p>Gate dinâmico (só A) · 3º closer (gatilho 85%) · aula gravada segura o morno sem perder o lead.</p></div>
+  </div>
+</div></section>
+
+<!-- DECISOES -->
+<section><div class="wrap reveal">
+  <div class="eyebrow">Governança da decisão</div>
+  <h2>O que já está decidido <span class="accent">e o que depende da Rafa</span></h2>
+  <div class="grid g2" style="margin-top:26px">
+    <div class="card"><h4>Decidido (aprovado em 02/07 ou coberto pela autonomia)</h4>
+      <ul class="cpul">
+        <li>Preço confirmado: R$23.900 → R$14.900 / 12x R$1.290, piso R$12.900</li>
+        <li>Metas: 15 vendas (R$40k) → 28 vendas (R$55-75k)</li>
+        <li>Nome: Formação Master em Omniterapia + Supervisão Clínica Semanal na oferta</li>
+        <li>Arquitetura perpétua híbrida (IA + SDRs humanos em escala)</li>
+        <li>MVP em 14 dias com A/B 50/50</li>
+      </ul>
+    </div>
+    <div class="ctabox"><h3>3 decisões para a Rafa</h3>
+      <ol>
+        <li><strong>Go do dia 1:</strong> autorizar submissão dos templates e a campanha provisória (dispara o relógio dos 14 dias).</li>
+        <li><strong>Garantia adicional "Primeiro Cliente Acompanhado":</strong> aprovar, ajustar ou descartar (custa horas de supervisão, não caixa).</li>
+        <li><strong>Data do dia de gravação do Michael</strong> (janela ideal: dias 8-12; roteiros prontos com justificativa por dados).</li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<footer>OMNI Brasil · Funil de Vendas da Formação Master em Omniterapia · Julho 2026 · Documento interno restrito<br>Estratégia completa: workspace/businesses/omni_brasil/outputs/funil-oba/ · Gerado por AURA com painéis multi-agente</footer>
+</div>
+
+<script>
+function tryPw(){var v=document.getElementById('pw').value.trim().toLowerCase();if(v==='omni777'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';document.body.style.overflow='auto';initReveal();}else{document.getElementById('err').textContent='Senha incorreta.';document.getElementById('pw').value='';}}
+function initReveal(){var els=document.querySelectorAll('.reveal');var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});els.forEach(function(el){io.observe(el)});}
+document.body.style.overflow='hidden';
+</script>
+</body>
+</html>
