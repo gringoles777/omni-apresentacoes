@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#050505">
+<title>O Talento Que as Pessoas Veem em Você — OMNI Brasil</title>
+<style>
+  /* ── Design System OMNI · Dark Gold · self-contained (zero CDN) ────────────
+     Fontes: system serif (Georgia) nas perguntas + system sans nos rótulos.
+     Sem @import/CDN (trava de performance FCP<1s, webview do Instagram). */
+  :root{
+    color-scheme:dark;
+    --black:#050505; --panel:#0D0D0D; --panel2:#141210;
+    --ink:#F5F0E8; --muted:#c9bfa9; --dim:#6B6B6B;
+    --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --gold-grad:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+    --line:rgba(200,168,75,.15);
+    --serif:'Cormorant Garamond','Georgia','Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(1100px 700px at 50% -8%,#12100b 0%,var(--black) 58%);
+    color:var(--ink);font-family:var(--serif);line-height:1.5;
+    min-height:100vh;min-height:100dvh;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* faíscas de fundo (CSS puro) */
+  .stars{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5}
+  .stars i{position:absolute;width:3px;height:3px;border-radius:50%;
+    background:var(--gold-light);box-shadow:0 0 6px 1px rgba(232,200,106,.6);
+    animation:tw 3.4s ease-in-out infinite}
+  @keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:.9;transform:scale(1.15)}}
+
+  header.topo{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 18px;background:rgba(5,5,5,.86);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  .marca{font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.32em;color:var(--gold)}
+  .inf{font-size:19px;color:var(--gold);opacity:.85}
+
+  .progress{position:sticky;top:47px;z-index:4;height:3px;background:rgba(255,255,255,.05)}
+  .progress .fill{height:100%;width:0;background:var(--gold-grad);
+    transition:width .5s cubic-bezier(.2,.8,.2,1)}
+  .chaprot{position:sticky;top:50px;z-index:4;text-align:right;padding:6px 18px 0;
+    font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+    background:linear-gradient(180deg,rgba(5,5,5,.86),transparent);min-height:18px}
+
+  main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:8px 20px 60px}
+  .screen{animation:enter .42s cubic-bezier(.2,.8,.2,1)}
+  @keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:10px 0 2px}
+  h1{font-family:var(--serif);font-weight:600;line-height:1.16;margin:6px 0 12px;
+    font-size:clamp(1.9rem,7vw,2.6rem)}
+  .q{font-family:var(--serif);font-weight:600;line-height:1.28;
+    font-size:clamp(1.35rem,5.4vw,1.65rem);margin:6px 0 20px}
+  .lead{color:var(--muted);font-family:var(--sans);font-size:15.5px;line-height:1.65;margin:0 0 14px}
+  .cenario{border:1px solid rgba(200,168,75,.28);border-radius:8px;padding:14px 16px;margin:2px 0 16px;
+    background:rgba(200,168,75,.05);font-style:italic;color:var(--ink);font-size:1.08rem}
+
+  /* cartões de opção */
+  .opts{display:flex;flex-direction:column;gap:10px;margin:4px 0 8px}
+  .opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;
+    min-height:64px;padding:14px 16px;border-radius:4px;border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.4;
+    transition:border-color .18s,background .18s,opacity .34s,transform .12s;
+    animation:optin .42s both}
+  @keyframes optin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .opt .key{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    font-weight:700;font-size:14px;color:var(--gold);border:1px solid rgba(200,168,75,.4);
+    transition:all .3s}
+  .opt:hover{border-color:rgba(200,168,75,.5)}
+  .opt:focus-visible{outline:none;box-shadow:0 0 0 2px rgba(200,168,75,.45)}
+  .opt.sel{border-color:var(--gold);background:linear-gradient(180deg,rgba(200,168,75,.14),rgba(200,168,75,.04))}
+  .opt.sel .key{background:var(--gold-grad);color:#1a1405;border-color:transparent;transform:scale(1.08)}
+  .opt.dim{opacity:.32}
+
+  .back{display:inline-block;margin-top:14px;background:none;border:0;color:var(--dim);
+    font-family:var(--sans);font-size:13px;cursor:pointer;padding:6px 2px}
+  .back:hover{color:var(--muted)}
+  .whisper{margin-top:10px;color:var(--dim);font-family:var(--sans);font-size:13px;font-style:italic;
+    opacity:0;transition:opacity .6s}
+  .whisper.on{opacity:1}
+
+  /* botões */
+  .btn{display:block;width:100%;padding:18px 22px;border:0;border-radius:4px;cursor:pointer;
+    font-family:var(--sans);font-weight:800;font-size:16px;letter-spacing:.01em;color:#1a1405;
+    background:var(--gold-grad);
+    box-shadow:0 8px 26px rgba(200,168,75,.3),0 0 0 1px rgba(232,200,106,.55) inset;
+    animation:breathe 3.2s ease-in-out infinite;transition:transform .14s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:translateY(0)}
+  @keyframes breathe{0%,100%{box-shadow:0 8px 26px rgba(200,168,75,.28),0 0 0 1px rgba(232,200,106,.5) inset}
+    50%{box-shadow:0 10px 32px rgba(200,168,75,.44),0 0 22px rgba(232,200,106,.3),0 0 0 1px rgba(232,200,106,.7) inset}}
+  .btn.ghost{background:none;color:var(--muted);border:1px solid var(--line);box-shadow:none;
+    font-weight:600;animation:none;margin-top:12px}
+  .btn.ghost:hover{color:var(--ink)}
+  .subhint{display:block;text-align:center;margin-top:12px;color:var(--muted);font-family:var(--sans);font-size:13px}
+
+  /* abertura */
+  .micro{font-family:var(--sans);font-size:13.5px;color:var(--gold);margin:16px 0 4px;letter-spacing:.02em}
+  .bullets{list-style:none;padding:0;margin:16px 0;font-family:var(--sans)}
+  .bullets li{position:relative;padding:8px 0 8px 26px;color:var(--muted);font-size:14.5px;line-height:1.5}
+  .bullets li::before{content:'✦';position:absolute;left:0;top:8px;color:var(--gold);font-size:13px}
+  .selo-cred{margin-top:18px;font-family:var(--sans);font-size:12px;color:var(--dim);line-height:1.6}
+
+  /* eco */
+  .eco{text-align:center;padding:28px 6px}
+  .spark{font-size:38px;color:var(--gold-light);text-shadow:0 0 20px rgba(232,200,106,.6);
+    animation:pulse 1.5s ease-in-out 1;margin-bottom:8px}
+  @keyframes pulse{0%{transform:scale(.7);opacity:.3}40%{transform:scale(1.25);opacity:1}100%{transform:scale(1);opacity:.95}}
+  .eco .kick{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:14px}
+  .eco .frase{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,5.6vw,1.7rem);
+    color:var(--gold-light);line-height:1.4;max-width:440px;margin:0 auto 26px}
+
+  /* processamento */
+  .proc{text-align:center;padding:70px 10px}
+  .constel{font-size:44px;color:var(--gold-light);text-shadow:0 0 26px rgba(232,200,106,.7);
+    animation:pulse 1.4s ease-in-out infinite}
+  .proc .msg{font-family:var(--serif);font-size:1.4rem;color:var(--ink);margin-top:26px;min-height:2em}
+
+  /* revelação / card */
+  .rev-eyebrow{text-align:center}
+  .card9{position:relative;margin:14px auto 20px;max-width:340px;border-radius:12px;overflow:hidden;
+    border:1px solid rgba(200,168,75,.3);
+    background:radial-gradient(120% 80% at 50% 0%,#161207 0%,#050505 62%);
+    box-shadow:0 0 0 1px rgba(232,200,106,.15) inset,0 20px 60px rgba(0,0,0,.6);
+    padding:34px 24px 26px;text-align:center;animation:glowin .8s ease both}
+  @keyframes glowin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .card9 .inf-b{font-size:26px;color:var(--gold);opacity:.9}
+  .card9 .cstars{font-size:13px;letter-spacing:.5em;color:var(--gold-deep);margin:6px 0 14px}
+  .card9 .lbl{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .card9 .arq{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,9vw,2.7rem);line-height:1.08;margin:8px 0;
+    background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .card9 .ln{width:60px;height:2px;margin:8px auto;background:var(--gold-grad);border-radius:2px}
+  .card9 .sig{font-family:var(--serif);font-style:italic;color:var(--ink);font-size:1.05rem;line-height:1.4;margin-top:10px}
+  .card9 .foot{font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-top:18px}
+
+  .reading{font-family:var(--sans);font-size:15.5px;line-height:1.68;color:var(--ink)}
+  .reading p{margin:0 0 13px;animation:enter .5s both}
+  .reading .branch{border-left:2px solid var(--gold);padding:2px 0 2px 14px;color:var(--muted);font-style:italic}
+  .reading .l50{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-style:italic}
+
+  /* radar barras */
+  .radar{margin:22px 0 6px}
+  .radar .rk{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .rrow{display:flex;align-items:center;gap:12px;margin:10px 0}
+  .rrow .rn{flex:0 0 132px;font-family:var(--sans);font-size:13px;color:var(--muted)}
+  .rrow .rbar{flex:1;height:12px;border-radius:6px;background:rgba(255,255,255,.05);overflow:hidden}
+  .rrow .rbar i{display:block;height:100%;width:0;border-radius:6px;background:var(--gold-grad);
+    transition:width .7s cubic-bezier(.2,.8,.2,1)}
+
+  /* email */
+  .field{margin:16px 0 8px}
+  .field label{display:block;font-family:var(--sans);font-weight:600;font-size:15px;color:var(--ink);margin-bottom:8px}
+  .field input{width:100%;padding:15px 16px;font-size:16px;border-radius:4px;
+    border:1px solid rgba(200,168,75,.4);background:#141210;color:var(--ink);font-family:var(--sans);
+    caret-color:var(--gold-light)}
+  .field input:focus{outline:none;border-color:var(--gold)}
+  .lgpd{font-family:var(--sans);font-size:11.5px;color:var(--dim);line-height:1.6;margin-top:16px}
+  .lgpd a{color:var(--gold)}
+
+  /* rota / presente */
+  .presente{border:1px solid var(--gold);border-radius:10px;padding:20px 18px;margin:18px 0;
+    background:radial-gradient(420px 220px at 50% 0%,rgba(200,168,75,.14),rgba(200,168,75,.02) 62%),var(--panel2)}
+  .presente .kk{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-light);margin-bottom:8px}
+  .rota-body{font-family:var(--sans);font-size:15.5px;line-height:1.66;color:var(--ink)}
+  .rota-body p{margin:0 0 12px}
+  .agenda{list-style:none;padding:0;margin:14px 0}
+  .agenda li{padding:12px 14px;border:1px solid var(--line);border-radius:4px;margin-bottom:8px;
+    font-family:var(--sans);font-size:14.5px;color:var(--ink);cursor:pointer}
+  .agenda li:hover{border-color:var(--gold)}
+
+  .center{text-align:center}
+  .disclaimer{font-family:var(--sans);font-size:12.5px;color:var(--dim);text-align:center;margin-top:26px;line-height:1.6}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:opacity .2s!important}
+    .rrow .rbar i{transition:width .2s!important}
+  }
+#demo-ribbon{position:fixed;top:10px;right:-34px;z-index:99999;background:#8a6d2f;color:#fff;font-size:11px;letter-spacing:2px;padding:4px 40px;transform:rotate(35deg);opacity:.85;pointer-events:none;font-family:sans-serif}
+</style>
+</head>
+<body><div id="demo-ribbon">RASCUNHO</div>
+<div class="stars" id="stars" aria-hidden="true"></div>
+<header class="topo"><span class="marca">OMNI BRASIL</span><span class="inf">∞</span></header>
+<div class="progress"><div class="fill" id="pfill"></div></div>
+<div class="chaprot" id="chaprot" aria-live="polite"></div>
+<main id="app"></main>
+
+<script>
+"use strict";
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIG — placeholders a preencher no go-live (ver 09-copy §13 OBRIGATÓRIO).
+   ═══════════════════════════════════════════════════════════════════════════ */
+var CONFIG = {
+  NOME_ESPECIALISTA: "Diumara Carvalho (exemplo, a definir)",
+  CREDENCIAL: "formado(a) e certificado(a) pela OMNI, com anos ajudando pessoas a fazer essa transição",
+  CNPJ: "00.000.000/0001-00 (demo)",
+  URL_PRIVACIDADE: "#",
+  HORARIOS_AGENDA: ["Segunda, 10h30","Terça, 15h00","Quarta, 19h30"], // DEMO fictício
+  WHATSAPP_LINK: "https://wa.me/5511972343492",
+  TEST_URL: "omnihypnosis.com.br/mapa",
+  ENDPOINT: "/intake/teste-vocacao",
+  ENDPOINT_CTA: "/intake/teste-vocacao/cta"
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCORING ENGINE — ESPELHO EXATO de src/vocation_scoring.js (KEEP IN SYNC!)
+   Qualquer alteração de peso/regra deve ser replicada nos dois arquivos.
+   ═══════════════════════════════════════════════════════════════════════════ */
+var QW = {
+  Q1:{sentido:[100,70,50,0]},
+  Q2:{d1:[100,66,33,0]}, Q3:{d2:[100,66,15,0]}, Q4:{d1:[100,40,30,30]},
+  Q5:{d2:[100,66,33,0]}, Q6:{d3:[100,66,33,0]}, Q7:{d1:[100,66,33,10]},
+  Q8:{d3:[100,55,45,25]}, Q9:{d3:[100,66,33,0]}, Q10:{d3:[100,66,33,0]},
+  Q11:{d2:[100,70,35,0]}, Q12:{renda:[90,80,85,25,85,75]}, Q13:{invest:[100,70,35,10]},
+  Q14:{d4:[100,75,45,10]}, Q15:{d4:[100,75,55,15]}, Q16:{dispo:[100,60,30,15]},
+  Q17:{d4:[100,60,70,15]}, Q12b:{idade:[25,35,45,55,62]}
+};
+function scoreVocation(respostas, telemetry){
+  telemetry = telemetry || {};
+  var r={}; for(var k in respostas){var n=parseInt(respostas[k],10); if(!isNaN(n)) r[k]=n;}
+  function V(q,key){var a=QW[q]&&QW[q][key]; var i=(r[q]||0)-1; return (a&&i>=0&&i<a.length)?a[i]:0;}
+  function avg(){var s=0; for(var i=0;i<arguments.length;i++)s+=arguments[i]; return s/arguments.length;}
+  var round=Math.round;
+
+  var d1_carrega=V('Q7','d1'), d3_procurado=V('Q6','d3'), d3_ja_disseram=V('Q9','d3');
+  var D1=avg(V('Q2','d1'),V('Q4','d1'),V('Q7','d1'));
+  var D2=avg(V('Q3','d2'),V('Q5','d2'),V('Q11','d2'));
+  var d3proc=d3_procurado;
+  var D3=avg(d3proc,V('Q8','d3'),d3_ja_disseram,V('Q10','d3'));
+  var D4=avg(V('Q14','d4'),V('Q15','d4'),V('Q17','d4'));
+
+  var renda_proxy=V('Q12','renda'), prontidao_invest=V('Q13','invest'), invest_dispo=V('Q16','dispo');
+  var gancho_sentido=V('Q1','sentido'), idade=V('Q12b','idade');
+  var fit_facilitador=(r.Q8===1)||(r.Q4===2), salvador=(r.Q8===4), fit_pragmatico=(r.Q11===4);
+  var motivacao_fuga=(r.Q1===1)||(r.Q1===2)||(r.Q17===3);
+  var motivacao_fuga_alta=(r.Q1===1)||(r.Q17===3);
+  var flags=[];
+
+  var flag_autodesq=false;
+  if(d1_carrega>=66 && D1>=80 && D2>=80 && d3_procurado<=33 && d3_ja_disseram>=66){
+    flag_autodesq=true; d3proc=Math.min(100,d3_procurado+33);
+    D3=avg(d3proc,V('Q8','d3'),d3_ja_disseram,V('Q10','d3')); flags.push('autodesqualificacao');
+  }
+
+  var arquetipo=(function(){
+    if(flag_autodesq) return 'Guia Silencioso';
+    if(D1<=35 && D3<=35) return 'Realizador';
+    if(D1>=66 && D2>=55 && D3<=65 && d3_ja_disseram>=66) return 'Guia Silencioso';
+    if(D1>=66 && D3>=66) return 'Porto-Seguro';
+    if(D2<=40 && (fit_pragmatico||salvador||D3>=45)) return 'Construtor Pragmatico';
+    if(D2>=66 && D2>=D1) return D4>=66?'Transformador Inquieto':'Decifrador';
+    if(D1>=D2 && D1>=D3) return 'Porto-Seguro';
+    if(D2>=D1 && D2>=D3) return D4>=66?'Transformador Inquieto':'Decifrador';
+    return 'Construtor Pragmatico';
+  })();
+
+  var temperatura = D4>=66?'A':(D4>=34?'B':'C');
+  if(r.Q14===4 && V('Q15','d4')<=15) temperatura='C';
+  var fuga_mascarada = motivacao_fuga_alta && (r.Q15===1) && (r.Q13===2) && temperatura==='A';
+  if(fuga_mascarada){ temperatura='B'; flags.push('fuga_mascarada'); }
+  if(renda_proxy>=80 && invest_dispo<=60 && temperatura==='A') temperatura='B';
+
+  var isFit = arquetipo!=='Realizador';
+  var evidencia_prosocial_minima = (d3_procurado>=66)||(d3_ja_disseram>=66);
+  var bolso_curto=false;
+  if(renda_proxy<=35 && isFit && (temperatura==='A'||temperatura==='B')){
+    bolso_curto=true; if(temperatura==='A') temperatura='B'; flags.push('bolso_curto');
+  }
+
+  var quality_score=(function(){
+    var q=100;
+    q-=Math.min(35,(telemetry.fastScreens||0)*8);
+    if((telemetry.firstPosStreak||0)>=5) q-=25;
+    q-=Math.min(30,(telemetry.blurEvents||0)*12);
+    var dim={D1:[V('Q2','d1'),V('Q4','d1'),V('Q7','d1')],D2:[V('Q3','d2'),V('Q5','d2'),V('Q11','d2')],
+      D3:[d3_procurado,V('Q8','d3'),d3_ja_disseram,V('Q10','d3')],D4:[V('Q14','d4'),V('Q15','d4'),V('Q17','d4')]};
+    var contr=0;
+    for(var d in dim){var a=dim[d]; if(Math.max.apply(null,a)-Math.min.apply(null,a)>60) contr+=30;}
+    q-=Math.min(40,contr); return Math.max(0,q);
+  })();
+  var low_quality = quality_score<60;
+  if(low_quality) flags.push('low_quality');
+
+  var rota, cta_pago_aberto=false;
+  if(low_quality){ rota='LOW_QUALITY'; }
+  else if(arquetipo==='Realizador'){ rota='SAIDA_DIGNA'; }
+  else if(!evidencia_prosocial_minima){ rota='SAIDA_DIGNA'; }
+  else if(bolso_curto){ rota='TRILHA_PREPARACAO'; }
+  else if(temperatura==='C'){ flags.push('CULTIVAR'); rota='CULTIVAR'; }
+  else if((temperatura==='A'||temperatura==='B') && quality_score>=60){ rota='CTA_PAGO'; cta_pago_aberto=true; }
+  else { rota='SAIDA_DIGNA'; }
+  if(salvador) flags.push('salvador');
+  if(motivacao_fuga) flags.push('motivacao_fuga');
+
+  var eco1_ramo=(function(){
+    if(!r.Q2&&!r.Q3&&!r.Q4&&!r.Q5) return null;
+    var D1p=avg(V('Q2','d1'),V('Q4','d1')), D2p=avg(V('Q3','d2'),V('Q5','d2'));
+    if(Math.max(D1p,D2p)<=33) return 'NEUTRO';
+    return D1p>=D2p?'D1_DOM':'D2_DOM';
+  })();
+  var eco2_ramo=(function(){
+    if(!r.Q6&&!r.Q8) return null;
+    var D3p=avg(V('Q6','d3'),V('Q8','d3'));
+    if(D3p>=66) return 'D3_ALTA';
+    return d1_carrega>=66?'FALLBACK_CUSTO_A':'FALLBACK_CUSTO_B';
+  })();
+
+  var score_comercial=round(0.40*renda_proxy+0.35*invest_dispo+0.25*prontidao_invest);
+  return {arquetipo:arquetipo,D1:round(D1),D2:round(D2),D3:round(D3),D4:round(D4),
+    temperatura:temperatura,score_comercial:score_comercial,renda_proxy:renda_proxy,
+    invest_dispo:invest_dispo,prontidao_invest:prontidao_invest,quality_score:quality_score,
+    cta_pago_aberto:cta_pago_aberto,rota:rota,flags:flags,
+    d3_procurado:d3_procurado,d3_ja_disseram:d3_ja_disseram,d1_carrega:d1_carrega,
+    gancho_sentido:gancho_sentido,idade:idade,faixa_etaria:r.Q12b||null,
+    fit_facilitador:fit_facilitador,salvador:salvador,fit_pragmatico:fit_pragmatico,
+    motivacao_fuga:motivacao_fuga,evidencia_prosocial_minima:evidencia_prosocial_minima,
+    eco1_ramo:eco1_ramo,eco2_ramo:eco2_ramo};
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COPY — perguntas (ordem canônica = índice de peso), ecos, arquétipos, rotas.
+   Randomização de exibição preserva o índice canônico (idx).
+   ═══════════════════════════════════════════════════════════════════════════ */
+function O(idx,txt){return {idx:idx,txt:txt};}
+var QUESTIONS = [
+ {id:'Q1',cap:1,rand:true,q:"Pensa no seu trabalho nas últimas semanas. O que descreve melhor como você tem se sentido?",
+  o:[O(1,"Dou conta de tudo, mas já não sei bem para quê"),O(2,"Funciono no automático, os dias se repetem"),O(3,"Ainda gosto de partes, mas sinto que falta algo meu ali"),O(4,"Estou em paz com onde estou hoje")]},
+ {id:'Q2',cap:1,rand:true,q:"Um amigo próximo te diz que está tudo bem. Você sente que não está. O que costuma acontecer com você?",
+  o:[O(1,"Percebo na hora, o corpo dele conta antes das palavras"),O(2,"Sinto que tem algo, mesmo sem saber o quê"),O(3,"Só me toco depois, revendo a conversa"),O(4,"Prefiro acreditar no que a pessoa me diz")]},
+ {id:'Q3',cap:1,rand:true,q:"Um colega muda de comportamento do nada, fica diferente. Seu primeiro impulso é:",
+  o:[O(1,"Entender o que está acontecendo por dentro dele"),O(2,"Perguntar direto o que houve"),O(3,"Pensar em como isso afeta o trabalho"),O(4,"Sinceramente, não é da minha conta")]},
+ {id:'Q4',cap:1,rand:true,q:"Depois de uma conversa difícil com alguém, o que mais te deixa satisfeito?",
+  o:[O(1,"Sentir que a pessoa se sentiu de verdade compreendida"),O(2,"Ver que ela saiu com um caminho mais claro"),O(3,"Saber que fui honesto, mesmo que doesse"),O(4,"Ter resolvido junto o que estava travado")]},
+ {id:'Q5',cap:1,rand:false,q:"O quanto isso combina com você: “gosto de entender por que as pessoas repetem os mesmos padrões, mesmo sabendo que se prejudicam”.",
+  o:[O(1,"É exatamente eu, penso nisso o tempo todo"),O(2,"Combina bastante"),O(3,"Às vezes me pego pensando nisso"),O(4,"Não é muito o meu tipo de curiosidade")]},
+ {id:'Q6',cap:2,rand:false,q:"Com que frequência as pessoas te procuram para desabafar ou pedir conselho?",
+  o:[O(1,"Toda semana, virou um hábito comigo"),O(2,"Com alguma frequência"),O(3,"De vez em quando"),O(4,"Quase nunca")]},
+ {id:'Q7',cap:2,rand:false,q:"Depois de ouvir o problema de alguém, quantas vezes você continua carregando aquilo por dentro?",
+  o:[O(1,"Quase sempre, levo para casa"),O(2,"Com frequência, dependendo da pessoa"),O(3,"De vez em quando"),O(4,"Raramente, consigo separar bem")]},
+ {id:'Q8',cap:2,rand:true,q:"Quando alguém te traz um problema, o que mais parece com você?",
+  o:[O(1,"Escuto e ajudo a pessoa a chegar na própria resposta"),O(2,"Falo o que eu faria no lugar dela"),O(3,"Fico do lado, apoio sem me meter demais"),O(4,"Meto a mão e resolvo pela pessoa")]},
+ {id:'Q9',cap:2,rand:false,q:"Alguém já te disse alguma versão de “você devia trabalhar com isso”, cuidando ou ajudando pessoas?",
+  o:[O(1,"Muitas vezes, de pessoas diferentes"),O(2,"Algumas vezes"),O(3,"Uma ou outra vez"),O(4,"Nunca me disseram isso")]},
+ {id:'Q10',cap:2,rand:false,q:"Você já abriu mão de algo concreto (tempo, dinheiro, uma oportunidade) para ajudar alguém que precisava?",
+  o:[O(1,"Várias vezes, é parte de quem eu sou"),O(2,"Uma ou duas vezes que me marcaram"),O(3,"Raramente"),O(4,"Não que eu me lembre")]},
+ {id:'Q11',cap:2,rand:true,q:"Ajudar alguém a mudar, sem passo a passo garantido. Para você isso é:",
+  o:[O(1,"Fascinante, é onde fica interessante"),O(2,"Instigante, mesmo com desconforto"),O(3,"Depende do meu dia"),O(4,"Desconfortável, prefiro método claro")]},
+ {id:'Q12',cap:3,rand:true,q:"Hoje, no seu trabalho, você se descreveria mais como:",
+  o:[O(1,"Lidero uma equipe ou uma área"),O(2,"Sou referência técnica, as pessoas me procuram para resolver"),O(3,"Sou profissional liberal, vivo da minha própria expertise"),O(4,"Ainda estou construindo minha estabilidade"),O(5,"Toco meu próprio negócio, respondo pelos resultados"),O(6,"Sou servidor(a) público(a) de carreira")]},
+ {id:'Q12b',cap:3,rand:false,q:"Só para calibrar a leitura: em que década da vida você está?",
+  o:[O(1,"Até 29"),O(2,"30 a 39"),O(3,"40 a 49"),O(4,"50 a 59"),O(5,"60 ou mais")]},
+ {id:'Q13',cap:3,rand:false,q:"Nos últimos 12 meses, você investiu tempo ou dinheiro em se desenvolver (curso, terapia, mentoria, formação)?",
+  o:[O(1,"Sim, mais de uma vez, faz parte de como eu vivo"),O(2,"Sim, uma vez, algo que me marcou"),O(3,"Pensei nisso, mas não cheguei a fazer"),O(4,"Não foi uma prioridade agora")]},
+ {id:'Q14',cap:3,rand:false,q:"Sobre construir uma nova fonte de propósito e renda ajudando pessoas, você diria que:",
+  o:[O(1,"Já dei alguns passos concretos nessa direção"),O(2,"Estou pesquisando e me organizando para isso"),O(3,"Penso muito, mas não sei por onde começar"),O(4,"Hoje é mais um pensamento distante")]},
+ {id:'Q15',cap:3,rand:true,fixedTop:3,q:"Pensa em construir uma renda nova, que dependa mais de você. Como isso soa?",
+  o:[O(1,"Como liberdade, é o tipo de desafio que me atrai"),O(2,"Dá um frio na barriga, mas eu encararia"),O(3,"Prefiro construir o novo sem largar a segurança do que já tenho"),O(4,"Hoje isso me travaria")]},
+ {id:'Q16',cap:3,rand:true,q:"Se existisse um caminho testado para você desenvolver esse talento e transformá-lo em profissão, o que mais combinaria com você?",
+  o:[O(1,"Investiria no acompanhamento mais completo para chegar mais rápido e com segurança"),O(2,"Começaria pelo essencial e evoluiria conforme visse resultado"),O(3,"Preferiria aprender por conta antes de investir"),O(4,"Só avançaria com muita garantia antes de qualquer passo")]},
+ {id:'Q17',cap:3,rand:true,q:"No fundo, o que mais te move quando você pensa em mudar?",
+  o:[O(1,"Construir algo com o meu sentido, que seja meu"),O(2,"Os dois na mesma medida"),O(3,"Não aguento mais seguir como está"),O(4,"Ainda não sei se quero mudar")]}
+];
+var CAP_LABEL={1:"Onde você está",2:"Como você funciona",3:"O que vem agora"};
+
+var ECO1={D1_DOM:"Já dá para notar uma coisa em você: você sente o que as pessoas não dizem. Nem todo mundo carrega essa antena. Segue comigo.",
+  D2_DOM:"Tem gente que olha pra um problema. Você olha pra pessoa por dentro do problema. Isso é mais raro do que parece. Vamos adiante.",
+  NEUTRO:"Você não é do tipo que se derrama pelo que sente, e o teste percebeu. Isso também diz algo sobre a sua forma de lidar com gente. Continua comigo."};
+var ECO2={D3_ALTA:"Repara numa coisa: as pessoas já te escolheram como esse lugar seguro, muito antes deste teste. Você só nunca chamou isso pelo nome. A gente vai chamar.",
+  FALLBACK_CUSTO_A:"Você marcou que costuma levar o problema dos outros por dentro. Quem carrega assim geralmente é procurado mais do que percebe, só não contabiliza. Guarda isso, porque daqui a pouco faz sentido.",
+  FALLBACK_CUSTO_B:"Você ouve, resolve e segue em frente, sem carregar o que não é seu. O teste registrou isso também, e é um jeito legítimo de lidar com gente. Faltam poucas perguntas."};
+
+var LINHA_50="E se passou pela sua cabeça que talvez seja tarde: não é. No que envolve ler e conduzir gente, o tempo joga a seu favor. Tudo que você já viveu, ganhou e perdeu não é obstáculo, é a sua credencial. É o que faz as pessoas confiarem em você já na primeira conversa.";
+
+var ARQ={
+ 'Porto-Seguro':{nome:"O Porto-Seguro",tag:"Você já é o terapeuta da sua roda. Só não recebeu por isso ainda.",
+   sig:"Você é o lugar seguro onde as pessoas descarregam o que não contam a mais ninguém.",
+   dev:["Você virou o lugar onde as pessoas descarregam o que não contam para mais ninguém. Marcou que te procuram toda semana e que quase sempre leva o problema delas para dentro de casa. Essa é a sua força e a sua conta: você sente demais, e isso te esgota, porque você cuida de todo mundo e raramente alguém cuida de você na mesma medida.","O que você faz de graça, no corredor, no WhatsApp, na mesa do bar, é o núcleo de uma profissão de verdade. A diferença entre exaustão e realização, no seu caso, não é fazer menos. É fazer isso com método, com limite e com valor. Ajudar pessoas já é o que você faz. Faltou só transformar em caminho."]},
+ 'Decifrador':{nome:"O Decifrador de Gente",tag:"Você entende as pessoas por dentro. Falta um lugar para usar isso.",
+   sig:"Você olha para a pessoa dentro do problema, não só para o problema.",
+   dev:["Enquanto os outros olham para o problema, você olha para a pessoa dentro do problema. Você marcou que seu primeiro impulso é entender o que se passa por dentro do outro, e que pensa o tempo todo em por que as pessoas repetem os mesmos padrões. Você tem cabeça de clínico.","A sua tensão é essa: você enxerga fundo, mas fica na análise, observando de camarote uma habilidade que pedia campo, prática, gente na sua frente. Existe um trabalho em que ler o que move as pessoas é a competência central, e não um talento desperdiçado. Você não precisa de mais teoria. Precisa de onde colocar a sua."]},
+ 'Transformador Inquieto':{nome:"O Transformador Inquieto",tag:"Você tem energia de recomeço de sobra. Falta direção, não coragem.",
+   sig:"Você é movido por reinvenção. Construir algo seu soa como liberdade.",
+   dev:["Você é movido por reinvenção. Marcou que já deu passos concretos rumo à mudança e que construir algo seu soa como liberdade, não como ameaça. Essa é a sua potência, e também a sua armadilha: você começa muita coisa, se empolga, e a inquietação que te move é a mesma que te dispersa antes de colher.","Energia sem canal vira frustração. O que você não tem é falta de vontade, é falta de um caminho que segure a sua intensidade e a transforme em resultado com as pessoas. Ajudar gente a mudar pode ser exatamente o campo que dá vazão a tudo isso. Sua coragem já está provada. Faltou o mapa."]},
+ 'Guia Silencioso':{nome:"O Guia Silencioso",tag:"As pessoas já te disseram. Talvez seja hora de você acreditar.",
+   sig:"As pessoas saem mais leves de uma conversa com você. Toda vez.",
+   dev:["Você marcou que já ouviu, de gente diferente, que devia trabalhar ajudando ou cuidando de pessoas. E ainda assim você trata isso como se fosse só jeito, não talento. Essa é a sua tensão: a aptidão é real, os outros veem, e a única pessoa que não se dá permissão para levar a sério é você.","Repara: você marcou que carrega o peso dos outros por dentro. Quem carrega assim é procurado muito mais do que contabiliza, você só não soma. O que te falta não é capacidade, é a permissão de assumir o que você já é. Existe uma forma séria de ajudar pessoas que combina exatamente com quem você é em silêncio."]},
+ 'Construtor Pragmatico':{nome:"O Construtor Pragmático",tag:"Você resolve, entrega, faz acontecer. E às vezes atropela o processo do outro.",
+   sig:"Com você a coisa anda, sai do papel, vira resultado.",
+   dev:["Você é do tipo que mete a mão e resolve. As pessoas confiam em você porque com você a coisa anda, sai do papel, vira resultado. Você marcou que prefere método claro e que gosta de destravar o que está parado. Essa objetividade é ouro, e é também a sua tensão: no seu impulso de resolver, você às vezes entrega a resposta antes de a pessoa chegar nela sozinha.","O seu talento com gente é mais de guia, de mentor, de quem constrói junto, do que de quem escuta sem agir. Bem direcionado, isso vira uma forma poderosa de ajudar pessoas a saírem do lugar. O ajuste fino não é fazer menos. É aprender quando recuar para o outro crescer."],
+   reality:"Antes de qualquer passo, um aviso honesto que combina com o seu perfil: esse caminho vai exigir de você exatamente o que menos vem natural, escutar sem já resolver, segurar a resposta pronta para a pessoa chegar nela sozinha. É a parte mais difícil justamente para quem é bom em executar. Se você topar treinar isso, o seu talento vira raro. Se procura um atalho, não é aqui."},
+ 'Realizador':{nome:"O Realizador",tag:"Sua força está em fazer o mundo funcionar. E isso vale muito.",
+   sig:"Você faz empresas, times e projetos existirem de pé.",
+   dev:["Vamos ser honestos, porque um teste que aprova todo mundo não vale nada. O seu talento não está principalmente em mergulhar no mundo interno das pessoas. Está em execução, em liderança, em fazer as coisas acontecerem no mundo real. Você marcou que foca no impacto do trabalho e que prefere resolver a ficar decifrando o que o outro sente. Isso não é uma falha, é um perfil valioso, dos que fazem empresas, times e projetos existirem de pé.","Este teste olha para um tipo específico de talento com pessoas, e o seu brilha em outro lugar: onde há uma meta para bater, um time para liderar, um resultado para entregar. Guarde o seu mapa. Ele mostra, preto no branco, onde a sua força rende mais, e vale como bússola na próxima decisão de carreira que você tomar."]}
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ESTADO + persistência (localStorage, 24h) + telemetria
+   ═══════════════════════════════════════════════════════════════════════════ */
+var LS_KEY='voc_v1';
+var state={answers:{},step:0,startedAt:Date.now(),
+  tel:{blurEvents:0,firstPosStreak:0,_streak:0,fastScreens:0}};
+var display={};                 // ordem de exibição por questão (para telemetria)
+var screenShownAt=0;
+var result=null;                // payload do scoreVocation após o teste
+var posted=false;               // se o POST de selagem já foi feito
+
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify({a:state.answers,s:state.step,t:state.startedAt,tel:state.tel}));}catch(e){}}
+function load(){try{var raw=localStorage.getItem(LS_KEY);if(!raw)return null;var o=JSON.parse(raw);
+  if(!o||!o.t||(Date.now()-o.t)>864e5){localStorage.removeItem(LS_KEY);return null;}return o;}catch(e){return null;}}
+function clearSave(){try{localStorage.removeItem(LS_KEY);}catch(e){}}
+
+document.addEventListener('visibilitychange',function(){if(document.hidden){state.tel.blurEvents++;}});
+window.addEventListener('blur',function(){/* contabilizado por visibilitychange; evita duplicar */});
+
+/* faíscas de fundo */
+(function(){var s=document.getElementById('stars');var n=window.innerWidth<420?14:22;var h='';
+  for(var i=0;i<n;i++){h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;animation-delay:'+(Math.random()*3).toFixed(1)+'s"></i>';}
+  s.innerHTML=h;})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOW — sequência de passos
+   ═══════════════════════════════════════════════════════════════════════════ */
+// steps: {t:'q',q}, {t:'eco',n}
+var STEPS=[];
+(function(){
+  var ecoAfter={Q5:1,Q8:2};
+  for(var i=0;i<QUESTIONS.length;i++){
+    STEPS.push({t:'q',q:QUESTIONS[i]});
+    if(ecoAfter[QUESTIONS[i].id]) STEPS.push({t:'eco',n:ecoAfter[QUESTIONS[i].id]});
+  }
+})();
+var TOTAL_Q=QUESTIONS.length;
+
+var app=document.getElementById('app');
+var pfill=document.getElementById('pfill');
+var chaprot=document.getElementById('chaprot');
+
+function answeredCount(){return Object.keys(state.answers).length;}
+function setProgress(cap,extra){
+  var pct=Math.min(100,(answeredCount()/TOTAL_Q)*100 + (extra||0));
+  pfill.style.width=pct.toFixed(1)+'%';
+  chaprot.textContent = cap ? ('cap. '+cap+' de 3') : '';
+}
+
+function vibrate(){try{if(navigator.vibrate)navigator.vibrate(8);}catch(e){}}
+
+function shuffleOptions(q){
+  var opts=q.o.slice();
+  if(!q.rand) return opts;
+  // Fisher-Yates
+  for(var i=opts.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=opts[i];opts[i]=opts[j];opts[j]=t;}
+  if(q.fixedTop){ // move a opção fixa pro topo
+    var fi=-1; for(var k=0;k<opts.length;k++) if(opts[k].idx===q.fixedTop){fi=k;break;}
+    if(fi>0){var f=opts.splice(fi,1)[0];opts.unshift(f);}
+  }
+  return opts;
+}
+
+function renderQuestion(step){
+  var q=step.q;
+  var opts;
+  if(display[q.id]) opts=display[q.id]; else {opts=shuffleOptions(q);display[q.id]=opts;}
+  var isScale=!q.rand;
+  var html='<div class="screen">';
+  html+='<div class="eyebrow">'+CAP_LABEL[q.cap]+'</div>';
+  html+='<div class="q">'+q.q+'</div>';
+  html+='<div class="opts">';
+  var letters='ABCDEF';
+  for(var i=0;i<opts.length;i++){
+    var sel=state.answers[q.id]===opts[i].idx?' sel':'';
+    html+='<button class="opt'+sel+'" data-idx="'+opts[i].idx+'" data-pos="'+i+'" style="animation-delay:'+(0.06*i+0.04).toFixed(2)+'s">'
+      +'<span class="key">'+letters[i]+'</span><span>'+opts[i].txt+'</span></button>';
+  }
+  html+='</div>';
+  if(state.step>0) html+='<button class="back" id="backBtn">← voltar</button>';
+  html+='<div class="whisper" id="whisper">Não existe resposta certa. Vai no primeiro instinto.</div>';
+  html+='</div>';
+  app.innerHTML=html;
+  window.scrollTo(0,0);
+  setProgress(q.cap,0);
+  screenShownAt=Date.now();
+
+  var btns=app.querySelectorAll('.opt');
+  for(var b=0;b<btns.length;b++){
+    btns[b].addEventListener('click',function(){onAnswer(q,this,isScale);});
+  }
+  var back=document.getElementById('backBtn');
+  if(back) back.addEventListener('click',goBack);
+
+  // sussurro anti-paralisia após 20s de inatividade
+  var wt=setTimeout(function(){var w=document.getElementById('whisper');if(w)w.classList.add('on');},20000);
+  app._whisperTimer=wt;
+}
+
+function onAnswer(q,btnEl,isScale){
+  if(app._whisperTimer)clearTimeout(app._whisperTimer);
+  vibrate();
+  var idx=parseInt(btnEl.getAttribute('data-idx'),10);
+  var pos=parseInt(btnEl.getAttribute('data-pos'),10);
+  var novo = state.answers[q.id]===undefined;
+  state.answers[q.id]=idx;
+
+  // telemetria: viés de 1ª posição (só em questões com peso randomizado)
+  if(q.rand){
+    if(pos===0){state.tel._streak++;state.tel.firstPosStreak=Math.max(state.tel.firstPosStreak,state.tel._streak);}
+    else state.tel._streak=0;
+  }
+  // telemetria: tela de cenário respondida rápido demais (Q1-Q11)
+  var qnum=parseInt(q.id.replace(/\D/g,''),10);
+  if(qnum<=11 && !/b/.test(q.id) && (Date.now()-screenShownAt)<2500) state.tel.fastScreens++;
+
+  // feedback visual: marca escolhida, esmaece as outras
+  var all=app.querySelectorAll('.opt');
+  for(var i=0;i<all.length;i++){
+    if(all[i]===btnEl) all[i].classList.add('sel');
+    else all[i].classList.add('dim');
+    all[i].disabled=true;
+  }
+  save();
+  setTimeout(next, isScale?340:360);
+}
+
+function renderEco(step){
+  // calcula ramo com respostas parciais
+  var partial=scoreVocation(state.answers,{});
+  var txt, ramo;
+  if(step.n===1){ramo=partial.eco1_ramo||'NEUTRO';txt=ECO1[ramo];}
+  else {ramo=partial.eco2_ramo||'FALLBACK_CUSTO_B';txt=ECO2[ramo.replace('FALLBACK_CUSTO_A','FALLBACK_CUSTO_A')];}
+  var html='<div class="screen eco">'
+    +'<div class="spark">✦</div>'
+    +'<div class="kick">Percebi uma coisa</div>'
+    +'<div class="frase">“'+txt+'”</div>'
+    +'<button class="btn" id="ecoNext">Continuar →</button>'
+    +'</div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+  setProgress(null,2);   // empurra a barra levemente, sem mexer no capítulo
+  document.getElementById('ecoNext').addEventListener('click',function(){vibrate();next();});
+}
+
+function showStep(i){
+  state.step=i;save();
+  if(i>=STEPS.length){return startReveal();}
+  var st=STEPS[i];
+  // history para interceptar back nativo
+  try{history.pushState({s:i},'');}catch(e){}
+  if(st.t==='q') renderQuestion(st);
+  else renderEco(st);
+}
+function next(){showStep(state.step+1);}
+function goBack(){
+  var i=state.step-1;
+  while(i>=0 && STEPS[i] && STEPS[i].t==='eco') i--;   // pula ecos ao voltar
+  if(i<0){return showOpening();}
+  showStep(i);
+}
+window.addEventListener('popstate',function(){
+  // evita abandono acidental: back nativo volta 1 pergunta em vez de sair
+  if(state.step>0 && !result){try{history.pushState({s:state.step},'');}catch(e){}goBack();}
+});
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ABERTURA
+   ═══════════════════════════════════════════════════════════════════════════ */
+function showOpening(resume){
+  var html='<div class="screen">'
+    +'<div class="eyebrow" style="text-align:center">O talento que já aparece em você</div>'
+    +'<h1>O Talento Que as Pessoas Veem em Você <span style="color:var(--gold-light)">(Antes de Você)</span></h1>'
+    +'<p class="lead">Em 3 minutos, descubra o dom que já aparece na forma como você lida com gente, e por que ele pode valer muito mais do que você imagina.</p>'
+    +'<p class="lead">Tem uma coisa que as pessoas fazem com você e talvez você nem note mais: elas te procuram. Para desabafar, para decidir, para entender o que estão sentindo. Você virou esse lugar seguro sem nunca ter estudado para isso.</p>'
+    +'<ul class="bullets">'
+    +'<li>Qual dos 6 perfis de talento humano descreve você</li>'
+    +'<li>A força que as pessoas já reconhecem em você, mesmo quando você não se dá crédito por ela</li>'
+    +'<li>O ponto exato onde esse talento te custa energia, e por que ninguém te avisou disso</li>'
+    +'<li>Onde esse mesmo dom poderia deixar de ser um favor que você faz de graça</li>'
+    +'</ul>'
+    +'<p class="micro">São 18 perguntas rápidas, uma de cada vez. Leva cerca de 3 minutos. Nada de certo ou errado, só você.</p>'
+    +'<button class="btn" id="startBtn">Começar meu teste →</button>'
+    +'<span class="subhint">Gratuito. Sem cadastro para começar. Seu resultado aparece na hora.</span>'
+    +(resume?'<button class="btn ghost" id="resumeBtn">Continuar de onde parei</button>':'')
+    +'<div class="selo-cred">Construído sobre modelos validados de personalidade e de prontidão de mudança, pela OMNI, instituição com 46 anos de método e certificação ISO 9001.</div>'
+    +'</div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+  pfill.style.width='0%';chaprot.textContent='';
+  document.getElementById('startBtn').addEventListener('click',function(){
+    vibrate();
+    if(!resume){state.answers={};state.step=0;display={};state.startedAt=Date.now();
+      state.tel={blurEvents:0,firstPosStreak:0,_streak:0,fastScreens:0};clearSave();}
+    showStep(0);
+  });
+  if(resume){document.getElementById('resumeBtn').addEventListener('click',function(){vibrate();showStep(state.step);});}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PROCESSAMENTO + REVELAÇÃO
+   ═══════════════════════════════════════════════════════════════════════════ */
+function startReveal(){
+  result=scoreVocation(state.answers,{blurEvents:state.tel.blurEvents,firstPosStreak:state.tel.firstPosStreak,fastScreens:state.tel.fastScreens});
+  pfill.style.width='100%';chaprot.textContent='';
+  var msgs=["Cruzando as suas respostas…","Encontrando o seu padrão…","Revelando o seu talento…"];
+  app.innerHTML='<div class="screen proc"><div class="constel">✦</div><div class="msg" id="pmsg">'+msgs[0]+'</div></div>';
+  window.scrollTo(0,0);
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var i=0;var pm=document.getElementById('pmsg');
+  var iv=setInterval(function(){i++;if(i<msgs.length){if(pm)pm.textContent=msgs[i];}else{clearInterval(iv);renderReveal();}},reduce?300:800);
+}
+
+function freqQ6(){var i=state.answers.Q6;return {1:"toda semana",2:"com alguma frequência",3:"de vez em quando",4:"quase nunca"}[i]||"com frequência";}
+function carregaQ7(){var i=state.answers.Q7;return {1:"quase sempre leva o problema delas para dentro de casa",2:"com frequência carrega o que ouve por dentro",3:"às vezes carrega o que ouve",4:"consegue separar bem o que é seu"}[i]||"carrega o que ouve";}
+function revLinhas(arq){
+  var l1;
+  if(arq==='Porto-Seguro') l1="Você marcou que as pessoas te procuram "+freqQ6()+", e que "+carregaQ7()+".";
+  else if(arq==='Guia Silencioso') l1="Você marcou que já ouviram, de gente diferente, que você devia trabalhar ajudando pessoas, e que "+carregaQ7()+".";
+  else if(arq==='Decifrador') l1="Você marcou que seu primeiro impulso é entender o que se passa por dentro do outro, e que pensa em por que as pessoas repetem os mesmos padrões.";
+  else if(arq==='Transformador Inquieto') l1="Você marcou que já deu passos concretos rumo à mudança, e que construir algo seu soa como liberdade.";
+  else if(arq==='Construtor Pragmatico') l1="Você marcou que prefere método claro e que, quando alguém traz um problema, você mete a mão e resolve.";
+  else l1="Você marcou que foca no impacto do trabalho e que prefere resolver a ficar decifrando o que o outro sente.";
+  var l2 = (arq==='Realizador')
+    ? "Isso não é uma falha. É um perfil valioso, e este teste sabe reconhecer onde ele rende."
+    : "Isso não é um detalhe da sua personalidade. É a matéria-prima de uma profissão que você já exerce sem saber.";
+  var l3 = "Tem mais coisa que este teste enxergou em você. Preparei o mapa completo. Ele está logo abaixo.";
+  return [l1,l2,l3];
+}
+
+function renderReveal(){
+  var a=ARQ[result.arquetipo];var linhas=revLinhas(result.arquetipo);
+  var html='<div class="screen">'
+    +'<div class="eyebrow rev-eyebrow">Seu talento é o de</div>'
+    +'<div class="card9" id="card9">'
+      +'<div class="inf-b">∞</div>'
+      +'<div class="cstars">✦ ✦ ✦</div>'
+      +'<div class="lbl">O meu talento é o de</div>'
+      +'<div class="arq">'+a.nome+'</div>'
+      +'<div class="ln"></div>'
+      +'<div class="sig">“'+a.sig+'”</div>'
+      +'<div class="foot">OMNI · EST. 1979 · ISO 9001</div>'
+    +'</div>'
+    +'<div class="reading">';
+  for(var i=0;i<linhas.length;i++) html+='<p style="animation-delay:'+(0.15*i).toFixed(2)+'s">'+linhas[i]+'</p>';
+  html+='</div>'
+    +renderRadar()
+    +'<button class="btn" id="revBtn">Ver meu mapa completo →</button>'
+    +'</div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+  // anima barras
+  setTimeout(function(){var bars=app.querySelectorAll('.rrow .rbar i');for(var i=0;i<bars.length;i++){(function(el,k){setTimeout(function(){el.style.width=el.getAttribute('data-w');},120*k);})(bars[i],i);}},120);
+  document.getElementById('revBtn').addEventListener('click',function(){vibrate();renderDevolutiva();});
+}
+
+function renderRadar(){
+  var dims=[['Cuidado & sintonia',result.D1],['Leitura das pessoas',result.D2],['Evidência na prática',result.D3],['Prontidão pra recomeçar',result.D4]];
+  var h='<div class="radar"><div class="rk">Como seu dom se distribui</div>';
+  for(var i=0;i<dims.length;i++){
+    h+='<div class="rrow"><span class="rn">'+dims[i][0]+'</span><span class="rbar"><i data-w="'+Math.max(6,dims[i][1])+'%"></i></span></div>';
+  }
+  h+='</div>';return h;
+}
+
+/* devolutiva ramificada (§5 + ramos condicionais) */
+function renderDevolutiva(){
+  var a=ARQ[result.arquetipo];var fit=result.arquetipo!=='Realizador';
+  var is50=(result.faixa_etaria&&result.faixa_etaria>=4);
+  var html='<div class="screen">'
+    +'<div class="eyebrow">O que o seu mapa revela</div>'
+    +'<h1 style="font-size:clamp(1.7rem,6.4vw,2.2rem)">'+a.nome+'</h1>'
+    +'<div class="reading">';
+  for(var i=0;i<a.dev.length;i++) html+='<p>'+a.dev[i]+'</p>';
+  // ramos Porto-Seguro
+  if(result.arquetipo==='Porto-Seguro'){
+    if(state.answers.Q12===3) html+='<p class="branch">Você já cuida de gente por ofício, então a questão para você não é descobrir a vocação, é fazer isso do seu jeito. Do jeito que aprofunda de verdade, sem a pressa e o script que a sua rotina atual te obriga a ter. O talento está aqui há tempo. O que muda é a forma de exercê-lo.</p>';
+    if(result.invest_dispo<=30 && result.motivacao_fuga) html+='<p class="branch">Uma honestidade, porque você já deve ter ouvido promessa demais: isso não se resolve com curso de fim de semana nem com atalho motivacional, e é para desconfiar de quem prometer. É um ofício sério, que se aprende com método e prática. Se alguém te vender facilidade, vira as costas.</p>';
+  }
+  if(is50 && fit) html+='<div class="l50">'+LINHA_50+'</div>';
+  html+='</div>'
+    +'<button class="btn" id="devBtn">Quero o meu mapa completo →</button>'
+    +'</div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+  document.getElementById('devBtn').addEventListener('click',function(){vibrate();renderEmail();});
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EMAIL (upgrade) — selagem: POST com payload completo (lição B12)
+   ═══════════════════════════════════════════════════════════════════════════ */
+function renderEmail(){
+  var realizador=result.arquetipo==='Realizador';
+  var bullets = realizador
+    ? ['O retrato do seu perfil de execução e liderança, com os contextos onde você rende mais',
+       'As condições em que a sua força vira resultado (e as que te drenam sem você perceber)',
+       'O seu modo de agir quando alguém te traz um problema, e por que ele é uma força de liderança',
+       'O tipo de projeto e de time onde alguém com o seu perfil costuma prosperar']
+    : ['O retrato completo do seu perfil '+ARQ[result.arquetipo].nome+', com a força e o ponto cego que quase ninguém te aponta',
+       'O radar das suas 4 dimensões (o que te dá energia com pessoas e o que te drena)',
+       'Onde esse talento poderia deixar de ser um favor e virar uma profissão de verdade',
+       'O próximo passo mais inteligente para alguém com o seu perfil, no seu momento de vida'];
+  var chamada = realizador ? 'Seu mapa está pronto. Quer levar ele com você?' : 'Seu mapa completo está pronto. Quer que eu te envie?';
+  var corpo = realizador
+    ? 'O seu perfil não é do tipo que este teste seleciona para o caminho de ajudar pessoas pela escuta, e isso é uma informação valiosa, não um consolo. Preparei um mapa que mostra onde a sua força realmente rende. Vale guardar para a próxima decisão de carreira.'
+    : 'O que você acabou de ler foi só a leitura de superfície. O mapa completo do seu talento é bem mais fundo, e eu preparei ele em detalhe para você. Deixa eu te mandar por email, é seu para guardar, reler e mostrar para quem você quiser.';
+  var html='<div class="screen">'
+    +'<div class="eyebrow">✦ Seu mapa completo</div>'
+    +'<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">'+chamada+'</h1>'
+    +'<p class="lead">'+corpo+'</p>'
+    +'<ul class="bullets">';
+  for(var i=0;i<bullets.length;i++) html+='<li>'+bullets[i]+'</li>';
+  html+='</ul>'
+    +'<div class="field"><label for="em">Seu melhor email</label>'
+    +'<input id="em" type="email" inputmode="email" autocomplete="email" placeholder="voce@email.com"></div>'
+    +'<div id="emErr" style="color:var(--gold-light);font-family:var(--sans);font-size:13px;min-height:16px"></div>'
+    +'<button class="btn" id="emBtn">'+(realizador?'Quero meu mapa →':'Quero meu mapa completo →')+'</button>'
+    +'<span class="subhint">Sem spam. Só o seu mapa e o que faz sentido para o seu perfil.</span>'
+    +'<div class="lgpd">Seus dados são tratados conforme a LGPD. <a href="'+CONFIG.URL_PRIVACIDADE+'">Política de Privacidade</a>. OMNI Brasil, CNPJ '+CONFIG.CNPJ+'. Você pode pedir a exclusão dos seus dados a qualquer momento.</div>'
+    +'</div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+  var input=document.getElementById('em');
+  document.getElementById('emBtn').addEventListener('click',function(){
+    var v=(input.value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){document.getElementById('emErr').textContent='Confere o email, parece incompleto.';return;}
+    vibrate();state.email=v;sealAndPost(v);renderRota();
+  });
+}
+
+function buildPayload(email){
+  return {email:email||state.email||null,nome:null,
+    respostas:state.answers,
+    telemetry:{blurEvents:state.tel.blurEvents,firstPosStreak:state.tel.firstPosStreak,fastScreens:state.tel.fastScreens},
+    metadata:{startedAt:state.startedAt,finishedAt:Date.now(),ua:navigator.userAgent,titulo_variante:'A',
+      client_result:result}};
+}
+function sealAndPost(email){
+  if(posted)return;
+  var body=JSON.stringify(buildPayload(email));
+  postWithRetry(CONFIG.ENDPOINT,body,2).then(function(ok){if(ok){posted=true;clearSave();}});
+}
+function postWithRetry(url,body,tries){
+  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true})
+    .then(function(r){if(r.ok)return true;throw new Error('http '+r.status);})
+    .catch(function(){if(tries>0)return new Promise(function(res){setTimeout(res,900);}).then(function(){return postWithRetry(url,body,tries-1);});return false;});
+}
+// rede de segurança: se o POST não confirmou, tenta beacon ao sair da página
+window.addEventListener('pagehide',function(){
+  if(result && state.email && !posted && navigator.sendBeacon){
+    try{navigator.sendBeacon(CONFIG.ENDPOINT,new Blob([JSON.stringify(buildPayload())],{type:'application/json'}));}catch(e){}
+  }
+});
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ROTA DE SAÍDA (conforme scoring) + compartilhamento
+   ═══════════════════════════════════════════════════════════════════════════ */
+function beaconCta(evento){
+  var body=JSON.stringify({email:state.email||null,arquetipo:result.arquetipo,rota:result.rota,evento:evento||'cta_vocacao',origem:'teste-vocacao',clicked_at:new Date().toISOString()});
+  try{if(navigator.sendBeacon)navigator.sendBeacon(CONFIG.ENDPOINT_CTA,new Blob([body],{type:'application/json'}));
+    else fetch(CONFIG.ENDPOINT_CTA,{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true});}catch(e){}
+}
+function waLink(text){return CONFIG.WHATSAPP_LINK+'?text='+encodeURIComponent(text);}
+
+function renderRota(){
+  var rota=result.rota, a=ARQ[result.arquetipo];
+  var html='<div class="screen">';
+  html+='<div class="eyebrow center">✓ Seu mapa está a caminho do seu email</div>';
+
+  if(rota==='CTA_PAGO'){
+    var acao = (state.answers.Q14===1 || state.answers.Q17===1)
+      ? '<p class="branch">Você marcou que já está em movimento nessa direção. Então essa conversa não é para te convencer de nada, é para encurtar o seu caminho. Quem já decidiu perde menos tempo com uma leitura certeira do que sozinho no escuro.</p>' : '';
+    var reality = (result.arquetipo==='Construtor Pragmatico' && a.reality)
+      ? '<p class="branch">'+a.reality+'</p>' : '';
+    var agenda='';
+    if(CONFIG.HORARIOS_AGENDA && CONFIG.HORARIOS_AGENDA.length){
+      agenda='<ul class="agenda">';
+      for(var i=0;i<CONFIG.HORARIOS_AGENDA.length;i++) agenda+='<li>'+CONFIG.HORARIOS_AGENDA[i]+'</li>';
+      agenda+='<li>Ver mais horários</li></ul>';
+    }
+    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Seu perfil chamou a atenção. Que tal conversar sobre ele com quem entende do assunto?</h1>'
+      +'<div class="rota-body">'
+      +'<p>O seu resultado abriu esta tela por um motivo específico: as suas respostas mostram evidência concreta, coisas que já aconteceram na sua vida, não só vontade. Com um mapa assim, vale uma leitura a dois: 30 minutos de conversa, um a um, para ler o seu mapa junto com você.</p>'
+      +'<p>Quem conduz essa conversa é <b>'+CONFIG.NOME_ESPECIALISTA+'</b>, '+CONFIG.CREDENCIAL+'.</p>'
+      +reality+acao
+      +'</div>'
+      +'<div class="presente"><div class="kk">O que acontece nesses 30 minutos</div>'
+      +'<ul class="bullets">'
+      +'<li>'+CONFIG.NOME_ESPECIALISTA+' lê o seu mapa completo com você, ponto a ponto</li>'
+      +'<li>Vocês olham juntos onde o seu talento rende mais e o que hoje está te travando</li>'
+      +'<li>Você sai com um próximo passo concreto para o seu momento, faça você algo com a OMNI ou não</li>'
+      +'<li>No fim, se fizer sentido para os dois, vocês falam sobre caminhos de formação. Só se fizer sentido.</li>'
+      +'</ul>'
+      +'<p class="rota-body" style="color:var(--muted)">Você recebe o seu mapa completo por email de qualquer forma, conversando ou não. A conversa é um extra, não um pedágio.</p>'
+      +agenda
+      +'<button class="btn" id="ctaBtn">Confirmar minha conversa de 30 minutos →</button>'
+      +'<span class="subhint">Prefere agendar depois? O link para marcar vai junto com o seu mapa, no seu email.</span>'
+      +'</div>';
+  } else if(rota==='CULTIVAR'){
+    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você descobriu o seu talento. Agora é sobre tempo, e o tempo é seu.</h1>'
+      +'<div class="rota-body">'
+      +'<p>Tem uma coisa que ficou clara no seu mapa: o talento é real e forte. O que talvez não seja agora é o momento de dar um passo grande, e isso é maturidade, não falta de coragem. Não faz o menor sentido te empurrar para uma decisão que o seu momento ainda não pediu.</p>'
+      +'<p>Então a gente vai fazer diferente com você. Nas próximas semanas, vou te mandar algumas histórias de pessoas que estavam mais ou menos onde você está, muitas depois dos 50, várias sem largar o emprego que pagava as contas, e como elas foram construindo esse caminho no tempo delas. Sem pressa e sem cobrança. Quando for a sua hora, você vai saber, e o caminho vai estar aqui.</p>'
+      +'</div>'
+      +'<button class="btn" id="ctaBtn">Pode me mandar essas histórias →</button>';
+  } else if(rota==='TRILHA_PREPARACAO'){
+    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">O talento está aí. O momento financeiro é uma questão de sequência, não de “não”.</h1>'
+      +'<div class="rota-body">'
+      +'<p>Vou ser direta com você, porque você merece: o seu perfil é dos mais fortes que este teste encontra. O que o seu momento pede não é frear o sonho, é começar pela porta certa. Preparei uma trilha gratuita para quem está exatamente aí: quer se preparar de verdade antes de investir pesado.</p>'
+      +'<p>São conteúdos que já vão te fazer melhorar a forma como você ajuda as pessoas hoje, de graça, enquanto você constrói o terreno. Quando for a sua hora de dar o passo maior, você vai chegar mais forte, e o caminho vai estar aqui te esperando.</p>'
+      +'</div>'
+      +'<button class="btn" id="ctaBtn">Quero começar pela trilha gratuita →</button>'
+      +'<span class="subhint">Nada de cobrança escondida. É o começo honesto, no ritmo que cabe no seu momento.</span>';
+  } else { // SAIDA_DIGNA / LOW_QUALITY
+    var realizador=result.arquetipo==='Realizador';
+    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">'+(realizador?'Guarde o seu mapa. Ele é uma bússola.':'Seu mapa completo está a caminho.')+'</h1>'
+      +'<div class="rota-body">'
+      +'<p>'+(realizador
+        ? 'O seu mapa mostra, preto no branco, onde a sua força de execução e liderança rende mais. Vale como bússola na próxima decisão de carreira que você tomar. Ele está indo para o seu email agora.'
+        : 'Preparei o seu mapa completo e ele está indo para o seu email. É seu para guardar, reler e usar quando fizer sentido para o seu momento.')+'</p>'
+      +'</div>';
+  }
+  html+='<div id="shareSlot"></div></div>';
+  app.innerHTML=html;window.scrollTo(0,0);
+
+  var ctaBtn=document.getElementById('ctaBtn');
+  if(ctaBtn) ctaBtn.addEventListener('click',function(){
+    vibrate();beaconCta(rota==='CTA_PAGO'?'cta_conversa_30min':('rota_'+rota.toLowerCase()));
+    var msg = rota==='CTA_PAGO'
+      ? 'Oi! Fiz o teste de vocação (deu '+result.arquetipo+') e quero agendar a conversa de 30 minutos sobre o meu mapa.'
+      : 'Oi! Fiz o teste de vocação (deu '+result.arquetipo+') e quero continuar com o próximo passo.';
+    window.open(waLink(msg),'_blank');
+  });
+  renderShare();
+}
+
+function renderShare(){
+  var a=ARQ[result.arquetipo];
+  var slot=document.getElementById('shareSlot');
+  if(!slot)return;
+  slot.innerHTML='<div style="margin-top:34px;border-top:1px solid var(--line);padding-top:22px">'
+    +'<div class="eyebrow center">Conhece alguém que precisa ver isso sobre si?</div>'
+    +'<p class="lead center" style="max-width:400px;margin:8px auto 16px">Compartilhe o seu resultado. Sem expor nada sensível, só o dom.</p>'
+    +'<button class="btn" id="waShare">Enviar no WhatsApp →</button>'
+    +'<button class="btn ghost" id="dlCard">↓ Salvar meu card</button>'
+    +'</div>';
+  document.getElementById('waShare').addEventListener('click',function(){
+    vibrate();beaconCta('share_whatsapp');
+    var t='Fiz um teste rápido que diz qual é o seu talento com pessoas. Deu '+a.nome+' pra mim e me leu inteiro. Faz o seu, são 3 minutos: '+location.href;
+    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+  });
+  document.getElementById('dlCard').addEventListener('click',function(){vibrate();downloadCard();});
+}
+
+/* card 9:16 via canvas (gerado on-demand, zero peso no load) */
+function downloadCard(){
+  var a=ARQ[result.arquetipo];
+  var W=1080,H=1920,c=document.createElement('canvas');c.width=W;c.height=H;var x=c.getContext('2d');
+  // fundo
+  var g=x.createRadialGradient(W/2,H*0.1,80,W/2,H*0.1,H);g.addColorStop(0,'#1a1509');g.addColorStop(0.6,'#050505');g.addColorStop(1,'#050505');
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  // faíscas
+  x.fillStyle='rgba(232,200,106,0.75)';
+  for(var i=0;i<40;i++){var rx=Math.random()*W,ry=Math.random()*H,rr=Math.random()*2.5+1;x.beginPath();x.arc(rx,ry,rr,0,7);x.fill();}
+  x.textAlign='center';
+  // infinito
+  x.fillStyle='#C8A84B';x.font='120px Georgia';x.fillText('∞',W/2,320);
+  // constelação
+  x.fillStyle='#9A7A2E';x.font='40px Georgia';x.fillText('✦  ✦  ✦',W/2,430);
+  // label
+  x.fillStyle='#c9bfa9';x.font='36px Arial';x.fillText('O MEU TALENTO É O DE',W/2,600);
+  // nome (gradiente)
+  var lg=x.createLinearGradient(W*0.15,0,W*0.85,0);lg.addColorStop(0,'#9A7A2E');lg.addColorStop(0.5,'#E8C86A');lg.addColorStop(1,'#C8A84B');
+  x.fillStyle=lg;
+  var nm=a.nome.toUpperCase();
+  x.font='700 118px Georgia';
+  wrapText(x,nm,W/2,760,W*0.86,120);
+  // linha
+  x.fillStyle='#C8A84B';x.fillRect(W/2-90,980,180,4);
+  // assinatura
+  x.fillStyle='#F5F0E8';x.font='italic 52px Georgia';
+  wrapText(x,'“'+a.sig+'”',W/2,1120,W*0.82,72);
+  // chamada
+  x.fillStyle='#c9bfa9';x.font='44px Arial';
+  x.fillText('Faça o seu mapa em 3 minutos',W/2,1560);
+  x.fillStyle='#C8A84B';x.font='40px Arial';x.fillText(CONFIG.TEST_URL,W/2,1620);
+  // rodapé
+  x.fillStyle='#6B6B6B';x.font='34px Arial';x.fillText('OMNI · EST. 1979',W/2,1780);
+  x.fillText('ISO 9001 · 46 ANOS',W/2,1830);
+  // download
+  try{
+    c.toBlob(function(blob){
+      var url=URL.createObjectURL(blob);var link=document.createElement('a');
+      link.href=url;link.download='meu-talento-omni.png';document.body.appendChild(link);link.click();
+      document.body.removeChild(link);setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    },'image/png');
+  }catch(e){var d=c.toDataURL('image/png');window.open(d,'_blank');}
+}
+function wrapText(ctx,text,x,y,maxW,lh){
+  var words=text.split(' '),line='',yy=y;
+  for(var n=0;n<words.length;n++){
+    var test=line+words[n]+' ';
+    if(ctx.measureText(test).width>maxW && n>0){ctx.fillText(line.trim(),x,yy);line=words[n]+' ';yy+=lh;}
+    else line=test;
+  }
+  ctx.fillText(line.trim(),x,yy);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BOOT
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function boot(){
+  var saved=load();
+  if(saved && saved.a && Object.keys(saved.a).length>0 && saved.s>0 && saved.s<STEPS.length){
+    state.answers=saved.a;state.step=saved.s;state.startedAt=saved.t;if(saved.tel)state.tel=saved.tel;
+    // recomputa ordem de exibição para as questões já respondidas (mantém canônico)
+    showOpening(true);
+  } else {
+    showOpening(false);
+  }
+})();
+</script>
+</body>
+</html>
