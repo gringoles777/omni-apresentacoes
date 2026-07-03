@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novo Teste de Vocação · OMNI Brasil</title>
+<style>
+  :root{
+    --black:#050505; --dark:#0D0D0D; --elevated:#1A1A1A; --texture:#2D2D2D;
+    --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --cream:#F5F0E8; --cream-70:rgba(245,240,232,.72); --cream-50:rgba(245,240,232,.52);
+    --teal:#2A9D8F; --gray-dark:#242424;
+    --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-30:rgba(200,168,75,.30);
+    --grad-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+    --grad-gold-text:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 30%,#E8C86A 50%,#C8A84B 70%,#9A7A2E 100%);
+    --serif:'Georgia','Times New Roman',serif;
+    --body:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+    --glow:0 0 24px rgba(200,168,75,.25);
+    --glow-hover:0 0 34px rgba(200,168,75,.42);
+    --shadow-card:0 4px 22px rgba(0,0,0,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black); color:var(--cream);
+    font-family:var(--body); font-size:17px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 20% 0%,rgba(200,168,75,.06),transparent 45%),radial-gradient(circle at 85% 95%,rgba(42,157,143,.05),transparent 45%);
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+  section{padding:clamp(56px,9vh,104px) 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15;letter-spacing:.01em}
+  .goldtext{background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+  .lead{color:var(--cream-70);font-size:1.08rem}
+  a{color:var(--gold-light)}
+
+  /* HERO */
+  .hero{
+    text-align:center;
+    background:radial-gradient(ellipse at 50% -10%,rgba(200,168,75,.14),transparent 55%),linear-gradient(180deg,#0A0A0A,#050505);
+    border-bottom:1px solid var(--gold-15);
+    padding:clamp(64px,12vh,130px) 0 clamp(56px,9vh,100px);
+  }
+  .hero .badge{
+    display:inline-block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold-30);border-radius:50px;padding:7px 18px;margin-bottom:26px;background:var(--gold-10)
+  }
+  .hero h1{font-size:clamp(1.5rem,4vw,2.4rem);color:var(--cream-70);font-weight:400;font-style:italic;margin-bottom:10px}
+  .hero .title{
+    font-size:clamp(2.1rem,6vw,4rem);line-height:1.08;margin:12px auto 26px;max-width:14ch;
+    background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 40px rgba(200,168,75,.15);
+  }
+  .hero .exec{max-width:640px;margin:0 auto;color:var(--cream-70);font-size:1.1rem}
+  .hero .exec b{color:var(--cream)}
+
+  /* generic pieces */
+  .kicker{font-size:clamp(1.7rem,3.6vw,2.5rem);margin-bottom:14px}
+  .sub{max-width:680px;margin-bottom:38px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:linear-gradient(160deg,var(--elevated),#111);
+    border:1px solid rgba(200,168,75,.16);border-radius:10px;padding:24px;box-shadow:var(--shadow-card);
+    transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--glow);border-color:var(--gold-30)}
+  .card h3{font-size:1.2rem;color:var(--gold-light);margin-bottom:6px}
+  .card .tag{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:12px;display:block}
+  .card .tagline{font-style:italic;color:var(--cream);margin-bottom:12px;font-size:1rem}
+  .card .who{color:var(--cream-50);font-size:.9rem}
+  .card .num{font-family:var(--serif);font-size:2rem;color:var(--gold-deep);opacity:.55;line-height:1;margin-bottom:8px}
+
+  /* pill highlight box */
+  .box{background:var(--gold-10);border:1px solid var(--gold-15);border-left:3px solid var(--gold);border-radius:8px;padding:20px 22px;margin-top:20px}
+  .box.teal{background:rgba(42,157,143,.08);border-color:rgba(42,157,143,.25);border-left-color:var(--teal)}
+  .box p+p{margin-top:10px}
+
+  /* fusion columns */
+  .fusion{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-bottom:24px}
+  .fusion .plus{align-self:center;font-family:var(--serif);font-size:2rem;color:var(--gold)}
+  .fcol{background:var(--elevated);border:1px solid rgba(200,168,75,.14);border-radius:10px;padding:22px}
+  .fcol h4{font-family:var(--serif);color:var(--gold-light);font-size:1.05rem;margin-bottom:8px}
+  .fcol p{color:var(--cream-70);font-size:.95rem}
+
+  /* journey flow */
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 30px}
+  .step{background:var(--elevated);border:1px solid rgba(200,168,75,.2);border-radius:50px;padding:9px 18px;font-size:.86rem;color:var(--cream);font-weight:600;white-space:nowrap}
+  .step.hot{background:var(--grad-gold);color:#0A0A0A;font-weight:700;border:none}
+  .arrow{color:var(--gold);font-size:1.1rem}
+  .routes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  .route{border:1px solid rgba(200,168,75,.18);border-radius:10px;padding:20px;background:linear-gradient(160deg,var(--elevated),#111)}
+  .route h4{font-family:var(--serif);color:var(--gold-light);font-size:1.05rem;margin-bottom:8px}
+  .route .lbl{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--teal);display:block;margin-bottom:8px}
+  .route p{color:var(--cream-70);font-size:.92rem}
+
+  /* dimensions */
+  .dims{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .dim{background:var(--elevated);border:1px solid rgba(200,168,75,.16);border-radius:10px;padding:18px;text-align:center}
+  .dim .code{font-family:var(--serif);font-size:1.8rem;color:var(--gold);line-height:1}
+  .dim .nm{font-weight:700;margin:8px 0 4px;font-size:.98rem}
+  .dim p{color:var(--cream-50);font-size:.82rem;line-height:1.4}
+  .temp{display:flex;gap:12px;flex-wrap:wrap;margin:6px 0 26px}
+  .tchip{flex:1;min-width:150px;border-radius:8px;padding:14px 16px;border:1px solid rgba(255,255,255,.08)}
+  .tchip b{display:block;font-family:var(--serif);font-size:1.05rem;margin-bottom:2px}
+  .tA{background:rgba(200,80,40,.14);border-color:rgba(220,120,70,.35)} .tA b{color:#E89A6A}
+  .tB{background:var(--gold-10);border-color:var(--gold-30)} .tB b{color:var(--gold-light)}
+  .tC{background:rgba(42,120,157,.12);border-color:rgba(70,140,180,.3)} .tC b{color:#7FB6D4}
+  .detectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .det{background:linear-gradient(160deg,var(--elevated),#101010);border:1px solid rgba(200,168,75,.14);border-radius:10px;padding:18px}
+  .det h4{font-family:var(--serif);color:var(--gold-light);font-size:1rem;margin-bottom:6px}
+  .det p{color:var(--cream-70);font-size:.88rem}
+
+  /* tables */
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(200,168,75,.16);border-radius:10px;margin-top:8px}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+  thead th{background:linear-gradient(135deg,var(--gold-deep),var(--gold));color:#0A0A0A;font-weight:700;text-align:left;padding:12px 14px;font-size:.82rem;letter-spacing:.02em}
+  tbody td{padding:11px 14px;border-top:1px solid rgba(255,255,255,.06);color:var(--cream-70)}
+  tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+  tbody td b{color:var(--cream)}
+  .yes{color:var(--teal);font-weight:700}
+  .part{color:var(--gold-light);font-weight:700}
+  .scrollhint{font-size:.75rem;color:var(--cream-50);margin-top:8px;display:none}
+
+  /* jumps */
+  .jumps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  .jump{background:var(--gold-10);border:1px solid var(--gold-15);border-radius:10px;padding:18px;text-align:center}
+  .jump .p{font-weight:700;color:var(--cream);margin-bottom:6px}
+  .jump .delta{font-family:var(--serif);font-size:1.5rem;color:var(--gold-light)}
+  .jump .delta .old{color:var(--cream-50);font-size:1rem}
+  .jump small{color:var(--cream-50);display:block;margin-top:4px;font-size:.8rem}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+  .cmp{border-radius:10px;padding:20px;border:1px solid rgba(255,255,255,.08)}
+  .cmp.old{background:#111} .cmp.new{background:var(--gold-10);border-color:var(--gold-30)}
+  .cmp .lbl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:12px;display:block}
+  .cmp.old .lbl{color:var(--cream-50)} .cmp.new .lbl{color:var(--gold)}
+  .cmp .row{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid rgba(255,255,255,.06);font-size:.92rem}
+  .cmp .row:first-of-type{border-top:none}
+  .cmp .row span:last-child{font-family:var(--serif);color:var(--cream)}
+
+  /* checklist */
+  .checks{list-style:none;display:grid;gap:12px}
+  .checks li{background:var(--elevated);border:1px solid rgba(200,168,75,.14);border-radius:8px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start}
+  .checks .mk{width:24px;height:24px;flex:none;border-radius:6px;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.8rem;margin-top:1px}
+  .checks li b{color:var(--cream)} .checks li span{color:var(--cream-70);font-size:.93rem}
+
+  /* decisions */
+  .decisions{display:grid;gap:16px;counter-reset:d}
+  .decision{position:relative;background:linear-gradient(160deg,var(--elevated),#101010);border:1px solid var(--gold-15);border-radius:12px;padding:24px 24px 24px 74px}
+  .decision::before{counter-increment:d;content:counter(d);position:absolute;left:20px;top:22px;width:38px;height:38px;border-radius:50%;background:var(--grad-gold);color:#0A0A0A;font-family:var(--serif);font-weight:700;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--glow)}
+  .decision h3{font-size:1.15rem;color:var(--gold-light);margin-bottom:6px}
+  .decision p{color:var(--cream-70);font-size:.95rem}
+  .decision .hint{color:var(--teal);font-size:.85rem;margin-top:8px;font-weight:600}
+
+  /* CTA button style used decoratively */
+  .btn{display:inline-block;background:var(--grad-gold);color:#0A0A0A;font-weight:700;padding:14px 30px;border-radius:50px;text-decoration:none;box-shadow:var(--glow);letter-spacing:.02em;transition:box-shadow .25s,transform .25s}
+  .btn:hover{box-shadow:var(--glow-hover);transform:translateY(-2px)}
+
+  footer{text-align:center;padding:44px 22px 60px;color:var(--cream-50);font-size:.85rem;border-bottom:none}
+  footer .sig{color:var(--gold);font-weight:700;letter-spacing:.04em}
+
+  @media(max-width:820px){
+    .g3,.dims,.jumps{grid-template-columns:1fr 1fr}
+    .fusion{grid-template-columns:1fr}.fusion .plus{transform:rotate(90deg)}
+    .routes,.compare{grid-template-columns:1fr}
+    .scrollhint{display:block}
+  }
+  @media(max-width:520px){
+    body{font-size:16px}
+    .g2,.g3,.dims,.jumps{grid-template-columns:1fr}
+    .temp .tchip{min-width:100%}
+    .decision{padding:22px 20px 22px 20px}
+    .decision::before{position:static;margin-bottom:12px}
+  }
+
+  /* GATE senha */
+  #gate{position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+  body:not(.locked) #gate{display:none}
+  body.locked{overflow:hidden}
+  #gate .glogo{font-weight:700;font-size:28px;letter-spacing:7px;color:#d4af6a;text-transform:uppercase}
+  #gate .gsub{font-size:12px;letter-spacing:3px;color:#b9b3a8;text-transform:uppercase}
+  #gate .glock{font-size:40px;margin-bottom:4px}
+  #gate input{background:#000;border:1px solid rgba(212,175,106,.35);color:#efeae0;padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+  #gate input:focus{border-color:#d4af6a}
+  #gate .gerr{color:#e07a5f;font-size:13px;display:none}
+  #gate .ghint{font-size:11px;letter-spacing:1px;color:#6f6a60}
+
+</style>
+</head>
+<body class="locked">
+<div id="gate">
+  <div class="glock">&#128274;</div>
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">Novo Teste de Voca&ccedil;&atilde;o &middot; Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Estrat&eacute;gia comercial &middot; confidencial</div>
+</div>
+
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">Projeto greenfield · OMNI Brasil</span>
+    <h1>Novo Teste de Vocação</h1>
+    <div class="title">O Talento Que as Pessoas Veem em Você (Antes de Você)</div>
+    <p class="exec">
+      Um teste de <b>3 minutos e 18 telas</b> que revela um dom latente e não uma dor, entrega um <b>arquétipo nomeado</b> que a pessoa quer compartilhar,
+      e roda por baixo um <b>motor de qualificação invisível</b> que decide, sozinho, quem vira conversa com a closer, quem entra em cultivo e quem sai com dignidade.
+      Concebido, escrito e testado com <b>11 personas simuladas</b> antes de uma linha de código.
+    </p>
+  </div>
+</header>
+
+<!-- ========== CONCEITO EM 30 SEGUNDOS ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O conceito em 30 segundos</div>
+    <h2 class="kicker">Três camadas que trabalham juntas</h2>
+    <p class="lead sub">A virada foi fundir o palco aspiracional que engaja com o motor psicométrico que qualifica. O lead vive uma experiência de autodescoberta; o comercial recebe um lead pré-lido.</p>
+
+    <div class="fusion">
+      <div class="fcol">
+        <h4>Palco aspiracional</h4>
+        <p>O teste revela um talento que vale mais do que a pessoa imagina, não um diagnóstico de exaustão. Aversão à perda no anúncio, orgulho na revelação.</p>
+      </div>
+      <div class="plus">+</div>
+      <div class="fcol">
+        <h4>Arquétipo nomeado</h4>
+        <p>O resultado é uma identidade compartilhável (um dos 6 perfis) com leitura ramificada que cita o que a pessoa marcou. Parece que o teste a leu por dentro.</p>
+      </div>
+      <div class="plus">+</div>
+      <div class="fcol">
+        <h4>Score invisível no backend</h4>
+        <p>Quatro dimensões numéricas, temperatura A/B/C e roteamento comercial rodam no navegador. O lead nunca vê nota. O CRM recebe tudo.</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <p><b>Por que ganha do formato anterior.</b> O teste antigo (Mapa de Mim, versão A) media a dor e devolvia um diagnóstico. Marcou 5,5 de valor percebido e só 2 de 8 personas sentiram que o arquétipo bateu.
+      O novo modelo inverte a lógica: entrega orgulho em vez de rótulo de problema, prende pela identidade e qualifica sem nunca perguntar renda. Na simulação, saltou para faixa de 7,5+ de valor com folga.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6 ARQUÉTIPOS ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O resultado que o lead recebe</div>
+    <h2 class="kicker">Os 6 arquétipos</h2>
+    <p class="lead sub">Cinco perfis de fit e um não-fit gentil. Cada um nomeia a força e a tensão, cita dados reais que a pessoa marcou e nunca menciona hipnose ou produto.</p>
+
+    <div class="grid g3">
+      <div class="card">
+        <span class="tag">Fit · lead mais quente</span>
+        <h3>O Porto-Seguro</h3>
+        <p class="tagline">Você já é o terapeuta da sua roda. Só não recebeu por isso ainda.</p>
+        <p class="who">Para quem é procurado toda semana e leva o problema dos outros para casa. Cuidado e evidência altos.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Fit · cabeça de clínico</span>
+        <h3>O Decifrador de Gente</h3>
+        <p class="tagline">Você entende as pessoas por dentro. Falta um lugar para usar isso.</p>
+        <p class="who">Para quem olha a pessoa dentro do problema e pensa o tempo todo em por que as pessoas repetem padrões.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Fit · energia de recomeço</span>
+        <h3>O Transformador Inquieto</h3>
+        <p class="tagline">Você tem energia de recomeço de sobra. Falta direção, não coragem.</p>
+        <p class="who">Para quem já deu passos concretos rumo à mudança e vê construir algo seu como liberdade.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Fit · o introvertido</span>
+        <h3>O Guia Silencioso</h3>
+        <p class="tagline">As pessoas já te disseram. Talvez seja hora de você acreditar.</p>
+        <p class="who">Para quem já ouviu de várias pessoas que devia cuidar de gente, mas ainda trata isso como jeito, não talento.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Fit · resolve e entrega</span>
+        <h3>O Construtor Pragmático</h3>
+        <p class="tagline">Você resolve, entrega, faz acontecer. E às vezes atropela o processo do outro.</p>
+        <p class="who">Para quem prefere método claro e destrava o que está parado. Perfil de mentor, com reality-check antes do CTA.</p>
+      </div>
+      <div class="card" style="border-color:rgba(255,255,255,.1)">
+        <span class="tag" style="color:var(--cream-50)">Não-fit · saída digna</span>
+        <h3 style="color:var(--cream)">O Realizador</h3>
+        <p class="tagline">Sua força está em fazer o mundo funcionar. E isso vale muito.</p>
+        <p class="who">Para quem brilha em execução e liderança. Recebe um mapa como bússola de carreira, sem CTA de venda. Protege a marca.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== A JORNADA ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">A jornada</div>
+    <h2 class="kicker">Do anúncio à decisão de rota</h2>
+    <p class="lead sub">Ordem emocional pensada: gancho de sentido cedo, identidade prazerosa no meio, ecos que espelham a pessoa e trade-offs de investimento só nas últimas telas. A revelação vem antes do email.</p>
+
+    <div class="flow">
+      <span class="step">Anúncio (teste grátis)</span><span class="arrow">→</span>
+      <span class="step">18 telas · 1 pergunta cada</span><span class="arrow">→</span>
+      <span class="step">2 ecos que espelham</span><span class="arrow">→</span>
+      <span class="step hot">Revelação do arquétipo</span><span class="arrow">→</span>
+      <span class="step">Email (upgrade, não pedágio)</span><span class="arrow">→</span>
+      <span class="step hot">Rota de saída</span>
+    </div>
+
+    <p class="lead sub" style="margin-bottom:16px">O motor decide, no navegador, qual das <b>4 rotas de saída</b> a pessoa vê. Ninguém recebe a rota errada.</p>
+    <div class="routes">
+      <div class="route">
+        <span class="lbl">Rota 1 · Conversão</span>
+        <h4>CTA de conversa com a especialista</h4>
+        <p>30 minutos, um a um, sem custo. Só para fit + temperatura quente/morna que passem no veto de evidência prosocial. Com agendamento inline e garantia sem chantagem.</p>
+      </div>
+      <div class="route">
+        <span class="lbl">Rota 2 · Cultivar</span>
+        <h4>Régua de permissão (fit forte + frio)</h4>
+        <p>Lead de maior LTV latente. Não é descartado nem pressionado: entra numa régua de histórias de alunas 50+ e sem largar o emprego. O link de conversa vai no email para quando esquentar.</p>
+      </div>
+      <div class="route">
+        <span class="lbl">Rota 3 · Bolso curto</span>
+        <h4>Trilha gratuita de preparação</h4>
+        <p>Vocação alta, capacidade de investir baixa. Recebe devolutiva completa e uma trilha gratuita. O preço nunca é descoberto dentro da call, só ancorado no email pós-agendamento.</p>
+      </div>
+      <div class="route">
+        <span class="lbl">Rota 4 · Saída digna</span>
+        <h4>Realizador (não-fit)</h4>
+        <p>Tela de email própria, com bullets de execução e liderança, e card compartilhável próprio. Sai como defensor da marca, sem CTA. Um teste que aprova todo mundo não vale nada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== O MOTOR INVISÍVEL ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O motor invisível</div>
+    <h2 class="kicker">Como o teste qualifica sem perguntar renda</h2>
+    <p class="lead sub">Quatro dimensões definem o arquétipo e a temperatura. Cinco detectores corrigem os enganos que a versão 1 cometia. Tudo determinístico, 100% no navegador, resiliente à webview do Instagram.</p>
+
+    <div class="dims">
+      <div class="dim"><div class="code">D1</div><div class="nm">Cuidado &amp; Sintonia</div><p>O quanto a pessoa sente e carrega o que os outros não dizem.</p></div>
+      <div class="dim"><div class="code">D2</div><div class="nm">Abertura à Mente</div><p>A curiosidade pelo funcionamento interno das pessoas.</p></div>
+      <div class="dim"><div class="code">D3</div><div class="nm">Evidência Prosocial</div><p>Provas concretas: já é procurada, já ouviu que tem o dom, já pagou o custo.</p></div>
+      <div class="dim"><div class="code">D4</div><div class="nm">Prontidão</div><p>O estágio de mudança. Define a temperatura, não o arquétipo.</p></div>
+    </div>
+
+    <h3 style="font-size:1.1rem;color:var(--gold-light);margin-bottom:12px">Temperatura comercial (só D4)</h3>
+    <div class="temp">
+      <div class="tchip tA"><b>A · Quente</b>Já em movimento. Prioridade da closer, speed-to-lead.</div>
+      <div class="tchip tB"><b>B · Morno</b>Pensando, se organizando. CTA com nutrição antes.</div>
+      <div class="tchip tC"><b>C · Frio</b>Pensamento distante. Vai para cultivo, nunca descartado.</div>
+    </div>
+
+    <h3 style="font-size:1.1rem;color:var(--gold-light);margin:22px 0 12px">Os 5 detectores (em linguagem de negócio)</h3>
+    <div class="detectors">
+      <div class="det"><h4>Fuga mascarada</h4><p>Lead que parece quente, mas só quer fugir do trabalho atual. Rebaixa de A para B: nutrir antes, porque o risco de arrependimento e no-show é alto.</p></div>
+      <div class="det"><h4>Autodesqualificação</h4><p>O introvertido que carrega o peso dos outros mas jura que ninguém o procura. O motor corrige a evidência para baixo demais e o roteia como Guia Silencioso.</p></div>
+      <div class="det"><h4>Veto de fit</h4><p>Sem prova concreta de que já ajuda pessoas, o CTA de conversa não abre, mesmo com renda alta. Protege a marca e o tempo da closer (caso Roberto).</p></div>
+      <div class="det"><h4>Proxy de renda cruzado</h4><p>Alto cargo mas baixa disposição de investir vira B, não A. Vocação alta com bolso curto vai para a trilha gratuita, não para a call de venda.</p></div>
+      <div class="det"><h4>Quality-score anti-ruído</h4><p>Quem responde rápido demais, chuta a primeira opção e troca de aba tem o dado marcado como ruído. Não entra na fila da closer nem contamina a métrica de conversão.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== O LABORATÓRIO ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O laboratório</div>
+    <h2 class="kicker">Testado em 8 personas ICP antes do código</h2>
+    <p class="lead sub">Cada persona respondeu o teste inteiro. Medimos valor percebido, sensação de "me leu", intenção de dar email, de agendar e de compartilhar. O placar guiou todas as correções da versão 2.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Persona</th><th>Perfil</th><th>Valor</th><th>Me leu</th><th>Email</th><th>Agendar</th><th>Compart.</th><th>Bateu?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Mariana</b>, 42, RH burnout</td><td>Cética, morna</td><td>8</td><td>8,5</td><td>8</td><td>4</td><td>3,5</td><td class="yes">SIM</td></tr>
+          <tr><td><b>Carlos</b>, 48, comercial</td><td>Risco churn</td><td>6</td><td>6,5</td><td>7</td><td>6</td><td>1</td><td class="yes">SIM*</td></tr>
+          <tr><td><b>Fernanda</b>, 38, TI</td><td>Fit, fria</td><td>7,5</td><td>6,5</td><td>8</td><td>1</td><td>1,5</td><td class="part">PARCIAL</td></tr>
+          <tr><td><b>Roberto</b>, 51, CFO</td><td>Não-fit</td><td>6</td><td>6</td><td>5</td><td>respeito 9</td><td>7</td><td class="yes">SIM</td></tr>
+          <tr><td><b>Juliana</b>, 35, mkt</td><td>Vocação sem bolso</td><td>9</td><td>10</td><td>10</td><td>9</td><td>8</td><td class="yes">SIM*</td></tr>
+          <tr><td><b>Pedro</b>, 44, médico</td><td>A-lead quente</td><td>8</td><td>7,5</td><td>9</td><td>6</td><td>5</td><td class="yes">SIM</td></tr>
+          <tr><td><b>Ana</b>, 55, servidora</td><td>Fit, fria</td><td>8</td><td>9</td><td>7</td><td>2-3</td><td>4</td><td class="yes">SIM</td></tr>
+          <tr><td><b>Ricardo</b>, 39, distraído</td><td>Ruído</td><td>5</td><td>4</td><td>6</td><td>1</td><td>2</td><td style="color:#E08a6a;font-weight:700">ERRADO</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scrollhint">Arraste a tabela para o lado para ver todas as colunas.</p>
+
+    <div class="box teal" style="margin-top:22px">
+      <p><b>O que a versão 1 já provou.</b> Todas as 8 deram email (7 reais). A devolutiva antes do email funcionou, o eco ramificado virou pico emocional e o não-fit digno fez o Roberto sair como defensor da marca. Mesmo a v1 já superou o teste antigo com folga.</p>
+    </div>
+
+    <h3 style="font-size:1.1rem;color:var(--gold-light);margin:30px 0 6px">Os saltos da rodada 2 (após as correções)</h3>
+    <div class="jumps">
+      <div class="jump"><div class="p">Mariana · agendar</div><div class="delta"><span class="old">4</span> → 7,5</div><small>CTA sem escassez de manual, com garantia sem chantagem</small></div>
+      <div class="jump"><div class="p">Roberto · email</div><div class="delta"><span class="old">5</span> → 7</div><small>Eco 2 parou de fabricar dado que ele não marcou</small></div>
+      <div class="jump"><div class="p">Ana · temperatura</div><div class="delta">FRIO → MORNO</div><small>Q15 reescrita validou a prudência em vez de puni-la</small></div>
+    </div>
+    <p class="lead" style="margin-top:12px;font-size:.95rem;color:var(--cream-50)">Ana também saltou de 4 para 8 na intenção de compartilhar após a linha condicional 50+ ("sua bagagem é a credencial").</p>
+
+    <h3 style="font-size:1.1rem;color:var(--gold-light);margin:30px 0 6px">Contra a versão A do teste antigo</h3>
+    <div class="compare">
+      <div class="cmp old">
+        <span class="lbl">Mapa de Mim · versão A</span>
+        <div class="row"><span>Valor percebido</span><span>5,5</span></div>
+        <div class="row"><span>Intenção de agendar</span><span>3,9</span></div>
+        <div class="row"><span>Arquétipo bateu</span><span>2 de 8</span></div>
+      </div>
+      <div class="cmp new">
+        <span class="lbl">Novo Teste de Vocação</span>
+        <div class="row"><span>Valor percebido</span><span>~7,5+</span></div>
+        <div class="row"><span>Intenção de agendar</span><span>muito acima</span></div>
+        <div class="row"><span>Arquétipo bateu</span><span>7-8 de 8</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== O QUE FALTA ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O que falta para ir ao ar</div>
+    <h2 class="kicker">Checklist de go-live</h2>
+    <p class="lead sub">A concepção, a copy e o scoring estão prontos e testados. O que resta é construção e preenchimento de dados reais. Alguns itens dependem de decisão da Rafa (próxima seção).</p>
+
+    <ul class="checks">
+      <li><span class="mk">□</span><span><b>Build do HTML do teste</b> — as 18 telas, os 2 ecos ramificados, a revelação e as 4 rotas, com o scoring rodando 100% client-side e fallback local da leitura em 1,5s.</span></li>
+      <li><span class="mk">□</span><span><b>Especialista nomeado + foto + credencial</b> — o CTA promete especificidade verificável. Subir com nome vago derruba a conversão abaixo da própria v1.</span></li>
+      <li><span class="mk">□</span><span><b>CNPJ real e Política de Privacidade viva</b> — o público avesso a golpe consulta na Receita. Placeholder no ar é pior que ausência.</span></li>
+      <li><span class="mk">□</span><span><b>Agenda inline com horários reais</b> — a escassez honesta ("restam N horários esta semana") só vale se for verdadeira.</span></li>
+      <li><span class="mk">□</span><span><b>Trilha gratuita de preparação</b> — o conteúdo que a rota "bolso curto" promete precisa existir de fato.</span></li>
+      <li><span class="mk">□</span><span><b>Régua de emails da rota CULTIVAR</b> — as 5 histórias de permissão (a professora que virou terapeuta aos 54, etc.) esboçadas na copy.</span></li>
+      <li><span class="mk">□</span><span><b>Calibração de 60 a 90 dias no Pipedrive</b> — os pesos 0-100 são sugeridos. Cruzar arquétipo, dimensões e temperatura com conversão e no-show reais afina o motor.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DECISÕES DA RAFA ========== -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Decisões que são suas, Rafa</div>
+    <h2 class="kicker">Cinco travas para destravar o build</h2>
+    <p class="lead sub">Nada aqui exige que você entre na engenharia. São decisões de negócio e de posicionamento. Com elas fechadas, a squad segue sozinha para a construção.</p>
+
+    <div class="decisions">
+      <div class="decision">
+        <h3>Aprovar o título e os 6 arquétipos</h3>
+        <p>Título dentro do teste: "O Talento Que as Pessoas Veem em Você (Antes de Você)". Nos anúncios: "O Talento Que Você Está Desperdiçando". Os 6 nomes e taglines da seção acima.</p>
+        <p class="hint">Sugestão: aprovar como está. Foram validados nas 8 personas.</p>
+      </div>
+      <div class="decision">
+        <h3>Quem é a especialista nomeada do CTA</h3>
+        <p>A conversa de 30 minutos precisa de um rosto real: nome, foto e credencial. É a peça que sustenta a promessa de especificidade verificável. Uma das closers atuais ou você mesma?</p>
+        <p class="hint">Decisão sua: definir a pessoa e liberar a foto.</p>
+      </div>
+      <div class="decision">
+        <h3>O corte inicial de temperatura A/B/C</h3>
+        <p>Onde traçar a linha entre quente, morno e frio antes da calibração. A spec traz uma sugestão determinística (A quando prontidão alta, cultivo quando fria). Você pode aceitar ou apertar.</p>
+        <p class="hint">Sugestão: começar com o corte da spec e recalibrar em 60-90 dias.</p>
+      </div>
+      <div class="decision">
+        <h3>A trilha gratuita de preparação existe? E é o quê?</h3>
+        <p>A rota "bolso curto" promete uma trilha gratuita. Precisa decidir se ela existe no lançamento e do que ela é feita (conteúdos que você já tem, uma sequência nova, um mini-curso).</p>
+        <p class="hint">Decisão sua: se não houver trilha pronta, a rota vira "devolutiva completa + lista de espera" no dia 1.</p>
+      </div>
+      <div class="decision">
+        <h3>O go para o build</h3>
+        <p>Com as quatro decisões acima fechadas, autorizar a squad a construir o HTML do teste e ligar o funil. Concepção, copy e scoring estão prontos e documentados.</p>
+        <p class="hint">É o único item que libera a próxima fase.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="sig">Projeto conduzido por AURA com a squad AIOX</p>
+  <p style="margin-top:6px">estrategista · analista · copy-chief · UX · 11 personas simuladas · 03/07/2026</p>
+</footer>
+
+
+<script>
+function tryLogin(){
+  if(document.getElementById('pwd').value==='omni777'){document.body.classList.remove('locked');}
+  else{document.getElementById('gerr').style.display='block';}
+}
+</script>
+</body>
+</html>
