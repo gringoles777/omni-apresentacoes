@@ -129,7 +129,7 @@ footer{border-top:1px solid var(--gold-20);margin-top:80px;padding:28px 24px;tex
 <!-- ================= SUMÁRIO EXECUTIVO ================= -->
 <section>
   <h2><span class="n">1</span>Sumário Executivo</h2>
-  <p class="lead" style="margin-top:22px">Hoje, de cada 100 leads que pedem a consultoria, <strong>só 22 respondem alguma coisa</strong>. O diagnóstico com dados reais mostra que a cadência pede a coisa errada (ligação), no canal com menos calor (oficial), e morre no meio. Em paralelo, bugs de infraestrutura mandavam mensagem duplicada, marcavam como enviado o que nunca chegou e silenciavam os alertas que avisariam você de tudo isso.</p>
+  <p class="lead" style="margin-top:22px">Hoje, de cada 100 leads que pedem a consultoria, <strong>só 22 respondem alguma coisa</strong>. O diagnóstico com dados reais mostra que a cadência pede a ligação da forma errada (síncrona, agora, em horário comercial, a frio), no canal com menos calor (oficial), e morre no meio. A ligação em si é o que gera compromisso e comparecimento, então o objetivo não é tirá-la, é marcá-la num horário que o lead consiga (ver seção 3.3). Em paralelo, bugs de infraestrutura mandavam mensagem duplicada, marcavam como enviado o que nunca chegou e silenciavam os alertas que avisariam você de tudo isso.</p>
   <div class="tiles">
     <div class="tile"><div class="v">22,5%</div><div class="l">conexão real hoje (104 de 463 leads em 30 dias responderam de verdade)</div><div class="s">PIPEDRIVE · FUNIL SDR-NOVO</div></div>
     <div class="tile"><div class="v red">54%</div><div class="l">dos leads endereçáveis morrem sem NENHUMA resposta em toda a cadência (204 "encerrou contato")</div><div class="s">MOTIVOS DE PERDA · 30D</div></div>
@@ -267,6 +267,29 @@ Pode responder com uma palavra só 🙂</div>
     <div class="copybox">Fechado, {nome}! 🙌 Pra deixar do seu jeito, me responde aqui mesmo, nesta conversa, com uma palavrinha: você prefere que nosso papo de 5 minutos seja por TEXTO, ÁUDIO ou LIGAÇÃO? Se quiser, já emenda o melhor horário (por exemplo: "áudio, depois das 20h"). Assim que você responder, uma pessoa do nosso time assume por aqui e cuida de tudo pra você, sem link e sem pular de conversa 😊</div>
     <p style="font-size:13.5px;margin-top:12px"><strong>Acaba com os 3 saltos.</strong> Hoje: botão → auto-resposta → link → terceiro número → apertar enviar. Cada salto perde gente e foi a causa nº 3. Na proposta, o clique positivo pede só uma resposta no próprio chat oficial e um humano assume ali. <strong>Requer que o time cubra a inbox oficial do WABA no Chatwoot</strong> (hoje o não-oficial que é atendido).</p>
   </div>
+
+  <h3 style="color:var(--teal)">3.3 · Correção de rota — a ligação é o compromisso (não um atrito)</h3>
+  <div class="note" style="border-color:var(--teal);background:var(--teal-10)">
+    <p style="color:var(--ink);margin-top:0"><strong>A simulação otimizou CONEXÃO — e conexão é o proxy errado.</strong> O laboratório premiou "o lead responde educado", mas o que faz o lead <strong>comparecer e se qualificar</strong> é a ligação: o vínculo e o compromisso de ter falado com uma pessoa. Dado da operação (Rafa): flexibilizar para áudio/texto <em>sobe a resposta e derruba o comparecimento</em>. Marcar horário sozinho não basta, é a conversa por voz que cria o vínculo.</p>
+    <p><strong>O que muda na cadência acima:</strong> a ligação volta a ser o destino. O erro nunca foi pedir ligação, foi pedir ligação <em>síncrona, agora, em horário comercial, a frio</em>. Então o M0 e a ponte deixam de oferecer "texto ou áudio?" e passam a marcar a ligação num horário que o lead escolhe, inclusive à noite. Texto e áudio viram <strong>rampa de acesso</strong> à ligação, nunca substitutos, e se o lead resistir, o SDR re-ancora gentilmente na voz.</p>
+    <p style="margin-bottom:0"><strong>Todo o resto do diagnóstico continua de pé</strong> (matar escassez fake, acabar com os 3 saltos, trocar o M-TC2 de guru, usar o Michael Arruda, disparar nas janelas noturnas) — nada disso trocava compromisso por facilidade. Só a parte de "deixar o lead escolher o formato" é revertida.</p>
+  </div>
+
+  <div class="card">
+    <h4>M0 corrigido · +3 min · número não-oficial (texto livre)</h4>
+    <div class="copybox">Ótimo dia, {nome}! Sim, a gente fala "ótimo dia" a qualquer hora, mania nossa aqui da OMNI 😄
+
+Aqui é o David, do time do Michael Arruda. Acabei de receber seu pedido de consultoria estratégica de carreira (aquele formulário sobre trabalhar ajudando pessoas).
+
+O próximo passo é uma conversa rápida por telefone, uns 5 minutinhos, pra eu entender seu momento e já te direcionar. Não precisa ser agora nem no meio do seu trabalho: me diz o melhor horário pra você que eu te ligo, pode ser hoje à noite, depois das 20h, se for melhor 🙂</div>
+    <p style="font-size:13.5px;margin-top:12px">Mantém a ligação como destino (compromisso + qualificação), mas tira o "agora" e o horário comercial: o lead escolhe quando, incluindo a noite. Continua usando o Michael Arruda como âncora e a saudação auto-consciente que desarma o "é robô".</p>
+  </div>
+
+  <div class="card" style="border-color:var(--teal)">
+    <h4 style="color:var(--teal)">Ponte corrigida · pós-clique positivo</h4>
+    <div class="copybox">Fechado, {nome}! 🙌 Nosso papo é rapidinho, uns 5 minutos por telefone, e é aí que eu entendo o seu momento pra te direcionar de verdade. Me diz só o melhor horário pra eu te ligar (pode ser à noite, depois das 20h, se o dia for corrido) que uma pessoa do nosso time já assume por aqui e te liga na hora combinada 😊</div>
+    <p style="font-size:13.5px;margin-top:12px">Acaba com os 3 saltos <strong>e</strong> mantém a voz como destino. O lead se compromete com um horário que ele mesmo escolheu, e o SDR liga, cria o vínculo e qualifica. Se o lead responder "não posso ligar", o SDR não cede para texto de imediato: propõe um horário noturno, nem que seja curto.</p>
+  </div>
 </section>
 
 <!-- ================= BUGS ================= -->
@@ -317,7 +340,7 @@ Pode responder com uma palavra só 🙂</div>
   <h3>5.1 · As 3 mudanças de maior alavanca</h3>
   <div class="tablewrap"><table>
     <tr><th>#</th><th>Mudança</th><th>Por quê</th><th>Como / dono</th></tr>
-    <tr><td>1</td><td><strong>Tirar a ligação do primeiro pedido.</strong> M0 pergunta só "texto ou áudio?" (1 palavra). A ligação vira uma das opções, nunca a única.</td><td>Causa nº 1. ~17% dos que respondem pedem texto/áudio; a maioria silenciosa nem responde por antecipar a ligação.</td><td>Ajuste de copy do M0 (não-oficial, texto livre) — não precisa da Meta. Pode testar já.</td></tr>
+    <tr><td>1</td><td><strong>Marcar a ligação num horário que o lead escolhe (inclusive à noite), em vez de "posso te ligar agora?".</strong> A ligação continua sendo o destino, o que muda é o "agora" e o horário comercial.</td><td>Causa nº 1 corrigida: o atrito não é a ligação (ela é o compromisso), é a ligação síncrona no expediente. Deixar o lead escolher o horário mantém o vínculo e resolve o "estou no trabalho".</td><td>Ajuste de copy do M0 (não-oficial, texto livre) — não precisa da Meta. Pode testar já.</td></tr>
     <tr><td>2</td><td><strong>Acabar com os 3 saltos pós-clique.</strong> Botão positivo → resposta no mesmo chat oficial, humano assume ali. Sem link, sem terceiro número.</td><td>Causa nº 3, a que mais envenena a cadência ("cliquei e ninguém veio"). Cada salto perde gente.</td><td>Exige o time cobrindo a inbox oficial do WABA no Chatwoot. Decisão operacional + ajuste da ponte.</td></tr>
     <tr><td>3</td><td><strong>Abolir escassez fake e o M-TC2 de guru.</strong> Botões viram "Agora não / Não é pra mim"; M-TC2 vira "faça a consultoria inteira por mensagem".</td><td>Causas 2 e 5. O ICP reconhece o script e perde confiança em toda a cadência; o M-TC2 chega a gerar bloqueio.</td><td>4 templates novos → squad <span style="font-family:var(--mono)">@meta-templates</span> reescreve e reaprova na Meta.</td></tr>
   </table></div>
@@ -331,7 +354,7 @@ Pode responder com uma palavra só 🙂</div>
   <h3>5.4 · Decisões que dependem de você</h3>
   <div class="tablewrap"><table>
     <tr><th>Decisão</th><th>Recomendação</th></tr>
-    <tr><td>Adotar a cadência "Atrito Zero" (acionar <span style="font-family:var(--mono)">@meta-templates</span> para os 4 templates novos)?</td><td><span class="pill ok">SIM</span> — começar pelo M0 (não precisa da Meta) e medir a taxa de resposta por 1 semana antes de reaprovar os templates.</td></tr>
+    <tr><td>Adotar a cadência revista (ligação como destino, no horário do lead), acionando <span style="font-family:var(--mono)">@meta-templates</span> para os 4 templates?</td><td><span class="pill ok">SIM</span> — começar pelo M0 corrigido (não precisa da Meta) e medir <strong>ligações comparecidas</strong>, não só respostas, por 1 semana antes de reaprovar os templates.</td></tr>
     <tr><td>Cobrir a inbox oficial do WABA no Chatwoot para o time atender ali (habilita a ponte sem link)?</td><td><span class="pill warn">DECISÃO</span> — é o que destrava a mudança nº 2, a de maior impacto estrutural.</td></tr>
     <tr><td>Ligar o cron do auditor (12h/18h) agora que os alertas funcionam?</td><td><span class="pill ok">SIM</span> — baixo custo, fecha o loop de vigilância.</td></tr>
     <tr><td>Corrigir os 3 bugs estratégicos de lembrete (seção 4.2)?</td><td><span class="pill ok">SIM</span> — o do "amanhã" e o do template de fallback afetam direto o no-show de 45%.</td></tr>
