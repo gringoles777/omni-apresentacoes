@@ -418,6 +418,20 @@ var ARQ={
    ESTADO + persistência (localStorage, 24h) + telemetria
    ═══════════════════════════════════════════════════════════════════════════ */
 var LS_KEY='voc_v1';
+/* ── Teste A/B da tela final (§7) — sorteio 50/50 client-side, persistido ──────
+   VARIANT 'a' = Tela do Presente (atual) | 'b' = enquadramento por evidência.
+   ?v=a / ?v=b FORÇA e persiste (demo/QA). Retomada mantém a variante. */
+var LS_VARIANT='voc_cta_variant';
+function resolveVariant(){
+  var v=null;
+  try{var m=/[?&]v=([ab])(?:[&#]|$)/i.exec(location.search);if(m)v=m[1].toLowerCase();}catch(e){}
+  if(!v){try{var s=localStorage.getItem(LS_VARIANT);if(s==='a'||s==='b')v=s;}catch(e){}}
+  if(!v){v=(Math.random()<0.5)?'a':'b';}
+  try{localStorage.setItem(LS_VARIANT,v);}catch(e){}
+  return v;
+}
+var VARIANT=resolveVariant();                              // 'a' | 'b'
+var CTA_VARIANT=(VARIANT==='b')?'leitura_b':'presente_a';  // carimbo no payload/beacons
 var state={answers:{},step:0,startedAt:Date.now(),
   tel:{blurEvents:0,firstPosStreak:0,_streak:0,fastScreens:0}};
 var display={};                 // ordem de exibição por questão (para telemetria)
@@ -748,10 +762,11 @@ function renderEmail(){
 
 function buildPayload(email){
   return {email:email||state.email||null,nome:null,
+    cta_variant:CTA_VARIANT,
     respostas:state.answers,
     telemetry:{blurEvents:state.tel.blurEvents,firstPosStreak:state.tel.firstPosStreak,fastScreens:state.tel.fastScreens},
     metadata:{startedAt:state.startedAt,finishedAt:Date.now(),ua:navigator.userAgent,titulo_variante:'A',
-      client_result:result}};
+      cta_variant:CTA_VARIANT,client_result:result}};
 }
 function sealAndPost(email){
   if(posted)return;
@@ -774,7 +789,7 @@ window.addEventListener('pagehide',function(){
    ROTA DE SAÍDA (conforme scoring) + compartilhamento
    ═══════════════════════════════════════════════════════════════════════════ */
 function beaconCta(evento){
-  var body=JSON.stringify({email:state.email||null,arquetipo:result.arquetipo,rota:result.rota,evento:evento||'cta_vocacao',origem:'teste-vocacao',clicked_at:new Date().toISOString()});
+  var body=JSON.stringify({email:state.email||null,arquetipo:result.arquetipo,rota:result.rota,cta_variant:CTA_VARIANT,evento:evento||'cta_vocacao',origem:'teste-vocacao',clicked_at:new Date().toISOString()});
   try{if(navigator.sendBeacon)navigator.sendBeacon(CONFIG.ENDPOINT_CTA,new Blob([body],{type:'application/json'}));
     else fetch(CONFIG.ENDPOINT_CTA,{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true});}catch(e){}
 }
@@ -782,6 +797,7 @@ function waLink(text){return CONFIG.WHATSAPP_LINK+'?text='+encodeURIComponent(te
 
 /* v3 — WhatsApp do presente (mensagem pré-preenchida, saudação OMNI) */
 function presenteWhatsMsg(){
+  if(VARIANT==='b') return 'Ótimo dia! Acabei de fazer o teste de vocação, meu perfil deu '+result.arquetipo+' e quero agendar a leitura do meu mapa';
   return 'Ótimo dia! Acabei de fazer o teste de vocação, meu perfil deu '+result.arquetipo+' e quero agendar minha consultoria presente de 30 minutos';
 }
 function openPresenteWhats(){ waClicked=true; window.open(waLink(presenteWhatsMsg()),'_blank'); }
@@ -818,10 +834,15 @@ function popup1(){ // saiu após a revelação, ainda sem email
 function popup2(){ // qualificado saindo da tela do presente sem agendar
   if(popup2Shown||activePopup||!result)return;
   popup2Shown=true;beaconCta('popup2_shown');
+  var m=(VARIANT==='b')
+    ? {h:'A sua leitura de mapa fica disponível, mas o melhor horário não espera.',
+       body:'O link para agendar vai no seu email, mas se quiser garantir seu horário agora, leva menos de um minuto.',
+       cta:'Agendar minha leitura →',dismiss:'Prefiro pelo email'}
+    : {h:'Seu presente fica reservado, mas não para sempre.',
+       body:'A consultoria de 30 minutos com o time OMNI foi liberada pelo seu resultado de hoje. O link também vai no seu email, mas se quiser garantir seu horário agora, leva menos de um minuto.',
+       cta:'Agendar meu presente →',dismiss:'Prefiro pelo email'};
   showModal({
-    h:'Seu presente fica reservado, mas não para sempre.',
-    body:'A consultoria de 30 minutos com o time OMNI foi liberada pelo seu resultado de hoje. O link também vai no seu email, mas se quiser garantir seu horário agora, leva menos de um minuto.',
-    cta:'Agendar meu presente →',dismiss:'Prefiro pelo email',
+    h:m.h,body:m.body,cta:m.cta,dismiss:m.dismiss,
     onCta:function(){beaconCta('popup2_aceito');openPresenteWhats();}
   });
 }
@@ -843,28 +864,44 @@ function renderRota(){
   html+='<div class="eyebrow center">✓ Seu mapa está a caminho do seu email</div>';
 
   if(rota==='CTA_PAGO'){
-    // v3 — TELA DO PRESENTE (§7): enxuta, agenda via WhatsApp com o time OMNI.
+    // §7 — TELA FINAL DO QUALIFICADO. Teste A/B:
+    //   VARIANT 'a' = Tela do Presente (atual). 'b' = enquadramento por evidência.
+    // Só esta tela + o pop-up 2 mudam entre A e B; todo o resto é idêntico.
     onPresente=true;
     var acao = (state.answers.Q14===1)
       ? '<p class="branch">Você marcou que já está em movimento nessa direção. Então essa conversa não é para te convencer de nada, é para encurtar o seu caminho.</p>' : '';
     var reality = (result.arquetipo==='Construtor Pragmatico' && a.reality)
       ? '<p class="branch">'+a.reality+'</p>' : '';
-    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você ganhou um presente.</h1>'
-      +'<div class="rota-body">'
-      +'<p>Enquanto eu finalizo a análise detalhada do seu teste, uma coisa já ficou clara: o seu perfil tem muito potencial. Do tipo que fica incrível trabalhando transformando vidas.</p>'
-      +'<p>Por isso você ganhou um presente: <b>uma consultoria de 30 minutos com o time de especialistas da OMNI</b>, gente preparada para olhar essa transição a fundo com você e te mostrar como destravar esse potencial.</p>'
-      +reality+acao
-      +'</div>'
-      +'<div class="presente"><div class="kk">O que acontece nesses 30 minutos</div>'
-      +'<ul class="bullets">'
-      +'<li>Leitura do seu mapa com você, ponto a ponto</li>'
+    // 3 bullets compartilhados entre A e B (idênticos).
+    var bulletsPresente='<li>Leitura do seu mapa com você, ponto a ponto</li>'
       +'<li>Onde o seu talento rende mais e o que hoje está te travando</li>'
-      +'<li>Você sai com um próximo passo concreto para o seu momento, faça você algo com a OMNI ou não</li>'
-      +'</ul>'
-      +'<p class="rota-body" style="color:var(--muted)">E fica tranquilo(a): o seu mapa completo chega no seu email de qualquer forma, conversando ou não.</p>'
-      +'<button class="btn" id="ctaBtn">Quero agendar meu presente →</button>'
-      +'<span class="subhint">Prefere ver o mapa primeiro? Tudo bem. O link para agendar também vai no seu email.</span>'
-      +'</div>';
+      +'<li>Você sai com um próximo passo concreto para o seu momento, faça você algo com a OMNI ou não</li>';
+    if(VARIANT==='b'){
+      html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Uma coisa no seu resultado pediu atenção.</h1>'
+        +'<div class="rota-body">'
+        +'<p>As suas respostas mostram evidência concreta, coisas que já aconteceram na sua vida, não só vontade. Quando um mapa sai assim, a gente oferece um passo a mais: uma leitura a dois, 30 minutos com o time de especialistas da OMNI, para ler o seu mapa ponto a ponto e desenhar o próximo passo do seu momento.</p>'
+        +reality+acao
+        +'</div>'
+        +'<div class="presente"><div class="kk">O que acontece nesses 30 minutos</div>'
+        +'<ul class="bullets">'+bulletsPresente+'</ul>'
+        +'<p class="rota-body" style="color:var(--muted)">Sem custo e sem compromisso. E o seu mapa completo chega no seu email de qualquer forma.</p>'
+        +'<button class="btn" id="ctaBtn">Quero a leitura do meu mapa →</button>'
+        +'<span class="subhint">Prefere ver o mapa primeiro? Tudo bem. O link para agendar também vai no seu email.</span>'
+        +'</div>';
+    } else {
+      html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você ganhou um presente.</h1>'
+        +'<div class="rota-body">'
+        +'<p>Enquanto eu finalizo a análise detalhada do seu teste, uma coisa já ficou clara: o seu perfil tem muito potencial. Do tipo que fica incrível trabalhando transformando vidas.</p>'
+        +'<p>Por isso você ganhou um presente: <b>uma consultoria de 30 minutos com o time de especialistas da OMNI</b>, gente preparada para olhar essa transição a fundo com você e te mostrar como destravar esse potencial.</p>'
+        +reality+acao
+        +'</div>'
+        +'<div class="presente"><div class="kk">O que acontece nesses 30 minutos</div>'
+        +'<ul class="bullets">'+bulletsPresente+'</ul>'
+        +'<p class="rota-body" style="color:var(--muted)">E fica tranquilo(a): o seu mapa completo chega no seu email de qualquer forma, conversando ou não.</p>'
+        +'<button class="btn" id="ctaBtn">Quero agendar meu presente →</button>'
+        +'<span class="subhint">Prefere ver o mapa primeiro? Tudo bem. O link para agendar também vai no seu email.</span>'
+        +'</div>';
+    }
   } else if(rota==='CULTIVAR'){
     html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você descobriu o seu talento. Agora é sobre tempo, e o tempo é seu.</h1>'
       +'<div class="rota-body">'
