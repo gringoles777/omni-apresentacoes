@@ -177,11 +177,25 @@
   .center{text-align:center}
   .disclaimer{font-family:var(--sans);font-size:12.5px;color:var(--dim);text-align:center;margin-top:26px;line-height:1.6}
 
+  /* pop-ups de saída (§7A) */
+  .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:22px;
+    background:rgba(3,3,3,.82);backdrop-filter:blur(4px);animation:enter .26s ease both}
+  .modal .box{position:relative;max-width:420px;width:100%;border:1px solid var(--gold);border-radius:14px;padding:28px 22px 22px;
+    background:radial-gradient(420px 220px at 50% 0%,rgba(200,168,75,.16),rgba(200,168,75,.02) 62%),var(--panel2);
+    box-shadow:0 24px 70px rgba(0,0,0,.62)}
+  .modal .mx{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--dim);font-size:24px;line-height:1;cursor:pointer}
+  .modal .mx:hover{color:var(--muted)}
+  .modal h3{font-family:var(--serif);font-weight:600;font-size:clamp(1.3rem,5.4vw,1.6rem);line-height:1.24;margin:2px 0 12px;color:var(--ink)}
+  .modal p{font-family:var(--sans);font-size:14.5px;line-height:1.6;color:var(--muted);margin:0 0 16px}
+  .modal .dismiss{display:block;width:100%;text-align:center;margin-top:12px;background:none;border:0;color:var(--dim);
+    font-family:var(--sans);font-size:13px;cursor:pointer;padding:6px}
+  .modal .dismiss:hover{color:var(--muted)}
+
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:opacity .2s!important}
     .rrow .rbar i{transition:width .2s!important}
   }
-#demo-ribbon{position:fixed;top:10px;right:-34px;z-index:99999;background:#8a6d2f;color:#fff;font-size:11px;letter-spacing:2px;padding:4px 40px;transform:rotate(35deg);opacity:.85;pointer-events:none;font-family:sans-serif}
+  #demo-ribbon{position:fixed;top:10px;right:-34px;z-index:99999;background:#8a6d2f;color:#fff;font-size:11px;letter-spacing:2px;padding:4px 40px;transform:rotate(35deg);opacity:.85;pointer-events:none;font-family:sans-serif}
 </style>
 </head>
 <body><div id="demo-ribbon">RASCUNHO</div>
@@ -197,11 +211,10 @@
    CONFIG — placeholders a preencher no go-live (ver 09-copy §13 OBRIGATÓRIO).
    ═══════════════════════════════════════════════════════════════════════════ */
 var CONFIG = {
-  NOME_ESPECIALISTA: "Diumara Carvalho (exemplo, a definir)",
-  CREDENCIAL: "formado(a) e certificado(a) pela OMNI, com anos ajudando pessoas a fazer essa transição",
+  // v3: fluxo do "presente" agenda via WhatsApp com o TIME OMNI (sem especialista
+  // nomeado). NOME_ESPECIALISTA/CREDENCIAL/HORARIOS_AGENDA saíram do fluxo.
   CNPJ: "00.000.000/0001-00 (demo)",
   URL_PRIVACIDADE: "#",
-  HORARIOS_AGENDA: ["Segunda, 10h30","Terça, 15h00","Quarta, 19h30"], // DEMO fictício
   WHATSAPP_LINK: "https://wa.me/5511972343492",
   TEST_URL: "omnihypnosis.com.br/mapa",
   ENDPOINT: "/intake/teste-vocacao",
@@ -213,13 +226,13 @@ var CONFIG = {
    Qualquer alteração de peso/regra deve ser replicada nos dois arquivos.
    ═══════════════════════════════════════════════════════════════════════════ */
 var QW = {
-  Q1:{sentido:[100,70,50,0]},
+  Q1:{sentido:[90,70,50,0,100]},   // v3: idx5 = exaustão alta (APPENDED, preserva 1-4)
   Q2:{d1:[100,66,33,0]}, Q3:{d2:[100,66,15,0]}, Q4:{d1:[100,40,30,30]},
   Q5:{d2:[100,66,33,0]}, Q6:{d3:[100,66,33,0]}, Q7:{d1:[100,66,33,10]},
   Q8:{d3:[100,55,45,25]}, Q9:{d3:[100,66,33,0]}, Q10:{d3:[100,66,33,0]},
   Q11:{d2:[100,70,35,0]}, Q12:{renda:[90,80,85,25,85,75]}, Q13:{invest:[100,70,35,10]},
   Q14:{d4:[100,75,45,10]}, Q15:{d4:[100,75,55,15]}, Q16:{dispo:[100,60,30,15]},
-  Q17:{d4:[100,60,70,15]}, Q12b:{idade:[25,35,45,55,62]}
+  Q17:{d4:[100,85,70,15,60]}, Q12b:{idade:[25,35,45,55,62]}  // v3: idx3=fuga, idx5=financeira
 };
 function scoreVocation(respostas, telemetry){
   telemetry = telemetry || {};
@@ -238,9 +251,11 @@ function scoreVocation(respostas, telemetry){
   var renda_proxy=V('Q12','renda'), prontidao_invest=V('Q13','invest'), invest_dispo=V('Q16','dispo');
   var gancho_sentido=V('Q1','sentido'), idade=V('Q12b','idade');
   var fit_facilitador=(r.Q8===1)||(r.Q4===2), salvador=(r.Q8===4), fit_pragmatico=(r.Q11===4);
-  var motivacao_fuga=(r.Q1===1)||(r.Q1===2)||(r.Q17===3);
-  var motivacao_fuga_alta=(r.Q1===1)||(r.Q17===3);
+  var exaustao_alta=(r.Q1===5);   // v3: Q1 idx5 = fuga mais forte
+  var motivacao_fuga=(r.Q1===1)||(r.Q1===2)||(r.Q1===5)||(r.Q17===3);
+  var motivacao_fuga_alta=(r.Q1===1)||(r.Q1===5)||(r.Q17===3);
   var flags=[];
+  if(exaustao_alta) flags.push('exaustao_alta');
 
   var flag_autodesq=false;
   if(d1_carrega>=66 && D1>=80 && D2>=80 && d3_procurado<=33 && d3_ja_disseram>=66){
@@ -319,7 +334,7 @@ function scoreVocation(respostas, telemetry){
     d3_procurado:d3_procurado,d3_ja_disseram:d3_ja_disseram,d1_carrega:d1_carrega,
     gancho_sentido:gancho_sentido,idade:idade,faixa_etaria:r.Q12b||null,
     fit_facilitador:fit_facilitador,salvador:salvador,fit_pragmatico:fit_pragmatico,
-    motivacao_fuga:motivacao_fuga,evidencia_prosocial_minima:evidencia_prosocial_minima,
+    motivacao_fuga:motivacao_fuga,exaustao_alta:exaustao_alta,evidencia_prosocial_minima:evidencia_prosocial_minima,
     eco1_ramo:eco1_ramo,eco2_ramo:eco2_ramo};
 }
 
@@ -330,13 +345,13 @@ function scoreVocation(respostas, telemetry){
 function O(idx,txt){return {idx:idx,txt:txt};}
 var QUESTIONS = [
  {id:'Q1',cap:1,rand:true,q:"Pensa no seu trabalho nas últimas semanas. O que descreve melhor como você tem se sentido?",
-  o:[O(1,"Dou conta de tudo, mas já não sei bem para quê"),O(2,"Funciono no automático, os dias se repetem"),O(3,"Ainda gosto de partes, mas sinto que falta algo meu ali"),O(4,"Estou em paz com onde estou hoje")]},
+  o:[O(1,"Dou conta de tudo, mas já não sei bem para quê"),O(2,"Funciono no automático, os dias se repetem"),O(3,"Ainda gosto de partes, mas sinto que falta algo meu ali"),O(4,"Estou em paz com onde estou hoje"),O(5,"Estou no meu limite. Sigo entregando, mas por dentro estou esgotado(a)")]},
  {id:'Q2',cap:1,rand:true,q:"Um amigo próximo te diz que está tudo bem. Você sente que não está. O que costuma acontecer com você?",
   o:[O(1,"Percebo na hora, o corpo dele conta antes das palavras"),O(2,"Sinto que tem algo, mesmo sem saber o quê"),O(3,"Só me toco depois, revendo a conversa"),O(4,"Prefiro acreditar no que a pessoa me diz")]},
  {id:'Q3',cap:1,rand:true,q:"Um colega muda de comportamento do nada, fica diferente. Seu primeiro impulso é:",
-  o:[O(1,"Entender o que está acontecendo por dentro dele"),O(2,"Perguntar direto o que houve"),O(3,"Pensar em como isso afeta o trabalho"),O(4,"Sinceramente, não é da minha conta")]},
+  o:[O(1,"Fico curioso(a) para entender o que está acontecendo por dentro dele"),O(2,"Pergunto direto o que houve"),O(3,"Penso em como isso afeta o trabalho"),O(4,"Sinceramente, não me importo muito, talvez nem perceba")]},
  {id:'Q4',cap:1,rand:true,q:"Depois de uma conversa difícil com alguém, o que mais te deixa satisfeito?",
-  o:[O(1,"Sentir que a pessoa se sentiu de verdade compreendida"),O(2,"Ver que ela saiu com um caminho mais claro"),O(3,"Saber que fui honesto, mesmo que doesse"),O(4,"Ter resolvido junto o que estava travado")]},
+  o:[O(1,"Sentir que a pessoa se sentiu de verdade compreendida"),O(2,"Ver que ela saiu com um caminho mais claro"),O(3,"Saber que passei minha visão e a pessoa realmente escutou"),O(4,"Ter resolvido junto o que estava travado")]},
  {id:'Q5',cap:1,rand:false,q:"O quanto isso combina com você: “gosto de entender por que as pessoas repetem os mesmos padrões, mesmo sabendo que se prejudicam”.",
   o:[O(1,"É exatamente eu, penso nisso o tempo todo"),O(2,"Combina bastante"),O(3,"Às vezes me pego pensando nisso"),O(4,"Não é muito o meu tipo de curiosidade")]},
  {id:'Q6',cap:2,rand:false,q:"Com que frequência as pessoas te procuram para desabafar ou pedir conselho?",
@@ -350,7 +365,7 @@ var QUESTIONS = [
  {id:'Q10',cap:2,rand:false,q:"Você já abriu mão de algo concreto (tempo, dinheiro, uma oportunidade) para ajudar alguém que precisava?",
   o:[O(1,"Várias vezes, é parte de quem eu sou"),O(2,"Uma ou duas vezes que me marcaram"),O(3,"Raramente"),O(4,"Não que eu me lembre")]},
  {id:'Q11',cap:2,rand:true,q:"Ajudar alguém a mudar, sem passo a passo garantido. Para você isso é:",
-  o:[O(1,"Fascinante, é onde fica interessante"),O(2,"Instigante, mesmo com desconforto"),O(3,"Depende do meu dia"),O(4,"Desconfortável, prefiro método claro")]},
+  o:[O(1,"Me atrai, é aí que a coisa fica viva pra mim"),O(2,"Encaro bem, na prática acho que costuma ser assim mesmo"),O(3,"Me deixa inseguro(a), prefiro ter clareza do caminho antes"),O(4,"Pra mim não dá: sem um método claro, melhor nem começar")]},
  {id:'Q12',cap:3,rand:true,q:"Hoje, no seu trabalho, você se descreveria mais como:",
   o:[O(1,"Lidero uma equipe ou uma área"),O(2,"Sou referência técnica, as pessoas me procuram para resolver"),O(3,"Sou profissional liberal, vivo da minha própria expertise"),O(4,"Ainda estou construindo minha estabilidade"),O(5,"Toco meu próprio negócio, respondo pelos resultados"),O(6,"Sou servidor(a) público(a) de carreira")]},
  {id:'Q12b',cap:3,rand:false,q:"Só para calibrar a leitura: em que década da vida você está?",
@@ -359,12 +374,12 @@ var QUESTIONS = [
   o:[O(1,"Sim, mais de uma vez, faz parte de como eu vivo"),O(2,"Sim, uma vez, algo que me marcou"),O(3,"Pensei nisso, mas não cheguei a fazer"),O(4,"Não foi uma prioridade agora")]},
  {id:'Q14',cap:3,rand:false,q:"Sobre construir uma nova fonte de propósito e renda ajudando pessoas, você diria que:",
   o:[O(1,"Já dei alguns passos concretos nessa direção"),O(2,"Estou pesquisando e me organizando para isso"),O(3,"Penso muito, mas não sei por onde começar"),O(4,"Hoje é mais um pensamento distante")]},
- {id:'Q15',cap:3,rand:true,fixedTop:3,q:"Pensa em construir uma renda nova, que dependa mais de você. Como isso soa?",
+ {id:'Q15',cap:3,rand:true,fixedTop:3,q:"Pensa em construir uma carreira nova, com uma renda que dependa mais de você. Como isso soa?",
   o:[O(1,"Como liberdade, é o tipo de desafio que me atrai"),O(2,"Dá um frio na barriga, mas eu encararia"),O(3,"Prefiro construir o novo sem largar a segurança do que já tenho"),O(4,"Hoje isso me travaria")]},
  {id:'Q16',cap:3,rand:true,q:"Se existisse um caminho testado para você desenvolver esse talento e transformá-lo em profissão, o que mais combinaria com você?",
-  o:[O(1,"Investiria no acompanhamento mais completo para chegar mais rápido e com segurança"),O(2,"Começaria pelo essencial e evoluiria conforme visse resultado"),O(3,"Preferiria aprender por conta antes de investir"),O(4,"Só avançaria com muita garantia antes de qualquer passo")]},
+  o:[O(1,"Investiria no acompanhamento mais completo para chegar mais rápido e com segurança"),O(2,"Começaria pelo essencial e evoluiria devagar, conforme visse resultado"),O(3,"Preferiria aprender por conta antes de investir"),O(4,"Só avançaria com muita garantia antes de qualquer passo")]},
  {id:'Q17',cap:3,rand:true,q:"No fundo, o que mais te move quando você pensa em mudar?",
-  o:[O(1,"Construir algo com o meu sentido, que seja meu"),O(2,"Os dois na mesma medida"),O(3,"Não aguento mais seguir como está"),O(4,"Ainda não sei se quero mudar")]}
+  o:[O(1,"Construir algo com o meu sentido, que seja meu"),O(2,"Ter mais liberdade de tempo para mim e para quem eu amo"),O(3,"Sair do que estou vivendo hoje, não aguento mais"),O(4,"Ainda não sei se quero mudar"),O(5,"Melhorar de verdade a minha situação financeira")]}
 ];
 var CAP_LABEL={1:"Onde você está",2:"Como você funciona",3:"O que vem agora"};
 
@@ -409,6 +424,8 @@ var display={};                 // ordem de exibição por questão (para teleme
 var screenShownAt=0;
 var result=null;                // payload do scoreVocation após o teste
 var posted=false;               // se o POST de selagem já foi feito
+// v3 — estado dos pop-ups de saída (§7A). Disparo único cada.
+var onPresente=false, waClicked=false, popup1Shown=false, popup2Shown=false, activePopup=false;
 
 function save(){try{localStorage.setItem(LS_KEY,JSON.stringify({a:state.answers,s:state.step,t:state.startedAt,tel:state.tel}));}catch(e){}}
 function load(){try{var raw=localStorage.getItem(LS_KEY);if(!raw)return null;var o=JSON.parse(raw);
@@ -561,7 +578,12 @@ function goBack(){
 }
 window.addEventListener('popstate',function(){
   // evita abandono acidental: back nativo volta 1 pergunta em vez de sair
-  if(state.step>0 && !result){try{history.pushState({s:state.step},'');}catch(e){}goBack();}
+  if(state.step>0 && !result){try{history.pushState({s:state.step},'');}catch(e){}goBack();return;}
+  // após a revelação: back dispara o pop-up de saída (§7A) e segura na página
+  if(result && ((onPresente&&!waClicked)||!state.email)){
+    try{history.pushState({s:'guard'},'');}catch(e){}
+    tryExitPopup();
+  }
 });
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -758,39 +780,90 @@ function beaconCta(evento){
 }
 function waLink(text){return CONFIG.WHATSAPP_LINK+'?text='+encodeURIComponent(text);}
 
+/* v3 — WhatsApp do presente (mensagem pré-preenchida, saudação OMNI) */
+function presenteWhatsMsg(){
+  return 'Ótimo dia! Acabei de fazer o teste de vocação, meu perfil deu '+result.arquetipo+' e quero agendar minha consultoria presente de 30 minutos';
+}
+function openPresenteWhats(){ waClicked=true; window.open(waLink(presenteWhatsMsg()),'_blank'); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   POP-UPS DE SAÍDA (§7A) — exit-intent, não bloqueantes, disparo único
+   ═══════════════════════════════════════════════════════════════════════════ */
+function showModal(opts){
+  activePopup=true;
+  var wrap=document.createElement('div');wrap.className='modal';
+  wrap.innerHTML='<div class="box"><button class="mx" aria-label="Fechar">×</button>'
+    +'<h3>'+opts.h+'</h3><p>'+opts.body+'</p>'
+    +'<button class="btn" data-cta>'+opts.cta+'</button>'
+    +'<button class="dismiss" data-dismiss>'+opts.dismiss+'</button></div>';
+  document.body.appendChild(wrap);
+  function close(){activePopup=false;if(wrap.parentNode)wrap.parentNode.removeChild(wrap);}
+  function bye(){close();if(opts.onDismiss)opts.onDismiss();}
+  wrap.querySelector('[data-cta]').addEventListener('click',function(){vibrate();var f=opts.onCta;close();if(f)f();});
+  wrap.querySelector('.mx').addEventListener('click',bye);
+  wrap.querySelector('[data-dismiss]').addEventListener('click',bye);
+  wrap.addEventListener('click',function(e){if(e.target===wrap)bye();});
+}
+function popup1(){ // saiu após a revelação, ainda sem email
+  if(popup1Shown||activePopup||!result)return;
+  popup1Shown=true;beaconCta('popup1_shown');
+  var arqNome=(ARQ[result.arquetipo]?ARQ[result.arquetipo].nome:'seu perfil');
+  showModal({
+    h:'Seu mapa completo fica pronto em instantes. Não vai levar?',
+    body:'Ele mostra o retrato do seu perfil '+arqNome+', a força e o ponto cego que quase ninguém te aponta, e o próximo passo mais inteligente para o seu momento. É seu, de graça, no seu email.',
+    cta:'Quero meu mapa →',dismiss:'Agora não',
+    onCta:function(){beaconCta('popup1_aceito');renderEmail();}
+  });
+}
+function popup2(){ // qualificado saindo da tela do presente sem agendar
+  if(popup2Shown||activePopup||!result)return;
+  popup2Shown=true;beaconCta('popup2_shown');
+  showModal({
+    h:'Seu presente fica reservado, mas não para sempre.',
+    body:'A consultoria de 30 minutos com o time OMNI foi liberada pelo seu resultado de hoje. O link também vai no seu email, mas se quiser garantir seu horário agora, leva menos de um minuto.',
+    cta:'Agendar meu presente →',dismiss:'Prefiro pelo email',
+    onCta:function(){beaconCta('popup2_aceito');openPresenteWhats();}
+  });
+}
+function tryExitPopup(){
+  if(activePopup||!result)return;
+  if(onPresente && !waClicked){popup2();return;}
+  if(!state.email){popup1();return;}
+}
+// desktop: mouse sai pelo topo da janela
+document.addEventListener('mouseout',function(e){
+  if(!e.relatedTarget && (e.clientY==null || e.clientY<=0)) tryExitPopup();
+});
+// mobile/tab: página fica oculta (troca de app/aba)
+document.addEventListener('visibilitychange',function(){ if(document.hidden) tryExitPopup(); });
+
 function renderRota(){
   var rota=result.rota, a=ARQ[result.arquetipo];
   var html='<div class="screen">';
   html+='<div class="eyebrow center">✓ Seu mapa está a caminho do seu email</div>';
 
   if(rota==='CTA_PAGO'){
-    var acao = (state.answers.Q14===1 || state.answers.Q17===1)
-      ? '<p class="branch">Você marcou que já está em movimento nessa direção. Então essa conversa não é para te convencer de nada, é para encurtar o seu caminho. Quem já decidiu perde menos tempo com uma leitura certeira do que sozinho no escuro.</p>' : '';
+    // v3 — TELA DO PRESENTE (§7): enxuta, agenda via WhatsApp com o time OMNI.
+    onPresente=true;
+    var acao = (state.answers.Q14===1)
+      ? '<p class="branch">Você marcou que já está em movimento nessa direção. Então essa conversa não é para te convencer de nada, é para encurtar o seu caminho.</p>' : '';
     var reality = (result.arquetipo==='Construtor Pragmatico' && a.reality)
       ? '<p class="branch">'+a.reality+'</p>' : '';
-    var agenda='';
-    if(CONFIG.HORARIOS_AGENDA && CONFIG.HORARIOS_AGENDA.length){
-      agenda='<ul class="agenda">';
-      for(var i=0;i<CONFIG.HORARIOS_AGENDA.length;i++) agenda+='<li>'+CONFIG.HORARIOS_AGENDA[i]+'</li>';
-      agenda+='<li>Ver mais horários</li></ul>';
-    }
-    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Seu perfil chamou a atenção. Que tal conversar sobre ele com quem entende do assunto?</h1>'
+    html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você ganhou um presente.</h1>'
       +'<div class="rota-body">'
-      +'<p>O seu resultado abriu esta tela por um motivo específico: as suas respostas mostram evidência concreta, coisas que já aconteceram na sua vida, não só vontade. Com um mapa assim, vale uma leitura a dois: 30 minutos de conversa, um a um, para ler o seu mapa junto com você.</p>'
-      +'<p>Quem conduz essa conversa é <b>'+CONFIG.NOME_ESPECIALISTA+'</b>, '+CONFIG.CREDENCIAL+'.</p>'
+      +'<p>Enquanto eu finalizo a análise detalhada do seu teste, uma coisa já ficou clara: o seu perfil tem muito potencial. Do tipo que fica incrível trabalhando transformando vidas.</p>'
+      +'<p>Por isso você ganhou um presente: <b>uma consultoria de 30 minutos com o time de especialistas da OMNI</b>, gente preparada para olhar essa transição a fundo com você e te mostrar como destravar esse potencial.</p>'
       +reality+acao
       +'</div>'
       +'<div class="presente"><div class="kk">O que acontece nesses 30 minutos</div>'
       +'<ul class="bullets">'
-      +'<li>'+CONFIG.NOME_ESPECIALISTA+' lê o seu mapa completo com você, ponto a ponto</li>'
-      +'<li>Vocês olham juntos onde o seu talento rende mais e o que hoje está te travando</li>'
+      +'<li>Leitura do seu mapa com você, ponto a ponto</li>'
+      +'<li>Onde o seu talento rende mais e o que hoje está te travando</li>'
       +'<li>Você sai com um próximo passo concreto para o seu momento, faça você algo com a OMNI ou não</li>'
-      +'<li>No fim, se fizer sentido para os dois, vocês falam sobre caminhos de formação. Só se fizer sentido.</li>'
       +'</ul>'
-      +'<p class="rota-body" style="color:var(--muted)">Você recebe o seu mapa completo por email de qualquer forma, conversando ou não. A conversa é um extra, não um pedágio.</p>'
-      +agenda
-      +'<button class="btn" id="ctaBtn">Confirmar minha conversa de 30 minutos →</button>'
-      +'<span class="subhint">Prefere agendar depois? O link para marcar vai junto com o seu mapa, no seu email.</span>'
+      +'<p class="rota-body" style="color:var(--muted)">E fica tranquilo(a): o seu mapa completo chega no seu email de qualquer forma, conversando ou não.</p>'
+      +'<button class="btn" id="ctaBtn">Quero agendar meu presente →</button>'
+      +'<span class="subhint">Prefere ver o mapa primeiro? Tudo bem. O link para agendar também vai no seu email.</span>'
       +'</div>';
   } else if(rota==='CULTIVAR'){
     html+='<h1 style="font-size:clamp(1.6rem,6vw,2.1rem)">Você descobriu o seu talento. Agora é sobre tempo, e o tempo é seu.</h1>'
@@ -821,11 +894,12 @@ function renderRota(){
 
   var ctaBtn=document.getElementById('ctaBtn');
   if(ctaBtn) ctaBtn.addEventListener('click',function(){
-    vibrate();beaconCta(rota==='CTA_PAGO'?'cta_conversa_30min':('rota_'+rota.toLowerCase()));
-    var msg = rota==='CTA_PAGO'
-      ? 'Oi! Fiz o teste de vocação (deu '+result.arquetipo+') e quero agendar a conversa de 30 minutos sobre o meu mapa.'
-      : 'Oi! Fiz o teste de vocação (deu '+result.arquetipo+') e quero continuar com o próximo passo.';
-    window.open(waLink(msg),'_blank');
+    vibrate();
+    if(rota==='CTA_PAGO'){ beaconCta('cta_presente_whatsapp'); openPresenteWhats(); }
+    else {
+      beaconCta('rota_'+rota.toLowerCase());
+      window.open(waLink('Oi! Fiz o teste de vocação (deu '+result.arquetipo+') e quero continuar com o próximo passo.'),'_blank');
+    }
   });
   renderShare();
 }
