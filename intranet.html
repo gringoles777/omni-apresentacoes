@@ -1,223 +1,643 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Intranet OMNI Brasil</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Central do OMNER — Intranet OMNI Brasil</title>
 <style>
+  /* ============================================================
+     INTRANET OMNI BRASIL — Hub interno
+     Conceito "do cinza à cor": setor trancado nasce cinza e
+     ganha sua cor ao destravar. Base: DS OMNI dark-gold.
+     ============================================================ */
   :root{
-    --bg:#0A0A0A; --panel:#111111; --panel2:#151510;
-    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.55); --ink-faint:rgba(244,244,232,.3);
-    --gold:#C9A84C; --gold-deep:#A9842A; --gold-10:rgba(201,168,76,.12); --gold-line:rgba(201,168,76,.18);
-    --font:'Oswald','Arial Black',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+    --bg:#070706; --bg-2:#0E0D0B; --bg-3:#16140F; --bg-card:#100F0C;
+    --line:rgba(200,168,75,.15); --line-soft:rgba(245,240,232,.08);
+    --gold:#C8A84B; --gold-lt:#E8C86A; --gold-dp:#9A7A2E; --gold-glow:rgba(200,168,75,.16);
+    --cream:#F5F0E8; --muted:#A79D88; --faint:#6E675A; --grey-dead:#47443C;
+
+    --c-comercial:#E0A93B; --c-marketing:#E4635A; --c-financeiro:#39B587;
+    --c-entrega:#8E7BE6; --c-lideranca:#4EA8E0;
+
+    --display:"Oswald","Bebas Neue","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+    --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --mono:"SFMono-Regular",ui-monospace,"Cascadia Mono","Segoe UI Mono",Menlo,monospace;
+    --maxw:1200px;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
+  *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--body);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .display{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.03em;line-height:1;text-wrap:balance}
+  .eyebrow{font-family:var(--body);font-weight:600;text-transform:uppercase;letter-spacing:.26em;font-size:12px;color:var(--gold)}
+  .muted{color:var(--muted)} .tnum{font-variant-numeric:tabular-nums}
 
   /* HEADER */
-  header{padding:54px 24px 0;text-align:center;max-width:1180px;margin:0 auto}
-  .logo{font-family:var(--font);font-weight:700;font-size:26px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
-  .subtitle{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--ink-soft);text-transform:uppercase;margin-top:8px}
-  h1{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:clamp(1.9rem,4vw,3rem);margin-top:26px;line-height:1.05}
-  h1 .gold{color:var(--gold)}
-  .lead{color:var(--ink-soft);max-width:640px;margin:14px auto 0;font-size:15px;line-height:1.6}
+  header.top{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;gap:18px;height:64px}
+  .brand{display:flex;align-items:baseline;gap:14px;min-width:0}
+  .brand .logo{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+  .brand .sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,.5);white-space:nowrap}
+  nav.links{margin-left:auto;display:flex;gap:24px}
+  nav.links a{font-size:13px;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;font-weight:500;transition:color .2s;position:relative;padding:4px 0}
+  nav.links a:hover{color:var(--cream)}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-2px;height:1px;width:0;background:var(--gold);transition:width .25s}
+  nav.links a:hover::after{width:100%}
+  @media (max-width:820px){nav.links{display:none}.brand .sub{display:none}}
 
-  /* SEARCH */
-  .searchwrap{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--bg) 72%,transparent);padding:26px 24px 16px;max-width:1180px;margin:24px auto 0}
-  #search{width:100%;font-family:var(--mono);background:var(--panel);border:1px solid var(--gold-line);color:var(--ink);padding:15px 20px;border-radius:10px;font-size:15px;outline:none}
-  #search:focus{border-color:var(--gold)}
-  #search::placeholder{color:var(--ink-faint)}
-  .noresult{display:none;text-align:center;color:var(--ink-soft);font-family:var(--mono);font-size:14px;padding:40px}
+  /* HERO (compacto) */
+  .hero{position:relative;overflow:hidden;padding:70px 0 54px;isolation:isolate}
+  .hero .glow{position:absolute;inset:-40% 0 auto 0;height:120%;z-index:-1;background:radial-gradient(55% 50% at 50% 10%,var(--gold-glow),transparent 68%);animation:breathe 9s ease-in-out infinite}
+  @keyframes breathe{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+  .infinity{width:96px;margin:0 auto 22px;display:block;filter:drop-shadow(0 0 22px var(--gold-glow))}
+  .hero h1{font-size:clamp(38px,6.5vw,74px);margin:0 auto;max-width:16ch;text-align:center;color:var(--cream)}
+  .hero h1 .col{background:linear-gradient(100deg,var(--gold-dp),var(--gold),var(--gold-lt),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .tag{text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(17px,2.3vw,23px);color:var(--cream);opacity:.9;margin:20px auto 0;max-width:40ch;line-height:1.4}
+  .hero .cta-row{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+  .btn{font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px;padding:14px 30px;border-radius:3px;border:1px solid transparent;cursor:pointer;transition:.22s}
+  .btn.primary{background:var(--gold);color:#141007}
+  .btn.primary:hover{background:var(--gold-lt);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;border-color:var(--gold);color:var(--gold)}
+  .btn.ghost:hover{background:var(--gold);color:#141007}
 
-  /* SECTIONS */
-  main{max-width:1180px;margin:0 auto;padding:0 24px 80px}
-  section{margin-top:46px}
-  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--gold-line);padding-bottom:12px;margin-bottom:22px}
-  .sec-head h2{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:1px}
-  .sec-head .count{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:1px}
-  .sec-head .desc{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-left:auto;letter-spacing:1px}
+  section.blk{padding:66px 0;border-top:1px solid var(--line-soft)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(26px,4vw,42px);margin:8px 0 0;color:var(--cream)}
+  .sec-head .lead{max-width:42ch;color:var(--muted);font-size:14.5px}
+  .rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-  a.card{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:20px 22px;transition:border-color .2s,background .2s,transform .15s}
-  a.card:hover{border-color:var(--gold);background:#181712;transform:translateY(-2px)}
-  .card .top{display:flex;align-items:center;gap:11px}
-  .card .icon{font-size:21px;line-height:1}
-  .card .name{font-family:var(--font);font-weight:600;font-size:17px;letter-spacing:.3px;min-width:0}
-  .card .badge{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--gold-deep);background:var(--gold-10);border:1px solid var(--gold-line);border-radius:20px;padding:3px 9px;white-space:nowrap;text-transform:uppercase;margin-left:auto;flex-shrink:0}
-  .card .body{color:var(--ink-soft);font-size:13.5px;line-height:1.55;margin-top:10px}
+  /* ACESSO RÁPIDO (aberto a todos) */
+  .quick{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media (max-width:820px){.quick{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.quick{grid-template-columns:1fr}}
+  .qcard{display:flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--line-soft);border-radius:10px;padding:16px 18px;cursor:pointer;transition:.22s}
+  .qcard:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .qcard .ic{width:38px;height:38px;flex:0 0 38px;border-radius:8px;display:grid;place-items:center;background:rgba(200,168,75,.1);color:var(--gold)}
+  .qcard .ic svg{width:20px;height:20px}
+  .qcard .t{font-size:14.5px;color:var(--cream);font-weight:600}
+  .qcard .d{font-size:12px;color:var(--muted)}
 
-  /* DESTAQUE — Central Estratégica */
-  .featured{margin:34px auto 0;max-width:1180px;padding:0 24px}
-  a.strat{display:flex;align-items:center;gap:20px;text-decoration:none;color:var(--ink);background:linear-gradient(135deg,#151008,#0e0e0e);border:1px solid rgba(220,159,66,.4);border-radius:14px;padding:24px 28px;transition:border-color .2s,transform .15s}
-  a.strat:hover{border-color:var(--gold);transform:translateY(-2px)}
-  .strat .lock{font-size:32px}
-  .strat .txt h3{font-family:var(--font);font-weight:700;text-transform:uppercase;font-size:19px;letter-spacing:.5px}
-  .strat .txt p{color:var(--ink-soft);font-size:13px;margin-top:5px;line-height:1.5}
-  .strat .arrow{margin-left:auto;color:var(--gold);font-family:var(--mono);font-size:13px;letter-spacing:1px;white-space:nowrap}
+  /* VALORES compactos */
+  .values{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media (max-width:820px){.values{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.values{grid-template-columns:1fr}}
+  .val{background:var(--bg-card);border:1px solid var(--line);border-radius:8px;padding:22px 20px;position:relative;overflow:hidden;transition:.3s}
+  .val::before{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:var(--gold)}
+  .val:hover{transform:translateY(-3px);border-color:var(--gold)}
+  .val h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:20px;color:var(--gold);margin:0 0 6px}
+  .val p{font-size:13px;color:var(--muted);margin:0}
 
-  footer{text-align:center;padding:40px 24px 60px;font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-faint)}
+  /* EVENTOS */
+  .events{display:flex;flex-direction:column;gap:12px}
+  .ev{display:grid;grid-template-columns:84px 1fr auto;gap:22px;align-items:center;background:var(--bg-card);border:1px solid var(--line);border-radius:8px;padding:16px 24px;transition:.25s}
+  .ev:hover{border-color:var(--gold);transform:translateX(4px)}
+  .ev .date{text-align:center;border-right:1px solid var(--line);padding-right:18px}
+  .ev .date .d{font-family:var(--display);font-size:34px;color:var(--gold);line-height:.9}
+  .ev .date .m{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+  .ev .info h4{margin:0 0 4px;font-size:16.5px;color:var(--cream);font-weight:600}
+  .ev .info p{margin:0;font-size:13px;color:var(--muted)}
+  .ev .tagpill{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--line);border-radius:50px;padding:5px 13px;white-space:nowrap}
+  @media (max-width:600px){.ev{grid-template-columns:66px 1fr;gap:14px}.ev .tagpill{display:none}.ev .date .d{font-size:28px}}
 
-  @media(max-width:600px){
-    header{padding-top:36px}
-    .searchwrap{padding-top:18px}
-    .strat{flex-wrap:wrap}
-    .strat .arrow{margin-left:0}
-  }
+  /* SETORES */
+  .sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:900px){.sectors{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.sectors{grid-template-columns:1fr}}
+  .sector{--c:var(--grey-dead);position:relative;overflow:hidden;cursor:pointer;background:var(--bg-card);border:1px solid var(--line-soft);border-radius:12px;padding:28px 26px;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;transition:.4s;filter:grayscale(1) brightness(.82)}
+  .sector::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 60%);opacity:0;transition:opacity .4s;pointer-events:none}
+  .sector:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--c) 55%,transparent)}
+  .sector .top-row{display:flex;align-items:center;justify-content:space-between}
+  .sector .idx{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--faint)}
+  .sector .lock{width:26px;height:26px;opacity:.6;transition:.3s}
+  .sector h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:clamp(24px,3vw,32px);margin:20px 0 6px;color:var(--cream)}
+  .sector p{margin:0;font-size:13px;color:var(--faint);max-width:34ch}
+  .sector .count{margin-top:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:8px}
+  .sector .count .dot{width:7px;height:7px;border-radius:50%;background:var(--faint)}
+  .sector.unlocked{filter:none;border-color:color-mix(in srgb,var(--c) 50%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 25%,transparent),0 22px 55px -30px color-mix(in srgb,var(--c) 60%,transparent)}
+  .sector.unlocked::after{opacity:1}
+  .sector.unlocked .idx{color:var(--c)}
+  .sector.unlocked .lock{opacity:0}
+  .sector.unlocked h3{color:var(--c)}
+  .sector.unlocked p{color:var(--muted)}
+  .sector.unlocked .count{color:var(--c)}
+  .sector.unlocked .count .dot{background:var(--c);box-shadow:0 0 10px var(--c)}
+  .sector.justunlocked{animation:colorpop .9s ease}
+  @keyframes colorpop{0%{filter:grayscale(1) brightness(.82)}100%{filter:none}}
+
+  /* MODAL senha */
+  .overlay{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(3,3,2,.82);backdrop-filter:blur(6px);padding:24px}
+  .overlay.show{display:flex}
+  .modal{--c:var(--gold);width:min(420px,100%);background:var(--bg-2);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);border-radius:14px;padding:36px 32px;text-align:center;position:relative;box-shadow:0 40px 90px -30px color-mix(in srgb,var(--c) 55%,transparent);animation:rise .35s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .modal .lockbig{width:42px;height:42px;margin:0 auto 14px;display:block;color:var(--c)}
+  .modal .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--c);font-weight:600}
+  .modal h4{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:28px;margin:8px 0 4px;color:var(--cream)}
+  .modal .hint{font-size:13px;color:var(--muted);margin:0 0 20px}
+  .modal input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--cream);font-family:var(--mono);font-size:15px;letter-spacing:.1em;padding:14px 16px;text-align:center;outline:none;transition:.2s}
+  .modal input:focus{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 20%,transparent)}
+  .modal .err{color:#E4635A;font-size:12.5px;height:18px;margin:9px 0 0;opacity:0;transition:opacity .2s}
+  .modal .err.show{opacity:1}
+  .modal .go{margin-top:16px;width:100%;background:var(--c);color:#141007;border:none;font-family:var(--body);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:13px;padding:14px;border-radius:6px;cursor:pointer;transition:.2s}
+  .modal .go:hover{filter:brightness(1.1)}
+  .modal .close{position:absolute;top:15px;right:17px;background:none;border:none;color:var(--faint);font-size:22px;cursor:pointer;line-height:1}
+  .modal .close:hover{color:var(--cream)}
+  .shake{animation:shake .4s}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+
+  /* PAINEL setor (launcher) */
+  .panel{position:fixed;inset:0;z-index:300;display:none;overflow-y:auto;background:var(--bg);animation:fade .4s ease}
+  .panel.show{display:block}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .panel .phead{--c:var(--gold);position:sticky;top:0;z-index:5;background:rgba(5,5,5,.85);backdrop-filter:blur(14px);border-bottom:1px solid color-mix(in srgb,var(--c) 35%,transparent)}
+  .panel .phead .wrap{display:flex;align-items:center;gap:16px;height:66px}
+  .panel .phead .kk{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
+  .panel .phead h3{font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:24px;margin:0;color:var(--cream)}
+  .panel .phead .x{margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:9px 18px;cursor:pointer;font-size:13px;text-transform:uppercase;letter-spacing:.07em;transition:.2s}
+  .panel .phead .x:hover{border-color:var(--c);color:var(--cream)}
+  .panel .pbody{padding:44px 0 80px}
+  .panel .pbody .wrap{max-width:1120px}
+  .panel .pintro{--c:var(--gold);margin-bottom:34px;max-width:64ch}
+  .panel .pintro .big{font-family:var(--display);text-transform:uppercase;letter-spacing:.02em;font-size:clamp(30px,4.5vw,52px);line-height:1;color:var(--cream);margin:0 0 14px;text-wrap:balance}
+  .panel .pintro .big em{font-family:var(--serif);text-transform:none;font-style:italic;color:var(--c)}
+  .panel .pintro .sub{font-size:15.5px;color:var(--muted)}
+
+  .grp-title{font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:13px;color:var(--muted);margin:34px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--line-soft)}
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:860px){.tools{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.tools{grid-template-columns:1fr}}
+  .tool{--c:var(--gold);position:relative;background:var(--bg-card);border:1px solid var(--line-soft);border-radius:11px;padding:22px 20px;cursor:pointer;transition:.24s;display:flex;flex-direction:column;gap:12px;min-height:150px}
+  .tool:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 18px 40px -26px color-mix(in srgb,var(--c) 70%,transparent)}
+  .tool .th{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .tool .ic{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+  .tool .ic svg{width:21px;height:21px}
+  .tool .badge{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:50px;padding:4px 10px;white-space:nowrap}
+  .tool .badge.soon{color:var(--faint);border-color:var(--line-soft)}
+  .tool .badge.doc{color:var(--muted);border-color:var(--line-soft)}
+  .tool h5{margin:0;font-size:16px;color:var(--cream);font-weight:600;line-height:1.25}
+  .tool p{margin:0;font-size:12.8px;color:var(--muted);flex:1}
+  .tool .go-row{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--c);display:flex;align-items:center;gap:6px;opacity:.85}
+  .tool.disabled{cursor:default;opacity:.72}
+  .tool.disabled:hover{transform:none;box-shadow:none;border-color:var(--line-soft)}
+  .tool .path{font-family:var(--mono);font-size:11px;color:var(--faint);word-break:break-all}
+
+  /* VIEWER embutido */
+  .viewer{position:fixed;inset:0;z-index:400;display:none;flex-direction:column;background:var(--bg)}
+  .viewer.show{display:flex}
+  .vhead{--c:var(--gold);display:flex;align-items:center;gap:14px;padding:12px 20px;background:var(--bg-2);border-bottom:1px solid color-mix(in srgb,var(--c) 40%,transparent)}
+  .vhead .vic{width:32px;height:32px;border-radius:7px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,transparent);color:var(--c);flex:0 0 32px}
+  .vhead .vic svg{width:18px;height:18px}
+  .vhead .vt{min-width:0}
+  .vhead .vt .vn{font-size:15px;color:var(--cream);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vhead .vt .vu{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vhead .vbtns{margin-left:auto;display:flex;gap:9px;flex:0 0 auto}
+  .vhead button, .vhead a.vbtn{font-family:var(--body);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;padding:9px 15px;border-radius:6px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--muted);transition:.2s;white-space:nowrap}
+  .vhead a.vbtn.pri{background:var(--c);color:#141007;border-color:transparent;font-weight:700}
+  .vhead button:hover,.vhead a.vbtn:hover{color:var(--cream);border-color:var(--c)}
+  .vhead a.vbtn.pri:hover{filter:brightness(1.1);color:#141007}
+  .vframe-wrap{position:relative;flex:1;background:var(--bg)}
+  .vframe-wrap iframe{width:100%;height:100%;border:0;background:#fff}
+  .vfallback{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:30px;background:var(--bg)}
+  .vfallback.show{display:flex}
+  .vfallback .fic{width:56px;height:56px;color:var(--muted)}
+  .vfallback h4{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:24px;color:var(--cream);margin:0}
+  .vfallback p{color:var(--muted);font-size:14px;max-width:44ch;margin:0}
+  .vhint{position:absolute;bottom:0;left:0;right:0;background:rgba(14,13,11,.92);border-top:1px solid var(--line-soft);padding:9px 20px;font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:10px}
+  .vhint a{color:var(--gold)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:46px 0 54px;background:var(--bg-2)}
+  footer .cols{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:flex-start}
+  footer .logo{font-family:var(--display);font-size:19px;letter-spacing:5px;color:var(--gold);text-transform:uppercase}
+  footer .fnote{font-size:13px;color:var(--muted);max-width:36ch;margin-top:10px}
+  footer .meta{font-size:12px;color:var(--faint);text-align:right;line-height:1.9}
+  footer .meta a{color:var(--muted)} footer .meta a:hover{color:var(--gold)}
+
+  .disclaimer{font-size:12px;color:var(--faint);background:var(--bg-2);border:1px dashed var(--line);border-radius:8px;padding:13px 17px;margin-top:22px;line-height:1.5}
+  .disclaimer b{color:var(--muted)}
 </style>
-</head>
-<body>
 
-<header>
-  <div class="logo">OMNI BRASIL</div>
-  <div class="subtitle">Intranet · Uso Interno</div>
-  <h1>O <span class="gold">hub central</span> da OMNI</h1>
-  <p class="lead">Tudo da empresa em um lugar só: squads, marca, produtos e guias operacionais. Use a busca para encontrar rápido o que precisa.</p>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="logo">OMNI BRASIL</span>
+      <span class="sub">Central do OMNER · Intranet</span>
+    </div>
+    <nav class="links">
+      <a href="#inicio">Início</a>
+      <a href="#rapido">Acesso rápido</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#setores">Setores</a>
+    </nav>
+  </div>
 </header>
 
-<!-- DESTAQUE: Central Estratégica -->
-<div class="featured" data-item>
-  <a class="strat" href="central-estrategica.html">
-    <span class="lock">🔒</span>
-    <span class="txt">
-      <h3>Central Estratégica</h3>
-      <p>Dados sensíveis — comercial, performance de funil, diagnósticos e planos. Acesso restrito por senha.</p>
-    </span>
-    <span class="arrow">ACESSAR →</span>
-  </a>
+<section class="hero" id="inicio">
+  <div class="glow"></div>
+  <div class="wrap">
+    <svg class="infinity" viewBox="0 0 240 110" fill="none" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="240" y2="0"><stop offset="0" stop-color="#9A7A2E"/><stop offset=".45" stop-color="#C8A84B"/><stop offset=".6" stop-color="#E8C86A"/><stop offset="1" stop-color="#9A7A2E"/></linearGradient></defs>
+      <path d="M120 55 C120 22 92 22 72 40 C48 62 48 62 24 62 C4 62 4 30 24 30 C48 30 48 78 72 78 C92 78 120 78 120 55 Z M120 55 C120 22 148 22 168 40 C192 62 192 62 216 62 C236 62 236 30 216 30 C192 30 192 78 168 78 C148 78 120 78 120 55 Z" stroke="url(#g)" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <h1 class="display">Central do <span class="col">OMNER</span></h1>
+    <p class="tag">Tudo o que o OMNER usa pra transformar vidas, num só lugar. Ferramentas, painéis e planos — organizados por setor.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#setores">Acessar meu setor</a>
+      <a class="btn ghost" href="#rapido">Acesso rápido</a>
+    </div>
+  </div>
+</section>
+
+<!-- ACESSO RÁPIDO (aberto a todos) -->
+<section class="blk" id="rapido">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Aberto a todos</span><h2 class="display">Acesso rápido</h2></div>
+      <p class="lead">Os links que todo mundo da OMNI usa — sem senha.</p>
+    </div>
+    <div class="quick" id="quickGrid"></div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="blk" id="valores">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Manual do OMNER</span><h2 class="display">Nossos valores</h2></div>
+      <p class="lead">O que nos guia, todos os dias.</p>
+    </div>
+    <div class="values">
+      <div class="val rv"><h3>Vidas</h3><p>Cuidar de si, do outro e compreender seu papel no mundo.</p></div>
+      <div class="val rv"><h3>Responsabilidade</h3><p>Autorresponsabilidade sobre o próprio desempenho e para com o outro.</p></div>
+      <div class="val rv"><h3>110%</h3><p>Overdelivery, autorresponsabilidade e evolução constante.</p></div>
+      <div class="val rv"><h3>Integridade</h3><p>Agir com imparcialidade e sempre fazer o certo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section class="blk" id="agenda">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Agenda</span><h2 class="display">Próximos eventos</h2></div>
+      <p class="lead">As datas que movem a OMNI.</p>
+    </div>
+    <div class="events">
+      <div class="ev rv"><div class="date"><div class="d tnum">24</div><div class="m">Jul</div></div><div class="info"><h4>Imersão de Formação — Turma de Inverno</h4><p>Encontro presencial de transformação · São Paulo, SP</p></div><span class="tagpill">Presencial</span></div>
+      <div class="ev rv"><div class="date"><div class="d tnum">08</div><div class="m">Ago</div></div><div class="info"><h4>Abertura de turma — Formação em Omniterapia</h4><p>Kick-off ao vivo online com os founders</p></div><span class="tagpill">Online</span></div>
+      <div class="ev rv"><div class="date"><div class="d tnum">15</div><div class="m">Set</div></div><div class="info"><h4>Convenção Comercial 2026</h4><p>Metas, playbook e reconhecimento do time</p></div><span class="tagpill">Interno</span></div>
+    </div>
+    <div class="disclaimer" style="margin-top:20px">📌 <b>Datas de exemplo</b> — troque no bloco <code>#agenda</code> pelas datas reais antes de divulgar.</div>
+  </div>
+</section>
+
+<!-- SETORES -->
+<section class="blk" id="setores">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Área restrita</span><h2 class="display">Setores da empresa</h2></div>
+      <p class="lead">Cada área tem sua chave. Destrave a sua e ela ganha cor — com os atalhos e painéis daquele time.</p>
+    </div>
+    <div class="sectors" id="sectorGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="cols">
+    <div>
+      <div class="logo">OMNI BRASIL</div>
+      <p class="fnote">Transformação que se prova. Método americano. Precisão suíça. Propósito brasileiro.</p>
+    </div>
+    <div class="meta">
+      OMNI Hypnosis Training Center Brasil<br>
+      Rua dos Íris, 150 — Mirandópolis, São Paulo/SP<br>
+      <a href="https://omnihypnosis.com.br">omnihypnosis.com.br</a> · @omnibr<br>
+      <span style="color:var(--faint)">Intranet interna — exclusiva dos OMNERs</span>
+    </div>
+  </div></div>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay"><div class="modal" id="modal">
+  <button class="close" id="closeModal" aria-label="Fechar">×</button>
+  <svg class="lockbig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+  <div class="k" id="mKicker">Setor</div>
+  <h4 id="mTitle">Comercial</h4>
+  <p class="hint">Digite a chave do setor para colorir esta área.</p>
+  <input id="mInput" type="password" placeholder="chave do setor" autocomplete="off" spellcheck="false"/>
+  <div class="err" id="mErr">Chave incorreta. Tente novamente.</div>
+  <button class="go" id="mGo">Destravar</button>
+</div></div>
+
+<!-- PAINEL -->
+<div class="panel" id="panel">
+  <div class="phead"><div class="wrap">
+    <div><div class="kk" id="pKicker">Setor</div><h3 id="pTitle">Comercial</h3></div>
+    <button class="x" id="pClose">Fechar ×</button>
+  </div></div>
+  <div class="pbody"><div class="wrap" id="pContent"></div></div>
 </div>
 
-<div class="searchwrap">
-  <input type="text" id="search" placeholder="🔎 Buscar (ex: design, squad, produto, guia, dashboard)..." oninput="filter(this.value)">
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+  <div class="vhead" id="vhead">
+    <div class="vic" id="vIc"></div>
+    <div class="vt"><div class="vn" id="vName">—</div><div class="vu" id="vUrl">—</div></div>
+    <div class="vbtns">
+      <a class="vbtn pri" id="vOpen" href="#" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+      <button id="vClose">Fechar</button>
+    </div>
+  </div>
+  <div class="vframe-wrap">
+    <iframe id="vFrame" title="Visualizador" referrerpolicy="no-referrer"></iframe>
+    <div class="vfallback" id="vFallback">
+      <svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>
+      <h4>Este sistema não permite exibição embutida</h4>
+      <p>Por segurança, ele só abre em janela própria. Use o botão abaixo.</p>
+      <a class="btn primary" id="vOpen2" href="#" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+    </div>
+    <div class="vhint" id="vHint">Não carregou? <a id="vOpen3" href="#" target="_blank" rel="noopener">Abrir em nova aba ↗</a></div>
+  </div>
 </div>
-
-<main>
-  <!-- SQUADS & AUTOMAÇÕES -->
-  <section data-sec>
-    <div class="sec-head">
-      <h2>Squads &amp; Automações</h2><span class="count"></span>
-      <span class="desc">o enxame AIOX da OMNI</span>
-    </div>
-    <div class="grid">
-      <a class="card" href="squads-do-dia-a-dia.html" data-item>
-        <div class="top"><span class="icon">🎯</span><span class="name">Squads do Dia-a-Dia</span><span class="badge">novo</span></div>
-        <div class="body">Mapa visual das squads que você mais usa, com função, como acionar e quando usar. Organizado por área.</div>
-      </a>
-      <a class="card" href="agentes-skills-omni.html" data-item>
-        <div class="top"><span class="icon">🤖</span><span class="name">Catálogo Agentes &amp; Skills</span><span class="badge">🔐</span></div>
-        <div class="body">Dashboard com busca: todas as squads, agentes core e skills do AIOX. Acesso por senha.</div>
-      </a>
-      <a class="card" href="guia-aiox.html" data-item>
-        <div class="top"><span class="icon">📘</span><span class="name">Guia AIOX — Iniciantes</span></div>
-        <div class="body">Guia completo de agentes, squads, comandos e skills. Ponto de partida para quem está começando.</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- MARCA & DESIGN SYSTEM -->
-  <section data-sec>
-    <div class="sec-head">
-      <h2>Marca &amp; Design System</h2><span class="count"></span>
-      <span class="desc">identidade visual oficial</span>
-    </div>
-    <div class="grid">
-      <a class="card" href="design-system/index.html" data-item>
-        <div class="top"><span class="icon">🎨</span><span class="name">Design System OMNI</span><span class="badge">tokens</span></div>
-        <div class="body">Paleta, tipografia, componentes e padrões. A fonte da verdade visual para todo material da OMNI.</div>
-      </a>
-      <a class="card" href="https://omni-brasil-ds.vercel.app/brandbook/guidelines" target="_blank" data-item>
-        <div class="top"><span class="icon">📐</span><span class="name">Brandbook Interativo</span><span class="badge">vercel</span></div>
-        <div class="body">Identidade completa: Heritage Gold, tipografia, logos, tokens, movimento e produtos. App na Vercel.</div>
-      </a>
-      <a class="card" href="culture-deck-validacao.html" data-item>
-        <div class="top"><span class="icon">🧭</span><span class="name">Culture Deck</span><span class="badge">🔐</span></div>
-        <div class="body">Liderança, contratação, frameworks de decisão e símbolos da cultura OMNI.</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- PRODUTOS -->
-  <section data-sec>
-    <div class="sec-head">
-      <h2>Produtos</h2><span class="count"></span>
-      <span class="desc">o que a OMNI vende</span>
-    </div>
-    <div class="grid">
-      <a class="card" href="portal-omniterapeuta-apresentacao-2026.html" data-item>
-        <div class="top"><span class="icon">🌐</span><span class="name">Portal do Omniterapeuta</span></div>
-        <div class="body">Apresentação do portal do aluno/omniterapeuta — funcionalidades e jornada.</div>
-      </a>
-      <a class="card" href="lp-formacao-omniterapia.html" data-item>
-        <div class="top"><span class="icon">🎓</span><span class="name">Formação em Omniterapia</span></div>
-        <div class="body">Landing da Formação (OBA) — o produto principal da OMNI Brasil.</div>
-      </a>
-      <a class="card" href="landing-alianca-de-ouro.html" data-item>
-        <div class="top"><span class="icon">💎</span><span class="name">Aliança de Ouro</span></div>
-        <div class="body">Mastermind exclusivo para empresários R$100k+/mês. Acesso por convite.</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- GUIAS & OPERAÇÕES -->
-  <section data-sec>
-    <div class="sec-head">
-      <h2>Guias &amp; Operações</h2><span class="count"></span>
-      <span class="desc">como fazer no dia-a-dia</span>
-    </div>
-    <div class="grid">
-      <a class="card" href="boas-praticas-de-onde-salvar.html" data-item>
-        <div class="top"><span class="icon">📂</span><span class="name">Onde Salvar — Boas Práticas</span></div>
-        <div class="body">Onde guardar cada tipo de arquivo no Google Drive para manter tudo organizado.</div>
-      </a>
-      <a class="card" href="tutorial-migracao-onedrive-google.html" data-item>
-        <div class="top"><span class="icon">🔄</span><span class="name">Migração OneDrive → Google</span></div>
-        <div class="body">Tutorial passo a passo de migração de arquivos para o Google Drive.</div>
-      </a>
-      <a class="card" href="guia-google-ads-setup.html" data-item>
-        <div class="top"><span class="icon">🟢</span><span class="name">Setup Google Ads</span></div>
-        <div class="body">Passo a passo para conectar o Google Ads ao Ad-Midas (4 etapas).</div>
-      </a>
-      <a class="card" href="guia-configuracao-meta-ads.html" data-item>
-        <div class="top"><span class="icon">🔵</span><span class="name">Setup Meta Ads</span></div>
-        <div class="body">Passo a passo para conectar o Meta Ads (Hypnoflash) ao AIOX.</div>
-      </a>
-      <a class="card" href="changelog.html" data-item>
-        <div class="top"><span class="icon">📝</span><span class="name">Changelog</span><span class="badge">🔐</span></div>
-        <div class="body">Evolução do projeto por data, autor e tipo. Atualizado automaticamente.</div>
-      </a>
-      <a class="card" href="backlog.html" data-item>
-        <div class="top"><span class="icon">💡</span><span class="name">Backlog de Ideias</span></div>
-        <div class="body">Ideias da equipe — lista e kanban. Conectado ao WhatsApp.</div>
-      </a>
-    </div>
-  </section>
-
-  <div class="noresult" id="noresult">Nenhum resultado para a busca.</div>
-</main>
-
-<footer>OMNI Brasil // Intranet // Uso Interno · 2026</footer>
 
 <script>
-  function filter(q){
-    q=(q||'').toLowerCase().trim();
-    var items=document.querySelectorAll('[data-item]');
-    var anyVisible=false;
-    items.forEach(function(el){
-      var hit=el.textContent.toLowerCase().indexOf(q)>-1;
-      el.style.display=hit?'':'none';
-      if(hit)anyVisible=true;
+/* ================================================================
+   ⚠️ Senhas verificadas no NAVEGADOR (front-end). Serve para uma
+   intranet-demo. Quem abrir o código vê as senhas. Para dados
+   sigilosos de verdade, use um backend com login.
+   Trocar senha: edite o campo 'pass' de cada setor abaixo.
+   ================================================================ */
+const SECTORS = {
+  comercial: { title:"Comercial", pass:"110porcento", color:"var(--c-comercial)", kicker:"Setor 01",
+    intro:{big:"O motor de <em>vendas</em> da OMNI", sub:"Disparos, leads, funil de SDR e inteligência comercial ao vivo — tudo num lugar."} },
+  marketing: { title:"Marketing", pass:"docinzaacor", color:"var(--c-marketing)", kicker:"Setor 02",
+    intro:{big:"Onde a <em>demanda</em> nasce", sub:"Performance de tráfego, comportamento, landing pages e apresentações."} },
+  financeiro:{ title:"Financeiro", pass:"legado5m", color:"var(--c-financeiro)", kicker:"Setor 03",
+    intro:{big:"Os <em>números</em> que sustentam a missão", sub:"Metas, preço, comissões e indicadores. Dados sensíveis — acesso restrito."} },
+  entrega:   { title:"Entrega", pass:"transformavidas", color:"var(--c-entrega)", kicker:"Setor 04",
+    intro:{big:"A <em>experiência</em> do omniterapeuta", sub:"Portal do aluno, agenda, acolhimento e operação da formação."} },
+  lideranca: { title:"Liderança", pass:"omner2026", color:"var(--c-lideranca)", kicker:"Setor 05",
+    intro:{big:"A <em>visão</em> do topo", sub:"Planos estratégicos, plano de ação do mês, KPIs e changelog da operação."} },
+};
+
+/* Ícones por tipo */
+const IC = {
+  dashboard:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  relatorio:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h9l4 4v16H6z"/><path d="M9 12h7M9 16h7M9 8h3"/></svg>',
+  crm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 4v16M14 8h4M14 12h4"/></svg>',
+  conversas:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg>',
+  automacao:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  analytics:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg>',
+  landing:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>',
+  portal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l9 8h-2v9H5v-9H3z"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5"/></svg>',
+  qr:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M20 14v0M17 20h4M21 17v4"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>',
+  strategy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20L20 4M14 4h6v6"/><circle cx="6" cy="18" r="2"/></svg>',
+};
+
+/* ================= FERRAMENTAS por setor =================
+   Links relativos (.html) = arquivos do próprio omni-apresentacoes,
+   embutem no visualizador. external:true = sistema com login (nova aba). */
+const TOOLS = {
+  comercial: [
+    { grupo:"Painéis ao vivo", items:[
+      {name:"Dashboard Inteligência Comercial", type:"dashboard", badge:"Ao vivo", desc:"Closers, SDR, AQRC e tráfego Meta/Google em tempo real (Pipedrive).", url:"https://dash.omnihypnosis.com.br/dashboard-v2/index.html", external:true},
+      {name:"Painel do Closer", type:"dashboard", badge:"Ao vivo", desc:"Performance individual dos closers.", url:"https://closer.omnihypnosis.com.br", external:true},
+      {name:"Dashboard — Doc Técnica", type:"doc", badge:"Spec", desc:"Arquitetura, endpoints, telas e regras. Fonte da verdade do painel.", url:"dashboard-spec.html"},
+    ]},
+    { grupo:"Relatórios de funil & SDR", items:[
+      {name:"Relatório Tentativa de Conectar", type:"relatorio", badge:"Relatório", desc:"406 leads na etapa, com Pipedrive, Chatwoot e última mensagem.", url:"relatorio-tentativa-conectar-2026-06-03.html"},
+      {name:"Leads com Resposta — Conectado", type:"relatorio", badge:"Relatório", desc:"Leads com resposta real na etapa Conectado, por SDR.", url:"leads-responderam-tentativa-conectar.html"},
+      {name:"Diagnóstico Pré-Vendas SDR", type:"relatorio", badge:"Diagnóstico", desc:"3 causas raiz, plano de 4 fases, backlog OMNI-009.", url:"diagnostico-pre-vendas-sdr-2026-05.html"},
+      {name:"Auditoria Inside Sales v6", type:"relatorio", badge:"Auditoria", desc:"Validação das automações SDR (com histórico v3–v5).", url:"auditoria-inside-sales-sdr-2026-v6.html"},
+      {name:"Auditoria de Workflows W000X", type:"relatorio", badge:"Auditoria", desc:"Qualidade dos workflows SDR: issues por risco e correção.", url:"auditoria-w000x-20260505.html"},
+    ]},
+    { grupo:"Processo & playbook", items:[
+      {name:"Manual de Pré-Vendas SDR", type:"doc", badge:"Manual", desc:"Automações, SLAs, mensagens exatas e responsabilidades.", url:"manual-pre-vendas-sdr.html"},
+      {name:"Reestruturação da Pré-Venda", type:"strategy", badge:"Projeto", desc:"Projeto completo de reestruturação da pré-venda 2026.", url:"projeto-reestruturacao-prevenda-2026.html"},
+    ]},
+    { grupo:"Ferramentas ao vivo", items:[
+      {name:"Pipedrive — CRM", type:"crm", badge:"CRM", desc:"Funil de vendas, deals e etapas do SDR.", url:"https://app.pipedrive.com", external:true},
+      {name:"Chatwoot — Conversas WhatsApp", type:"conversas", badge:"Conversas", desc:"Central de mensagens dos SDRs (inboxes por vendedor).", url:"https://conversas-web.server.omnihypnosis.com.br", external:true},
+      {name:"n8n — Disparos & SLA do funil", type:"automacao", badge:"Automação", desc:"Disparo WhatsApp, SLA Monitor e tentativa de conectar.", url:"https://n8n.hypnos.omnihypnosis.com.br", external:true},
+      {name:"QR Code SDR — Conectar WhatsApp", type:"qr", badge:"Conexão", desc:"Parear o número do SDR (Evolution/Chatwoot). Falta o link do painel.", soon:true},
+    ]},
+  ],
+  marketing: [
+    { grupo:"Painéis ao vivo", items:[
+      {name:"Dashboard MQL — Meta + Google", type:"dashboard", badge:"Ao vivo", desc:"Performance de tráfego pago, MQL por origem e custo por lead.", url:"https://dash.omnihypnosis.com.br", external:true},
+      {name:"Microsoft Clarity", type:"analytics", badge:"Ao vivo", desc:"Mapas de calor e gravações de sessão das páginas.", url:"https://clarity.microsoft.com", external:true},
+    ]},
+    { grupo:"Meta & Google Ads", items:[
+      {name:"Relatório Google Ads", type:"relatorio", badge:"Relatório", desc:"Performance das campanhas, CPL, diagnóstico Midas e recomendações.", url:"relatorio-google-ads-abril-2026.html"},
+      {name:"Resumo Meta Ads (13/Mai)", type:"relatorio", badge:"Relatório", desc:"6 campanhas, R$730/dia, funil frio + quente + remarketing CRM.", url:"resumo-meta-ads-13mai-2026.html"},
+      {name:"Análise Meta Ads — Formação", type:"relatorio", badge:"Relatório", desc:"Campanhas ativas, CPR por conjunto e cruzamento Pipedrive.", url:"analise-meta-ads-formacao-2026-04-06.html"},
+      {name:"Campanha de Aquecimento", type:"strategy", badge:"Plano", desc:"3 vídeos isca + retargeting. Meta ROAS 2,72 → 8,8.", url:"plano-campanha-aquecimento-abril-2026.html"},
+      {name:"Diagnóstico HypnoFlash", type:"relatorio", badge:"Diagnóstico", desc:"Campanhas ativas, ranking CPA e plano de ação.", url:"diagnostico-hipnoflash-2026-03-27.html"},
+      {name:"Ações + Criativos HypnoFlash", type:"relatorio", badge:"Criativos", desc:"Ranking de 29 ads, padrões vencedores e 3 briefs novos.", url:"relatorio-acoes-hipnoflash-2026-03-27.html"},
+    ]},
+    { grupo:"Marca & aquisição", items:[
+      {name:"Design System OMNI", type:"landing", badge:"Marca", desc:"Paleta, tipografia, componentes e padrões oficiais.", url:"design-system/index.html"},
+      {name:"Brandbook Interativo", type:"landing", badge:"App", desc:"Identidade completa: Heritage Gold, tokens, logos, movimento.", url:"https://omni-brasil-ds.vercel.app/brandbook/guidelines", external:true},
+      {name:"Landing Pages — go.omnihypnosis", type:"landing", badge:"Páginas", desc:"Iscas e páginas de captura publicadas.", url:"https://go.omnihypnosis.com.br", external:true},
+      {name:"Benchmark Externo — 9 Players", type:"relatorio", badge:"Relatório", desc:"Marisa Peer, Tony Robbins, Mindvalley e mais. Esteira + ARR.", url:"benchmark-externo-2026-04.html"},
+    ]},
+  ],
+  financeiro: [
+    { grupo:"Metas & performance", items:[
+      {name:"Metas vs Realizado", type:"dashboard", badge:"Ao vivo", desc:"Metas mensais (competência editável) no dashboard comercial.", url:"https://dash.omnihypnosis.com.br/dashboard-v2/index.html", external:true},
+      {name:"Plano de Performance Comercial", type:"target", badge:"Plano", desc:"Diagnóstico do funil, 4 fases de execução, projeção 90 dias.", url:"plano-performance-vendas-rafa.html"},
+    ]},
+    { grupo:"Preço & remuneração", items:[
+      {name:"Estratégia de Preço", type:"doc", badge:"Doc interno", desc:"Ancoragem, ticket e política de preços (repositório interno).", path:"workspace/businesses/omni_brasil/operations/pricing-strategy.yaml"},
+      {name:"Design de Comissões", type:"doc", badge:"Doc interno", desc:"Estrutura de comissionamento do time (repositório interno).", path:"workspace/businesses/omni_brasil/operations/commission-design.yaml"},
+    ]},
+  ],
+  entrega: [
+    { grupo:"Produtos & portais", items:[
+      {name:"Portal do Omniterapeuta — Apresentação", type:"portal", badge:"Deck", desc:"Funcionalidades e jornada do portal do aluno.", url:"portal-omniterapeuta-apresentacao-2026.html"},
+      {name:"Portal do Omniterapeuta — Ao vivo", type:"portal", badge:"Ao vivo", desc:"Área do aluno em produção.", url:"https://portal.omnihypnosis.com.br", external:true},
+      {name:"Formação em Omniterapia (LP)", type:"landing", badge:"Landing", desc:"Landing da Formação — produto principal.", url:"lp-formacao-omniterapia.html"},
+      {name:"Plenamente", type:"portal", badge:"App", desc:"Acolhimento e experiência contínua do aluno.", url:"https://plenamente.app", external:true},
+    ]},
+    { grupo:"Operação", items:[
+      {name:"Agenda de Consultoria", type:"landing", badge:"Agenda", desc:"Agendamento de consultorias (agenda-julia + admin).", url:"https://go.omnihypnosis.com.br/agenda-julia/", external:true},
+      {name:"Templates WhatsApp — No-Show", type:"automacao", badge:"Automação", desc:"Confirmação e lembretes (24h, 1h, hora exata) via n8n + Meta.", url:"https://n8n.hypnos.omnihypnosis.com.br", external:true},
+      {name:"Backlog de Ideias", type:"doc", badge:"Backlog", desc:"Ideias da equipe — lista e kanban, conectado ao WhatsApp.", url:"backlog.html"},
+      {name:"Onde Salvar — Boas Práticas", type:"doc", badge:"Guia", desc:"Onde guardar cada tipo de arquivo no Drive.", url:"boas-praticas-de-onde-salvar.html"},
+    ]},
+  ],
+  lideranca: [
+    { grupo:"Planos & execução", items:[
+      {name:"Plano de Ação OMNI (do mês)", type:"target", badge:"Plano", desc:"Plano de ação vigente com iniciativas e responsáveis.", url:"plano-acao-omni.html"},
+      {name:"Plano Lançamento Nova Era", type:"strategy", badge:"Plano", desc:"Rebranding em 4 fases, evento ao vivo, funil e projeção R$527k.", url:"lancamento-nova-era-omni-2026.html"},
+      {name:"Changelog da Operação", type:"relatorio", badge:"Evolução", desc:"Tudo o que foi entregue e evoluído, por data e autor.", url:"changelog.html"},
+    ]},
+    { grupo:"Estratégia & mercado", items:[
+      {name:"War Game Report 2026", type:"strategy", badge:"Estratégia", desc:"Onde dobrar, onde pivotar, fossos competitivos.", url:"war-game-report.html"},
+      {name:"Potencial de Mercado OMNI", type:"relatorio", badge:"Mercado", desc:"Mercado, SWOT, cenários, moats e projeção 2026–2030.", url:"relatorio-potencial-mercado-omni-2026.html"},
+      {name:"Benchmark Externo — 9 Players", type:"relatorio", badge:"Benchmark", desc:"Comparativo com os maiores players + projeção ARR.", url:"benchmark-externo-2026-04.html"},
+      {name:"Pesquisa ICP — Gestor Exausto", type:"analytics", badge:"Pesquisa", desc:"Público-alvo e dores do avatar.", url:"pesquisa-icp-gestor-exausto-2026-04.html"},
+      {name:"Ideias de IA com Fit OMNI", type:"strategy", badge:"Ideias", desc:"10 jogadas de IA, top 3 e alertas regulatórios.", url:"ideias-ia-omni-2026-04-11.html"},
+    ]},
+    { grupo:"Squads & AIOX", items:[
+      {name:"Catálogo Agentes & Skills", type:"doc", badge:"Catálogo", desc:"Todas as squads, agentes core e skills do AIOX.", url:"agentes-skills-omni.html"},
+      {name:"Squads do Dia-a-Dia", type:"doc", badge:"Mapa", desc:"Mapa das squads mais usadas, com função e como acionar.", url:"squads-do-dia-a-dia.html"},
+      {name:"Guia AIOX — Iniciantes", type:"doc", badge:"Guia", desc:"Agentes, squads, comandos e skills. Ponto de partida.", url:"guia-aiox.html"},
+    ]},
+  ],
+};
+
+/* Acesso rápido — aberto a todos (sem senha) */
+const QUICK = [
+  {name:"Design System", desc:"Marca oficial", type:"landing", url:"design-system/index.html"},
+  {name:"Guia AIOX", desc:"Começe por aqui", type:"doc", url:"guia-aiox.html"},
+  {name:"Squads do Dia-a-Dia", desc:"O enxame AIOX", type:"doc", url:"squads-do-dia-a-dia.html"},
+  {name:"Onde Salvar", desc:"Boas práticas", type:"doc", url:"boas-praticas-de-onde-salvar.html"},
+  {name:"Backlog de Ideias", desc:"Ideias do time", type:"doc", url:"backlog.html"},
+  {name:"Changelog", desc:"Evolução da OMNI", type:"relatorio", url:"changelog.html"},
+];
+
+/* ==================== Render ==================== */
+const $ = s=>document.querySelector(s);
+const TITLES = Object.fromEntries(Object.entries(SECTORS).map(([k,v])=>[k,v.title]));
+
+/* acesso rápido */
+$("#quickGrid").innerHTML = QUICK.map((t,i)=>
+  `<div class="qcard rv" data-quick="${i}"><div class="ic">${IC[t.type]||IC.doc}</div><div><div class="t">${t.name}</div><div class="d">${t.desc}</div></div></div>`).join("");
+document.querySelectorAll("[data-quick]").forEach(el=>{
+  const t = QUICK[+el.dataset.quick];
+  el.addEventListener("click", ()=> t.external ? window.open(t.url,"_blank","noopener") : openViewer(t,"var(--gold)"));
+});
+
+/* setores */
+$("#sectorGrid").innerHTML = Object.entries(SECTORS).map(([k,c])=>{
+  const n = (TOOLS[k]||[]).reduce((a,g)=>a+g.items.length,0);
+  return `<div class="sector" data-sec="${k}" style="--c:${c.color}" tabindex="0" role="button" aria-label="Abrir setor ${c.title}">
+    <div class="top-row"><span class="idx">${c.kicker.toUpperCase()}</span>
+      <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div>
+    <div><h3>${c.title}</h3><p>${c.intro.sub}</p></div>
+    <div class="count"><span class="dot"></span><span data-status>${n} ferramentas · trancado</span></div>
+  </div>`;
+}).join("");
+
+/* estado destravado */
+const unlocked = new Set();
+try{ (JSON.parse(sessionStorage.getItem("omni_hub_unlocked")||"[]")).forEach(s=>unlocked.add(s)); }catch(e){}
+function paint(){
+  document.querySelectorAll(".sector").forEach(el=>{
+    const k=el.dataset.sec;
+    if(unlocked.has(k)){
+      el.classList.add("unlocked");
+      const n=(TOOLS[k]||[]).reduce((a,g)=>a+g.items.length,0);
+      el.querySelector("[data-status]").textContent = `${n} ferramentas · clique para entrar`;
+    }
+  });
+}
+paint();
+
+/* modal */
+const overlay=$("#overlay"), modal=$("#modal"), panel=$("#panel");
+let current=null;
+function openModal(sec){
+  current=sec; const c=SECTORS[sec];
+  modal.style.setProperty("--c",c.color);
+  $("#mKicker").textContent=c.kicker; $("#mTitle").textContent=c.title;
+  $("#mInput").value=""; $("#mErr").classList.remove("show");
+  overlay.classList.add("show"); setTimeout(()=>$("#mInput").focus(),60);
+}
+function closeModal(){ overlay.classList.remove("show"); current=null; }
+
+function openPanel(sec){
+  const c=SECTORS[sec];
+  panel.querySelector(".phead").style.setProperty("--c",c.color);
+  $("#pKicker").textContent=c.kicker+" · Área restrita";
+  $("#pTitle").textContent=c.title; $("#pTitle").style.color=c.color;
+  let html = `<div class="pintro" style="--c:${c.color}"><div class="big">${c.intro.big}</div><div class="sub">${c.intro.sub}</div></div>`;
+  (TOOLS[sec]||[]).forEach(g=>{
+    html += `<div class="grp-title">${g.grupo}</div><div class="tools">`;
+    g.items.forEach((t,i)=>{
+      const isDoc = !!t.path, isSoon = !!t.soon;
+      const cls = (isDoc||isSoon) ? "tool disabled" : "tool";
+      const badgeCls = isSoon ? "badge soon" : (isDoc ? "badge doc" : "badge");
+      const foot = isSoon ? `<div class="go-row" style="color:var(--faint)">Em breve · configurar</div>`
+                 : isDoc ? `<div class="path">${t.path}</div>`
+                 : `<div class="go-row">${t.external?"Abrir em nova aba ↗":"Abrir no hub →"}</div>`;
+      html += `<div class="${cls}" style="--c:${c.color}" data-sec="${sec}" data-grp="${g.grupo}" data-i="${i}">
+        <div class="th"><div class="ic">${IC[t.type]||IC.doc}</div><span class="${badgeCls}">${t.badge}</span></div>
+        <h5>${t.name}</h5><p>${t.desc}</p>${foot}</div>`;
     });
-    // esconde seções vazias
-    document.querySelectorAll('[data-sec]').forEach(function(sec){
-      var vis=sec.querySelectorAll('[data-item]');
-      var show=Array.prototype.some.call(vis,function(c){return c.style.display!=='none'});
-      sec.style.display=show?'':'none';
+    html += `</div>`;
+  });
+  html += `<div class="disclaimer">🔗 Links reais puxados do registro de capacidades da OMNI. Alguns painéis (Pipedrive, Chatwoot, n8n, dashboards com login) abrem em nova aba por bloquearem exibição embutida — é normal. Ajuste ou adicione ferramentas na lista <b>TOOLS</b> do arquivo.</div>`;
+  $("#pContent").innerHTML=html;
+  panel.querySelectorAll(".tool:not(.disabled)").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const t=TOOLS[el.dataset.sec].find(g=>g.grupo===el.dataset.grp).items[+el.dataset.i];
+      if(t.external) window.open(t.url,"_blank","noopener");
+      else openViewer(t,c.color);
     });
-    document.getElementById('noresult').style.display=anyVisible?'none':'block';
+  });
+  panel.classList.add("show"); document.body.style.overflow="hidden"; panel.scrollTop=0;
+}
+function closePanel(){ panel.classList.remove("show"); document.body.style.overflow=""; }
+
+function enterSector(sec){ unlocked.has(sec) ? openPanel(sec) : openModal(sec); }
+
+function trySubmit(){
+  if(!current) return;
+  const val=$("#mInput").value.trim().toLowerCase();
+  if(val===SECTORS[current].pass){
+    unlocked.add(current);
+    try{ sessionStorage.setItem("omni_hub_unlocked",JSON.stringify([...unlocked])); }catch(e){}
+    const card=document.querySelector('.sector[data-sec="'+current+'"]');
+    card.classList.add("unlocked","justunlocked");
+    const n=(TOOLS[current]||[]).reduce((a,g)=>a+g.items.length,0);
+    card.querySelector("[data-status]").textContent=`${n} ferramentas · clique para entrar`;
+    const sec=current; closeModal(); setTimeout(()=>openPanel(sec),380);
+  }else{
+    modal.classList.remove("shake"); void modal.offsetWidth; modal.classList.add("shake");
+    $("#mErr").classList.add("show"); $("#mInput").select();
   }
+}
+
+/* viewer embutido */
+const viewer=$("#viewer"), vFrame=$("#vFrame"), vFallback=$("#vFallback"), vHint=$("#vHint");
+let vTimer=null;
+function openViewer(tool, color){
+  viewer.style.setProperty("--c", color);
+  $("#vhead").style.setProperty("--c", color);
+  $("#vIc").innerHTML = IC[tool.type]||IC.doc;
+  $("#vName").textContent = tool.name;
+  $("#vUrl").textContent = tool.url;
+  ["#vOpen","#vOpen2","#vOpen3"].forEach(s=>$(s).href=tool.url);
+  vFallback.classList.remove("show"); vHint.style.display="flex";
+  vFrame.style.display="block";
+  vFrame.src = tool.url;
+  viewer.classList.add("show"); document.body.style.overflow="hidden";
+  // fallback: se não sinalizar load em 4.5s, provavelmente bloqueou
+  clearTimeout(vTimer);
+  let loaded=false;
+  vFrame.onload=()=>{ loaded=true; };
+  vTimer=setTimeout(()=>{ if(!loaded){ vFallback.classList.add("show"); vFrame.style.display="none"; vHint.style.display="none"; } },4500);
+}
+function closeViewer(){ viewer.classList.remove("show"); vFrame.src="about:blank"; clearTimeout(vTimer);
+  if(!panel.classList.contains("show")) document.body.style.overflow=""; }
+
+/* eventos */
+document.querySelectorAll(".sector").forEach(el=>{
+  el.addEventListener("click",()=>enterSector(el.dataset.sec));
+  el.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();enterSector(el.dataset.sec);} });
+});
+$("#mGo").addEventListener("click",trySubmit);
+$("#mInput").addEventListener("keydown",e=>{ if(e.key==="Enter") trySubmit(); });
+$("#closeModal").addEventListener("click",closeModal);
+overlay.addEventListener("click",e=>{ if(e.target===overlay) closeModal(); });
+$("#pClose").addEventListener("click",closePanel);
+$("#vClose").addEventListener("click",closeViewer);
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ if(viewer.classList.contains("show")) closeViewer(); else { closeModal(); closePanel(); } } });
+
+/* reveal */
+const io=new IntersectionObserver(en=>{ en.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} }); },{threshold:.1});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
 </script>
-</body>
-</html>
