@@ -1,0 +1,187 @@
+<title>Copiloto de Vendas — Guia Rápido</title>
+<style>
+  :root{
+    --bg:#080807;--bg2:#100e0a;--card:#16130d;--card2:#1d190f;
+    --ouro:#c8a84b;--ouro-claro:#e6cd85;--linha:#2a2519;
+    --ink:#f3efe6;--ink2:#b6afa0;--ink3:#7d766a;
+    --verde:#31c48d;--alerta:#e5924a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(700px 380px at 85% -10%,rgba(200,168,75,.10),transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.58;-webkit-font-smoothing:antialiased;padding:0 0 70px;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ouro);font-weight:700}
+  h1,h2,h3{text-wrap:balance;line-height:1.15}
+
+  header.top{border-bottom:1px solid var(--linha);padding:16px 0;position:sticky;top:0;z-index:9;
+    background:rgba(8,8,7,.9);backdrop-filter:blur(10px)}
+  .top-in{max-width:680px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:10px}
+  .brand{font-weight:800;letter-spacing:.32em;color:var(--ouro);font-size:12.5px}
+  .top-in .tag{margin-left:auto;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
+
+  .hero{padding:44px 0 26px}
+  .hero h1{font-size:clamp(27px,6.5vw,40px);font-weight:800;letter-spacing:-.015em;margin-top:12px}
+  .hero h1 .g{color:var(--ouro)}
+  .hero p{margin-top:14px;color:var(--ink2);font-size:16px;max-width:56ch}
+
+  .acesso{margin:8px 0 4px;background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid var(--linha);border-radius:16px;padding:20px 22px;display:flex;flex-wrap:wrap;gap:20px}
+  .acesso .campo{display:flex;flex-direction:column;gap:3px}
+  .acesso .lbl{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:700}
+  .acesso .val{font-size:17px;font-weight:700;color:var(--ouro-claro);word-break:break-all}
+  .acesso .val.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em}
+
+  section{padding:30px 0;border-bottom:1px solid var(--linha)}
+  section > .eyebrow{display:block;margin-bottom:14px}
+  h2{font-size:20px;font-weight:800;letter-spacing:-.01em}
+
+  .passos{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:6px;counter-reset:p}
+  .passos li{position:relative;padding-left:44px;counter-increment:p}
+  .passos li::before{content:counter(p);position:absolute;left:0;top:-2px;width:30px;height:30px;
+    border-radius:9px;background:linear-gradient(180deg,var(--ouro-claro),var(--ouro));color:#1a1405;
+    font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .passos li b{color:var(--ink)}
+  .passos .sub{color:var(--ink2);font-size:14.5px}
+  .critico{color:var(--alerta);font-weight:700}
+
+  .modos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+  @media(max-width:560px){.modos{grid-template-columns:1fr}}
+  .modo{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--linha);
+    border-radius:14px;padding:16px 17px}
+  .modo h3{font-size:15px;font-weight:800;color:var(--ouro-claro)}
+  .modo p{font-size:13.5px;color:var(--ink2);margin-top:6px}
+  .modo .aviso{margin-top:9px;font-size:12.5px;color:var(--alerta);font-weight:600}
+
+  .janelas{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .jan{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;
+    background:var(--card);border:1px solid var(--linha);border-radius:12px;padding:13px 15px}
+  .jan .n{font-family:Georgia,serif;font-size:22px;font-weight:700;color:var(--ouro);line-height:1;opacity:.9}
+  .jan .t{font-weight:700;font-size:15px;color:var(--ink)}
+  .jan .d{font-size:13.5px;color:var(--ink2);margin-top:2px}
+  .jan.destaque{border-color:rgba(49,196,141,.45)}
+  .jan.destaque .n{color:var(--verde)}
+
+  .estrela{background:linear-gradient(180deg,rgba(49,196,141,.09),transparent);
+    border:1px solid rgba(49,196,141,.35);border-radius:16px;padding:22px 24px;margin-top:4px}
+  .estrela .eyebrow{color:var(--verde)}
+  .estrela h2{margin-top:12px}
+  .estrela p{color:var(--ink2);font-size:15px;margin-top:10px}
+  .estrela .fluxo{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px}
+  .estrela .chip{background:var(--card2);border:1px solid var(--linha);border-radius:20px;padding:6px 13px;color:var(--ink)}
+  .estrela .seta{color:var(--verde);font-weight:800}
+
+  .nota{background:var(--card);border:1px solid var(--linha);border-left:3px solid var(--alerta);
+    border-radius:12px;padding:16px 18px;margin-top:4px}
+  .nota h3{font-size:15px;font-weight:800;color:var(--alerta)}
+  .nota p{font-size:14px;color:var(--ink2);margin-top:6px}
+
+  .foot{padding-top:28px;text-align:center;color:var(--ink3);font-size:12px}
+  .foot .brand{display:block;margin-bottom:6px}
+  b.ok{color:var(--verde)}
+  code{background:#221d13;border:1px solid var(--linha);border-radius:5px;padding:1px 7px;color:var(--ouro-claro);font-size:13px}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <span class="brand">OMNI BRASIL</span>
+    <span class="tag">Guia do Copiloto</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">Para as closers · teste de hoje</span>
+    <h1>Seu <span class="g">gerente comercial</span> no ouvido, durante a call.</h1>
+    <p>O copiloto escuta a reunião ao vivo, sugere o próximo passo pelo script FPH e monta sozinho a devolutiva pra você enviar à lead. Ele fala pouco e só quando importa, pra não te distrair. Você conduz, ele te cobre.</p>
+  </div>
+
+  <div class="acesso">
+    <div class="campo">
+      <span class="lbl">Acesso (Chrome ou Edge)</span>
+      <span class="val">closer.omnihypnosis.com.br</span>
+    </div>
+    <div class="campo">
+      <span class="lbl">Senha</span>
+      <span class="val" style="color:var(--ink2);font-size:14px;font-weight:600">A Rafa envia junto com este link</span>
+    </div>
+  </div>
+
+  <section>
+    <span class="eyebrow">Antes de começar a call</span>
+    <h2>Escolha como o copiloto vai ouvir</h2>
+    <div class="modos">
+      <div class="modo">
+        <h3>Call no PC (Meet/Zoom)</h3>
+        <p>Ele capta o áudio do cliente pela tela e a sua voz pelo microfone, em canais separados.</p>
+        <p class="aviso">Ao compartilhar a aba/tela, MARQUE a caixinha "Compartilhar áudio". Sem isso ele não ouve o cliente.</p>
+      </div>
+      <div class="modo">
+        <h3>Viva-voz / celular</h3>
+        <p>O microfone capta o ambiente: cliente no viva-voz e você na mesma sala.</p>
+        <p class="aviso">Não use fone neste modo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="eyebrow">O passo a passo</span>
+    <h2>Do login à call rodando</h2>
+    <ol class="passos">
+      <li><b>Entre</b> no site e digite a senha. <span class="sub">Se a tela parecer antiga, atualize a página (a versão nova carrega sozinha).</span></li>
+      <li><b>Escolha o modo</b> de captura (acima) e <b>digite o nome da lead</b> no campo da janela Devolutiva.</li>
+      <li><b>Clique em "Iniciar call"</b> e, no modo PC, <span class="critico">marque "Compartilhar áudio"</span> ao escolher a aba.</li>
+      <li><b>Conduza a reunião normalmente.</b> O copiloto acompanha e vai preenchendo as janelas.</li>
+      <li>No fim, <b>"Encerrar"</b>. Para a próxima lead, <b>"Nova call"</b> zera tudo.</li>
+    </ol>
+  </section>
+
+  <section>
+    <span class="eyebrow">As 6 janelas da tela</span>
+    <h2>O que olhar em cada uma</h2>
+    <div class="janelas">
+      <div class="jan"><span class="n">1</span><div><span class="t">Alertas (topo)</span><div class="d">O aviso mais importante do momento. Ele fica na tela até você resolver. É o gerente cutucando: "cheque o decisor", "faça silêncio após o preço".</div></div></div>
+      <div class="jan"><span class="n">2</span><div><span class="t">Bloco atual + sugestões</span><div class="d">Onde a conversa está e o que perguntar/fazer agora. Se a lead objeta, a frase pronta pra responder aparece em verde.</div></div></div>
+      <div class="jan"><span class="n">3</span><div><span class="t">Próximo passo</span><div class="d">O bloco que vem a seguir e os pontos de atenção, pra você ir um passo à frente.</div></div></div>
+      <div class="jan"><span class="n">4</span><div><span class="t">Histórico crítico</span><div class="d">Registro dos alertas e objeções que apareceram, com horário.</div></div></div>
+      <div class="jan destaque"><span class="n">5</span><div><span class="t">Devolutiva ao vivo + documento</span><div class="d">Vai enchendo com os ativos, travas, custo e caminho da lead. É daqui que sai o documento pra enviar (veja abaixo).</div></div></div>
+      <div class="jan"><span class="n">6</span><div><span class="t">Transcrição</span><div class="d">O que foi falado. Não precisa acompanhar em tempo real, é só pra consulta.</div></div></div>
+    </div>
+  </section>
+
+  <div class="estrela">
+    <span class="eyebrow">O diferencial pra fechar</span>
+    <h2>A devolutiva da lead sai sozinha</h2>
+    <p>Quando a conversa chega na devolutiva, o copiloto <b class="ok">gera automaticamente</b> um documento estratégico premium com o retrato do momento da lead, escrito na lógica de vendas. O link aparece na janela 5.</p>
+    <div class="fluxo">
+      <span class="chip">Chega na devolutiva</span>
+      <span class="seta">→</span>
+      <span class="chip">Documento gera sozinho</span>
+      <span class="seta">→</span>
+      <span class="chip">Copiar link</span>
+      <span class="seta">→</span>
+      <span class="chip">Enviar pra lead na hora</span>
+    </div>
+    <p style="margin-top:14px">É só clicar em <b>"Copiar link"</b> e colar no WhatsApp ou no chat da call. A lead abre no celular na hora e sente o diferencial. Se a conversa evoluir, o botão <b>"Atualizar"</b> regenera com o material novo.</p>
+  </div>
+
+  <section style="border-bottom:none;padding-bottom:0">
+    <span class="eyebrow">Bom saber</span>
+    <div class="nota">
+      <h3>Se as dicas pararem de aparecer</h3>
+      <p>O assistente pode estar descansando por uns minutos (limite de uso). Não trava nada: <b>siga a call normalmente, você no comando</b>. Quando ele voltar, as sugestões retomam sozinhas. O copiloto é seu apoio, não sua muleta.</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span class="brand">OMNI BRASIL</span>
+    Copiloto de Vendas · uso interno das closers
+  </div>
+
+</div>
