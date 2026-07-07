@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plenamente — Diferenciais & Fidelização</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=DM+Serif+Display&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A84B;
+    --gold-light: #E8C86A;
+    --gold-deep: #9A7A2E;
+    --black: #050505;
+    --dark: #0D0D0D;
+    --dark-el: #1A1A1A;
+    --dark-tx: #2D2D2D;
+    --cream: #F5F0E8;
+    --cream-70: rgba(245,240,232,0.70);
+    --cream-50: rgba(245,240,232,0.50);
+    --gold-10: rgba(200,168,75,0.10);
+    --gold-20: rgba(200,168,75,0.20);
+    --gold-30: rgba(200,168,75,0.30);
+    --teal: #2A9D8F;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ── Lock Screen ─────────────────────────── */
+  #lock {
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1.5rem;
+  }
+  #lock .lock-logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #9A7A2E, #C8A84B, #E8C86A, #C8A84B, #9A7A2E);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+  }
+  #lock h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    color: var(--cream);
+    text-align: center;
+    font-weight: 400;
+  }
+  #lock p { color: var(--cream-50); font-size: 0.85rem; }
+  #lock-form { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+  #lock-pwd {
+    background: var(--dark-el); border: 1px solid var(--gold-30);
+    color: var(--cream); padding: 0.75rem 1.25rem; border-radius: 6px;
+    font-family: 'Inter', sans-serif; font-size: 1rem; outline: none;
+    min-width: 220px;
+  }
+  #lock-pwd:focus { border-color: var(--gold); }
+  #lock-btn {
+    background: linear-gradient(135deg, #9A7A2E, #C8A84B, #E8C86A);
+    color: var(--black); border: none; padding: 0.75rem 2rem;
+    font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 6px; cursor: pointer;
+  }
+  #lock-err { color: #e05; font-size: 0.8rem; min-height: 1em; }
+
+  /* ── Layout ─────────────────────────────── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── Hero ───────────────────────────────── */
+  .hero {
+    padding: 6rem 0 4rem;
+    text-align: center;
+    border-bottom: 1px solid var(--gold-20);
+  }
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--cream); margin-bottom: 1.25rem;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, #9A7A2E, #C8A84B, #E8C86A, #C8A84B, #9A7A2E);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--cream-70);
+    max-width: 600px; margin: 0 auto 2.5rem;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--gold-10); border: 1px solid var(--gold-30);
+    color: var(--gold); padding: 0.4rem 1rem;
+    font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; border-radius: 4px;
+  }
+
+  /* ── Numbers Bar ─────────────────────────── */
+  .numbers {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--gold-20);
+    border: 1px solid var(--gold-20); border-radius: 8px;
+    margin: 3rem 0; overflow: hidden;
+  }
+  .num-item {
+    background: var(--dark-el); padding: 2rem 1rem; text-align: center;
+  }
+  .num-item .val {
+    font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 600;
+    background: linear-gradient(135deg, #9A7A2E, #C8A84B, #E8C86A);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+  .num-item .lbl {
+    font-size: 0.75rem; color: var(--cream-50); margin-top: 0.4rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* ── Section ─────────────────────────────── */
+  section { padding: 4rem 0; border-bottom: 1px solid var(--gold-10); }
+  .section-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif; font-size: clamp(1.75rem, 3.5vw, 2.4rem);
+    font-weight: 400; color: var(--cream); margin-bottom: 2.5rem;
+  }
+
+  /* ── Differential Cards ─────────────────── */
+  .diff-grid { display: grid; gap: 1.25rem; }
+  .diff-card {
+    background: var(--dark-el); border: 1px solid var(--gold-20);
+    border-radius: 10px; padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .diff-card:hover { border-color: var(--gold); }
+  .diff-num {
+    font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .diff-title {
+    font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 500;
+    color: var(--cream); margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .diff-body { font-size: 0.9rem; color: var(--cream-70); line-height: 1.7; }
+  .diff-body strong { color: var(--cream); font-weight: 500; }
+  .diff-tag {
+    display: inline-block; margin-top: 1rem;
+    background: var(--gold-10); border: 1px solid var(--gold-20);
+    color: var(--gold); padding: 0.25rem 0.75rem;
+    font-size: 0.7rem; font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em; text-transform: uppercase; border-radius: 3px;
+  }
+
+  /* ── Retention Table ─────────────────────── */
+  .ret-grid { display: grid; gap: 0.75rem; }
+  .ret-row {
+    display: grid; grid-template-columns: 1fr 1.5fr;
+    background: var(--dark-el); border: 1px solid var(--gold-10);
+    border-radius: 8px; overflow: hidden;
+  }
+  .ret-el {
+    padding: 1rem 1.25rem;
+    border-right: 1px solid var(--gold-10);
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 500;
+    color: var(--gold); display: flex; align-items: center;
+  }
+  .ret-mec {
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem; color: var(--cream-70);
+    display: flex; align-items: center;
+  }
+
+  /* ── Competitive Table ───────────────────── */
+  .comp-table { width: 100%; border-collapse: collapse; }
+  .comp-table th {
+    font-family: 'Oswald', sans-serif; font-size: 0.75rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--gold-30); text-align: left;
+  }
+  .comp-table td {
+    padding: 0.9rem 1rem; font-size: 0.85rem; color: var(--cream-70);
+    border-bottom: 1px solid var(--gold-10); vertical-align: top;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr.highlight td {
+    background: var(--gold-10); color: var(--cream); font-weight: 500;
+  }
+  .comp-table tr.highlight td:first-child { color: var(--gold); }
+  .check { color: var(--teal); }
+  .cross { color: rgba(200,80,80,0.7); }
+
+  /* ── Pitch ───────────────────────────────── */
+  .pitch {
+    background: var(--dark-el); border: 1px solid var(--gold-30);
+    border-radius: 12px; padding: 3rem 2.5rem; text-align: center;
+    margin: 4rem 0 0;
+  }
+  .pitch-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+  .pitch blockquote {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 400; color: var(--cream); line-height: 1.55;
+    max-width: 680px; margin: 0 auto;
+  }
+  .pitch blockquote em {
+    font-style: normal;
+    background: linear-gradient(135deg, #9A7A2E, #C8A84B, #E8C86A);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* ── Footer ──────────────────────────────── */
+  footer {
+    padding: 2.5rem 0; text-align: center;
+    font-size: 0.75rem; color: var(--cream-50);
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 600px) {
+    .numbers { grid-template-columns: repeat(2, 1fr); }
+    .ret-row { grid-template-columns: 1fr; }
+    .ret-el { border-right: none; border-bottom: 1px solid var(--gold-10); }
+    .comp-table { font-size: 0.75rem; }
+    .comp-table th, .comp-table td { padding: 0.6rem 0.5rem; }
+    .pitch { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Lock Screen -->
+<div id="lock">
+  <div class="lock-logo">OMNI Brasil</div>
+  <h2>Plenamente<br>Diferenciais & Fidelização</h2>
+  <p>Documento restrito — Mastermind</p>
+  <div id="lock-form">
+    <input id="lock-pwd" type="password" placeholder="Senha de acesso" autocomplete="off">
+    <button class="lock-btn" id="lock-btn" onclick="unlock()">Entrar</button>
+  </div>
+  <div id="lock-err"></div>
+</div>
+
+<div id="content" style="display:none">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">OMNI Brasil · Mastermind · Julho 2026</div>
+    <h1>Plenamente<br><span>Diferenciais de Valor</span></h1>
+    <p class="hero-sub">O app de auto-hipnoterapia guiada — por que ele retém, por que ele converte, e por que ninguém no Brasil faz igual.</p>
+    <div class="hero-tag">Análise Estratégica</div>
+
+    <!-- Numbers -->
+    <div class="numbers">
+      <div class="num-item"><div class="val">163</div><div class="lbl">Áudios publicados</div></div>
+      <div class="num-item"><div class="val">19h</div><div class="lbl">Horas de conteúdo</div></div>
+      <div class="num-item"><div class="val">6</div><div class="lbl">Novelas da Mente</div></div>
+      <div class="num-item"><div class="val">50</div><div class="lbl">Clássicos infantis</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Em uma frase -->
+<section>
+  <div class="container">
+    <div class="section-label">Posicionamento</div>
+    <div class="section-title">O que é, em uma frase</div>
+    <div class="diff-card" style="border-color: var(--gold-30);">
+      <div class="diff-body" style="font-size:1.05rem; color: var(--cream);">
+        Um <strong>app de auto-hipnoterapia guiada por voz</strong>, com conteúdo clínico-criativo que funciona tanto para adultos em processo terapêutico quanto para crianças em desenvolvimento emocional.
+        É o <em>Spotify da hipnoterapia</em> — com a curadoria e a voz de um terapeuta real.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Diferenciais -->
+<section>
+  <div class="container">
+    <div class="section-label">Diferenciais</div>
+    <div class="section-title">O que nenhum concorrente tem</div>
+    <div class="diff-grid">
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 01</div>
+        <div class="diff-title">Voz real de terapeuta — não é ator, não é IA genérica</div>
+        <div class="diff-body">
+          O catálogo inteiro é narrado com a <strong>voz clonada do Michael Arruda</strong> — terapeuta com nome, rosto e método conhecido. Isso cria algo que nenhum concorrente tem: autoridade terapêutica dentro do áudio. O usuário não está ouvindo "uma voz relaxante". Está ouvindo <strong>o seu terapeuta</strong>.
+          <br><br>
+          Num mercado onde apps de meditação usam narradores anônimos ou IA sintética, isso é diferenciação imediata.
+        </div>
+        <div class="diff-tag">Barreira de entrada alta</div>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 02</div>
+        <div class="diff-title">Conteúdo infantil com recurso oculto — categoria que não existe</div>
+        <div class="diff-body">
+          Os 50 Clássicos Reimaginados não são audiolivros nem meditações guiadas. São <strong>contos clássicos adaptados com autossugestão, visualização e poder da mente embutidos na narrativa</strong> — invisíveis para a criança, intencionais para o terapeuta.
+          <br><br>
+          A criança ouve o Lobo, ouve o protagonista respirando fundo, repete a autossugestão <em>dentro da história</em>, sem perceber que está sendo conduzida. O recurso funciona <strong>porque não parece recurso</strong>.
+          <br><br>
+          Apps de meditação infantil (Calm Kids, Headspace for Kids) fazem meditação guiada explícita. Aqui a ferramenta terapêutica está camuflada em entretenimento. <strong>Isso é produto, não feature.</strong>
+        </div>
+        <div class="diff-tag">Inexistente no mercado</div>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 03</div>
+        <div class="diff-title">Novelas da Mente — ficção terapêutica serializada</div>
+        <div class="diff-body">
+          6 séries com 8 capítulos cada. Narrativas com personagens, conflito real, tensão dramática — e trabalho clínico embutido no arco da história. Cada episódio aborda um padrão de pensamento específico.
+          <br><br>
+          <strong>Por que isso fideliza:</strong> séries criam compromisso. Quem começa "O Cavaleiro Preso na Mente" vai querer o capítulo 2. O modelo Netflix aplicado à saúde mental — e ninguém no Brasil faz isso.
+        </div>
+        <div class="diff-tag">Formato inédito no Brasil</div>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 04</div>
+        <div class="diff-title">Gamificação com economia própria (Lumens 💡)</div>
+        <div class="diff-body">
+          Sistema de marcos, selos e moeda interna atrelados ao uso real do app. O usuário ganha recompensas por ouvir, voltar no dia seguinte, completar séries, atingir streaks.
+          <br><br>
+          A progressão tem camadas: conteúdo gratuito → premium → badges exclusivos. O usuário <strong>investe tempo e identidade no app</strong>, o que cria custo de saída real.
+        </div>
+        <div class="diff-tag">Arquitetura de hábito</div>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 05</div>
+        <div class="diff-title">Dois públicos, uma assinatura familiar</div>
+        <div class="diff-body">
+          Adulto usa o app à noite para trabalhar ansiedade e foco. Coloca o filho pra dormir ouvindo os Clássicos Reimaginados. <strong>A assinatura resolve dois problemas da mesma família</strong> — o que justifica preço maior e reduz churn porque a decisão de cancelar afeta dois hábitos, não um.
+          <br><br>
+          Nenhum concorrente direto cobre os dois públicos com a mesma profundidade.
+        </div>
+        <div class="diff-tag">Churn duplo-bloqueado</div>
+      </div>
+
+      <div class="diff-card">
+        <div class="diff-num">DIFERENCIAL 06</div>
+        <div class="diff-title">Integrado ao ecossistema Omniterapeuta</div>
+        <div class="diff-body">
+          O app é a <strong>porta de entrada do método</strong>. Alunos da formação podem usar o Plenamente como ferramenta clínica com seus pacientes — criar categorias próprias e publicar áudios. Isso transforma cada omni-terapeuta em um distribuidor do app dentro da sua carteira de clientes.
+          <br><br>
+          <strong>Efeito de rede:</strong> quanto mais terapeutas formados, mais usuários o app alcança por indicação profissional. Canal de aquisição com custo quase zero.
+        </div>
+        <div class="diff-tag">Efeito de rede</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Fidelização -->
+<section>
+  <div class="container">
+    <div class="section-label">Retenção</div>
+    <div class="section-title">O que segura o usuário</div>
+    <div class="ret-grid">
+      <div class="ret-row">
+        <div class="ret-el">Áudio do dia</div>
+        <div class="ret-mec">Hábito diário — o usuário volta porque tem algo novo toda manhã</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Pílula do terapeuta</div>
+        <div class="ret-mec">Microconteúdo diário — baixo esforço, alto reforço de crença</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Novelas em capítulos</div>
+        <div class="ret-mec">Cliffhanger narrativo — "o que acontece com o cavaleiro?" cria compromisso</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Lumens e marcos</div>
+        <div class="ret-mec">Sunk cost positivo — perder a sequência ou os Lumens dói</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Voz do Michael</div>
+        <div class="ret-mec">Vínculo emocional com o narrador — não é intercambiável com outro app</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Catálogo crescente</div>
+        <div class="ret-mec">163 áudios hoje — sempre tem algo novo para descobrir</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Conteúdo infantil</div>
+        <div class="ret-mec">O filho vira âncora — pai não cancela o que o filho usa toda noite</div>
+      </div>
+      <div class="ret-row">
+        <div class="ret-el">Prescrição do terapeuta</div>
+        <div class="ret-mec">Indicação profissional aumenta adesão e percepção de valor clínico</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparativo -->
+<section>
+  <div class="container">
+    <div class="section-label">Mercado</div>
+    <div class="section-title">Onde o Plenamente está sozinho</div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>Hipnoterapia</th>
+          <th>Voz de especialista</th>
+          <th>Infantil encoberto</th>
+          <th>Ficção serializada</th>
+          <th>Ecossistema formação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Calm / Headspace</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Insight Timer</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+        </tr>
+        <tr>
+          <td>Simples (BR)</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+          <td class="cross">✗</td>
+        </tr>
+        <tr class="highlight">
+          <td>Plenamente</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Pitch -->
+<div class="container">
+  <div class="pitch">
+    <div class="pitch-label">Frase de posicionamento</div>
+    <blockquote>
+      "O Plenamente não é um app de meditação. É onde o trabalho que começa na sessão continua em casa — para adultos que querem mudar e para crianças que precisam de histórias que <em>fazem bem de verdade</em>."
+    </blockquote>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    OMNI Brasil · Documento restrito · Julho 2026
+  </div>
+</footer>
+
+</div><!-- /content -->
+
+<script>
+  function unlock() {
+    const v = document.getElementById('lock-pwd').value;
+    if (v === 'omni777') {
+      document.getElementById('lock').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+    } else {
+      document.getElementById('lock-err').textContent = 'Senha incorreta.';
+      document.getElementById('lock-pwd').value = '';
+    }
+  }
+  document.getElementById('lock-pwd').addEventListener('keydown', e => {
+    if (e.key === 'Enter') unlock();
+  });
+</script>
+</body>
+</html>
