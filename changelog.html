@@ -3839,6 +3839,32 @@ const CAPABILITIES = [
     <span>Síntese:</span> <code>outputs/super-squad-conteudo-viral/</code>
   </div>
 </div>`}
+  ,{id:"CAP-072",nome:"Copiloto de Reuniões — sugestões ao vivo com perfis de regras",categoria:"ferramenta-produtividade",status:"ativo",statusLabel:"Ativo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"09/07",atualizado:"09/07",
+    link:"apps/copiloto-reunioes/",
+    depende:["Groq Whisper (STT pt-BR)","Groq llama-3.3-70b (gerador padrão)","CLI Claude Max (gerador alternativo)"],dependentes:[],
+    descricao:"Agente estilo 'Fathom ao vivo' para o Michael: escuta reuniões de Zoom/Google Meet (ou qualquer call no PC) em tempo real capturando o áudio da aba do navegador + microfone, transcreve em chunks de 9s e a cada 15s gera sugestões acionáveis com base em PERFIS DE REGRAS em markdown que o próprio Michael escreve (hot reload — editar a regra vale na hora, até no meio da reunião) + contexto digitado antes da call. Cockpit com Alerta persistente (regra violada), sugestões prontas para falar, perguntas fortes e Radar de fatos (compromissos, números, decisões com horário). Sem bot entrando na call, invisível para os participantes, sem gravação de áudio em disco. Testado internamente em 09/07: transcrição literal (0.9-3.5s/chunk) e reação correta à objeção simulada de vendas (alerta urgência alta + quebra pronta em 1.2s).",
+    habilidades:[
+      "Escuta Zoom e Google Meet ao vivo sem bot visível (compartilhar aba com áudio + mic)",
+      "Perfis de regras em markdown editáveis com hot reload (geral, vendas, mentoria + novos)",
+      "Contexto por reunião: objetivo, limites e pontos sensíveis informados antes da call",
+      "Sugestões prontas para falar + alertas por violação de regra + perguntas fortes",
+      "Radar acumulativo de compromissos, números e decisões com horário",
+      "Fala do Michael e dos participantes rotuladas separadamente na transcrição",
+      "Gerador com fallback automático: Groq llama (~1s) <-> CLI Claude Max (~23s)"
+    ],
+    apis:["Groq Whisper large-v3-turbo + llama-3.3-70b (GROQ_KEY do vault)","CLI Claude Code (assinatura Max)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar</div>
+  <div class="note-step"><div class="note-num">1</div><div>No Mac: <code>cd apps/copiloto-reunioes && ./start.sh</code> (abre http://localhost:8768)</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Escolher perfil + escrever contexto → Iniciar → escolher a aba do Zoom/Meet marcando "Compartilhar áudio"</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Criar regras novas: um <code>.md</code> em <code>perfis/</code> (vale na hora, sem reiniciar)</div></div>
+  <div class="note-ids">
+    <span>App:</span> <code>apps/copiloto-reunioes/</code> &nbsp;|&nbsp;
+    <span>Teste:</span> <code>tests/teste-pipeline.py</code> &nbsp;|&nbsp;
+    <span>Chave:</span> <code>GROQ_KEY (vault)</code>
+  </div>
+</div>`}
 ];
 
 const INFRA = [
