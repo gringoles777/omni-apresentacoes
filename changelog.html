@@ -415,7 +415,7 @@ function checkPwd() {
 // CHANGELOG DATA (auto-generated)
 // ═══════════════════════════════════════
 const DATA = [
-{"hash": "520d2866", "author": "Michael Arruda", "date": "2026-07-10", "type": "feat", "scope": "plenamente", "message": "The Lightner v0.1, RPG educativo estilo Game Boy (estrutura completa 6h+)", "status": "novo", "friendly": "The Lightner v0.1, RPG educativo estilo Game Boy (estrutura completa 6h+)"},
+{"hash": "520d2866", "author": "Michael Arruda", "date": "2026-07-10", "type": "feat", "scope": "plenamente", "message": "The Lightner v0.1, RPG educativo estilo Game Boy (estrutura completa 6h+) (CAP-074)", "status": "novo", "friendly": "The Lightner, o Iluminador: RPG solo estilo Game Boy do Plenamente com estrutura completa (10 atos, 27 mapas, 76 casos, 8 mentores), dimensionado e validado para 6h+ de jogo; conteudo em placeholders para o Michael preencher (CAP-074)"},
 {"hash": "2ac32270", "author": "Julia", "date": "2026-07-10", "type": "feat", "scope": "plenamente", "message": "mensagem amigável quando o cartão é recusado [pagamentos]", "status": "novo", "friendly": "Mensagem amigável quando o cartão é recusado [pagamentos]"},
 {"hash": "c2cb5440", "author": "Julia", "date": "2026-07-10", "type": "feat", "scope": "portal", "message": "admin bloqueia horarios das Reunioes da Alianca [REU-BLOCK]", "status": "novo", "friendly": "Admin bloqueia horarios das Reunioes da Alianca [REU-BLOCK]"},
 {"hash": "7c71deb7", "author": "Julia", "date": "2026-07-10", "type": "feat", "scope": "plenamente", "message": "checkout de cartão de crédito funcional (Pagar.me) [pagamentos]", "status": "novo", "friendly": "Checkout de cartão de crédito funcional (Pagar.me) [pagamentos]"},
@@ -3889,6 +3889,30 @@ const CAPABILITIES = [
     <span>App:</span> <code>apps/copiloto-reunioes/</code> &nbsp;|&nbsp;
     <span>Teste:</span> <code>tests/teste-pipeline.py</code> &nbsp;|&nbsp;
     <span>Chave:</span> <code>GROQ_KEY (vault)</code>
+  </div>
+</div>`}
+  ,{id:"CAP-074",nome:"The Lightner, o Iluminador — RPG educativo do Plenamente",categoria:"produto-plenamente",status:"prototipo",statusLabel:"Protótipo",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"0.1",inicio:"10/07",atualizado:"10/07",
+    link:"apps/plenamente-2/games/the-lightner/",
+    depende:[],dependentes:[],
+    descricao:"RPG solo educativo estilo Game Boy (canvas 160x144, paleta Plenamente roxo->azul, zero dependências, roda até offline) em que o jogador é alguém que sabe ouvir, recebe o livro 'Desbloqueie o Poder da Sua Mente' e aprende com 8 mentores as técnicas isoladas que formam um omniterapeuta, sem nunca usar o termo. Estrutura completa dimensionada para mínimo ~6,7h de jogo (validador automático prova a conta): 10 atos, 27 mapas desenhados em ASCII editável, 76 casos, 13 técnicas com matriz de afinidade explicada, 30 fragmentos com frases do livro. O 'combate' é a Sessão: OUVIR gera Rapport, cada bloqueio (Medo, Dúvida, Hábito, Tristeza, Vergonha, Rigidez) pede o tipo certo de técnica e derrota é gentil. Todo o conteúdo narrativo está em placeholders editáveis (data/*.js) esperando os insights reais da formação.",
+    habilidades:[
+      "Overworld tile-based com NPCs, investigação com moradores e portões de capítulo por Luz (reputação)",
+      "Sessões por turnos educativas: escuta antes da técnica, fraquezas explicadas",
+      "Progressão EXP/nível 1-20 + economia de Luz que dosa o ritmo sem grind",
+      "Save no navegador (3 espaços + autosave), controles touch e teclado",
+      "Validador de estrutura/pacing e smoke test que joga do prólogo ao final",
+      "Conteúdo 100% data-driven: casos, mapas, diálogos e economia editáveis sem tocar no motor"
+    ],
+    apis:["Nenhuma (estático puro, sem backend)"],
+    nota:`<div class="cap-note-box">
+  <div class="note-title">Como usar</div>
+  <div class="note-step"><div class="note-num">1</div><div>Jogar: <code>go.omnihypnosis.com.br/teste-plenamente/the-lightner/</code> (protótipo, não linkado no app)</div></div>
+  <div class="note-step"><div class="note-num">2</div><div>Editar conteúdo: <code>docs/GUIA-DE-CONTEUDO.md</code> — tudo entre &lsaquo; &rsaquo; é placeholder</div></div>
+  <div class="note-step"><div class="note-num">3</div><div>Validar: <code>node tools/validate.js</code> (consistência + prova das 6h)</div></div>
+  <div class="note-ids">
+    <span>Fonte:</span> <code>apps/plenamente-2/games/the-lightner/</code> &nbsp;|&nbsp;
+    <span>Design:</span> <code>docs/GAME-DESIGN.md</code>
   </div>
 </div>`}
 ];
