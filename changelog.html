@@ -3796,7 +3796,7 @@ const CAPABILITIES = [
     ],
     apis:["Node.js + Express","Storage em arquivo JSON (bookings.json)","Evolution API (notificação WhatsApp)"],nota:null},
   {id:"CAP-050",nome:"Plenamente 2.0",categoria:"app-cliente",status:"ativo",statusLabel:"Ativo",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.1",inicio:"14/06",atualizado:"14/06",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"2.0",inicio:"14/06",atualizado:"11/07",
     link:"apps/plenamente-2/",
     depende:["Node.js 22 + Fastify 5","SQLite (better-sqlite3)","Vite 6 + React 18 (PWA)","Claude CLI (chat)"],dependentes:[],
     descricao:"Webapp de áudios de auto-hipnoterapia da OMNI, estilo Spotify simplificado (evolução do PlenaMente original). Usuários ouvem áudios por categorias, criam playlists/favoritos e reproduzem em background (tela bloqueada via Media Session API). Omniterapeutas enviam os próprios áudios, visíveis só aos clientes vinculados por código. Tem ambiente admin e um chat com IA que acolhe e recomenda áudios do catálogo. PWA instalável.",
@@ -3810,7 +3810,7 @@ const CAPABILITIES = [
       "Chat com IA (Claude Haiku) que recomenda áudios + guard-rails de tema sensível (CVV 188)",
       "Streaming com HTTP Range (seek) e upload de áudios/vídeos; PWA instalável"
     ],
-    apis:["Node.js 22 + Fastify 5","SQLite (better-sqlite3)","Vite 6 + React 18","Claude CLI (claude-haiku-4-5)","ffmpeg/ffprobe"],nota:null},
+    apis:["Node.js 22 + Fastify 5","SQLite (better-sqlite3)","Vite 6 + React 18","Claude CLI (claude-haiku-4-5)","ffmpeg/ffprobe"],nota:"11/07/2026: produção (plenamente.app) alinhada ao plenamente-teste — Jogos da Mente, Lumens, gamificação, onboarding com foco, novelas/estórias/clássicos (172 áudios), tutorial do terapeuta e checkout Pagar.me. Banco reiniciado com 4 contas de teste; usuários antigos recriam a conta (auth agora igual ao teste: Supabase + confirmação de e-mail). Backup do banco/áudios antigos preservado."},
   {id:"CAP-051",nome:"Lead-Intake Nativo (substituto do n8n)",categoria:"infraestrutura-comercial",status:"ativo",statusLabel:"Ativo",
     criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"17/06",atualizado:"17/06",
     link:"apps/lead-intake/",
