@@ -415,6 +415,8 @@ function checkPwd() {
 // CHANGELOG DATA (auto-generated)
 // ═══════════════════════════════════════
 const DATA = [
+{"hash": "4603715f", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "plenamente", "message": "app oficial: Ligando os Pontos no ar + jogos ilimitados após 1º pagamento (CAP-075)", "status": "novo", "friendly": "O jogo Ligando os Pontos entrou no app oficial (plenamente.app), com desbloqueio ao concluir 5 fases do nível anterior. E nova regra: o 1º pagamento libera TODOS os jogos ilimitados para sempre (mesmo se cancelar depois); grátis joga 5 partidas por dia. Copy dos planos atualizada. Deploy verificado no ar (CAP-075)"},
+{"hash": "b5e44d9", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "plenamente", "message": "Ligando os Pontos: próximo nível abre ao concluir 5 fases do atual (CAP-075)", "status": "melhoria", "friendly": "Ligando os Pontos: o próximo nível abre quando você conclui 5 fases do nível atual (antes exigia o nível inteiro); dentro do nível dá pra escolher qualquer fase (CAP-075)"},
 {"hash": "4603715f", "author": "Michael Arruda", "date": "2026-07-12", "type": "deploy", "scope": "plenamente-2", "message": "espelho teste→produção — jogo Ligando os Pontos + billing jogos ilimitados após 1º pagamento", "status": "outro", "friendly": "Espelho teste→produção — jogo Ligando os Pontos + billing jogos ilimitados após 1º pagamento"},
 {"hash": "ae5f917", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "plenamente", "message": "Ligando os Pontos — desbloqueio por nível + escolha livre de fase (CAP-075)", "status": "melhoria", "friendly": "Ligando os Pontos: agora dá pra escolher qualquer fase dentro de um nível liberado (não precisa mais ir 1→2→3 na marra); o próximo nível abre ao concluir o atual. No momento todos os níveis estão liberados temporariamente pra revisão das fases novas (CAP-075)"},
 {"hash": "d5455a89", "author": "Michael Arruda", "date": "2026-07-12", "type": "docs", "scope": "capabilities", "message": "CAP-075 v1.3 — desbloqueio por nivel + escolha livre (libera-tudo temporario ON)", "status": "documentacao", "friendly": "CAP-075 v1.3 — desbloqueio por nivel + escolha livre (libera-tudo temporario ON)"},
@@ -3955,9 +3957,9 @@ const CAPABILITIES = [
     <span>Design:</span> <code>docs/GAME-DESIGN.md</code>
   </div>
 </div>`}
-  ,{id:"CAP-075",nome:"Ligando os Pontos — 4º jogo da Pausa da Mente",categoria:"produto-plenamente",status:"ativo",statusLabel:"Ativo",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.2",inicio:"11/07",atualizado:"12/07",
-    link:"https://go.omnihypnosis.com.br/teste-plenamente/",
+  ,{id:"CAP-075",nome:"Ligando os Pontos — 4º jogo da Pausa da Mente",categoria:"produto-plenamente",status:"ativo",statusLabel:"Ativo em produção",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.4",inicio:"11/07",atualizado:"12/07",
+    link:"https://plenamente.app",
     depende:[],dependentes:[],
     descricao:"Quarto jogo dos Jogos da Mente do Plenamente, estilo connect-the-dots (gênero Numberlink): ligar cada par de pontos da mesma cor com caminhos que não se cruzam até preencher 100% do tabuleiro. Subtítulo: 'Apenas para relaxar a mente'. 40 fases fixas em 4 grupos de dificuldade (Tranquilo 5x5, Suave 6x6 e Médio 7x7 com 10 fases cada, Profundo 8x8 com 15, de 4 a 10 cores), todas geradas por script com solução única comprovada por solver. Jogabilidade idêntica ao clássico do gênero: arrastar fluido em canvas, pisar no próprio caminho retrai, atravessar caminho de outra cor corta o pedaço dela, ponto alheio bloqueia. Desbloqueio sequencial, selo de fase perfeita (mínimo de toques), records e Lumens no padrão dos jogos (sessão 60s+ = +5, recorde = +10, 1x/dia). Paleta das bolinhas pensada para daltônicos (deuteranopia/protanopia/tritanopia), validada por simulação: o par roxo/azul que se confundia virou azul + magenta, e a 10ª cor é cinza neutro.",
     habilidades:[
