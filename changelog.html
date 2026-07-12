@@ -415,6 +415,7 @@ function checkPwd() {
 // CHANGELOG DATA (auto-generated)
 // ═══════════════════════════════════════
 const DATA = [
+{"hash": "fd5321e", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "plenamente", "message": "Ligando os Pontos — paleta segura p/ daltônicos + 5 fases Suave (20→25) (CAP-075)", "status": "melhoria", "friendly": "Ligando os Pontos ficou acessível a daltônicos: nova paleta das bolinhas validada por simulação de daltonismo (o par roxo/azul que confundia virou azul + magenta; 10ª cor cinza neutro). E ganhou +5 fases no nível Suave — agora são 25 fases no total, todas com solução única. Verificado por e2e real no ar (CAP-075)"},
 {"hash": "53d455a8", "author": "Michael Arruda", "date": "2026-07-12", "type": "docs", "scope": "capabilities", "message": "CAP-075 v1.1 — paleta daltonico-safe + 25 fases (Ligando os Pontos)", "status": "documentacao", "friendly": "CAP-075 v1.1 — paleta daltonico-safe + 25 fases (Ligando os Pontos)"},
 {"hash": "0b0d30c8", "author": "Rafa Mendes", "date": "2026-07-12", "type": "fix", "scope": "coach-closers", "message": "sync nao grava sessao vazia (0 cenas) — retenta na proxima", "status": "correcao", "friendly": "Sync nao grava sessao vazia (0 cenas) — retenta na proxima"},
 {"hash": "1f80b14b", "author": "Michael Arruda", "date": "2026-07-11", "type": "fix", "scope": "plenamente", "message": "trava scroll do fundo com player cheio aberto", "status": "correcao", "friendly": "Trava scroll do fundo com player cheio aberto"},
@@ -3950,12 +3951,13 @@ const CAPABILITIES = [
   </div>
 </div>`}
   ,{id:"CAP-075",nome:"Ligando os Pontos — 4º jogo da Pausa da Mente",categoria:"produto-plenamente",status:"ativo",statusLabel:"Ativo",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"11/07",atualizado:"11/07",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.1",inicio:"11/07",atualizado:"12/07",
     link:"https://go.omnihypnosis.com.br/teste-plenamente/",
     depende:[],dependentes:[],
-    descricao:"Quarto jogo dos Jogos da Mente do Plenamente, estilo connect-the-dots (gênero Numberlink): ligar cada par de pontos da mesma cor com caminhos que não se cruzam até preencher 100% do tabuleiro. Subtítulo: 'Apenas para relaxar a mente'. 20 fases fixas em 4 grupos de dificuldade (Tranquilo 5x5, Suave 6x6, Médio 7x7, Profundo 8x8, de 4 a 10 cores), todas geradas por script com solução única comprovada por solver. Jogabilidade idêntica ao clássico do gênero: arrastar fluido em canvas, pisar no próprio caminho retrai, atravessar caminho de outra cor corta o pedaço dela, ponto alheio bloqueia. Desbloqueio sequencial, selo de fase perfeita (mínimo de toques), records e Lumens no padrão dos jogos (sessão 60s+ = +5, recorde = +10, 1x/dia).",
+    descricao:"Quarto jogo dos Jogos da Mente do Plenamente, estilo connect-the-dots (gênero Numberlink): ligar cada par de pontos da mesma cor com caminhos que não se cruzam até preencher 100% do tabuleiro. Subtítulo: 'Apenas para relaxar a mente'. 25 fases fixas em 4 grupos de dificuldade (Tranquilo 5x5, Suave 6x6 com 10 fases, Médio 7x7, Profundo 8x8, de 4 a 10 cores), todas geradas por script com solução única comprovada por solver. Jogabilidade idêntica ao clássico do gênero: arrastar fluido em canvas, pisar no próprio caminho retrai, atravessar caminho de outra cor corta o pedaço dela, ponto alheio bloqueia. Desbloqueio sequencial, selo de fase perfeita (mínimo de toques), records e Lumens no padrão dos jogos (sessão 60s+ = +5, recorde = +10, 1x/dia). Paleta das bolinhas pensada para daltônicos (deuteranopia/protanopia/tritanopia), validada por simulação: o par roxo/azul que se confundia virou azul + magenta, e a 10ª cor é cinza neutro.",
     habilidades:[
-      "20 fases com solução única (gerador + solver de backtracking, cobertura 100% garantida)",
+      "25 fases com solução única (gerador + solver de backtracking, cobertura 100% garantida)",
+      "Paleta acessível a daltônicos, validada por simulação (Machado 2009 + ΔE Lab): 6 primeiras cores com ΔE mínimo ~15",
       "Canvas com pointer events (touch e mouse): corte e retração de caminhos em tempo real",
       "Seletor de fases com progresso por conta (game_progress) e desbloqueio sequencial",
       "Fase perfeita: contagem de toques no estilo do gênero (gestos seguidos na mesma cor contam 1)",
@@ -3970,7 +3972,7 @@ const CAPABILITIES = [
   <div class="note-step"><div class="note-num">3</div><div>Produção: entra no próximo deploy espelho teste → prod</div></div>
   <div class="note-ids">
     <span>Fonte:</span> <code>plenamente-teste/frontend/src/games/</code> &nbsp;|&nbsp;
-    <span>Fases:</span> <code>ligaLevels.js (20, solução única)</code>
+    <span>Fases:</span> <code>ligaLevels.js (25, solução única)</code>
   </div>
 </div>`}
 ];
