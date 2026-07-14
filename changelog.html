@@ -435,7 +435,6 @@ const DATA = [
 {"hash": "fd166451", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "plenamente-growth", "message": "primeiro growth-review — daily-pulse 12/07 + cruzamento com auditoria UX + backlog RICE (EXP-001..009, Tier 1 aprovado)", "status": "novo", "friendly": "Primeiro growth-review — daily-pulse 12/07 + cruzamento com auditoria UX + backlog RICE (EXP-001..009, Tier 1 aprovado)"},
 {"hash": "568f2296", "author": "Michael Arruda", "date": "2026-07-12", "type": "refactor", "scope": "plenamente-growth", "message": "v1.0.1 — endpoint /api/admin/analytics como fonte primaria + DAU alinhado ao app + metricas de indicacao (CAP-076)", "status": "refatoracao", "friendly": "V1.0.1 — endpoint /api/admin/analytics como fonte primaria + DAU alinhado ao app + metricas de indicacao (CAP-076)"},
 {"hash": "196d79a7", "author": "Michael Arruda", "date": "2026-07-12", "type": "docs", "scope": "plenamente-growth", "message": "ARCHITECTURE.md + CHANGELOG.md da squad (CAP-076)", "status": "documentacao", "friendly": "ARCHITECTURE.md + CHANGELOG.md da squad (CAP-076)"},
-{"hash": "df8d493a", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "squads", "message": "squad plenamente-growth — growth engine do app Plenamente (CAP-076)", "status": "novo", "friendly": "Squad plenamente-growth — growth engine do app Plenamente (CAP-076)"},
 {"hash": "df8d493a", "author": "Michael Arruda", "date": "2026-07-12", "type": "feat", "scope": "squads", "message": "squad plenamente-growth — growth engine do app Plenamente (CAP-076)", "status": "novo", "friendly": "Nova squad Plenamente Growth: 7 agentes (chief, CTO, analista de uso, analista de mercado, marketing, estrategista e implementador) que analisam diariamente o uso do app e o mercado, e propõem formas de escalar o Plenamente. Banco de produção sempre read-only e todo experimento passa pela aprovação do Michael (CAP-076)"},
 {"hash": "f2876d6b", "author": "Michael Arruda", "date": "2026-07-12", "type": "deploy", "scope": "plenamente-2", "message": "escudo de sequência semanal do Premium na tabela de planos", "status": "outro", "friendly": "Escudo de sequência semanal do Premium na tabela de planos"},
 {"hash": "c1a8a694", "author": "Michael Arruda", "date": "2026-07-12", "type": "deploy", "scope": "plenamente-2", "message": "melhorias dos jogos + tela de planos comparativa", "status": "outro", "friendly": "Melhorias dos jogos + tela de planos comparativa"},
@@ -4011,7 +4010,7 @@ const CAPABILITIES = [
   </div>
 </div>`}
   ,{id:"CAP-076",nome:"Plenamente Growth: squad de escala do app",categoria:"squad-aiox",status:"ativo",statusLabel:"Ativo",
-    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.0",inicio:"12/07",atualizado:"12/07",
+    criador:"Michael Arruda",responsavel:"Michael Arruda",versao:"1.1",inicio:"12/07",atualizado:"13/07",
     link:"https://plenamente.app",
     depende:[],dependentes:[],
     descricao:"Squad AIOX avançada dedicada a escalar o app Plenamente em duas frentes: crescimento de usuários/receita e escala técnica. Formação: 1 chief orquestrador + 6 especialistas (CTO, analista de uso, analista de mercado, especialista em marketing, estrategista de crescimento e implementador), rodando o ciclo análise, estratégia, decisão (gate humano do Michael) e implementação. Analisa diariamente o uso real dos usuários direto do banco de produção (DAU/WAU/MAU, retenção D1/D7/D30, funil de onboarding, escutas por categoria, jogos/Lumens/novelas, churn, conversão trial para assinante) e o mercado (Calm, Headspace, Insight Timer, Lojong, Cíngulo, Reveri, Nerva), mantendo um backlog RICE de experimentos. Guardrails inegociáveis: banco de produção sempre read-only, domínios protegidos acionam a squad dona, ads reais passam pelas squads de ads, e todo experimento ou deploy exige aprovação humana com validação prévia no ambiente de teste.",
@@ -4021,7 +4020,8 @@ const CAPABILITIES = [
       "*growth-review: síntese uso + mercado + marketing, backlog RICE e propostas de experimento com gate humano",
       "*tech-review: auditoria técnica do CTO (performance, custos, gargalos, roadmap de escala)",
       "Seeds de conhecimento: KPIs do Plenamente, matriz de concorrentes e backlog de experimentos em data/",
-      "Criada com pesquisa real: schema do banco mapeado do código + docs de negócio compiladas (assinaturas, Partner, Lumens, plano 90d)"
+      "Criada com pesquisa real: schema do banco mapeado do código + docs de negócio compiladas (assinaturas, Partner, Lumens, plano 90d)",
+      "1º ciclo completo executado: growth-review com dados de produção (12/07) + auditoria UX, e Tier 1 aprovado pelo Michael foi pra produção em 13/07: wizard de entrada em 5 passos, trava de 24h de verificação de e-mail e amostras públicas por área (EXP-001..003b)"
     ],
     apis:["GET /api/admin/analytics (DAU/WAU/MAU, retenção, MRR prontos)","scripts/send-whatsapp.js (entrega no Telegram)"],
     nota:`<div class="cap-note-box">
