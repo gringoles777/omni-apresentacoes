@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Fluxo de Automações dos Leads — Guardião · OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0D0D; --dark:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E; --gold-data:#AE8F38;
+  --teal:#2A9D8F; --ink:#F5F0E8; --ink-70:rgba(245,240,232,.70); --ink-50:rgba(245,240,232,.50);
+  --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+  --teal-10:rgba(42,157,143,.10); --red:#C96A5A; --amber:#D9A441;
+  --font:'Oswald',sans-serif; --body:'Inter',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65;font-size:16px}
+a{color:var(--gold)}
+#gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+body:not(.locked) #gate{display:none}
+#gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+#gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-50);text-transform:uppercase}
+#gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-30);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+#gate input:focus{border-color:var(--gold)}
+#gate button{font-family:var(--font);background:var(--gold);color:#000;border:none;padding:12px 34px;border-radius:8px;font-size:15px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+#gate .gerr{color:var(--red);font-size:13px;font-family:var(--mono);display:none}
+body.locked main,body.locked header{display:none}
+
+header{border-bottom:1px solid var(--gold-20);padding:38px 24px 30px;text-align:center}
+header .brand{font-family:var(--font);font-weight:700;font-size:20px;letter-spacing:6px;color:var(--gold);text-transform:uppercase}
+header .est{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--ink-50);margin-top:4px}
+header h1{font-family:var(--font);font-weight:600;font-size:clamp(25px,4vw,40px);margin-top:22px;line-height:1.2}
+header .sub{color:var(--ink-70);max-width:780px;margin:12px auto 0;font-size:15px}
+header .meta{font-family:var(--mono);font-size:12px;color:var(--ink-50);margin-top:16px;letter-spacing:1px}
+
+main{max-width:1060px;margin:0 auto;padding:20px 24px 90px}
+section{margin-top:60px}
+h2{font-family:var(--font);font-weight:600;font-size:25px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+h2 .n{font-family:var(--mono);font-size:14px;color:var(--ink-50);border:1px solid var(--gold-30);border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-family:var(--font);font-weight:500;font-size:19px;margin:30px 0 10px;color:var(--gold-light)}
+p{color:var(--ink-70);margin-top:10px;max-width:880px}
+strong{color:var(--ink)}
+.lead{font-size:17px;color:var(--ink)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:26px}
+.tile{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:22px 20px}
+.tile .v{font-family:var(--font);font-weight:600;font-size:36px;line-height:1;color:var(--gold)}
+.tile .v.teal{color:var(--teal)} .tile .v.red{color:var(--red)} .tile .v.amber{color:var(--amber)}
+.tile .l{font-size:13px;color:var(--ink-70);margin-top:10px;line-height:1.45}
+.tile .s{font-family:var(--mono);font-size:11px;color:var(--ink-50);margin-top:8px}
+
+/* FLUXO vertical */
+.flow{margin-top:28px;position:relative}
+.step{display:grid;grid-template-columns:56px 1fr;gap:18px;position:relative;padding-bottom:8px}
+.step .rail{display:flex;flex-direction:column;align-items:center}
+.step .dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;flex:none;border:2px solid var(--gold-30);background:var(--bg);z-index:1}
+.step .line{width:2px;flex:1;background:var(--gold-20);margin:2px 0}
+.step:last-child .line{display:none}
+.step .card{background:var(--dark);border:1px solid var(--gold-20);border-left:3px solid var(--sem,var(--gold-deep));border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:20px}
+.step .card .top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.step .card .t{font-family:var(--font);font-size:17px;color:var(--ink)}
+.step .card .owner{font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;color:var(--ink-50);border:1px solid var(--gold-20);border-radius:20px;padding:2px 9px}
+.step .card .num{font-family:var(--mono);font-size:13px;color:var(--sem,var(--gold));margin-left:auto;white-space:nowrap}
+.step .card p{font-size:13.5px;margin-top:7px}
+.sem-green{--sem:var(--teal)} .sem-red{--sem:var(--red)} .sem-amber{--sem:var(--amber)} .sem-gray{--sem:#6B6B6B}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 9px;border-radius:20px;letter-spacing:.5px}
+.chip.g{background:var(--teal-10);color:var(--teal);border:1px solid rgba(42,157,143,.4)}
+.chip.r{background:rgba(201,106,90,.12);color:var(--red);border:1px solid rgba(201,106,90,.4)}
+.chip.a{background:rgba(217,164,65,.12);color:var(--amber);border:1px solid rgba(217,164,65,.4)}
+.chip.gray{background:rgba(245,240,232,.06);color:var(--ink-70);border:1px solid rgba(245,240,232,.18)}
+
+/* funil de barras */
+.chart{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:26px 26px 20px;margin-top:24px}
+.chart .ct{font-family:var(--font);font-size:16px;margin-bottom:4px}
+.chart .cs{font-size:12.5px;color:var(--ink-50);margin-bottom:18px;font-family:var(--mono)}
+.brow{display:grid;grid-template-columns:180px 1fr;align-items:center;gap:12px;margin-top:9px}
+.brow .bl{font-size:13px;color:var(--ink-70);text-align:right;line-height:1.25}
+.brow .btrack{position:relative;height:26px}
+.brow .bar{position:absolute;left:0;top:0;height:26px;border-radius:0 4px 4px 0;min-width:3px}
+.brow .bar.teal{background:var(--teal)} .brow .bar.gold{background:var(--gold-data)} .brow .bar.red{background:var(--red)} .brow .bar.dim{background:var(--texture)}
+.brow .bv{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap}
+.refline{border-top:1px dashed var(--gold-30);margin-top:14px;padding-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-50)}
+
+.card2{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:22px 24px;margin-top:16px;border-left:3px solid var(--sem,var(--gold))}
+.card2 h4{font-family:var(--font);font-weight:500;font-size:18px;color:var(--ink)}
+.card2 .tag{font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:var(--sem,var(--gold));text-transform:uppercase}
+.card2 p{font-size:14.5px}
+.card2 .action{margin-top:10px;font-size:13.5px;color:var(--ink-70);border-top:1px solid rgba(245,240,232,.08);padding-top:10px}
+.card2 .action b{color:var(--gold-light)}
+
+.note{background:var(--gold-10);border:1px solid var(--gold-30);border-radius:12px;padding:20px 24px;margin-top:26px;font-size:14.5px;color:var(--ink-70)}
+.note strong{color:var(--gold)}
+.tablewrap{overflow-x:auto;margin-top:18px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-family:var(--font);font-weight:500;text-align:left;color:var(--gold);border-bottom:1px solid var(--gold-30);padding:10px 12px;letter-spacing:.5px;white-space:nowrap}
+td{border-bottom:1px solid rgba(245,240,232,.08);padding:11px 12px;color:var(--ink-70);vertical-align:top}
+td:first-child{color:var(--ink)}
+footer{border-top:1px solid var(--gold-20);margin-top:80px;padding:28px 24px;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--ink-50);letter-spacing:1px}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="glock">🛡️</div>
+  <div class="glogo">OMNI Brasil</div>
+  <div class="gsub">Guardião de Leads · Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="senha" onkeydown="if(event.key==='Enter')tryLogin()">
+  <button onclick="tryLogin()">Entrar</button>
+  <div class="gerr" id="gerr">Senha incorreta.</div>
+</div>
+
+<header>
+  <div class="brand">OMNI Brasil</div>
+  <div class="est">EST. 1979 · GUARDIÃO DE LEADS 🛡️</div>
+  <h1>O Caminho do Lead, Passo a Passo</h1>
+  <div class="sub">Todo o processo de automação, do anúncio à venda, com o estado real de cada etapa e onde estão os gargalos de verdade. Levantado pela squad guardião-leads sobre dados ao vivo do intake.</div>
+  <div class="meta">16 · JULHO · 2026 — dados de reconciliação e SLA ao vivo</div>
+</header>
+
+<main>
+
+<!-- ===== SUMÁRIO / A VIRADA ===== -->
+<section>
+  <h2><span class="n">1</span>A resposta curta</h2>
+  <p class="lead" style="margin-top:22px">Você achou que tinha muitos gargalos na automação dos leads. A boa notícia: <strong>a parte que mais dá medo, a "encanação" que leva o lead do anúncio até o CRM, está limpa.</strong> Nos últimos 7 dias, tudo que entrou virou deal, sem lead perdido no caminho e sem fila entupida. Os gargalos reais são dois, e nenhum está nessa encanação: um é o <strong>topo do funil</strong> (que hoje ninguém mede) e o outro é a <strong>conversa com o lead depois que ele vira deal</strong> (a conexão).</p>
+  <div class="tiles">
+    <div class="tile"><div class="v teal">0</div><div class="l">leads perdidos dentro do intake em 7 dias (297 entraram, 288 viraram deal, 9 descartes legítimos)</div><div class="s">RECONCILIAÇÃO · AO VIVO 16/07</div></div>
+    <div class="tile"><div class="v teal">0</div><div class="l">leads presos na fila e 0 deals sem SDR atribuído</div><div class="s">SLA DA FILA · AO VIVO</div></div>
+    <div class="tile"><div class="v red">?</div><div class="l">quantos leads o Meta gerou vs os 297 que entraram: <strong>ponto cego</strong>, ninguém mede hoje</div><div class="s">TOPO DO FUNIL</div></div>
+    <div class="tile"><div class="v red">22,5%</div><div class="l">conexão: de cada 100 deals, só ~22 respondem alguma coisa (o maior gargalo real)</div><div class="s">DISPARO · MEDIDO EM JUL</div></div>
+  </div>
+</section>
+
+<!-- ===== O FLUXO PASSO A PASSO ===== -->
+<section>
+  <h2><span class="n">2</span>A jornada completa, etapa por etapa</h2>
+  <p>Cada etapa com seu dono, o número real e o semáforo. 🟢 saudável · 🟡 atenção · 🔴 gargalo · ⚫ ponto cego (sem medição).</p>
+
+  <div class="flow">
+    <!-- 1 Meta -->
+    <div class="step sem-gray">
+      <div class="rail"><div class="dot">📢</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">1. Meta Ads gera o lead</span><span class="owner">@ad-midas (tráfego)</span><span class="num">⚫ ponto cego</span></div>
+        <p>O lead vê o anúncio e preenche o formulário. <strong>Não sabemos quantos leads o Meta gera de verdade</strong> versus quantos chegam ao passo 3. Se o Meta gera 400 e só 297 entram, há um vazamento aqui, e hoje ele é invisível. É o item nº 1 a resolver.</p>
+      </div>
+    </div>
+    <!-- 2 AC/Typebot/XQUIZ -->
+    <div class="step sem-green">
+      <div class="rail"><div class="dot">📥</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">2. AC / Typebot / XQUIZ recebe e entrega ao app</span><span class="owner">app lead-intake (nativo)</span><span class="num">🟢 ativo</span></div>
+        <p>O formulário posta direto nos endpoints do app nativo (<span style="font-family:var(--mono);font-size:12px">/intake/ac, /intake/xquiz, LINK001</span>). O n8n saiu do caminho desde junho. App em modo <strong>active</strong>, servidor e worker online, watchdog saudável.</p>
+      </div>
+    </div>
+    <!-- 3 fila -->
+    <div class="step sem-green">
+      <div class="rail"><div class="dot">⏳</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">3. Fila de processamento (MySQL)</span><span class="owner">worker nativo</span><span class="num">🟢 0 presos</span></div>
+        <p>O lead passa pelos estados <span style="font-family:var(--mono);font-size:11.5px">waiting_start → waiting_deal_creation → waiting_funnel → done</span>. É aqui que costuma dar lag (a criação do deal). Agora: <strong>0 leads presos</strong>, fila fluindo. Idempotência tripla evita deal duplicado.</p>
+      </div>
+    </div>
+    <!-- 4 deal -->
+    <div class="step sem-green">
+      <div class="rail"><div class="dot">🎯</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">4. Deal criado no Pipedrive</span><span class="owner">app lead-intake</span><span class="num">🟢 288 / 288</span></div>
+        <p>O deal nasce no funil SDR-Novo (MQL ou Tentativa de Conectar). <strong>288 deals reais no CRM, 0 fantasmas, 0 sumidos.</strong> A reconciliação confere um a um.</p>
+      </div>
+    </div>
+    <!-- 5 rotação SDR -->
+    <div class="step sem-green">
+      <div class="rail"><div class="dot">👤</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">5. Rotação de SDR</span><span class="owner">app lead-intake</span><span class="num">🟢 0 sem dono</span></div>
+        <p>Cada deal recebe um SDR (David, Layslla, com fallback Rafaela). <strong>Nenhum deal ficou sem SDR.</strong> O lead score (escolaridade + investimento) já entra calculado.</p>
+      </div>
+    </div>
+    <!-- 6 disparo -->
+    <div class="step sem-red">
+      <div class="rail"><div class="dot">💬</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">6. Cadência de WhatsApp (M0 + M-TC1..4)</span><span class="owner">squad disparo-comercial</span><span class="num">🔴 gargalo</span></div>
+        <p>O robô dispara a régua (primeira mensagem + 4 follow-ups) para o lead responder e aceitar uma ligação de 5 min. <strong>Aqui está o maior gargalo real:</strong> só ~22,5% dos leads respondem alguma coisa; 54% morrem em silêncio ("encerrou contato"). Fora do escopo da guardiã, é do disparo, mas é onde o funil realmente aperta.</p>
+      </div>
+    </div>
+    <!-- 7 conexão -->
+    <div class="step sem-red">
+      <div class="rail"><div class="dot">🔗</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">7. Conexão (lead responde) → ligação de 5 min</span><span class="owner">SDR</span><span class="num">🔴 ~22,5%</span></div>
+        <p>O lead que responde vira "Conectado". O SDR faz a ligação rápida que entende o momento e agenda a consultoria. 60% das conexões nascem já do M0, o meio da régua quase não gera resposta.</p>
+      </div>
+    </div>
+    <!-- 8 reunião -->
+    <div class="step sem-amber">
+      <div class="rail"><div class="dot">📅</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">8. Consultoria agendada → comparecimento</span><span class="owner">SDR / closer</span><span class="num">🟡 45% no-show</span></div>
+        <p>A consultoria com o especialista é marcada. <strong>Cerca de 45% não comparecem</strong> (no-show). Existem lembretes automáticos, mas essa etapa ainda perde quase metade.</p>
+      </div>
+    </div>
+    <!-- 9 venda -->
+    <div class="step sem-gray">
+      <div class="rail"><div class="dot">🏆</div></div>
+      <div class="card">
+        <div class="top"><span class="t">9. Venda da Formação</span><span class="owner">closer</span><span class="num">— fim do funil</span></div>
+        <p>A consultoria comparecida converte na venda da Formação em Omniterapia. É o objetivo de toda a máquina.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== O FUNIL EM NÚMEROS ===== -->
+<section>
+  <h2><span class="n">3</span>Onde afunila (e onde não)</h2>
+  <div class="chart">
+    <div class="ct">O funil, do intake à conexão</div>
+    <div class="cs">intake: dados ao vivo 7 dias (297). Conexão/no-show: taxas medidas no disparo (jul), aplicadas para ilustrar a queda</div>
+    <div class="brow"><div class="bl">Meta gerou</div><div class="btrack"><div class="bar dim" style="width:100%"></div><span class="bv" style="left:8px;color:var(--ink-50)">? não medido</span></div></div>
+    <div class="brow"><div class="bl">Entraram no intake</div><div class="btrack"><div class="bar teal" style="width:88%"></div><span class="bv" style="left:calc(88% + 8px)">297</span></div></div>
+    <div class="brow"><div class="bl">Viraram deal no CRM</div><div class="btrack"><div class="bar teal" style="width:85%"></div><span class="bv" style="left:calc(85% + 8px)">288 · perda 0</span></div></div>
+    <div class="brow"><div class="bl">Responderam (conexão)</div><div class="btrack"><div class="bar red" style="width:19%"></div><span class="bv" style="left:calc(19% + 8px)">~22,5%</span></div></div>
+    <div class="brow"><div class="bl">Compareceram à consultoria</div><div class="btrack"><div class="bar red" style="width:10.5%"></div><span class="bv" style="left:calc(10.5% + 8px)">~55% dos agendados</span></div></div>
+    <div class="refline">Leitura: do anúncio ao CRM quase não se perde nada (as barras douradas/teal ficam cheias). A queda brutal é da entrada do CRM para a conexão (barra vermelha). O topo (quanto o Meta gerou) é a barra cinza, que não medimos.</div>
+  </div>
+</section>
+
+<!-- ===== OS 3 GARGALOS REAIS ===== -->
+<section>
+  <h2><span class="n">4</span>Os 3 gargalos reais (e o que fazer)</h2>
+
+  <div class="card2 sem-red">
+    <div class="tag">Gargalo 1 · ponto cego</div>
+    <h4>O topo do funil não é medido</h4>
+    <p>A guardiã sabe que 297 leads entraram, mas não sabe quantos o Meta gerou. Se o Meta gera bem mais do que entra, há um vazamento grande e invisível entre o anúncio e o formulário (pixel, formulário quebrado, leads de teste, filtros). Hoje isso é um "n/d".</p>
+    <div class="action"><b>Ação:</b> handoff para a <b>@ad-midas</b> (tráfego) fechar o número de leads do Meta por período, para a guardiã cruzar Meta × intake e revelar (ou descartar) o vazamento de topo.</div>
+  </div>
+
+  <div class="card2 sem-red">
+    <div class="tag">Gargalo 2 · o maior</div>
+    <h4>A conexão: 77% dos leads nunca respondem</h4>
+    <p>De cada 100 deals que chegam limpos ao CRM, só ~22 respondem alguma coisa. 54% morrem em silêncio. Não é a automação do intake que perde esses leads, é a <strong>conversa</strong> que não engata. Foi exatamente o alvo da revisão de estratégia do disparo (a cadência nova "ligação como compromisso").</p>
+    <div class="action"><b>Ação:</b> é domínio do <b>disparo-comercial</b>. Já mexemos na copy (V2) e no timing; o próximo passo é medir se a cadência nova subiu a conexão e atacar o meio da régua, que hoje quase não gera resposta.</div>
+  </div>
+
+  <div class="card2 sem-amber">
+    <div class="tag">Gargalo 3 · perda tardia</div>
+    <h4>No-show: ~45% não comparecem à consultoria</h4>
+    <p>Quase metade de quem agenda não aparece. É a perda mais cara, porque acontece depois de todo o esforço de conectar e agendar. Há lembretes automáticos, mas a taxa segue alta.</p>
+    <div class="action"><b>Ação:</b> domínio do disparo/comercial. Vale revisar a régua de lembretes (e existem bugs de lembrete já mapeados na revisão do disparo para corrigir).</div>
+  </div>
+</section>
+
+<!-- ===== PONTO CEGO DA VIGILÂNCIA ===== -->
+<section>
+  <h2><span class="n">5</span>Um alerta sobre a própria vigilância</h2>
+  <div class="note">
+    <strong>A guardiã já ficou cega uma vez, em silêncio.</strong> O cron de reconciliação morreu sozinho de 29/06 a 07/07 (um caractere "&" nas URLs de webhook quebrava o carregamento do ambiente e matava o script sem avisar). Ficou 8 dias sem auditar, e ninguém soube. Já foi <strong>corrigido</strong> (o Python passou a ler o ambiente por um parser robusto), e a auditoria voltou a rodar 3x/dia. Fica o registro: a vigilância também precisa de vigilância, e por isso hoje há um monitor de saúde do próprio intake rodando a cada 5 min.
+  </div>
+</section>
+
+<!-- ===== RESUMO / PRÓXIMOS PASSOS ===== -->
+<section>
+  <h2><span class="n">6</span>Em uma tabela</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Etapa</th><th>Dono</th><th>Estado</th><th>Número</th></tr>
+    <tr><td>Meta → formulário</td><td>@ad-midas</td><td><span class="chip gray">ponto cego</span></td><td>não medido</td></tr>
+    <tr><td>Recebimento (AC/Typebot/XQUIZ → app)</td><td>lead-intake</td><td><span class="chip g">saudável</span></td><td>active, online</td></tr>
+    <tr><td>Fila de processamento</td><td>worker nativo</td><td><span class="chip g">saudável</span></td><td>0 presos</td></tr>
+    <tr><td>Criação do deal</td><td>lead-intake</td><td><span class="chip g">saudável</span></td><td>288/288, perda 0</td></tr>
+    <tr><td>Rotação de SDR</td><td>lead-intake</td><td><span class="chip g">saudável</span></td><td>0 sem dono</td></tr>
+    <tr><td>Cadência WhatsApp + conexão</td><td>disparo-comercial</td><td><span class="chip r">gargalo</span></td><td>~22,5% conexão</td></tr>
+    <tr><td>Comparecimento à consultoria</td><td>SDR/closer</td><td><span class="chip a">atenção</span></td><td>~45% no-show</td></tr>
+  </table></div>
+  <p style="margin-top:22px"><strong>Conclusão:</strong> a automação do intake (o que a guardiã cobre) está entre as partes mais saudáveis da operação. Os gargalos que você sente estão no <strong>topo</strong> (precisa a @ad-midas medir) e na <strong>conversa com o lead</strong> (o disparo, onde já estamos trabalhando). Se você quiser, o próximo passo natural é eu acionar a @ad-midas para fechar o número do topo e finalmente enxergar o funil inteiro, de ponta a ponta.</p>
+</section>
+
+</main>
+
+<footer>OMNI BRASIL · GUARDIÃO DE LEADS · FLUXO DE AUTOMAÇÕES · 16/07/2026 · CONFIDENCIAL</footer>
+
+<script>
+function tryLogin(){
+  if(document.getElementById('pwd').value==='omni777'){document.body.classList.remove('locked');}
+  else{document.getElementById('gerr').style.display='block';}
+}
+</script>
+</body>
+</html>
