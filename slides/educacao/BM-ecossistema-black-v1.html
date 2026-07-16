@@ -158,7 +158,7 @@
   .product-mark::after { background: linear-gradient(90deg, var(--gold-30), transparent); }
 
   .category {
-    font-family: var(--font-body); font-size: 11px; font-weight: 600;
+    font-family: var(--font-body); font-size: 12.5px; font-weight: 700;
     letter-spacing: 6px; text-transform: uppercase; color: var(--gold);
     display: flex; align-items: center; gap: 16px;
   }
@@ -179,7 +179,7 @@
     animation: shimmer 5.5s linear infinite;
   }
   @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -20% 0; } }
-  .subline { font-size: clamp(13px, 1.4vw, 17px); color: var(--cream-70); font-weight: 300; max-width: 820px; line-height: 1.7; }
+  .subline { font-size: clamp(15px, 1.6vw, 19px); color: var(--cream-70); font-weight: 400; max-width: 820px; line-height: 1.7; }
   .quote {
     font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
     font-size: clamp(24px, 3.4vw, 44px); line-height: 1.35; color: var(--cream); max-width: 940px;
@@ -197,7 +197,7 @@
     content: ""; position: absolute; top: 1px; left: 50%; transform: translateX(-50%) rotate(45deg);
     width: 7px; height: 7px; background: var(--gold);
   }
-  .mono-note { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--cream-50); }
+  .mono-note { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 2px; color: var(--cream-50); }
 
   /* ============ CAPA ============ */
   .cover-logo-big {
@@ -210,7 +210,7 @@
   }
   .cover-badges { display: flex; gap: 28px; margin-top: 8px; }
   .cover-badges span {
-    font-family: var(--font-body); font-weight: 500; font-size: 10px; letter-spacing: 3px;
+    font-family: var(--font-body); font-weight: 600; font-size: 11.5px; letter-spacing: 3px;
     color: var(--cream-50); text-transform: uppercase;
     padding: 8px 18px; border: 1px solid var(--gold-15);
   }
@@ -283,7 +283,7 @@
     font-family: var(--font-body); font-weight: 600; font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase;
   }
   .case-step ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-  .case-step li { font-size: 13.5px; color: var(--cream-70); line-height: 1.5; font-weight: 300; padding-left: 18px; position: relative; }
+  .case-step li { font-size: 15px; color: var(--cream); line-height: 1.5; font-weight: 400; padding-left: 18px; position: relative; }
   .case-step li::before { content: "\25C6"; position: absolute; left: 0; font-size: 6px; top: 6px; color: var(--gold); }
   .case-step.step-hoje { border-color: var(--gold-30); background: linear-gradient(160deg, rgba(200,168,75,0.08), rgba(200,168,75,0.02)); }
   .case-step.step-hoje li { color: var(--cream); font-weight: 400; }
@@ -299,7 +299,7 @@
   .contrast-col:hover { transform: translateY(-4px); }
   .contrast-col h3 { font-family: var(--font-title); font-weight: 600; font-size: 17px; letter-spacing: 4px; text-transform: uppercase; }
   .contrast-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .contrast-col li { font-size: 14px; line-height: 1.55; color: var(--cream-70); font-weight: 300; padding-left: 22px; position: relative; }
+  .contrast-col li { font-size: 15.5px; line-height: 1.55; color: var(--cream); font-weight: 400; padding-left: 22px; position: relative; }
   .contrast-col li::before { content: "\25C6"; position: absolute; left: 0; font-size: 7px; top: 6px; }
   .col-old { background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); }
   .col-old h3 { color: var(--gray); }
@@ -353,7 +353,7 @@
   }
   .eco-node:hover { border-color: var(--gold); box-shadow: 0 0 32px rgba(200,168,75,0.15); transform: scale(1.04); }
   .eco-node h4 { font-family: var(--font-title); font-weight: 600; font-size: 14px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; }
-  .eco-node p { font-size: 11px; color: var(--cream-50); margin-top: 6px; line-height: 1.5; font-weight: 300; }
+  .eco-node p { font-size: 12.5px; color: var(--cream-70); margin-top: 6px; line-height: 1.5; font-weight: 400; }
   .eco-n1 { top: 0; left: 0; }
   .eco-n2 { top: 0; right: 0; }
   .eco-n3 { bottom: 0; left: 0; }
@@ -373,11 +373,11 @@
     transition: all 0.4s var(--ease);
   }
   .j-label {
-    position: absolute; top: calc(100% + 14px); width: 140px;
-    font-size: 11px; line-height: 1.45; color: var(--cream-70); font-weight: 400;
+    position: absolute; top: calc(100% + 14px); width: 150px;
+    font-size: 12.5px; line-height: 1.45; color: var(--cream); font-weight: 400;
   }
   .j-step:nth-child(odd) .j-label { top: auto; bottom: calc(100% + 14px); }
-  .j-label b { color: var(--gold); font-weight: 600; display: block; font-size: 10px; letter-spacing: 2px; margin-bottom: 3px; }
+  .j-label b { color: var(--gold); font-weight: 700; display: block; font-size: 11px; letter-spacing: 2px; margin-bottom: 3px; }
   .j-step:last-child .j-dot { background: var(--gold); box-shadow: 0 0 20px rgba(200,168,75,0.7); }
   .journey-branches { width: 100%; height: 96px; margin-top: -30px; }
   .journey-branches path { stroke: var(--gold-deep); stroke-width: 1; stroke-dasharray: 4 4; }
@@ -389,7 +389,7 @@
   .fork-chip {
     padding: 14px 24px; border: 1px solid var(--gold-30);
     background: linear-gradient(160deg, rgba(200,168,75,0.07), rgba(200,168,75,0.02));
-    font-size: 13px; font-weight: 500; color: var(--cream);
+    font-size: 14.5px; font-weight: 500; color: var(--cream);
     transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
   }
   .fork-chip:hover { border-color: var(--gold); transform: translateY(-3px); }
@@ -418,7 +418,7 @@
     color: var(--gold); font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 1.7;
     border-bottom: 1px solid var(--gold-30); padding-bottom: 2px;
   }
-  .force-item p { font-size: clamp(13px, 1.35vw, 15.5px); line-height: 1.6; color: var(--cream); font-weight: 300; }
+  .force-item p { font-size: clamp(15px, 1.5vw, 17px); line-height: 1.6; color: var(--cream); font-weight: 400; }
   .force-item p strong { color: var(--gold-light); font-weight: 600; }
 
   .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -430,8 +430,8 @@
   }
   .access-card:hover { border-color: var(--gold); transform: translateY(-3px); }
   .access-card h4 { font-family: var(--font-title); font-weight: 600; font-size: 16px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
-  .access-card p { font-size: 11.5px; color: var(--cream-50); line-height: 1.5; font-weight: 300; }
-  .access-card .access-sub { font-family: var(--font-body); font-size: 10px; color: var(--gold-light); letter-spacing: 1px; }
+  .access-card p { font-size: 13px; color: var(--cream-70); line-height: 1.5; font-weight: 400; }
+  .access-card .access-sub { font-family: var(--font-body); font-size: 11.5px; color: var(--gold-light); letter-spacing: 1px; }
   .access-wide { grid-column: 1 / -1; }
 
   /* ============ CERTIFICAÇÕES ============ */
@@ -439,13 +439,13 @@
   .cert-card {
     background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07);
     padding: 26px 14px; display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: var(--font-body); font-weight: 500; font-size: 13px; letter-spacing: 1.5px;
+    font-family: var(--font-body); font-weight: 600; font-size: 14px; letter-spacing: 1.5px;
     color: var(--cream-70); line-height: 1.45; min-height: 88px; text-transform: uppercase;
     position: relative; overflow: hidden;
     transition: border-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
   }
   .cert-card { flex-direction: column; gap: 6px; }
-  .cert-card .cert-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 1px; text-transform: none; font-weight: 400; }
+  .cert-card .cert-sub { font-size: 11.5px; color: var(--gold-light); letter-spacing: 1px; text-transform: none; font-weight: 400; }
   .cert-card::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -473,7 +473,7 @@
     font-family: var(--font-title); font-weight: 700;
     font-size: clamp(50px, 8vw, 104px); line-height: 1.1; letter-spacing: 1px; color: var(--cream);
   }
-  .invest-note { font-size: 13px; color: var(--cream-50); font-weight: 300; }
+  .invest-note { font-size: 14.5px; color: var(--cream-70); font-weight: 400; }
 
   .center-block { display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; gap: 26px; }
 
