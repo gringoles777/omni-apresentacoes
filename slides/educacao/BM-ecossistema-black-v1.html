@@ -359,7 +359,7 @@
   .eco-n4 { bottom: 0; right: 0; }
 
   /* ============ JORNADA ============ */
-  .journey { width: 100%; max-width: 1150px; display: flex; flex-direction: column; gap: 30px; margin-top: 8px; }
+  .journey { width: 100%; max-width: 1150px; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
   .journey-line { display: flex; align-items: flex-start; position: relative; padding: 64px 0; }
   .journey-track {
     position: absolute; top: 72px; left: 7%; right: 7%; height: 2px;
@@ -378,6 +378,8 @@
   .j-step:nth-child(odd) .j-label { top: auto; bottom: calc(100% + 14px); }
   .j-label b { color: var(--gold); font-weight: 600; display: block; font-size: 10px; letter-spacing: 2px; margin-bottom: 3px; }
   .j-step:last-child .j-dot { background: var(--gold); box-shadow: 0 0 20px rgba(200,168,75,0.7); }
+  .journey-branches { width: 100%; height: 96px; margin-top: -30px; }
+  .journey-branches path { stroke: var(--gold-deep); stroke-width: 1; stroke-dasharray: 4 4; }
   .journey-fork { display: flex; align-items: center; justify-content: center; gap: 18px; }
   .journey-fork .fork-label {
     font-family: var(--font-body); font-weight: 600; font-size: 10px; letter-spacing: 3px;
@@ -428,6 +430,8 @@
   .access-card:hover { border-color: var(--gold); transform: translateY(-3px); }
   .access-card h4 { font-family: var(--font-title); font-weight: 600; font-size: 16px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
   .access-card p { font-size: 11.5px; color: var(--cream-50); line-height: 1.5; font-weight: 300; }
+  .access-card .access-sub { font-family: var(--font-body); font-size: 10px; color: var(--gold-light); letter-spacing: 1px; }
+  .access-wide { grid-column: 1 / -1; }
 
   /* ============ CERTIFICAÇÕES ============ */
   .cert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; max-width: 1020px; }
@@ -439,6 +443,8 @@
     position: relative; overflow: hidden;
     transition: border-color 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
   }
+  .cert-card { flex-direction: column; gap: 6px; }
+  .cert-card .cert-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 1px; text-transform: none; font-weight: 400; }
   .cert-card::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
@@ -664,20 +670,23 @@
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
       <span class="category" data-reveal style="--d:0s">O mapa da jornada</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">Sua jornada dentro <span class="hl">da Black</span>.</h2>
+      <h2 class="headline" data-reveal style="--d:0.15s">Sua jornada no primeiro mês <span class="hl">no Ecossistema</span>.</h2>
       <div class="journey" data-reveal style="--d:0.35s">
         <div class="journey-line">
           <div class="journey-track"></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>01</b>Liberação dos sistemas e da inteligência artificial</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>02</b>Diversos treinamentos gravados</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>03</b>Conteúdos estratégicos iniciais</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>04</b>Reunião individual com Michael Arruda: alinhamento de estratégia</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>05</b>Execução de todas as tarefas combinadas</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>06</b>Gestora de suporte: auxílio e dúvidas sobre as tarefas</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>07</b>Reunião com o mentor Faixa Ouro</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>01</b>Reunião de liberação dos sistemas de inteligência artificial</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>02</b>Acesso a treinamentos gravados</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>03</b>Reunião individual com Michael Arruda: alinhamento de estratégia</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>04</b>Execução das tarefas combinadas</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>05</b>Gestora de suporte: auxílio e dúvidas sobre as tarefas</div></div>
+          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>06</b>Reunião com o mentor Faixa Ouro</div></div>
         </div>
+        <svg class="journey-branches" viewBox="0 0 100 12" preserveAspectRatio="none">
+          <path d="M91.7 0 L91.7 6 L34.5 12" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M91.7 0 L91.7 6 L50 12" fill="none" vector-effect="non-scaling-stroke"/>
+          <path d="M91.7 0 L91.7 6 L65.5 12" fill="none" vector-effect="non-scaling-stroke"/>
+        </svg>
         <div class="journey-fork">
-          <span class="fork-label">A partir daqui &#8594;</span>
           <div class="fork-chip">Trabalhar com empresas</div>
           <div class="fork-chip">Atendimentos individuais</div>
           <div class="fork-chip">Mentorias em grupo</div>
@@ -695,8 +704,9 @@
         <img src="assets-eco-black/print-simone-pessoas.png" alt="Depoimento de mentoranda sobre reunião com mentor" class="wa-print" data-reveal style="--d:0.2s">
         <div class="force-list">
           <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p>Sua primeira reunião individual é com o <strong>Michael Arruda</strong>: o mapa exato do seu próximo passo.</p></div>
-          <div class="force-item" data-reveal style="--d:0.5s"><span class="fi-marker">02</span><p><strong>Acesso livre às reuniões individuais</strong> para quem está com as tarefas em dia. Quem faz, tem a gente sem limite.</p></div>
-          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">03</span><p><strong>Revisão estratégica a cada trimestre</strong> e 1 aula ao vivo por semana com mentores especialistas.</p></div>
+          <div class="force-item" data-reveal style="--d:0.5s"><span class="fi-marker">02</span><p><strong>Mentorias individuais ilimitadas.</strong> Pra quem faz, a gente também faz o que estiver ao nosso alcance.</p></div>
+          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">03</span><p><strong>Aulas semanais</strong> de mentorias estratégicas.</p></div>
+          <div class="force-item" data-reveal style="--d:0.8s"><span class="fi-marker">04</span><p><strong>Reunião estratégica trimestral.</strong> Para alinhamento de estratégias e expectativas.</p></div>
         </div>
       </div>
     </div>
@@ -737,21 +747,23 @@
       <div class="force-split">
         <img src="assets-eco-black/print-kenia-acesso.png" alt="Mensagem no grupo sobre ingressos de evento para os Blacks" class="wa-print" data-reveal style="--d:0.2s">
         <div class="access-grid">
-          <div class="access-card" data-reveal style="--d:0.35s"><h4>Legacy</h4><p>A imersão que vira chave de identidade</p></div>
-          <div class="access-card" data-reveal style="--d:0.45s"><h4>Mentoring Day</h4><p>Negócios, experiências e amizades para a vida toda</p></div>
-          <div class="access-card" data-reveal style="--d:0.55s"><h4>MTS</h4><p>Make the Stage: o palco como alavanca de autoridade</p></div>
-          <div class="access-card" data-reveal style="--d:0.65s"><h4>Oportunidades</h4><p>Eventos, ingressos e portas que só quem está dentro recebe</p></div>
+          <div class="access-card" data-reveal style="--d:0.35s"><h4>Legacy ilimitado</h4><p>A imersão que vira chave de identidade</p></div>
+          <div class="access-card" data-reveal style="--d:0.42s"><h4>Legacy Família</h4><span class="access-sub">(2 pessoas por ano)</span><p>Para transformar o ambiente da sua família</p></div>
+          <div class="access-card" data-reveal style="--d:0.49s"><h4>Mentoring Day</h4><p>Negócios, experiências e amizades para a vida toda</p></div>
+          <div class="access-card" data-reveal style="--d:0.56s"><h4>MTS</h4><p>Make the Stage: o palco como alavanca de autoridade</p></div>
+          <div class="access-card access-wide" data-reveal style="--d:0.63s"><h4>Oportunidades</h4><p>Eventos, ingressos e portas que só quem está dentro recebe</p></div>
         </div>
       </div>
     </div>
 
     <!-- SLIDE 13: CERTIFICAÇÕES -->
-    <div class="slide">
+    <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
       <span class="category" data-reveal style="--d:0s">Especializações</span>
       <h2 class="headline" data-reveal style="--d:0.15s">Para dominar <span class="hl">cada frente</span>.</h2>
+      <p class="mono-note" data-reveal style="--d:0.22s">( TREINAMENTOS GRAVADOS )</p>
       <div class="cert-grid">
-        <div class="cert-card" data-reveal style="--d:0.3s">Make the Stage</div>
+        <div class="cert-card" data-reveal style="--d:0.3s">Make the Stage<span class="cert-sub">(imersão ao vivo)</span></div>
         <div class="cert-card" data-reveal style="--d:0.38s">HypnoKids Intensivo</div>
         <div class="cert-card" data-reveal style="--d:0.46s">Formação de Mentores</div>
         <div class="cert-card" data-reveal style="--d:0.54s">Imersão Médica</div>
