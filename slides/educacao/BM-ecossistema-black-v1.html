@@ -254,6 +254,7 @@
   }
   .video-hero span { font-family: var(--font-title); font-size: 15px; letter-spacing: 4px; color: var(--cream-70); text-transform: uppercase; }
 
+  .video-hero-sm { width: min(600px, 58vw); }
   #video-modal {
     display: none; position: fixed; inset: 0; z-index: 500;
     background: rgba(5,5,5,0.95);
@@ -517,7 +518,7 @@
 <!-- ============ MODAL DE VÍDEO ============ -->
 <div id="video-modal">
   <button id="video-close">FECHAR &#10005;</button>
-  <video id="video-player" controls preload="metadata" src="https://go.omnihypnosis.com.br/videos/depoimentos-iniciais-black.mp4"></video>
+  <video id="video-player" controls preload="metadata"></video>
 </div>
 
 <div id="main">
@@ -530,7 +531,7 @@
   </div>
   <div class="brand-header">OMNI BRASIL</div>
   <div class="footer-tag">ECOSSISTEMA BLACK &nbsp;//&nbsp; OMNI BRASIL</div>
-  <div class="counter" id="counter"><b>01</b> / 19</div>
+  <div class="counter" id="counter"><b>01</b> / 21</div>
 
   <div class="slides">
 
@@ -578,7 +579,7 @@
       <div class="product-mark">ECOSSISTEMA BLACK</div>
       <span class="category" data-reveal style="--d:0s">Quem já atravessou</span>
       <h2 class="headline" data-reveal style="--d:0.15s">Pessoas exatamente <span class="hl">como você</span>.</h2>
-      <div class="video-hero" id="video-open" data-reveal style="--d:0.35s">
+      <div class="video-hero" data-video="https://go.omnihypnosis.com.br/videos/depoimentos-iniciais-black.mp4" data-reveal style="--d:0.35s">
         <div class="play">&#9654;</div>
         <span>Depoimentos Black</span>
       </div>
@@ -827,6 +828,28 @@
       </div>
     </div>
 
+    <!-- SLIDE 18: OBJEÇÃO DE PREÇO — JEFFERSON -->
+    <div class="slide slide-center">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <span class="category" data-reveal style="--d:0s">Uma decisão</span>
+      <h2 class="headline" data-reveal style="--d:0.15s; font-size: clamp(20px, 2.6vw, 34px);">Você sabe o quanto vai investir.<br><span class="hl">Mas não sabe o quanto uma decisão pode transformar a sua vida.</span></h2>
+      <div class="video-hero video-hero-sm" data-video="https://go.omnihypnosis.com.br/videos/depoimento-jefferson.mp4" data-reveal style="--d:0.35s">
+        <div class="play">&#9654;</div>
+        <span>Depoimento Jefferson</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 19: FÉ — MARIANA -->
+    <div class="slide slide-center">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <span class="category" data-reveal style="--d:0s">Fé</span>
+      <h2 class="headline" data-reveal style="--d:0.15s; font-size: clamp(20px, 2.6vw, 34px);">Quando a sua fé mata os seus medos,<br><span class="hl">milagres acontecem.</span></h2>
+      <div class="video-hero video-hero-sm" data-video="https://go.omnihypnosis.com.br/videos/depoimento-mariana.mp4" data-reveal style="--d:0.35s">
+        <div class="play">&#9654;</div>
+        <span>Depoimento Mariana</span>
+      </div>
+    </div>
+
     <!-- SLIDE 18: QUEM ENTRA -->
     <div class="slide">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
@@ -843,7 +866,7 @@
       <div class="product-mark">ECOSSISTEMA BLACK</div>
       <div class="center-block">
         <img src="black-ecossistema-logo-gold.png" alt="" data-reveal style="--d:0s; width: 150px;">
-        <h2 class="headline" data-reveal style="--d:0.2s; font-size: clamp(30px, 4.8vw, 58px);">Sua travessia<br><span class="hl gold-shimmer">começa hoje</span>.</h2>
+        <h2 class="headline" data-reveal style="--d:0.2s; font-size: clamp(26px, 4.2vw, 52px);">Faça a sua aplicação,<br><span class="hl gold-shimmer">e não desista dos seus sonhos.</span></h2>
         <div class="divider" data-reveal style="--d:0.4s"></div>
       </div>
     </div>
@@ -879,10 +902,16 @@
   // ============ MODAL DE VÍDEO ============
   const modal = document.getElementById('video-modal');
   const player = document.getElementById('video-player');
-  document.getElementById('video-open').addEventListener('click', function(e) {
-    e.stopPropagation();
+  function openVideo(src) {
+    if (player.getAttribute('src') !== src) player.setAttribute('src', src);
     modal.classList.add('open');
     player.play();
+  }
+  document.querySelectorAll('[data-video]').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openVideo(el.getAttribute('data-video'));
+    });
   });
   function closeVideo() {
     modal.classList.remove('open');
