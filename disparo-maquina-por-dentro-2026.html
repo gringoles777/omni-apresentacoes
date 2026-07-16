@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>A Máquina de Disparo, por dentro — OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0D0D; --dark:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E; --gold-data:#AE8F38;
+  --teal:#2A9D8F; --ink:#F5F0E8; --ink-70:rgba(245,240,232,.70); --ink-50:rgba(245,240,232,.50);
+  --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+  --teal-10:rgba(42,157,143,.10); --red:#C96A5A; --amber:#D9A441;
+  --font:'Oswald',sans-serif; --body:'Inter',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65;font-size:16px}
+a{color:var(--gold)}
+#gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+body:not(.locked) #gate{display:none}
+#gate .glock{font-size:40px}
+#gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+#gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-50);text-transform:uppercase}
+#gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-30);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+#gate input:focus{border-color:var(--gold)}
+#gate button{font-family:var(--font);background:var(--gold);color:#000;border:none;padding:12px 34px;border-radius:8px;font-size:15px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+#gate .gerr{color:var(--red);font-size:13px;font-family:var(--mono);display:none}
+body.locked main,body.locked header{display:none}
+
+header{border-bottom:1px solid var(--gold-20);padding:38px 24px 30px;text-align:center}
+header .brand{font-family:var(--font);font-weight:700;font-size:20px;letter-spacing:6px;color:var(--gold);text-transform:uppercase}
+header .est{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--ink-50);margin-top:4px}
+header h1{font-family:var(--font);font-weight:600;font-size:clamp(25px,4vw,40px);margin-top:22px;line-height:1.2}
+header .sub{color:var(--ink-70);max-width:800px;margin:12px auto 0;font-size:15px}
+header .meta{font-family:var(--mono);font-size:12px;color:var(--ink-50);margin-top:16px;letter-spacing:1px}
+
+main{max-width:1080px;margin:0 auto;padding:20px 24px 90px}
+section{margin-top:60px}
+h2{font-family:var(--font);font-weight:600;font-size:25px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+h2 .n{font-family:var(--mono);font-size:14px;color:var(--ink-50);border:1px solid var(--gold-30);border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+h3{font-family:var(--font);font-weight:500;font-size:19px;margin:30px 0 10px;color:var(--gold-light)}
+p{color:var(--ink-70);margin-top:10px;max-width:900px}
+strong{color:var(--ink)}
+.lead{font-size:17px;color:var(--ink)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:26px}
+.tile{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:22px 20px}
+.tile .v{font-family:var(--font);font-weight:600;font-size:36px;line-height:1;color:var(--gold)}
+.tile .v.teal{color:var(--teal)} .tile .v.red{color:var(--red)} .tile .v.amber{color:var(--amber)}
+.tile .l{font-size:13px;color:var(--ink-70);margin-top:10px;line-height:1.45}
+.tile .s{font-family:var(--mono);font-size:11px;color:var(--ink-50);margin-top:8px}
+
+.robos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:22px}
+.robo{background:var(--dark);border:1px solid var(--gold-20);border-radius:10px;padding:16px 18px}
+.robo .rn{font-family:var(--font);font-size:16px;color:var(--gold-light)}
+.robo .rc{font-family:var(--mono);font-size:10.5px;color:var(--ink-50);margin-top:2px}
+.robo p{font-size:13px;margin-top:8px}
+
+/* régua vertical */
+.flow{margin-top:28px}
+.step{display:grid;grid-template-columns:52px 1fr;gap:18px;position:relative}
+.step .rail{display:flex;flex-direction:column;align-items:center}
+.step .dot{width:44px;height:44px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font);font-size:13px;flex:none;border:2px solid var(--sem,var(--gold-30));background:var(--bg);z-index:1;color:var(--sem,var(--gold));line-height:1}
+.step .line{width:2px;flex:1;background:var(--gold-20);margin:2px 0}
+.step:last-child .line{display:none}
+.step .card{background:var(--dark);border:1px solid var(--gold-20);border-left:3px solid var(--sem,var(--gold-deep));border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:18px;width:100%}
+.step .card .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.step .card .t{font-family:var(--font);font-size:17px;color:var(--ink)}
+.step .card .meta2{font-family:var(--mono);font-size:10.5px;letter-spacing:.3px;color:var(--ink-50);border:1px solid var(--gold-20);border-radius:20px;padding:2px 9px}
+.step .card .gat{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--sem,var(--gold));white-space:nowrap}
+.copybox{background:#000;border:1px solid var(--gold-20);border-radius:8px;padding:11px 14px;margin-top:10px;font-size:13px;color:var(--ink);white-space:pre-wrap;line-height:1.5}
+.btnsim{display:inline-block;background:var(--gold-10);border:1px solid var(--gold-30);border-radius:16px;padding:2px 11px;font-size:11.5px;color:var(--gold);margin:8px 6px 0 0;font-family:var(--mono)}
+.step .card .obs{font-size:12.5px;color:var(--ink-70);margin-top:9px}
+.sem-red{--sem:var(--red)} .sem-amber{--sem:var(--amber)} .sem-green{--sem:var(--teal)} .sem-gray{--sem:#6B6B6B}
+
+.chart{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:26px 26px 20px;margin-top:24px}
+.chart .ct{font-family:var(--font);font-size:16px;margin-bottom:4px}
+.chart .cs{font-size:12.5px;color:var(--ink-50);margin-bottom:18px;font-family:var(--mono)}
+.brow{display:grid;grid-template-columns:190px 1fr;align-items:center;gap:12px;margin-top:9px}
+.brow .bl{font-size:13px;color:var(--ink-70);text-align:right;line-height:1.25}
+.brow .btrack{position:relative;height:26px}
+.brow .bar{position:absolute;left:0;top:0;height:26px;border-radius:0 4px 4px 0;min-width:3px}
+.brow .bar.teal{background:var(--teal)} .brow .bar.gold{background:var(--gold-data)} .brow .bar.red{background:var(--red)} .brow .bar.dim{background:var(--texture)}
+.brow .bv{position:absolute;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:12px;color:var(--ink);white-space:nowrap}
+.refline{border-top:1px dashed var(--gold-30);margin-top:14px;padding-top:8px;font-family:var(--mono);font-size:11.5px;color:var(--ink-50)}
+
+.card2{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:20px 24px;margin-top:16px;border-left:3px solid var(--sem,var(--gold))}
+.card2 h4{font-family:var(--font);font-weight:500;font-size:18px;color:var(--ink)}
+.card2 .tag{font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:var(--sem,var(--gold));text-transform:uppercase}
+.card2 p{font-size:14.5px}
+.card2 .action{margin-top:10px;font-size:13.5px;color:var(--ink-70);border-top:1px solid rgba(245,240,232,.08);padding-top:10px}
+.card2 .action b{color:var(--gold-light)}
+.note{background:var(--gold-10);border:1px solid var(--gold-30);border-radius:12px;padding:20px 24px;margin-top:26px;font-size:14.5px;color:var(--ink-70)}
+.note strong{color:var(--gold)}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 9px;border-radius:20px;letter-spacing:.5px}
+.chip.g{background:var(--teal-10);color:var(--teal);border:1px solid rgba(42,157,143,.4)}
+.chip.r{background:rgba(201,106,90,.12);color:var(--red);border:1px solid rgba(201,106,90,.4)}
+.chip.a{background:rgba(217,164,65,.12);color:var(--amber);border:1px solid rgba(217,164,65,.4)}
+footer{border-top:1px solid var(--gold-20);margin-top:80px;padding:28px 24px;text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--ink-50);letter-spacing:1px}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="glock">📡</div>
+  <div class="glogo">OMNI Brasil</div>
+  <div class="gsub">Máquina de Disparo · Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="senha" onkeydown="if(event.key==='Enter')tryLogin()">
+  <button onclick="tryLogin()">Entrar</button>
+  <div class="gerr" id="gerr">Senha incorreta.</div>
+</div>
+
+<header>
+  <div class="brand">OMNI Brasil</div>
+  <div class="est">EST. 1979 · DISPARO-COMERCIAL 📡</div>
+  <h1>A Máquina de Disparo, por dentro</h1>
+  <div class="sub">Tudo que acontece com o lead DEPOIS que ele vira deal no CRM: cada mensagem da régua, cada gatilho automático, e exatamente onde o lead trava. Esta é a automação que eu opero, e é onde estão os gargalos de verdade.</div>
+  <div class="meta">16 · JULHO · 2026 — dados ao vivo do funil SDR-Novo (Pipedrive) e do disparo</div>
+</header>
+
+<main>
+
+<!-- ===== 1 VISÃO GERAL ===== -->
+<section>
+  <h2><span class="n">1</span>O que essa automação faz</h2>
+  <p class="lead" style="margin-top:22px">O guardião entrega o lead no CRM. A partir daí, entra a <strong>máquina de disparo</strong>: um robô que trabalha o lead por WhatsApp para ele responder e aceitar uma ligação rápida de 5 minutos, que é onde o SDR qualifica e agenda a consultoria. A régua tem <strong>5 toques</strong> (a primeira mensagem + 4 follow-ups) e uma camada de robôs que reagem quando o lead responde ou clica.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v">389</div><div class="l">leads entraram na régua nos últimos 7 dias</div><div class="s">PIPELINE SDR-NOVO · 7D</div></div>
+    <div class="tile"><div class="v red">288</div><div class="l">estão parados AGORA em "Tentativa de conectar" (recebendo a régua, sem responder)</div><div class="s">ONDE OS LEADS EMPILHAM</div></div>
+    <div class="tile"><div class="v red">~16%</div><div class="l">conectaram nos 7 dias (deflacionado; 288 ainda no meio da régua, taxa madura ~22%)</div><div class="s">CONEXÃO</div></div>
+    <div class="tile"><div class="v amber">~45%</div><div class="l">no-show: quase metade dos que agendam não comparecem à consultoria</div><div class="s">MEDIDO NA REVISÃO JUL</div></div>
+  </div>
+
+  <h3>Os robôs que compõem a máquina</h3>
+  <div class="robos">
+    <div class="robo"><div class="rn">Robô da régua</div><div class="rc">disparo_pipedrive_chatwoot.py</div><p>O coração. A cada minuto, busca as atividades de WhatsApp vencidas no Pipedrive e dispara a mensagem da etapa (M0, M-TC1..4), confirma a entrega e conclui a atividade.</p></div>
+    <div class="robo"><div class="rn">Lead-ativo</div><div class="rc">lead_ativo.py · a cada 2 min</div><p>Quando o lead PUXA a conversa (manda "agendar consultoria"), responde na hora, etiqueta e avisa o SDR.</p></div>
+    <div class="robo"><div class="rn">Handler de botões</div><div class="rc">handler_botao_vocacao.py · poller ~10s</div><p>Quando o lead clica num botão do template, responde: positivo pede o horário da ligação; negativo se despede e dá o lead como perdido.</p></div>
+    <div class="robo"><div class="rn">Detector de conexão</div><div class="rc">detectar_conexao.py · a cada 5 min</div><p>Quando o lead responde algo real, move o deal de "Tentativa" para "Conectado".</p></div>
+    <div class="robo"><div class="rn">Lembrete de reunião</div><div class="rc">lembrete_reuniao.py</div><p>Quando a consultoria é agendada, manda lembretes (24h antes, 1h antes, na hora) para reduzir o no-show.</p></div>
+    <div class="robo"><div class="rn">Vigias</div><div class="rc">monitor_instancias / auditor</div><p>Vigiam a saúde dos números de WhatsApp e auditam se o que o robô diz que enviou a Meta realmente despachou.</p></div>
+  </div>
+</section>
+
+<!-- ===== 2 A RÉGUA PASSO A PASSO ===== -->
+<section>
+  <h2><span class="n">2</span>A régua, mensagem por mensagem</h2>
+  <p>Cada toque com o gatilho que o dispara, o canal, a copy real e a observação de onde o lead trava. Copy atual (V2 "ligação como compromisso").</p>
+
+  <div class="flow">
+    <!-- M0 -->
+    <div class="step sem-amber">
+      <div class="rail"><div class="dot">M0</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">Primeira mensagem</span><span class="meta2">~3 min após virar deal · 24h</span><span class="gat">🟡 canal em contingência</span></div>
+        <div class="copybox">Oi, {nome}! Excelente dia! Aqui é {sdr}, da OMNI! Vi que você se cadastrou para realizar nossa consultoria estratégica... Posso te ligar rapidinho? Coisa de 5 minutos...</div>
+        <div class="obs"><strong>Gatilho:</strong> deal criado + trava de idade de 5 min + estágio MQL/Tentativa. <strong>Atenção:</strong> hoje o M0 sai como este template antigo (saudação padrão), porque os dois números não-oficiais caíram e forçamos tudo pelo oficial. Quando o não-oficial voltar, o M0 volta pro texto pessoal (com as 8 variações). 60% de todas as conexões nascem aqui.</div>
+      </div>
+    </div>
+    <!-- M-TC1 -->
+    <div class="step sem-green">
+      <div class="rail"><div class="dot">TC1</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">Follow-up 1 — boas-vindas</span><span class="meta2">+1 dia · template oficial (inbox Layslla)</span><span class="gat">🟢 copy V2</span></div>
+        <div class="copybox">Ótimo dia, {nome}! Aqui é da equipe do Michael Arruda, da OMNI. ...a gente faz uma ligação rápida de 5 minutos, só pra entender o seu momento e já marcar a sua consultoria. Funciona no horário que for melhor pra você, inclusive à noite...</div>
+        <span class="btnsim">Combinar meu horário</span><span class="btnsim">Agora não</span>
+        <div class="obs"><strong>Gatilho:</strong> atividade "M-TC1" vencida (lead não respondeu ao M0). É o toque com botão que mais gera clique depois do M0.</div>
+      </div>
+    </div>
+    <!-- M-TC2 -->
+    <div class="step sem-red">
+      <div class="rail"><div class="dot">TC2</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">Follow-up 2 — rotina corrida</span><span class="meta2">+4 dias · template oficial</span><span class="gat">🔴 quase morto</span></div>
+        <div class="copybox">Oi, {nome}, sei que na rotina de quem trabalha o dia inteiro quase não sobra tempo... uma conversa rápida de 5 minutos, por telefone... É no horário que você escolher, inclusive à noite.</div>
+        <span class="btnsim">Marcar minha ligação</span><span class="btnsim">Não tenho interesse</span>
+        <div class="obs"><strong>Gatilho:</strong> atividade "M-TC2" vencida. <strong>Trava:</strong> o meio da régua quase não gera resposta (na medição, 2 respostas em 400 conversas) e o buraco de 4 dias esfria o lead.</div>
+      </div>
+    </div>
+    <!-- M-TC3 -->
+    <div class="step sem-red">
+      <div class="rail"><div class="dot">TC3</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">Follow-up 3 — escolha o horário</span><span class="meta2">+2 dias · template oficial</span><span class="gat">🔴 quase morto</span></div>
+        <div class="copybox">Olá, {nome}, não quero te encher de mensagens... qual seria o melhor momento pra gente conversar 5 minutos por telefone... Pode ser sábado de manhã, depois das 20h30...</div>
+        <span class="btnsim">Tenho interesse</span><span class="btnsim">Não é pra mim</span>
+        <div class="obs"><strong>Gatilho:</strong> atividade "M-TC3" vencida. Poucas respostas.</div>
+      </div>
+    </div>
+    <!-- M-TC4 -->
+    <div class="step sem-amber">
+      <div class="rail"><div class="dot">TC4</div><div class="line"></div></div>
+      <div class="card">
+        <div class="top"><span class="t">Follow-up 4 — encerramento honesto</span><span class="meta2">+3 dias · template oficial</span><span class="gat">🟡 breakup</span></div>
+        <div class="copybox">Oi, {nome}, vou ser honesto com você: não tem vaga expirando nem pressão nenhuma aqui... se um dia fizer sentido, é só me chamar neste mesmo número...</div>
+        <span class="btnsim">Quero conversar</span><span class="btnsim">Pode encerrar</span>
+        <div class="obs"><strong>Gatilho:</strong> atividade "M-TC4" vencida. É o último toque. Depois dele, o lead sem resposta é dado como perdido (encerrou contato).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3 CAMADA INTERATIVA ===== -->
+<section>
+  <h2><span class="n">3</span>O que acontece quando o lead reage</h2>
+  <p>A régua acima é o "empurrão". Quando o lead responde ou clica, entram os robôs reativos, em tempo quase real.</p>
+
+  <div class="card2 sem-green">
+    <div class="tag">clicou num botão do template</div>
+    <h4>Handler responde em ~10 segundos</h4>
+    <p>Botão positivo ("Combinar meu horário" etc.) → o robô responde na hora pedindo o melhor horário da ligação, e o SDR (David/Layslla) assume a conversa na própria inbox oficial. Botão negativo → despedida educada e o deal é dado como perdido. <strong>Novo desde julho:</strong> acabou o "pulo do link" que antes jogava o lead pra outro número, agora a conversa fica toda num lugar só.</p>
+  </div>
+  <div class="card2 sem-green">
+    <div class="tag">respondeu texto / puxou a conversa</div>
+    <h4>Lead-ativo assume e avisa o SDR</h4>
+    <p>Se o lead manda "quero agendar" no número, o robô responde na hora (pede a ligação no comercial, ou um áudio fora do horário), etiqueta o lead como "alerta" e pinga o SDR no Google Chat. Não deixa o lead quente esfriar esperando.</p>
+  </div>
+  <div class="card2 sem-green">
+    <div class="tag">respondeu algo real</div>
+    <h4>Detector move para "Conectado"</h4>
+    <p>Quando o lead responde de verdade (não só "ok"), o deal sobe de "Tentativa de conectar" para "Conectado" automaticamente, e o robô para de mandar os follow-ups (não incomoda quem já respondeu).</p>
+  </div>
+  <div class="card2 sem-amber">
+    <div class="tag">consultoria agendada</div>
+    <h4>Lembretes automáticos contra o no-show</h4>
+    <p>Marcada a consultoria, o robô manda lembrete 24h antes, 1h antes e na hora. Mesmo assim, ~45% não aparecem, é a perda mais cara do funil, e há bugs de lembrete já mapeados para corrigir.</p>
+  </div>
+</section>
+
+<!-- ===== 4 ONDE TRAVA ===== -->
+<section>
+  <h2><span class="n">4</span>Onde o lead trava (com número de hoje)</h2>
+  <div class="chart">
+    <div class="ct">O funil do disparo, últimos 7 dias</div>
+    <div class="cs">389 leads entraram; 288 seguem presos em Tentativa de conectar agora</div>
+    <div class="brow"><div class="bl">Entraram na régua</div><div class="btrack"><div class="bar teal" style="width:100%"></div><span class="bv" style="left:calc(100% - 40px)">389</span></div></div>
+    <div class="brow"><div class="bl">Presos em Tentativa (sem responder)</div><div class="btrack"><div class="bar red" style="width:74%"></div><span class="bv" style="left:calc(74% + 8px)">288</span></div></div>
+    <div class="brow"><div class="bl">Conectaram</div><div class="btrack"><div class="bar gold" style="width:16%"></div><span class="bv" style="left:calc(16% + 8px)">~62 · 16%</span></div></div>
+    <div class="brow"><div class="bl">Perdidos (silêncio + dado ruim)</div><div class="btrack"><div class="bar dim" style="width:19.5%"></div><span class="bv" style="left:calc(19.5% + 8px)">76</span></div></div>
+    <div class="refline">A barra vermelha é o gargalo: 288 leads recebendo a régua e não respondendo. Dos perdidos, metade é qualidade de dado (duplicado, inválido, engano), metade é silêncio.</div>
+  </div>
+
+  <div class="card2 sem-red" style="margin-top:26px">
+    <div class="tag">gargalo 1 · o maior</div>
+    <h4>A conexão: 3 de cada 4 leads nunca respondem</h4>
+    <p>A régua toca 5 vezes, mas só ~16-22% respondem alguma coisa. 60% das conexões que existem nascem já do M0 (a primeira mensagem); o meio da régua (TC2, TC3) quase não gera resposta. É o ponto onde mais se perde.</p>
+    <div class="action"><b>O que já fizemos:</b> a revisão de estratégia (julho) trocou a copy para a V2 (sem escassez fake, ligação no horário do lead). <b>O que falta:</b> medir se a V2 subiu a conexão e reforçar o M0 (que é onde a maioria responde).</div>
+  </div>
+  <div class="card2 sem-red">
+    <div class="tag">gargalo 2 · entrega</div>
+    <h4>Números ruins queimam a entrega</h4>
+    <p>Boa parte dos leads do fundo da régua tem número inválido/fora do WhatsApp (a Meta rejeita como "indisponível"). Isso não perde só a mensagem: mandar muito para número morto <strong>desgasta a reputação do número oficial</strong>, do qual hoje dependemos 100% (os não-oficiais caíram).</p>
+    <div class="action"><b>Ação:</b> validar/higienizar os números antes de disparar, para proteger o número oficial e melhorar a entrega.</div>
+  </div>
+  <div class="card2 sem-amber">
+    <div class="tag">gargalo 3 · o mais caro</div>
+    <h4>No-show: ~45% não comparecem</h4>
+    <p>Depois de todo o esforço de conectar e agendar, quase metade não aparece na consultoria. Os lembretes existem, mas a taxa segue alta, e há bugs de lembrete mapeados (ex: o lembrete que diz "amanhã" no próprio dia).</p>
+    <div class="action"><b>Ação:</b> corrigir os bugs de lembrete e revisar a régua de confirmação da consultoria.</div>
+  </div>
+</section>
+
+<!-- ===== 5 CONTINGÊNCIA ATUAL ===== -->
+<section>
+  <h2><span class="n">5</span>Uma contingência que vale saber</h2>
+  <div class="note">
+    <strong>Hoje a máquina está rodando em modo de contingência.</strong> Os dois números de WhatsApp não-oficiais (David e Layslla) caíram/bloquearam, então forçamos <strong>tudo pelo canal oficial</strong> (Meta). Isso mantém a operação de pé sem lead perdido, mas com dois efeitos: (1) a primeira mensagem (M0) sai como o template antigo, não com o texto pessoal do não-oficial; (2) todo o volume se concentra no número oficial, que é resistente a bloqueio, mas tem limite da Meta se o ritmo subir demais. Quando os não-oficiais voltarem, é um clique para voltar ao normal. <strong>O número do David já voltou;</strong> vale religar o não-oficial dele para o M0 recuperar a copy boa.
+  </div>
+</section>
+
+<!-- ===== 6 RESUMO ===== -->
+<section>
+  <h2><span class="n">6</span>Em uma frase</h2>
+  <p class="lead">A máquina de disparo está de pé e funcionando (entrega, follow-ups, robôs reativos, lembretes), mas o funil aperta em <strong>três pontos, todos meus para atacar</strong>: a <strong>conexão</strong> (a maioria nunca responde, já mexemos na copy), a <strong>qualidade dos números</strong> (que queima a entrega) e o <strong>no-show</strong> (o mais caro). O intake que traz o lead até aqui está limpo; o trabalho de reduzir gargalo é todo daqui pra frente. Se você quiser, o próximo passo concreto é medir a conexão com a copy V2 nova e atacar o M0, que é onde a maioria responde.</p>
+</section>
+
+</main>
+
+<footer>OMNI BRASIL · DISPARO-COMERCIAL · A MÁQUINA POR DENTRO · 16/07/2026 · CONFIDENCIAL</footer>
+
+<script>
+function tryLogin(){
+  if(document.getElementById('pwd').value==='omni777'){document.body.classList.remove('locked');}
+  else{document.getElementById('gerr').style.display='block';}
+}
+</script>
+</body>
+</html>
