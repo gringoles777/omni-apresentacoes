@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Reorganização · Sistema, Empresa e Rotina · OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --dark:#0D0D0D; --elevated:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.7); --cream-50:rgba(245,240,232,.5);
+  --teal:#2A9D8F; --red:#E05C5C;
+  --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-30:rgba(200,168,75,.30);
+  --grad-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  --display:'Oswald','Arial Black',sans-serif; --serif:'DM Serif Display',Georgia,serif;
+  --mono:'IBM Plex Mono','Courier New',monospace; --body:'Inter','Open Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--cream);font-family:var(--body);line-height:1.65;font-size:clamp(.9rem,1.2vw,1.05rem)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.label{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.6rem,6vw,4.6rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.08;margin:18px 0 10px;background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.04em;text-transform:uppercase;color:var(--cream);margin-bottom:8px}
+h2 em{font-style:normal;color:var(--gold)}
+h3{font-family:var(--body);font-weight:700;font-size:1.02rem;color:var(--gold-light)}
+.section{padding:64px 0;border-top:1px solid var(--gold-15)}
+.hero{padding:96px 0 72px;text-align:center;background:radial-gradient(ellipse at 50% -20%,rgba(200,168,75,.14),transparent 60%)}
+.hero p.sub{font-family:var(--serif);font-size:clamp(1.1rem,2vw,1.45rem);color:var(--cream-70);max-width:680px;margin:0 auto}
+.kicker{margin-top:26px;display:inline-block;padding:9px 18px;border:1px solid var(--gold-30);border-radius:999px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--cream-70)}
+.grid{display:grid;gap:14px;margin-top:28px}
+.g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:860px){.g4,.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.g4,.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--dark);border:1px solid var(--gold-15);border-radius:14px;padding:22px}
+.stat .num{font-family:var(--display);font-weight:700;font-size:clamp(1.9rem,3.4vw,2.7rem);color:var(--gold);line-height:1.1}
+.stat .cap{font-size:.82rem;color:var(--cream-70);margin-top:6px}
+.stat.bad .num{color:var(--red)}
+.stat.good .num{color:var(--teal)}
+.lead{color:var(--cream-70);max-width:760px;margin-top:6px}
+.fase{display:flex;gap:20px;margin-top:22px;align-items:flex-start}
+.fase .n{flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:var(--gold-10);border:1px solid var(--gold-30);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--gold)}
+.fase .body{flex:1;background:var(--dark);border:1px solid var(--gold-15);border-radius:14px;padding:20px 22px}
+.fase .meta{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.fase ul{margin:10px 0 0 18px;color:var(--cream-70);font-size:.92rem}
+.fase li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;margin-top:24px;font-size:.9rem}
+th{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-align:left;padding:10px 12px;border-bottom:1px solid var(--gold-30)}
+td{padding:12px;border-bottom:1px solid rgba(245,240,232,.08);color:var(--cream-70);vertical-align:top}
+td b{color:var(--cream)}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;background:var(--gold-10);border:1px solid var(--gold-30);color:var(--gold-light);white-space:nowrap}
+.decision{display:flex;gap:14px;align-items:flex-start;background:var(--dark);border:1px solid var(--gold-15);border-radius:12px;padding:16px 18px;margin-top:10px}
+.decision .ic{flex:0 0 auto;font-size:1.1rem}
+.decision p{font-size:.92rem;color:var(--cream-70)}
+.decision b{color:var(--cream)}
+.principio{border-left:3px solid var(--gold);padding:4px 0 4px 18px;margin-top:18px}
+.principio p{color:var(--cream-70);font-size:.93rem;margin-top:2px}
+.rotina-dia{display:grid;grid-template-columns:110px 1fr;gap:0;margin-top:24px;border:1px solid var(--gold-15);border-radius:14px;overflow:hidden}
+.rotina-dia>div{padding:14px 18px;border-bottom:1px solid rgba(245,240,232,.08)}
+.rotina-dia .h{font-family:var(--display);font-weight:600;color:var(--gold);background:var(--dark);text-align:right;font-size:1rem}
+.rotina-dia .d{background:#0a0a0a;color:var(--cream-70);font-size:.92rem}
+.quote{font-family:var(--serif);font-size:clamp(1.2rem,2.4vw,1.7rem);color:var(--gold-light);text-align:center;max-width:720px;margin:0 auto;line-height:1.4}
+footer{padding:56px 0 40px;text-align:center;border-top:1px solid var(--gold-15)}
+footer .tag{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;color:var(--gold)}
+footer .src{font-family:var(--mono);font-size:.68rem;color:var(--cream-50);margin-top:10px}
+a{color:var(--gold-light)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label">Relatório interno · 19 de julho de 2026</div>
+    <h1>Plano de<br>Reorganização</h1>
+    <p class="sub">Sistema AIOX, empresa e rotina de trabalho: tudo mais simples, tudo mais eficiente.</p>
+    <div class="kicker">Auditoria em 5 frentes · 173+ sessões analisadas · 2 rodadas de revisão adversarial (24 gaps corrigidos)</div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">01 · Diagnóstico</div>
+    <h2>O que a auditoria <em>encontrou</em></h2>
+    <p class="lead">Cinco agentes varreram em paralelo o repositório, o framework AIOX, o workspace, o histórico de conversas e a infraestrutura da VPS. Os números falam sozinhos.</p>
+    <div class="grid g4">
+      <div class="card stat bad"><div class="num">7.221</div><div class="cap">arquivos de node_modules versionados no git, inflando o repo</div></div>
+      <div class="card stat bad"><div class="num">1,6 GB</div><div class="cap">de binários no git, incluindo o dataset de voz do Michael (764 MB)</div></div>
+      <div class="card stat bad"><div class="num">18/45</div><div class="cap">squads mortas há 3+ meses, 40% do total ocupando atenção</div></div>
+      <div class="card stat bad"><div class="num">5</div><div class="cap">sistemas de memória paralelos guardando o mesmo fato em lugares diferentes</div></div>
+      <div class="card stat bad"><div class="num">138</div><div class="cap">entradas sujas no git status, trabalho sem commit desde 29/06</div></div>
+      <div class="card stat bad"><div class="num">570</div><div class="cap">permissões acumuladas num arquivo "local" compartilhado entre máquinas</div></div>
+      <div class="card stat bad"><div class="num">5 sem</div><div class="cap">de defasagem do INFRA.md: 10+ apps rodando sem registro, 6 fantasmas</div></div>
+      <div class="card stat good"><div class="num">~16 GB</div><div class="cap">recuperáveis no disco da VPS (backups redundantes + pasta órfã)</div></div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card"><h3>Empresa sem mapa</h3><p style="font-size:.9rem;color:var(--cream-70);margin-top:6px">Identidade em company/ congelada desde abril. Organograma, metas, funil e processos vivem em 4 lugares com datas diferentes.</p></div>
+      <div class="card"><h3>Regras que viraram letra morta</h3><p style="font-size:.9rem;color:var(--cream-70);margin-top:6px">A estrutura canônica do CLAUDE.md cita um repo que não existe mais e é violada pela própria raiz: outputs/, logs/ e 27 scripts one-shot soltos.</p></div>
+      <div class="card"><h3>Uso real do Claude</h3><p style="font-size:.9rem;color:var(--cream-70);margin-top:6px">Pico às 19h-23h, Plenamente consome ~45% do tempo interativo. Fricções: "onde parei?", gate teste/prod confuso e sessões-monstro de até 79 MB.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">02 · Princípios</div>
+    <h2>A régua de <em>todas</em> as decisões</h2>
+    <div class="principio"><h3>1. Uma fonte por tipo de coisa</h3><p>Código em apps/, dados da empresa no workspace, conhecimento na memória indexada, infra no INFRA.md. Se existe em 2 lugares, um deles morre ou vira link.</p></div>
+    <div class="principio"><h3>2. Regra escrita sem executor morre</h3><p>Toda regra nova precisa de um script, hook ou cron que a mantenha viva. Sem executor, nem escrever.</p></div>
+    <div class="principio"><h3>3. Binário pesado nunca no git</h3><p>Mídia, dataset e backup vão pro Google Drive via rclone. No git ficam código, texto e configuração.</p></div>
+    <div class="principio"><h3>4. Menos superfícies</h3><p>O que não roda há 90 dias vai pra _archive/ ou Drive. Arquivar é reversível; manter tudo ativo custa atenção pra sempre.</p></div>
+    <div class="principio"><h3>5. Automatizar o repetido, conversar sobre o novo</h3><p>O que se pede toda semana vira cron com entrega no Telegram. Sessão interativa é pra decisão e criação, não pra status.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">03 · Execução</div>
+    <h2>As <em>fases</em> do plano</h2>
+    <div class="fase"><div class="n">0</div><div class="body"><div class="meta">Hoje · 30 min · Rede de segurança</div><b>Backup completo antes de qualquer movimento.</b><ul><li>Commit das pendências legítimas + git bundle + tar dos ~130 untracked, tudo copiado pro Drive.</li><li>Aviso a Rafa, Julia e Fernanda (inclusive pra salvarem o settings.local.json de cada máquina).</li></ul></div></div>
+    <div class="fase"><div class="n">1</div><div class="body"><div class="meta">Dia 1 · 2-3h · Faxina do git e da raiz</div><b>O maior ganho por hora investida.</b><ul><li>Untrack dos 7.221 node_modules; mídia e fotos 4K vão pro Drive (política única: zero binário pesado no repo).</li><li>outputs/, logs/, operations/ e services/ saem da raiz; 27 scripts one-shot vão pro _attic.</li><li>Segredos dos .env.bak consolidados no vault e apagados; CSVs de leads fora do git (LGPD).</li><li>Triagem final: cada untracked ganha um veredito. Meta: git status com menos de 10 entradas.</li></ul></div></div>
+    <div class="fase"><div class="n">2</div><div class="body"><div class="meta">Semana 1 · 3h · AIOX enxuto</div><b>De 45 squads e 5 memórias pra algo governável.</b><ul><li>18 squads mortas arquivadas + registry atualizado; skills duplicadas e pastas legadas deletadas.</li><li>Memória: a do Claude vira o índice mestre; agent-memory absorvida; canonical-sources passa a governar os dados das squads.</li><li>settings.local.json sai do git (com coordenação multi-máquina); allowlist curada e compartilhada.</li><li>Proposta pronta de CLAUDE.md v3 corrigindo estrutura canônica, hook de sessão e regra de copy.</li></ul></div></div>
+    <div class="fase"><div class="n">3</div><div class="body"><div class="meta">Semana 2 · 3h · Empresa legível</div><b>Workspace vira o retrato fiel da OMNI.</b><ul><li>MAPA.md: um arquivo que responde "como a OMNI funciona hoje": organograma, metas, funil, produtos e painéis.</li><li>Governança: 1 sistema = 1 dono humano; ritual de gestão de segunda (~30 min) com o weekly-report como pauta.</li><li>company/ atualizada pra realidade pós-crise; outputs com ciclo de vida (YYYY-MM + _archive).</li><li>Negócio fantasma omni_hypnosis arquivado; runtime separado de documentação.</li></ul></div></div>
+    <div class="fase"><div class="n">4</div><div class="body"><div class="meta">Semana 3 · 2h · Infra confiável</div><b>Documentação que se mantém sozinha.</b><ul><li>INFRA.md gerado automaticamente por script no cron semanal: nunca mais mente.</li><li>Consolidações: dashboard v1 x v2 (via squad dash-omni), audio-motivacao, message-gateway, disparo-comercial pro repo.</li><li>Disco: ~16 GB liberados; crons mortos removidos; logs com rotação.</li></ul></div></div>
+    <div class="fase"><div class="n">5</div><div class="body"><div class="meta">Contínuo · começa hoje · Rotina com o Fable</div><b>Hábitos, não projeto.</b><ul><li>Briefing noturno às 18h30 no Telegram, antes do bloco de trabalho das 19h-23h.</li><li>1 objetivo por sessão; /goal com critério de pronto; braçal delegado a subagentes.</li><li>Skill /status: "onde parei em X?" respondido em 30 segundos.</li><li>Health-check do Plenamente ampliado pra conteúdo, filas e catálogo.</li></ul></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">04 · Rotina</div>
+    <h2>O dia com o <em>Fable</em></h2>
+    <div class="rotina-dia">
+      <div class="h">7h</div><div class="d">Morning digest no Telegram (seg-sex, já existe).</div>
+      <div class="h">18h30</div><div class="d"><b style="color:var(--cream)">Briefing noturno (novo):</b> estado dos projetos, alertas, pendências de ontem. O bloco da noite começa decidindo, não perguntando "onde parei".</div>
+      <div class="h">19h-23h</div><div class="d">Bloco de trabalho. 1 objetivo por sessão; objetivo grande vira /goal com critério mensurável ("refaça até nota 9+").</div>
+      <div class="h">Encerrar</div><div class="d">"Salva e sobe": commit, push e ponto de parada anotado na memória.</div>
+      <div class="h" style="border-bottom:none">Segunda</div><div class="d" style="border-bottom:none">Ritual de gestão (~30 min): weekly-report é a pauta. Michael + Rafa; Julia e Fernanda async.</div>
+    </div>
+    <table>
+      <tr><th>Situação</th><th>Modelo</th></tr>
+      <tr><td>Estratégia, planos, arquitetura, auditoria, conteúdo denso</td><td><span class="pill">FABLE</span></td></tr>
+      <tr><td>Dev normal, features, correções, deploy</td><td><span class="pill">OPUS</span></td></tr>
+      <tr><td>Volume mecânico: renomear, variações, filas</td><td><span class="pill">SUBAGENTES</span> o Fable delega, sem trocar de modelo na mão</td></tr>
+    </table>
+    <p class="quote" style="margin-top:40px">"O Fable orquestra, os menores executam."</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">05 · Governança</div>
+    <h2>Decisões que são <em>do Michael</em></h2>
+    <p class="lead">Todo o resto executa com autonomia, com backup antes de cada movimento. Estes 7 pontos aguardam OK explícito:</p>
+    <div class="decision"><div class="ic">⚠️</div><p><b>Dashboard v1 x v2:</b> qual morre (execução via squad dash-omni, libera ~330 MB de RAM).</p></div>
+    <div class="decision"><div class="ic">⚠️</div><p><b>Disparo-comercial pro repo:</b> sistema comercial ao vivo; janela fora dos horários de disparo, copy intocada.</p></div>
+    <div class="decision"><div class="ic">⚠️</div><p><b>Deletar do disco</b> (após cópia no Drive): rvc-tools 9,5 GB + 5 swap-backups redundantes.</p></div>
+    <div class="decision"><div class="ic">⚠️</div><p><b>Rewrite do histórico git em agosto:</b> derruba o .git de 1,2 GB pra ~100 MB, exige re-clone de todas as máquinas.</p></div>
+    <div class="decision"><div class="ic">✍️</div><p><b>Ratificar o CLAUDE.md v3</b> (proposta pronta no Anexo A do plano; só o Michael edita).</p></div>
+    <div class="decision"><div class="ic">💬</div><p><b>Sessão de ~40 min:</b> conteúdo do MAPA.md, donos por sistema e refresh do company/.</p></div>
+    <div class="decision"><div class="ic">💬</div><p><b>Ritual de segunda:</b> combinar papéis e cadência com Rafa, Julia e Fernanda.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="label">06 · Sucesso</div>
+    <h2>Como saber que <em>funcionou</em> (medir em 30 dias)</h2>
+    <div class="grid g3">
+      <div class="card stat good"><div class="num">&lt;10</div><div class="cap">entradas no git status (hoje: 138)</div></div>
+      <div class="card stat good"><div class="num">≤27</div><div class="cap">squads visíveis, registry batendo (hoje: 45, divergente)</div></div>
+      <div class="card stat good"><div class="num">&lt;7 dias</div><div class="cap">de idade do INFRA.md, sempre (hoje: 5 semanas)</div></div>
+      <div class="card stat good"><div class="num">Zero</div><div class="cap">segredo ou dado de lead versionado no git</div></div>
+      <div class="card stat good"><div class="num">Raras</div><div class="cap">sessões acima de 20 MB (hoje: 22 grandes)</div></div>
+      <div class="card stat good"><div class="num">30 seg</div><div class="cap">pra responder "onde parei em X?" via /status</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="tag">OMNI Brasil · Transformação que se prova</div>
+    <div class="src">Plano completo: workspace/businesses/omni_brasil/outputs/plano-reorganizacao-sistema-2026-07/ (PLANO.md + ROTINA.md) · commit 0dc8e5d9</div>
+  </div>
+</footer>
+
+</body>
+</html>
