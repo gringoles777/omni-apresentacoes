@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aulão Bancários FPH — Plano de Lançamento | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --dark:#0D0D0D; --elevated:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --cream-50:rgba(245,240,232,.50);
+  --navy:#0A1628; --teal:#2A9D8F; --gray:#6B6B6B;
+  --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-30:rgba(200,168,75,.30);
+  --gradient-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  --red:#E05C5C; --red-10:rgba(224,92,92,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.65;font-size:16px}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;border-bottom:1px solid var(--gold-10)}
+
+/* HERO */
+.hero{padding:110px 0 80px;background:radial-gradient(ellipse at 50% -20%,rgba(200,168,75,.12),transparent 60%),var(--black);text-align:center;border-bottom:1px solid var(--gold-30)}
+.hero .est{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(34px,6vw,60px);letter-spacing:.04em;text-transform:uppercase;line-height:1.12}
+.hero h1 .goldtxt{background:var(--gradient-gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-family:'DM Serif Display',serif;font-style:italic;font-weight:400;font-size:clamp(18px,2.6vw,24px);color:var(--cream-70);margin-top:18px}
+.hero .meta-strip{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:40px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-30);padding:10px 18px;background:var(--gold-10)}
+
+/* SECTION TITLES */
+.sec-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(26px,4vw,38px);letter-spacing:.04em;text-transform:uppercase;margin-bottom:34px}
+h3{font-family:'Oswald',sans-serif;font-weight:500;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-light);margin-bottom:14px}
+
+/* CARDS / GRID */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--elevated);border:1px solid var(--gold-15);padding:28px}
+.card .k{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.card .v{font-size:15px;color:var(--cream)}
+.card .v strong{color:var(--gold-light)}
+
+/* TABLES */
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:640px}
+th{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-align:left;padding:12px 14px;border-bottom:1px solid var(--gold-30);background:var(--gold-10)}
+td{padding:13px 14px;border-bottom:1px solid var(--gold-10);color:var(--cream-70);vertical-align:top}
+td strong{color:var(--cream)}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;padding:3px 10px;border:1px solid var(--gold-30);color:var(--gold);white-space:nowrap}
+.tag.teal{border-color:rgba(42,157,143,.5);color:var(--teal)}
+.tag.red{border-color:rgba(224,92,92,.5);color:var(--red)}
+
+/* TIMELINE */
+.day{background:var(--elevated);border:1px solid var(--gold-15);border-left:3px solid var(--gold);margin-bottom:26px}
+.day.today{border-left-color:var(--gold-light);box-shadow:0 0 40px rgba(200,168,75,.08)}
+.day.d0{border-left-color:var(--teal)}
+.day-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;padding:20px 26px;border-bottom:1px solid var(--gold-10);background:var(--gold-10)}
+.day-head .dd{font-family:'Oswald',sans-serif;font-weight:700;font-size:22px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-light)}
+.day-head .dl{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-50)}
+.day ul{list-style:none;padding:18px 26px}
+.day li{padding:9px 0 9px 30px;position:relative;font-size:15px;color:var(--cream-70)}
+.day li::before{content:'';position:absolute;left:4px;top:16px;width:9px;height:9px;border:2px solid var(--gold);background:transparent}
+.day li strong{color:var(--cream)}
+.day li .who{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:.04em}
+
+/* GATES */
+.gate{background:var(--navy);border:1px solid var(--gold-30);padding:24px 28px;margin:18px 0;display:flex;gap:18px;align-items:flex-start}
+.gate .gid{font-family:'Oswald',sans-serif;font-weight:700;font-size:20px;color:var(--gold-light);letter-spacing:.05em;white-space:nowrap}
+.gate p{font-size:14px;color:var(--cream-70)}
+.gate p strong{color:var(--cream)}
+
+/* ALERT */
+.alert{background:var(--red-10);border:1px solid rgba(224,92,92,.4);border-left:3px solid var(--red);padding:24px 28px;margin:26px 0}
+.alert .at{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.alert p{font-size:14px;color:var(--cream-70)}
+.note{background:var(--gold-10);border:1px solid var(--gold-30);border-left:3px solid var(--gold);padding:24px 28px;margin:26px 0}
+.note .at{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.note p{font-size:14px;color:var(--cream-70)}
+.note p strong{color:var(--cream)}
+
+/* CHECK */
+.checklist{list-style:none}
+.checklist li{padding:12px 0 12px 40px;position:relative;border-bottom:1px solid var(--gold-10);font-size:15px;color:var(--cream-70)}
+.checklist li::before{content:'';position:absolute;left:6px;top:16px;width:14px;height:14px;border:2px solid var(--gold)}
+.checklist li strong{color:var(--cream)}
+
+footer{padding:56px 0;text-align:center}
+footer .inf{font-family:'DM Serif Display',serif;font-style:italic;color:var(--cream-50);font-size:15px}
+footer .mono{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-top:10px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="est">OMNI Brasil · EST. 1979 · Gestor de Lançamentos</div>
+    <h1>Aulão <span class="goldtxt">Bancários</span><br>→ Formação Profissional</h1>
+    <div class="sub">Plano de lançamento — quinta-feira, 23 de julho de 2026, 20h30 (Zoom)</div>
+    <div class="meta-strip">
+      <span class="chip">≈400 leads bancários</span>
+      <span class="chip">Michael entrega</span>
+      <span class="chip">Oferta FPH com aplicação</span>
+      <span class="chip">Aprovação: Fernanda</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="sec-label">01 · Briefing</div>
+    <h2>O que foi definido</h2>
+    <div class="grid g3">
+      <div class="card"><div class="k">Evento</div><div class="v">Aulão ao vivo em <strong>23/07 (quinta), 20h30</strong>, transmitido via <strong>Zoom</strong>. Entrega: <strong>Michael Arruda</strong>.</div></div>
+      <div class="card"><div class="k">Público</div><div class="v"><strong>Todos os leads da campanha/página Bancários</strong> que entraram no último mês (desde 20/06). Estimativa: ~400. A extração cruza título <strong>[CON-BAN]</strong> + origem da LP/UTM (nem todos podem estar marcados).</div></div>
+      <div class="card"><div class="k">Oferta</div><div class="v"><strong>Formação Profissional em Hipnoterapia (FPH)</strong> com aplicação: preenche a aplicação → consultoria para verificar perfil. <strong>10 primeiras aplicações: consultoria com a Rafa</strong>; demais com o time. Preço é aberto na aula.</div></div>
+      <div class="card"><div class="k">Estrutura</div><div class="v"><strong>Canal WhatsApp</strong> do aulão + página-manifesto fixada no canal (explica a aula) + <strong>página de acesso à aula</strong> (form: nome e telefone obrigatórios, email opcional → ActiveCampaign; botão para o Zoom).</div></div>
+      <div class="card"><div class="k">Convite</div><div class="v"><strong>WABA oficial "Atendimento - Omni"</strong> (1422655749552165 — já usado para avisos de aula) + <strong>email via ActiveCampaign</strong>, remetente Michael Arruda.</div></div>
+      <div class="card"><div class="k">Brinde</div><div class="v"><strong>Módulo 1 da FPH</strong> revelado/sorteado ao final da aula, para quem estiver ao vivo (segura presença até a oferta).</div></div>
+    </div>
+    <div class="note">
+      <div class="at">Governança deste lançamento</div>
+      <p><strong>Rafa delegou a aprovação e o acompanhamento da execução à Fernanda Machado</strong> (decisão de 20/07). Fernanda é uma das quatro aprovadoras oficiais de copy da OMNI (política de 17/07), portanto fecha sozinha os gates G2, G3 e G4. Toda copy que chega ao lead precisa do OK explícito dela sobre o <strong>texto final</strong> antes de qualquer disparo — aprovação de fluxo/mecânica não vale como aprovação de redação.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="sec-label">02 · Cronograma</div>
+    <h2>D-3 ao D+1 — janela comprimida</h2>
+
+    <div class="day today">
+      <div class="day-head"><span class="dd">Segunda 20/07</span><span class="dl">D-3 · Hoje — corrida do template</span></div>
+      <ul>
+        <li><strong>Submeter templates Meta</strong> (convite + lembrete D0) no WABA Atendimento - Omni — <span class="who">@template-chief</span> · aprovação Meta leva 24–48h: <strong>item mais crítico do plano</strong></li>
+        <li><strong>Copy de todas as peças</strong>: convite WABA, email de convite, 2 páginas, lembretes, mensagens do canal — <span class="who">@copy-chief</span> → OK da Fernanda (G3)</li>
+        <li><strong>Criar o canal WhatsApp</strong> do aulão — <span class="who">manual: Rafa ou Michael (dono do número, no app)</span></li>
+        <li><strong>Criar a sala Zoom</strong> — <span class="who">Michael</span> · link alimenta a página de acesso</li>
+        <li><strong>Extrair e tratar a lista</strong>: [CON-BAN] + origem LP bancários desde 20/06 — <span class="who">operator + disparo-comercial</span></li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="dd">Terça 21/07</span><span class="dl">D-2 · Convite no ar</span></div>
+      <ul>
+        <li><strong>Páginas no ar</strong>: manifesto fixado no canal + página de acesso com form → AC — <span class="who">@design-chief (skill landing-page)</span></li>
+        <li><strong>Onda 1 do convite</strong>: email (AC, Michael Arruda) + WABA se o template já aprovou — sempre com <strong>preview dry-run</strong> antes — <span class="who">@disparo-chief</span></li>
+        <li>CTA do convite: <strong>entrar no canal</strong> + confirmar presença na página de acesso</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="dd">Quarta 22/07</span><span class="dl">D-1 · Reforço + véspera</span></div>
+      <ul>
+        <li><strong>Onda 2</strong>: reforço para não-abertos / não-inscritos (email + WABA) — <span class="who">@disparo-chief</span></li>
+        <li>1–2 posts de antecipação no canal (copy aprovada)</li>
+        <li><strong>Gate G4 — checklist de véspera</strong>: nº de inscritos, Zoom testado, roteiro da oferta, mecânica do brinde, moderação do chat — <span class="who">Fernanda aprova</span></li>
+      </ul>
+    </div>
+
+    <div class="day d0">
+      <div class="day-head"><span class="dd">Quinta 23/07</span><span class="dl">D0 · Aulão 20h30</span></div>
+      <ul>
+        <li>Lembretes: manhã + 19h30 + 20h25 "entrou no ar" (canal + template WABA + email)</li>
+        <li><strong>Aula ao vivo (Zoom)</strong> → oferta FPH com preço aberto → aplicação → <strong>brinde Módulo 1 ao final</strong></li>
+        <li>Pós-aula imediato: <strong>link da aplicação fixado no canal</strong> · 10 primeiras aplicações = consultoria com a Rafa</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <div class="day-head"><span class="dd">Sexta 24/07</span><span class="dl">D+1 · Replay + follow-up</span></div>
+      <ul>
+        <li>Replay com prazo para quem não assistiu + disparo pós-aula (WABA já tem histórico desse uso)</li>
+        <li>Follow-up das aplicações → agendamento das consultorias</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="sec-label">03 · Peças × Squad responsável</div>
+    <h2>Quem faz o quê</h2>
+    <div class="tablewrap">
+    <table>
+      <tr><th>Peça</th><th>Responsável</th><th>Gate / condição</th></tr>
+      <tr><td><strong>Templates Meta</strong> (convite, lembrete)</td><td><span class="tag">@template-chief</span></td><td>Domínio protegido — só a squad opera. Submissão HOJE</td></tr>
+      <tr><td><strong>Copy</strong> (convite, email, páginas, lembretes, canal)</td><td><span class="tag">@copy-chief</span></td><td>G3 — texto final com OK da Fernanda, registrado</td></tr>
+      <tr><td><strong>2 páginas</strong> (manifesto + acesso c/ form → AC)</td><td><span class="tag">@design-chief</span></td><td>skill landing-page · no ar até terça</td></tr>
+      <tr><td><strong>Tratamento da lista + disparo WhatsApp</strong></td><td><span class="tag">@disparo-chief</span></td><td>Preview dry-run antes de cada onda (G2/L2)</td></tr>
+      <tr><td><strong>Email</strong> (convite, reforço, lembretes)</td><td><span class="tag teal">ActiveCampaign</span></td><td>Remetente Michael Arruda · copy aprovada</td></tr>
+      <tr><td><strong>Canal WhatsApp + Zoom</strong></td><td><span class="tag teal">Rafa / Michael (manual)</span></td><td>Hoje — link do Zoom alimenta a página</td></tr>
+      <tr><td><strong>Aula + oferta</strong></td><td><span class="tag teal">Michael</span></td><td>Roteiro validado no G4</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="sec-label">04 · Gates de aprovação</div>
+    <h2>Onde a Fernanda aprova</h2>
+    <div class="gate"><div class="gid">G1 ✓</div><p><strong>Modelo e briefing — fechado em 20/07 com a Rafa.</strong> Modelo: Aula ao Vivo → Oferta (versão comprimida D-3).</p></div>
+    <div class="gate"><div class="gid">G2</div><p><strong>Plano completo (esta apresentação).</strong> O OK da Fernanda libera a execução do cronograma e os disparos via pipeline — cada onda ainda passa por preview dry-run.</p></div>
+    <div class="gate"><div class="gid">G3</div><p><strong>Copies finais.</strong> Todo texto que chega ao lead (template, email, páginas, lembretes, posts do canal) precisa do OK explícito da Fernanda sobre o texto final. Fica registrado quem aprovou e quando.</p></div>
+    <div class="gate"><div class="gid">G4</div><p><strong>Véspera (quarta 22/07).</strong> Checklist go-live: inscritos, infra testada, roteiro, brinde, moderação.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="sec-label">05 · Riscos e pontos de atenção</div>
+    <h2>O que pode dar errado</h2>
+    <div class="alert">
+      <div class="at">⚠ Risco principal — aprovação do template Meta</div>
+      <p>A Meta leva 24–48h para aprovar template. Se não aprovar até terça, a <strong>onda 1 sai só por email</strong> (que carrega o convite ao canal) e o WABA entra na quarta, assim que aprovar. Por isso a submissão precisa sair hoje (20/07).</p>
+    </div>
+    <div class="note">
+      <div class="at">Enquadramento do brinde</div>
+      <p>Sorteio comercial formal exige autorização SECAP (Lei 5.768/71). Nas <strong>peças escritas</strong>, tratar como <strong>"brinde revelado ao final, para quem estiver ao vivo"</strong> — sem a palavra "sorteio". Na fala ao vivo, o Michael conduz a dinâmica.</p>
+    </div>
+    <div class="note">
+      <div class="at">Qualidade da lista</div>
+      <p>Parte dos deals de julho pode estar sem UTM/título correto (recuperação em lote de 06/07). A extração cruza <strong>título [CON-BAN] + origem da página Bancários</strong> para não deixar lead de fora nem convidar lead de outro nicho. Volume final real é reportado antes da onda 1.</p>
+    </div>
+    <div class="note">
+      <div class="at">Anti-queima de número</div>
+      <p>~400 envios respeitam os guardrails de volume da disparo-comercial (cadência, espaçamento, canal oficial). Nenhum disparo acontece por fora do pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="sec-label">06 · Checklist executivo da Fernanda</div>
+    <h2>Acompanhamento da execução</h2>
+    <ul class="checklist">
+      <li><strong>Hoje (seg):</strong> aprovar o plano (G2) · aprovar copies (G3) assim que o copy-chief entregar · confirmar que os templates foram submetidos à Meta</li>
+      <li><strong>Hoje (seg):</strong> confirmar com Rafa/Michael a criação do canal WhatsApp e da sala Zoom</li>
+      <li><strong>Terça:</strong> validar as 2 páginas no ar · aprovar o preview dry-run da onda 1 · confirmar saída do email</li>
+      <li><strong>Quarta:</strong> aprovar preview da onda 2 · fechar o Gate G4 (checklist de véspera)</li>
+      <li><strong>Quinta:</strong> acompanhar lembretes (manhã / 19h30 / 20h25) · presença na aula · link da aplicação no canal ao final</li>
+      <li><strong>Sexta:</strong> validar disparo de replay/pós-aula · repassar nº de aplicações para agendamento das consultorias</li>
+    </ul>
+    <div class="note" style="margin-top:34px">
+      <div class="at">Como acionar a squad</div>
+      <p>No Claude Code: <strong>@squads/gestao-lancamentos/</strong> → o Lancamento Chief assume com este plano carregado. O vigia diário (VPS, 08h) monitora os marcos e avisa via WhatsApp. Comando útil: <strong>*status-lancamento aulao-bancarios-fph</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="inf">Heritage meets precision.</div>
+    <div class="mono">OMNI Brasil · Gestor de Lançamentos · Plano gerado em 20/07/2026 · Aprovação delegada a Fernanda Machado</div>
+  </div>
+</footer>
+
+</body>
+</html>
