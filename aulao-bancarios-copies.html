@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copies — Aulão Bancários FPH | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --elevated:#1A1A1A; --gold:#C8A84B; --gold-light:#E8C86A;
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --teal:#2A9D8F; --gray:#6B6B6B;
+  --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-30:rgba(200,168,75,.30);
+  --green:#4CAF7D; --green-10:rgba(76,175,125,.12); --amber:#E0A83C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.65;font-size:16px}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+.hero{padding:80px 0 50px;text-align:center;border-bottom:1px solid var(--gold-30);background:radial-gradient(ellipse at 50% -20%,rgba(200,168,75,.12),transparent 60%)}
+.hero .est{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,5vw,44px);letter-spacing:.04em;text-transform:uppercase}
+.hero .sub{color:var(--cream-70);margin-top:12px;font-size:15px}
+.piece{background:var(--elevated);border:1px solid var(--gold-15);margin:36px 0;overflow:hidden}
+.piece-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:18px 26px;background:var(--gold-10);border-bottom:1px solid var(--gold-15)}
+.piece-head .pn{font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-light)}
+.badge{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border:1px solid}
+.badge.ok{color:var(--green);border-color:rgba(76,175,125,.5);background:var(--green-10)}
+.badge.wait{color:var(--amber);border-color:rgba(224,168,60,.5);background:rgba(224,168,60,.1)}
+.piece-meta{padding:14px 26px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--cream-70);letter-spacing:.02em}
+.copytext{margin:16px 26px 26px;padding:22px 24px;background:var(--black);border-left:3px solid var(--gold);white-space:pre-wrap;font-size:15px;color:var(--cream)}
+.copytext .lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:14px 0 6px}
+.copytext .lbl:first-child{margin-top:0}
+.note{background:var(--gold-10);border-left:3px solid var(--gold);padding:18px 26px;margin:30px 0;font-size:14px;color:var(--cream-70)}
+.note strong{color:var(--cream)}
+h2.secao{font-family:'Oswald',sans-serif;font-weight:600;font-size:24px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);margin:56px 0 6px}
+footer{padding:50px 0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gray)}
+a{color:var(--gold-light)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="est">OMNI Brasil · Gestor de Lançamentos · Gate G3</div>
+    <h1>Copies — Aulão Bancários</h1>
+    <div class="sub">Quinta 23/07 · 20h30 · Zoom · Michael Arruda — 8 peças para aprovação da Rafa</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="note"><strong>Como aprovar:</strong> responda à AURA por número de peça ("aprovo 6 e 7", "na 3 troca X"). Peças 1 e 2 já estão aprovadas por você e <strong>APROVADAS pela Meta</strong> (templates prontos para disparo). Links definitivos com redirect próprio: <em>/aulao-bancarios</em> (página), <em>/aulao-bancarios-grupo</em> (grupo), <em>/aulao-bancarios-zoom</em> (Zoom, provisório até o link do Michael).</div>
+
+  <h2 class="secao">Templates WhatsApp (WABA Atendimento - Omni)</h2>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 1 · Template Convite</span><span class="badge ok">G3 Rafa ✓</span><span class="badge ok">Meta APPROVED</span></div>
+    <div class="piece-meta">aulao_bancarios_convite · MARKETING · {{1}} = primeiro nome · ID 2479261195906279</div>
+    <div class="copytext">Excelente dia, {{1}}! Aqui é Michael Arruda, e eu quis falar com você diretamente.
+
+Aqui na OMNI somos especialistas em transformar pessoas competentes em profissionais de alto valor, extraindo o que cada uma tem de melhor.
+
+No último mês fizemos uma campanha para bancários, por notar quanta gente boa desse mercado gostaria de trabalhar com mais liberdade de tempo e ajudar pessoas com o seu trabalho.
+
+A campanha foi um sucesso, e eu decidi dar uma aula de presente para todos os bancários e ex-bancários: nela vou te mostrar o caminho para extrair o seu melhor e alcançar o seu melhor resultado profissional.
+
+Será na próxima quinta, 23/07, às 20h30, ao vivo.
+
+Se você quer se tornar um profissional mais reconhecido e trabalhar com mais propósito, essa é a sua oportunidade. Toque no botão abaixo para garantir a sua vaga.
+<span class="lbl">Rodapé</span>Omni Brasil · Formando hipnoterapeutas desde 1979
+<span class="lbl">Botão</span>Garantir minha vaga → go.omnihypnosis.com.br/aulao-bancarios</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 2 · Template Lembrete D0</span><span class="badge ok">G3 Rafa ✓</span><span class="badge ok">Meta APPROVED</span></div>
+    <div class="piece-meta">aulao_bancarios_lembrete_d0 · MARKETING · {{1}} = primeiro nome · ID 1603536264439800</div>
+    <div class="copytext">Ótimo dia, {{1}}! Aqui é Michael Arruda.
+
+É hoje a aula que preparei de presente para bancários e ex-bancários. Às 20h30, ao vivo, eu vou te mostrar o caminho para extrair o seu melhor e se tornar um profissional de alto valor, com mais liberdade de tempo e propósito.
+
+Reservei um cuidado a mais para quem estiver comigo do começo ao fim: no encerramento eu revelo um brinde para quem ficar ao vivo até o final.
+
+Deixe tudo pronto e toque no botão abaixo para acessar a aula. Te espero às 20h30.
+<span class="lbl">Rodapé</span>Omni Brasil · Formando hipnoterapeutas desde 1979
+<span class="lbl">Botão</span>Acessar a aula → go.omnihypnosis.com.br/aulao-bancarios</div>
+  </div>
+
+  <h2 class="secao">Páginas (design publica após seu OK)</h2>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 6 · Página-Manifesto (fixada no grupo)</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="copytext">UMA AULA-PRESENTE PARA BANCÁRIOS E EX-BANCÁRIOS
+Quinta, 23/07, 20h30 · Ao vivo pelo Zoom · com Michael Arruda
+
+Aqui é Michael Arruda, da Omni Brasil, e eu quis falar com você diretamente.
+
+Aqui na OMNI somos especialistas em transformar pessoas competentes em profissionais de alto valor, extraindo o que cada uma tem de melhor.
+
+No último mês fizemos uma campanha para bancários, porque percebi quanta gente boa desse mercado gostaria de trabalhar com mais liberdade de tempo, mais reconhecimento e ajudando pessoas com o próprio trabalho. A campanha foi um sucesso. E eu decidi dar uma aula de presente para todos os bancários e ex-bancários.
+
+PARA QUEM É ESTA AULA
+Para você que é de banco, ativo ou recém-saído, e sente que tem muito mais a entregar. Que quer construir uma carreira com mais propósito e liberdade, sem abrir mão de fazer isso de forma estruturada e segura.
+
+O QUE VOCÊ VAI SAIR SABENDO
+· O caminho para extrair o seu melhor e alcançar o seu melhor resultado profissional
+· Como se tornar um profissional mais reconhecido, com mais liberdade de tempo
+· Como profissionais de banco estão construindo uma nova carreira com propósito, sem largar tudo de uma vez
+· O que a Omni Brasil oferece para você se formar de verdade nessa profissão
+
+QUANDO E ONDE
+Quinta-feira, 23/07, às 20h30 · Ao vivo pelo Zoom
+O link de acesso fica na página da aula e será enviado aqui no grupo.
+
+UM BRINDE AO FINAL
+Para quem ficar comigo ao vivo até o encerramento, eu revelo um brinde no final da aula. Vale a pena ficar até o fim.
+
+A OMNI BRASIL
+Formando hipnoterapeutas desde 1979. São 46 anos de legado e método por trás de tudo o que vou te mostrar ao vivo.
+
+Garanta sua vaga na página da aula: go.omnihypnosis.com.br/aulao-bancarios</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 7 · Página de Acesso à Aula</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="piece-meta">go.omnihypnosis.com.br/aulao-bancarios · form → ActiveCampaign</div>
+    <div class="copytext"><span class="lbl">Headline</span>A aula que o Michael Arruda preparou de presente para bancários e ex-bancários.
+<span class="lbl">Subhead</span>Quinta, 23/07, às 20h30, ao vivo pelo Zoom. O caminho para extrair o seu melhor e se tornar um profissional de alto valor, com mais liberdade de tempo e propósito.
+<span class="lbl">Acima do formulário</span>Uma aula ao vivo, direto com Michael Arruda, para profissionais de banco que sentem que têm muito mais a entregar. Preencha os dados abaixo para garantir sua vaga e receber os lembretes da aula.
+<span class="lbl">Formulário</span>Nome (obrigatório) · WhatsApp (obrigatório) · E-mail opcional: "Deixe seu e-mail e receba o lembrete e o material da aula também por lá."
+<span class="lbl">Botão principal (negrito + gradiente + brilho)</span>QUERO MINHA VAGA NA AULA
+<span class="lbl">Pós-inscrição</span>Sua vaga está garantida. No dia da aula, entre pelo botão abaixo alguns minutos antes das 20h30.
+Botão: ENTRAR NA SALA DO ZOOM → go.omnihypnosis.com.br/aulao-bancarios-zoom
+<span class="lbl">Rodapé</span>Omni Brasil · Formação Profissional em Hipnoterapia · EST. 1979</div>
+  </div>
+
+  <h2 class="secao">Emails (ActiveCampaign · remetente Michael Arruda)</h2>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 3 · Email Convite (terça)</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="piece-meta">Assunto: Uma aula que preparei de presente para você</div>
+    <div class="copytext">Ótima tarde, [nome].
+
+Aqui é Michael Arruda, da Omni Brasil, e eu quis falar com você diretamente.
+
+Aqui na OMNI somos especialistas em transformar pessoas competentes em profissionais de alto valor, extraindo o que cada uma tem de melhor.
+
+No último mês fizemos uma campanha para bancários, porque percebi quanta gente boa desse mercado gostaria de trabalhar com mais liberdade de tempo, mais reconhecimento e ajudando pessoas com o próprio trabalho.
+
+A campanha foi um sucesso. E eu decidi dar uma aula de presente para todos os bancários e ex-bancários.
+
+Será na próxima quinta, 23/07, às 20h30, ao vivo pelo Zoom.
+
+Nessa aula eu vou te mostrar:
+· O caminho para extrair o seu melhor e alcançar o seu melhor resultado profissional
+· Como profissionais de banco estão construindo uma nova carreira com propósito, sem largar tudo de um dia para o outro
+· O que a Omni Brasil oferece para você se formar de verdade nessa profissão
+
+Para não perder nada, faça duas coisas agora:
+
+1. Entre no grupo oficial da aula: go.omnihypnosis.com.br/aulao-bancarios-grupo
+2. Garanta sua vaga na página da aula: go.omnihypnosis.com.br/aulao-bancarios
+
+Quem ficar comigo ao vivo até o final ainda recebe um brinde, que eu revelo no encerramento.
+
+Te espero quinta, às 20h30.
+
+Michael Arruda
+Omni Brasil</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 4 · Email Reforço (quarta)</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="piece-meta">Segmento: não abriram/não confirmaram · Assunto: Amanhã, 20h30: a aula-presente para quem é de banco</div>
+    <div class="copytext">Ótima tarde, [nome].
+
+Michael Arruda aqui, direto ao ponto.
+
+Amanhã, quinta 23/07, às 20h30, eu entro ao vivo com a aula que preparei de presente para bancários e ex-bancários.
+
+Eu criei essa aula porque acredito numa coisa: gente competente merece se tornar um profissional de alto valor, com mais liberdade de tempo, mais reconhecimento e o propósito de ajudar pessoas com o próprio trabalho.
+
+Não é sobre largar tudo amanhã. É sobre enxergar o caminho para extrair o seu melhor, de forma estruturada, com o método que a Omni ensina desde 1979.
+
+Garanta seu lugar agora:
+
+1. Grupo oficial da aula: go.omnihypnosis.com.br/aulao-bancarios-grupo
+2. Página da aula: go.omnihypnosis.com.br/aulao-bancarios
+
+É ao vivo. E quem ficar comigo até o final recebe um brinde que eu revelo no encerramento.
+
+Te espero amanhã, 20h30.
+
+Michael Arruda
+Omni Brasil</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 5 · Email Lembrete (quinta manhã)</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="piece-meta">Assunto: É hoje, 20h30: a aula que preparei para você</div>
+    <div class="copytext">Ótimo dia, [nome].
+
+É hoje.
+
+Às 20h30 eu entro ao vivo com a aula que preparei de presente para bancários e ex-bancários. Nela eu vou te mostrar o caminho para extrair o seu melhor e se tornar um profissional de alto valor, com mais liberdade de tempo e propósito.
+
+Deixe tudo pronto:
+
+Página da aula: go.omnihypnosis.com.br/aulao-bancarios
+Grupo oficial: go.omnihypnosis.com.br/aulao-bancarios-grupo
+
+Uma dica: entre alguns minutos antes das 20h30, porque o começo é onde eu mostro o mapa completo do caminho.
+
+E, como combinei, quem ficar comigo ao vivo até o final recebe um brinde que eu revelo no encerramento.
+
+Nos vemos hoje à noite.
+
+Michael Arruda
+Omni Brasil</div>
+  </div>
+
+  <h2 class="secao">Mensagens do grupo WhatsApp</h2>
+
+  <div class="piece">
+    <div class="piece-head"><span class="pn">Peça 8 · 5 Posts do Grupo</span><span class="badge wait">Aguardando G3</span></div>
+    <div class="copytext"><span class="lbl">Antecipação · terça 21/07</span>Ótima tarde, pessoal. Aqui é Michael Arruda, que bom ter você aqui.
+
+Este é o ponto de encontro da aula que preparei de presente para bancários e ex-bancários. É na quinta, 23/07, às 20h30, ao vivo.
+
+Garanta sua vaga na página da aula e já deixe fixada aqui no grupo: go.omnihypnosis.com.br/aulao-bancarios
+
+Ao longo desta semana eu vou mandando por aqui os avisos e o link da sala. Fica de olho.
+
+Michael Arruda
+<span class="lbl">Antecipação · quarta 22/07</span>Ótima tarde a todos. Michael Arruda aqui.
+
+Falta um dia para a nossa aula ao vivo. Amanhã, quinta 23/07, às 20h30, no Zoom.
+
+Uma pergunta para você levar até lá: se você pudesse extrair o seu melhor e virar um profissional mais reconhecido, com mais liberdade de tempo, o que mudaria na sua vida ainda este ano?
+
+É exatamente sobre esse caminho que vamos conversar, de forma estruturada e segura.
+
+Se ainda não garantiu sua vaga, faça agora: go.omnihypnosis.com.br/aulao-bancarios
+
+Até amanhã, 20h30.
+<span class="lbl">Quinta · manhã</span>Ótimo dia, pessoal. É hoje.
+
+Às 20h30 eu entro ao vivo com a aula que preparei de presente para bancários e ex-bancários. Vou te mostrar o caminho para extrair o seu melhor e se tornar um profissional de alto valor.
+
+Deixe sua vaga pronta e um lembrete no celular: go.omnihypnosis.com.br/aulao-bancarios
+
+Quem ficar comigo ao vivo até o final recebe um brinde que eu revelo no encerramento. Vale a pena ficar até o fim.
+
+Nos vemos à noite.
+<span class="lbl">Quinta · 19h30</span>Ótima noite, pessoal. Falta 1 hora para começar.
+
+Às 20h30 abrimos a sala ao vivo. Vá se organizando para assistir com atenção, porque o começo é onde eu mostro o mapa completo do caminho.
+
+Prepare seu acesso por aqui: go.omnihypnosis.com.br/aulao-bancarios
+
+Te espero às 20h30.
+<span class="lbl">Quinta · 20h25 (entrou no ar)</span>Ótima noite. Estamos no ar, a sala já está aberta.
+
+Entre agora pelo Zoom e garanta seu lugar antes de começarmos: go.omnihypnosis.com.br/aulao-bancarios-zoom
+
+Fique comigo até o final: o brinde é revelado no encerramento da aula.
+
+Começamos em instantes.</div>
+  </div>
+
+  <div class="note"><strong>Conformidade verificada:</strong> Michael em 1ª pessoa · sem "sorteio" (brinde revelado ao final) · sem preço · sem promessa financeira explícita · saudações OMNI por horário · sem travessão · legado factual (1979/46 anos) · templates dentro das regras Meta.</div>
+
+</div>
+
+<footer>OMNI Brasil · Gestor de Lançamentos · aulao-bancarios-fph · 20/07/2026</footer>
+
+</body>
+</html>
