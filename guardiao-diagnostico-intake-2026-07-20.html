@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Diagnóstico do Intake 20/07 — Guardião · OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0D0D0D; --dark:#1A1A1A; --texture:#2D2D2D;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E; --gold-data:#AE8F38;
+  --teal:#2A9D8F; --ink:#F5F0E8; --ink-70:rgba(245,240,232,.70); --ink-50:rgba(245,240,232,.50);
+  --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+  --teal-10:rgba(42,157,143,.10); --red:#C96A5A; --amber:#D9A441;
+  --font:'Oswald',sans-serif; --body:'Inter',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65;font-size:16px}
+a{color:var(--gold)}
+#gate{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center}
+body:not(.locked) #gate{display:none}
+#gate .glock{font-size:40px}
+#gate .glogo{font-family:var(--font);font-weight:700;font-size:28px;letter-spacing:7px;color:var(--gold);text-transform:uppercase}
+#gate .gsub{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--ink-50);text-transform:uppercase}
+#gate input{font-family:var(--mono);background:#000;border:1px solid var(--gold-30);color:var(--ink);padding:14px 20px;border-radius:8px;font-size:16px;text-align:center;width:min(300px,80vw);outline:none}
+#gate input:focus{border-color:var(--gold)}
+#gate button{font-family:var(--font);background:var(--gold);color:#000;border:none;padding:12px 34px;border-radius:8px;font-size:15px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+#gate .gerr{color:var(--red);font-size:13px;font-family:var(--mono);display:none}
+body.locked main,body.locked header,body.locked footer{display:none}
+
+header{border-bottom:1px solid var(--gold-20);padding:38px 24px 30px;text-align:center}
+header .brand{font-family:var(--font);font-weight:700;font-size:20px;letter-spacing:6px;color:var(--gold);text-transform:uppercase}
+header .est{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--ink-50);margin-top:4px}
+header h1{font-family:var(--font);font-weight:600;font-size:clamp(25px,4vw,40px);margin-top:22px;line-height:1.2}
+header .sub{color:var(--ink-70);max-width:780px;margin:12px auto 0;font-size:15px}
+header .meta{font-family:var(--mono);font-size:12px;color:var(--ink-50);margin-top:16px;letter-spacing:1px}
+
+main{max-width:1060px;margin:0 auto;padding:20px 24px 90px}
+section{margin-top:60px}
+h2{font-family:var(--font);font-weight:600;font-size:25px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:14px}
+h2 .n{font-family:var(--mono);font-size:14px;color:var(--ink-50);border:1px solid var(--gold-30);border-radius:50%;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+p{color:var(--ink-70);margin-top:10px;max-width:880px}
+strong{color:var(--ink)}
+.lead{font-size:17px;color:var(--ink)}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:26px}
+.tile{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:22px 20px}
+.tile .v{font-family:var(--font);font-weight:600;font-size:36px;line-height:1;color:var(--gold)}
+.tile .v.teal{color:var(--teal)} .tile .v.red{color:var(--red)} .tile .v.amber{color:var(--amber)}
+.tile .l{font-size:13px;color:var(--ink-70);margin-top:10px;line-height:1.45}
+.tile .s{font-family:var(--mono);font-size:11px;color:var(--ink-50);margin-top:8px}
+
+table.sem{width:100%;border-collapse:collapse;margin-top:26px;background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;overflow:hidden}
+table.sem th{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-50);text-align:left;padding:14px 16px;border-bottom:1px solid var(--gold-20)}
+table.sem td{padding:13px 16px;border-bottom:1px solid rgba(200,168,75,.10);font-size:13.5px;color:var(--ink-70);vertical-align:top}
+table.sem tr:last-child td{border-bottom:none}
+table.sem td.dim{font-family:var(--font);font-size:15px;color:var(--ink);white-space:nowrap}
+table.sem td.sm{font-size:22px;text-align:center;width:60px}
+.tablewrap{overflow-x:auto}
+
+.chart{background:var(--dark);border:1px solid var(--gold-20);border-radius:12px;padding:26px 26px 20px;margin-top:24px}
+.chart .ct{font-family:var(--font);font-size:16px;margin-bottom:4px}
+.chart .cs{font-size:12.5px;color:var(--ink-50);margin-bottom:18px;font-family:var(--mono)}
+.hrow{display:grid;grid-template-columns:46px 1fr 34px;align-items:center;gap:10px;margin-top:6px}
+.hrow .hl{font-family:var(--mono);font-size:11.5px;color:var(--ink-50);text-align:right}
+.hrow .hbar{height:16px;border-radius:3px;background:var(--teal);opacity:.85;min-width:2px}
+.hrow .hbar.red{background:var(--red)}
+.hrow .hbar.amber{background:var(--amber)}
+.hrow .hv{font-family:var(--mono);font-size:11.5px;color:var(--ink-70)}
+.legend{display:flex;gap:18px;margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-50)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+
+.callout{background:var(--gold-10);border:1px solid var(--gold-30);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:20px 24px;margin-top:26px}
+.callout.red{background:rgba(201,106,90,.08);border-color:rgba(201,106,90,.4);border-left-color:var(--red)}
+.callout .t{font-family:var(--font);font-size:16px;color:var(--ink);letter-spacing:.5px}
+.callout p{font-size:14px}
+.chip{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 9px;border-radius:20px;letter-spacing:.5px}
+.chip.g{background:var(--teal-10);color:var(--teal);border:1px solid rgba(42,157,143,.4)}
+.chip.r{background:rgba(201,106,90,.12);color:var(--red);border:1px solid rgba(201,106,90,.4)}
+.chip.a{background:rgba(217,164,65,.12);color:var(--amber);border:1px solid rgba(217,164,65,.4)}
+
+footer{border-top:1px solid var(--gold-20);padding:26px 24px;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--ink-50);text-transform:uppercase}
+</style>
+</head>
+<body class="locked">
+
+<div id="gate">
+  <div class="glock">🛡️</div>
+  <div class="glogo">OMNI Brasil</div>
+  <div class="gsub">Guardião de Leads · Acesso Restrito</div>
+  <input type="password" id="pwd" placeholder="senha" onkeydown="if(event.key==='Enter')tryLogin()">
+  <button onclick="tryLogin()">Entrar</button>
+  <div class="gerr" id="gerr">Senha incorreta.</div>
+</div>
+
+<header>
+  <div class="brand">OMNI Brasil</div>
+  <div class="est">EST. 1979 · GUARDIÃO DE LEADS 🛡️</div>
+  <h1>"O intake está parado?" Não. E o vale sem leads é normal.</h1>
+  <div class="sub">Diagnóstico completo feito em cima do alerta de intake parado: cada degrau do caminho do lead verificado ao vivo na VPS, com o número que prova onde o fluxo secou de verdade.</div>
+  <div class="meta">20 · JULHO · 2026 · 15:13 BRT — verificação read-only ao vivo</div>
+</header>
+
+<main>
+
+<section>
+  <h2><span class="n">1</span>A resposta curta</h2>
+  <p class="lead" style="margin-top:22px">O intake <strong>não está parado</strong>. O app está no ar, em modo ativo, com fila zerada e sem nenhum lead perdido nos últimos 7 dias. A janela sem leads desde 10:25 assustou, mas a investigação completa (VPS + Meta Ads API) mostrou que <strong>a campanha entrega normalmente e o funil é de volume baixo</strong>: 1 a 3 cliques por hora na LP. Janelas de 3 a 6 horas sem lead aconteceram em todos os últimos 4 dias. Não há vazamento nem pane; há pouco volume no topo.</p>
+  <div class="tiles">
+    <div class="tile"><div class="v teal">0</div><div class="l">leads presos na fila, 0 órfãos, lag zero</div><div class="s">SLA DA FILA · CRON 15:10</div></div>
+    <div class="tile"><div class="v teal">0</div><div class="l">leads perdidos em 7 dias (209 entraram, 203 viraram deal real no Pipedrive, 6 descartes legítimos)</div><div class="s">RECONCILIAÇÃO · CRON 13:01</div></div>
+    <div class="tile"><div class="v red">10:25</div><div class="l">horário da última lead que entrou. Depois disso, nenhuma requisição externa chegou (e nenhuma falhou)</div><div class="s">NGINX + FORMS_SUBMISSIONS</div></div>
+    <div class="tile"><div class="v amber">1-3</div><div class="l">cliques por hora é o volume real da campanha da LP (17 cliques no dia inteiro de ontem). Vales de 3-6h sem lead são rotina</div><div class="s">META ADS API · @AD-MIDAS</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Semáforo por dimensão</h2>
+  <div class="tablewrap">
+  <table class="sem">
+    <tr><th></th><th>Dimensão</th><th>Número que justifica</th></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Saúde do app</td><td>lead-intake-server e worker online no pm2, /health = {ok, mode: active}, INTAKE_MODE=active no .env, watchdog "saudável" às 15:12</td></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Fila / SLA</td><td>0 presos, 0 órfãos, lag 0 (vigia oficial das 15:10)</td></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Fila → Deal (24h)</td><td>21 entradas, 20 done com deal criado, 1 em waiting_aftersave (etapa normal), perda interna zero</td></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Reconciliação 7d</td><td>209 entradas → 203 deals confirmados um a um no Pipedrive, 0 sumidos, 6 dedup/desqualificação legítimos</td></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Rotação SDR</td><td>0 deals sem sdr_id</td></tr>
+    <tr><td class="sm">🟢</td><td class="dim">Caminho público</td><td>nginx sem nenhum erro hoje; toda POST /intake que chegou respondeu 200; LP no ar (HTTP 200)</td></tr>
+    <tr><td class="sm">🟡</td><td class="dim">Topo (visitas → leads)</td><td>Última lead às 10:25 e tarde rala de visitas, mas a Meta entrega normal (impressões contínuas, spend maior que ontem). Volume estrutural baixo: 1-3 cliques/h. Vales de 3-6h sem lead ocorreram em todos os últimos 4 dias</td></tr>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">3</span>Onde o fluxo secou: visitas na LP, hora a hora</h2>
+  <div class="chart">
+    <div class="ct">Visitas na LP consultoria-terapeuta-premium-c · hoje 20/07</div>
+    <div class="cs">FONTE: NGINX ACCESS LOG · VPS · GET POR HORA</div>
+    <div class="hrow"><div class="hl">05h</div><div class="hbar" style="width:87%"></div><div class="hv">14</div></div>
+    <div class="hrow"><div class="hl">06h</div><div class="hbar" style="width:50%"></div><div class="hv">8</div></div>
+    <div class="hrow"><div class="hl">07h</div><div class="hbar" style="width:81%"></div><div class="hv">13</div></div>
+    <div class="hrow"><div class="hl">08h</div><div class="hbar" style="width:62%"></div><div class="hv">10</div></div>
+    <div class="hrow"><div class="hl">09h</div><div class="hbar" style="width:100%"></div><div class="hv">16</div></div>
+    <div class="hrow"><div class="hl">10h</div><div class="hbar red" style="width:6%"></div><div class="hv">1</div></div>
+    <div class="hrow"><div class="hl">11h</div><div class="hbar red" style="width:2px"></div><div class="hv">0</div></div>
+    <div class="hrow"><div class="hl">12h</div><div class="hbar amber" style="width:50%"></div><div class="hv">8</div></div>
+    <div class="hrow"><div class="hl">13h</div><div class="hbar red" style="width:2px"></div><div class="hv">0</div></div>
+    <div class="hrow"><div class="hl">14h</div><div class="hbar red" style="width:2px"></div><div class="hv">0</div></div>
+    <div class="hrow"><div class="hl">15h*</div><div class="hbar red" style="width:6%"></div><div class="hv">1</div></div>
+    <div class="legend"><span><i style="background:var(--teal)"></i>fluxo normal</span><span><i style="background:var(--red)"></i>colapso</span><span>* 15h parcial (medido às 15:13)</span></div>
+  </div>
+  <p>O mesmo log mostra que <strong>nenhuma requisição de lead falhou</strong>: as POSTs simplesmente pararam de chegar junto com as visitas. A LP responde normalmente (HTTP 200). O que parecia colapso é a cara normal de um funil de 1 a 3 cliques pagos por hora: a manhã concentrou um burst (16 visitas às 9h, 5 leads) e a tarde ficou no vale. Ontem e anteontem tiveram vales idênticos de 3 a 6 horas.</p>
+</section>
+
+<section>
+  <h2><span class="n">4</span>Veredito do tráfego (@ad-midas)</h2>
+  <div class="callout" id="veredito-admidas">
+    <div class="t">✅ Veredito recebido (15:40): nenhuma campanha da LP foi pausada, rejeitada ou ficou sem verba</div>
+    <p>A @ad-midas validou via Meta Ads API (conta ativa, sem spend cap, billing ok): a campanha <strong>terapeutas-lpc está entregando normal o dia inteiro</strong>, com impressões contínuas hora a hora (10h=55, 11h=59, 12h=114, 13h=83, 14h=59) e spend hoje até 15h (R$53,62) MAIOR que ontem no mesmo intervalo (R$47,13). Detalhe importante: essa campanha é micro e sempre gerou só 1 a 3 cliques por hora. Ontem, o dia inteiro, foram 17 cliques de link.</p>
+    <p style="margin-top:12px">O cruzamento do log da LP confirmou: as visitas de hoje carregam o utm da própria terapeutas-lpc (49 de 55 com utm_id 120248554481650621) e nenhuma veio de outra campanha. Com esse volume (unidades por hora), <strong>janelas de 3 a 6 horas sem lead são estatisticamente normais</strong>, e o histórico confirma: 17/07 ficou 6h sem lead à tarde, 18/07 teve duas janelas de 3 a 5h, 19/07 também. O alarme de "intake parado" foi um vale normal de um funil de volume baixo.</p>
+    <p style="margin-top:12px">Achado colateral da varredura (não afeta essa LP): a campanha <strong>LICKS_LEADS_DISTRIBUICAO_FRIO</strong> zerou a entrega depois das 11h com os 3 adsets ACTIVE e verba sobrando (provável pacing da Meta em budget micro de R$20/dia por adset). Os cliques dela não caem nesta LP, mas vale quem opera a LICKS checar no Gerenciador.</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">5</span>Ações</h2>
+  <div class="tablewrap">
+  <table class="sem">
+    <tr><th>#</th><th>Ação</th><th>Status</th></tr>
+    <tr><td class="sm">1</td><td>@ad-midas validou a entrega das campanhas na Meta (status, verba, review, billing): tudo normal na terapeutas-lpc</td><td><span class="chip g">CONCLUÍDO 15:40</span></td></tr>
+    <tr><td class="sm">2</td><td>Recuperação no intake: nada a recuperar (0 presos, 0 perdidos)</td><td><span class="chip g">SEM AÇÃO NECESSÁRIA</span></td></tr>
+    <tr><td class="sm">3</td><td>Quem opera a LICKS checar no Gerenciador por que a LICKS_LEADS_DISTRIBUICAO_FRIO parou de entregar após 11h (adsets ACTIVE, verba sobrando; provável pacing de budget micro)</td><td><span class="chip a">RECOMENDADO</span></td></tr>
+    <tr><td class="sm">4</td><td>Decisão de negócio: se o volume atual (1 a 3 cliques/hora na LP) está aquém da meta, o assunto é escala de verba/criativo, não conserto técnico</td><td><span class="chip a">PARA A DIRETORA</span></td></tr>
+  </table>
+  </div>
+</section>
+
+</main>
+
+<footer>OMNI BRASIL · GUARDIÃO DE LEADS · DIAGNÓSTICO DO INTAKE · 20/07/2026 · CONFIDENCIAL</footer>
+
+<script>
+function tryLogin(){
+  if(document.getElementById('pwd').value==='omni777'){document.body.classList.remove('locked');}
+  else{document.getElementById('gerr').style.display='block';}
+}
+</script>
+</body>
+</html>
