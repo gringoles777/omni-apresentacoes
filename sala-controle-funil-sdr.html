@@ -105,7 +105,7 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
   <div class="stage s-ok">
     <div class="top"><span class="name"><span class="num">②</span>M0 — primeira mensagem (instantânea, até 24h)</span><span class="badge b-ok">No ar · 100% canal oficial</span></div>
     <div class="desc">Template <b>m0_confirmacao_cadastro</b> (UTILITY, 2 botões) nos WABAs David + Layslla — imune ao frequency cap. Valida WhatsApp via Evolution; sem WhatsApp → fila de ligação (SEM_WHATSAPP). Desde 20/07 <b>todo disparo sai pelo oficial</b> (política padrão sua, protege os números não-oficiais).</div>
-    <div class="pend">Evolução em teste: M0 v2 com 4 botões de horário ("Cancelar consultoria") submetido 20/07 — aguardando veredito da Meta (1–3 dias). Se aprovar UTILITY, substitui o atual com ganho de agendamento direto.</div>
+    <div class="pend">Teste do M0 de 4 botões CONCLUÍDO (21/07): a Meta aprovou, mas recategorizou como MARKETING (v1 e v2) — não existe M0 de horários em UTILITY. Decisão sua: manter 2 botões UTILITY (recomendado) ou ativar 4 botões MARKETING aceitando risco de frequency cap.</div>
   </div>
   <div class="arrow">▼</div>
 
@@ -127,10 +127,9 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
   </div>
   <div class="arrow">▼</div>
 
-  <div class="stage s-warn">
-    <div class="top"><span class="name"><span class="num">⑥</span>Lembretes de reunião (confirmação · 24h · 1h · na hora)</span><span class="badge b-info">Fix no ar · aguarda Meta</span></div>
-    <div class="desc"><b>Resolvido em 21/07 (aprovação Rafa):</b> os 4 templates UTILITY foram submetidos nos 2 WABAs (8 submissões, todas aceitas como UTILITY, PENDING) e o robô já está preparado: no canal oficial ele tenta o template (com botão "Entrar na reunião" → link do Meet) e, enquanto a Meta não aprova, cai no texto livre atual. Quando aprovar (1–3 dias), o furo fecha sozinho, sem novo deploy. Bônus: o lembrete de 24h não diz mais "amanhã" — usa data+hora (bug de fuso eliminado; flagrado ao vivo no caso Gladys 21/07).</div>
-    <div class="pend">Limitação até a Meta aprovar: lembrete só chega a lead que interagiu nas últimas 24h (janela de texto livre).</div>
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">⑥</span>Lembretes de reunião (confirmação · 24h · 1h · na hora)</span><span class="badge b-ok">RESOLVIDO · templates no ar</span></div>
+    <div class="desc"><b>Resolvido em 21/07 (aprovação Rafa):</b> os 4 templates UTILITY foram submetidos nos 2 WABAs (8 submissões, todas aceitas como UTILITY, PENDING) e o robô já está preparado: no canal oficial ele tenta o template (com botão "Entrar na reunião" → link do Meet) e, enquanto a Meta não aprova, cai no texto livre atual. <b>A Meta aprovou em ~1h (21/07): os 4 como UTILITY nos 2 WABAs</b> — o robô já envia por template, e lembrete passa a chegar também em lead frio (fora da janela de 24h). Furo fechado. Bônus: o lembrete de 24h não diz mais "amanhã" — usa data+hora (bug de fuso eliminado; flagrado ao vivo no caso Gladys 21/07).</div>
   </div>
   <div class="arrow">▼</div>
 
@@ -215,8 +214,8 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
 <div class="tablewrap">
 <table>
   <tr><th>Item</th><th>Quem</th><th>Prazo esperado</th><th>Quando resolver</th></tr>
-  <tr><td><b>4 templates de lembrete de reunião</b> (UTILITY, 2 WABAs, 8 submissões 21/07)</td><td>Meta</td><td>1–3 dias</td><td>Aprovou → robô passa a usar template sozinho (fallback já no ar). Rejeitou → squad diagnostica e ressubmete.</td></tr>
-  <tr><td><b>M0 v2 — 4 botões de horário</b> ("Cancelar consultoria"), UTILITY, 2 WABAs</td><td class="badge-cell">Meta</td><td>1–3 dias (submetido 20/07)</td><td>Aprovou UTILITY → squad troca o M0 no config (te aviso). Rejeitou → decidir: 2 botões UTILITY (atual) · 4 botões MARKETING (risco de entrega) · 3 botões sem recusa.</td></tr>
+  <tr><td><b>4 templates de lembrete de reunião</b> — ✅ APROVADOS (UTILITY, 2 WABAs, 21/07 em ~1h)</td><td>—</td><td>—</td><td>Resolvido: robô já envia via template.</td></tr>
+  <tr><td><b>M0 v2 — 4 botões de horário</b> ("Cancelar consultoria"), UTILITY, 2 WABAs</td><td>Rafa</td><td>decisão</td><td><b>Veredito saiu (21/07): APPROVED como MARKETING</b> — hipótese do botão de escassez refutada; a leitura de marketing vem dos botões de horário em si. Nova decisão sua: manter M0 de 2 botões UTILITY (recomendado, entrega protegida) ou ativar o de 4 botões como MARKETING (risco de frequency cap na 1ª mensagem).</td></tr>
   <tr><td><b>David reescanear o QR</b> do número não-oficial (omni-david estava "connecting")</td><td>David</td><td>—</td><td>Sem urgência: hoje tudo sai pelo oficial. Necessário só se você quiser reativar o não-oficial dele no futuro.</td></tr>
 </table>
 </div>
