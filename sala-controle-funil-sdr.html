@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sala de Controle — Funil SDR · OMNI Brasil</title>
+<style>
+:root{
+  --black:#050505; --bg:#0D0D0D; --dark:#1A1A1A; --dark2:#232323;
+  --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+  --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+  --txt:#EDEAE2; --muted:#9B968A;
+  --ok:#4CAF7D; --warn:#E0B84C; --crit:#E06A5A; --info:#6FA8DC;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;line-height:1.55}
+body.locked .content{display:none}
+.gate{display:none}
+body.locked .gate{display:flex;position:fixed;inset:0;background:var(--black);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.gate .glogo{font-size:13px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
+.gate input{background:var(--dark);border:1px solid var(--gold-30);color:var(--txt);padding:12px 18px;border-radius:8px;font-size:16px;width:260px;text-align:center;outline:none}
+.gate input:focus{border-color:var(--gold)}
+.gerr{color:var(--crit);font-size:13px;display:none}
+.ghint{color:var(--muted);font-size:12px}
+.wrap{max-width:1060px;margin:0 auto;padding:36px 22px 80px}
+header.page{border-bottom:1px solid var(--gold-20);padding-bottom:22px;margin-bottom:30px}
+.kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+h1{font-size:30px;font-weight:600;background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 30%,#E8C86A 50%,#C8A84B 70%,#9A7A2E 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--muted);font-size:14px;margin-top:6px}
+h2{font-size:19px;color:var(--gold-light);margin:38px 0 16px;display:flex;align-items:center;gap:10px}
+h2 .n{font-size:12px;color:var(--gold-deep);border:1px solid var(--gold-30);border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.d-ok{background:var(--ok)} .d-warn{background:var(--warn)} .d-crit{background:var(--crit)} .d-info{background:var(--info)}
+.flow{display:flex;flex-direction:column;gap:10px}
+.stage{background:var(--dark);border:1px solid var(--gold-10);border-left:3px solid var(--gold-deep);border-radius:10px;padding:16px 18px}
+.stage.s-ok{border-left-color:var(--ok)} .stage.s-warn{border-left-color:var(--warn)} .stage.s-crit{border-left-color:var(--crit)}
+.stage .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.stage .name{font-weight:600;font-size:15.5px;color:var(--txt)}
+.stage .name .num{color:var(--gold);margin-right:8px}
+.badge{font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.b-ok{background:rgba(76,175,125,.13);color:var(--ok)}
+.b-warn{background:rgba(224,184,76,.13);color:var(--warn)}
+.b-crit{background:rgba(224,106,90,.13);color:var(--crit)}
+.b-info{background:rgba(111,168,220,.13);color:var(--info)}
+.stage .desc{font-size:13.5px;color:#C9C4B8;margin-top:7px}
+.stage .desc b{color:var(--txt)}
+.stage .pend{font-size:13px;margin-top:8px;padding:8px 12px;background:var(--gold-10);border-radius:7px;color:var(--gold-light)}
+.arrow{color:var(--gold-deep);text-align:center;font-size:13px;line-height:.6}
+.dec{background:var(--dark);border:1px solid var(--gold-20);border-radius:10px;padding:16px 18px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start}
+.dec .pri{font-size:20px;font-weight:700;color:var(--gold);min-width:34px;text-align:center;line-height:1.2}
+.dec .pri small{display:block;font-size:9.5px;letter-spacing:1px;color:var(--gold-deep);font-weight:400}
+.dec h3{font-size:15px;margin-bottom:5px}
+.dec p{font-size:13.5px;color:#C9C4B8}
+.dec .why{color:var(--muted);font-size:12.5px;margin-top:5px;font-style:italic}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.card{background:var(--dark);border:1px solid var(--gold-10);border-radius:10px;padding:15px 17px}
+.card h3{font-size:14px;color:var(--gold-light);margin-bottom:7px}
+.card p,.card li{font-size:13px;color:#C9C4B8}
+.card ul{padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.done{border-left:3px solid var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+th{text-align:left;color:var(--gold-deep);font-size:11.5px;letter-spacing:1px;text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--gold-20)}
+td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.05);color:#C9C4B8;vertical-align:top}
+td b{color:var(--txt)}
+.tablewrap{overflow-x:auto;background:var(--dark);border:1px solid var(--gold-10);border-radius:10px;padding:6px 10px 10px}
+footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){h1{font-size:24px}.dec{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body class="locked">
+
+<div class="gate">
+  <div class="glogo">OMNI Brasil · Sala de Controle</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <div class="gerr" id="gerr">Senha incorreta</div>
+  <div class="ghint">Acesso restrito à liderança OMNI</div>
+</div>
+
+<div class="content wrap">
+
+<header class="page">
+  <div class="kicker">Operação Comercial · Pré-Vendas</div>
+  <h1>Sala de Controle — Funil SDR</h1>
+  <div class="sub">Estado auditado em <b>21/07/2026</b> direto na VPS + repositório + Meta. Fonte única: o que está escrito aqui foi <b>verificado</b>, não presumido.</div>
+</header>
+
+<div class="legend">
+  <span><span class="dot d-ok"></span>Funcionando como desenhado</span>
+  <span><span class="dot d-warn"></span>Funciona, mas com limitação conhecida</span>
+  <span><span class="dot d-crit"></span>Furo ativo</span>
+  <span><span class="dot d-info"></span>Aguardando terceiro (Meta)</span>
+</div>
+
+<h2><span class="n">1</span>O funil vivo — etapa por etapa</h2>
+<div class="flow">
+
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">①</span>Lead entra (LP / ads)</span><span class="badge b-ok">Saudável</span></div>
+    <div class="desc">Lead-intake <b>nativo</b> na VPS, com guardião + dead-man's switch + auto-recuperação (crons ativos, verificados hoje). Captura ao vivo ~98%.</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">②</span>M0 — primeira mensagem (instantânea, até 24h)</span><span class="badge b-ok">No ar · 100% canal oficial</span></div>
+    <div class="desc">Template <b>m0_confirmacao_cadastro</b> (UTILITY, 2 botões) nos WABAs David + Layslla — imune ao frequency cap. Valida WhatsApp via Evolution; sem WhatsApp → fila de ligação (SEM_WHATSAPP). Desde 20/07 <b>todo disparo sai pelo oficial</b> (política padrão sua, protege os números não-oficiais).</div>
+    <div class="pend">Evolução em teste: M0 v2 com 4 botões de horário ("Cancelar consultoria") submetido 20/07 — aguardando veredito da Meta (1–3 dias). Se aprovar UTILITY, substitui o atual com ganho de agendamento direto.</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">③</span>Cadência Tentativa de Conectar (M-TC1 → 4)</span><span class="badge b-ok">No ar · A/B rodando</span></div>
+    <div class="desc">Régua sua no robô: TC1 = 18h pós-M0 · TC2 = +48h · TC3 = sábado (Layslla) / domingo (David) · janela 8h–21h. <b>A/B ativo:</b> David = Vocação v1 · Layslla = variações B (aprovadas Meta 20/07). Throughput corrigido (fila por vencimento, teto 60/rodada no oficial). <b>Confirmado hoje: as copies na VPS são idênticas às do repositório</b> — o robô manda a versão nova.</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">④</span>Lead clica no botão</span><span class="badge b-ok">No ar (poller 10s)</span></div>
+    <div class="desc">Handler via PM2 <b>poller-vocacao</b>: clique positivo → deal vai para <b>Conectado</b> + alerta no Google Chat para o SDR ligar; clique de recusa → despedida + perdido. Reconhece os botões novos do M0 v2 (horários e "Cancelar consultoria").</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-warn">
+    <div class="top"><span class="name"><span class="num">⑤</span>SDR humano liga e agenda</span><span class="badge b-warn">Gargalo humano</span></div>
+    <div class="desc">SLA combinado: <b>15 min</b>. Placar diário por SDR às 18h30 no Google Chat + alerta comercial anti-ruído (digest 12h/17h). Histórico recente: mediana de resposta era 95 min — o placar existe exatamente para puxar isso para baixo. Acompanhar os números da semana.</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-crit">
+    <div class="top"><span class="name"><span class="num">⑥</span>Lembretes de reunião (confirmação · 24h · 1h · na hora)</span><span class="badge b-crit">Furo ativo</span></div>
+    <div class="desc">Robô roda a cada 5 min e, desde 20/07, envia pelo <b>canal oficial</b> (correto). Porém envia <b>texto livre</b> — e a Meta só entrega texto livre se o lead interagiu nas últimas 24h. <b>Lead com conversa fria não recebe lembrete nenhum</b> (fica em DEFER silencioso) → no-show evitável.</div>
+    <div class="pend">Fix pronto esperando você: 4 templates UTILITY de lembrete redigidos e revisados pela squad meta-templates. Falta só o seu OK de copy → submissão (aprovação Meta provável em 24–48h) → robô passa a usar template. Decisão nº 1 da fila abaixo.</div>
+  </div>
+  <div class="arrow">▼</div>
+
+  <div class="stage s-ok">
+    <div class="top"><span class="name"><span class="num">⑦</span>Reunião com consultor → Closer</span><span class="badge b-ok">Coberto</span></div>
+    <div class="desc">Avaliação de reuniões pela squad sales-intelligence + Copiloto de Vendas v2 (alertas preditivos). Fora do escopo desta arrumação — sem furo estrutural conhecido.</div>
+  </div>
+</div>
+
+<h2><span class="n">2</span>Fila de decisões — só depende de você</h2>
+
+<div class="dec">
+  <div class="pri">1º<small>agora</small></div>
+  <div>
+    <h3>Aprovar os 4 templates de lembrete de reunião</h3>
+    <p>Copy pronta e revisada (probabilidade de aprovação Meta: alta). Decisão embutida: no lembrete de 24h, trocar "amanhã" por data+hora (recomendado — elimina o bug de fuso que faz o lembrete mentir o dia).</p>
+    <div class="why">Impacto imediato em no-show: hoje, lead frio não recebe lembrete nenhum. É o maior furo aberto do funil.</div>
+  </div>
+</div>
+
+<div class="dec">
+  <div class="pri">2º<small>3–7d</small></div>
+  <div>
+    <h3>Layslla: quando reativar o não-oficial novo</h3>
+    <p>Número novo (98902-7539) conectado e aquecendo desde 20/07. Decidir quando tirá-la do <b>forcar_canal_oficial</b> para o M0 dela voltar a sair como texto pessoal (mais conversão que template).</p>
+    <div class="why">Recomendação: manter aquecendo ao menos 1–2 semanas antes de dar volume, para não queimar o número novo.</div>
+  </div>
+</div>
+
+<div class="dec">
+  <div class="pri">3º<small>manual</small></div>
+  <div>
+    <h3>Verified name do WABA da Layslla → "Consultoria OMNI"</h3>
+    <p>O name_status está DECLINED. Não tem API: é um passo manual seu (ou do Michael) no WhatsApp Manager do Business Manager.</p>
+    <div class="why">Nome verificado dá cara profissional ao número oficial que hoje carrega quase todo o volume.</div>
+  </div>
+</div>
+
+<div class="dec">
+  <div class="pri">4º<small>quando quiser</small></div>
+  <div>
+    <h3>Pacote SDR-IA (substituir/complementar a ligação humana)</h3>
+    <p>Prompt v8 validado em bancada, estratégia completa aguardando desde 02/07. Pendências suas: preço vigente, agenda real dos consultores, persona da IA e o go do A/B 50/50.</p>
+    <div class="why">Estratégico, não urgente — mas ataca o gargalo real (64% dos leads nunca falam com ninguém).</div>
+  </div>
+</div>
+
+<h2><span class="n">3</span>Aguardando terceiros — sem ação sua</h2>
+<div class="tablewrap">
+<table>
+  <tr><th>Item</th><th>Quem</th><th>Prazo esperado</th><th>Quando resolver</th></tr>
+  <tr><td><b>M0 v2 — 4 botões de horário</b> ("Cancelar consultoria"), UTILITY, 2 WABAs</td><td class="badge-cell">Meta</td><td>1–3 dias (submetido 20/07)</td><td>Aprovou UTILITY → squad troca o M0 no config (te aviso). Rejeitou → decidir: 2 botões UTILITY (atual) · 4 botões MARKETING (risco de entrega) · 3 botões sem recusa.</td></tr>
+  <tr><td><b>David reescanear o QR</b> do número não-oficial (omni-david estava "connecting")</td><td>David</td><td>—</td><td>Sem urgência: hoje tudo sai pelo oficial. Necessário só se você quiser reativar o não-oficial dele no futuro.</td></tr>
+</table>
+</div>
+
+<h2><span class="n">4</span>Riscos monitorados</h2>
+<div class="grid2">
+  <div class="card"><h3>Frequency cap no canal oficial (erro 131049)</h3><p>Com 100% do volume no oficial, a Meta pode limitar mensagens MARKETING por lead. O M0 UTILITY escapa; as M-TC (MARKETING) estão sujeitas. O robô já trata com cooldown e monitor a cada 5 min — acompanhar o relatório de erros.</p></div>
+  <div class="card"><h3>Deals "Direto" sem UTM</h3><p>Causado pela recuperação em lote de 06/07 (119 leads reenviados sem UTM). Captura ao vivo está saudável. Risco latente conhecido na landing-omni-formacao (deal sem campo UTM).</p></div>
+  <div class="card"><h3>Trabalho paralelo em terminais</h3><p>Causa raiz da sensação de "achei que estava feito": máquina local chegou a ficar 13 commits atrás da main com registros importantes sem commit. Corrigido hoje + criado o <b>deploy-disparo.sh</b> para a VPS nunca mais divergir em silêncio.</p></div>
+  <div class="card"><h3>Handler: cron desligado, poller ligado</h3><p>O handler de botões roda via PM2 (poller a cada 10s); a entrada antiga no cron está comentada. Intencional (evita duplicidade), registrado aqui para ninguém "consertar" o cron de volta.</p></div>
+</div>
+
+<h2><span class="n">5</span>Arrumado em 21/07 (esta sessão)</h2>
+<div class="grid2">
+  <div class="card done"><h3>✓ Máquina local sincronizada</h3><p>Registros da submissão do M0 v2, proposta de lembretes e pending do lançamento commitados e na main. Repo em dia com a origin.</p></div>
+  <div class="card done"><h3>✓ deploy-disparo.sh (CAP-083)</h3><p>Fim do scp de memória: <b>status</b> responde na hora se a VPS roda a versão do repo; <b>deploy</b> faz backup + cópia + verificação md5, com proteção contra sobrescrever hotfix.</p></div>
+  <div class="card done"><h3>✓ VPS auditada e confirmada em dia</h3><p>21 arquivos do disparo comparados: zero divergências. As copies novas da Tentativa de Conectar <b>estão</b> rodando; lembretes já saem pelo canal oficial.</p></div>
+</div>
+
+<footer>
+  <span>OMNI Brasil · Sala de Controle do Funil SDR · atualizado por AURA</span>
+  <span>21/07/2026</span>
+</footer>
+
+</div>
+
+<script>
+try{if(sessionStorage.getItem('salactrl_gate')==='1'){document.body.classList.remove('locked')}}catch(e){}
+function tryLogin(){
+  if(document.getElementById('pwd').value==='omni777'){
+    document.body.classList.remove('locked');
+    try{sessionStorage.setItem('salactrl_gate','1')}catch(e){}
+  }else{
+    document.getElementById('gerr').style.display='block';
+    document.getElementById('pwd').value='';
+  }
+}
+</script>
+</body>
+</html>
