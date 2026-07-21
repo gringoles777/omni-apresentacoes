@@ -140,7 +140,42 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
   </div>
 </div>
 
-<h2><span class="n">2</span>Fila de decisões — só depende de você</h2>
+<h2><span class="n">2</span>As copies no ar — palavra por palavra</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:12px">Extraído em 21/07 do config que o robô usa na VPS (idêntico ao repositório). <b style="color:#C9C4B8">{nome}</b> = primeiro nome do lead. Colchetes = botões.</p>
+
+<div class="card" style="margin-bottom:12px">
+  <h3>M0 — primeira mensagem (os 2 WABAs) · template m0_confirmacao_cadastro · UTILITY</h3>
+  <p>"Ótimo dia, {nome}! Recebemos o seu cadastro para a consultoria estratégica aqui na OMNI e ele já está registrado. Para concluir o seu agendamento, preciso confirmar algumas informações com você numa ligação rápida de 5 minutos, no horário que for melhor pra você, inclusive à noite. Qual o melhor horário pra essa ligação?"<br><b>[ Combinar meu horário ] [ Agora não ]</b></p>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Teste A — David (cadência Vocação v1)</h3>
+    <ul>
+      <li><b>M-TC1:</b> "Que ótimo ter você aqui, {nome}! Você se cadastrou pra nossa consultoria estratégica de carreira e o próximo passo é só agendar nossa conversa. É só tocar no botão abaixo pra garantir a sua." <b>[ Agendar consultoria ] [ Perder consultoria ]</b></li>
+      <li><b>M-TC2:</b> "Você sabe que é competente e todos os dias vê na internet pessoas com metade do seu preparo construindo resultados sem se esforçar tanto quanto você, não é mesmo, {nome}? 🤷🏻‍♂️ Se você quer usar todo o seu conhecimento para ajudar pessoas e ter mais liberdade de tempo, estamos aqui para te ajudar. Toca no botão abaixo pra garantir sua vaga." <b>[ Quero agendar ] [ Perder a oportunidade ]</b></li>
+      <li><b>M-TC3:</b> "olá, {nome}, eu não quero te incomodar com mensagens e por isso quero entender: transformar sua carreira é uma prioridade pra você nesse momento ou não? 🤔" <b>[ Sim, é prioridade ] [ Não é prioridade ]</b></li>
+      <li><b>M-TC4:</b> "Oi, {nome}, vou passar sua vaga para outra pessoa, tudo bem? 😬 Estou com agenda cheia e a prioridade é de quem se cadastrou primeiro, mas como não tenho sua resposta vou entender que você não deseja mais essa transformação na sua carreira. Caso ainda se interesse por favor me sinalize agora. 😉" <b>[ Quero manter minha vaga ] [ Pode passar a vaga ]</b></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Teste B — Layslla (variações B, aprovadas Meta 20/07)</h3>
+    <ul>
+      <li><b>M-TC1:</b> "Ótimo dia, {nome}! Que bom ter você com a gente. Seu cadastro pra consultoria estratégica de carreira já está aqui e agora só falta agendar a nossa conversa. Toca no botão abaixo pra garantir a sua antes que a agenda feche." <b>[ Agendar consultoria ] [ Perder consultoria ]</b></li>
+      <li><b>M-TC2:</b> "Quantas vezes você já viu, {nome}, gente com metade da sua experiência colhendo resultados que você ainda não colheu? 🤷🏻‍♂️ Se você quer transformar seu conhecimento em uma forma de ajudar pessoas e ter mais liberdade de tempo, a gente te mostra o caminho. Toca no botão abaixo pra garantir sua vaga enquanto ela está reservada." <b>[ Quero agendar ] [ Perder a oportunidade ]</b></li>
+      <li><b>M-TC3:</b> "Olá, {nome}, prometo não te encher de mensagens, só preciso entender uma coisa: transformar sua carreira é uma prioridade pra você agora ou deixamos pra outro momento? 🤔" <b>[ Sim, é prioridade ] [ Não é prioridade ]</b></li>
+      <li><b>M-TC4:</b> "Oi, {nome}, preciso liberar sua vaga pra próxima pessoa da lista, posso? 😬 Minha agenda está cheia e a preferência é de quem responde primeiro. Sem o seu retorno, vou entender que essa transformação na sua carreira ficou pra depois. Se ainda quiser, me sinalize agora que eu seguro a sua vaga. 😉" <b>[ Quero manter minha vaga ] [ Pode passar a vaga ]</b></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" style="margin-top:12px;border-left:3px solid var(--info)">
+  <h3>Trabalhada esta semana, ainda NÃO no ar — M0 v2 com botões de horário (aguarda Meta)</h3>
+  <p>"Ótimo dia, {nome}! Recebemos o seu cadastro para a consultoria estratégica aqui na OMNI e ele já está registrado. Para concluir o seu agendamento, preciso confirmar algumas informações com você numa ligação rápida de 5 minutos. É só me dizer o melhor período pra eu te ligar. Qual horário fica melhor pra você?"<br><b>[ Manhã (8h-12h) ] [ Tarde (12h-18h) ] [ Fim de tarde (18h-20h) ] [ Cancelar consultoria ]</b></p>
+  <p style="margin-top:6px;color:var(--muted)">Submetido 20/07 como UTILITY nos 2 WABAs; veredito da Meta em 1–3 dias. O handler dos botões novos já está no ar. Quando aprovar, a squad troca o M0 e te avisa. (A v1, com botão "Perder minha consultoria", foi aprovada como MARKETING e descartada por sofrer limite de entrega.)</p>
+</div>
+
+<h2><span class="n">3</span>Fila de decisões — só depende de você</h2>
 
 <div class="dec">
   <div class="pri">1º<small>agora</small></div>
@@ -178,7 +213,7 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
   </div>
 </div>
 
-<h2><span class="n">3</span>Aguardando terceiros — sem ação sua</h2>
+<h2><span class="n">4</span>Aguardando terceiros — sem ação sua</h2>
 <div class="tablewrap">
 <table>
   <tr><th>Item</th><th>Quem</th><th>Prazo esperado</th><th>Quando resolver</th></tr>
@@ -187,7 +222,7 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
 </table>
 </div>
 
-<h2><span class="n">4</span>Riscos monitorados</h2>
+<h2><span class="n">5</span>Riscos monitorados</h2>
 <div class="grid2">
   <div class="card"><h3>Frequency cap no canal oficial (erro 131049)</h3><p>Com 100% do volume no oficial, a Meta pode limitar mensagens MARKETING por lead. O M0 UTILITY escapa; as M-TC (MARKETING) estão sujeitas. O robô já trata com cooldown e monitor a cada 5 min — acompanhar o relatório de erros.</p></div>
   <div class="card"><h3>Deals "Direto" sem UTM</h3><p>Causado pela recuperação em lote de 06/07 (119 leads reenviados sem UTM). Captura ao vivo está saudável. Risco latente conhecido na landing-omni-formacao (deal sem campo UTM).</p></div>
@@ -195,7 +230,7 @@ footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--gold-10);colo
   <div class="card"><h3>Handler: cron desligado, poller ligado</h3><p>O handler de botões roda via PM2 (poller a cada 10s); a entrada antiga no cron está comentada. Intencional (evita duplicidade), registrado aqui para ninguém "consertar" o cron de volta.</p></div>
 </div>
 
-<h2><span class="n">5</span>Arrumado em 21/07 (esta sessão)</h2>
+<h2><span class="n">6</span>Arrumado em 21/07 (esta sessão)</h2>
 <div class="grid2">
   <div class="card done"><h3>✓ Máquina local sincronizada</h3><p>Registros da submissão do M0 v2, proposta de lembretes e pending do lançamento commitados e na main. Repo em dia com a origin.</p></div>
   <div class="card done"><h3>✓ deploy-disparo.sh (CAP-083)</h3><p>Fim do scp de memória: <b>status</b> responde na hora se a VPS roda a versão do repo; <b>deploy</b> faz backup + cópia + verificação md5, com proteção contra sobrescrever hotfix.</p></div>
