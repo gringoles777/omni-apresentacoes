@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>War Room — Aulão Depois do Banco | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --elevated:#1A1A1A; --gold:#C8A84B; --gold-light:#E8C86A;
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --teal:#2A9D8F; --gray:#6B6B6B;
+  --gold-10:rgba(200,168,75,.10); --gold-15:rgba(200,168,75,.15); --gold-30:rgba(200,168,75,.30);
+  --green:#4CAF7D; --green-10:rgba(76,175,125,.12); --amber:#E0A83C; --red:#E05C5C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--cream);font-family:Inter,sans-serif;line-height:1.55;padding:32px 16px 80px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:Oswald,sans-serif;font-size:clamp(26px,5vw,40px);color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+.sub{color:var(--cream-70);margin:6px 0 28px;font-size:15px}
+h2{font-family:Oswald,sans-serif;font-size:20px;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;margin:38px 0 14px;border-bottom:1px solid var(--gold-30);padding-bottom:8px}
+.card{background:var(--elevated);border:1px solid var(--gold-15);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{color:var(--gold);text-align:left;padding:8px 10px;border-bottom:1px solid var(--gold-30);font-family:Oswald,sans-serif;letter-spacing:.5px;font-weight:500}
+td{padding:8px 10px;border-bottom:1px solid rgba(245,240,232,.08);vertical-align:top}
+a{color:var(--gold-light)}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.ok{background:var(--green-10);color:var(--green)}
+.hoje{background:rgba(224,168,60,.14);color:var(--amber)}
+.amanha{background:var(--gold-10);color:var(--gold-light)}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:13px}
+.copytext{white-space:pre-wrap;background:#101010;border-left:3px solid var(--gold);border-radius:6px;padding:14px 16px;font-size:14px;color:var(--cream);margin-top:10px}
+.lbl{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:12px 0 4px;font-weight:600}
+.lbl:first-child{margin-top:0}
+.note{background:var(--gold-10);border:1px solid var(--gold-30);border-radius:10px;padding:14px 16px;font-size:14px;margin:14px 0}
+.warn{background:rgba(224,92,92,.10);border:1px solid rgba(224,92,92,.35);border-radius:10px;padding:14px 16px;font-size:14px;margin:14px 0}
+ul{margin-left:20px}
+li{margin-bottom:6px;font-size:14px}
+.num{font-family:Oswald,sans-serif;font-size:30px;color:var(--gold-light)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.stat{background:#101010;border:1px solid var(--gold-15);border-radius:10px;padding:14px;text-align:center}
+.stat small{color:var(--cream-70);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🚀 War Room — Aulão "Depois do Banco"</h1>
+<div class="sub">Aula ao vivo · <strong>quinta, 23/07, 20h30</strong> · Zoom · com Michael Arruda · Oferta: FPH com aplicação
+<br>Resumo de conferência para <strong>Fernanda</strong> (condução) — gerado em 22/07 pelo Gestor de Lançamentos · Governança: Rafa aprova gates</div>
+
+<h2>1 · Links oficiais (todos testados em 21/07)</h2>
+<div class="card"><table>
+<tr><th>O quê</th><th>Link</th><th>Aponta para</th></tr>
+<tr><td><strong>Página da aula</strong> (destino dos botões dos templates e emails)</td><td class="mono"><a href="https://go.omnihypnosis.com.br/aulao-bancarios">go.omnihypnosis.com.br/aulao-bancarios</a></td><td>captura "Depois do Banco" (base da LP da Fernanda, copy da peça 7, form → ActiveCampaign)</td></tr>
+<tr><td><strong>Grupo WhatsApp</strong></td><td class="mono"><a href="https://go.omnihypnosis.com.br/aulao-bancarios-grupo">go.omnihypnosis.com.br/aulao-bancarios-grupo</a></td><td>chat.whatsapp.com/DyxdYts2agHHEHj2LoUAHD</td></tr>
+<tr><td><strong>Sala Zoom</strong></td><td class="mono"><a href="https://go.omnihypnosis.com.br/aulao-bancarios-zoom">go.omnihypnosis.com.br/aulao-bancarios-zoom</a></td><td>sala oficial do Michael (us06web.zoom.us/j/87873296521) — sala com limite de vagas</td></tr>
+<tr><td>Copies aprovadas (peças 1-8, G3 Rafa)</td><td class="mono"><a href="https://gringoles777.github.io/omni-apresentacoes/aulao-bancarios-copies.html">…/aulao-bancarios-copies.html</a></td><td>senha omni777</td></tr>
+<tr><td>Plano do lançamento (G2)</td><td class="mono"><a href="https://gringoles777.github.io/omni-apresentacoes/aulao-bancarios-fph-2026-07-23.html">…/aulao-bancarios-fph-2026-07-23.html</a></td><td>senha omni777</td></tr>
+<tr><td>Handoff completo + roteiro</td><td class="mono">repo main</td><td>workspace/businesses/omni_brasil/outputs/lancamentos/aulao-bancarios-fph/HANDOFF-FERNANDA.md</td></tr>
+</table>
+<div class="note">⚠️ Regra de ouro dos links: em TODA comunicação orgânica, usar SEMPRE os redirects <span class="mono">go.omnihypnosis.com.br/…</span> (nunca o link direto do Zoom/grupo/GitHub) — assim trocamos o destino sem reeditar mensagem.</div>
+</div>
+
+<h2>2 · O que JÁ SAIU (não repetir)</h2>
+<div class="card">
+<div class="grid">
+<div class="stat"><div class="num">333</div><small>WhatsApp enviados (21/07)</small></div>
+<div class="stat"><div class="num">75%</div><small>entregues/lidos no WhatsApp</small></div>
+<div class="stat"><div class="num">327</div><small>emails enviados 16h (21/07)</small></div>
+<div class="stat"><div class="num">65</div><small>falhas WhatsApp (cobertas pelo email)</small></div>
+</div>
+<table>
+<tr><th>Peça</th><th>Canal</th><th>Quando</th><th>Status</th></tr>
+<tr><td>Peça 1 — Template convite <span class="mono">aulao_bancarios_convite</span></td><td>WABA oficial (inbox 22, label <span class="mono">aulao-depois-do-banco</span>)</td><td>21/07 tarde</td><td><span class="badge ok">Enviado</span></td></tr>
+<tr><td>Peça 3 — Email convite ("O que te impede de viver com mais liberdade e equilíbrio?")</td><td>AC · campanha id 2480 · lista id 495 (334)</td><td>21/07 16h</td><td><span class="badge ok">Enviado</span></td></tr>
+<tr><td>Peça 8a — Post antecipação 1 + imagem convite</td><td>Grupo WhatsApp (fixado)</td><td>21/07</td><td><span class="badge ok">Publicado</span></td></tr>
+</table>
+</div>
+
+<h2>3 · O que sai HOJE (qua 22/07) — Onda 2</h2>
+<div class="card">
+<table>
+<tr><th>Peça</th><th>Canal / segmento</th><th>Status</th></tr>
+<tr><td><strong>Peça 4 — Email reforço</strong><br>Assunto: <em>Vem comigo amanhã, ou libero seu lugar?</em><br>Pré-cabeçalho: <em>Reservei uma vaga pra você desde a campanha. Amanhã, 20h30.</em></td><td>AC — SOMENTE quem não abriu/não se inscreveu na onda 1 (segmentar pela campanha 2480)</td><td><span class="badge hoje">Hoje à tarde</span></td></tr>
+<tr><td><strong>Peça 8b — Post antecipação 2</strong> (texto na seção 5)</td><td>Grupo WhatsApp</td><td><span class="badge hoje">Hoje à tarde</span></td></tr>
+<tr><td><strong>G4 — Checklist de véspera</strong> (checklists/go-live.md da squad)</td><td>Fernanda roda, <strong>GO final é da Rafa</strong></td><td><span class="badge hoje">Hoje à noite</span></td></tr>
+</table>
+<div class="warn">🚫 Os 5 rascunhos <strong>"[Masterclass Bancários]"</strong> no ActiveCampaign (ids 2475-2479) NÃO podem ser disparados como estão: nome antigo do evento, copy não aprovada e lista errada (485). Adaptar às copies aprovadas (lembretes → peça 5 e peça 2) ou apagar. O nome "Masterclass Bancários" não existe mais — o evento é <strong>"Depois do Banco"</strong> em toda comunicação.</div>
+</div>
+
+<h2>4 · O que sai AMANHÃ (qui 23/07 — D0) e sexta</h2>
+<div class="card"><table>
+<tr><th>Hora</th><th>Peça</th><th>Canal</th></tr>
+<tr><td>Manhã</td><td>Peça 5 — Email D0 · Assunto: <em>Você está deixando sua melhor chance passar</em> · Pré: <em>É hoje, 20h30, ao vivo. O começo é onde mostro o mapa inteiro.</em></td><td>AC (lista toda)</td></tr>
+<tr><td>Manhã</td><td>Peça 8c — Mensagem "é hoje"</td><td>Grupo</td></tr>
+<tr><td>~18-19h</td><td>Peça 2 — Template lembrete <span class="mono">aulao_bancarios_lembrete_d0</span> (APROVADO na Meta; serve de retry p/ os 16 do limite de frequência)</td><td>WABA via Chatwoot (script <span class="mono">disparo_onda1_waba.py</span> adaptado — instruções no handoff)</td></tr>
+<tr><td>19h30</td><td>Peça 8d — "Falta 1 hora"</td><td>Grupo</td></tr>
+<tr><td>20h25</td><td>Peça 8e — "Estamos no ar" (link do Zoom)</td><td>Grupo</td></tr>
+<tr><td>20h30</td><td><strong>AULA</strong> → oferta FPH → aplicações · Consultorias com a Rafa = <strong>~10% dos presentes</strong> (Michael anuncia o número NA HORA — decisão Rafa 21/07)</td><td>Zoom</td></tr>
+<tr><td>Sex 24/07</td><td>Replay com prazo + follow-up das aplicações → agendar consultorias</td><td>Email + WhatsApp + grupo</td></tr>
+</table></div>
+
+<h2>5 · Textos da comunicação orgânica do grupo (APROVADOS — usar como estão)</h2>
+<div class="card">
+<span class="lbl">Post antecipação 2 — HOJE (qua 22/07, tarde)</span>
+<div class="copytext">Ótima tarde a todos. Michael Arruda aqui.
+
+Falta um dia para a aula Depois do Banco, ao vivo. Amanhã, quinta 23/07, às 20h30, no Zoom.
+
+Uma pergunta para você levar até lá: se você pudesse extrair o seu melhor e virar um profissional mais reconhecido, com mais liberdade de tempo, o que mudaria na sua vida ainda este ano?
+
+É exatamente sobre esse caminho que vamos conversar, de forma estruturada e segura.
+
+Se ainda não garantiu sua vaga, faça agora: https://go.omnihypnosis.com.br/aulao-bancarios
+
+Até amanhã, 20h30.</div>
+
+<span class="lbl">Mensagem do dia — QUINTA de manhã</span>
+<div class="copytext">Ótimo dia, pessoal. É hoje.
+
+Às 20h30 eu entro ao vivo com a aula Depois do Banco, que preparei de presente para bancários e ex-bancários. Vou te mostrar o caminho para extrair o seu melhor e se tornar um profissional de alto valor.
+
+Deixe sua vaga pronta e um lembrete no celular: https://go.omnihypnosis.com.br/aulao-bancarios
+
+Quem ficar comigo ao vivo até o final recebe um brinde que eu revelo no encerramento. Vale a pena ficar até o fim.
+
+Nos vemos à noite.</div>
+
+<span class="lbl">Mensagem — QUINTA 19h30</span>
+<div class="copytext">Ótima noite, pessoal. Falta 1 hora para a aula Depois do Banco.
+
+Às 20h30 abrimos a sala ao vivo. Vá se organizando para assistir com atenção, porque o começo é onde eu mostro o mapa completo do caminho.
+
+Prepare seu acesso por aqui: https://go.omnihypnosis.com.br/aulao-bancarios
+
+Te espero às 20h30.</div>
+
+<span class="lbl">Mensagem — QUINTA 20h25 (entrou no ar)</span>
+<div class="copytext">Ótima noite. Estamos no ar, a sala já está aberta.
+
+Entre agora pelo Zoom e garanta seu lugar antes de começarmos: https://go.omnihypnosis.com.br/aulao-bancarios-zoom
+
+Fique comigo até o final: o brinde é revelado no encerramento da aula.
+
+Começamos em instantes.</div>
+
+<div class="note">🖼️ <strong>Imagem do convite</strong> (já usada no post 1, pode reaproveitar nos lembretes): <span class="mono">outputs/lancamentos/aulao-bancarios-fph/convite-grupo-v1.png</span> (repo main) — arte preto+dourado com a foto real do Michael, grafia conferida.</div>
+</div>
+
+<h2>6 · Checklist de conferência da comunicação (para a Fernanda validar)</h2>
+<div class="card"><ul>
+<li>✅ Nome do evento em TODA peça = <strong>"Depois do Banco"</strong> (zero menção a "Masterclass Bancários")</li>
+<li>✅ Links sempre pelos redirects <span class="mono">go.omnihypnosis.com.br</span> (página / -grupo / -zoom)</li>
+<li>✅ Saudação OMNI sempre ("ótimo dia/ótima tarde/ótima noite" — nunca "bom/boa")</li>
+<li>✅ Sem travessão em texto corrido · sem a palavra "sorteio" (brinde = "revelado no encerramento") · sem preço (revelado na aula) · sem promessa financeira explícita</li>
+<li>✅ Escassez só verdadeira: sala com limite real; consultorias = ~10% dos presentes, anunciado na hora</li>
+<li>✅ Copy NOVA (que não esteja na página de copies) → aprovação de um dos 4 (Fernanda pode aprovar) + registro em <span class="mono">memory/decisions.md</span></li>
+<li>✅ Disparo WhatsApp sempre via Chatwoot (mensagem normal, nunca nota privada) + label <span class="mono">aulao-depois-do-banco</span></li>
+<li>✅ Respostas dos leads: inbox 22 (Atendimento - Omni) — time avisado, SLA curto</li>
+</ul></div>
+
+<h2>7 · Infra e credenciais (referência rápida)</h2>
+<div class="card"><ul>
+<li><strong>Campanha email onda 1:</strong> AC id 2480 · lista id 495 ("Aulao Depois do Banco 23-07", 334 contatos) · tag <span class="mono">aulao-depois-do-banco-2307</span></li>
+<li><strong>WABA oficial:</strong> "Atendimento - Omni" 1422655749552165 · Chatwoot inbox 22 · templates <span class="mono">aulao_bancarios_convite</span> (2479261195906279) e <span class="mono">aulao_bancarios_lembrete_d0</span> (1603536264439800), ambos APPROVED</li>
+<li><strong>Falhas onda 1 p/ eventual recuperação:</strong> <span class="mono">onda1_falhas_entrega.json</span> (42 números quebrados na origem, 16 limite Meta, 7 experimento Meta)</li>
+<li><strong>Estado do disparo (NUNCA apagar):</strong> <span class="mono">disparo_onda1_estado.json</span> — é o que impede envio duplicado</li>
+<li><strong>Git:</strong> Fernanda trabalha DIRETO NA MAIN neste lançamento (autorização Rafa 21/07, registrada em decisions.md) · staging seletivo, nunca <span class="mono">git add -A</span></li>
+</ul></div>
+
+<div class="sub" style="margin-top:30px">Gestor de Lançamentos · squad gestao-lancamentos · OMNI Brasil — atualizado 22/07/2026</div>
+</div>
+</body>
+</html>
