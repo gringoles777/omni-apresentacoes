@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros Stories — Consultoria Estratégica Profissional | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#050505; --dark:#0D0D0D; --dark-el:#1A1A1A;
+    --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --cream:#F5F0E8; --cream-60:rgba(245,240,232,0.60); --cream-40:rgba(245,240,232,0.40);
+    --gold-10:rgba(200,168,75,0.10); --gold-20:rgba(200,168,75,0.20);
+    --border-subtle:1px solid #242424;
+    --font-display:'Oswald',sans-serif; --font-serif:'DM Serif Display',serif; --font-body:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--cream);font-family:var(--font-body);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+  /* Header sticky */
+  header{position:sticky;top:0;z-index:200;background:rgba(5,5,5,0.92);backdrop-filter:blur(10px);border-bottom:var(--border-subtle)}
+  .header-inner{max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .logo-mark{height:22px;width:auto;flex-shrink:0}
+  .logo-mark path{fill:var(--gold)}
+  .brand{font-family:var(--font-display);font-weight:700;letter-spacing:5px;color:var(--gold);text-transform:uppercase;font-size:1rem}
+  .brand-sub{font-family:var(--font-body);color:var(--cream-40);text-transform:uppercase;letter-spacing:2.5px;font-size:0.62rem;border-left:var(--border-subtle);padding-left:14px}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* Hero */
+  .hero{padding:72px 0 40px;text-align:center;border-bottom:var(--border-subtle)}
+  .eyebrow{display:inline-block;font-family:var(--font-display);letter-spacing:3px;text-transform:uppercase;font-size:0.7rem;color:var(--gold);border:1px solid var(--gold-deep);border-radius:50px;padding:6px 16px;margin-bottom:22px}
+  .hero h1{font-family:var(--font-display);font-weight:700;text-transform:uppercase;letter-spacing:1px;font-size:clamp(2rem,5vw,3.4rem);line-height:1.05}
+  .hero h1 em{font-family:var(--font-serif);font-style:italic;text-transform:none;color:var(--gold);letter-spacing:0;display:block;margin-top:4px}
+  .hero p{color:var(--cream-60);max-width:640px;margin:20px auto 0;font-size:1.02rem}
+
+  /* Summary strip */
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:38px 0 8px}
+  .fact{background:var(--dark-el);border:var(--border-subtle);border-radius:8px;padding:18px}
+  .fact .k{font-family:var(--font-display);text-transform:uppercase;letter-spacing:2px;font-size:0.62rem;color:var(--gold);margin-bottom:8px}
+  .fact .v{font-size:0.92rem;color:var(--cream)}
+
+  /* Section titles */
+  .sec-title{font-family:var(--font-display);text-transform:uppercase;letter-spacing:1px;font-size:1.5rem;margin:56px 0 6px;color:var(--cream)}
+  .sec-title .num{color:var(--gold);margin-right:10px}
+  .sec-desc{color:var(--cream-60);font-size:0.9rem;margin-bottom:22px}
+
+  /* Roteiro card */
+  .roteiro{background:linear-gradient(135deg,#141210,#0c0c0c);border:1px solid #2a2418;border-radius:12px;padding:26px;margin-bottom:26px;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+  .roteiro h3{font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.5px;font-size:1.15rem;color:var(--gold-light)}
+  .roteiro .angle{color:var(--cream-40);font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;margin:2px 0 18px}
+
+  .tbl{width:100%;border-collapse:collapse;font-size:0.9rem;overflow-x:auto;display:block}
+  .tbl table{width:100%;border-collapse:collapse;min-width:560px}
+  table.rt{width:100%;border-collapse:collapse;min-width:560px}
+  .rt th{font-family:var(--font-display);text-transform:uppercase;letter-spacing:1.5px;font-size:0.6rem;color:var(--gold);text-align:left;padding:8px 12px;border-bottom:1px solid var(--gold-20)}
+  .rt td{padding:11px 12px;border-bottom:var(--border-subtle);vertical-align:top}
+  .rt td.t{white-space:nowrap;color:var(--gold-light);font-family:var(--font-display);font-size:0.85rem;width:64px}
+  .rt td.screen{color:var(--cream);font-weight:600;width:34%}
+  .rt td.vo{color:var(--cream-60);font-style:italic}
+  .scroll{overflow-x:auto}
+  .tom{margin-top:14px;font-size:0.82rem;color:var(--cream-60)}
+  .tom b{color:var(--gold)}
+
+  /* Approval banner */
+  .approval{background:var(--gold-10);border:1px solid var(--gold-deep);border-radius:12px;padding:22px 26px;margin:44px 0 20px;text-align:center}
+  .approval .label{font-family:var(--font-display);text-transform:uppercase;letter-spacing:3px;color:var(--gold);font-size:0.72rem;margin-bottom:8px}
+  .approval p{color:var(--cream);font-size:0.98rem}
+
+  .notes{background:var(--dark-el);border:var(--border-subtle);border-radius:10px;padding:22px 26px;margin:10px 0 60px}
+  .notes h4{font-family:var(--font-display);text-transform:uppercase;letter-spacing:1.5px;font-size:0.8rem;color:var(--gold);margin-bottom:12px}
+  .notes ul{list-style:none}
+  .notes li{padding:6px 0 6px 20px;position:relative;color:var(--cream-60);font-size:0.9rem}
+  .notes li::before{content:"◆";position:absolute;left:0;color:var(--gold-deep);font-size:0.7rem;top:8px}
+
+  footer{border-top:var(--border-subtle);padding:28px 0;text-align:center;color:var(--cream-40);font-size:0.78rem}
+
+  @media(max-width:600px){
+    .brand-sub{display:none}
+    .rt td.screen{width:auto}
+    .hero{padding:48px 0 32px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <svg class="logo-mark" viewBox="0 0 566.93 226.77" xmlns="http://www.w3.org/2000/svg"><path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/></svg>
+    <span class="brand">OMNI BRASIL</span>
+    <span class="brand-sub">Roteiros de Stories · Para Aprovação</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="eyebrow">Consultoria Estratégica · Vídeo Stories</span>
+    <h1>Roteiros de Stories <em>Consultoria Estratégica Profissional</em></h1>
+    <p>3 roteiros de até 30 segundos para a campanha de consultoria estratégica <strong>100% online</strong> — vendendo a mesma ideia dos criativos: uma nova carreira com propósito, sem exigência de diploma ou experiência prévia.</p>
+
+    <div class="facts">
+      <div class="fact"><div class="k">Big Idea</div><div class="v">Uma nova carreira com propósito, sem exigência de diploma ou experiência prévia.</div></div>
+      <div class="fact"><div class="k">Diferencial</div><div class="v">Não é vaga de emprego — é uma nova profissão.</div></div>
+      <div class="fact"><div class="k">Provas</div><div class="v">Única com Processo Terapêutico · ISO 9001</div></div>
+      <div class="fact"><div class="k">CTA</div><div class="v">Inscreva-se gratuitamente</div></div>
+    </div>
+  </section>
+
+  <h2 class="sec-title"><span class="num">01</span>A virada de quem está insatisfeito</h2>
+  <p class="sec-desc">Ângulo: dor → propósito. Fala com quem sente a carreira travada.</p>
+  <div class="roteiro">
+    <h3>Roteiro 1 — "A virada de quem está insatisfeito"</h3>
+    <div class="angle">Dor → Propósito</div>
+    <div class="scroll"><table class="rt">
+      <thead><tr><th>Tempo</th><th>Texto na tela</th><th>Locução</th></tr></thead>
+      <tbody>
+        <tr><td class="t">0–4s</td><td class="screen">Sente que sua carreira travou?</td><td class="vo">"Você acorda todo dia sentindo que sua carreira travou?"</td></tr>
+        <tr><td class="t">4–12s</td><td class="screen">Existe um caminho com propósito</td><td class="vo">"E se você pudesse construir uma nova profissão — com propósito, ajudando pessoas de verdade?"</td></tr>
+        <tr><td class="t">12–22s</td><td class="screen">Consultoria Estratégica · 100% online</td><td class="vo">"Na OMNI Brasil a gente te mostra como. Online, sem exigir diploma nem experiência prévia."</td></tr>
+        <tr><td class="t">22–27s</td><td class="screen">Não é vaga de emprego. É uma nova profissão.</td><td class="vo">"Atenção: não é vaga de emprego — é a sua nova profissão."</td></tr>
+        <tr><td class="t">27–30s</td><td class="screen">Inscreva-se gratuitamente</td><td class="vo">"Inscreva-se gratuitamente. O primeiro passo é agora."</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tom"><b>Tom:</b> empático → esperançoso. <b>Trilha:</b> introspectiva que vira inspiradora aos 12s.</p>
+  </div>
+
+  <h2 class="sec-title"><span class="num">02</span>Quebra do mito do diploma</h2>
+  <p class="sec-desc">Ângulo: quebra de objeção. Ataca direto a barreira "preciso de formação".</p>
+  <div class="roteiro">
+    <h3>Roteiro 2 — "Quebra do mito do diploma"</h3>
+    <div class="angle">Quebra de Objeção</div>
+    <div class="scroll"><table class="rt">
+      <thead><tr><th>Tempo</th><th>Texto na tela</th><th>Locução</th></tr></thead>
+      <tbody>
+        <tr><td class="t">0–3s</td><td class="screen">Sem diploma. Sem experiência.</td><td class="vo">"Sem diploma. Sem experiência prévia. E, ainda assim, uma nova carreira."</td></tr>
+        <tr><td class="t">3–10s</td><td class="screen">Processo Terapêutico · ISO 9001</td><td class="vo">"Parece bom demais? A OMNI é a única com processo terapêutico e certificação ISO 9001."</td></tr>
+        <tr><td class="t">10–20s</td><td class="screen">Consultoria · 100% online</td><td class="vo">"Numa consultoria estratégica online, traçamos seu plano pra viver de propósito, ajudando pessoas."</td></tr>
+        <tr><td class="t">20–26s</td><td class="screen">Não é vaga de emprego.</td><td class="vo">"Isso não é vaga de emprego. É a chance de reconstruir a sua história."</td></tr>
+        <tr><td class="t">26–30s</td><td class="screen">Inscreva-se gratuitamente</td><td class="vo">"Inscreva-se gratuitamente agora."</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tom"><b>Tom:</b> direto, seguro. <b>Trilha:</b> batida constante e moderna.</p>
+  </div>
+
+  <h2 class="sec-title"><span class="num">03</span>Liberdade com propósito</h2>
+  <p class="sec-desc">Ângulo: estilo de vida. Vende a liberdade de trabalhar de onde quiser com significado.</p>
+  <div class="roteiro">
+    <h3>Roteiro 3 — "Liberdade com propósito"</h3>
+    <div class="angle">Estilo de Vida</div>
+    <div class="scroll"><table class="rt">
+      <thead><tr><th>Tempo</th><th>Texto na tela</th><th>Locução</th></tr></thead>
+      <tbody>
+        <tr><td class="t">0–4s</td><td class="screen">Trabalhar de onde quiser. Com propósito.</td><td class="vo">"Imagine trabalhar de onde quiser, no seu horário, ajudando pessoas a mudarem de vida."</td></tr>
+        <tr><td class="t">4–12s</td><td class="screen">Consultoria Estratégica · 100% online</td><td class="vo">"Essa é a proposta da Consultoria Estratégica Profissional da OMNI Brasil. Tudo online."</td></tr>
+        <tr><td class="t">12–20s</td><td class="screen">Sem diploma. Sem experiência.</td><td class="vo">"Você não precisa de diploma nem de experiência prévia. Só da vontade de recomeçar com propósito."</td></tr>
+        <tr><td class="t">20–26s</td><td class="screen">Não é vaga de emprego · Processo Terapêutico · ISO 9001</td><td class="vo">"Não é vaga de emprego — é uma nova profissão, com processo terapêutico e certificação ISO 9001."</td></tr>
+        <tr><td class="t">26–30s</td><td class="screen">Inscreva-se gratuitamente</td><td class="vo">"Comece hoje. Inscreva-se gratuitamente."</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tom"><b>Tom:</b> aspiracional, leve, liberdade. <b>Trilha:</b> acústica/uplifting e moderna.</p>
+  </div>
+
+  <div class="approval">
+    <div class="label">Para aprovação — Michael</div>
+    <p>Michael, seguem os 3 roteiros para os vídeos de Stories. Se aprovar, seguimos para gravação/edição. Feedback e ajustes de copy são bem-vindos.</p>
+  </div>
+
+  <div class="notes">
+    <h4>Observações de produção</h4>
+    <ul>
+      <li>Manter a paleta da marca: âmbar (#F5B400), preto e branco.</li>
+      <li>Legendas sempre visíveis — a maioria assiste sem som.</li>
+      <li>Fechar os três com o mesmo CTA e a logo OHTC, mantendo consistência com os criativos.</li>
+      <li>Ritmo de fala: 2 a 3 palavras por segundo (não passar de ~75 palavras por vídeo).</li>
+      <li>Contexto visual: home office / videoconferência (mesma linguagem dos criativos de feed e stories).</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  OMNI Brasil · Roteiros de Stories — Consultoria Estratégica Profissional · Julho 2026
+</footer>
+
+</body>
+</html>
