@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Relatório de Campanhas — Julho 2026 | OMNI Brasil</title>
+
+<style>
+:root{
+  --ground:#0D0D0D; --ground-2:#141414; --elev:#1A1A1A; --line:#2A2724;
+  --ink:#F5F0E8; --ink-2:#B9B2A6; --ink-3:#7E786D;
+  --gold:#C8A84B; --gold-lt:#E8C86A; --gold-dp:#9A7A2E; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.22);
+  --good:#3BB4A2; --warn:#C9903C; --bad:#CF5247; --cool:#7C8AA0;
+  --good-bg:rgba(59,180,162,.13); --bad-bg:rgba(207,82,71,.13); --warn-bg:rgba(201,144,60,.13);
+  --f-disp:'Oswald','Arial Narrow','Segoe UI Condensed',system-ui,sans-serif;
+  --f-body:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+  --f-mono:'IBM Plex Mono','Cascadia Mono',Consolas,'Courier New',monospace;
+  --f-serif:'DM Serif Display',Georgia,'Times New Roman',serif;
+  --maxw:1180px;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --ground:#F5F0E8; --ground-2:#EDE6DA; --elev:#FFFCF6; --line:#DED3C0;
+    --ink:#171310; --ink-2:#4E463B; --ink-3:#7A7063;
+    --gold:#8A6C22; --gold-lt:#9A7A2E; --gold-dp:#6E5518; --gold-10:rgba(138,108,34,.09); --gold-20:rgba(138,108,34,.2);
+    --good:#1E7D6E; --warn:#9A6C18; --bad:#A8382E; --cool:#5A6779;
+    --good-bg:rgba(30,125,110,.11); --bad-bg:rgba(168,56,46,.11); --warn-bg:rgba(154,108,24,.11);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#F5F0E8; --ground-2:#EDE6DA; --elev:#FFFCF6; --line:#DED3C0;
+  --ink:#171310; --ink-2:#4E463B; --ink-3:#7A7063;
+  --gold:#8A6C22; --gold-lt:#9A7A2E; --gold-dp:#6E5518; --gold-10:rgba(138,108,34,.09); --gold-20:rgba(138,108,34,.2);
+  --good:#1E7D6E; --warn:#9A6C18; --bad:#A8382E; --cool:#5A6779;
+  --good-bg:rgba(30,125,110,.11); --bad-bg:rgba(168,56,46,.11); --warn-bg:rgba(154,108,24,.11);
+}
+:root[data-theme="dark"]{
+  --ground:#0D0D0D; --ground-2:#141414; --elev:#1A1A1A; --line:#2A2724;
+  --ink:#F5F0E8; --ink-2:#B9B2A6; --ink-3:#7E786D;
+  --gold:#C8A84B; --gold-lt:#E8C86A; --gold-dp:#9A7A2E; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.22);
+  --good:#3BB4A2; --warn:#C9903C; --bad:#CF5247; --cool:#7C8AA0;
+  --good-bg:rgba(59,180,162,.13); --bad-bg:rgba(207,82,71,.13); --warn-bg:rgba(201,144,60,.13);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);
+  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+p{margin:0}
+table{border-collapse:collapse;width:100%}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ── barra de marca OMNI (sticky) ────────── */
+.brandbar{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(200,168,75,.22)}
+.brandbar .wrap{display:flex;align-items:center;gap:14px;padding-block:12px;flex-wrap:wrap}
+.brandbar svg{height:20px;width:auto;fill:#C8A84B;flex:none;display:block}
+.brandbar .bname{font-family:var(--f-disp);font-weight:700;font-size:14px;
+  letter-spacing:.34em;text-transform:uppercase;color:#C8A84B;white-space:nowrap}
+.brandbar .bsub{font-family:var(--f-body);font-size:10.5px;letter-spacing:.19em;
+  text-transform:uppercase;color:rgba(245,240,232,.5);white-space:nowrap;
+  padding-left:14px;border-left:1px solid rgba(245,240,232,.16)}
+@media (max-width:560px){.brandbar .bsub{padding-left:0;border-left:0;flex-basis:100%}}
+
+/* ── cabeçalho ───────────────────────────── */
+.masthead{border-bottom:1px solid var(--line);background:
+   linear-gradient(180deg,var(--gold-10),transparent 70%)}
+.masthead .wrap{padding-block:44px 34px;display:flex;flex-wrap:wrap;gap:28px;
+  align-items:flex-end;justify-content:space-between}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.masthead h1{font-family:var(--f-disp);font-weight:600;letter-spacing:.02em;
+  text-transform:uppercase;font-size:clamp(2rem,5.2vw,3.4rem);line-height:1.02}
+.masthead h1 em{font-style:normal;color:var(--gold);display:block}
+.meta-block{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);
+  line-height:1.9;text-align:right;letter-spacing:.02em}
+.meta-block b{color:var(--ink-2);font-weight:500}
+
+/* ── KPIs ────────────────────────────────── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);margin:34px 0 0}
+.kpi{background:var(--elev);padding:18px 18px 16px}
+.kpi .k-lab{font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.kpi .k-val{font-family:var(--f-disp);font-size:1.75rem;line-height:1;
+  letter-spacing:.01em;color:var(--ink)}
+.kpi .k-val.gold{color:var(--gold)}
+.kpi .k-sub{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);margin-top:7px}
+
+/* ── seções ──────────────────────────────── */
+section{padding-block:56px;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.s-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px}
+.s-num{font-family:var(--f-mono);font-size:11px;color:var(--gold);letter-spacing:.1em;
+  padding-top:6px;white-space:nowrap}
+.s-head h2{font-family:var(--f-disp);font-weight:500;text-transform:uppercase;
+  letter-spacing:.045em;font-size:clamp(1.15rem,2.4vw,1.6rem);line-height:1.15}
+.lede{color:var(--ink-2);max-width:70ch;margin-bottom:30px;font-size:14.5px}
+h3.sub{font-family:var(--f-disp);font-weight:500;text-transform:uppercase;
+  letter-spacing:.09em;font-size:.9rem;color:var(--gold);margin:36px 0 14px;
+  padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3.sub:first-of-type{margin-top:0}
+
+/* ── alerta ──────────────────────────────── */
+.alert{border:1px solid var(--line);border-left:3px solid var(--bad);
+  background:var(--elev);padding:22px 24px;margin:0 0 6px}
+.alert.warn{border-left-color:var(--warn)}
+.alert h4{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.07em;
+  font-size:.82rem;color:var(--bad);margin-bottom:10px;font-weight:500}
+.alert.warn h4{color:var(--warn)}
+.alert p{color:var(--ink-2);font-size:14px;max-width:78ch}
+.alert p + p{margin-top:9px}
+.alert-grid{display:grid;gap:14px;margin-top:26px}
+
+/* ── barras de ranking ───────────────────── */
+.rank{display:flex;flex-direction:column;gap:2px}
+.rank-row{display:grid;grid-template-columns:26px minmax(0,1fr) 74px;
+  align-items:center;gap:14px;padding:9px 10px;background:var(--elev);
+  border-left:2px solid transparent}
+.rank-row:nth-child(odd){background:var(--ground-2)}
+.rank-row .pos{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);text-align:right}
+.rank-row .bar-wrap{min-width:0}
+.rank-row .nm{font-size:13px;color:var(--ink);margin-bottom:5px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-row .nm span{color:var(--ink-3);font-family:var(--f-mono);font-size:10.5px;
+  letter-spacing:.06em;text-transform:uppercase;margin-left:8px}
+.bar{height:7px;background:var(--gold);border-radius:1px}
+.bar.g{background:var(--good)} .bar.r{background:var(--bad)} .bar.c{background:var(--cool)}
+.rank-row .val{font-family:var(--f-mono);font-size:14px;text-align:right;color:var(--ink)}
+.rank-row .val small{display:block;font-size:10px;color:var(--ink-3);margin-top:2px}
+
+/* ── tabelas ─────────────────────────────── */
+.tscroll{overflow-x:auto;border:1px solid var(--line);background:var(--elev)}
+table.data{font-size:13px;min-width:760px}
+table.data th{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);text-align:right;padding:13px 11px;
+  border-bottom:1px solid var(--line);white-space:nowrap;font-weight:400;
+  background:var(--ground-2);position:sticky;top:0}
+table.data th:first-child{text-align:left}
+table.data td{padding:10px 11px;text-align:right;border-bottom:1px solid var(--line);
+  color:var(--ink-2);white-space:nowrap}
+table.data td:first-child{text-align:left;color:var(--ink);white-space:normal;min-width:230px}
+table.data tbody tr:last-child td{border-bottom:0}
+table.data tr.total td{background:var(--ground-2);color:var(--ink);
+  font-weight:600;border-top:1px solid var(--gold-20)}
+table.data td.hi{color:var(--ink);font-weight:600}
+.stripe{border-left:3px solid var(--line)}
+.stripe.s-good{border-left-color:var(--good)}
+.stripe.s-warn{border-left-color:var(--warn)}
+.stripe.s-bad{border-left-color:var(--bad)}
+.plat{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+  padding:2px 6px;border:1px solid var(--line);color:var(--ink-3);margin-right:8px;
+  display:inline-block;vertical-align:1px}
+.plat.m{color:var(--cool);border-color:var(--cool)}
+.plat.g{color:var(--gold);border-color:var(--gold-20)}
+.plat.o{color:var(--ink-3)}
+
+/* ── pills ───────────────────────────────── */
+.pill{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;display:inline-block}
+.pill.up{background:var(--good-bg);color:var(--good)}
+.pill.dn{background:var(--bad-bg);color:var(--bad)}
+.pill.mid{background:var(--warn-bg);color:var(--warn)}
+
+/* ── verdict cards ───────────────────────── */
+.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.vcard{background:var(--elev);border:1px solid var(--line);border-top:3px solid var(--line);padding:20px}
+.vcard.good{border-top-color:var(--good)} .vcard.warn{border-top-color:var(--warn)}
+.vcard.bad{border-top-color:var(--bad)}
+.vcard .v-lab{font-family:var(--f-mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;margin-bottom:14px}
+.vcard.good .v-lab{color:var(--good)} .vcard.warn .v-lab{color:var(--warn)}
+.vcard.bad .v-lab{color:var(--bad)}
+.vcard ul{margin:0;padding-left:16px;color:var(--ink-2);font-size:13.5px}
+.vcard li{margin-bottom:9px}
+.vcard li:last-child{margin-bottom:0}
+.vcard li b{color:var(--ink);font-weight:600}
+.vcard .v-foot{margin-top:15px;padding-top:13px;border-top:1px solid var(--line);
+  font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+
+/* ── quote ───────────────────────────────── */
+.pull{font-family:var(--f-serif);font-size:clamp(1.15rem,2.5vw,1.55rem);line-height:1.42;
+  color:var(--ink);border-left:2px solid var(--gold);padding:4px 0 4px 24px;margin:32px 0;
+  max-width:60ch}
+
+/* ── recomendações numeradas ─────────────── */
+.recs{display:flex;flex-direction:column;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.rec{background:var(--elev);padding:20px 22px;display:grid;
+  grid-template-columns:34px minmax(0,1fr);gap:18px;align-items:start}
+.rec .r-n{font-family:var(--f-mono);font-size:12px;color:var(--gold);padding-top:2px}
+.rec h4{font-size:14.5px;color:var(--ink);margin-bottom:7px;font-weight:600}
+.rec p{font-size:13.5px;color:var(--ink-2);max-width:76ch}
+.rec .r-src{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);margin-top:9px;
+  letter-spacing:.04em}
+
+/* ── rodapé ──────────────────────────────── */
+footer{border-top:1px solid var(--line);background:var(--ground-2);margin-top:20px}
+footer .wrap{padding-block:38px 46px}
+footer h4{font-family:var(--f-disp);text-transform:uppercase;letter-spacing:.09em;
+  font-size:.78rem;color:var(--gold);margin-bottom:14px;font-weight:500}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.fgrid p,.fgrid li{font-size:12.5px;color:var(--ink-3);line-height:1.7}
+.fgrid ul{margin:0;padding-left:15px}
+.fgrid b{color:var(--ink-2)}
+
+@media (max-width:640px){
+  .masthead .wrap{flex-direction:column;align-items:flex-start}
+  .meta-block{text-align:left}
+  .rank-row{grid-template-columns:22px minmax(0,1fr) 64px;gap:10px}
+  section{padding-block:44px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .bar{animation:grow .7s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes grow{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1)}}
+}
+</style>
+</head>
+<body>
+<div class="brandbar">
+  <div class="wrap">
+    <svg viewBox="0 0 566.93 226.77" role="img" aria-label="Símbolo infinito OMNI"><path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/></svg>
+    <div class="bname">OMNI Brasil</div>
+    <div class="bsub">Relatório de Campanhas · Julho 2026</div>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Squad Ads &amp; Traffic</div>
+      <h1>Performance de Campanhas<em>Julho 2026</em></h1>
+    </div>
+    <div class="meta-block">
+      Período: <b>01–31 jul 2026</b><br>
+      Fontes: <b>Pipedrive · Meta API · Google Ads API</b><br>
+      Base: <b>1.017 leads · 28 oportunidades · 10 vendas</b><br>
+      Emitido: <b>31 jul 2026</b>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="kpis">
+    <div class="kpi"><div class="k-lab">Investimento</div><div class="k-val gold">R$ 28.000</div><div class="k-sub">Meta 20.053 · Google 7.947</div></div>
+    <div class="kpi"><div class="k-lab">Leads</div><div class="k-val">1.017</div><div class="k-sub">CPL blended R$ 27,53</div></div>
+    <div class="kpi"><div class="k-lab">Reuniões agendadas</div><div class="k-val">46</div><div class="k-sub">4,52% dos leads</div></div>
+    <div class="kpi"><div class="k-lab">Reuniões realizadas</div><div class="k-val">26</div><div class="k-sub">56,5% de comparecimento</div></div>
+    <div class="kpi"><div class="k-lab">Oportunidades</div><div class="k-val">9</div><div class="k-sub">safra de julho · 28 no total</div></div>
+    <div class="kpi"><div class="k-lab">Vendas</div><div class="k-val">10</div><div class="k-sub">R$ 82.750 · ticket R$ 8.275</div></div>
+  </div>
+
+  <section>
+    <div class="s-head"><div class="s-num">00</div><h2>Leia isto antes dos rankings</h2></div>
+    <p class="lede">Três características da base mudam a leitura de todos os números abaixo. Ignorá-las leva a decisões erradas para agosto.</p>
+
+    <div class="alert-grid">
+      <div class="alert">
+        <h4>1 · O ciclo de venda é maior que o mês</h4>
+        <p><b>9 das 10 vendas de julho vieram de leads criados antes de julho.</b> A venda mais antiga entrou em 31/mar e fechou em 18/jul — 109 dias de ciclo. Só uma venda (R$ 350, bônus) nasceu e fechou dentro do mês.</p>
+        <p>Consequência prática: dividir a receita de julho pelo investimento de julho compara safras diferentes. O ROI por campanha dentro do mês existe, mas é indicador de caixa — não de eficiência da mídia. Para decidir budget, use <b>custo por reunião agendada</b> e <b>custo por oportunidade</b>, que são as métricas maduras dentro do mês.</p>
+      </div>
+      <div class="alert">
+        <h4>2 · Só 2 das 10 vendas têm campanha paga rastreável</h4>
+        <p>As outras 8 estão marcadas como Social Seller (3), Indicação (2), Inside sales (1), E-mail MKT (1) e sem UTM (1) — o CRM preenche o canal no campo de campanha quando não há UTM, o que não é a mesma coisa que origem real. <b>R$ 57.950 dos R$ 82.750 faturados não têm origem de mídia identificável.</b></p>
+      </div>
+      <div class="alert warn">
+        <h4>3 · Uma campanha, dois públicos, e um teste A/B com furo de rastreio</h4>
+        <p>A UTM <code>consultoria</code> reúne <b>428 leads de dois funis diferentes</b> (Bancários e Terapeutas). Separei pelo <code>utm_term</code>: 353 são Bancários e 75 carregam tag legado com <code>term</code> e <code>medium</code> trocados, de campanha sem verba em julho.</p>
+        <p>No <b>Teste A/B de LP (Terapeutas Premium)</b> o Meta reporta 38 leads e o CRM registrou 17 — <b>55% dos leads não chegaram ao Pipedrive</b>. É o único caso com divergência dessa ordem; nas demais campanhas a variação fica em ±5% a 24%.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">01</div><h2>Ranking · Reuniões agendadas</h2></div>
+    <p class="lede">Contagem acumulada: todo lead que chegou à etapa "Reunião Agendada" ou além (realizada, oportunidade, negociação, venda). Base de 1.017 leads de julho — 46 agendamentos.</p>
+
+    <div class="rank">
+      <div class="rank-row"><div class="pos">1</div><div class="bar-wrap"><div class="nm">Meta · BLOCO 03 — OBA Cadastro<span>Meta</span></div><div class="bar" style="width:100%"></div></div><div class="val">11<small>de 281</small></div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Meta · Consultoria Bancários<span>Meta</span></div><div class="bar" style="width:54.5%"></div></div><div class="val">6<small>de 353</small></div></div>
+      <div class="rank-row"><div class="pos">3</div><div class="bar-wrap"><div class="nm">Sem UTM registrada<span>não rastreado</span></div><div class="bar c" style="width:45.4%"></div></div><div class="val">5<small>de 83</small></div></div>
+      <div class="rank-row"><div class="pos">4</div><div class="bar-wrap"><div class="nm">Brand-Exato<span>Google</span></div><div class="bar g" style="width:36.4%"></div></div><div class="val">4<small>de 14</small></div></div>
+      <div class="rank-row"><div class="pos">4</div><div class="bar-wrap"><div class="nm">Acesso direto<span>orgânico</span></div><div class="bar c" style="width:36.4%"></div></div><div class="val">4<small>de 25</small></div></div>
+      <div class="rank-row"><div class="pos">6</div><div class="bar-wrap"><div class="nm">Curso-Hipnoterapeuta<span>Google</span></div><div class="bar g" style="width:27.3%"></div></div><div class="val">3<small>de 14</small></div></div>
+      <div class="rank-row"><div class="pos">6</div><div class="bar-wrap"><div class="nm">Meta · Consultoria — tag legado<span>Meta</span></div><div class="bar" style="width:27.3%"></div></div><div class="val">3<small>de 75</small></div></div>
+      <div class="rank-row"><div class="pos">8</div><div class="bar-wrap"><div class="nm">Curso-Hipnose<span>Google</span></div><div class="bar g" style="width:18.2%"></div></div><div class="val">2<small>de 16</small></div></div>
+      <div class="rank-row"><div class="pos">8</div><div class="bar-wrap"><div class="nm">Hipnoterapia-Genérico<span>Google</span></div><div class="bar g" style="width:18.2%"></div></div><div class="val">2<small>de 8</small></div></div>
+      <div class="rank-row"><div class="pos">8</div><div class="bar-wrap"><div class="nm">Meta · Terapeutas Premium LP-C<span>Meta</span></div><div class="bar" style="width:18.2%"></div></div><div class="val">2<small>de 77</small></div></div>
+      <div class="rank-row"><div class="pos">11</div><div class="bar-wrap"><div class="nm">Manifesto (PMax) · Formação · Indicação · Site institucional<span>1 cada</span></div><div class="bar c" style="width:9.1%"></div></div><div class="val">4<small>4 origens</small></div></div>
+    </div>
+
+    <div class="pull">A campanha que mais gasta não é a que mais agenda. Bancários levou 27% da verba e entregou 6 agendamentos; o BLOCO 03, com 25%, entregou 11.</div>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">02</div><h2>Ranking · Oportunidades</h2></div>
+    <p class="lede">Duas leituras, porque as bases são diferentes. A primeira mede a safra de julho — quantos leads gerados no mês chegaram a Oportunidade. A segunda é o arquivo de oportunidades completo, que inclui leads de meses anteriores movimentados em julho.</p>
+
+    <h3 class="sub">A · Safra de julho — 9 oportunidades de 1.017 leads (0,88%)</h3>
+    <div class="rank">
+      <div class="rank-row"><div class="pos">1</div><div class="bar-wrap"><div class="nm">Sem UTM registrada<span>não rastreado</span></div><div class="bar c" style="width:100%"></div></div><div class="val">2</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Brand-Exato<span>Google</span></div><div class="bar g" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Hipnoterapia-Genérico<span>Google</span></div><div class="bar g" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Meta · BLOCO 03 — OBA Cadastro<span>Meta</span></div><div class="bar" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Meta · Consultoria Bancários<span>Meta</span></div><div class="bar" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Meta · Consultoria — tag legado<span>Meta</span></div><div class="bar" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Acesso direto<span>orgânico</span></div><div class="bar c" style="width:50%"></div></div><div class="val">1</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Indicação<span>orgânico</span></div><div class="bar c" style="width:50%"></div></div><div class="val">1</div></div>
+    </div>
+
+    <h3 class="sub">B · Arquivo completo de oportunidades — 28 registros</h3>
+    <div class="rank">
+      <div class="rank-row"><div class="pos">1</div><div class="bar-wrap"><div class="nm">Sem UTM registrada<span>não rastreado</span></div><div class="bar c" style="width:100%"></div></div><div class="val">6</div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Mídias Sociais — Social Seller<span>orgânico</span></div><div class="bar c" style="width:83.3%"></div></div><div class="val">5</div></div>
+      <div class="rank-row"><div class="pos">3</div><div class="bar-wrap"><div class="nm">Inside sales<span>orgânico</span></div><div class="bar c" style="width:66.7%"></div></div><div class="val">4</div></div>
+      <div class="rank-row"><div class="pos">4</div><div class="bar-wrap"><div class="nm">Meta · Consultoria<span>Meta</span></div><div class="bar" style="width:50%"></div></div><div class="val">3</div></div>
+      <div class="rank-row"><div class="pos">5</div><div class="bar-wrap"><div class="nm">Brand-Exato<span>Google</span></div><div class="bar g" style="width:33.3%"></div></div><div class="val">2</div></div>
+      <div class="rank-row"><div class="pos">5</div><div class="bar-wrap"><div class="nm">Indicação<span>orgânico</span></div><div class="bar c" style="width:33.3%"></div></div><div class="val">2</div></div>
+      <div class="rank-row"><div class="pos">7</div><div class="bar-wrap"><div class="nm">Hipnoterapia-Genérico · Acesso direto · BLOCO 03 · PG-Consultoria-Nova · Site institucional · E-mail MKT<span>1 cada</span></div><div class="bar c" style="width:16.7%"></div></div><div class="val">6<small>6 origens</small></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">03</div><h2>Ranking · Vendas</h2></div>
+    <p class="lede">10 vendas fechadas em julho, R$ 82.750 de receita. A coluna de origem reflete o que está gravado no CRM — para 8 delas, o campo traz o canal comercial e não uma campanha de mídia.</p>
+
+    <div class="tscroll">
+      <table class="data">
+        <thead><tr><th>Origem registrada</th><th>Vendas</th><th>Receita</th><th>% receita</th><th>Ticket médio</th><th>Mídia paga?</th></tr></thead>
+        <tbody>
+          <tr class="stripe"><td>Mídias Sociais — Social Seller</td><td class="num hi">3</td><td class="num hi">R$ 20.850</td><td class="num">25,2%</td><td class="num">R$ 6.950</td><td><span class="pill mid">Não</span></td></tr>
+          <tr class="stripe"><td>Indicação</td><td class="num hi">2</td><td class="num hi">R$ 19.000</td><td class="num">23,0%</td><td class="num">R$ 9.500</td><td><span class="pill mid">Não</span></td></tr>
+          <tr class="stripe s-good"><td>Brand-Exato <span class="plat g">Google</span></td><td class="num hi">1</td><td class="num hi">R$ 12.900</td><td class="num">15,6%</td><td class="num">R$ 12.900</td><td><span class="pill up">Sim</span></td></tr>
+          <tr class="stripe s-good"><td>Search-Leads-OBA-Quente-BR <span class="plat g">Google</span></td><td class="num hi">1</td><td class="num hi">R$ 11.900</td><td class="num">14,4%</td><td class="num">R$ 11.900</td><td><span class="pill up">Sim</span></td></tr>
+          <tr class="stripe"><td>Inside sales</td><td class="num">1</td><td class="num">R$ 8.000</td><td class="num">9,7%</td><td class="num">R$ 8.000</td><td><span class="pill mid">Não</span></td></tr>
+          <tr class="stripe"><td>Sem UTM registrada</td><td class="num">1</td><td class="num">R$ 6.000</td><td class="num">7,3%</td><td class="num">R$ 6.000</td><td><span class="pill dn">Desconhecido</span></td></tr>
+          <tr class="stripe"><td>E-mail MKT</td><td class="num">1</td><td class="num">R$ 4.100</td><td class="num">5,0%</td><td class="num">R$ 4.100</td><td><span class="pill mid">Não</span></td></tr>
+          <tr class="total"><td>Total</td><td class="num">10</td><td class="num">R$ 82.750</td><td class="num">100%</td><td class="num">R$ 8.275</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:16px;margin-bottom:0"><b>Search-Leads-OBA-Quente-BR</b> não teve verba em julho — a campanha já estava encerrada e o lead foi gerado em 16/jun. A receita entra no mês, o custo não.</p>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">04</div><h2>Leads por campanha e funil completo</h2></div>
+    <p class="lede">Todas as campanhas com leads em julho. As colunas de funil são acumuladas: quem chegou a Oportunidade também está contado em Agendou e Realizou. A faixa colorida à esquerda antecipa a recomendação da seção 07.</p>
+
+    <div class="tscroll">
+      <table class="data">
+        <thead><tr><th>Campanha</th><th>Invest.</th><th>Leads</th><th>Conect.</th><th>MQL</th><th>Agend.</th><th>Realiz.</th><th>Oport.</th><th>CPL</th><th>Custo/agend.</th><th>Custo/oport.</th></tr></thead>
+        <tbody>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>Consultoria Bancários</td><td class="num">R$ 7.573,10</td><td class="num hi">353</td><td class="num">140</td><td class="num">47</td><td class="num">6</td><td class="num">3</td><td class="num">1</td><td class="num">R$ 21,45</td><td class="num">R$ 1.262,18</td><td class="num">R$ 7.573,10</td></tr>
+          <tr class="stripe s-warn"><td><span class="plat m">Meta</span>BLOCO 03 — OBA Cadastro</td><td class="num">R$ 6.910,27</td><td class="num hi">281</td><td class="num">107</td><td class="num">23</td><td class="num hi">11</td><td class="num">4</td><td class="num">1</td><td class="num">R$ 24,59</td><td class="num">R$ 628,21</td><td class="num">R$ 6.910,27</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>Terapeutas Premium LP-C</td><td class="num">R$ 2.508,34</td><td class="num">77</td><td class="num">38</td><td class="num">10</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 32,58</td><td class="num">R$ 1.254,17</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>Terapeutas Premium Teste A/B LP</td><td class="num">R$ 1.964,11</td><td class="num">17</td><td class="num">8</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 115,54</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe s-warn"><td><span class="plat g">Google</span>Curso-Hipnose</td><td class="num">R$ 1.650,57</td><td class="num">16</td><td class="num">9</td><td class="num">2</td><td class="num">2</td><td class="num">2</td><td class="num">0</td><td class="num">R$ 103,16</td><td class="num">R$ 825,28</td><td class="num">—</td></tr>
+          <tr class="stripe s-good"><td><span class="plat g">Google</span>Brand-Exato</td><td class="num">R$ 1.130,48</td><td class="num">14</td><td class="num">6</td><td class="num">4</td><td class="num hi">4</td><td class="num">2</td><td class="num">1</td><td class="num">R$ 80,75</td><td class="num hi">R$ 282,62</td><td class="num hi">R$ 1.130,48</td></tr>
+          <tr class="stripe s-good"><td><span class="plat g">Google</span>Curso-Hipnoterapeuta</td><td class="num">R$ 998,96</td><td class="num">14</td><td class="num">7</td><td class="num">4</td><td class="num">3</td><td class="num">1</td><td class="num">0</td><td class="num">R$ 71,35</td><td class="num hi">R$ 332,99</td><td class="num">—</td></tr>
+          <tr class="stripe s-good"><td><span class="plat g">Google</span>Hipnoterapia-Genérico</td><td class="num">R$ 670,66</td><td class="num">8</td><td class="num">5</td><td class="num">2</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="num">R$ 83,83</td><td class="num hi">R$ 335,33</td><td class="num hi">R$ 670,66</td></tr>
+          <tr class="stripe s-warn"><td><span class="plat g">Google</span>Manifesto (PMax RMKT)</td><td class="num">R$ 608,41</td><td class="num">14</td><td class="num">6</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 43,46</td><td class="num">R$ 608,41</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>Brand-Curso</td><td class="num">R$ 590,93</td><td class="num">9</td><td class="num">4</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 65,66</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>Concorrentes</td><td class="num">R$ 536,69</td><td class="num">7</td><td class="num">2</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 76,67</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>Certificação</td><td class="num">R$ 388,98</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 194,49</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>Escalar-Consultório</td><td class="num">R$ 222,46</td><td class="num">2</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 111,23</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>RMKT-YouTube-Engajados</td><td class="num">R$ 50,99</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">R$ 50,99</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe"><td><span class="plat m">Meta</span>Consultoria — tag legado <span class="pill dn">rastreio</span></td><td class="num">sem verba</td><td class="num">75</td><td class="num">25</td><td class="num">13</td><td class="num">3</td><td class="num">3</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe"><td><span class="plat o">Orgânico</span>Sem UTM registrada</td><td class="num">—</td><td class="num">83</td><td class="num">45</td><td class="num">12</td><td class="num">5</td><td class="num">4</td><td class="num">2</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe"><td><span class="plat o">Orgânico</span>Acesso direto</td><td class="num">—</td><td class="num">25</td><td class="num">15</td><td class="num">6</td><td class="num">4</td><td class="num">3</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe"><td><span class="plat o">Orgânico</span>Formação</td><td class="num">—</td><td class="num">11</td><td class="num">4</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="stripe"><td><span class="plat o">Orgânico</span>Outras 7 origens residuais</td><td class="num">—</td><td class="num">8</td><td class="num">6</td><td class="num">5</td><td class="num">2</td><td class="num">2</td><td class="num">1</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr class="total"><td>Total</td><td class="num">R$ 27.999,55</td><td class="num">1.017</td><td class="num">428</td><td class="num">132</td><td class="num">46</td><td class="num">26</td><td class="num">9</td><td class="num">R$ 27,53</td><td class="num">R$ 608,69</td><td class="num">R$ 3.111,06</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:16px;margin-bottom:0">O total de investimento inclui <b>R$ 2.194,60</b> gastos em campanhas que não geraram nenhum lead rastreável no CRM (detalhe na seção 06), por isso a soma da coluna de investimento das linhas acima é menor que o total.</p>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">05</div><h2>Leads perdidos e motivos</h2></div>
+    <p class="lede">739 dos 1.017 leads foram marcados como perdidos até 31/07 — 72,7% da base. Outros 277 seguem abertos e 1 foi ganho.</p>
+
+    <h3 class="sub">A · Perdas por campanha, em números absolutos</h3>
+    <div class="rank">
+      <div class="rank-row"><div class="pos">1</div><div class="bar-wrap"><div class="nm">Meta · Consultoria Bancários<span>85,3% da campanha</span></div><div class="bar r" style="width:100%"></div></div><div class="val">301<small>de 353</small></div></div>
+      <div class="rank-row"><div class="pos">2</div><div class="bar-wrap"><div class="nm">Meta · BLOCO 03 — OBA Cadastro<span>54,8% da campanha</span></div><div class="bar r" style="width:51.2%"></div></div><div class="val">154<small>de 281</small></div></div>
+      <div class="rank-row"><div class="pos">3</div><div class="bar-wrap"><div class="nm">Meta · Consultoria — tag legado<span>93,3% da campanha</span></div><div class="bar r" style="width:23.3%"></div></div><div class="val">70<small>de 75</small></div></div>
+      <div class="rank-row"><div class="pos">4</div><div class="bar-wrap"><div class="nm">Meta · Terapeutas Premium LP-C<span>74,0% da campanha</span></div><div class="bar r" style="width:18.9%"></div></div><div class="val">57<small>de 77</small></div></div>
+      <div class="rank-row"><div class="pos">5</div><div class="bar-wrap"><div class="nm">Sem UTM registrada<span>65,1% da origem</span></div><div class="bar c" style="width:17.9%"></div></div><div class="val">54<small>de 83</small></div></div>
+      <div class="rank-row"><div class="pos">6</div><div class="bar-wrap"><div class="nm">Acesso direto<span>64,0%</span></div><div class="bar c" style="width:5.3%"></div></div><div class="val">16<small>de 25</small></div></div>
+      <div class="rank-row"><div class="pos">6</div><div class="bar-wrap"><div class="nm">Meta · Terapeutas Premium Teste A/B LP<span>94,1% da campanha</span></div><div class="bar r" style="width:5.3%"></div></div><div class="val">16<small>de 17</small></div></div>
+      <div class="rank-row"><div class="pos">8</div><div class="bar-wrap"><div class="nm">Curso-Hipnose<span>75,0%</span></div><div class="bar r" style="width:4%"></div></div><div class="val">12<small>de 16</small></div></div>
+      <div class="rank-row"><div class="pos">9</div><div class="bar-wrap"><div class="nm">Manifesto (PMax)<span>71,4%</span></div><div class="bar r" style="width:3.3%"></div></div><div class="val">10<small>de 14</small></div></div>
+      <div class="rank-row"><div class="pos">9</div><div class="bar-wrap"><div class="nm">Formação<span>90,9%</span></div><div class="bar c" style="width:3.3%"></div></div><div class="val">10<small>de 11</small></div></div>
+      <div class="rank-row"><div class="pos">11</div><div class="bar-wrap"><div class="nm">Curso-Hipnoterapeuta<span>64,3%</span></div><div class="bar r" style="width:3%"></div></div><div class="val">9<small>de 14</small></div></div>
+      <div class="rank-row"><div class="pos">12</div><div class="bar-wrap"><div class="nm">Brand-Exato<span>50,0%</span></div><div class="bar g" style="width:2.3%"></div></div><div class="val">7<small>de 14</small></div></div>
+      <div class="rank-row"><div class="pos">13</div><div class="bar-wrap"><div class="nm">Brand-Curso · Hipnoterapia-Genérico · Concorrentes · Certificação · Escalar-Consultório e outras 8<span>somadas</span></div><div class="bar" style="width:7.6%"></div></div><div class="val">23<small>de 37</small></div></div>
+    </div>
+
+    <h3 class="sub">B · Motivos de perda — total geral</h3>
+    <div class="tscroll">
+      <table class="data">
+        <thead><tr><th>Motivo</th><th>Leads</th><th>% das perdas</th><th>% da base</th><th>Natureza</th></tr></thead>
+        <tbody>
+          <tr class="stripe s-warn"><td>Encerrou contato</td><td class="num hi">497</td><td class="num">67,3%</td><td class="num">48,9%</td><td>Falha de conexão / abordagem</td></tr>
+          <tr class="stripe s-warn"><td>Sem interesse ou necessidade</td><td class="num hi">96</td><td class="num">13,0%</td><td class="num">9,4%</td><td>Desalinhamento de oferta</td></tr>
+          <tr class="stripe s-bad"><td>Duplicidade</td><td class="num hi">43</td><td class="num">5,8%</td><td class="num">4,2%</td><td>Qualidade de base</td></tr>
+          <tr class="stripe s-bad"><td>Dados inválidos</td><td class="num hi">37</td><td class="num">5,0%</td><td class="num">3,6%</td><td>Qualidade de base</td></tr>
+          <tr class="stripe s-bad"><td>Engano</td><td class="num">28</td><td class="num">3,8%</td><td class="num">2,8%</td><td>Qualidade de base</td></tr>
+          <tr class="stripe"><td>Sem budget</td><td class="num">14</td><td class="num">1,9%</td><td class="num">1,4%</td><td>Qualificação econômica</td></tr>
+          <tr class="stripe"><td>Quer estratégia de marketing</td><td class="num">8</td><td class="num">1,1%</td><td class="num">0,8%</td><td>Público errado</td></tr>
+          <tr class="stripe"><td>Sem ensino médio</td><td class="num">4</td><td class="num">0,5%</td><td class="num">0,4%</td><td>Critério de elegibilidade</td></tr>
+          <tr class="stripe"><td>Apenas sem conexão</td><td class="num">3</td><td class="num">0,4%</td><td class="num">0,3%</td><td>Falha de conexão</td></tr>
+          <tr class="stripe"><td>Cadastrou errado</td><td class="num">3</td><td class="num">0,4%</td><td class="num">0,3%</td><td>Qualidade de base</td></tr>
+          <tr class="stripe"><td>Hipnoterapia</td><td class="num">3</td><td class="num">0,4%</td><td class="num">0,3%</td><td>Motivo não padronizado</td></tr>
+          <tr class="stripe"><td>Sem tempo</td><td class="num">2</td><td class="num">0,3%</td><td class="num">0,2%</td><td>Objeção</td></tr>
+          <tr class="stripe"><td>Buscando emprego</td><td class="num">1</td><td class="num">0,1%</td><td class="num">0,1%</td><td>Público errado</td></tr>
+          <tr class="total"><td>Total de perdas</td><td class="num">739</td><td class="num">100%</td><td class="num">72,7%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull">Metade da base inteira — 497 leads — morreu em "encerrou contato". Esse é o maior vazamento da operação, e ele não está na mídia: está entre a chegada do lead e a primeira conversa.</div>
+
+    <h3 class="sub">C · Qualidade de base por campanha</h3>
+    <p class="lede">Duplicidade, dados inválidos, engano e cadastro errado somam 111 leads (10,9% da base) que nunca poderiam ter virado nada. A concentração é reveladora:</p>
+    <div class="tscroll">
+      <table class="data">
+        <thead><tr><th>Campanha</th><th>Leads</th><th>Lixo de base</th><th>% da campanha</th><th>Custo do lixo</th></tr></thead>
+        <tbody>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>Consultoria Bancários</td><td class="num">353</td><td class="num hi">62</td><td class="num hi">17,6%</td><td class="num">R$ 1.330,10</td></tr>
+          <tr class="stripe s-warn"><td><span class="plat m">Meta</span>Consultoria — tag legado</td><td class="num">75</td><td class="num">11</td><td class="num">14,7%</td><td class="num">sem verba</td></tr>
+          <tr class="stripe s-warn"><td><span class="plat m">Meta</span>BLOCO 03 — OBA Cadastro</td><td class="num">281</td><td class="num">11</td><td class="num">3,9%</td><td class="num">R$ 270,51</td></tr>
+          <tr class="stripe"><td><span class="plat m">Meta</span>Terapeutas Premium LP-C</td><td class="num">77</td><td class="num">7</td><td class="num">9,1%</td><td class="num">R$ 228,03</td></tr>
+          <tr class="stripe"><td><span class="plat o">Orgânico</span>Sem UTM · Acesso direto</td><td class="num">108</td><td class="num">10</td><td class="num">9,3%</td><td class="num">—</td></tr>
+          <tr class="stripe"><td>Demais campanhas somadas</td><td class="num">123</td><td class="num">10</td><td class="num">8,1%</td><td class="num">R$ 705,95</td></tr>
+          <tr class="total"><td>Total</td><td class="num">1.017</td><td class="num">111</td><td class="num">10,9%</td><td class="num">R$ 2.534,59</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:16px;margin-bottom:0">Bancários sozinha responde por <b>56% de todo o lixo de base</b> do mês: 28 duplicados, 21 com dados inválidos, 10 enganos e 3 cadastros errados. Vale checar se o formulário da LP <code>transicao-bancario</code> ainda sofre com o bug de telefone corrigido em 14/07 — a distribuição das perdas sugere que parte do mês rodou com o problema.</p>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">06</div><h2>Investimento e ROI</h2></div>
+    <p class="lede">Valores extraídos direto da Meta Marketing API (conta <code>act_377230783636524</code> — Omni Brasil OBA 2) e da Google Ads API (customer <code>6713237463</code>), período 01–31/07/2026.</p>
+
+    <div class="tscroll">
+      <table class="data" style="min-width:560px">
+        <thead><tr><th>Plataforma</th><th>Investimento</th><th>Share</th><th>Leads</th><th>CPL</th><th>Agend.</th><th>Custo/agend.</th><th>Oport.</th><th>Custo/oport.</th></tr></thead>
+        <tbody>
+          <tr class="stripe s-warn"><td><span class="plat m">Meta</span>Conta OBA 2</td><td class="num hi">R$ 20.052,57</td><td class="num">71,6%</td><td class="num">728</td><td class="num hi">R$ 27,54</td><td class="num">19</td><td class="num">R$ 1.055,40</td><td class="num">2</td><td class="num">R$ 10.026,29</td></tr>
+          <tr class="stripe s-good"><td><span class="plat g">Google</span>Customer 6713237463</td><td class="num hi">R$ 7.946,98</td><td class="num">28,4%</td><td class="num">87</td><td class="num">R$ 91,34</td><td class="num">12</td><td class="num hi">R$ 662,25</td><td class="num">2</td><td class="num hi">R$ 3.973,49</td></tr>
+          <tr class="total"><td>Total mídia paga</td><td class="num">R$ 27.999,55</td><td class="num">100%</td><td class="num">815</td><td class="num">R$ 34,35</td><td class="num">31</td><td class="num">R$ 903,21</td><td class="num">4</td><td class="num">R$ 6.999,89</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:14px">Aqui só entram leads atribuídos a campanhas que tiveram verba em julho — por isso 815 e não 1.017. Os 202 restantes vêm de orgânico, acesso direto, indicação e da tag legado sem investimento.</p>
+
+    <p class="lede">O Meta entrega lead <b>3,3× mais barato</b>, mas o Google converte em reunião a um custo <b>37% menor</b>. Na oportunidade a distância se amplia: cada oportunidade do Google custou <b>R$ 3.973</b> contra <b>R$ 10.026</b> no Meta — 2,5× mais cara.</p>
+
+    <h3 class="sub">Investimento sem retorno rastreável — R$ 2.194,60 (7,8% da verba)</h3>
+    <div class="tscroll">
+      <table class="data" style="min-width:520px">
+        <thead><tr><th>Campanha / grupo de anúncios</th><th>Investido</th><th>Leads no CRM</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>LICKS_LEADS_DISTRIBUICAO_FRIO</td><td class="num">R$ 803,35</td><td class="num">0</td><td>8.007 cliques, zero lead — campanha de tráfego</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[CON-BAN] Burnout Corporativo</td><td class="num">R$ 414,35</td><td class="num">0</td><td>122 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat m">Meta</span>LICKS_LEADS_NUTRICAO_QUENTE</td><td class="num">R$ 293,40</td><td class="num">0</td><td>Nutrição — sem clique de saída</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[QUENTE] RMKT — Visitantes Site</td><td class="num">R$ 239,31</td><td class="num">0</td><td>30 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[CON-TER] Hipnoterapia Carreira</td><td class="num">R$ 183,12</td><td class="num">0</td><td>67 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[CON-BAN] Transição Bancário</td><td class="num">R$ 110,06</td><td class="num">0</td><td>40 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[CON-BAN] Nova Carreira 40+</td><td class="num">R$ 81,16</td><td class="num">0</td><td>28 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[CON-TER] Terapeuta Renda</td><td class="num">R$ 42,41</td><td class="num">0</td><td>13 cliques, zero conversão</td></tr>
+          <tr class="stripe s-bad"><td><span class="plat g">Google</span>[QUENTE] RMKT — Leads Não Compraram</td><td class="num">R$ 27,44</td><td class="num">0</td><td>8 cliques, zero conversão</td></tr>
+          <tr class="total"><td>Total</td><td class="num">R$ 2.194,60</td><td class="num">0</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">ROI — três leituras da mesma receita</h3>
+    <div class="verdicts">
+      <div class="vcard good">
+        <div class="v-lab">Leitura de caixa</div>
+        <ul>
+          <li>Receita julho <b>R$ 82.750</b> ÷ mídia julho <b>R$ 27.999,55</b></li>
+          <li>ROAS <b>2,96×</b> · ROI <b>+196%</b></li>
+        </ul>
+        <div class="v-foot">Verdadeira no fluxo de caixa, enganosa como métrica de mídia: 90% dessa receita veio de leads anteriores a julho.</div>
+      </div>
+      <div class="vcard bad">
+        <div class="v-lab">Leitura de mídia paga</div>
+        <ul>
+          <li>Receita com UTM paga <b>R$ 24.800</b> ÷ mídia julho <b>R$ 27.999,55</b></li>
+          <li>ROAS <b>0,89×</b> · ROI <b>−11%</b></li>
+        </ul>
+        <div class="v-foot">Só 2 vendas têm campanha identificável, e uma delas (Search-Leads-OBA-Quente-BR) nem rodou em julho.</div>
+      </div>
+      <div class="vcard warn">
+        <div class="v-lab">Leitura por campanha</div>
+        <ul>
+          <li><b>Brand-Exato</b> · R$ 1.130,48 investidos → R$ 12.900 · ROAS <b>11,4×</b> · ROI <b>+1.041%</b></li>
+          <li><b>Search-Leads-OBA-Quente-BR</b> · R$ 0 em julho → R$ 11.900 · ROAS não calculável</li>
+          <li>Todas as demais · ROI <b>−100%</b> no mês</li>
+        </ul>
+        <div class="v-foot">A única campanha com ROI positivo mensurável em julho é Brand-Exato.</div>
+      </div>
+    </div>
+
+    <div class="pull">O ROI honesto de julho é: R$ 28 mil investidos, 46 reuniões marcadas, 9 oportunidades novas e 1 venda de mídia paga atribuível. O resto do faturamento veio de safra antiga e de canais que a mídia não controla.</div>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">07</div><h2>Quais campanhas foram assertivas</h2></div>
+    <p class="lede">Critério: custo por reunião agendada e por oportunidade — as métricas que amadurecem dentro do mês. Volume de lead barato sem avanço no funil não conta como acerto.</p>
+
+    <div class="verdicts">
+      <div class="vcard good">
+        <div class="v-lab">Escalar em agosto</div>
+        <ul>
+          <li><b>Brand-Exato</b> (Google) — R$ 282,62 por reunião, 1 oportunidade, 1 venda de R$ 12.900. Taxa lead→reunião de 28,6%, a maior entre campanhas com volume. Melhor eficiência absoluta do mês.</li>
+          <li><b>Curso-Hipnoterapeuta</b> (Google) — R$ 332,99 por reunião, 3 agendamentos com apenas 14 leads (21,4%).</li>
+          <li><b>Hipnoterapia-Genérico</b> (Google) — R$ 335,33 por reunião e R$ 670,66 por oportunidade, o mais barato do mês.</li>
+        </ul>
+        <div class="v-foot">Somadas: R$ 2.800 de verba → 9 reuniões e 2 oportunidades.</div>
+      </div>
+
+      <div class="vcard warn">
+        <div class="v-lab">Manter e otimizar</div>
+        <ul>
+          <li><b>BLOCO 03 — OBA Cadastro</b> (Meta) — maior gerador de reuniões em volume (11) e CPL de R$ 24,59. O custo por reunião (R$ 628) é o dobro do Google, mas é a única fonte de escala do mês.</li>
+          <li><b>Curso-Hipnose</b> (Google) — CPL alto (R$ 103) porém 100% de comparecimento nas reuniões. Vale reduzir lance e manter.</li>
+          <li><b>Manifesto PMax</b> — CPL de R$ 43,46 é competitivo, mas parou na primeira reunião. Observar mais 30 dias.</li>
+        </ul>
+        <div class="v-foot">Somadas: R$ 9.169 de verba → 14 reuniões e 1 oportunidade.</div>
+      </div>
+
+      <div class="vcard bad">
+        <div class="v-lab">Cortar ou reestruturar</div>
+        <ul>
+          <li><b>Consultoria Bancários</b> (Meta) — R$ 7.573, a maior verba do mês, para 6 reuniões a R$ 1.262 cada. 85,3% de perda e 17,6% de lixo de base. É aqui que está o dinheiro parado.</li>
+          <li><b>Terapeutas Premium LP-C</b> — R$ 2.508 → 2 reuniões, nenhuma realizada, nenhuma oportunidade.</li>
+          <li><b>Teste A/B LP</b> — R$ 1.964 → zero reunião, e ainda perde 55% dos leads no caminho até o CRM.</li>
+          <li><b>Brand-Curso, Concorrentes, Certificação, Escalar-Consultório, RMKT-YouTube</b> — R$ 1.790 somados, zero reunião.</li>
+        </ul>
+        <div class="v-foot">Somadas com os R$ 2.194,60 sem lead: <b>R$ 16.030 (57% da verba) produziram 8 reuniões e 1 oportunidade.</b></div>
+      </div>
+    </div>
+
+    <div class="pull">R$ 2.800 nas três campanhas eficientes do Google produziram 9 reuniões — R$ 311 cada. R$ 16.030 nas campanhas travadas produziram 8, a R$ 2.004 cada. Cada R$ 1.000 realocados valem cerca de 2,7 reuniões a mais.</div>
+    <p class="lede" style="margin-bottom:0">Com uma ressalva que importa: Brand-Exato e Brand-Curso são busca de marca e têm teto de volume — não absorvem R$ 16 mil por mais que se aumente o lance. A realocação realista combina aumento gradual nos termos genéricos do Google (Hipnoterapia-Genérico e Curso-Hipnoterapeuta, que ainda têm espaço de impressão) com reestruturação — não só corte — do público de Bancários, que tem o maior volume de lead barato da conta e está travando na conexão, não na entrada.</p>
+  </section>
+
+  <section>
+    <div class="s-head"><div class="s-num">08</div><h2>O que medir para decidir agosto</h2></div>
+    <p class="lede">Nove dados que não estão nos arquivos atuais e que mudariam materialmente a qualidade da decisão. Ordenados por impacto sobre o resultado, não por esforço.</p>
+
+    <div class="recs">
+      <div class="rec"><div class="r-n">01</div><div>
+        <h4>Tempo até o primeiro contato do SDR</h4>
+        <p>497 leads morreram em "encerrou contato" — 49% da base. Antes de mexer em criativo ou público, é preciso saber se o problema é o lead ou a velocidade da resposta. Medir minutos entre a criação do negócio e a primeira atividade registrada, segmentado por campanha e por faixa de horário.</p>
+        <p class="r-src">Fonte: Pipedrive — activities API, campo <code>add_time</code> vs <code>first activity</code>. Nenhum dos três arquivos traz isso.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">02</div><div>
+        <h4>Coorte por safra, não por mês-calendário</h4>
+        <p>O ciclo médio observado é de 30 a 109 dias. Enquanto a análise for mês fechado, toda campanha nova aparecerá com ROI −100%. Rastrear os leads de julho por 90 dias e reportar conversão acumulada em D+30, D+60 e D+90 por campanha.</p>
+        <p class="r-src">Derivável do Pipedrive cruzando data de criação com data de ganho. Já existe o campo <code>[OBA] Data de Ganho</code>.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">03</div><div>
+        <h4>Fechar o buraco de atribuição das vendas</h4>
+        <p>R$ 57.950 de receita sem origem de mídia. Enquanto "Social Seller", "Inside sales" e "Indicação" ocuparem o campo de campanha, nenhum cálculo de ROI será confiável. Separar canal comercial de origem de mídia em dois campos distintos e preencher retroativamente as vendas de 2026.</p>
+        <p class="r-src">Ajuste de processo no Pipedrive + revisão do webhook de entrada de leads.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">04</div><div>
+        <h4>Investigar a perda de 55% dos leads do Teste A/B</h4>
+        <p>Meta reporta 38 leads, o CRM tem 17. Ou o pixel está contando duas vezes, ou a integração da LP variante está falhando. Nas outras campanhas a divergência é de ±5%, então isso é específico dessa LP e invalida a leitura do teste A/B inteiro.</p>
+        <p class="r-src">Comparar contagem por dia: Meta insights (ação <code>lead</code>) × leads no Pipedrive × logs do lp-webhook.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">05</div><div>
+        <h4>Desempenho por criativo, não só por campanha</h4>
+        <p>Bancários rodou com <code>utm_content</code> distinto por criativo (video_mente_cansada, video_transicao_segura, teste_pular_escuro e outros), mas ninguém está lendo esse campo. Com R$ 7.573 investidos, dá para saber qual criativo trouxe as 6 reuniões e qual trouxe os 62 leads de lixo.</p>
+        <p class="r-src">Cruzar <code>[OBA] utm_content</code> do Pipedrive com insights de nível de anúncio do Meta.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">06</div><div>
+        <h4>Comparecimento e resultado por SDR e closer</h4>
+        <p>Só 56,5% das reuniões marcadas aconteceram e apenas 34,6% das realizadas viraram oportunidade. Esses dois números pesam mais no resultado final que qualquer ajuste de CPL, e nenhum deles é problema de mídia.</p>
+        <p class="r-src">Os campos <code>SDR:</code> e <code>Closer:</code> já existem nos arquivos — falta cruzar com etapa e motivo de perda.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">07</div><div>
+        <h4>Qualificação declarada × resultado</h4>
+        <p>Escolaridade, objetivo com a formação e investimento em cursos nos últimos anos estão quase todos vazios na base. São exatamente os campos que separariam lead curioso de lead com capacidade de compra, e permitiriam qualificar antes de gastar tempo de SDR.</p>
+        <p class="r-src">Campos já existem no Pipedrive; a coleta na LP é que não está acontecendo.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">08</div><div>
+        <h4>Frequência e fadiga de criativo no Meta</h4>
+        <p>O CPL do Meta é bom, mas a queda de qualidade sugere saturação de público. Frequência acima de 2,5 na mesma janela costuma anteceder a piora que aparece aqui como "encerrou contato".</p>
+        <p class="r-src">Meta insights: <code>frequency</code>, <code>quality_ranking</code>, <code>engagement_rate_ranking</code> por conjunto de anúncios.</p>
+      </div></div>
+
+      <div class="rec"><div class="r-n">09</div><div>
+        <h4>Taxa de conversão da landing page por variante</h4>
+        <p>Estamos medindo custo por lead, não custo por visitante que converte. Sem sessões e taxa de conversão da LP não dá para saber se o CPL alto do Google é preço de clique caro ou página que converte mal.</p>
+        <p class="r-src">GA4 ou log do lp-webhook: sessões por <code>utm_campaign</code> ÷ leads gerados.</p>
+      </div></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>Fontes</h4>
+        <ul>
+          <li><b>Pipedrive</b> — Todos Leads Julho 2026 (1.017), Oportunidades Julho 2026 (28), Vendas Julho 2026 (10)</li>
+          <li><b>Meta Marketing API</b> v21.0 — <code>act_377230783636524</code>, nível campanha e conjunto</li>
+          <li><b>Google Ads API</b> — customer <code>6713237463</code>, nível campanha e grupo de anúncios</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Critérios de cálculo</h4>
+        <ul>
+          <li><b>Reunião agendada</b> conta de forma acumulada: etapa "Reunião Agendada" ou qualquer etapa posterior.</li>
+          <li><b>Atribuição Meta</b> confirmada pelas <code>url_tags</code> reais dos anúncios, não por semelhança de nome.</li>
+          <li><b>Atribuição Google</b>: <code>utm_campaign</code> do CRM corresponde ao nome do grupo de anúncios; Manifesto é PMax e mapeia no nível de campanha.</li>
+          <li><b>UTM <code>consultoria</code></b> desmembrada por <code>utm_term</code> em Bancários (353) e tag legado (75).</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Fora do escopo</h4>
+        <ul>
+          <li><b>Conta Hypnoflash</b> (<code>act_1127653835150900</code>) — R$ 13.596,22 em julho, produto distinto, fora do funil OBA.</li>
+          <li>Outras 18 contas Meta do portfólio sem veiculação no período.</li>
+          <li>Investimento de junho que gerou parte das vendas de julho não está somado — por isso o ROI de Search-Leads-OBA-Quente-BR aparece como não calculável.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
