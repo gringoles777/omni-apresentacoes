@@ -148,17 +148,7 @@
   .footer button:hover{color:var(--gold)}
 </style>
 
-<body class="locked">
-
-<!-- GATE -->
-<div id="gate">
-  <svg class="glock" viewBox="0 0 24 24" fill="none" stroke="#C8A84B" stroke-width="1.5"><rect x="4" y="10" width="16" height="11"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-  <div class="glogo">OMNI BRASIL</div>
-  <div class="gsub">Pesquisa Web · Protótipo Clicável</div>
-  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
-  <div class="gerr" id="gerr">Senha incorreta</div>
-  <div class="ghint">Acesso restrito à liderança OMNI</div>
-</div>
+<body>
 
 <!-- PAGE HEADER -->
 <div class="pagehead">
@@ -587,21 +577,8 @@ function restart(forceBranch){
   }
 }
 
-/* ===== gate ===== */
-function tryLogin(){
-  if(document.getElementById('pwd').value==='omni777'){
-    document.body.classList.remove('locked');
-    try{sessionStorage.setItem('pesq_gate','1')}catch(e){}
-    if(!chat.children.length) run();
-  }else{
-    document.getElementById('gerr').style.display='block';
-    document.getElementById('pwd').value='';
-    document.getElementById('pwd').focus();
-  }
-}
-try{
-  if(sessionStorage.getItem('pesq_gate')==='1'){ document.body.classList.remove('locked'); run(); }
-}catch(e){}
+/* ===== inicia direto, sem senha ===== */
+run();
 </script>
 </body>
 </html>
