@@ -388,11 +388,17 @@ function run(){
     return;
   }
 
-  /* question steps: show question bubble, then controls */
+  /* question steps: mostra a pergunta, dá tempo de leitura, e só então abre as opções */
   var qtext = s.q || (state.branch==='B'?s.qB:s.qA);
   typing(function(){
     botRow(qtext);
-    renderControls(s);
+    var qRow = chat.lastElementChild;
+    var plain = qtext.replace(/<[^>]+>/g,'');
+    var readMs = Math.min(1700, 550 + plain.length*24);
+    setTimeout(function(){
+      renderControls(s);
+      setTimeout(function(){ if(qRow) qRow.scrollIntoView({behavior:'smooth', block:'start'}); }, 70);
+    }, readMs);
   }, 480);
 }
 
