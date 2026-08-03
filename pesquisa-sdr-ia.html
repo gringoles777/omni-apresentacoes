@@ -360,6 +360,7 @@ function nextIndex(from){
   for(var k=from;k<FLOW.length;k++){
     var s = FLOW[k];
     if(s.only && s.only!==state.branch) continue;
+    if(s.cond && !s.cond()) continue;
     return k;
   }
   return -1;
@@ -373,7 +374,8 @@ function run(){
   dock.innerHTML = '';
 
   if(s.type==='bot'){
-    botSequence(s.lines, s.affirm?'affirm':'', function(){
+    var lines = s.dyn ? s.dyn() : s.lines;
+    botSequence(lines, s.affirm?'affirm':'', function(){
       if(s.cta){
         dock.innerHTML = '<button class="cta" id="ctaBtn">'+s.cta+'</button>';
         document.getElementById('ctaBtn').onclick = function(){ advance(); };
@@ -495,24 +497,97 @@ function finish(){
 
 function showAgenda(){
   typing(function(){
-    botRow('Pelo que você me contou, o seu perfil faz <span class="em">muito sentido</span> pra essa consultoria estratégica.<br><br>Escolhe o melhor horário pra gente conversar:');
-    var slots=[
-      {m:'Hoje', d:'HJ', day:'Hoje', time:'15h00 · 40 min com o consultor'},
-      {m:'Amanhã', d:'AM', day:'Amanhã de manhã', time:'09h00 · 40 min com o consultor'},
-      {m:'Amanhã', d:'AM', day:'Amanhã à tarde', time:'16h30 · 40 min com o consultor'}
-    ];
+    botRow('Estou muito feliz de poder te presentear com nossa <span class="em">consultoria estratégica</span>, porque tenho certeza de que você está no momento certo de fazê-la, e ela vai ser um <span class="em">divisor de águas</span>.<br><br>Escolhe um horário seguro pra reservar na sua agenda:');
     var wrap=document.createElement('div'); wrap.className='agenda';
-    slots.forEach(function(s){
-      var el=document.createElement('button'); el.className='slot';
-      el.innerHTML='<div class="cal"><div class="m">'+s.m+'</div><div class="d">'+s.d+'</div></div>'+
-                   '<div class="info"><div class="day">'+s.day+'</div><div class="time">'+s.time+'</div></div>'+
-                   '<div class="arr">&rsaquo;</div>';
-      el.onclick=function(){ commit(s.day, s.time.split(' ')[0]); };
-      wrap.appendChild(el);
-    });
+    curatedSlots().forEach(function(s){ wrap.appendChild(slotEl(s)); });
+
+    // affordance: ver a agenda completa
+    var more=document.createElement('button'); more.className='agenda-more'; more.textContent='Ver a agenda completa';
+    more.onclick=function(){ more.remove(); revealFullCalendar(wrap); };
+
+    // escape: nenhum desses horários -> SDR humano
+    var esc=document.createElement('button'); esc.className='agenda-escape'; esc.textContent='Não consigo nenhum desses horários';
+    esc.onclick=function(){ askIdealTime(); };
+
     var note=document.createElement('div'); note.className='agenda-note'; note.textContent='horários ilustrativos · integra com Cal.com no fluxo real';
-    dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(note); scrollDown();
+    dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(more); dock.appendChild(esc); dock.appendChild(note); scrollDown();
   },520);
+}
+
+function curatedSlots(){
+  return [
+    {m:'Hoje', d:'HJ', day:'Hoje', time:'15h00 · 40 min com o consultor'},
+    {m:'Amanhã', d:'AM', day:'Amanhã de manhã', time:'09h00 · 40 min com o consultor'},
+    {m:'Amanhã', d:'AM', day:'Amanhã à tarde', time:'16h30 · 40 min com o consultor'}
+  ];
+}
+function slotEl(s){
+  var el=document.createElement('button'); el.className='slot';
+  el.innerHTML='<div class="cal"><div class="m">'+s.m+'</div><div class="d">'+s.d+'</div></div>'+
+               '<div class="info"><div class="day">'+s.day+'</div><div class="time">'+s.time+'</div></div>'+
+               '<div class="arr">&rsaquo;</div>';
+  el.onclick=function(){ commit(s.day, s.time.split(' ')[0]); };
+  return el;
+}
+
+/* representação simples do calendário do Cal.com (ilustrativa) */
+function revealFullCalendar(wrap){
+  var card=document.createElement('div'); card.className='calcard';
+  var avail=[8,11,12,15,18,19,22,25,26]; // dias com vaga (ilustrativo)
+  var start=3; // dia da semana em que o mês começa (offset)
+  var html='<div class="ctitle">Agosto 2026</div><div class="calgrid">'+
+           '<div class="dow">D</div><div class="dow">S</div><div class="dow">T</div><div class="dow">Q</div><div class="dow">Q</div><div class="dow">S</div><div class="dow">S</div>';
+  for(var i=0;i<start;i++) html+='<div class="cell mut"></div>';
+  for(var d=1;d<=31;d++){
+    var cls = avail.indexOf(d)>=0 ? 'cell avail' : 'cell mut';
+    html+='<div class="'+cls+'" data-day="'+d+'">'+d+'</div>';
+  }
+  html+='</div><div class="calnote">Na versão real, aqui abre o calendário completo do Cal.com pra você escolher qualquer dia e horário. Alguns horários extras:</div>';
+  card.innerHTML=html;
+  var times=document.createElement('div'); times.className='caltimes';
+  [{day:'Qui, 12/08',time:'10h30'},{day:'Seg, 18/08',time:'19h00'},{day:'Ter, 26/08',time:'14h00'}].forEach(function(t){
+    var b=document.createElement('button'); b.className='caltime'; b.textContent=t.time;
+    b.onclick=function(){ commit(t.day, t.time); };
+    times.appendChild(b);
+  });
+  card.appendChild(times);
+  card.querySelectorAll('.cell.avail').forEach(function(c){
+    c.onclick=function(){ commit(c.getAttribute('data-day')+'/08', '11h00'); };
+  });
+  wrap.parentNode.insertBefore(card, wrap.nextSibling); scrollDown();
+}
+
+/* escape -> SDR humano assume */
+function askIdealTime(){
+  leadRow('Não consigo nenhum desses horários');
+  state.handoffHumano=true; // marca: este caminho vai pro SDR humano
+  dock.innerHTML='';
+  typing(function(){
+    botRow('Sem problema. Qual dia e horário seriam ideais pra você?');
+    var d=document.createElement('div'); d.className='tinput';
+    var ta=document.createElement('textarea'); ta.rows=1; ta.placeholder='Ex: quinta à noite, depois das 20h...';
+    ta.oninput=function(){ ta.style.height='auto'; ta.style.height=ta.scrollHeight+'px'; };
+    var snd=document.createElement('button'); snd.className='send'; snd.textContent='Enviar';
+    function submit(){ var v=ta.value.trim(); if(!v)return; state.answers.horario_ideal=v; leadRow(v); dock.innerHTML=''; endHandoff(); }
+    snd.onclick=submit;
+    ta.onkeydown=function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();} };
+    d.appendChild(ta); d.appendChild(snd); dock.innerHTML=''; dock.appendChild(d);
+    setTimeout(function(){ta.focus();},100); scrollDown();
+  },520);
+}
+function endHandoff(){
+  typing(function(){
+    var el=document.createElement('div'); el.className='final';
+    el.innerHTML =
+      '<span class="inf" style="width:64px">'+INF+'</span>'+
+      '<div class="banner ok" style="text-align:left"><div class="tag">Pedido registrado</div>'+
+      '<h4>Vou reservar com o consultor</h4>'+
+      '<p>Perfeito, vou tentar reservar esse horário com o consultor e te retorno aqui pelo WhatsApp.</p></div>'+
+      '<h3 style="margin-top:22px">Já estou cuidando disso pra você.</h3>'+
+      '<p>Assim que confirmar com o consultor, você recebe a mensagem por aqui.</p>'+
+      '<button class="restart" onclick="restart()">Reiniciar protótipo</button>';
+    chat.appendChild(el); bar.style.width='100%'; scrollDown();
+  },560);
 }
 
 function commit(day, time){
