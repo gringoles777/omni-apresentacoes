@@ -306,7 +306,9 @@ var FLOW = [
   {type:'single', key:'decisor', qA:'Última: quando você encontrar o caminho pra sua transição e chegar a hora de investir o tempo e o dinheiro necessários, você decide sozinha ou consulta alguém, um familiar por exemplo?', qB:'Última: quando você encontrar o caminho pra fazer seu trabalho crescer e chegar a hora de investir o tempo e o dinheiro, você decide sozinha ou consulta alguém, um familiar por exemplo?', options:[
     {label:'Tomo sozinha', v:'sozinha'},
     {label:'Alinho com alguém', v:'alinho'}
-  ]}
+  ]},
+  {type:'text', key:'decisor_quem', cond:function(){return state.answers.decisor && state.answers.decisor.v==='alinho';}, q:'Quem costuma decidir isso com você? (marido, esposa, um familiar...)', ph:'Escreve aqui...'},
+  {type:'bot', cond:function(){return state.answers.decisor && state.answers.decisor.v==='alinho';}, dyn:function(){var q=(state.answers.decisor_quem && state.answers.decisor_quem!=='(não respondeu)')?state.answers.decisor_quem:'essa pessoa';return ['Faz todo sentido. É muito importante que <span class="em">'+q+'</span> participe da consultoria junto com você, porque é uma decisão de vocês dois.'];}}
 ];
 
 /* ===== engine ===== */
