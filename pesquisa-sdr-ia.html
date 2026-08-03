@@ -503,16 +503,12 @@ function showAgenda(){
     var wrap=document.createElement('div'); wrap.className='agenda';
     curatedSlots().forEach(function(s){ wrap.appendChild(slotEl(s)); });
 
-    // affordance: ver a agenda completa
-    var more=document.createElement('button'); more.className='agenda-more'; more.textContent='Ver a agenda completa';
-    more.onclick=function(){ more.remove(); revealFullCalendar(wrap); };
-
-    // escape: nenhum desses horários -> SDR humano
-    var esc=document.createElement('button'); esc.className='agenda-escape'; esc.textContent='Não consigo nenhum desses horários';
+    // escape discreto: nenhum desses horários -> SDR humano
+    var esc=document.createElement('button'); esc.className='skip'; esc.style.textAlign='center'; esc.style.width='100%'; esc.textContent='Não consigo nenhum desses horários';
     esc.onclick=function(){ askIdealTime(); };
 
     var note=document.createElement('div'); note.className='agenda-note'; note.textContent='horários ilustrativos · integra com Cal.com no fluxo real';
-    dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(more); dock.appendChild(esc); dock.appendChild(note); scrollDown();
+    dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(esc); dock.appendChild(note); scrollDown();
   },520);
 }
 
