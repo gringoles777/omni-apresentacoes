@@ -284,7 +284,7 @@ var FLOW = [
   ]},
   {type:'single', key:'escolaridade', q:'E qual a sua escolaridade?', options:[
     {label:'Ensino fundamental', v:'fund', dq:true},
-    {label:'Ensino médio', v:'medio'},
+    {label:'Ensino médio', v:'medio', dq:true},
     {label:'Superior incompleto', v:'sup_inc'},
     {label:'Superior completo', v:'sup'},
     {label:'Pós-graduação ou mais', v:'pos'}
@@ -480,9 +480,11 @@ function finish(){
   dock.innerHTML='';
   var a=state.answers;
   var comp = a.comprometimento ? a.comprometimento.v : 10;
-  var dor = a.dor && a.dor!=='(não respondeu)' ? a.dor : null;
-  var qualified = !state.disqualify && comp>=7;
 
+  // nota abaixo de 7: sem resumo nem oferta, direto pro "não é o momento" (decisão Rafa)
+  if(comp<7){ showAltMomento(); return; }
+
+  var dor = a.dor && a.dor!=='(não respondeu)' ? a.dor : null;
   var mirror;
   if(state.branch==='B'){
     mirror = [
@@ -499,8 +501,8 @@ function finish(){
   }
 
   botSequence(mirror, '', function(){
-    if(qualified) showAgenda();
-    else showAlt();
+    if(state.disqualify) showAltCapacidade(); // capacidade (escolaridade) -> preço + opt-in
+    else showAgenda();
   });
 }
 
@@ -621,17 +623,44 @@ function endOk(day,time){
   },560);
 }
 
-function showAlt(){
+/* negativa por NOTA BAIXA (0-10 < 7): momento, sem preço, sem resumo */
+function showAltMomento(){
   typing(function(){
     var el=document.createElement('div'); el.className='final';
     el.innerHTML =
-      '<div class="banner alt" style="text-align:left"><div class="tag">Um caminho pra você começar</div>'+
-      '<h4>Esse talvez não seja o melhor momento pra consultoria</h4>'+
-      '<p>Pelo que você me contou, faz mais sentido você conhecer a Omniterapia com calma antes de uma consultoria estratégica. E tem um jeito bom de começar isso agora, no seu tempo.</p></div>'+
-      '<div style="margin-top:14px;text-align:left">'+
-        '<button class="opt" style="width:100%" onclick="restart()">Quero receber um conteúdo gratuito pra entender melhor</button>'+
-      '</div>'+
-      '<p style="margin-top:18px">Quando fizer sentido, a porta da OMNI continua aberta pra você.</p>'+
+      '<span class="inf" style="width:64px">'+INF+'</span>'+
+      '<div class="banner alt" style="text-align:left"><div class="tag">Fica pra quando for a sua hora</div>'+
+      '<h4>Esse talvez não seja o melhor momento pra sua consultoria</h4>'+
+      '<p>Vou ser honesta com você: a nossa consultoria rende de verdade quando você já está num momento de decisão, pronta pra agir. Fora disso, ela pode virar perda de tempo, pro seu lado e pro consultor.</p></div>'+
+      '<p style="margin-top:16px">Quando esse momento chegar, me chama por aqui que eu reabro sua agenda na hora. A porta da OMNI continua aberta pra você.</p>'+
+      '<button class="restart" onclick="restart()">Reiniciar protótipo</button>';
+    chat.appendChild(el); bar.style.width='100%'; scrollDown();
+  },560);
+}
+
+/* negativa por CAPACIDADE (escolaridade abaixo de superior): revela o preço + opt-in */
+function showAltCapacidade(){
+  typing(function(){
+    botRow('Deixa eu ser transparente com você, porque acho que você merece.<br><br>A nossa consultoria tem o objetivo de te ajudar a <span class="em">iniciar sua carreira terapêutica com muito sucesso</span>. O investimento inicial pra isso varia de <span class="em">10 a 20 mil</span>, com uma metodologia validada, método e acompanhamento, e a gente consegue flexibilizar a forma de pagamento.<br><br>Você acredita que isso pode caber nos seus planos e ainda quer agendar a consultoria pra conhecer melhor o projeto?');
+    var opts=document.createElement('div'); opts.className='opts';
+    var yes=document.createElement('button'); yes.className='opt'; yes.textContent='Sim, quero agendar e conhecer melhor';
+    yes.onclick=function(){ leadRow('Sim, quero agendar e conhecer melhor'); dock.innerHTML=''; showAgenda(); };
+    var no=document.createElement('button'); no.className='opt'; no.textContent='Agora não está nos meus planos';
+    no.onclick=function(){ leadRow('Agora não está nos meus planos'); dock.innerHTML=''; showFechamentoGentil(); };
+    opts.appendChild(yes); opts.appendChild(no);
+    dock.innerHTML=''; dock.appendChild(opts); scrollDown();
+  },560);
+}
+
+/* fechamento gentil quando a pessoa diz que o investimento não cabe agora */
+function showFechamentoGentil(){
+  typing(function(){
+    var el=document.createElement('div'); el.className='final';
+    el.innerHTML =
+      '<span class="inf" style="width:64px">'+INF+'</span>'+
+      '<div class="banner alt" style="text-align:left"><div class="tag">Sem problema nenhum</div>'+
+      '<h4>Quando fizer sentido pra você, a gente está aqui</h4>'+
+      '<p>Obrigada pela sua sinceridade. Se um dia esse investimento entrar nos seus planos, me chama por aqui que eu reabro sua agenda. E se quiser começar a conhecer a Omniterapia agora, sem custo, dá uma olhada na nossa auto-hipnoterapia.</p></div>'+
       '<button class="restart" onclick="restart()">Reiniciar protótipo</button>';
     chat.appendChild(el); bar.style.width='100%'; scrollDown();
   },560);
