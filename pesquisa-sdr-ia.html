@@ -333,7 +333,7 @@ var FLOW = [
     {label:'De alguém da família junto comigo', v:'alinho'}
   ]},
   {type:'text', key:'decisor_quem', cond:function(){return state.answers.decisor && state.answers.decisor.v==='alinho';}, q:'Quem estaria junto nessa decisão? (cônjuge, pai, mãe, um familiar...)', ph:'Escreve aqui...'},
-  {type:'bot', cond:function(){return state.answers.decisor && state.answers.decisor.v==='alinho';}, dyn:function(){var q=(state.answers.decisor_quem && state.answers.decisor_quem!=='(não respondeu)')?state.answers.decisor_quem:'essa pessoa';return ['Combinado. E se fizer sentido pra você, <span class="em">'+q+'</span> pode vir junto na consultoria. Decisão boa se toma junto 😉'];}},
+  {type:'bot', cond:function(){return state.answers.decisor && state.answers.decisor.v==='alinho';}, dyn:function(){var q=(state.answers.decisor_quem && state.answers.decisor_quem!=='(não respondeu)')?state.answers.decisor_quem:'essa pessoa';return ['Você citou que normalmente conta com a opinião de alguém pras suas decisões importantes. Seria incrível que <span class="em">'+q+'</span> participasse junto com você dessa consultoria. Se fizer sentido, escolhe um horário que seja bom pra vocês dois, tá? 😊'];}},
   {type:'single', key:'enquadramento', cond:function(){return state.answers.comprometimento && state.answers.comprometimento.v>=7 && state.answers.segmento && (state.answers.segmento.v==='desenvolver'||state.answers.segmento.v==='curiosidade');}, q:'Antes de reservar seu horário, me confirma uma coisa: essa consultoria é sobre VOCÊ se formar pra atender pessoas com a Omniterapia. É isso que você busca?', options:[
     {label:'Sim, é isso!', v:'sim'},
     {label:'Na verdade, quero ser atendido(a)', v:'tratamento', end:'tratamento'}
