@@ -584,7 +584,7 @@ function showAgenda(){
     curatedSlots().forEach(function(s){ wrap.appendChild(slotEl(s)); });
 
     // v3 (desenho da Rafa): quem não encaixa pede mais opções e diz o melhor horário
-    var mais=document.createElement('button'); mais.className='skip'; mais.style.textAlign='center'; mais.style.width='100%'; mais.textContent='Ver mais opções de horário';
+    var mais=document.createElement('button'); mais.className='skip'; mais.style.textAlign='center'; mais.style.width='100%'; mais.textContent='Esses horários não me atendem';
     mais.onclick=function(){ askIdealTime(); };
 
     var note=document.createElement('div'); note.className='agenda-note'; note.textContent='horários gerados pela agenda real (Cal.com) no fluxo de produção';
@@ -644,7 +644,7 @@ function revealFullCalendar(wrap){
 /* v3 (desenho da Rafa): "ver mais opções" -> pessoa diz o melhor horário -> agente verifica ->
    agenda se tiver; senão oferece o mais próximo + opção de aguardar liberar */
 function askIdealTime(){
-  leadRow('Ver mais opções de horário');
+  leadRow('Esses horários não me atendem');
   dock.innerHTML='';
   typing(function(){
     botRow('Claro! Me diz o melhor dia e horário pra você:');
