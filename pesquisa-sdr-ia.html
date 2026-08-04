@@ -728,37 +728,18 @@ function showAltMomento(){
   },560);
 }
 
-/* negativa por CAPACIDADE (gate composto): revela o preço + 3 vias */
+/* negativa por CAPACIDADE (gate composto): transparência do investimento + sim/não (decisão
+   Rafa 04/08: sem 3ª via; quem topa agenda direto e o decisor participa da própria reunião) */
 function showAltCapacidade(){
   typing(function(){
     botRow('Antes de agendar sua consultoria, quero ser transparente com você!<br><br>A nossa consultoria tem o objetivo de te ajudar a <span class="em">iniciar sua carreira terapêutica com muito sucesso</span>, de forma segura e validada. O investimento inicial pra isso varia de <span class="em">10 a 20 mil</span>, considerando formação e acompanhamento. As formas de pagamento são flexíveis e o retorno do investimento pode ser rápido.<br><br>Esse projeto ainda faz sentido pra você? Quer dar continuidade no agendamento da sua consultoria pra entender melhor?');
-    var quem=(state.answers.decisor_quem && state.answers.decisor_quem!=='(não respondeu)')?state.answers.decisor_quem:((state.answers.decisor&&state.answers.decisor.v==='alinho')?'quem decide com você':null);
     var opts=document.createElement('div'); opts.className='opts';
     var yes=document.createElement('button'); yes.className='opt'; yes.textContent='Sim, quero entender melhor na consultoria';
     yes.onclick=function(){ leadRow('Sim, quero entender melhor na consultoria'); dock.innerHTML=''; showAgenda(); };
-    if(quem){
-      var talk=document.createElement('button'); talk.className='opt'; talk.textContent='Quero conversar com '+quem+' antes';
-      talk.onclick=function(){ leadRow('Quero conversar com '+quem+' antes'); dock.innerHTML=''; showFollowupCombinado(quem); };
-      opts.appendChild(yes); opts.appendChild(talk);
-    } else { opts.appendChild(yes); }
     var no=document.createElement('button'); no.className='opt'; no.textContent='Não nesse momento';
     no.onclick=function(){ leadRow('Não nesse momento'); dock.innerHTML=''; showFechamentoGentil(); };
-    opts.appendChild(no);
+    opts.appendChild(yes); opts.appendChild(no);
     dock.innerHTML=''; dock.appendChild(opts); scrollDown();
-  },560);
-}
-
-/* v2: "quero conversar com {decisor} antes" -> follow-up combinado (SDR-IA retoma) */
-function showFollowupCombinado(quem){
-  typing(function(){
-    var el=document.createElement('div'); el.className='final';
-    el.innerHTML =
-      '<span class="inf" style="width:64px">'+INF+'</span>'+
-      '<div class="banner ok" style="text-align:left"><div class="tag">Combinado</div>'+
-      '<h4>Conversa com '+quem+' e eu te chamo</h4>'+
-      '<p>Faz todo sentido decidir junto. Vou guardar seu perfil prontinho e te chamo aqui no WhatsApp em até 3 dias pra saber o que vocês decidiram, tudo bem? Se quiserem, a consultoria pode ser com os dois juntos.</p></div>'+
-      '<button class="restart" onclick="restart()">Reiniciar protótipo</button>';
-    chat.appendChild(el); bar.style.width='100%'; scrollDown();
   },560);
 }
 
