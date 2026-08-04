@@ -580,15 +580,22 @@ function showAgenda(){
       ? 'Reservei um horário de <span class="em">consultoria estratégica</span> pra você com um consultor que conhece a realidade de quem já atende. Tenho certeza de que vai ser um <span class="em">divisor de águas</span>.<br><br>Escolhe o melhor horário pra reservar na sua agenda:'
       : 'Estou muito feliz de poder te presentear com nossa <span class="em">consultoria estratégica</span>, porque tenho certeza de que você está no momento certo de fazê-la, e ela vai ser um <span class="em">divisor de águas</span>.<br><br>Escolhe um horário seguro pra reservar na sua agenda:';
     botRow(abre);
-    var wrap=document.createElement('div'); wrap.className='agenda';
-    curatedSlots().forEach(function(s){ wrap.appendChild(slotEl(s)); });
+    var abreRow = chat.lastElementChild;
+    // pausa de leitura antes de abrir a agenda (a tela não atropela o texto)
+    var plain = abre.replace(/<[^>]+>/g,'');
+    var readMs = Math.min(2600, 700 + plain.length*22);
+    setTimeout(function(){
+      var wrap=document.createElement('div'); wrap.className='agenda';
+      curatedSlots().forEach(function(s){ wrap.appendChild(slotEl(s)); });
 
-    // v3 (desenho da Rafa): quem não encaixa pede mais opções e diz o melhor horário
-    var mais=document.createElement('button'); mais.className='skip'; mais.style.textAlign='center'; mais.style.width='100%'; mais.textContent='Esses horários não me atendem';
-    mais.onclick=function(){ askIdealTime(); };
+      // v4 (Rafa): botão VISÍVEL, mesmo estilo das opções (não escondido)
+      var mais=document.createElement('button'); mais.className='opt'; mais.style.textAlign='center'; mais.style.marginTop='8px'; mais.textContent='Esses horários não me atendem';
+      mais.onclick=function(){ askIdealTime(); };
 
-    var note=document.createElement('div'); note.className='agenda-note'; note.textContent='horários gerados pela agenda real (Cal.com) no fluxo de produção';
-    dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(mais); dock.appendChild(note); scrollDown();
+      var note=document.createElement('div'); note.className='agenda-note'; note.textContent='horários gerados pela agenda real (Cal.com) no fluxo de produção';
+      dock.innerHTML=''; dock.appendChild(wrap); dock.appendChild(mais); dock.appendChild(note);
+      setTimeout(function(){ if(abreRow) abreRow.scrollIntoView({behavior:'smooth', block:'start'}); }, 80);
+    }, readMs);
   },520);
 }
 
