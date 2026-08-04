@@ -605,11 +605,11 @@ function curatedSlots(){
   var dias=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
   function lbl(offset){ var d=new Date(now.getTime()+offset*86400000); return {day: offset===0?'Hoje':(offset===1?'Amanhã':dias[d.getDay()]), tag: offset===0?'HJ':(offset===1?'AM':dias[d.getDay()].slice(0,2).toUpperCase())}; }
   var slots=[];
-  if(h<13){ var t0=lbl(0); slots.push({m:t0.day,d:t0.tag,day:t0.day+' à tarde',time:'15h00 · 40 min com o consultor'}); }
+  if(h<13){ var t0=lbl(0); slots.push({m:t0.day,d:t0.tag,day:t0.day+' à tarde',time:'15h00 · 50 min com o consultor'}); }
   var am=lbl(1);
-  slots.push({m:am.day,d:am.tag,day:am.day+' de manhã',time:'09h00 · 40 min com o consultor'});
-  slots.push({m:am.day,d:am.tag,day:am.day+' à tarde',time:'15h00 · 40 min com o consultor'});
-  if(slots.length<3){ var dp=lbl(2); slots.push({m:dp.day,d:dp.tag,day:dp.day+' de manhã',time:'10h00 · 40 min com o consultor'}); }
+  slots.push({m:am.day,d:am.tag,day:am.day+' de manhã',time:'09h00 · 50 min com o consultor'});
+  slots.push({m:am.day,d:am.tag,day:am.day+' à tarde',time:'15h00 · 50 min com o consultor'});
+  if(slots.length<3){ var dp=lbl(2); slots.push({m:dp.day,d:dp.tag,day:dp.day+' de manhã',time:'10h00 · 50 min com o consultor'}); }
   return slots.slice(0,3);
 }
 function slotEl(s){
@@ -670,25 +670,26 @@ function verificaHorario(pedido){
   typing(function(){
     botRow('Deixa eu verificar na agenda do consultor...');
     typing(function(){
-      botRow('O mais próximo que tenho do que você pediu é <span class="em">quinta às 18h00</span>. Quer fechar esse horário, ou prefere aguardar liberar um ainda melhor? Assim que abrir, te aviso aqui no WhatsApp.');
+      botRow('Consigo te encaixar <span class="em">quinta às 20h40</span>. Quer fechar esse horário, ou prefere outro?');
       var opts=document.createElement('div'); opts.className='opts';
-      var fechar=document.createElement('button'); fechar.className='opt'; fechar.textContent='Fechar quinta às 18h00';
-      fechar.onclick=function(){ leadRow('Fechar quinta às 18h00'); dock.innerHTML=''; commit('quinta','18h00'); };
-      var esperar=document.createElement('button'); esperar.className='opt'; esperar.textContent='Prefiro aguardar um horário melhor';
-      esperar.onclick=function(){ leadRow('Prefiro aguardar um horário melhor'); dock.innerHTML=''; endEspera(); };
+      var fechar=document.createElement('button'); fechar.className='opt'; fechar.textContent='Fechar quinta às 20h40';
+      fechar.onclick=function(){ leadRow('Fechar quinta às 20h40'); dock.innerHTML=''; commit('quinta','20h40'); };
+      var esperar=document.createElement('button'); esperar.className='opt'; esperar.textContent='Preciso de outro horário';
+      esperar.onclick=function(){ leadRow('Preciso de outro horário'); dock.innerHTML=''; endEspera(); };
       opts.appendChild(fechar); opts.appendChild(esperar);
       dock.innerHTML=''; dock.appendChild(opts); scrollDown();
     },900);
   },600);
 }
+/* horário fora da grade automática: registra e o SDR humano confirma (decisão Rafa 04/08) */
 function endEspera(){
   typing(function(){
     var el=document.createElement('div'); el.className='final';
     el.innerHTML =
       '<span class="inf" style="width:64px">'+INF+'</span>'+
-      '<div class="banner ok" style="text-align:left"><div class="tag">Pedido registrado</div>'+
-      '<h4>Fico de olho na agenda pra você</h4>'+
-      '<p>Assim que liberar um horário como o que você pediu, te aviso aqui no WhatsApp pra gente reservar na hora, combinado?</p></div>'+
+      '<div class="banner ok" style="text-align:left"><div class="tag">Horário registrado</div>'+
+      '<h4>Vou confirmar a possibilidade pra você</h4>'+
+      '<p>Vou registrar esse horário na sua agenda agora mesmo. Estamos confirmando a possibilidade do consultor nesse horário e eu te aviso por aqui assim que confirmar, tudo bem?</p></div>'+
       '<button class="restart" onclick="restart()">Reiniciar protótipo</button>';
     chat.appendChild(el); bar.style.width='100%'; scrollDown();
   },560);
