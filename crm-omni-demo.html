@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="omni-locked">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM OMNI, como vai funcionar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111111; --panel2:#161612; --card:#1A1A16;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.6); --ink-faint:rgba(244,244,232,.32);
+    --gold:#C9A84C; --gold-light:#E8C86A; --gold-deep:#A9842A;
+    --gold-10:rgba(201,168,76,.10); --gold-line:rgba(201,168,76,.2);
+    --teal:#2A9D8F; --red:#E05C5C; --red-10:rgba(224,92,92,.12);
+    --green:#5CB85C; --green-10:rgba(92,184,92,.12);
+    --font:'Oswald',sans-serif; --body:'Inter',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html.omni-locked main, html.omni-locked header, html.omni-locked nav{display:none}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55}
+  #gate{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+  html:not(.omni-locked) #gate{display:none}
+  .glogo{font-family:var(--font);font-weight:700;font-size:22px;letter-spacing:6px;color:var(--gold)}
+  .gsub{font-size:11px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:22px}
+  #gate input{width:280px;padding:14px 16px;background:#141414;border:1px solid var(--gold-line);border-radius:10px;color:var(--ink);font-size:15px;outline:none;text-align:center;letter-spacing:2px}
+  #gate button{width:280px;padding:13px;background:var(--gold);border:none;border-radius:10px;color:#0A0A0A;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;font-size:13px}
+  .gerr{height:16px;font-size:12px;color:var(--red)}
+  header{padding:48px 20px 28px;text-align:center;border-bottom:1px solid var(--gold-line);background:radial-gradient(ellipse at top,rgba(201,168,76,.07),transparent 65%)}
+  .logo{font-family:var(--font);font-weight:700;letter-spacing:5px;color:var(--gold);font-size:15px}
+  .subtitle{font-size:10px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase;margin:6px 0 18px}
+  h1{font-family:var(--font);font-weight:600;font-size:clamp(26px,5vw,40px);line-height:1.15}
+  h1 .gold{color:var(--gold)}
+  .lead{max-width:640px;margin:14px auto 0;color:var(--ink-soft);font-size:15px}
+  .stats{display:flex;gap:26px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+  .stat .num{font-family:var(--font);font-size:26px;color:var(--gold);font-weight:600}
+  .stat .lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+  nav{position:sticky;top:0;z-index:50;display:flex;gap:4px;justify-content:flex-start;padding:10px 16px;background:rgba(10,10,10,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-line);overflow-x:auto}
+  nav button{flex:0 0 auto;background:none;border:1px solid transparent;color:var(--ink-soft);font-family:var(--body);font-size:13px;font-weight:600;padding:9px 14px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  nav button.on{background:var(--gold-10);border-color:var(--gold-line);color:var(--gold)}
+  main{max-width:1060px;margin:0 auto;padding:34px 18px 90px}
+  section{display:none}
+  section.on{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-family:var(--font);font-weight:600;font-size:24px;margin-bottom:6px}
+  .sub{color:var(--ink-soft);font-size:14px;margin-bottom:26px;max-width:720px}
+  .grid{display:grid;gap:14px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .cardx{background:var(--panel);border:1px solid var(--gold-line);border-radius:14px;padding:20px}
+  .cardx h3{font-family:var(--font);font-weight:600;font-size:16px;color:var(--gold);margin-bottom:8px}
+  .cardx p{font-size:13.5px;color:var(--ink-soft)}
+  .tag{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--gold-10);color:var(--gold);border:1px solid var(--gold-line);margin-bottom:10px}
+  /* ======== FILA DO DIA ======== */
+  .app{background:var(--panel);border:1px solid var(--gold-line);border-radius:16px;overflow:hidden}
+  .appbar{display:flex;align-items:center;gap:12px;padding:13px 18px;border-bottom:1px solid var(--gold-line);background:var(--panel2)}
+  .appbar .who{margin-left:auto;font-size:12px;color:var(--ink-faint)}
+  .appbar .t{font-family:var(--font);font-weight:600;font-size:15px;letter-spacing:1px}
+  .fila-item{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid rgba(244,244,232,.06);cursor:pointer;transition:background .15s}
+  .fila-item:hover{background:rgba(201,168,76,.05)}
+  .pri{flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;flex-direction:column;line-height:1.1}
+  .pri.hot{background:var(--red-10);color:var(--red);border:1px solid rgba(224,92,92,.35)}
+  .pri.comb{background:var(--gold-10);color:var(--gold);border:1px solid var(--gold-line)}
+  .pri.task{background:rgba(42,157,143,.12);color:var(--teal);border:1px solid rgba(42,157,143,.3)}
+  .pri.cold{background:rgba(244,244,232,.05);color:var(--ink-faint);border:1px solid rgba(244,244,232,.1)}
+  .fila-info{flex:1;min-width:0}
+  .fila-nome{font-weight:600;font-size:14.5px}
+  .fila-det{font-size:12px;color:var(--ink-soft);margin-top:2px}
+  .fila-det b{color:var(--gold);font-weight:600}
+  .acoes{display:flex;gap:8px;flex:0 0 auto}
+  .abtn{width:38px;height:38px;border-radius:10px;border:1px solid var(--gold-line);background:var(--gold-10);color:var(--gold);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .abtn.zap{color:#4AC959;background:rgba(74,201,89,.1);border-color:rgba(74,201,89,.3)}
+  .abtn:hover{filter:brightness(1.3)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;padding:12px 18px;font-size:11.5px;color:var(--ink-faint);border-top:1px solid rgba(244,244,232,.06)}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+  /* ======== FICHA ======== */
+  .ficha{display:grid;grid-template-columns:1.4fr 1fr;gap:0}
+  @media(max-width:760px){.ficha{grid-template-columns:1fr}}
+  .fmain{padding:20px;border-right:1px solid rgba(244,244,232,.07)}
+  .fside{padding:20px;background:var(--panel2)}
+  .fnome{font-family:var(--font);font-size:20px;font-weight:600}
+  .fmeta{font-size:12.5px;color:var(--ink-soft);margin:4px 0 14px}
+  .etapas{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap}
+  .etp{font-size:10.5px;padding:5px 10px;border-radius:16px;border:1px solid rgba(244,244,232,.12);color:var(--ink-faint)}
+  .etp.done{background:var(--gold-10);border-color:var(--gold-line);color:var(--gold)}
+  .etp.now{background:var(--gold);color:#0A0A0A;font-weight:700;border-color:var(--gold)}
+  .tl{border-left:2px solid var(--gold-line);padding-left:16px;display:flex;flex-direction:column;gap:12px}
+  .tl-item{font-size:13px;color:var(--ink-soft);position:relative}
+  .tl-item::before{content:'';position:absolute;left:-21px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .tl-item .quando{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint)}
+  .bloco{background:var(--card);border:1px solid var(--gold-line);border-radius:12px;padding:14px;margin-bottom:14px}
+  .bloco h4{font-family:var(--font);font-size:13px;letter-spacing:1px;color:var(--gold);font-weight:600;margin-bottom:10px;text-transform:uppercase}
+  .regua{display:flex;gap:5px;flex-wrap:wrap}
+  .rg{font-size:10.5px;font-family:var(--mono);padding:4px 8px;border-radius:8px;border:1px solid rgba(244,244,232,.12);color:var(--ink-faint)}
+  .rg.ok{background:var(--green-10);color:var(--green);border-color:rgba(92,184,92,.3)}
+  .rg.next{background:var(--gold-10);color:var(--gold);border-color:var(--gold-line)}
+  .chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-soft);padding:5px 0;cursor:pointer}
+  .chk input{accent-color:var(--gold);width:16px;height:16px}
+  .dep{font-size:12.5px;color:var(--ink-soft);border-left:3px solid var(--gold);padding:8px 12px;background:var(--gold-10);border-radius:0 8px 8px 0;margin-top:8px}
+  /* ======== KANBAN ======== */
+  .kb{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+  .kcol{flex:0 0 215px;background:var(--panel2);border:1px solid rgba(244,244,232,.08);border-radius:12px;padding:10px}
+  .kcol h5{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);display:flex;justify-content:space-between;padding:4px 6px 10px}
+  .kcard{background:var(--card);border:1px solid rgba(244,244,232,.1);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12.5px;cursor:pointer}
+  .kcard:hover{border-color:var(--gold-line)}
+  .kcard .v{font-family:var(--mono);font-size:11px;color:var(--gold)}
+  .kcard .s{font-size:10.5px;color:var(--ink-faint);margin-top:3px}
+  .kcard.alerta{border-left:3px solid var(--red)}
+  .kcard.atencao{border-left:3px solid var(--gold)}
+  .kcard.okz{border-left:3px solid var(--green)}
+  /* ======== PAINEL ======== */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+  .tile{background:var(--panel);border:1px solid var(--gold-line);border-radius:12px;padding:16px}
+  .tile .tv{font-family:var(--font);font-size:24px;font-weight:600;color:var(--gold)}
+  .tile .tl2{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-top:3px}
+  .tile .td{font-size:11px;margin-top:5px}
+  .up{color:var(--green)} .down{color:var(--red)}
+  .funil{display:flex;flex-direction:column;gap:6px}
+  .fun-row{display:flex;align-items:center;gap:10px;font-size:12.5px}
+  .fun-lbl{flex:0 0 150px;color:var(--ink-soft);text-align:right}
+  .fun-bar{height:26px;background:linear-gradient(90deg,var(--gold-deep),var(--gold));border-radius:6px;display:flex;align-items:center;padding:0 10px;font-family:var(--mono);font-size:11px;color:#0A0A0A;font-weight:700;min-width:52px}
+  /* ======== MODAIS DEMO ======== */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .overlay.on{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--gold-line);border-radius:16px;max-width:430px;width:100%;padding:24px}
+  .modal h3{font-family:var(--font);color:var(--gold);font-size:17px;margin-bottom:6px}
+  .modal p{font-size:13px;color:var(--ink-soft);margin-bottom:14px}
+  .modal label{display:block;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint);margin:12px 0 5px}
+  .modal input,.modal select{width:100%;padding:11px 12px;background:#141414;border:1px solid var(--gold-line);border-radius:9px;color:var(--ink);font-size:14px}
+  .mbtns{display:flex;gap:10px;margin-top:20px}
+  .mbtns button{flex:1;padding:12px;border-radius:10px;border:none;cursor:pointer;font-weight:700;font-size:13px}
+  .b-go{background:var(--gold);color:#0A0A0A}
+  .b-no{background:transparent;border:1px solid rgba(244,244,232,.2)!important;color:var(--ink-soft)}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green-10);border:1px solid rgba(92,184,92,.4);color:var(--green);padding:12px 22px;border-radius:12px;font-size:13.5px;z-index:300;display:none}
+  .toast.on{display:block;animation:fade .3s}
+  /* ======== TIMELINE MIGRAÇÃO ======== */
+  .fase{display:flex;gap:16px;margin-bottom:4px}
+  .fnum{flex:0 0 44px;display:flex;flex-direction:column;align-items:center}
+  .fball{width:38px;height:38px;border-radius:50%;background:var(--gold-10);border:1px solid var(--gold-line);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--font);font-weight:600;font-size:14px}
+  .fluxo{width:2px;flex:1;background:var(--gold-line);min-height:22px}
+  .fbody{padding-bottom:22px}
+  .fbody h4{font-family:var(--font);font-size:15px;font-weight:600;margin-top:8px}
+  .fbody .fdur{font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase}
+  .fbody p{font-size:13px;color:var(--ink-soft);margin-top:4px;max-width:640px}
+  .gate-pill{display:inline-block;margin-top:7px;font-size:11px;padding:4px 10px;border-radius:14px;background:var(--green-10);color:var(--green);border:1px solid rgba(92,184,92,.3)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:8px 10px;border-bottom:1px solid var(--gold-line)}
+  td{padding:9px 10px;border-bottom:1px solid rgba(244,244,232,.06);color:var(--ink-soft)}
+  td b{color:var(--ink)}
+  .foot{margin-top:60px;text-align:center;font-size:11px;color:var(--ink-faint);letter-spacing:2px;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="glogo">OMNI BRASIL</div>
+  <div class="gsub">CRM OMNI · Demonstração Interna</div>
+  <input type="password" id="pwd" placeholder="Senha de acesso" autofocus onkeydown="if(event.key==='Enter')tryLogin()">
+  <button onclick="tryLogin()">Entrar</button>
+  <div class="gerr" id="gerr"></div>
+</div>
+
+<header>
+  <div class="logo">OMNI BRASIL</div>
+  <div class="subtitle">Proposta · CRM próprio</div>
+  <h1>CRM <span class="gold">OMNI</span>, como vai funcionar</h1>
+  <p class="lead">O substituto do Pipedrive, feito sob medida para a nossa operação: cada tela responde "o que eu faço agora para não perder venda". Navegue pelas telas simuladas abaixo.</p>
+  <div class="stats">
+    <div class="stat"><div class="num">R$ 36k</div><div class="lbl">economia / ano</div></div>
+    <div class="stat"><div class="num">R$ 0</div><div class="lbl">licenças</div></div>
+    <div class="stat"><div class="num">6</div><div class="lbl">usuários</div></div>
+    <div class="stat"><div class="num">10 sem</div><div class="lbl">migração segura</div></div>
+  </div>
+</header>
+
+<nav id="nav">
+  <button data-s="visao" class="on">Por quê</button>
+  <button data-s="fila">Fila do Dia (SDR)</button>
+  <button data-s="ficha">Ficha do Lead</button>
+  <button data-s="kanban">Kanban</button>
+  <button data-s="painel">Painel da Gestão</button>
+  <button data-s="migracao">Migração sem risco</button>
+  <button data-s="seguranca">Segurança & Custo</button>
+</nav>
+
+<main>
+
+<!-- ============ VISÃO ============ -->
+<section id="visao" class="on">
+  <h2>Por que trocar o Pipedrive</h2>
+  <p class="sub">Hoje o Pipedrive é um kanban caro no meio de um sistema que já é nosso: intake de leads, rodízio de SDR, cadência de WhatsApp, robô de disparo, dashboards e reconciliação já rodam na nossa VPS. E os dados da autópsia mostraram onde a ferramenta atual deixa venda escapar.</p>
+  <div class="grid g3">
+    <div class="cardx"><span class="tag">Dado real</span><h3>Ligação combinada esquecida</h3><p>36% dos leads que aceitam a consultoria somem na marcação de horário. "Perdemos timing!" virou o 2º maior motivo de perda: 1.366 casos num semestre. O CRM OMNI trata a ligação combinada como compromisso com alarme, dono e cobrança.</p></div>
+    <div class="cardx"><span class="tag">Dado real</span><h3>Preço derreteu sem decisão</h3><p>O preço praticado caiu 35% em 3 meses sem nenhuma decisão registrada. No CRM OMNI, vender abaixo do piso exige motivo e aprovação da gestão, em 1 clique no Telegram.</p></div>
+    <div class="cardx"><span class="tag">Dado real</span><h3>Canal de R$ 400 mil invisível</h3><p>Um terço do pico de 2025 veio de uma única indicadora, escrita de 7 jeitos diferentes num campo de texto. O CRM OMNI tem cadastro de indicadores com painel e alerta de esfriamento.</p></div>
+    <div class="cardx"><span class="tag">Velocidade</span><h3>Resposta em minutos, não horas</h3><p>Lead novo entra na fila com cronômetro de 5 minutos. Hoje, quando depende de humano, a resposta mediana é de 11 a 18 horas.</p></div>
+    <div class="cardx"><span class="tag">Qualidade</span><h3>Dado ruim não entra</h3><p>Valor do contrato separado da entrada, forma de pagamento padronizada, qualificação pedida na etapa certa em 10 segundos. Nunca mais relatório que não fecha.</p></div>
+    <div class="cardx"><span class="tag">Custo</span><h3>R$ 3.000/mês a menos</h3><p>Zero licença. Roda na nossa VPS, no padrão dos outros 20 apps da casa. Único custo novo: tokens de IA quando o copiloto for usado.</p></div>
+  </div>
+</section>
+
+<!-- ============ FILA ============ -->
+<section id="fila">
+  <h2>Fila do Dia, a tela que o SDR abre de manhã</h2>
+  <p class="sub">Sem montar filtro, sem caçar card. A fila já vem ordenada: ligações combinadas primeiro, depois leads novos no cronômetro de 5 minutos, depois o resto. Cada item tem as 3 ações na mão. Experimente clicar nos botões.</p>
+  <div class="app">
+    <div class="appbar"><span class="t">FILA DO DIA</span><span class="who">Layslla · SDR · terça 09h32</span></div>
+    <div class="fila-item">
+      <div class="pri comb">09h40<span>COMB</span></div>
+      <div class="fila-info"><div class="fila-nome">Mariana Duarte</div><div class="fila-det"><b>Ligação combinada às 9h40</b> · pediu para ligar depois das 9h30 · Tentativa de conectar</div></div>
+      <div class="acoes"><button class="abtn" onclick="toast('Ligando para Mariana...')">📞</button><button class="abtn zap" onclick="toast('Abrindo conversa no Chatwoot 💛')">💬</button><button class="abtn" onclick="openModal('m-resultado')">✓</button></div>
+    </div>
+    <div class="fila-item">
+      <div class="pri hot" id="sla-timer">4:37<span>SLA</span></div>
+      <div class="fila-info"><div class="fila-nome">Carlos Menezes</div><div class="fila-det"><b>Lead novo, cronômetro rodando</b> · Meta Ads · quiz: transição de carreira · score 7</div></div>
+      <div class="acoes"><button class="abtn" onclick="toast('Ligando para Carlos... cronômetro pausado')">📞</button><button class="abtn zap" onclick="toast('Abrindo conversa no Chatwoot 💛')">💬</button><button class="abtn" onclick="openModal('m-resultado')">✓</button></div>
+    </div>
+    <div class="fila-item">
+      <div class="pri comb">10h15<span>COMB</span></div>
+      <div class="fila-info"><div class="fila-nome">Patrícia Nunes</div><div class="fila-det"><b>Ligação combinada às 10h15</b> · já viu o vídeo, quer saber valores · Conectado</div></div>
+      <div class="acoes"><button class="abtn" onclick="toast('Ligando para Patrícia...')">📞</button><button class="abtn zap" onclick="toast('Abrindo conversa no Chatwoot 💛')">💬</button><button class="abtn" onclick="openModal('m-resultado')">✓</button></div>
+    </div>
+    <div class="fila-item">
+      <div class="pri task">D1<span>RÉGUA</span></div>
+      <div class="fila-info"><div class="fila-nome">Roberto Farias</div><div class="fila-det">Ligação 3 da régua (D1, janela 10h a 11h) · não atendeu ontem 2x · e-mail 1 já saiu</div></div>
+      <div class="acoes"><button class="abtn" onclick="toast('Ligando para Roberto...')">📞</button><button class="abtn zap" onclick="toast('Abrindo conversa no Chatwoot 💛')">💬</button><button class="abtn" onclick="openModal('m-resultado')">✓</button></div>
+    </div>
+    <div class="fila-item" style="opacity:.65">
+      <div class="pri cold">48h<span>BACK</span></div>
+      <div class="fila-info"><div class="fila-nome">Fernanda Lopes</div><div class="fila-det">Backlog do fim de semana (entrou sábado 14h) · nunca atendeu · 3ª tentativa</div></div>
+      <div class="acoes"><button class="abtn" onclick="toast('Ligando para Fernanda...')">📞</button><button class="abtn zap" onclick="toast('Abrindo conversa no Chatwoot 💛')">💬</button><button class="abtn" onclick="openModal('m-resultado')">✓</button></div>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:var(--gold)"></span>Combinada (sempre no topo, alarme 10 min antes)</span>
+      <span><span class="dot" style="background:var(--red)"></span>Lead novo no SLA de 5 min</span>
+      <span><span class="dot" style="background:var(--teal)"></span>Régua do dia</span>
+      <span><span class="dot" style="background:rgba(244,244,232,.3)"></span>Backlog (não enterra o resto)</span>
+    </div>
+  </div>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="cardx"><h3>Registrar combinada em 2 cliques</h3><p>O SDR vive no WhatsApp. Atalho global: cola o telefone, escolhe data e janela, pronto. Sem navegar até a ficha.</p></div>
+    <div class="cardx"><h3>Colega de folga? Fila do time</h3><p>A gestora vê as filas de todos, reatribui em massa, e combinada órfã sobe sozinha para a fila do time. Ninguém fica esperando ligação que não vem.</p></div>
+    <div class="cardx"><h3>No celular vira lista</h3><p>Tudo funciona no celular do SDR, com som opcional quando a combinada está chegando.</p></div>
+  </div>
+</section>
+
+<!-- ============ FICHA ============ -->
+<section id="ficha">
+  <h2>Ficha do lead, com o playbook do lado</h2>
+  <p class="sub">Timeline completa, régua visível, e o que a autópsia mostrou que converte: depoimento certo para o perfil certo, âncora de preço na tela, checklist depois da call. Experimente os botões dourados.</p>
+  <div class="app">
+    <div class="ficha">
+      <div class="fmain">
+        <div class="fnome">Mariana Duarte</div>
+        <div class="fmeta">Terapeuta há 3 anos, atende quase de graça · Meta Ads · Campanha Search-Quente · Layslla (SDR)</div>
+        <div class="etapas">
+          <span class="etp done">MQL</span><span class="etp done">Tentativa</span><span class="etp now">Conectado</span><span class="etp">Avaliado</span><span class="etp">Reunião</span><span class="etp">Venda</span>
+        </div>
+        <div class="bloco">
+          <h4>Régua de cadência</h4>
+          <div class="regua">
+            <span class="rg ok">D0 · M0 ✓</span><span class="rg ok">D0 · Lig 1+2 ✓</span><span class="rg ok">D1 · TC1 ✓</span><span class="rg next">HOJE · Lig combinada 9h40</span><span class="rg">D2 · TC2</span><span class="rg">D5 · TC3 + e-mail</span><span class="rg">D14 · breakup</span>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-item"><span class="quando">hoje 08h02</span><br>Mariana respondeu no WhatsApp: "posso falar depois das 9h30"</div>
+          <div class="tl-item"><span class="quando">ontem 16h20</span><br>Layslla registrou ligação combinada para hoje 9h40</div>
+          <div class="tl-item"><span class="quando">ontem 10h05</span><br>Template TC1 entregue e lido</div>
+          <div class="tl-item"><span class="quando">segunda 18h44</span><br>Lead criado via quiz (Meta Ads), M0 enviado em 1 min, score 8</div>
+        </div>
+      </div>
+      <div class="fside">
+        <div class="bloco">
+          <h4>Copiloto 💛</h4>
+          <p style="font-size:12.5px;color:var(--ink-soft)">Perfil sugerido: <b style="color:var(--gold)">Terapeuta que não cobra</b>. Dor declarada: "atendo muito gratuito". Meta: R$ 10k/mês. Sugestão: usar o caso do Roberto e ancorar o valor cheio antes de falar de condições.</p>
+          <button class="abtn" style="width:100%;margin-top:10px;font-size:12px;height:34px" onclick="toast('Resumo completo gerado pelo copiloto')">Gerar resumo da conversa</button>
+        </div>
+        <div class="bloco">
+          <h4>Depoimento para este perfil</h4>
+          <div class="dep">"Eu atendia de graça havia 4 anos. Na formação aprendi a cobrar e em 60 dias fechei meus primeiros R$ 8 mil." · Roberto, turma M44</div>
+        </div>
+        <div class="bloco">
+          <h4>Checklist pós-call (30 segundos)</h4>
+          <label class="chk"><input type="checkbox"> Decisor de casa mapeado</label>
+          <label class="chk"><input type="checkbox"> Depoimento usado</label>
+          <label class="chk"><input type="checkbox"> Escala 0 a 10 perguntada</label>
+        </div>
+        <button class="abtn" style="width:100%;height:40px;font-size:13px" onclick="openModal('m-gate')">Avançar para Avaliado</button>
+        <button class="abtn" style="width:100%;height:40px;font-size:13px;margin-top:8px" onclick="openModal('m-desconto')">Marcar Venda (com desconto)</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KANBAN ============ -->
+<section id="kanban">
+  <h2>Kanban, agora com semáforo de tempo</h2>
+  <p class="sub">O mesmo funil de sempre, mesmas etapas, mesmos nomes. A diferença: cada card mostra há quanto tempo está parado, e a cor avisa antes de virar "Perdemos timing". A gestão enxerga o gargalo sem abrir card por card.</p>
+  <div class="app" style="padding:14px">
+    <div class="kb">
+      <div class="kcol"><h5>MQL <span>34</span></h5>
+        <div class="kcard okz">Carlos Menezes<div class="v">score 7 · Meta Ads</div><div class="s">há 4 min · no SLA</div></div>
+        <div class="kcard okz">Juliana Prado<div class="v">score 9 · indicação</div><div class="s">há 22 min</div></div>
+        <div class="kcard atencao">Anderson Luz<div class="v">score 5 · Google</div><div class="s">há 1h50 · SLA vencendo</div></div>
+      </div>
+      <div class="kcol"><h5>Tentativa <span>190</span></h5>
+        <div class="kcard okz">Mariana Duarte<div class="v">combinada hoje 9h40</div><div class="s">régua D1 em dia</div></div>
+        <div class="kcard atencao">Roberto Farias<div class="v">2 tentativas</div><div class="s">ligação 3 hoje</div></div>
+        <div class="kcard alerta">Fernanda Lopes<div class="v">3 tentativas</div><div class="s">48h parada · backlog</div></div>
+      </div>
+      <div class="kcol"><h5>Conectado <span>66</span></h5>
+        <div class="kcard okz">Patrícia Nunes<div class="v">quer valores</div><div class="s">combinada 10h15</div></div>
+        <div class="kcard atencao">Diego Ramos<div class="v">pediu proposta</div><div class="s">26h sem toque</div></div>
+      </div>
+      <div class="kcol"><h5>Reunião Agendada <span>15</span></h5>
+        <div class="kcard okz">Vanessa Costa<div class="v">R$ 15.000 · quinta 14h</div><div class="s">lembretes ativos</div></div>
+        <div class="kcard okz">Paulo Siqueira<div class="v">R$ 15.000 · sexta 10h</div><div class="s">vídeo pré-call visto</div></div>
+      </div>
+      <div class="kcol"><h5>Negociação <span>4</span></h5>
+        <div class="kcard atencao">Luciana Melo<div class="v">R$ 13.900 proposto</div><div class="s">aguarda retorno amanhã</div></div>
+      </div>
+      <div class="kcol"><h5>Venda 🏆 <span>3 no mês</span></h5>
+        <div class="kcard okz">Gisele Santoro<div class="v">R$ 12.900 à vista</div><div class="s">contrato assinado</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAINEL ============ -->
+<section id="painel">
+  <h2>Painel da gestão, os números que dirigem</h2>
+  <p class="sub">Métricas que hoje exigem planilha ou não existem: ligações combinadas cumpridas, velocidade de resposta, descontos da semana, pace contra o mês anterior. Metas por pessoa editáveis pela gestão.</p>
+  <div class="tiles">
+    <div class="tile"><div class="tv">11</div><div class="tl2">vendas no mês</div><div class="td up">pace +18% vs mesma altura</div></div>
+    <div class="tile"><div class="tv">R$ 118k</div><div class="tl2">valor contratado</div><div class="td up">meta: R$ 150k · 79%</div></div>
+    <div class="tile"><div class="tv">92%</div><div class="tl2">combinadas cumpridas</div><div class="td up">baseline era ~50%</div></div>
+    <div class="tile"><div class="tv">8 min</div><div class="tl2">resposta mediana</div><div class="td up">era 11 a 18 horas</div></div>
+    <div class="tile"><div class="tv">76%</div><div class="tl2">show rate reuniões</div><div class="td down">3 no-shows na semana</div></div>
+    <div class="tile"><div class="tv">2</div><div class="tl2">descontos abaixo do piso</div><div class="td">ambos aprovados com motivo</div></div>
+  </div>
+  <div class="app" style="padding:20px">
+    <h4 style="font-family:var(--font);color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">Funil do mês (leads → venda)</h4>
+    <div class="funil">
+      <div class="fun-row"><div class="fun-lbl">Leads criados</div><div class="fun-bar" style="width:100%">1.402</div></div>
+      <div class="fun-row"><div class="fun-lbl">Conectados</div><div class="fun-bar" style="width:46%">644</div></div>
+      <div class="fun-row"><div class="fun-lbl">Avaliados</div><div class="fun-bar" style="width:18%">252</div></div>
+      <div class="fun-row"><div class="fun-lbl">Reunião realizada</div><div class="fun-bar" style="width:9%">126</div></div>
+      <div class="fun-row"><div class="fun-lbl">Vendas</div><div class="fun-bar" style="width:4%">11</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:12px">Cada barra abre o detalhe por SDR, closer, canal e campanha. Motivos de perda com data real (fim da distorção da marcação em lote).</p>
+  </div>
+</section>
+
+<!-- ============ MIGRAÇÃO ============ -->
+<section id="migracao">
+  <h2>Migração sem perder um lead</h2>
+  <p class="sub">Regra de ouro: cada funil tem UM sistema dono por vez, e nenhum lead nasce no CRM novo antes de todas as automações saberem ler dele. O Guardião de Leads vigia os dois sistemas o tempo todo, e cada fase tem botão de voltar atrás de 1 comando.</p>
+  <div>
+    <div class="fase"><div class="fnum"><div class="fball">F0</div><div class="fluxo"></div></div><div class="fbody"><span class="fdur">Semanas 1 e 2</span><h4>Fundação e importação total</h4><p>App, banco e importação dos 60 mil deals, pessoas, atividades e notas do Pipedrive, com conferência número a número. Backup restaurado e testado antes de seguir.</p><span class="gate-pill">Gate: contagens e somas batem 100% com o Pipedrive</span></div></div>
+    <div class="fase"><div class="fnum"><div class="fball">F1</div><div class="fluxo"></div></div><div class="fbody"><span class="fdur">Semanas 3 e 4</span><h4>Espelho vivo, depois relatórios</h4><p>Primeiro o CRM vira espelho em tempo real do Pipedrive e a Rafa e a Diumara navegam e validam. Só depois os dashboards passam a ler dos dois lados comparando os números por 7 dias.</p><span class="gate-pill">Gate: espelho e relatórios sem nenhuma divergência</span></div></div>
+    <div class="fase"><div class="fnum"><div class="fball">F2</div><div class="fluxo"></div></div><div class="fbody"><span class="fdur">Semana 5</span><h4>Automações aprendem a ler o CRM</h4><p>Robô de disparo, cadência e SDR-IA passam a enxergar os dois sistemas. Ensaio geral em ambiente de teste antes de qualquer lead real.</p><span class="gate-pill">Gate: 14 dias de leitura dupla sem divergência</span></div></div>
+    <div class="fase"><div class="fnum"><div class="fball">F3</div><div class="fluxo"></div></div><div class="fbody"><span class="fdur">Semanas 6 e 7</span><h4>SDRs operam no CRM</h4><p>Leads novos nascem no CRM (funil SDR). Fila do Dia e ligações combinadas no ar. Leads no meio da régua migram com a posição preservada. Pipedrive segue como espelho de segurança, somente leitura.</p><span class="gate-pill">Gate: 10 dias úteis sem voltar ao Pipedrive e zero lead órfão</span></div></div>
+    <div class="fase"><div class="fnum"><div class="fball">F4</div><div class="fluxo"></div></div><div class="fbody"><span class="fdur">Semanas 8 e 9</span><h4>Closer, pós-venda e governança</h4><p>Fechamento, aprovação de desconto, cobrança de saldo automática e pós-venda migram, um funil por vez. Qualificação por etapa entra aqui, com o mapa definido pela Rafa.</p><span class="gate-pill">Gate: 2 ciclos completos de venda conciliados com o financeiro</span></div></div>
+    <div class="fase"><div class="fnum"><div class="fball">F5</div></div><div class="fbody"><span class="fdur">Semana 10</span><h4>Tchau, Pipedrive</h4><p>Export final completo guardado no Drive, conta cancelada. Economia de R$ 3.000/mês começa a contar.</p><span class="gate-pill">Gate: confirmação do Michael</span></div></div>
+  </div>
+</section>
+
+<!-- ============ SEGURANÇA ============ -->
+<section id="seguranca">
+  <h2>Segurança dos dados e custo</h2>
+  <p class="sub">Base de 50 mil contatos é ativo da empresa. O CRM OMNI nasce com trilha de auditoria completa, backups testados e controle de acesso por papel.</p>
+  <div class="grid g2">
+    <div class="cardx"><h3>Quem vê o quê</h3><p>Papéis com limite: SDR e closer trabalham seus leads, sem exportação em massa. Exportar mais de 500 linhas exige perfil de gestão e avisa o Michael na hora. Usuário desligado perde acesso imediatamente, em qualquer aba aberta.</p></div>
+    <div class="cardx"><h3>Nada se apaga sem rastro</h3><p>Toda mudança fica registrada: quem mexeu, quando, valor antes e depois. O que hoje é invisível no Pipedrive vira trilha de auditoria consultável.</p></div>
+    <div class="cardx"><h3>Backup que restaura de verdade</h3><p>Cópia a cada hora na VPS e diária criptografada no Drive da empresa. Todo mês um robô restaura o backup do zero e confere os números, porque backup que nunca foi testado não é backup.</p></div>
+    <div class="cardx"><h3>LGPD</h3><p>Dados mínimos necessários à venda, anonimização programada de perdidos antigos e atendimento a pedido de exclusão de titular.</p></div>
+  </div>
+  <div class="app" style="padding:20px;margin-top:16px">
+    <table>
+      <tr><th>Item</th><th>Pipedrive hoje</th><th>CRM OMNI</th></tr>
+      <tr><td><b>Licença mensal</b></td><td>~R$ 3.000</td><td><b>R$ 0</b></td></tr>
+      <tr><td><b>Infra</b></td><td>incluída no SaaS</td><td>VPS atual (custo zero adicional)</td></tr>
+      <tr><td><b>IA / copiloto</b></td><td>não tem</td><td>tokens da assinatura, sob demanda</td></tr>
+      <tr><td><b>Ligação combinada com alarme</b></td><td>não tem</td><td>nativo</td></tr>
+      <tr><td><b>Governança de preço</b></td><td>não tem</td><td>nativo</td></tr>
+      <tr><td><b>Auditoria completa</b></td><td>limitada</td><td>total</td></tr>
+      <tr><td><b>Economia em 12 meses</b></td><td></td><td><b>R$ 36.000</b></td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<!-- MODAIS DEMO -->
+<div class="overlay" id="m-resultado" onclick="if(event.target===this)closeModal(this)">
+  <div class="modal">
+    <h3>Registrar resultado</h3>
+    <p>3 campos, 10 segundos. O contador de tentativas atualiza sozinho.</p>
+    <label>O que aconteceu</label>
+    <select><option>Atendeu, conversamos</option><option>Não atendeu</option><option>Caixa postal</option><option>Pediu para ligar depois (vira combinada)</option></select>
+    <label>Próximo passo</label>
+    <select><option>Agendar reunião com closer</option><option>Ligação combinada</option><option>Segue na régua</option><option>Perder (com motivo)</option></select>
+    <label>Observação (opcional)</label>
+    <input type="text" placeholder="ex: prefere à tarde, marido participa da decisão">
+    <div class="mbtns"><button class="b-no" onclick="closeModal(document.getElementById('m-resultado'))">Cancelar</button><button class="b-go" onclick="closeModal(document.getElementById('m-resultado'));toast('Resultado registrado, próximo da fila 💛')">Salvar</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="m-gate" onclick="if(event.target===this)closeModal(this)">
+  <div class="modal">
+    <h3>Antes de avançar para Avaliado</h3>
+    <p>O sistema pede só o que falta, na etapa certa. É assim que a qualificação deixa de ser 100% vazia.</p>
+    <label>Contexto do lead</label>
+    <select><option>Ferramenta de trabalho</option><option>Transição de carreira</option><option>Desenvolvimento pessoal</option></select>
+    <label>Orçamento sinalizado</label>
+    <select><option>Entre R$ 8k e R$ 15k</option><option>Entre R$ 4k e R$ 8k</option><option>Menor que R$ 4k</option><option>Não sei ainda</option></select>
+    <div class="mbtns"><button class="b-no" onclick="closeModal(document.getElementById('m-gate'))">Voltar</button><button class="b-go" onclick="closeModal(document.getElementById('m-gate'));toast('Mariana avançou para Avaliado')">Avançar etapa</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="m-desconto" onclick="if(event.target===this)closeModal(this)">
+  <div class="modal">
+    <h3>Venda abaixo do piso</h3>
+    <p>Piso do produto: R$ 11.400. Valor proposto: R$ 9.900. A aprovação vai para a Rafa no Telegram, 1 clique. Se ela não responder em 30 minutos e o desconto for de até 10%, aprova sozinho com registro de auditoria.</p>
+    <label>Motivo do desconto</label>
+    <select><option>Condição à vista</option><option>Indicação de aluno</option><option>Objeção de crédito</option><option>Outro (descrever)</option></select>
+    <div class="mbtns"><button class="b-no" onclick="closeModal(document.getElementById('m-desconto'))">Cancelar</button><button class="b-go" onclick="closeModal(document.getElementById('m-desconto'));toast('Pedido enviado para aprovação da Rafa 💛')">Pedir aprovação</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="foot">OMNI Brasil · CRM OMNI · demonstração de conceito · dados de exemplo</div>
+
+<script>
+  var K='crm-omni-demo-auth';
+  try{if(sessionStorage.getItem(K)==='1')document.documentElement.className='';}catch(e){}
+  function tryLogin(){
+    var p=document.getElementById('pwd');
+    if(p.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){};document.documentElement.className='';}
+    else{document.getElementById('gerr').textContent='Senha incorreta';p.value='';p.focus();}
+  }
+  document.querySelectorAll('#nav button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#nav button').forEach(function(x){x.classList.remove('on')});
+      document.querySelectorAll('main section').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      document.getElementById(b.dataset.s).classList.add('on');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+  function openModal(id){document.getElementById(id).classList.add('on')}
+  function closeModal(el){el.classList.remove('on')}
+  var tt;
+  function toast(msg){
+    var t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');
+    clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},2600);
+  }
+  // cronômetro SLA demo
+  var s=277;
+  setInterval(function(){
+    s--;if(s<0)s=299;
+    var el=document.getElementById('sla-timer');
+    if(el)el.childNodes[0].nodeValue=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  },1000);
+</script>
+</body>
+</html>
