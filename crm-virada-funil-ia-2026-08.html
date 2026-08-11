@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Virada do CRM — funil com IA | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#FFFDF6; --tinta:#2B2B33;
+    --rosa:#E85D9E; --rosa-bg:#FDEEF5;
+    --amarelo:#E8A800; --amarelo-bg:#FFF7DC;
+    --verde:#2FA36B; --verde-bg:#E9F7EF;
+    --lilas:#8B5CF6; --lilas-bg:#F1EBFD;
+    --laranja:#F0662D; --laranja-bg:#FEF0E7;
+    --azul:#2E7DD1; --azul-bg:#E9F2FC;
+    --cinza:#8A8A95;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--papel);color:var(--tinta);font-family:'Nunito',sans-serif;font-size:17px;line-height:1.55;
+    background-image:repeating-linear-gradient(transparent,transparent 34px,rgba(46,125,209,.05) 34px,rgba(46,125,209,.05) 35px)}
+  .wrap{max-width:880px;margin:0 auto;padding:40px 22px 90px}
+  .mao{font-family:'Caveat',cursive}
+
+  /* capa */
+  .capa{text-align:center;margin-bottom:46px}
+  .capa .etiqueta{display:inline-block;background:var(--tinta);color:#fff;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:999px}
+  .capa h1{font-family:'Caveat',cursive;font-size:64px;line-height:1.05;margin:20px 0 6px}
+  .capa h1 .r{color:var(--rosa)} .capa h1 .a{color:var(--amarelo)} .capa h1 .v{color:var(--verde)} .capa h1 .l{color:var(--lilas)}
+  .capa p{max-width:620px;margin:10px auto 0;color:#55555f;font-weight:700}
+  .capa .data{margin-top:14px;font-size:13px;color:var(--cinza);font-weight:800;letter-spacing:1px}
+
+  /* seções */
+  section{margin:52px 0}
+  .titulo{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .titulo .num{min-width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:30px;font-weight:700;color:#fff}
+  .titulo h2{font-family:'Caveat',cursive;font-size:40px;line-height:1}
+  .marca{padding:2px 8px;border-radius:6px}
+
+  .cartao{border-radius:18px;padding:24px 26px;border:3px solid;position:relative}
+  .cartao h3{font-size:19px;font-weight:900;margin-bottom:8px}
+  .cartao p{margin-bottom:8px}
+  .cartao p:last-child{margin-bottom:0}
+
+  /* funil antes/depois */
+  .funis{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:700px){.funis{grid-template-columns:1fr}}
+  .funil{border-radius:18px;padding:20px;border:3px dashed var(--cinza);background:#fff}
+  .funil.novo{border:3px solid var(--verde);background:var(--verde-bg)}
+  .funil h3{font-family:'Caveat',cursive;font-size:28px;margin-bottom:12px;text-align:center}
+  .etapa{background:#fff;border-left:8px solid var(--cinza);border-radius:10px;padding:10px 14px;margin-bottom:10px;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  .etapa b{display:block;font-size:15.5px}
+  .etapa span{font-size:13.5px;color:#66666f}
+  .etapa.robo{border-left-color:var(--azul)}
+  .etapa.sdr1{border-left-color:var(--rosa)}
+  .etapa.sdr2{border-left-color:var(--lilas)}
+  .etapa.legado{border-left-color:var(--amarelo)}
+  .etapa.morta{opacity:.55;border-left-color:#bbb}
+  .etapa .tag{display:inline-block;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;margin-left:6px;vertical-align:2px}
+  .tag.robo{background:var(--azul)} .tag.sdr{background:var(--rosa)} .tag.leg{background:var(--amarelo)} .tag.novoT{background:var(--verde)}
+  .seta-baixo{text-align:center;font-size:22px;color:var(--cinza);margin:-4px 0 6px}
+
+  /* filas do dia */
+  .filas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:700px){.filas{grid-template-columns:1fr}}
+  .fila{border-radius:14px;padding:16px 18px;color:var(--tinta)}
+  .fila b{display:block;font-size:16px;margin-bottom:4px}
+  .fila span{font-size:14.5px}
+  .fila .ordem{font-family:'Caveat',cursive;font-size:26px;font-weight:700;float:right;line-height:1}
+
+  /* card do SDR */
+  .cardsdr{background:#fff;border:3px solid var(--lilas);border-radius:18px;padding:22px 24px;box-shadow:6px 6px 0 var(--lilas-bg)}
+  .cardsdr .linha{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:2px dotted #e5e0f7}
+  .cardsdr .linha:last-child{border-bottom:none}
+  .cardsdr .k{min-width:150px;font-size:12.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--lilas)}
+  .cardsdr .v{font-weight:700}
+  .risca{ text-decoration:line-through;color:#b3b3bb;font-weight:700}
+
+  /* métricas */
+  .metricas{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:700px){.metricas{grid-template-columns:1fr}}
+  .mlista{border-radius:16px;padding:18px 20px}
+  .mlista h3{font-family:'Caveat',cursive;font-size:27px;margin-bottom:10px}
+  .mlista li{margin:0 0 9px 20px;font-weight:700;font-size:15.5px}
+  .destaque-metrica{margin-top:18px;background:#2B2B33;color:#fff;border-radius:16px;padding:20px 24px;text-align:center}
+  .destaque-metrica .mao{font-size:27px;color:#FFD34D}
+
+  /* decisões */
+  .decisao{border-radius:18px;padding:22px 24px;margin-bottom:18px;border:3px solid;background:#fff;box-shadow:5px 5px 0 rgba(0,0,0,.05)}
+  .decisao .topo{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .decisao .dnum{min-width:40px;height:40px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:26px;font-weight:700}
+  .decisao h3{font-size:18.5px;font-weight:900}
+  .decisao .rec{display:inline-block;margin-top:10px;font-weight:900;font-size:14px;padding:7px 14px;border-radius:999px;color:#fff}
+  .decisao .trava{font-size:14px;color:#6b6b75;margin-top:8px}
+
+  /* alerta */
+  .alerta{background:var(--laranja-bg);border:3px solid var(--laranja)}
+  .alerta .badge{position:absolute;top:-16px;left:22px;background:var(--laranja);color:#fff;font-weight:900;font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:999px}
+  .balao{background:#fff;border-radius:14px;padding:12px 16px;margin:10px 0;font-weight:700;border:2px solid #f3d4c2}
+  .balao small{display:block;font-weight:800;color:var(--laranja);font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+
+  /* requisitos michael */
+  .reqs{counter-reset:req}
+  .req{display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid var(--azul);border-radius:14px;padding:14px 18px;margin-bottom:12px}
+  .req::before{counter-increment:req;content:counter(req);min-width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:23px;font-weight:700}
+  .req b{display:block}
+  .req span{font-size:14.5px;color:#5b5b66}
+
+  .legenda{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0 0}
+  .legenda span{font-size:12.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:999px;color:#fff}
+
+  .rodape{margin-top:70px;text-align:center;color:var(--cinza);font-size:13px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- CAPA -->
+  <div class="capa">
+    <span class="etiqueta">OMNI Brasil · Decisão da Rafa</span>
+    <h1>A <span class="r">Virada</span> do <span class="v">CRM</span><br>para o funil com <span class="l">IA</span></h1>
+    <p>O chat de IA agora qualifica o lead antes de qualquer humano tocar nele. O SDR deixa de ser filtro e vira fechador de compromisso. Este é o desenho do CRM para esse mundo novo.</p>
+    <div class="data">11 DE AGOSTO DE 2026 · DIAGNÓSTICO DO JEFF (GESTOR COMERCIAL) · SOMENTE LEITURA, NADA FOI ALTERADO</div>
+    <div class="legenda">
+      <span style="background:var(--azul)">🤖 Máquina</span>
+      <span style="background:var(--rosa)">📞 SDR</span>
+      <span style="background:var(--amarelo)">📜 Legado</span>
+      <span style="background:var(--verde)">✨ Novo</span>
+      <span style="background:var(--laranja)">⚠️ Risco</span>
+    </div>
+  </div>
+
+  <!-- 1. O QUE A IA ENTREGA -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--verde)">1</div><h2>O que a IA já entrega <span class="marca" style="background:var(--verde-bg);color:var(--verde)">prontinho</span></h2></div>
+    <div class="cartao" style="border-color:var(--verde);background:var(--verde-bg)">
+      <p>Quem termina o chat chega no Pipedrive com <b>7 campos de perfil preenchidos</b>, <b>nota de comprometimento 0-10</b>, etiqueta <b>MQL-IA</b>, link da conversa e um destes desfechos:</p>
+      <div style="margin-top:12px">
+        <div class="etapa robo"><b>✅ Confirmado <span class="tag novoT">a IA fechou sozinha</span></b><span>Horário marcado no Cal.com → deal vai pra "Avaliado (423)" com reunião criada, link do Meet e nota de preparação.</span></div>
+        <div class="etapa robo"><b>🕐 Pré-agendamento <span class="tag sdr">bola do SDR</span></b><span>Lead pediu um horário fora da grade ("me liga às 19h") → alerta no Google Chat. <b>É um compromisso, não um lead a conectar.</b></span></div>
+        <div class="etapa robo"><b>❌ Desqualificado</b><span>Sem budget, sem comprometimento (nota &lt; 7), quer tratamento → perdido com motivo estruturado. Quem quer tratamento vai pro canal SDR + terapeuta.</span></div>
+        <div class="etapa robo"><b>💤 Abandonou o chat</b><span>Entra na régua de retomada W1-W4 com link pra continuar de onde parou.</span></div>
+      </div>
+      <p style="margin-top:14px"><b>Momento perfeito pra decidir:</b> a flag está ligada em produção, mas só 2 deals de teste passaram até agora. Você está redesenhando <u>antes</u> do volume entrar.</p>
+    </div>
+  </section>
+
+  <!-- 2. FUNIL ANTES E DEPOIS -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--rosa)">2</div><h2>O funil: <span class="marca" style="background:#f2f2f2;color:#999">antes</span> → <span class="marca" style="background:var(--rosa-bg);color:var(--rosa)">depois</span></h2></div>
+    <div class="funis">
+      <div class="funil">
+        <h3>😮‍💨 Hoje (mundo antigo)</h3>
+        <div class="etapa morta"><b>480 · Leads Gerais</b><span>Mistura lead de LP com lead do chat</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa morta"><b>481 · Conectado IA</b><span>Vazia — criada e nunca usada</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa legado"><b>421 · Tentativa de conectar <span class="tag leg">261 deals</span></b><span>O funil antigo inteiro comprimido numa etapa: ligar 3x pra descobrir quem é a pessoa</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa morta"><b>420 · MQL</b><span>Recebe o pré-agendado misturado com MQL antigo 😱</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa morta"><b>423 · Avaliado / 485 vazia</b><span>Sem etapa de "realizada": show rate não existe</span></div>
+      </div>
+      <div class="funil novo">
+        <h3>✨ Proposto (mundo novo)</h3>
+        <div class="etapa robo"><b>1 · Cadastro (chat rodando) <span class="tag robo">máquina</span></b><span>Área da IA — nenhum humano trabalha aqui</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa robo"><b>2 · Retomada (abandonou) <span class="tag robo">máquina</span></b><span>Régua W1-W4 chama de volta pro chat</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa sdr1"><b>3 · Ligação combinada ⭐ <span class="tag sdr">SDR</span></b><span>Renomear a 481 vazia. Lead pediu horário → SDR liga NA HORA pedida. Fila nº 1, com hora marcada.</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa sdr2"><b>4 · Consultoria agendada (423) <span class="tag sdr">SDR</span></b><span>Confirmada pela IA ou fechada pelo SDR</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa sdr2"><b>5 · Realizada / no-show <span class="tag novoT">nasce o show rate</span></b><span>Renomear a 485 vazia. Todo desfecho registrado.</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa legado"><b>421 · só legado de LP <span class="tag leg">encolhe</span></b><span>O encolhimento dela é a medida do sucesso da virada</span></div>
+      </div>
+    </div>
+    <p style="margin-top:14px;text-align:center" class="mao" style="font-size:24px">💡 Renomear as etapas vazias (481 e 485) em vez de criar novas = não perde histórico e não quebra os IDs usados em 8 sistemas.</p>
+  </section>
+
+  <!-- 3. RISCO -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--laranja)">3</div><h2>O risco pra resolver <span class="marca" style="background:var(--laranja-bg);color:var(--laranja)">antes do volume</span></h2></div>
+    <div class="cartao alerta">
+      <span class="badge">⚠️ Prioridade máxima</span>
+      <p style="margin-top:8px">O pré-agendado hoje cai na etapa <b>420 MQL</b> — e a 420 está na lista de etapas válidas do robô de disparo M0. O que pode acontecer:</p>
+      <div class="balao"><small>Lead, no chat</small>"Pode me ligar às 19h? 😊"</div>
+      <div class="balao"><small>Robô M0, minutos depois</small>"Posso te ligar 5 minutinhos? Qual o melhor horário? 🤖"</div>
+      <p><b>Correção: uma linha</b> (tirar o pré-agendado das etapas do M0 — que é exatamente o que a decisão nº 1 resolve). A auditoria é do <b>@disparo-chief</b>, domínio protegido da squad.</p>
+    </div>
+  </section>
+
+  <!-- 4. CARD DO SDR -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--lilas)">4</div><h2>O card que o SDR <span class="marca" style="background:var(--lilas-bg);color:var(--lilas)">precisa ver</span></h2></div>
+    <div class="cardsdr">
+      <div class="linha"><span class="k">🕐 Horário pedido</span><span class="v">"Hoje às 19h" — a informação nº 1, no topo, sempre</span></div>
+      <div class="linha"><span class="k">🎯 Nota 0-10</span><span class="v">Comprometimento medido pela IA (filtrável: "só ≥ 7")</span></div>
+      <div class="linha"><span class="k">💔 A dor dela</span><span class="v">Nas palavras do lead — muda a abertura da ligação <b style="color:var(--lilas)">(promover a campo)</b></span></div>
+      <div class="linha"><span class="k">🧭 O que move</span><span class="v">Propósito / renda / carreira (já é campo)</span></div>
+      <div class="linha"><span class="k">💰 Quem decide</span><span class="v">Ela mesma ou consulta alguém <b style="color:var(--lilas)">(promover a campo)</b></span></div>
+      <div class="linha"><span class="k">🔗 Links</span><span class="v">Conversa do chat + Meet</span></div>
+      <div class="linha"><span class="k">🗑️ Sai da visão</span><span class="risca">Budget identificado por SDR · Status Tentativas de contato</span> <span style="font-size:13px;color:#999">(0% de uso em 1.237 deals — a IA já entrega isso)</span></div>
+    </div>
+  </section>
+
+  <!-- 5. DIA DO SDR -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--amarelo)">5</div><h2>O novo dia do SDR: <span class="marca" style="background:var(--amarelo-bg);color:var(--amarelo)">4 filas</span></h2></div>
+    <div class="filas">
+      <div class="fila" style="background:var(--rosa-bg);border:3px solid var(--rosa)"><span class="ordem" style="color:var(--rosa)">1ª</span><b>📞 Ligação combinada</b><span>Ligar no horário que o lead pediu. Tem hora marcada — não é lista pra varrer.</span></div>
+      <div class="fila" style="background:var(--lilas-bg);border:3px solid var(--lilas)"><span class="ordem" style="color:var(--lilas)">2ª</span><b>📅 Consultoria agendada</b><span>Confirmar presença, resolver reagendamento.</span></div>
+      <div class="fila" style="background:var(--azul-bg);border:3px solid var(--azul)"><span class="ordem" style="color:var(--azul)">3ª</span><b>🔁 No-show</b><span>Reagendar quem faltou.</span></div>
+      <div class="fila" style="background:var(--amarelo-bg);border:3px solid var(--amarelo)"><span class="ordem" style="color:var(--amarelo)">4ª</span><b>📜 Tentativa de conectar (legado)</b><span>Só lead de LP sem chat. Deve encolher até sumir.</span></div>
+    </div>
+    <p style="margin-top:14px;font-weight:800;text-align:center">O que <span class="risca">deixa de ser</span> trabalho do SDR: descobrir renda, escolaridade, comprometimento. A IA entrega ou descarta. <span style="color:var(--rosa)">A competência que passa a valer é honrar horário.</span></p>
+  </section>
+
+  <!-- 6. MÉTRICAS -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--rosa)">6</div><h2>Métricas que <span class="marca" style="background:var(--verde-bg);color:var(--verde)">nascem</span> e que <span class="marca" style="background:#f2f2f2;color:#999">morrem</span></h2></div>
+    <div class="metricas">
+      <div class="mlista" style="background:var(--verde-bg);border:3px solid var(--verde)">
+        <h3 style="color:var(--verde)">🌱 Nascem</h3>
+        <ul>
+          <li>Taxa de qualificação da IA (o novo topo de funil)</li>
+          <li>Quanto a IA fecha sozinha vs precisa de humano</li>
+          <li>⭐ Tempo do pedido de horário até a ligação</li>
+          <li>Show rate da consultoria</li>
+          <li>⭐ MQL-IA vs MQL humano: conversão até a venda</li>
+          <li>Motivo de desqualificação por gate (a IA corta certo?)</li>
+        </ul>
+      </div>
+      <div class="mlista" style="background:#f6f6f6;border:3px dashed #c9c9d1">
+        <h3 style="color:#999">🪦 Morrem (ou viram só do legado)</h3>
+        <ul style="color:#8a8a95">
+          <li class="risca">Número de tentativas de conexão</li>
+          <li class="risca">Taxa de conexão</li>
+          <li class="risca">Tempo do primeiro contato humano</li>
+          <li class="risca">Volume de M0 disparado</li>
+          <li class="risca">"Leads trabalhados por SDR"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="destaque-metrica">
+      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px">O número pro seu painel amanhã</div>
+      <span class="mao">"De cada 100 pessoas que terminam o chat, quantas viram consultoria realizada — e em quanto tempo?"</span>
+      <div style="font-size:13px;color:#aaa;margin-top:8px">Hoje esse número não existe em lugar nenhum.</div>
+    </div>
+  </section>
+
+  <!-- 7. DECISÕES -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--lilas)">7</div><h2>As 5 decisões que <span class="marca" style="background:var(--lilas-bg);color:var(--lilas)">só você</span> pode tomar</h2></div>
+
+    <div class="decisao" style="border-color:var(--rosa)">
+      <div class="topo"><div class="dnum" style="background:var(--rosa)">1</div><h3>Pré-agendado ganha etapa própria? (renomear a 481 vazia → "Ligação combinada")</h3></div>
+      <p>Resolve o risco do M0, separa compromisso de lead frio e cria a métrica de tempo até a ligação.</p>
+      <span class="rec" style="background:var(--verde)">✓ Recomendação: SIM</span>
+      <div class="trava">Trava: o risco nº 3 e a métrica ⭐ do painel.</div>
+    </div>
+
+    <div class="decisao" style="border-color:var(--amarelo)">
+      <div class="topo"><div class="dnum" style="background:var(--amarelo)">2</div><h3>O chat vira o caminho principal de TODO lead pago?</h3></div>
+      <p>É a decisão maior: define se a "Tentativa de conectar" (421) vira exclusiva do legado e morre aos poucos, ou se os dois mundos convivem de vez.</p>
+      <span class="rec" style="background:var(--amarelo)">☆ Estratégica — sua leitura de negócio</span>
+      <div class="trava">Trava: a leitura limpa de todo o funil (hoje 3 populações misturadas).</div>
+    </div>
+
+    <div class="decisao" style="border-color:var(--lilas)">
+      <div class="topo"><div class="dnum" style="background:var(--lilas)">3</div><h3>Promover "dor" e "decisor" a campos de verdade?</h3></div>
+      <p>Hoje vivem só na nota. Como campo, viram filtro e relatório. Só esses 2 — cada campo novo é escrita a mais numa API que já estourou budget em julho.</p>
+      <span class="rec" style="background:var(--verde)">✓ Recomendação: SIM, só esses 2</span>
+      <div class="trava">Trava: a visão de card do SDR.</div>
+    </div>
+
+    <div class="decisao" style="border-color:var(--azul)">
+      <div class="topo"><div class="dnum" style="background:var(--azul)">4</div><h3>Qual o SLA da ligação combinada?</h3></div>
+      <p>O placar atual usa 15 min para primeiro contato — mas ligação combinada tem hora marcada. Qual a tolerância sobre a hora prometida? (sugestão de partida: ±10 min)</p>
+      <span class="rec" style="background:var(--azul)">✎ Defina o número</span>
+      <div class="trava">Trava: o alerta de estouro no canal do SDR.</div>
+    </div>
+
+    <div class="decisao" style="border-color:var(--verde)">
+      <div class="topo"><div class="dnum" style="background:var(--verde)">5</div><h3>A meta do SDR muda de volume pra show de ligação combinada?</h3></div>
+      <p>Se a fila nº 1 é honrar horário, a meta precisa apontar pra lá — senão o time continua perseguindo discagem.</p>
+      <span class="rec" style="background:var(--verde)">✓ Recomendação: SIM</span>
+      <div class="trava">Trava: o que o time persegue no dia a dia.</div>
+    </div>
+  </section>
+
+  <!-- 8. LEGADO QUE INTERFERE -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--amarelo)">8</div><h2>Do legado, <span class="marca" style="background:var(--amarelo-bg);color:var(--amarelo)">só isto</span> interfere</h2></div>
+    <div class="cartao" style="border-color:var(--amarelo);background:var(--amarelo-bg)">
+      <p>🧹 <b>3.124 atividades órfãs</b> na fila (0% concluídas, ~70% em deals mortos). No mundo novo a fila do SDR <b>é o produto</b> — se ela mentir, a virada não pega.</p>
+      <p>👥 <b>A etapa 480 tem duas populações</b> (lead de LP + lead do chat) — a régua de retomada pode mandar link de chat pra quem nunca abriu chat. A confirmar com @disparo-chief.</p>
+      <p>🏷️ <b>Uma automação nativa apaga a etiqueta MQL-IA</b> — sem ela, você não prova que a virada funcionou (já existe reconciliador no código, precisa vigiar).</p>
+      <p style="margin-top:10px;color:#8a6d00"><b>Pode esperar:</b> os 12.674 deals do UpSell Legacy, HYPNOFLASH, Nutrição, funil de 2019. Não tocam o funil novo.</p>
+    </div>
+  </section>
+
+  <!-- 9. CRM DO MICHAEL -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--azul)">9</div><h2>Leve pro CRM do Michael <span class="marca" style="background:var(--azul-bg);color:var(--azul)">6 exigências</span></h2></div>
+    <p style="margin-bottom:14px;font-weight:700">Quando for olhar o PRD do CRM próprio, confirme que estas 6 coisas viraram <u>feature</u>, não observação — um CRM que só replica o Pipedrive não atende o mundo novo:</p>
+    <div class="reqs">
+      <div class="req"><div><b>Ligação combinada como objeto de 1ª classe</b><span>Com hora prometida, dono, alarme e SLA. "Perdemos timing!" = 1.331 perdas no trimestre.</span></div></div>
+      <div class="req"><div><b>Qualificação por IA nativa</b><span>O CRM nasce sabendo que existe lead que chega qualificado sem humano, com nota, transcrição e motivo.</span></div></div>
+      <div class="req"><div><b>Duas populações sem misturar métricas</b><span>Lead com chat e sem chat no mesmo funil, com leitura separada.</span></div></div>
+      <div class="req"><div><b>A fila do dia é o produto, não o kanban</b><span>O SDR do mundo novo trabalha por hora marcada, não por coluna.</span></div></div>
+      <div class="req"><div><b>Desfecho de reunião obrigatório</b><span>Realizada / no-show / remarcada — sem isso não existe show rate.</span></div></div>
+      <div class="req"><div><b>Comparação IA vs humano nativa</b><span>Hoje depende de uma etiqueta que uma automação apaga sozinha.</span></div></div>
+    </div>
+  </section>
+
+  <div class="rodape">OMNI Brasil · Diagnóstico Jeff (gestor comercial) via AURA · 11/08/2026 · Nenhuma alteração foi feita no CRM — este documento é insumo de decisão.</div>
+</div>
+</body>
+</html>
