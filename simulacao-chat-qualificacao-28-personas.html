@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat de Qualificação testado com as 28 personas reais | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --bg-deep:#050505; --panel:#111111; --panel2:#15130E;
+    --ink:#F4F4E8; --ink-soft:rgba(244,244,232,.62); --ink-faint:rgba(244,244,232,.34);
+    --gold:#C9A84C; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --gold-10:rgba(201,168,76,.10); --gold-20:rgba(201,168,76,.20); --gold-line:rgba(201,168,76,.18);
+    --teal:#2A9D8F; --teal-10:rgba(42,157,143,.10); --teal-line:rgba(42,157,143,.32);
+    --red:#E05C5C; --red-10:rgba(224,92,92,.09); --red-line:rgba(224,92,92,.30);
+    --amber:#D89A3C; --amber-10:rgba(216,154,60,.10); --amber-line:rgba(216,154,60,.30);
+    --blue:#5B8DD9; --blue-10:rgba(91,141,217,.10); --blue-line:rgba(91,141,217,.30);
+    --font-d:'Oswald',sans-serif; --font-b:'Inter',system-ui,sans-serif; --font-m:'IBM Plex Mono',monospace;
+    --max:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* ═══ HEADER STICKY ═══ */
+  header.top{
+    position:sticky;top:0;z-index:100;background:rgba(5,5,5,.94);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--gold-line);padding:12px 22px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand svg{height:20px;width:auto;fill:var(--gold);flex-shrink:0}
+  .brand .nm{font-family:var(--font-d);font-weight:700;font-size:15px;letter-spacing:5.5px;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+  .brand .div{width:1px;height:22px;background:var(--gold-line)}
+  .brand .sub{font-family:var(--font-b);font-size:10px;letter-spacing:2.6px;color:rgba(244,244,232,.5);text-transform:uppercase;line-height:1.4}
+  .top .nav{margin-left:auto;display:flex;gap:16px;flex-wrap:wrap}
+  .top .nav a{color:var(--ink-faint);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;text-decoration:none;transition:color .2s}
+  .top .nav a:hover{color:var(--gold)}
+  @media(max-width:760px){.top .nav{display:none}}
+
+  /* ═══ LAYOUT ═══ */
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  section{padding:60px 0;border-bottom:1px solid rgba(244,244,232,.05)}
+  section:last-of-type{border-bottom:none}
+  .eyebrow{font-family:var(--font-b);font-size:10px;font-weight:600;letter-spacing:3.6px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--font-d);font-weight:700;font-size:clamp(30px,5.2vw,54px);line-height:1.08;text-transform:uppercase;letter-spacing:-.4px}
+  h1 em{font-style:normal;color:var(--gold)}
+  h2{font-family:var(--font-d);font-weight:600;font-size:clamp(22px,3.4vw,34px);line-height:1.15;text-transform:uppercase;margin-bottom:18px;letter-spacing:.3px}
+  h2 em{font-style:normal;color:var(--gold)}
+  h3{font-family:var(--font-d);font-weight:500;font-size:17px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  p{color:var(--ink-soft);font-size:16px;margin-bottom:16px}
+  p strong,li strong{color:var(--ink);font-weight:600}
+  .lead{font-size:clamp(17px,2.1vw,19px);color:rgba(244,244,232,.78);font-weight:300}
+  a.inline{color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold-20)}
+
+  /* ═══ HERO ═══ */
+  .hero{padding:70px 0 56px;background:
+    radial-gradient(ellipse 800px 380px at 50% -8%, rgba(201,168,76,.10), transparent 70%),
+    linear-gradient(180deg,#0D0B07 0%,var(--bg) 100%)}
+  .hero .tag{display:inline-block;border:1px solid var(--gold-20);background:var(--gold-10);color:var(--gold);
+    font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:6px 15px;border-radius:2px;margin-bottom:24px}
+  .hero .meta{margin-top:22px;font-size:13px;color:var(--ink-faint);font-family:var(--font-m);line-height:2}
+  .safe{margin-top:26px;border-left:2px solid var(--teal);background:var(--teal-10);padding:14px 18px;border-radius:0 6px 6px 0}
+  .safe p{margin:0;color:rgba(244,244,232,.82);font-size:15px}
+
+  /* ═══ NÚMEROS ═══ */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-top:38px}
+  .kpi{background:var(--panel);border:1px solid var(--gold-line);border-radius:10px;padding:24px 20px;position:relative;overflow:hidden}
+  .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .kpi .n{font-family:var(--font-d);font-size:40px;font-weight:700;line-height:1;color:var(--gold)}
+  .kpi .n.bad{color:var(--red)} .kpi .n.good{color:var(--teal)}
+  .kpi .l{font-size:12px;color:var(--ink-faint);margin-top:8px;line-height:1.5;letter-spacing:.3px}
+
+  /* ═══ BARRAS COMPARATIVAS ═══ */
+  .cmp{margin-top:30px;background:var(--panel);border:1px solid rgba(244,244,232,.07);border-radius:10px;padding:26px 24px}
+  .cmp .row{margin-bottom:20px}
+  .cmp .row:last-child{margin-bottom:0}
+  .cmp .lbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px;gap:12px}
+  .cmp .lbl span:first-child{color:var(--ink)}
+  .cmp .lbl span:last-child{font-family:var(--font-m);color:var(--ink-faint);font-size:12px;white-space:nowrap}
+  .bar{height:9px;background:rgba(244,244,232,.06);border-radius:5px;overflow:hidden;margin-bottom:5px;position:relative}
+  .bar i{display:block;height:100%;border-radius:5px}
+  .bar.antes i{background:linear-gradient(90deg,var(--gold-deep),var(--gold))}
+  .bar.depois i{background:linear-gradient(90deg,#1f7a6f,var(--teal))}
+  .cmp .leg{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);width:52px;display:inline-block}
+  .cmp .barline{display:flex;align-items:center;gap:10px}
+  .cmp .barline .bar{flex:1;margin-bottom:0}
+  .cmp .barline+.barline{margin-top:7px}
+
+  /* ═══ CARDS ═══ */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:26px}
+  .card{background:var(--panel);border:1px solid rgba(244,244,232,.08);border-radius:10px;padding:22px 20px}
+  .card.bug{border-color:var(--red-line);background:linear-gradient(160deg,var(--red-10),var(--panel) 62%)}
+  .card.win{border-color:var(--teal-line);background:linear-gradient(160deg,var(--teal-10),var(--panel) 62%)}
+  .card.watch{border-color:var(--amber-line);background:linear-gradient(160deg,var(--amber-10),var(--panel) 62%)}
+  .card h4{font-family:var(--font-d);font-size:15px;font-weight:500;letter-spacing:.8px;color:var(--ink);margin-bottom:9px;text-transform:none;line-height:1.3}
+  .card.bug h4{color:var(--red)} .card.win h4{color:var(--teal)} .card.watch h4{color:var(--amber)}
+  .card p{font-size:14px;margin-bottom:0;color:var(--ink-soft)}
+  .card .who{font-size:11px;font-family:var(--font-m);color:var(--ink-faint);margin-top:12px;display:block;letter-spacing:.4px}
+  .num-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;
+    background:var(--gold);color:#0A0A0A;font-family:var(--font-d);font-size:12px;font-weight:700;margin-right:9px;flex-shrink:0}
+
+  /* ═══ FALAS / CITAÇÕES ═══ */
+  .quote{border-left:2px solid var(--gold);padding:4px 0 4px 16px;margin:14px 0;font-style:italic;color:rgba(244,244,232,.8);font-size:15px}
+
+  /* ═══ CÓDIGO ═══ */
+  pre{background:#0C0C0C;border:1px solid rgba(244,244,232,.09);border-radius:8px;padding:16px 18px;overflow-x:auto;margin:14px 0}
+  code{font-family:var(--font-m);font-size:12.5px;color:rgba(244,244,232,.85);line-height:1.75;white-space:pre}
+  .hl-red{color:var(--red)} .hl-gold{color:var(--gold-light)} .hl-teal{color:var(--teal)}
+
+  /* ═══ LISTAS ═══ */
+  ul.clean{list-style:none;margin:18px 0}
+  ul.clean li{position:relative;padding:9px 0 9px 26px;font-size:15.5px;color:var(--ink-soft);border-bottom:1px solid rgba(244,244,232,.045)}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li::before{content:'◆';position:absolute;left:0;top:11px;color:var(--gold);font-size:8px}
+  ol.steps{list-style:none;counter-reset:s;margin:20px 0}
+  ol.steps li{counter-increment:s;position:relative;padding:12px 0 12px 44px;border-bottom:1px solid rgba(244,244,232,.05);font-size:15.5px;color:var(--ink-soft)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:26px;height:26px;border-radius:50%;
+    background:var(--gold-10);border:1px solid var(--gold-20);color:var(--gold);font-family:var(--font-d);font-size:12px;
+    display:flex;align-items:center;justify-content:center;font-weight:600}
+
+  /* ═══ TABELA ═══ */
+  .tablewrap{overflow-x:auto;margin-top:26px;border:1px solid rgba(244,244,232,.08);border-radius:10px}
+  table{width:100%;border-collapse:collapse;min-width:720px}
+  th{background:#0E0E0E;font-family:var(--font-d);font-size:11px;font-weight:500;letter-spacing:2.2px;text-transform:uppercase;
+    color:var(--gold);text-align:left;padding:13px 14px;border-bottom:1px solid var(--gold-line);white-space:nowrap}
+  td{padding:12px 14px;font-size:13.5px;color:var(--ink-soft);border-bottom:1px solid rgba(244,244,232,.05);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr.mudou{background:rgba(201,168,76,.045)}
+  td.pid{font-family:var(--font-m);font-size:12px;color:var(--ink-faint)}
+  td b{color:var(--ink);font-weight:600;font-size:14px}
+  .cir{font-size:11px;color:var(--ink-faint);font-family:var(--font-m)}
+  td.verd{font-size:12.5px;color:var(--ink-faint);max-width:280px;line-height:1.55}
+  .pill{display:inline-block;font-size:11px;padding:4px 10px;border-radius:20px;white-space:nowrap;font-weight:500;letter-spacing:.3px}
+  .pill.ok{background:var(--teal-10);color:var(--teal);border:1px solid var(--teal-line)}
+  .pill.warn{background:var(--amber-10);color:var(--amber);border:1px solid var(--amber-line)}
+  .pill.info{background:var(--blue-10);color:var(--blue);border:1px solid var(--blue-line)}
+  .pill.bad{background:var(--red-10);color:var(--red);border:1px solid var(--red-line)}
+
+  /* ═══ DECISÕES ═══ */
+  .decisao{background:linear-gradient(140deg,#1A1510,#0E0E0E);border:2px solid var(--gold);border-radius:12px;padding:30px 26px;margin-top:26px}
+  .decisao h3{color:var(--gold);margin-bottom:16px}
+  .decisao .item{padding:14px 0;border-bottom:1px solid var(--gold-10)}
+  .decisao .item:last-child{border-bottom:none;padding-bottom:0}
+  .decisao .item b{display:block;color:var(--ink);font-size:15px;font-weight:600;margin-bottom:5px;font-family:var(--font-b)}
+  .decisao .item p{margin:0;font-size:14.5px}
+  .aviso{margin-top:24px;background:var(--red-10);border:1px solid var(--red-line);border-radius:8px;padding:16px 18px}
+  .aviso p{margin:0;font-size:14.5px;color:rgba(244,244,232,.82)}
+  .aviso b{color:var(--red)}
+
+  /* ═══ PREÇOS ═══ */
+  .precos{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .preco{background:var(--panel);border:1px solid var(--gold-line);border-radius:8px;padding:12px 16px;text-align:center;flex:1;min-width:104px}
+  .preco .v{font-family:var(--font-d);font-size:20px;color:var(--gold);font-weight:600}
+  .preco .q{font-size:10.5px;color:var(--ink-faint);margin-top:3px;letter-spacing:.4px}
+  .preco.faixa{border-color:var(--red-line);background:var(--red-10)}
+  .preco.faixa .v{color:var(--red)}
+
+  footer{background:var(--bg-deep);border-top:1px solid var(--gold-line);padding:34px 22px;text-align:center;
+    font-size:12px;color:var(--ink-faint);line-height:2;letter-spacing:.5px}
+  footer b{color:var(--gold);font-weight:600}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 566.93 226.77" xmlns="http://www.w3.org/2000/svg" aria-label="OMNI"><path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/></svg>
+    <span class="nm">OMNI BRASIL</span>
+    <span class="div"></span>
+    <span class="sub">Chat de qualificação<br>testado com 28 personas reais</span>
+  </div>
+  <nav class="nav">
+    <a href="#placar">Placar</a>
+    <a href="#bugs">Bugs</a>
+    <a href="#achados">Achados</a>
+    <a href="#mudancas">Mudanças</a>
+    <a href="#personas">As 28</a>
+    <a href="#decisoes">Decisões</a>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="tag">Relatório interno · 10 de agosto de 2026</div>
+    <h1>O chat de qualificação<br>agenda <em>22 consultorias</em><br>a cada 28 leads</h1>
+    <p class="lead" style="margin-top:22px;max-width:720px">
+      Entre elas: o lead errado que queria recolocação em RH, seis pessoas que já são formadas pela OMNI e duas que declararam nas calls reais que não tinham como pagar.
+    </p>
+    <div class="meta">
+      Alvo: go.omnihypnosis.com.br/consultoria-premium-chat → chat da Pesquisa Web<br>
+      Personas: as 28 canônicas da Autópsia do Pico (calls, Chatwoot, DMs e grupo Black)<br>
+      Método: 5 rodadas completas, 444 respostas simuladas, placar estável a partir da terceira
+    </div>
+    <div class="safe">
+      <p><strong>Nada foi alterado em produção.</strong> Todo o teste rodou numa cópia isolada do app, com banco próprio, Pipedrive desligado, Cal.com desligado e Google Chat em modo seco. A página no ar segue recebendo tráfego exatamente como antes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MÉTODO ═══ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Como foi feito</div>
+    <h2>Gente real, não persona <em>inventada</em></h2>
+    <p>Cada uma das 28 personas do arquivo canônico foi traduzida em respostas ao chat, fiéis ao que a fonte documenta: a dor com a fala literal da pessoa, a trava, a renda, o decisor e a objeção que ela trouxe na call, no Chatwoot ou na DM. Onde o arquivo diz que o dado não existe e o chat exige uma resposta (idade, escolaridade), o valor entrou marcado como premissa do simulador, nunca como fato.</p>
+    <p>A simulação percorre o motor de verdade, o mesmo que o lead usa, e registra a conversa inteira balão por balão, o desfecho, o resumo que vai para o closer e o alerta que vai para o SDR.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n">28</div><div class="l">personas reais<br>rastreadas até a fonte</div></div>
+      <div class="kpi"><div class="n">5</div><div class="l">rodadas completas<br>até o placar estabilizar</div></div>
+      <div class="kpi"><div class="n">3</div><div class="l">bugs encontrados<br>rodando, não lendo</div></div>
+      <div class="kpi"><div class="n">12</div><div class="l">achados<br>documentados</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PLACAR ═══ -->
+<section id="placar">
+  <div class="wrap">
+    <div class="eyebrow">O resultado</div>
+    <h2>De 22 agendamentos para <em>13</em>, sem perder comprador</h2>
+    <p>Os 13 que continuam agendando são exatamente as compradoras verificadas, os quase compradores de call com renda e janela abertas, o Círculo 1 de terapeutas e o Círculo 2. As 9 que saíram não viraram perda: 6 foram para a esteira de formados e 3 para nutrição.</p>
+
+    <div class="cmp">
+      <div class="row">
+        <div class="lbl"><span>Consultoria confirmada</span><span>22 → 13</span></div>
+        <div class="barline"><span class="leg">Antes</span><div class="bar antes"><i style="width:78.6%"></i></div></div>
+        <div class="barline"><span class="leg">Depois</span><div class="bar depois"><i style="width:46.4%"></i></div></div>
+      </div>
+      <div class="row">
+        <div class="lbl"><span>Encaminhado ao time de formados</span><span>0 → 6</span></div>
+        <div class="barline"><span class="leg">Antes</span><div class="bar antes"><i style="width:0%"></i></div></div>
+        <div class="barline"><span class="leg">Depois</span><div class="bar depois"><i style="width:21.4%"></i></div></div>
+      </div>
+      <div class="row">
+        <div class="lbl"><span>Sem renda entrando, vai para nutrição</span><span>0 → 3</span></div>
+        <div class="barline"><span class="leg">Antes</span><div class="bar antes"><i style="width:0%"></i></div></div>
+        <div class="barline"><span class="leg">Depois</span><div class="bar depois"><i style="width:10.7%"></i></div></div>
+      </div>
+      <div class="row">
+        <div class="lbl"><span>Lead errado barrado na segunda pergunta</span><span>0 → 1</span></div>
+        <div class="barline"><span class="leg">Antes</span><div class="bar antes"><i style="width:0%"></i></div></div>
+        <div class="barline"><span class="leg">Depois</span><div class="bar depois"><i style="width:3.6%"></i></div></div>
+      </div>
+      <div class="row">
+        <div class="lbl"><span>Perguntas por pessoa, em média</span><span>15,6 → 15,9</span></div>
+        <div class="barline"><span class="leg">Antes</span><div class="bar antes"><i style="width:78%"></i></div></div>
+        <div class="barline"><span class="leg">Depois</span><div class="bar depois"><i style="width:79.5%"></i></div></div>
+      </div>
+    </div>
+    <p style="margin-top:18px;font-size:14px;color:var(--ink-faint)">O questionário não ficou mais longo: quatro perguntas novas entraram, uma saiu e a rota de quem já é da casa encurtou de 14 para 9 perguntas.</p>
+  </div>
+</section>
+
+<!-- ═══ QUEM AGENDOU SEM DEVER ═══ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O que o teste expôs</div>
+    <h2>Quem agendou <em>sem dever agendar</em></h2>
+    <div class="cards">
+      <div class="card watch">
+        <h4>Ethiene, o anti-MQL número 1</h4>
+        <p>Queria recolocação em RH ou logística. Escolheu "quero mudar de carreira", atravessou 16 perguntas e reservou horário. A pergunta que a desqualificaria existe no chat, mas só no fim e só para quem escolhe "me desenvolver" ou "curiosidade".</p>
+        <div class="quote" style="font-size:13.5px;margin:12px 0 0">"Eu tinha entendido que vocês faziam uma consultoria pra eu fazer uma transição de carreira."</div>
+        <span class="who">fonte: mineracao-calls §3.1 e §3.6</span>
+      </div>
+      <div class="card watch">
+        <h4>Seis ex-alunos e mentorandos Black</h4>
+        <p>Daniela, G.H., A.A., B.S., Hallison e Ana Maria. Nenhuma pergunta identifica quem já é da casa. Todos ouviram "a Omniterapia adiciona à sua prática um método com autoridade ISO 9001", que eles já têm, e terminaram com "a gente vê se esse caminho é pra você", que eles já percorreram.</p>
+        <span class="who">é o mesmo erro que queimou a call real da Daniela</span>
+      </div>
+      <div class="card watch">
+        <h4>Suzane e Carlos Eduardo</h4>
+        <p>Ela com o nome no Serasa por dívida de 19 mil e crédito travado. Ele recém demitido. Os dois passaram no gate porque ele mede renda familiar, e não se existe renda entrando hoje.</p>
+        <div class="quote" style="font-size:13.5px;margin:12px 0 0">"Como eu tô iniciando uma nova carreira, eu não teria como pagar, mas a vontade é grande."</div>
+        <span class="who">a analise-mql §1 é explícita: compra quem ainda tem a renda que financia a travessia</span>
+      </div>
+      <div class="card watch">
+        <h4>Bruno, nota 10 e não fechou</h4>
+        <p>Respondeu 10 na escala e agendou. A avaliação da call real dele diz "alto interesse, baixa urgência". A nota de 0 a 10 mede disposição, não urgência, e o chat não tinha como separar as duas coisas.</p>
+        <span class="who">fonte: mineracao-calls §3.1, §3.4 e §3.5</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BUGS ═══ -->
+<section id="bugs">
+  <div class="wrap">
+    <div class="eyebrow">Encontrados rodando, não lendo código</div>
+    <h2>Três <em>bugs</em> que afetam lead de verdade</h2>
+    <div class="cards">
+      <div class="card bug">
+        <h4><span class="num-badge" style="background:var(--red);color:#0A0A0A">1</span>O horário que o lead escreve desaparece</h4>
+        <p>Quem clica em "esses horários não me atendem" e escreve, por exemplo, "sábado de manhã", gera um alerta no Google Chat com <b>"Horário pedido pelo lead: (não informado)"</b>. Enquanto isso a tela promete "vou registrar esse horário na sua agenda agora mesmo". O SDR recebe um pedido de horário sem o horário.</p>
+        <span class="who">causa: preAgendar lê a sessão de antes da gravação · corrigido e conferido nos dois sentidos</span>
+      </div>
+      <div class="card bug">
+        <h4><span class="num-badge" style="background:var(--red);color:#0A0A0A">2</span>Propõe horário mais cedo do que o pedido</h4>
+        <p>A enfermeira de plantão escreveu "terça depois das 22h, saio do plantão" e o chat respondeu "consigo te encaixar terça às 20h40", que é exatamente quando ela está trabalhando. E sem avisar que era antes do que ela pediu.</p>
+        <span class="who">agora o chat diz que é mais cedo e pergunta se dá</span>
+      </div>
+      <div class="card bug">
+        <h4><span class="num-badge" style="background:var(--red);color:#0A0A0A">3</span>O balão do decisor quebra a frase</h4>
+        <p>O texto que a pessoa escreve entra inteiro dentro da frase pronta. Saiu assim no teste: "seria incrível que <i>minha família, que resiste a mudança drástica</i> participasse junto com você". E o "pra vocês dois" não cabe quando ela cita a família toda.</p>
+        <span class="who">agora só usa o nome quando é curto e limpo, senão diz "essa pessoa"</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACHADOS ═══ -->
+<section id="achados">
+  <div class="wrap">
+    <div class="eyebrow">Estrutura</div>
+    <h2>Por que 79% passavam</h2>
+    <ul class="clean">
+      <li><strong>A pergunta filtro chega tarde e só para dois segmentos.</strong> "Essa consultoria é sobre você se formar pra atender pessoas, é isso que você busca?" está no fim e condicionada a quem escolheu "me desenvolver" ou "curiosidade".</li>
+      <li><strong>Não existe rota para quem já é da casa.</strong> Ex-aluno, formado parado e mentorando Black entram todos pelo funil de primeiro passo.</li>
+      <li><strong>Não existe casa para "sou formado mas não atendo".</strong> Simone, psicanalista, e B.S., formada pela OMNI em 2021, caem no braço de transição de carreira e ouvem "construa em paralelo sem largar sua renda". A dor delas é medo de atender.</li>
+      <li><strong>O gate mede a renda errada.</strong> Renda familiar não diz se há renda entrando hoje nem se o crédito está livre. Mãe solo com a renda toda comprometida também passa.</li>
+      <li><strong>A nota de 0 a 10 não separa interesse de urgência.</strong> É o caso Bruno, documentado na avaliação da call.</li>
+      <li><strong>Não há onde a pessoa perguntar nada.</strong> As três dúvidas que a base registra como decisivas não cabiam em botão: "sou biomédica, posso atuar?" (a terceira pergunta mais frequente das DMs), "a pessoa pode ser hipnotizada e não querer voltar?" e a fronteira com o CRP.</li>
+      <li><strong>O chat afirma autoridade e não prova nada.</strong> Iara, a cética, pede prova verificável antes de qualquer conversa comercial. Recebe ISO 9001 e 46 anos, que são afirmações, e sai numa tela que fala de prioridade quando o que ela pediu foi evidência.</li>
+      <li><strong>Quem é barrado sai de mãos vazias.</strong> A tela de "não é o melhor momento" não oferecia nada, e a esteira de entrada que existe (HypnoFlash e workshop de 27 a 97 reais) nunca é oferecida a quem tem teto de 500 reais.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ O QUE JÁ FUNCIONA ═══ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Não mexer</div>
+    <h2>O que o chat já faz <em>melhor que a call</em></h2>
+    <div class="cards">
+      <div class="card win">
+        <h4>Captura o decisor que a call nunca capturou</h4>
+        <p>Raquel, Bruno e Amanda declararam o segundo decisor e foram convidados a trazer a pessoa para a consultoria. Nas três calls reais esse decisor nunca foi mapeado, e foi o que esfriou as três.</p>
+      </div>
+      <div class="card win">
+        <h4>A copy do braço de transição acerta o perfil órfão</h4>
+        <p>"Dá pra construir em paralelo, sem largar sua renda. É ponte, não salto." É exatamente o servidor concursado que a base aponta como o perfil sem oferta: financia com o salário e tem medo de largá-lo.</p>
+      </div>
+      <div class="card win">
+        <h4>O gate de nota abaixo de 7 funciona</h4>
+        <p>O reservista da Aeronáutica, curioso espiritual sem intenção de monetizar, foi barrado corretamente e sem constrangimento.</p>
+      </div>
+      <div class="card win">
+        <h4>O fechamento gentil com presente</h4>
+        <p>Evita a despedida seca que já gerou dano de marca. Quem sai por capacidade recebe um áudio do método e a porta continua aberta.</p>
+      </div>
+      <div class="card win">
+        <h4>O horário noturno de 20h40</h4>
+        <p>Resolve quem trabalha em plantão, desde que corrigido o aviso de horário mais cedo.</p>
+      </div>
+      <div class="card win">
+        <h4>O espelho antes da agenda</h4>
+        <p>Devolve a dor com as palavras da própria pessoa antes de pedir o compromisso do horário.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MUDANÇAS ═══ -->
+<section id="mudancas">
+  <div class="wrap">
+    <div class="eyebrow">Testado, não teorizado</div>
+    <h2>As 13 mudanças <em>que foram rodadas</em></h2>
+    <ol class="steps">
+      <li><strong>Filtro de enquadramento na segunda pergunta, para todo mundo.</strong> Quatro saídas: sim, ainda não sei, quero ser atendido e "eu procurava outra coisa". A Ethiene sai em 2 perguntas em vez de agendar depois de 16.</li>
+      <li><strong>Pergunta "sua formação em hipnose foi com a OMNI?"</strong> para quem atende com hipnose.</li>
+      <li><strong>Rota curta do ex-aluno.</strong> Quem responde sim faz 9 perguntas em vez de 14, não responde idade, escolaridade, renda familiar nem a nota de 0 a 10, responde só quanto fatura hoje, e vai para o time que cuida dos formados.</li>
+      <li><strong>Nova opção na segmentação: "já me formei em terapia ou hipnose, mas ainda não atendo"</strong>, com pergunta e espelho próprios (o que te impede de começar, e não o que trava seu crescimento).</li>
+      <li><strong>Pergunta de renda ativa:</strong> "hoje você tem renda entrando todo mês?". Quem não tem sai para nutrição, com presente e a porta aberta.</li>
+      <li><strong>Campo de dúvida livre</strong>, opcional, que resolve os três casos sem lugar de uma vez só.</li>
+      <li><strong>Pergunta de janela:</strong> "quando você pretende começar?". Não barra ninguém, vai para o resumo do closer.</li>
+      <li><strong>Ponte pela profissão logo depois da área</strong>, o movimento com 91% de continuação nas DMs, já respondendo "não precisa ser psicólogo".</li>
+      <li><strong>Presente também na tela de "não é o momento"</strong>, que era a única saída sem nada.</li>
+      <li><strong>Correção do horário perdido</strong> no alerta do SDR.</li>
+      <li><strong>Aviso quando o horário disponível é mais cedo</strong> do que o pedido.</li>
+      <li><strong>Balão do decisor sanitizado</strong>, e "pra vocês" no lugar de "pra vocês dois".</li>
+      <li><strong>A pergunta "você costuma investir no seu desenvolvimento?" virou opcional</strong>, atrás de uma chave reversível. Com renda, renda ativa, janela e nota, ela é a de menor valor decisório, e cada clique a mais custa abandono.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═══ RESUMO DO CLOSER ═══ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">O que muda para quem atende</div>
+    <h2>O resumo que o <em>closer</em> recebe</h2>
+    <p>A informação mais cara do chat estava sendo capturada e não chegava a ninguém. Agora chega, e chega antes da conversa começar.</p>
+
+    <h3 style="margin-top:26px">Antes</h3>
+    <pre><code>Nota de comprometimento (0-10): 10
+Por que agora: Cansei de adiar a minha vez
+Decide o investimento: alinha com alguém</code></pre>
+
+    <h3 style="margin-top:24px">Depois</h3>
+    <pre><code>Nota de comprometimento (0-10): 10
+Quando pretende começar: Nos próximos meses  <span class="hl-red">← ATENÇÃO: nota alta com janela longa
+                                                (alto interesse, baixa urgência)</span>
+Decide o investimento: alinha com a família <span class="hl-gold">— foi CONVIDADA a trazer
+                                            essa pessoa para a consultoria</span>
+<span class="hl-teal">DÚVIDA QUE ELA QUER RESPONDIDA:</span> "Preciso aparecer em vídeo e fazer live?
+                                 Tenho medo de julgamento."</code></pre>
+
+    <h3 style="margin-top:24px">E na primeira linha, quando é gente da casa</h3>
+    <pre><code><span class="hl-gold">⚠ JÁ É FORMADO(A) PELA OMNI · fatura hoje: De R$ 15 mil a R$ 50 mil
+   — não tratar como iniciante</span></code></pre>
+    <p style="font-size:14px;color:var(--ink-faint);margin-top:14px">O diagnóstico que a avaliação da call fez depois da reunião perdida agora aparece antes dela acontecer.</p>
+  </div>
+</section>
+
+<!-- ═══ TABELA DAS 28 ═══ -->
+<section id="personas">
+  <div class="wrap">
+    <div class="eyebrow">Uma a uma</div>
+    <h2>As <em>28 personas</em> e seus desfechos</h2>
+    <p>As linhas destacadas são as que mudaram de desfecho. A coluna da direita é o que a fonte diz que aquela pessoa é, e é contra isso que o chat foi julgado.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>ID</th><th>Quem</th><th>Fluxo atual</th><th>Com as mudanças</th><th>O que a fonte diz</th></tr></thead>
+        <tbody>
+      <tr><td class="pid">P01</td><td><b>Gisele</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">COMPRA. Deve virar MQL e ir para a agenda.</td></tr>
+      <tr><td class="pid">P02</td><td><b>Saniamar</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">COMPRA. Deve virar MQL. Renda baixa no momento e faculdade em curso.</td></tr>
+      <tr><td class="pid">P03</td><td><b>Wilson</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">MQL forte. Renda alta, sem objeção de valor. Deve ir para a agenda.</td></tr>
+      <tr class="mudou"><td class="pid">P04</td><td><b>Suzane</b><br><span class="cir">1 / cruza anti-MQL</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill warn">Nutrição (sem renda)</span></td><td class="verd">NÃO tem como pagar (Serasa, dívida de 19k). Vontade alta, capacidade zero. O ideal é o gate pegar ANTES da call.</td></tr>
+      <tr><td class="pid">P05</td><td><b>Gustavo</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">MQL. Encaixe de parcela, não objeção de valor. Deve ir para a agenda.</td></tr>
+      <tr class="mudou"><td class="pid">P06</td><td><b>Carlos Eduardo</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill warn">Nutrição (sem renda)</span></td><td class="verd">SEM renda que financia (demitido). analise-mql §1: o comprador é quem AINDA tem a renda.</td></tr>
+      <tr><td class="pid">P07</td><td><b>Raquel</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">MQL com SEGUNDO DECISOR nunca mapeado nas duas calls. O chat precisa capturar isso e o horário precisa caber no plantão.</td></tr>
+      <tr><td class="pid">P08</td><td><b>Andreia</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">Círculo 1 (quem mais compra por crença). Sem caixa hoje. É a dor-headline nº 1 da Autópsia.</td></tr>
+      <tr><td class="pid">P09</td><td><b>Allan</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">MQL. Renda declarada alta para a amostra. Objeção é PERMISSÃO de cobrar, não preço.</td></tr>
+      <tr><td class="pid">P10</td><td><b>Simone</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">Formada e travada por medo de atender. Não é "transição de carreira" nem "já atendo": o chat não tem essa casa.</td></tr>
+      <tr class="mudou"><td class="pid">P11</td><td><b>Daniela</b><br><span class="cir">1 / ex-aluna OMNI</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">EX-ALUNA da casa. Ser tratada como iniciante é a objeção dominante dela, e foi o erro que queimou a call real.</td></tr>
+      <tr><td class="pid">P12</td><td><b>Aline</b><br><span class="cir">1</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">Círculo 1 sem caixa. Dor de autoridade moral para cobrar.</td></tr>
+      <tr><td class="pid">P13</td><td><b>Bruno</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">Deu NOTA 10 na call e NÃO fechou. É o caso que prova que nota alta não é qualificação.</td></tr>
+      <tr><td class="pid">P14</td><td><b>Amanda</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">MQL com decisor em casa. "Ela ouve, leva para o marido e esfria": o chat tem que trazer o marido para a consultoria.</td></tr>
+      <tr><td class="pid">P15</td><td><b>A farmacêutica de hospital</b><br><span class="cir">2</span></td><td><span class="pill ok">Pré-agendamento</span></td><td><span class="pill ok">Pré-agendamento</span></td><td class="verd">Renda existe mas está toda comprometida (aluguel, filhos, sozinha). Medo real sobre a segurança da hipnose.</td></tr>
+      <tr><td class="pid">P16</td><td><b>J. (biomédica)</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">A 3ª pergunta mais frequente das DMs. Sem resposta, ela não avança. Personalizar pela profissão tem 91% de continuação.</td></tr>
+      <tr><td class="pid">P17</td><td><b>M. O. (servidor concursado)</b><br><span class="cir">2</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td class="verd">Perfil órfão de oferta: financia com o salário e tem medo de largá-lo. É exatamente quem a copy "em paralelo, sem largar sua renda" serve.</td></tr>
+      <tr class="mudou"><td class="pid">P18</td><td><b>Felipe</b><br><span class="cir">3 / anti-MQL por renda</span></td><td><span class="pill warn">Fechamento gentil</span></td><td><span class="pill warn">Nutrição (sem renda)</span></td><td class="verd">NÃO deve ir para a call (analise-mql §3: nutrir com low-ticket). E não pode receber despedida seca, já houve dano de marca por isso.</td></tr>
+      <tr><td class="pid">P19</td><td><b>Benedito</b><br><span class="cir">3</span></td><td><span class="pill warn">Fechamento gentil</span></td><td><span class="pill warn">Fechamento gentil</span></td><td class="verd">Fora da faixa por capacidade absoluta. A esteira certa é HypnoFlash / workshop de R$ 27–97.</td></tr>
+      <tr><td class="pid">P20</td><td><b>Iara</b><br><span class="cir">3</span></td><td><span class="pill warn">Não é o momento</span></td><td><span class="pill warn">Não é o momento</span></td><td class="verd">Não compra sem prova verificável. Quer testar em si primeiro. O chat não oferece prova nenhuma.</td></tr>
+      <tr class="mudou"><td class="pid">P21</td><td><b>Ethiene</b><br><span class="cir">anti</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill bad">Fora de escopo</span></td><td class="verd">LEAD ERRADO. Nenhuma intenção terapêutica. A avaliação recomenda a pergunta-filtro ANTES de agendar: "você se imagina atuando como terapeuta?"</td></tr>
+      <tr><td class="pid">P22</td><td><b>O reservista da Aeronáutica</b><br><span class="cir">anti</span></td><td><span class="pill warn">Não é o momento</span></td><td><span class="pill warn">Não é o momento</span></td><td class="verd">Não deve agendar. "É só curiosidade mesmo."</td></tr>
+      <tr><td class="pid">P23</td><td><b>Thiago</b><br><span class="cir">anti</span></td><td><span class="pill warn">Fechamento gentil</span></td><td><span class="pill warn">Fechamento gentil</span></td><td class="verd">Mismatch de criativo + dúvida regulatória (CRP). Não compra enquanto o criativo não disser o produto.</td></tr>
+      <tr class="mudou"><td class="pid">P24</td><td><b>G. H.</b><br><span class="cir">ex-aluno</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">EX-ALUNO com problema de AQUISIÇÃO, não de método. Alvo de esteira Legacy/Black, não de consultoria de entrada.</td></tr>
+      <tr class="mudou"><td class="pid">P25</td><td><b>A. A.</b><br><span class="cir">ex-aluno</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">EX-ALUNO em estagnação. Perfil-alvo natural de Legacy/Black com custo de aquisição zero.</td></tr>
+      <tr class="mudou"><td class="pid">P26</td><td><b>B. S.</b><br><span class="cir">ex-aluno</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">JÁ PAGOU a formação. Precisa de segurança prática, não de descobrir o preço da formação de novo.</td></tr>
+      <tr class="mudou"><td class="pid">P27</td><td><b>Hallison</b><br><span class="cir">black</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">JÁ É CLIENTE do ecossistema Black. Não é lead de consultoria de entrada.</td></tr>
+      <tr class="mudou"><td class="pid">P28</td><td><b>Ana Maria</b><br><span class="cir">black</span></td><td><span class="pill ok">Consultoria confirmada</span></td><td><span class="pill info">Time de formados</span></td><td class="verd">JÁ É CLIENTE. Objeção: falta de prova verificável dos resultados divulgados.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DECISÕES ═══ -->
+<section id="decisoes">
+  <div class="wrap">
+    <div class="eyebrow">Não é decisão técnica</div>
+    <h2>O que depende <em>de vocês</em></h2>
+
+    <div class="decisao">
+      <h3>1. A faixa anunciada na tela de transparência</h3>
+      <p>A tela diz que o investimento "varia de 10 a 20 mil". Os preços que a casa efetivamente fechou nas calls documentadas são outros:</p>
+      <div class="precos">
+        <div class="preco"><div class="v">7.900</div><div class="q">Bruno</div></div>
+        <div class="preco"><div class="v">9.900</div><div class="q">Saniamar, fechou</div></div>
+        <div class="preco"><div class="v">12.000</div><div class="q">Gustavo</div></div>
+        <div class="preco"><div class="v">12.900</div><div class="q">Gisele, fechou</div></div>
+        <div class="preco faixa"><div class="v">10 a 20 mil</div><div class="q">o que a tela anuncia</div></div>
+      </div>
+      <p>O número que barra gente é maior do que o preço real de entrada, e ele aparece justamente para o Círculo 1, o terapeuta que já atende e não consegue cobrar, que é quem mais compra por crença. A ancoragem que o mercado usa no Chatwoot é de parcela, entre 300 e 500 reais por mês.</p>
+
+      <div class="item" style="border-top:1px solid var(--gold-10);margin-top:18px;padding-top:16px">
+        <b>2. O que fazer com o ex-aluno identificado</b>
+        <p>O teste encaminha para o time de formados. A decisão é se ele vai para uma agenda própria de Legacy e Black ou para contato humano no WhatsApp.</p>
+      </div>
+      <div class="item">
+        <b>3. Oferecer a esteira de entrada a quem sai por capacidade</b>
+        <p>HypnoFlash e workshop de 27 a 97 reais, em vez de só o áudio de presente. É a rota documentada para quem tem teto de 500 reais.</p>
+      </div>
+    </div>
+
+    <div class="aviso">
+      <p><b>Toda copy nova precisa de aprovação antes de qualquer deploy.</b> Rafa, Michael, Fernanda ou Julia, conforme a regra de aprovação de copy de disparo. Os textos propostos estão no patch, prontos para revisão palavra por palavra. Nada disso sobe sem o OK explícito.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMO APLICAR ═══ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Quando aprovado</div>
+    <h2>Como <em>aplicar</em></h2>
+    <ul class="clean">
+      <li>O patch está pronto e mexe em três arquivos do módulo da pesquisa: o fluxo, o motor e o resumo.</li>
+      <li><strong>Os três bugs são independentes das mudanças de fluxo</strong> e podem subir sozinhos, sem esperar a aprovação de copy.</li>
+      <li>A suíte de testes roda 47 de 50 com as mudanças. As 3 falhas são contrato antigo, não regressão: duas assumem a pergunta de enquadramento no fim, que mudou de lugar, e uma verifica o texto do lead dentro do balão do decisor, que agora nem entra quando é longo.</li>
+      <li>O simulador ficou versionado no repositório e roda de novo a qualquer momento, contra qualquer versão do chat, sem tocar em produção.</li>
+    </ul>
+    <p style="margin-top:22px;font-size:14px;color:var(--ink-faint)">
+      Pacote completo em <span style="font-family:var(--font-m);color:var(--gold)">workspace/businesses/omni_brasil/outputs/simulador-chat-qualificacao-2026-08/</span>: relatório, as 28 personas mapeadas com a fonte de cada valor, os transcritos das 28 conversas nas duas versões, o comparativo e o patch.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <b>OMNI HYPNOSIS TRAINING CENTER BRASIL</b><br>
+  Relatório interno · Simulação do chat de qualificação com as 28 personas canônicas · 10 de agosto de 2026<br>
+  Uso interno. Os números de venda citados vêm das minerações de calls, Chatwoot, DMs e grupo Black.
+</footer>
+
+</body>
+</html>
