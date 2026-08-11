@@ -2,8 +2,11 @@ name: Atualizar Relatório de Leads — Conectado
 
 on:
   schedule:
-    # 8h, 10h, 12h, 14h, 16h e 18h BRT (UTC-3) — seg a sáb
-    - cron: "0 11,13,15,17,19,21 * * 1-6"
+    # 10h, 14h, 17h e 19h BRT (UTC-3) — seg a sáb.
+    # Era 6x/dia (8,10,12,14,16,18). A Rafa cortou para 4 em 11/08/2026: o SDR tem
+    # muita demanda e relatório frequente demais vira ruído — quando tudo avisa,
+    # nada avisa. O relatório continua disponível pelo link a qualquer hora.
+    - cron: "0 13,17,20,22 * * 1-6"
   workflow_dispatch:
     # Permite rodar manualmente pelo GitHub Actions
 
