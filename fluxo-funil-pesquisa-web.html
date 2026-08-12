@@ -126,7 +126,7 @@
 </header>
 
 <main>
-  <p class="meta">Documento operacional · 11 de agosto de 2026</p>
+  <p class="meta">Documento operacional · atualizado em 12 de agosto de 2026</p>
   <h1>O caminho do lead, do anúncio à consultoria.</h1>
   <p class="lead">
     Tudo que acontece depois que alguém clica no anúncio: o que o lead vê, o que o sistema faz
@@ -156,7 +156,8 @@
       <p>1. Nasce o negócio no Pipedrive em <b>Leads Gerais</b>, com dono sorteado entre David e Layslla (metade para cada) e o campo SDR preenchido igual.</p>
       <p>2. É gerado o <b>link de retomada</b> daquele lead, que a régua vai usar depois.</p>
       <p>3. O chat abre já sabendo quem é a pessoa.</p>
-      <p>4. Se o nome contiver "teste", o negócio nasce marcado e <b>nenhum evento de conversão dispara</b>.</p>
+      <p>4. Dispara o evento <b>CompleteRegistration</b> para o Meta: é o <b>cadastro</b>, medido separado de quem qualifica.</p>
+      <p>5. Se o nome contiver "teste", o negócio nasce marcado e <b>nenhum evento de conversão dispara</b>. É a convenção que impede o teste interno de ensinar o algoritmo com lead que não existe.</p>
     </div></div>
   </div>
 
@@ -174,7 +175,7 @@
     </div>
   </div>
 
-  <p style="font-size:14px;color:var(--soft);margin:14px 0 4px">Depois, os dois caminhos se juntam: idade, escolaridade, renda familiar, renda mínima na transição, se investe em si, a nota de 0 a 10, o porquê agora e quem decide o investimento.</p>
+  <p style="font-size:14px;color:var(--soft);margin:14px 0 4px">Depois, os dois caminhos se juntam: idade, escolaridade, renda familiar, renda mínima na transição, se investe em si, a <b>nota de 1 a 5</b>, o porquê agora e quem decide o investimento.</p>
 
   <h2><span class="n">03</span> O que o chat fala, do início ao fim</h2>
   <p class="h2sub">Além das perguntas, o chat dispara mensagens próprias. Elas existem para dar ritmo, acolher e vender a consultoria.</p>
@@ -220,9 +221,9 @@
     <div class="passo"><div class="quando">na hora</div><div class="oque">
       Nasce a atividade <b>"Reunião Agendada"</b> com contato, horário, link e resumo do perfil. É ela que dispara todos os lembretes. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
-      Sai da régua antiga: as tarefas de "posso te ligar 5 minutos?" são encerradas para não incomodar quem já agendou. <span class="quem sis">sistema</span></div></div>
+      Sai da régua antiga: as tarefas de "posso te ligar 5 minutos?" são encerradas para não incomodar quem já agendou. A entrada dessa régua foi <b>desativada em 12/08</b>; quem já estava no ciclo termina normalmente. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
-      Vai para a página <b>/obrigado</b> com o vídeo do Michael e as instruções de preparo. <b>Aqui dispara a conversão</b> para Meta e Google. <span class="quem sis">sistema</span></div></div>
+      Vai para a página <b>/obrigado</b> com o vídeo do Michael e as instruções de preparo. <b>Aqui dispara a conversão</b>: evento <b>Lead</b> no Meta e a conversão do Google Ads. É o evento que as campanhas otimizam. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">minutos</div><div class="oque">
       WhatsApp de confirmação com as instruções de preparo, com os botões <b>Confirmar presença</b> e <b>Preciso remarcar</b>. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">se clicar</div><div class="oque">
@@ -253,24 +254,26 @@
       <div class="msg">"Ótimo dia, {nome}! Aqui é a {sdr}, da OMNI. Vi que você precisa de um horário diferente para a sua consultoria e já estou verificando essa disponibilidade. Se tiver outras opções de dia e horário, pode me passar também. Assim que eu conseguir, te aviso por aqui."</div>
       É <b>um disparo só</b>, não é régua. E é ela que <b>cria a conversa</b> — sem isso o SDR começaria do zero. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
+      Tudo que sai por WhatsApp é <b>espelhado no Chatwoot como MENSAGEM</b> (não como nota interna), com o <b>nome da pessoa</b> no contato, a <b>etiqueta</b> da situação e o link da conversa gravado no Pipedrive. O SDR vê o que o lead recebeu, e o status de entrega e leitura da Meta. <span class="quem sis">sistema</span></div></div>
+    <div class="passo"><div class="quando">na hora</div><div class="oque">
       <b>Alerta enxuto no Google Chat</b>, três linhas, com os dois links prontos:
       <div class="msg">[AGENDA] Mariana pediu outro horário<br>Pediu: "só consigo depois das 19h"<br>abrir conversa · ver no Pipedrive</div>
       Nome completo, e-mail, funil e perfil <b>saem do alerta</b>: já estão no Pipedrive. <span class="quem hum">SDR assume</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
-      Vai para a mesma página <b>/obrigado</b> e <b>dispara a mesma conversão</b>. <span class="quem sis">sistema</span></div></div>
+      Vai para a mesma página <b>/obrigado</b> e dispara o <b>mesmo evento Lead</b>: qualificação vem das respostas, não de ter agendado. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">depois</div><div class="oque">
       Quando o SDR fecha o horário e cria a reunião, a pessoa entra na esteira de lembretes do desfecho 1. <span class="quem hum">SDR</span></div></div>
   </div>
 
   <div class="lt bad">
-    <div class="cab"><h3>Desfecho 3 · Nota abaixo de 7</h3>
+    <div class="cab"><h3>Desfecho 3 · Nota abaixo de 3 (escala 1 a 5)</h3>
       <div class="sub">Não é o momento dela. Nunca vê preço nem agenda: oferecer seria queimar a pessoa e o tempo da closer.</div></div>
     <div class="passo"><div class="quando">no chat</div><div class="oque">
       Antes de encerrar, uma última pergunta aberta: <i>o que falta para isso virar prioridade?</i> A resposta fica registrada e vira material de análise. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
       Tela de despedida sem constrangimento: <i>"a consultoria rende quando você já está num momento de decisão"</i>. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
-      Negócio marcado <b>Perdido · sem comprometimento (nota < 7)</b>, com perfil e nota gravados. <span class="quem sis">sistema</span></div></div>
+      Negócio marcado <b>Perdido · sem comprometimento (nota &lt; 3)</b>, com perfil e nota gravados. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">na hora</div><div class="oque">
       Página de conteúdo: aplicativo <b>Plenamente</b> e o <b>livro do Michael</b>. <b>Sem pixel</b>: não conta como conversão. <span class="quem sis">sistema</span></div></div>
     <div class="passo"><div class="quando">depois</div><div class="oque">
@@ -366,7 +369,33 @@
 
   <div class="regua"></div>
 
-  <h2><span class="n">08</span> O critério dos alertas internos</h2>
+  <h2><span class="n">08</span> O que mudou desde ontem</h2>
+  <p class="h2sub">Para quem já leu a primeira versão: o funil entrou no ar de verdade em 11/08 e estas mudanças vieram de leads reais.</p>
+
+  <div class="ramos">
+    <div class="ramo c-ok"><div class="cond">Os primeiros agendamentos</div>
+      <p>Três pessoas agendaram sozinhas pelo chat, <b>duas delas às 3h da manhã</b>, sem nenhum SDR acordado. É a prova do conceito que motivou o projeto.</p>
+    </div>
+    <div class="ramo c-info"><div class="cond">A nota virou 1 a 5</div>
+      <p>Era de 0 a 10 com corte em 7. Agora é <b>de 1 a 5, aprovando a partir de 3</b>. Quem comparar notas precisa separar as duas eras: até 11/08 é uma escala, de 12/08 em diante é outra.</p>
+    </div>
+    <div class="ramo c-ok"><div class="cond">Cadastro e qualificado agora são eventos diferentes</div>
+      <p>Os dois disparavam <span class="marca m-amarelo">o mesmo evento</span> e o Meta somava coisas distintas. Agora o cadastro é <b>CompleteRegistration</b> e quem qualifica é <b>Lead</b>, que é o evento otimizado pelas campanhas.</p>
+    </div>
+    <div class="ramo c-ok"><div class="cond">O que o lead recebe aparece pro SDR</div>
+      <p>O espelho no Chatwoot ia como <b>nota interna amarela</b>, e o SDR achava que nada tinha sido enviado. Agora vai como mensagem, com nome da pessoa, etiqueta e status de entrega e leitura.</p>
+    </div>
+    <div class="ramo c-warn"><div class="cond">Quem pede outro horário recebe na hora</div>
+      <p>Uma mensagem única do SDR, automática, que <b>cria a conversa</b> — é dela que sai o link que o alerta leva. Antes o SDR tinha que começar do zero.</p>
+    </div>
+    <div class="ramo c-bad"><div class="cond">Coisas que estavam quebradas</div>
+      <p>O chat propunha horário que ninguém pediu, o lembrete anunciava hora com 3 horas de erro, quem agendava de madrugada não recebia a confirmação, e a primeira frase aparecia cortada no celular. Tudo corrigido com lead real no ar.</p>
+    </div>
+  </div>
+
+  <div class="regua"></div>
+
+  <h2><span class="n">09</span> O critério dos alertas internos</h2>
   <p class="h2sub">Decisão da Rafa em 11/08, depois de ver o canal do SDR encher: quando tudo avisa, nada avisa.</p>
 
   <div class="ramos">
@@ -388,7 +417,7 @@
 
   <div class="regua"></div>
 
-  <h2><span class="n">09</span> Onde o lead escapa hoje</h2>
+  <h2><span class="n">10</span> Onde o lead escapa hoje</h2>
   <p class="h2sub">Os gargalos reais, para decidir onde investir esforço.</p>
 
   <div class="alerta">
@@ -397,8 +426,8 @@
   </div>
 
   <div class="alerta">
-    <h3>Gargalo nº 2 · a régua antiga ainda ligada</h3>
-    <p>Quem agenda pelo chat <b>ainda recebe a mensagem do SDR pedindo para ligar</b>, porque as automações antigas (M0 a M-TC4) continuam ativas para os leads das landings anteriores. Some quando o tráfego virar inteiro e elas forem desligadas.</p>
+    <h3>Gargalo nº 2 · a landing converte 7%</h3>
+    <p>Medido em 12/08, com o tráfego já apontado: <b>98 visitas para 7 cadastros</b>. Depois que a pessoa entra no chat o funil vai bem (dos 7 cadastros, 3 saíram com consultoria marcada), então <b>hoje o vazamento maior é antes do chat</b>. Revisar a landing é a prioridade de maior retorno.</p>
   </div>
 
   <div class="alerta">
@@ -412,7 +441,7 @@
 
   <div class="regua"></div>
 
-  <h2><span class="n">10</span> Onde cada coisa mora</h2>
+  <h2><span class="n">11</span> Onde cada coisa mora</h2>
   <div class="wrap"><table>
     <tr><th>Peça</th><th>Onde</th><th>Quem cuida</th></tr>
     <tr><td>Landing e chat</td><td>go.omnihypnosis.com.br</td><td class="small">sistema próprio (lead-intake)</td></tr>
