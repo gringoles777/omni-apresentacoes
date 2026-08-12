@@ -281,6 +281,19 @@
     z-index: 10;
   }
 
+  /* Janelas baixas: compacta o conteúdo para o logo não sobrepor o título */
+  @media (max-height: 720px) {
+    .slide { gap: 18px; padding-top: 120px; }
+    .slide-logo { width: 42px; top: 18px; }
+    .lesson-text { font-size: 36px; }
+    .rows { gap: 12px; }
+    .row { padding: 10px 18px; }
+    .row-desc { font-size: 16px; }
+    .golden { font-size: 23px; }
+    .cover-logo { width: 100px; }
+    .cover-title { font-size: 48px; }
+  }
+
   @media (max-width: 768px) {
     .slide { padding: 110px 24px 90px; gap: 20px; }
     .cover-title { font-size: 36px; }
