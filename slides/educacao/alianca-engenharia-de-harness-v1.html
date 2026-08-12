@@ -122,28 +122,22 @@
     z-index: 10;
   }
 
-  /* Black logo centered top — fixed position inside slide */
+  /* Logo Aliança de Ouro centralizado no topo — posição fixa dentro do slide */
   .slide-logo {
     position: absolute;
     top: 40px;
     left: 50%;
     transform: translateX(-50%);
     width: 64px;
-    filter: invert(1) sepia(1) saturate(0.4) hue-rotate(5deg) brightness(0.85);
-    opacity: 0.55;
+    object-fit: contain;
+    opacity: 0.6;
   }
 
   /* Cover */
   .cover-logo {
     width: 140px;
-    filter: invert(1) sepia(1) saturate(0.4) hue-rotate(5deg) brightness(0.85);
-  }
-  .cover-kicker {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(200, 168, 75, 0.4));
   }
   .cover-title {
     font-family: 'Oswald', sans-serif;
@@ -316,14 +310,13 @@
 </div>
 
 <!-- Rodapé -->
-<span class="footer">Black Mentoring // OMNI Brasil</span>
+<span class="footer">Aliança de Ouro // OMNI Brasil</span>
 
 <div class="slides">
 
   <!-- SLIDE 0: CAPA -->
   <div class="slide slide-cover active" id="slide-0">
-    <img src="black-mentory-logo.png" alt="Black Mentoring" class="cover-logo">
-    <span class="cover-kicker">Aula · Inteligência Artificial</span>
+    <img src="../_assets/alianca-logo.png" alt="Aliança de Ouro" class="cover-logo">
     <h1 class="cover-title">Engenharia de Harness</h1>
     <div class="slide-divider"></div>
     <p class="cover-subtitle">O ativo invisível do seu negócio com IA</p>
@@ -331,7 +324,7 @@
 
   <!-- SLIDE 1: O QUE É HARNESS -->
   <div class="slide" id="slide-1">
-    <img src="black-mentory-logo.png" alt="" class="slide-logo">
+    <img src="../_assets/alianca-logo.png" alt="" class="slide-logo">
     <span class="lesson-category">01 · O que é harness</span>
     <p class="lesson-text">O modelo você <em>aluga</em>.<br>O harness você <em>constrói</em>.</p>
     <div class="rows">
@@ -353,7 +346,7 @@
 
   <!-- SLIDE 2: A REGRA DE OURO -->
   <div class="slide" id="slide-2">
-    <img src="black-mentory-logo.png" alt="" class="slide-logo">
+    <img src="../_assets/alianca-logo.png" alt="" class="slide-logo">
     <span class="lesson-category">02 · A regra de ouro</span>
     <p class="lesson-text">Conhecimento sai da sua <em>cabeça</em><br>e entra no <em>sistema</em>.</p>
     <div class="rows">
@@ -375,7 +368,7 @@
 
   <!-- SLIDE 3: O JOGO DE LONGO PRAZO -->
   <div class="slide" id="slide-3">
-    <img src="black-mentory-logo.png" alt="" class="slide-logo">
+    <img src="../_assets/alianca-logo.png" alt="" class="slide-logo">
     <span class="lesson-category">03 · O jogo de longo prazo</span>
     <p class="lesson-text">Harness rende <em>juros compostos</em>.</p>
     <div class="rows">
