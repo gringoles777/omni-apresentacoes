@@ -174,6 +174,47 @@ header.topbar {
 .progress-fill { background: linear-gradient(90deg, var(--color-gold-deep), var(--color-gold), var(--color-gold-light)); height: 100%; transition: width 400ms; }
 
 /* ═══════════════════════════════════════════════════
+   BRIEFING FERNANDA
+   ═══════════════════════════════════════════════════ */
+#briefing { max-width: 1400px; margin: 0 auto 24px; padding: 0 32px; }
+.brief-box {
+  background: var(--color-dark); border: 1px solid var(--color-gold-30);
+  border-radius: var(--radius-card); overflow: hidden;
+}
+.brief-head {
+  padding: 16px 20px; cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(200,168,75,0.07);
+}
+.brief-head:hover { background: rgba(200,168,75,0.12); }
+.brief-head .cat-title { flex: 1; }
+.brief-body { display: none; padding: 20px; }
+.brief-box.open .brief-body { display: block; }
+.brief-box.open .cat-chevron { transform: rotate(180deg); }
+.brief-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.brief-card {
+  background: var(--color-dark-elevated); border: 1px solid var(--color-gold-15);
+  border-radius: var(--radius-card); padding: 16px 18px;
+}
+.brief-card h4 {
+  font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--color-gold);
+  margin-bottom: 10px;
+}
+.brief-card ul { list-style: none; }
+.brief-card li {
+  font-size: 12.5px; color: var(--color-cream-70); line-height: 1.55;
+  padding: 3px 0 3px 16px; position: relative;
+}
+.brief-card li::before { content: '◆'; position: absolute; left: 0; top: 3px; font-size: 8px; color: var(--color-gold-deep); }
+.brief-card li strong { color: var(--color-cream); font-weight: 600; }
+.brief-card li .gold { color: var(--color-gold-light); font-weight: 600; }
+.brief-note {
+  margin-top: 16px; font-size: 11.5px; color: var(--color-cream-50);
+  border-top: 1px dashed var(--color-gold-20); padding-top: 12px; line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════
    CONFIG / SETUP BANNER
    ═══════════════════════════════════════════════════ */
 #setup-banner {
@@ -425,6 +466,99 @@ footer {
     <div class="label">Equipe</div>
     <div class="value" style="font-size:13px;line-height:1.4;color:var(--color-cream-70);font-family:var(--font-body);margin-top:4px">
       Michael · Fernanda (DRI)<br>Marcão · Eliza · Ítalo · Mara
+    </div>
+  </div>
+</section>
+
+<!-- BRIEFING FERNANDA -->
+<section id="briefing">
+  <div class="brief-box open" id="brief-box">
+    <div class="brief-head" onclick="document.getElementById('brief-box').classList.toggle('open')">
+      <span class="cat-icon">🧭</span>
+      <span class="cat-title">Briefing de Execução · Fernanda (DRI)</span>
+      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Atualizado 12/08/2026</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="brief-body">
+      <div class="brief-grid">
+
+        <div class="brief-card">
+          <h4>🎯 Missão</h4>
+          <ul>
+            <li><strong>Meta:</strong> <span class="gold">150 presentes</span> no evento · <span class="gold">~80 pagantes</span> · piso <span class="gold">R$200 mil</span></li>
+            <li><strong>Evento:</strong> 21 a 24/10/2026 (qua-sáb), Faculdade do Conhecimento, Shopping Campinas (contrato fechado)</li>
+            <li><strong>DRI da meta:</strong> Fernanda. A meta final é sempre dela.</li>
+            <li><strong>Nome público:</strong> Legacy Família (Experience só em contrato, para diferenciar do Legacy de 5 dias)</li>
+          </ul>
+        </div>
+
+        <div class="brief-card">
+          <h4>💰 Oferta &amp; Lotes</h4>
+          <ul>
+            <li><strong>Indicado:</strong> R$3.997 (12x R$397), enquadrado como 50% off da âncora R$8.000 (tabela: R$16.000)</li>
+            <li><strong>Lotes externos:</strong> <span class="gold">R$3.997 até 31/08</span> → R$5.997 (intermediário) → R$7.997 (final)</li>
+            <li><strong>Carrinho fecha:</strong> 19/10 (2 dias antes do evento). Data de virada do lote 2→3: Fernanda define</li>
+            <li><strong>Bônus único:</strong> Treinamento de Auto-Omniterapia (21 dias, começa antes do evento)</li>
+            <li><strong>Vale-por-dois:</strong> reveal na confirmação, nunca headline nem fala de palco</li>
+            <li><strong>Ex-aluno Legacy:</strong> trouxe alguém que paga ~R$4 mil, refaz o Legacy sem custo</li>
+          </ul>
+        </div>
+
+        <div class="brief-card">
+          <h4>🔀 Funil</h4>
+          <ul>
+            <li><strong>Base:</strong> indicação de alunos (Multiplique Sua Luz) → aula ao vivo "Desbloqueie a Sua Vida" (Zoom, sem replay) → pré-inscrição R$100 → ligação da equipe → confirmação</li>
+            <li><strong>Campanha externa</strong> (profissional liberal, tráfego frio): leva para a AULA, não direto para a página</li>
+            <li><strong>Afiliados e venda 1:1:</strong> podem mandar direto para a página de vendas</li>
+            <li><strong>Afiliados:</strong> comissão 50% adiantada, sem meta mínima, começam já; OMNI recebe no mínimo 50% do ingresso; termo online no portal; NF para receber</li>
+            <li><strong>Novos membros Black:</strong> 2 ingressos cada (registrados no portal)</li>
+          </ul>
+        </div>
+
+        <div class="brief-card">
+          <h4>✅ Responsabilidades da Fernanda</h4>
+          <ul>
+            <li>Calendário de aulas até outubro (próxima: alvo 20/08) e ritmo das edições</li>
+            <li>Monitorar o funil em /admin/indicacoes (presença, R$100, fechamentos)</li>
+            <li>Copy da campanha externa (página + anúncios), junto com o AIOX/Claude</li>
+            <li>Comunidade WhatsApp dos confirmados (não usar grupo: ninguém vê número de ninguém)</li>
+            <li>Esquenta pré-evento (roteiro e frequência, via portal e comunidade)</li>
+            <li>Material/agenda dos 4 dias, publicado no portal em detalhes do evento</li>
+            <li>Ponto focal dos afiliados no dia a dia (casos extraordinários vão direto ao Michael)</li>
+            <li>Levantar com a Eliza: inscritos deste Legacy + compradores sem agendamento (base dos cenários de meta)</li>
+            <li>Definir a data de virada do lote R$5.997 → R$7.997</li>
+          </ul>
+        </div>
+
+        <div class="brief-card">
+          <h4>👥 Quem faz o quê</h4>
+          <ul>
+            <li><strong>Michael:</strong> aulas ao vivo (com alunos-depoimento combinados), autoridade com afiliados, alinha equipe de filmagem</li>
+            <li><strong>Mara:</strong> pós-venda</li>
+            <li><strong>Eliza:</strong> onboarding + números da base</li>
+            <li><strong>Ítalo:</strong> logística do evento (+ possível freelancer no evento) e NF das comissões</li>
+            <li><strong>Julia (+ Claude):</strong> termo online do portal (participação + imagem + LGPD, tudo num termo só, com CPF no cadastro)</li>
+            <li><strong>Marcão:</strong> em negociação, sem martelo batido</li>
+            <li><strong>Filmagem:</strong> equipe contratada grava o evento e capta depoimentos para o próximo lançamento</li>
+          </ul>
+        </div>
+
+        <div class="brief-card">
+          <h4>📅 Prazos-chave</h4>
+          <ul>
+            <li><span class="gold">14/08 (sexta):</span> portal pronto (ingressos bônus + área do comprador + código promocional de afiliado)</li>
+            <li><span class="gold">20/08 (alvo):</span> próxima aula de convidados</li>
+            <li><span class="gold">31/08:</span> fim do lote 1 (R$3.997)</li>
+            <li><span class="gold">~14/10:</span> pesquisa/formulário de aquecimento (1 semana antes)</li>
+            <li><span class="gold">19/10:</span> carrinho fecha</li>
+            <li><span class="gold">21-24/10:</span> evento</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="brief-note">
+        <strong style="color:var(--color-gold)">Regras de ouro:</strong> sem "joguinho de últimas vagas" no palco (escassez real: capacidade + data) · a política de remarcação por força maior é interna, nunca comunicada · alimentação, hospedagem e transfer por conta do participante (equipe envia lista de hospedagens) · garantia condicionada à ligação de aprovação; reembolso só nos 7 dias do CDC · copy pré-escrita de disparo em volume precisa de aprovação (Rafa, Michael, Fernanda ou Julia) antes de ir ao ar · pitch do evento leva para a Formação (nova oferta de pós-graduação em construção).
+      </div>
     </div>
   </div>
 </section>
