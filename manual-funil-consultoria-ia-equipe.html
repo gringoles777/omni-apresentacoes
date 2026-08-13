@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual do Funil Consultoria IA — Equipe | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#FFFDF6; --tinta:#2B2B33;
+    --rosa:#E85D9E; --rosa-bg:#FDEEF5;
+    --amarelo:#E8A800; --amarelo-bg:#FFF7DC;
+    --verde:#2FA36B; --verde-bg:#E9F7EF;
+    --lilas:#8B5CF6; --lilas-bg:#F1EBFD;
+    --laranja:#F0662D; --laranja-bg:#FEF0E7;
+    --azul:#2E7DD1; --azul-bg:#E9F2FC;
+    --cinza:#8A8A95;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--papel);color:var(--tinta);font-family:'Nunito',sans-serif;font-size:17px;line-height:1.55}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 22px 90px}
+  .mao{font-family:'Caveat',cursive}
+
+  .capa{text-align:center;margin-bottom:44px}
+  .capa .etiqueta{display:inline-block;background:var(--tinta);color:#fff;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:999px}
+  .capa h1{font-family:'Caveat',cursive;font-size:56px;line-height:1.05;margin:18px 0 8px}
+  .capa h1 em{font-style:normal;color:var(--lilas)}
+  .capa p{max-width:640px;margin:8px auto 0;color:#55555f;font-weight:700}
+
+  section{margin:48px 0}
+  .titulo{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .titulo .num{min-width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:28px;font-weight:700;color:#fff}
+  .titulo h2{font-family:'Caveat',cursive;font-size:38px;line-height:1}
+
+  .ideia{background:#2B2B33;color:#fff;border-radius:16px;padding:22px 26px;text-align:center;margin-bottom:8px}
+  .ideia .mao{font-size:28px;color:#FFD34D}
+  .ideia small{display:block;margin-top:8px;color:#bbb;font-size:14px;font-weight:700}
+
+  .etapa-card{border-radius:18px;border:3px solid;background:#fff;padding:20px 24px;margin-bottom:16px;box-shadow:4px 4px 0 rgba(0,0,0,.05)}
+  .etapa-card .cab{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .etapa-card .onum{min-width:38px;height:38px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:24px;font-weight:700}
+  .etapa-card h3{font-size:19px;font-weight:900}
+  .quem{font-size:11.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:999px;color:#fff}
+  .sig{margin-bottom:10px}
+  .faco{border-radius:12px;padding:12px 16px;font-weight:700}
+  .faco b{display:block;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+  .faco ul{margin-left:18px}
+  .faco li{margin-bottom:4px}
+
+  .regras{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:700px){.regras{grid-template-columns:1fr}}
+  .regra{border-radius:14px;padding:16px 18px;font-weight:700;border:3px solid}
+  .regra b{display:block;margin-bottom:4px;font-size:16.5px}
+
+  .cardsdr{background:#fff;border:3px solid var(--lilas);border-radius:18px;padding:20px 24px;box-shadow:6px 6px 0 var(--lilas-bg)}
+  .cardsdr .linha{display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:2px dotted #e5e0f7}
+  .cardsdr .linha:last-child{border-bottom:none}
+  .cardsdr .k{min-width:160px;font-size:12.5px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--lilas)}
+  .cardsdr .v{font-weight:700}
+
+  .faq details{background:#fff;border:2px solid #e8e4d8;border-radius:12px;margin-bottom:10px;padding:0}
+  .faq summary{cursor:pointer;font-weight:900;padding:14px 18px;list-style:none}
+  .faq summary::before{content:"❓ "}
+  .faq p{padding:0 18px 14px;font-weight:600;color:#4a4a55}
+
+  .rodape{margin-top:60px;text-align:center;color:var(--cinza);font-size:13px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <span class="etiqueta">OMNI Brasil · Manual da Equipe Comercial</span>
+    <h1>Funil <em>Consultoria IA</em><br>como trabalhar o quadro novo</h1>
+    <p>A partir de agora, um assistente de IA conversa com o lead ANTES de você. Ele qualifica, descarta quem não serve e muitas vezes já agenda a consultoria sozinho. Este manual mostra o que cada etapa significa e o que é o SEU trabalho em cada uma.</p>
+  </div>
+
+  <div class="ideia">
+    <span class="mao">"O lead que chega em você já respondeu 20 perguntas. Seu trabalho não é descobrir quem ele é — é honrar o compromisso que ele já assumiu."</span>
+    <small>É por isso que a competência nº 1 do funil novo é pontualidade, não volume de discagem.</small>
+  </div>
+
+  <!-- ETAPAS -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--rosa)">1</div><h2>As etapas, uma a uma</h2></div>
+
+    <div class="etapa-card" style="border-color:var(--azul)">
+      <div class="cab"><div class="onum" style="background:var(--azul)">1</div><h3>Lead Geral</h3><span class="quem" style="background:var(--azul)">🤖 máquina — ninguém trabalha aqui</span></div>
+      <p class="sig">A pessoa preencheu o formulário e está conversando com a IA agora. Se ela for desqualificada no chat (sem budget, quer ser atendida como paciente, sem comprometimento), o negócio vira <b>Perdido aqui mesmo</b>, com o motivo preenchido — ele nem avança.</p>
+      <div class="faco" style="background:var(--azul-bg)"><b>O que eu faço</b>Nada. Não ligue, não mande mensagem: a IA está no meio da conversa com ela.</div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--azul)">
+      <div class="cab"><div class="onum" style="background:var(--azul)">2</div><h3>Retomada (abandonou)</h3><span class="quem" style="background:var(--azul)">🤖 máquina — régua automática</span></div>
+      <p class="sig">Começou o chat e sumiu no meio. O sistema move pra cá sozinho depois de 30 minutos, e a régua de WhatsApp manda até 4 toques com o link pra ela continuar de onde parou.</p>
+      <div class="faco" style="background:var(--azul-bg)"><b>O que eu faço</b>Nada por padrão — a régua trabalha. Se o lead responder algo fora do script na conversa, aí sim é com você.</div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--rosa)">
+      <div class="cab"><div class="onum" style="background:var(--rosa)">3</div><h3>MQL (agendar)</h3><span class="quem" style="background:var(--rosa)">📞 SDR — fila prioritária</span></div>
+      <p class="sig">Qualificado! Respondeu tudo, tem perfil, só não fechou horário. Muitos aqui <b>pediram um horário específico</b> ("pode me ligar às 19h?") — o horário pedido está no campo <b>Horário (Pesquisa)</b> do negócio.</p>
+      <div class="faco" style="background:var(--rosa-bg)"><b>O que eu faço</b><ul><li>Se tem horário pedido: <b>ligar NA HORA que a pessoa pediu</b>. Não antes, não depois. É compromisso, não lista fria.</li><li>Se não tem: contatar no mesmo dia e fechar a consultoria.</li><li>Fechou horário? Crie a atividade de reunião e mova para "Agendamento a confirmar" (ou "Reunião confirmada", se confirmou na hora com você).</li></ul></div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--laranja)">
+      <div class="cab"><div class="onum" style="background:var(--laranja)">4</div><h3>Agendamento a confirmar</h3><span class="quem" style="background:var(--laranja)">📞 SDR — ATENÇÃO MÁXIMA</span></div>
+      <p class="sig">Agendou a consultoria no chat mas <b>ainda não clicou no botão de confirmar</b> do WhatsApp. É aqui que o no-show nasce: agendou e esfriou.</p>
+      <div class="faco" style="background:var(--laranja-bg)"><b>O que eu faço</b><ul><li>Negócio parado aqui mais de 1 dia (o sino avisa): chamar a pessoa, humanizar, garantir a presença.</li><li>Ela confirmou com você na conversa? Mova para "Reunião confirmada" manualmente.</li></ul></div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--verde)">
+      <div class="cab"><div class="onum" style="background:var(--verde)">5</div><h3>Reunião confirmada</h3><span class="quem" style="background:var(--verde)">🤝 closer assume</span></div>
+      <p class="sig">Clicou em confirmar (o sistema move sozinho) ou o SDR confirmou na conversa. O link do Meet está no negócio e na atividade. Os lembretes automáticos (24h, 1h, na hora) saem sem ninguém pedir.</p>
+      <div class="faco" style="background:var(--verde-bg)"><b>O que eu faço (closer)</b><ul><li>Abrir a atividade da reunião: o perfil resumido está lá (o que move, a dor nas palavras do lead, nota de comprometimento, quem decide).</li><li>Depois da reunião, <b>SEMPRE registrar o desfecho</b>: compareceu → mover para "Reunião Realizada"; faltou → mover para "No-show".</li></ul></div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--amarelo)">
+      <div class="cab"><div class="onum" style="background:var(--amarelo)">6</div><h3>No-show (reagendar)</h3><span class="quem" style="background:var(--amarelo)">📞 SDR — recuperação</span></div>
+      <p class="sig">Confirmou e não apareceu. O negócio <b>avança</b> pra cá (nunca volta etapa!). Esta coluna é a sua bandeja de urgências: ninguém mora aqui.</p>
+      <div class="faco" style="background:var(--amarelo-bg)"><b>O que eu faço</b><ul><li>Contatar no mesmo dia, reagendar. Reagendou e compareceu → mover direto para "Reunião Realizada".</li><li>Não recuperou em alguns dias → Perdido com motivo "NO-SHOW SEM RECUPERAÇÃO".</li></ul></div>
+    </div>
+
+    <div class="etapa-card" style="border-color:var(--lilas)">
+      <div class="cab"><div class="onum" style="background:var(--lilas)">7</div><h3>Reunião Realizada → Oportunidade → Negociação → Venda</h3><span class="quem" style="background:var(--lilas)">🤝 closer</span></div>
+      <p class="sig">Daqui pra frente nada mudou: é o processo de vendas que vocês já conhecem.</p>
+    </div>
+  </section>
+
+  <!-- CARD -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--lilas)">2</div><h2>O que olhar no card antes de ligar</h2></div>
+    <div class="cardsdr">
+      <div class="linha"><span class="k">🕐 Horário (Pesquisa)</span><span class="v">A hora que o lead PEDIU pra ser chamado — informação nº 1</span></div>
+      <div class="linha"><span class="k">🎯 Nota (Pesquisa)</span><span class="v">Comprometimento 1 a 5, medido pela IA na conversa</span></div>
+      <div class="linha"><span class="k">🧭 O que move</span><span class="v">Propósito, renda ou carreira — o ângulo da sua abertura</span></div>
+      <div class="linha"><span class="k">📝 Nota do negócio</span><span class="v">TODAS as 20 respostas do chat, incluindo a dor nas palavras do lead e quem decide o investimento — leia antes de ligar, a abertura da ligação está aqui</span></div>
+      <div class="linha"><span class="k">🔗 Link (Pesquisa)</span><span class="v">Link do Meet da consultoria (quando já agendada)</span></div>
+      <div class="linha"><span class="k">🏷️ Etiqueta MQL-IA</span><span class="v">Este lead foi qualificado pela IA sem falar com humano — NUNCA remover essa etiqueta (é ela que mede o funil novo)</span></div>
+    </div>
+  </section>
+
+  <!-- REGRAS DE OURO -->
+  <section>
+    <div class="titulo"><div class="num" style="background:var(--verde)">3</div><h2>Regras de ouro do quadro</h2></div>
+    <div class="regras">
+      <div class="regra" style="border-color:var(--rosa);background:var(--rosa-bg)"><b>⏰ Hora marcada é sagrada</b>Lead que pediu horário recebe a ligação naquele horário. Atrasar aqui é onde o funil morre.</div>
+      <div class="regra" style="border-color:var(--verde);background:var(--verde-bg)"><b>➡️ Negócio nunca volta etapa</b>No-show AVANÇA pra coluna de no-show. Se precisar "voltar", algo está errado — fale com a Rafa.</div>
+      <div class="regra" style="border-color:var(--lilas);background:var(--lilas-bg)"><b>🏷️ MQL-IA não se apaga</b>A etiqueta é como medimos se o funil novo funciona. Pode ADICIONAR outras; nunca remover essa.</div>
+      <div class="regra" style="border-color:var(--amarelo);background:var(--amarelo-bg)"><b>📋 Toda reunião tem desfecho</b>Realizada, no-show ou remarcada — sempre registrado no quadro no mesmo dia.</div>
+      <div class="regra" style="border-color:var(--azul);background:var(--azul-bg)"><b>🤖 Não atropele a máquina</b>Lead em "Lead Geral" ou "Retomada" está com a IA/régua. Só entre se ele falar com você primeiro.</div>
+      <div class="regra" style="border-color:var(--laranja);background:var(--laranja-bg)"><b>🧪 "teste" no nome = ignorar</b>Negócio com [TESTE] no título é teste interno: não trabalhar, não contar.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="titulo"><div class="num" style="background:var(--azul)">4</div><h2>Perguntas que vão surgir</h2></div>
+    <details><summary>O lead do funil antigo (LPs) sumiu?</summary><p>Não. O funil SDR-Novo continua existindo com os leads de formulário das LPs, com o processo de sempre (tentativa de conexão, M0). O quadro novo é só pra quem passa pelo chat de IA. Com o tempo, o antigo esvazia.</p></details>
+    <details><summary>Quem qualificou no chat pode receber o M0 ("posso te ligar 5 minutinhos")?</summary><p>Não — no quadro novo o robô de disparo nem enxerga esses negócios. Se você vir isso acontecendo, avise a Rafa na hora: é bug.</p></details>
+    <details><summary>O lead da Retomada concluiu o chat depois. E aí?</summary><p>O sistema move sozinho pro destino certo (MQL, Agendamento a confirmar ou Perdido). Você não precisa fazer nada.</p></details>
+    <details><summary>Fechei o horário com o lead do MQL por telefone. Onde registro?</summary><p>Crie a atividade de reunião no negócio (com o horário certo e o dono sendo você) e mova o card para "Agendamento a confirmar" — ou direto para "Reunião confirmada" se ele confirmou com você na ligação.</p></details>
+    <details><summary>De quem é o negócio depois que a reunião confirma?</summary><p>O closer assume a condução, mas o campo "SDR:" continua registrando quem foi o SDR — a atribuição de vocês não se perde.</p></details>
+  </section>
+
+  <div class="rodape">OMNI Brasil · Manual do Funil Consultoria IA · v1 — 12/08/2026 · Dúvidas: Rafa</div>
+</div>
+</body>
+</html>

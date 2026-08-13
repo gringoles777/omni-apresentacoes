@@ -182,18 +182,20 @@
         <div class="etapa morta"><b>Funil 21 · Closer</b><span>21 deals parados há +30 dias em "Reunião Agendada", vários com donos que já saíram (Rogério/Erik). 41 reuniões venceram sem desfecho.</span></div>
       </div>
       <div class="funil novo">
-        <h3>✨ Pipeline 21 esticado</h3>
-        <div class="etapa robo"><b>1 · Chat em andamento <span class="tag novoT">nova</span> <span class="tag robo">máquina</span></b><span>A IA conversa — nenhum humano trabalha aqui</span></div>
+        <h3>✨ Pipeline 21 — construído pela Rafa (12/08)</h3>
+        <div class="etapa robo"><b>1 · Lead Geral (493) <span class="tag robo">máquina</span></b><span>Formulário enviado, chat rodando. Desqualificado = Perdido aqui mesmo, nem avança.</span></div>
         <div class="seta-baixo">↓</div>
-        <div class="etapa robo"><b>2 · Retomada (abandonou) <span class="tag novoT">nova</span> <span class="tag robo">máquina</span></b><span>Régua W1-W4 chama de volta pro chat</span></div>
+        <div class="etapa robo"><b>2 · Retomada — abandonou (491) <span class="tag robo">máquina</span></b><span>Iniciou o chat e não concluiu; régua W1-W4 chama de volta</span></div>
         <div class="seta-baixo">↓</div>
-        <div class="etapa sdr1"><b>3 · Ligação combinada ⭐ <span class="tag novoT">nova</span> <span class="tag sdr">SDR</span></b><span>Lead pediu horário → SDR liga NA HORA pedida. Fila nº 1.</span></div>
+        <div class="etapa sdr1"><b>3 · MQL agendar (492) ⭐ <span class="tag sdr">SDR</span></b><span>Qualificado, só faltou agendar. Quem pediu horário → SDR liga NA HORA pedida.</span></div>
         <div class="seta-baixo">↓</div>
-        <div class="etapa sdr2"><b>4 · Reunião Agendada <span class="tag sdr">já existe</span></b><span>Os dois mundos convergem aqui. Dono troca de SDR → closer; a etiqueta MQL-IA separa a origem nas métricas.</span></div>
+        <div class="etapa sdr1"><b>4 · Agendamento a confirmar (490) <span class="tag sdr">SDR atento</span></b><span>Agendou e ainda não clicou em confirmar — é aqui que o no-show nasce</span></div>
         <div class="seta-baixo">↓</div>
-        <div class="etapa sdr2"><b>5 · Realizada / No-show <span class="tag novoT">nasce o show rate</span></b><span>No-show volta uma etapa e o dono volta pro SDR reagendar — o loop fica no mesmo quadro.</span></div>
+        <div class="etapa sdr2"><b>5 · Reunião confirmada (112) <span class="tag novoT">botão move</span></b><span>Clicou em confirmar. Closer assume; etiqueta MQL-IA separa a origem.</span></div>
         <div class="seta-baixo">↓</div>
-        <div class="etapa sdr2"><b>6-8 · Oportunidade → Negociação → Venda <span class="tag sdr">já existem</span></b><span>Nada muda pros closers.</span></div>
+        <div class="etapa sdr2"><b>6 · No-show reagendar <span class="tag novoT">criar na migração</span></b><span>Faltou → AVANÇA pra cá (nunca volta etapa). Recuperou → Realizada. Nasce o show rate.</span></div>
+        <div class="seta-baixo">↓</div>
+        <div class="etapa sdr2"><b>7-10 · Realizada → Oportunidade → Negociação → Venda <span class="tag sdr">já existem</span></b><span>Nada muda pros closers.</span></div>
       </div>
     </div>
     <div style="margin-top:16px;background:#fff;border:2px dashed var(--amarelo);border-radius:14px;padding:14px 18px;font-weight:700">📜 <b>E o funil 65?</b> Vira o quadro congelado do mundo antigo: continua recebendo só lead de formulário (LP sem chat), com robô M0 e régua atual intocados. Esvazia conforme o tráfego migra pro chat — quando zerar, arquiva. <span style="color:var(--amarelo)">O encolhimento dele é o termômetro da virada.</span></div>
@@ -279,8 +281,8 @@
     <div class="titulo"><div class="num" style="background:var(--lilas)">7</div><h2>Decidido ✓ e o que <span class="marca" style="background:var(--lilas-bg);color:var(--lilas)">ainda falta</span> você cravar</h2></div>
 
     <div class="cartao" style="border-color:var(--verde);background:var(--verde-bg);margin-bottom:20px">
-      <h3>✅ Decidido (12/08): pipeline único, esticando o 21</h3>
-      <p>As etapas do mundo novo entram no topo do pipeline do Closer; o funil 65 congela como legado de LP. Com isso, duas pendências saíram da mesa sozinhas: a etapa própria pro pré-agendado (virou a "Ligação combinada" do desenho) e o risco do M0 (morre por construção).</p>
+      <h3>✅ Decidido e PREPARADO (12/08)</h3>
+      <p>Pipeline único esticando o 21 — e a Rafa já criou as etapas na UI (IDs 493/491/492/490 confirmados na API). O código da virada está pronto na main atrás da flag <b>PESQUISA_PIPELINE=closer21</b> (170 testes passando; produção intocada até ligar a flag). Falta executar: roteiro completo em <b>workspace/businesses/omni_brasil/outputs/crm-pipeline21-2026-08/MIGRACAO-PASSO-A-PASSO.md</b> · manual do time: <b>manual-funil-consultoria-ia-equipe.html</b> neste mesmo portal.</p>
     </div>
 
     <div class="decisao" style="border-color:var(--rosa)">
