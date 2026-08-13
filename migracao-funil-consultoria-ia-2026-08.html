@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migração do Funil Consultoria IA — passo a passo | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papel:#FFFDF6; --tinta:#2B2B33;
+    --rosa:#E85D9E; --rosa-bg:#FDEEF5;
+    --amarelo:#E8A800; --amarelo-bg:#FFF7DC;
+    --verde:#2FA36B; --verde-bg:#E9F7EF;
+    --lilas:#8B5CF6; --lilas-bg:#F1EBFD;
+    --laranja:#F0662D; --laranja-bg:#FEF0E7;
+    --azul:#2E7DD1; --azul-bg:#E9F2FC;
+    --cinza:#8A8A95;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--papel);color:var(--tinta);font-family:'Nunito',sans-serif;font-size:17px;line-height:1.55}
+  .wrap{max-width:840px;margin:0 auto;padding:40px 22px 90px}
+  .mao{font-family:'Caveat',cursive}
+
+  .capa{text-align:center;margin-bottom:40px}
+  .capa .etiqueta{display:inline-block;background:var(--tinta);color:#fff;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;padding:7px 18px;border-radius:999px}
+  .capa h1{font-family:'Caveat',cursive;font-size:54px;line-height:1.05;margin:18px 0 8px}
+  .capa h1 em{font-style:normal;color:var(--rosa)}
+  .capa p{max-width:640px;margin:8px auto 0;color:#55555f;font-weight:700}
+  .status{display:inline-block;margin-top:14px;background:var(--verde-bg);border:2px solid var(--verde);color:var(--verde);font-weight:900;padding:8px 18px;border-radius:999px;font-size:14px}
+
+  .bloco{margin:44px 0}
+  .bloco-cab{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .bloco-cab .letra{min-width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:30px;font-weight:700;color:#fff}
+  .bloco-cab h2{font-family:'Caveat',cursive;font-size:36px;line-height:1}
+  .bloco-sub{color:#6b6b75;font-weight:800;font-size:14px;margin-bottom:14px;margin-left:60px}
+
+  .passo{display:flex;gap:14px;align-items:flex-start;background:#fff;border:2px solid;border-radius:14px;padding:14px 18px;margin-bottom:12px}
+  .passo .check{min-width:30px;height:30px;border:3px solid;border-radius:8px;margin-top:2px;background:#fff}
+  .passo b{display:block;font-size:16.5px}
+  .passo span{font-size:14.5px;color:#5b5b66;font-weight:600}
+  .passo code{background:#f4f1e8;border-radius:6px;padding:1px 7px;font-size:13.5px;font-weight:700}
+  .mini{display:inline-block;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:999px;color:#fff;margin-left:6px;vertical-align:2px}
+
+  .tabela{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);font-size:15px}
+  .tabela th{background:var(--tinta);color:#fff;padding:9px 12px;text-align:left;font-size:12.5px;letter-spacing:1px;text-transform:uppercase}
+  .tabela td{padding:9px 12px;border-bottom:1px solid #eee;font-weight:700}
+
+  .alerta{background:var(--laranja-bg);border:3px solid var(--laranja);border-radius:16px;padding:18px 22px;font-weight:700;margin:16px 0}
+  .rollback{background:#2B2B33;color:#fff;border-radius:16px;padding:20px 24px;margin-top:16px}
+  .rollback .mao{font-size:26px;color:#FFD34D}
+  .rollback p{color:#ccc;font-weight:700;font-size:15px;margin-top:6px}
+
+  .rodape{margin-top:60px;text-align:center;color:var(--cinza);font-size:13px;font-weight:700}
+  .rodape a{color:var(--azul)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <span class="etiqueta">OMNI Brasil · Roteiro de Execução</span>
+    <h1>Migração do Funil <em>Consultoria IA</em><br>passo a passo</h1>
+    <p>Do funil 65 pro pipeline 21 (Closer), na ordem certa e com rollback de 2 comandos. O código já está pronto atrás da flag <b>PESQUISA_PIPELINE</b> — nada muda em produção até o Bloco B.</p>
+    <span class="status">✅ Preparação concluída em 12/08 · 170 testes passando · produção intocada</span>
+  </div>
+
+  <!-- BLOCO A -->
+  <div class="bloco">
+    <div class="bloco-cab"><div class="letra" style="background:var(--rosa)">A</div><h2>Pipedrive na interface</h2></div>
+    <div class="bloco-sub">Rafa ou Michael · ~15 minutos · pode fazer a qualquer hora, antes de tudo</div>
+
+    <div class="passo" style="border-color:var(--rosa)"><div class="check" style="border-color:var(--rosa)"></div><div><b>1. Criar a etapa "No-show (reagendar)"</b><span>No pipeline 21, entre "Reunião confirmada" e "Reunião Realizada". Probabilidade 40%, estagnando em 2 dias. <b>Anotar o ID da etapa</b> (aparece na URL ao editá-la) — ele entra no Bloco B.</span></div></div>
+
+    <div class="passo" style="border-color:var(--rosa)"><div class="check" style="border-color:var(--rosa)"></div><div><b>2. Ajustar as probabilidades das etapas</b> <span class="mini" style="background:var(--amarelo)">melhoria sugerida</span><span>Hoje quase tudo está em 100% e o forecast infla. Valores sugeridos:</span>
+      <table class="tabela" style="margin-top:8px">
+        <tr><th>Etapa</th><th>Probabilidade</th></tr>
+        <tr><td>Lead Geral</td><td>5%</td></tr>
+        <tr><td>Retomada (abandonou)</td><td>5%</td></tr>
+        <tr><td>MQL (agendar)</td><td>30%</td></tr>
+        <tr><td>Agendamento a confirmar</td><td>60%</td></tr>
+        <tr><td>Reunião confirmada</td><td>90% (já está ✓)</td></tr>
+        <tr><td>No-show (reagendar)</td><td>40%</td></tr>
+      </table>
+    </div></div>
+
+    <div class="passo" style="border-color:var(--rosa)"><div class="check" style="border-color:var(--rosa)"></div><div><b>3. Ligar o sino "estagnando em dias"</b> <span class="mini" style="background:var(--amarelo)">melhoria sugerida</span><span>"Agendamento a confirmar" → 1 dia (etapa de atenção máxima do SDR) · "MQL (agendar)" → 2 dias. A "Reunião confirmada" já tem (1 dia ✓).</span></div></div>
+
+    <div class="passo" style="border-color:var(--rosa)"><div class="check" style="border-color:var(--rosa)"></div><div><b>4. Faxina do resíduo do pipeline 21</b><span>46 negócios abertos, 21 parados há +30 dias, vários com donos que já saíram (Rogério/Erik). O @comercial-chief gera a lista "redistribuir vs marcar perdido", você aprova o lote, a squad executa. Precisa acontecer ANTES de o time começar a operar no quadro.</span></div></div>
+
+    <div class="passo" style="border-color:var(--rosa)"><div class="check" style="border-color:var(--rosa)"></div><div><b>5. Correção de raiz da etiqueta (recomendado)</b><span>Na Automation do Pipedrive que cria a atividade "M 0": remover a ação que mexe em "Etiqueta" (ela SUBSTITUI o campo em vez de somar — é o que apagava a MQL-IA). Só você consegue editar.</span></div></div>
+  </div>
+
+  <!-- BLOCO B -->
+  <div class="bloco">
+    <div class="bloco-cab"><div class="letra" style="background:var(--azul)">B</div><h2>VPS — a virada em si</h2></div>
+    <div class="bloco-sub">AURA executa com você acompanhando · ~15 minutos · precisa do ID da etapa No-show (passo A1)</div>
+
+    <div class="passo" style="border-color:var(--azul)"><div class="check" style="border-color:var(--azul)"></div><div><b>1. Puxar o código na VPS</b><span><code>git pull</code> em /home/michael/omni_brasil — a flag ainda desligada, nada muda. Se houver drift local: parar e resolver antes.</span></div></div>
+    <div class="passo" style="border-color:var(--azul)"><div class="check" style="border-color:var(--azul)"></div><div><b>2. Rodar a migration do banco</b><span>Cria a coluna de controle do mover de Retomada (idempotente, pode rodar 2x sem problema).</span></div></div>
+    <div class="passo" style="border-color:var(--azul)"><div class="check" style="border-color:var(--azul)"></div><div><b>3. Ligar a flag no .env (com backup antes)</b><span><code>PESQUISA_PIPELINE=closer21</code> + <code>PESQUISA_STAGE_NOSHOW=&lt;ID do passo A1&gt;</code></span></div></div>
+    <div class="passo" style="border-color:var(--azul)"><div class="check" style="border-color:var(--azul)"></div><div><b>4. Reiniciar e conferir os logs</b><span><code>pm2 restart lead-intake-server lead-intake-worker</code> e olhar o tick rodar limpo.</span></div></div>
+  </div>
+
+  <!-- BLOCO C -->
+  <div class="bloco">
+    <div class="bloco-cab"><div class="letra" style="background:var(--lilas)">C</div><h2>Squads</h2></div>
+    <div class="bloco-sub">AURA aciona · em paralelo com o Bloco B</div>
+
+    <div class="passo" style="border-color:var(--lilas)"><div class="check" style="border-color:var(--lilas)"></div><div><b>1. @disparo-chief — botão de confirmação</b><span>Hoje o clique em CONFIRMAR só grava nota. Passa a também mover o negócio 490 → 112 (só se ainda estiver em 490 — quem já avançou não volta). E validar que a régua de retomada W1-W4 segue ok.</span></div></div>
+    <div class="passo" style="border-color:var(--lilas)"><div class="check" style="border-color:var(--lilas)"></div><div><b>2. @comercial-chief — monitor comercial</b><span>Regras R1-R5 passam a vigiar as etapas novas do 21; aposentar o radar das etapas da pesquisa no 65.</span></div></div>
+    <div class="passo" style="border-color:var(--lilas)"><div class="check" style="border-color:var(--lilas)"></div><div><b>3. @dashomni-chief — dashboard</b><span>Métricas novas: taxa de conclusão do chat, qualificação da IA, confirmado vs pré-agendado, show rate, MQL-IA vs MQL humano, tempo pedido→ligação.</span></div></div>
+    <div class="passo" style="border-color:var(--lilas)"><div class="check" style="border-color:var(--lilas)"></div><div><b>4. @comercial-chief — rotação do token Pipedrive</b> <span class="mini" style="background:var(--laranja)">segurança</span><span>O token da API está em texto puro em 3 scripts do repositório. Gerar novo, guardar no vault, atualizar os scripts. Fora da migração, mas não deixar esfriar.</span></div></div>
+  </div>
+
+  <!-- BLOCO D -->
+  <div class="bloco">
+    <div class="bloco-cab"><div class="letra" style="background:var(--verde)">D</div><h2>Teste ponta a ponta</h2></div>
+    <div class="bloco-sub">Obrigatório ANTES de abrir tráfego · lead com "teste" no nome (não conta métrica)</div>
+
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>1. Cadastro</b><span>Deal nasce em Lead Geral (493) no pipeline 21, com SDR do rodízio e UTMs preenchidas.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>2. Abandono</b><span>Iniciar o chat e fechar → deal move pra Retomada (491). No teste aceleramos o relógio de 30 pra 2 minutos.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>3. Agendamento completo</b><span>Chat até o fim com horário → deal em 490 + etiqueta MQL-IA + atividade de reunião com o SDR como dono + link do Meet + lembrete chega no WhatsApp.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>4. Botão confirmar</b><span>Clicar no WhatsApp → deal move pra Reunião confirmada (112). Depende do passo C1.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>5. Pedido de horário fora da grade</b><span>Deal em MQL agendar (492) + alerta no Google Chat com o link da conversa.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>6. Desqualificado</b><span>Perdido em 493 com o motivo estruturado, sem avançar.</span></div></div>
+    <div class="passo" style="border-color:var(--verde)"><div class="check" style="border-color:var(--verde)"></div><div><b>7. Registrar e abrir tráfego</b><span>Atualizar capabilities.yaml + changelog, e aí sim a decisão de mídia: redirecionar o tráfego pro chat.</span></div></div>
+  </div>
+
+  <div class="alerta">⚠️ <b>A regra que não muda:</b> nada de abrir tráfego real antes do Bloco D fechar 7 de 7. O funil 65 continua funcionando normalmente durante toda a migração — nenhum lead se perde em nenhum cenário.</div>
+
+  <div class="rollback">
+    <span class="mao">Se qualquer coisa cheirar mal: rollback em 2 comandos</span>
+    <p>Voltar a flag pra <b>sdr65</b> no .env e reiniciar o PM2 — o chat volta a escrever no funil 65 na hora. A etapa No-show e a migration são inertes com a flag desligada; nada mais precisa ser desfeito.</p>
+  </div>
+
+  <div class="rodape">OMNI Brasil · Roteiro preparado por AURA em 12/08/2026 · Versão técnica completa (com os comandos) no repositório: workspace/businesses/omni_brasil/outputs/crm-pipeline21-2026-08/MIGRACAO-PASSO-A-PASSO.md · Manual do time: <a href="manual-funil-consultoria-ia-equipe.html">manual-funil-consultoria-ia-equipe.html</a></div>
+</div>
+</body>
+</html>
