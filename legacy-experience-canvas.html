@@ -215,6 +215,75 @@ header.topbar {
 }
 
 /* ═══════════════════════════════════════════════════
+   CRONOGRAMA DE DIVULGAÇÃO
+   ═══════════════════════════════════════════════════ */
+#cronograma { max-width: 1400px; margin: 0 auto 24px; padding: 0 32px; }
+.crono-box {
+  background: var(--color-dark); border: 1px solid var(--color-gold-30);
+  border-radius: var(--radius-card); overflow: hidden;
+}
+.crono-head {
+  padding: 16px 20px; cursor: pointer; user-select: none;
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(200,168,75,0.07);
+}
+.crono-head:hover { background: rgba(200,168,75,0.12); }
+.crono-head .cat-title { flex: 1; }
+.crono-body { display: none; padding: 20px; }
+.crono-box.open .crono-body { display: block; }
+.crono-box.open .cat-chevron { transform: rotate(180deg); }
+
+.day {
+  display: grid; grid-template-columns: 96px 1fr; gap: 20px;
+  padding: 18px 0; border-top: 1px dashed var(--color-gold-20);
+}
+.day:first-child { border-top: none; padding-top: 0; }
+.day-when { text-align: right; }
+.day-date { font-family: var(--font-display); font-size: 21px; font-weight: 600; color: var(--color-gold); line-height: 1.1; }
+.day-dow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cream-30); margin-top: 4px; }
+.day-tag {
+  display: inline-block; margin-top: 8px; font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-pill);
+  border: 1px solid var(--color-gold-30); color: var(--color-gold);
+}
+.day-tag.marco { background: var(--color-gold-15); }
+.day-items { display: flex; flex-direction: column; gap: 15px; min-width: 0; }
+.track-name {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--color-cream-50); margin-bottom: 7px;
+  display: flex; align-items: center; gap: 8px;
+}
+.track-name::before { content: ''; width: 18px; height: 1px; background: var(--color-gold-30); flex-shrink: 0; }
+.track ul { list-style: none; }
+.track li {
+  font-size: 13px; color: var(--color-cream-70); line-height: 1.6;
+  padding: 4px 0 4px 16px; position: relative;
+}
+.track li::before { content: '◆'; position: absolute; left: 0; top: 6px; font-size: 8px; color: var(--color-gold-deep); }
+.track li strong { color: var(--color-cream); font-weight: 600; }
+.who {
+  display: inline-block; font-size: 9.5px; letter-spacing: 0.5px; text-transform: uppercase;
+  font-weight: 600; padding: 2px 8px; border-radius: var(--radius-pill);
+  background: var(--color-gold-10); border: 1px solid var(--color-gold-20);
+  color: var(--color-gold-light); margin-left: 7px; white-space: nowrap;
+}
+.cond {
+  border-left: 2px solid rgba(232,200,106,0.45); background: rgba(232,200,106,0.05);
+  padding: 11px 14px; border-radius: 0 6px 6px 0;
+  font-size: 12.5px; color: var(--color-cream-70); line-height: 1.6;
+}
+.cond strong { color: var(--status-thinking); }
+.crono-foot { margin-top: 22px; border-top: 1px solid var(--color-gold-20); padding-top: 20px; }
+.crono-foot > .track-name { margin-bottom: 14px; }
+.decision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.idea-quote {
+  margin-top: 12px; padding: 14px 18px; border-left: 3px solid var(--color-gold);
+  background: rgba(200,168,75,0.06); border-radius: 0 6px 6px 0;
+  font-family: var(--font-serif); font-size: 15px; line-height: 1.6; color: var(--color-cream);
+}
+.idea-quote span { display: block; font-family: var(--font-body); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-gold); margin-bottom: 8px; }
+
+/* ═══════════════════════════════════════════════════
    CONFIG / SETUP BANNER
    ═══════════════════════════════════════════════════ */
 #setup-banner {
@@ -388,7 +457,11 @@ footer {
 
 @media (max-width: 768px) {
   header.topbar { padding: 14px 16px; }
-  .summary-row, .filters, .canvas-wrap, #setup-banner { padding-left: 16px; padding-right: 16px; }
+  .summary-row, .filters, .canvas-wrap, #setup-banner, #briefing, #cronograma { padding-left: 16px; padding-right: 16px; }
+  .day { grid-template-columns: 1fr; gap: 10px; }
+  .day-when { text-align: left; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .day-dow { margin-top: 0; }
+  .day-tag { margin-top: 0; }
   .gap-row-top { grid-template-columns: 24px 1fr auto; }
   .gap-badge { display: none; }
   .gap-detail { padding-left: 16px; }
@@ -476,7 +549,7 @@ footer {
     <div class="brief-head" onclick="document.getElementById('brief-box').classList.toggle('open')">
       <span class="cat-icon">🧭</span>
       <span class="cat-title">Briefing de Execução · Fernanda (DRI)</span>
-      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Atualizado 12/08/2026</span>
+      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Atualizado 14/08/2026</span>
       <span class="cat-chevron">▼</span>
     </div>
     <div class="brief-body">
@@ -497,8 +570,9 @@ footer {
           <ul>
             <li><strong>Indicado:</strong> R$3.997 (12x R$397), enquadrado como 50% off da âncora R$8.000 (tabela: R$16.000)</li>
             <li><strong>Lotes externos:</strong> <span class="gold">R$3.997 até 31/08</span> → R$5.997 (intermediário) → R$7.997 (final)</li>
-            <li><strong>Carrinho fecha:</strong> 19/10 (2 dias antes do evento). Data de virada do lote 2→3: Fernanda define</li>
+            <li><strong>Carrinho fecha:</strong> 19/10 (2 dias antes do evento). Virada do lote 2→3: <span class="gold">fim de setembro</span>, antecipável conforme vendas</li>
             <li><strong>Bônus único:</strong> Treinamento de Auto-Omniterapia (21 dias, começa antes do evento)</li>
+            <li><strong>Nova camada (14/08):</strong> a festa dos <span class="gold">11 anos da OMNI</span> e a inauguração do novo espaço entram como parte da experiência</li>
             <li><strong>Vale-por-dois:</strong> reveal na confirmação, nunca headline nem fala de palco</li>
             <li><strong>Ex-aluno Legacy:</strong> trouxe alguém que paga ~R$4 mil, refaz o Legacy sem custo</li>
           </ul>
@@ -509,6 +583,7 @@ footer {
           <ul>
             <li><strong>Base:</strong> indicação de alunos (Multiplique Sua Luz) → aula ao vivo "Desbloqueie a Sua Vida" (Zoom, sem replay) → pré-inscrição R$100 → ligação da equipe → confirmação</li>
             <li><strong>Campanha externa</strong> (profissional liberal, tráfego frio): leva para a AULA, não direto para a página</li>
+            <li><strong>Campanha externa para terapeutas: adiada para a fase 2</strong> (decisão de 14/08). Até lá, aquecimento pela distribuição de conteúdo que já está rodando para esse público</li>
             <li><strong>Afiliados e venda 1:1:</strong> podem mandar direto para a página de vendas</li>
             <li><strong>Afiliados:</strong> comissão 50% adiantada, sem meta mínima, começam já; OMNI recebe no mínimo 50% do ingresso; termo online no portal; NF para receber</li>
             <li><strong>Novos membros Black:</strong> 2 ingressos cada (registrados no portal)</li>
@@ -526,7 +601,9 @@ footer {
             <li>Material/agenda dos 4 dias, publicado no portal em detalhes do evento</li>
             <li>Ponto focal dos afiliados no dia a dia (casos extraordinários vão direto ao Michael)</li>
             <li>Levantar com a Eliza: inscritos deste Legacy + compradores sem agendamento (base dos cenários de meta)</li>
-            <li>Definir a data de virada do lote R$5.997 → R$7.997</li>
+            <li>Confirmar com a Eliza, até 17/08, quantos ingressos sobram para venda depois das vagas já garantidas aos alunos</li>
+            <li>Executar o cronograma de divulgação de 17 a 21/08 (mensagens, e-mails e página do Legacy)</li>
+            <li><s style="color:var(--color-cream-30)">Definir a data de virada do lote R$5.997 → R$7.997</s> — definido: <span class="gold">fim de setembro</span>, antecipável conforme vendas</li>
           </ul>
         </div>
 
@@ -547,8 +624,12 @@ footer {
           <h4>📅 Prazos-chave</h4>
           <ul>
             <li><span class="gold">14/08 (sexta):</span> portal pronto (ingressos bônus + área do comprador + código promocional de afiliado)</li>
-            <li><span class="gold">20/08 (alvo):</span> próxima aula de convidados</li>
+            <li><span class="gold">17/08 (segunda):</span> textos, vídeos do Michael e testes do pré-cadastro no portal</li>
+            <li><span class="gold">18/08 (terça):</span> disparo no grupo de alunos e na Comunidade — limite 19/08 se houver ajuste</li>
+            <li><span class="gold">20/08 (quinta):</span> aula de convidados (tema definido pelo Michael)</li>
+            <li><span class="gold">21/08 (sexta):</span> página básica do Legacy no ar, com link do lote 1</li>
             <li><span class="gold">31/08:</span> fim do lote 1 (R$3.997)</li>
+            <li><span class="gold">Fim de setembro:</span> virada do lote 2 → 3 (pode antecipar conforme vendas)</li>
             <li><span class="gold">~14/10:</span> pesquisa/formulário de aquecimento (1 semana antes)</li>
             <li><span class="gold">19/10:</span> carrinho fecha</li>
             <li><span class="gold">21-24/10:</span> evento</li>
@@ -559,6 +640,192 @@ footer {
       <div class="brief-note">
         <strong style="color:var(--color-gold)">Regras de ouro:</strong> sem "joguinho de últimas vagas" no palco (escassez real: capacidade + data) · a política de remarcação por força maior é interna, nunca comunicada · alimentação, hospedagem e transfer por conta do participante (equipe envia lista de hospedagens) · garantia condicionada à ligação de aprovação; reembolso só nos 7 dias do CDC · copy pré-escrita de disparo em volume precisa de aprovação (Rafa, Michael, Fernanda ou Julia) antes de ir ao ar · pitch do evento leva para a Formação (nova oferta de pós-graduação em construção).
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOGRAMA DE DIVULGAÇÃO -->
+<section id="cronograma">
+  <div class="crono-box open" id="crono-box">
+    <div class="crono-head" onclick="document.getElementById('crono-box').classList.toggle('open')">
+      <span class="cat-icon">📣</span>
+      <span class="cat-title">Cronograma de Divulgação · Abertura do Legacy</span>
+      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Reunião Michael + Fernanda · 14/08/2026</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="crono-body">
+
+      <!-- ── 17/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">17/08</div>
+          <div class="day-dow">Segunda</div>
+          <div class="day-tag">Produção</div>
+        </div>
+        <div class="day-items">
+
+          <div class="track">
+            <div class="track-name">Trilha 1 · Grupo de WhatsApp dos alunos</div>
+            <ul>
+              <li>Escrever a mensagem de divulgação para o grupo <span class="who">Fernanda</span></li>
+              <li>Gravar o vídeo explicando <strong>como os alunos cadastram as pessoas interessadas</strong> e fazem a pré-inscrição no portal <span class="who">Michael</span></li>
+              <li>Rodar os <strong>testes do pré-cadastro no portal</strong> — ponta a ponta, antes de qualquer disparo</li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Trilha 2 · Comunidade OMNI (em paralelo)</div>
+            <ul>
+              <li>Escrever a mensagem com a <strong>chamada para o vídeo</strong> que o Michael vai gravar <span class="who">Fernanda</span></li>
+              <li>Gravar o vídeo da Comunidade <span class="who">Michael</span> — pauta: o <strong>novo momento da OMNI</strong>, a série de lives semanais e a oportunidade de participar do Legacy Experience em outubro. Fecha convidando para a <strong>aula do dia 20/08</strong></li>
+              <li>Escolher o <strong>tema da aula de 20/08</strong> <span class="who">Michael</span></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Operacional · Inventário de vagas</div>
+            <ul>
+              <li>Confirmar com a Eliza <strong>quantos ingressos teremos disponíveis para vender</strong>, descontadas as vagas dos alunos que já têm direito de participação <span class="who">Fernanda</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── 18/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">18/08</div>
+          <div class="day-dow">Terça</div>
+          <div class="day-tag marco">Disparo</div>
+        </div>
+        <div class="day-items">
+
+          <div class="cond">
+            <strong>Gate:</strong> os disparos de 18/08 dependem de tudo estar testado e aprovado no dia 17. Se algo não passar, faz-se o ajuste e a data-limite para as mensagens irem ao ar é <strong>19/08</strong>.
+          </div>
+
+          <div class="track">
+            <div class="track-name">Se aprovado · Disparos</div>
+            <ul>
+              <li>Enviar a mensagem no <strong>grupo dos alunos</strong></li>
+              <li>Publicar a mensagem na <strong>Comunidade OMNI</strong> (com o vídeo do Michael)</li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Trilha 3 · E-mail para a base</div>
+            <ul>
+              <li>Preparar a <strong>série de e-mails-convite</strong> chamando a base para a comunidade de WhatsApp, para participarem desse novo momento da OMNI <span class="who">Fernanda</span></li>
+              <li>A mesma série já leva o <strong>convite para a aula do dia 20/08</strong></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── 19/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">19/08</div>
+          <div class="day-dow">Quarta</div>
+          <div class="day-tag">Limite</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Contingência</div>
+            <ul>
+              <li><strong>Data-limite</strong> para as mensagens do grupo de alunos irem ao ar, caso tenha havido ajuste depois dos testes</li>
+            </ul>
+          </div>
+          <div class="track">
+            <div class="track-name">Trilha 4 · Página do Legacy</div>
+            <ul>
+              <li>Início da confecção de uma <strong>página básica do Legacy</strong> <span class="who">Fernanda</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 20/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">20/08</div>
+          <div class="day-dow">Quinta</div>
+          <div class="day-tag marco">Aula ao vivo</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Aula de convidados</div>
+            <ul>
+              <li>Aula ao vivo para a Comunidade e para a base convidada — <strong>tema a definir pelo Michael</strong> (decisão de 17/08)</li>
+              <li>É o destino de todos os convites disparados em 18/08: grupo, Comunidade e série de e-mails</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 21/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">21/08</div>
+          <div class="day-dow">Sexta</div>
+          <div class="day-tag marco">Entrega</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Prazo final · Página do Legacy</div>
+            <ul>
+              <li>Página no ar. Escopo acordado:</li>
+              <li>O que é o evento</li>
+              <li>Para quem é</li>
+              <li>Depoimentos</li>
+              <li>Direcionamento para a Comunidade</li>
+              <li><strong>Link de compra da pré-inscrição (lote 1)</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DECISÕES ── -->
+      <div class="crono-foot">
+        <div class="track-name">Decisões e definições da reunião</div>
+        <div class="decision-grid">
+
+          <div class="brief-card">
+            <h4>🎉 Nova camada de oferta · 11 anos da OMNI</h4>
+            <ul>
+              <li>Somar ao Legacy Experience a participação em um <strong>momento único</strong>: a festa de comemoração dos <span class="gold">11 anos da OMNI</span>, em um espaço totalmente novo</li>
+              <li>Objetivo: <strong>superar a expectativa</strong> de quem já viveu o Legacy e <strong>encantar</strong> quem vai viver pela primeira vez</li>
+              <li>Ainda em preparação — algo muito especial sendo montado</li>
+            </ul>
+            <div class="idea-quote">
+              <span>Ideia de posicionamento</span>
+              “Você é nosso convidado para viver com a gente esse momento histórico: a inauguração do novo espaço da OMNI, em comemoração aos nossos 11 anos de história.”
+            </div>
+          </div>
+
+          <div class="brief-card">
+            <h4>⏭️ Adiado para a fase 2</h4>
+            <ul>
+              <li>A <strong>campanha externa para terapeutas</strong>, com foco em vendas do Legacy, fica para um <strong>momento futuro</strong> — uma segunda fase</li>
+              <li>Enquanto isso, aproveitamos a <strong>distribuição de conteúdo que já está rodando</strong> para esse público como aquecimento</li>
+              <li>Michael também vai falar mais sobre o Legacy no <strong>conteúdo das redes sociais</strong></li>
+            </ul>
+          </div>
+
+          <div class="brief-card">
+            <h4>💰 Virada de lote 2 → 3</h4>
+            <ul>
+              <li>Definida para o <span class="gold">final de setembro</span></li>
+              <li>Pode ser <strong>antecipada</strong>, a depender do ritmo das vendas</li>
+              <li>Substitui a pendência anterior de "Fernanda define a data de virada"</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -611,7 +878,7 @@ alter publication supabase_realtime add table public.legacy_experience_canvas;</
 
 <footer>
   OMNI Brasil · Legacy Experience · Canvas gerado em maio 2026 · Sync via Supabase
-  <br><span style="opacity:0.4;font-size:9px;">build v2.0 — 2026-05-07</span>
+  <br><span style="opacity:0.4;font-size:9px;">build v2.1 — cronograma de divulgação atualizado em 2026-08-14</span>
 </footer>
 
 </div><!-- #main -->
