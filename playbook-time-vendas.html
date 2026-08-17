@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMNI Brasil — Playbook do Time de Vendas (Processo do Funil de Chat)</title>
+<style>
+  :root { --bg:#050505; --panel:#0d0d0d; --panel2:#141414; --gold:#C8A84B; --gold2:#DC9F42; --cream:#F5F0E8; --muted:#9a917f; --red:#c0564b; --green:#5f8f6b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--cream); font-family:'Segoe UI', Roboto, 'Open Sans', Arial, sans-serif; line-height:1.55; font-size:15px; }
+  .wrap { max-width:900px; margin:0 auto; padding:32px 20px 80px; }
+  header { border-bottom:2px solid var(--gold); padding:36px 0 24px; margin-bottom:8px; }
+  .brand { font-family:Oswald, 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:3px; color:var(--gold); font-size:13px; }
+  h1 { font-family:Georgia, 'Times New Roman', serif; font-size:34px; font-weight:400; margin:10px 0 6px; }
+  .sub { color:var(--muted); font-size:14px; }
+  h2 { font-family:Oswald, 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:2px; font-size:19px; color:var(--gold); margin:44px 0 14px; border-left:4px solid var(--gold); padding-left:12px; }
+  h3 { font-size:15px; color:var(--gold2); margin:22px 0 8px; text-transform:uppercase; letter-spacing:1px; }
+  p { margin:8px 0; }
+  ul, ol { margin:8px 0 8px 20px; }
+  li { margin:5px 0; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:13.5px; }
+  th { background:var(--panel2); color:var(--gold); text-align:left; padding:8px 10px; text-transform:uppercase; font-size:11px; letter-spacing:1px; border-bottom:1px solid var(--gold); }
+  td { padding:8px 10px; border-bottom:1px solid #222; vertical-align:top; }
+  .panel { background:var(--panel); border:1px solid #232323; border-left:3px solid var(--gold); padding:14px 18px; margin:14px 0; }
+  .warn { border-left-color:var(--red); }
+  .warn b, .warn strong { color:var(--red); }
+  .ok { border-left-color:var(--green); }
+  .q { font-style:italic; color:#d8d0c0; }
+  .tag { display:inline-block; background:var(--panel2); border:1px solid var(--gold); color:var(--gold); font-size:11px; padding:1px 8px; margin:2px 4px 2px 0; border-radius:2px; }
+  .small { font-size:12px; color:var(--muted); }
+  code { background:var(--panel2); padding:1px 6px; font-size:12.5px; color:var(--gold2); }
+  .toc { background:var(--panel); padding:16px 22px; margin:20px 0; border:1px solid #232323; }
+  .toc a { color:var(--cream); text-decoration:none; display:block; padding:3px 0; font-size:14px; }
+  .toc a:hover { color:var(--gold); }
+  footer { margin-top:60px; border-top:1px solid #232323; padding-top:16px; color:var(--muted); font-size:12px; }
+  .fluxo { font-size:13.5px; background:var(--panel2); padding:12px 16px; border:1px solid #2a2a2a; margin:10px 0; overflow-x:auto; }
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:50;background:#050505;border-bottom:1px solid #232323;padding:10px 20px;display:flex;align-items:center;gap:12px"><svg style="height:20px;width:auto;fill:#C8A84B" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 566.93 226.77">
+  <path d="M184.56,137.47l-.62,1.62c-2.61,6.53-5.49,12.52-8.53,18.08,6.74,12.99,16.6,21.73,37.08,21.63,18.33-.11,31.3-19.22,41.3-41.33h-69.22ZM295.54,137.47c-3.22,6.97-6.56,13.61-10.08,19.81,6.67,12.93,14.81,21.8,35.27,21.41,18.37-.36,31.84-19.29,42.27-41.22h-67.45ZM200.59,97.79l-.14.36c-4,10.8-8.1,21.38-12.48,31.47h69.22c4.51-10.97,8.42-22.17,11.95-31.82h-68.56ZM311.65,97.79l-.15.36c-3.97,10.76-8.09,21.38-12.48,31.47h67.58c4.76-10.95,8.85-22.16,12.49-31.82h-67.44ZM203.72,89.93h68.42l.87-2.25c4.11-10.22,8.71-19.14,13.83-26.93-8.4-8.31-21.65-10.3-31.94-10.61-1.78-.06-3.69-.14-5.74-.14-12.63,0-29.93,3.42-45.45,39.93M314.78,89.93h67.33l.87-2.25c4.23-10.5,9.02-19.68,14.27-27.61-8.44-7.75-21.26-9.65-31.26-9.93-1.8-.06-3.72-.14-5.74-.14-12.66,0-29.96,3.42-45.48,39.93M353.01,23.7c20.21.61,36.22,8.42,48.16,23.53.98,1.27,1.91,2.56,2.78,3.89,15.75-18.93,35.48-28.12,59.07-27.41,20.17.61,36.21,8.42,48.12,23.53,11.88,15.09,17.5,34.65,16.8,58.68-.35,11.49-3.03,42.45-24.91,69.03l-.06-.06c-3.79,5.95-10.82,10.01-18.96,10.01-12.17,0-22-8.91-22-19.9,0-6.8,3.78-12.78,9.5-16.38l.1-.07.12-.08c33.17-16.82,42.21-35.86,42.64-45.31,1.83-38.12-20.41-52.49-38.42-53.01-12.71-.39-33.17-2.63-51.2,39.79h22.9v7.86h-26.02l-.14.36c-3.97,10.76-8.08,21.38-12.46,31.47h38.62v7.86h-42.13c-16.71,36.26-37.33,64.08-67.33,65.6-21.26,1.07-42.68-17.69-55.12-33.19-1.15-1.4-1.91-2.96-2.48-4.58-13.96,21.83-30.7,36.67-52.41,37.77-21.26,1.07-42.67-17.69-55.13-33.19-1.13-1.41-1.89-3-2.46-4.63-16.79,25.97-39.1,38.63-66.66,37.83-20.17-.59-36.24-8.44-48.15-23.54-11.89-15.12-17.5-34.67-16.8-58.68.35-11.49,3.04-42.46,24.9-69.03l.06.06c3.8-5.95,10.84-10,18.98-10,12.14,0,22,8.92,22,19.9,0,6.8-3.76,12.77-9.5,16.35l-.1.1-.12.08c-30.08,20.5-41.66,35.23-43.29,44.52-5.66,32.07,21.09,53.26,39.07,53.8,9.4.28,23.03,1.58,36.78-14.9,4.3-6.87,8.7-15.27,12.95-24.26h-18.99v-7.86h22.65c1.62-3.64,3.24-7.29,4.8-10.9,2.72-7.15,5.53-14.15,8.45-20.93h-35.9v-7.86h39.33l.9-2.25c17.54-43.68,44.36-65.05,80-63.98,20.18.61,36.24,8.42,48.15,23.53,1.18,1.49,2.25,3.03,3.32,4.58,15.81-19.4,35.74-28.82,59.6-28.1"/>
+</svg><span style="font-family:Oswald,'Arial Narrow',sans-serif;color:#C8A84B;letter-spacing:6px;font-weight:700;font-size:14px">OMNI BRASIL</span><span style="font-family:Inter,Arial,sans-serif;color:rgba(245,240,232,0.5);text-transform:uppercase;letter-spacing:2px;font-size:10px;margin-left:auto">Playbook do Time de Vendas</span></div>
+<div class="wrap">
+
+<header>
+  <div class="brand">OMNI Brasil · Transformação que se prova.</div>
+  <h1>Playbook do Time de Vendas</h1>
+  <div class="sub">Passo a passo dos processos no <b>funil novo</b> (chat de qualificação + pipeline Closer 21 + agendamento automático) · v1.3 · 17/08/2026 · Vigente desde a virada de 13/08 · Par do <b>Manual do SDR · Consultoria Premium</b> (referência click-level da agenda e dos alertas).</div>
+</header>
+
+<div class="toc">
+  <a href="#s1">1. O processo novo em uma página</a>
+  <a href="#s2">2. O pipeline 21 etapa por etapa (quem faz o quê, quando move)</a>
+  <a href="#s3">3. Processos do SDR — passo a passo</a>
+  <a href="#s4">4. Processos do CLOSER — passo a passo</a>
+  <a href="#s5">5. Ferramentas: onde cada coisa acontece</a>
+  <a href="#s6">6. Regras de ouro (valem para todos)</a>
+</div>
+
+<h2 id="s1">1 · O processo novo em uma página</h2>
+<p><b>O que mudou (virada 12-13/08):</b> a qualificação deixou de começar no humano. O <b>chat de IA</b> qualifica o lead (~16 perguntas), aplica os gates automáticos e <b>agenda sozinho</b> na agenda real (Cal.com). O humano entra onde a máquina para: retomar quem abandonou, fechar horário de quem pediu fora da grade, garantir confirmação e presença, e conduzir a consultoria. Tudo vive no <b>pipeline 21 (Closer)</b>, ponta a ponta.</p>
+<div class="fluxo">
+ANÚNCIO → PÁGINA COM CHAT (go.omnihypnosis.com.br/consultoria-premium-chat)<br>
+&nbsp;&nbsp;→ cadastro cria o negócio em <b>Lead Geral (493)</b> com SDR do rodízio + UTMs<br>
+&nbsp;&nbsp;→ chat qualifica: desqualificado = <b>Perdido</b> ali mesmo, com motivo estruturado<br>
+&nbsp;&nbsp;→ abandonou no meio = <b>Retomada (491)</b> · qualificado sem agenda fechada = <b>MQL agendar (492)</b><br>
+&nbsp;&nbsp;→ agendou sozinho no Cal.com = <b>Agendamento a confirmar (490)</b> + lembrete pedindo "confirmado"<br>
+&nbsp;&nbsp;→ clicou CONFIRMAR no WhatsApp = <b>Reunião confirmada (112)</b> (move automático)<br>
+&nbsp;&nbsp;→ lembretes 24h / 1h / 5 min antes → <b>CONSULTORIA</b> (closer, 50-60 min por vídeo)<br>
+&nbsp;&nbsp;→ <b>Realizada (113)</b> → <b>Oportunidade (116)</b> → <b>Negociação (114)</b> → <b>Venda (280)</b><br>
+&nbsp;&nbsp;→ faltou? <b>etiqueta "no-show" no deal</b> (a etapa não muda) — resgate do SDR
+</div>
+<div class="panel warn"><b>3 verdades do estado atual que o time precisa saber:</b><br>
+① A régua automática de retomada (W1-W4) está <b>desligada</b> — retomar quem abandonou é trabalho MANUAL do SDR até segundo aviso.<br>
+② O robô M0 (cadência de WhatsApp) NÃO alcança o pipeline 21 — lead do chat só recebe os lembretes de reunião; o resto é o SDR.<br>
+③ O funil antigo (65) segue vivo para lead de formulário, com M0 e régua próprios — ele não é seu foco, mas não sumiu.</div>
+
+<h2 id="s2">2 · O pipeline 21 etapa por etapa</h2>
+<table>
+  <tr><th>Etapa (ID)</th><th>Como o lead ENTRA</th><th>Dono</th><th>O que fazer</th><th>SAI para</th></tr>
+  <tr><td><b>Lead Geral</b> (493)</td><td>Automático: cadastro no formulário da página de chat</td><td>máquina</td><td>Nada — a máquina conduz. Desqualificado pelo gate vira <b>Perdido aqui mesmo</b> com motivo estruturado (não avança etapa).</td><td>491, 492, 490 ou Perdido</td></tr>
+  <tr><td><b>Retomada (abandonou)</b> (491)</td><td>Automático: iniciou o chat e parou; worker move após 30 min de silêncio</td><td><b>SDR</b> (manual, régua desligada)</td><td>Processo P3 abaixo: retomar a conversa no WhatsApp, terminar a qualificação na mão e agendar.</td><td>490 (agendou) ou Perdido</td></tr>
+  <tr><td><b>MQL (agendar)</b> (492)</td><td>Automático: qualificado, respondeu tudo, faltou fechar horário — inclui quem pediu <b>horário fora da grade</b> (o pedido fica no campo <code>pesquisa_horario</code>) e o overbooking (horário da grade que estava ocupado). Chega ALERTA no Google Chat com o link da conversa.</td><td><b>SDR</b></td><td>Processo P2 + manual §01: responder em até 30 min, oferecer 2 horários próximos e fechar agenda pela página do Cal.com.</td><td>490</td></tr>
+  <tr><td><b>Agendamento a confirmar</b> (490)</td><td>Automático: agendou no Cal.com (sozinho pelo chat ou via SDR) e ainda não clicou no botão CONFIRMAR</td><td><b>SDR — atenção máxima</b></td><td>Processo P4: garantir a confirmação. O lembrete de criação já pediu "confirmado"; sem resposta, o SDR cobra.</td><td>112 (automático no clique)</td></tr>
+  <tr><td><b>Reunião confirmada</b> (112)</td><td>Automático: clique no botão CONFIRMAR do WhatsApp (handler move 490 → 112; quem já está adiante não volta)</td><td>closer</td><td>Closer se prepara (processo C1). Lembretes automáticos seguem: 24h antes (com link do Meet e nome da especialista), 1h antes, 5 min antes. Faltou → etiqueta "no-show" (abaixo).</td><td>113 ou Perdido</td></tr>
+  <tr><td colspan="5" style="background:var(--panel)"><b>NO-SHOW não é etapa — é ETIQUETA.</b> Faltou à reunião (10 min de espera) → <b>o CLOSER aplica a etiqueta "no-show" no deal</b> (ele estava na sala) e o deal FICA onde está — em Agendamento a confirmar (nunca confirmou e não apareceu) ou em Reunião confirmada (confirmou e faltou). O <b>SDR</b> assume o resgate (processo P5) filtrando o pipeline pela etiqueta. Recuperou = reagendou → o SDR REMOVE a etiqueta e registra em nota (o deal já está na etapa certa; nada se move). Não recuperou = <b>Perdido "NO-SHOW SEM RECUPERAÇÃO"</b>.</td></tr>
+  <tr><td><b>Reunião Realizada</b> (113)</td><td>Manual: closer move após a consultoria acontecer</td><td>closer</td><td>Registrar resumo da call no deal (dor, decisor, objeções, próximo passo com data). Ninguém fica parado aqui: ou vira Oportunidade, ou é Perdido "Não é o momento (pós-consultoria)".</td><td>116 ou Perdido</td></tr>
+  <tr><td><b>Oportunidade</b> (116)</td><td>Manual: lead passou o filtro da call — quer resolver AGORA e recebeu o caminho (blocos 6-8 do script)</td><td>closer</td><td>Follow-up ativo com data marcada. "Preciso pensar" com retorno agendado vive aqui.</td><td>114 ou Perdido</td></tr>
+  <tr><td><b>Negociação</b> (114)</td><td>Manual: valor foi apresentado (bloco 13) e há conversa ativa de condições/decisor (inclui call de casal marcada)</td><td>closer</td><td>Sequência de fechamento (tabela → piso → FPH, ver regras C4). Máx. 7 dias parado aqui sem contato = decidir: reativar ou Perdido com motivo.</td><td>280 ou Perdido</td></tr>
+  <tr><td><b>Venda</b> (280)</td><td>Manual: <b>pagamento efetivado</b> (não "prometido")</td><td>closer</td><td>Deal ganho com data e valor corretos. Acionar pós-venda/onboarding do aluno.</td><td>—</td></tr>
+</table>
+<p class="small">Critérios de Oportunidade/Negociação e o prazo de 7 dias são a regra operacional desta versão — Rafa pode recalibrar. O funil 65 (SDR antigo: MQL → Tentativa → Conectado) está congelado como legado; só recebe lead de formulário.</p>
+
+<h2 id="s3">3 · Processos do SDR — passo a passo</h2>
+<div class="panel ok">
+<p><b>Antes de tudo: o Manual do SDR é a referência click-level.</b> Para as situações do dia a dia da agenda — lead pediu outro horário, botões do lembrete, alertas de urgência ([URGENTE], sem link do Meet, [PACIENTE]), como remarcar/cancelar e onde fica cada coisa — o passo a passo com telas e copies está no <b>Manual do SDR · Consultoria Premium</b>: <code>gringoles777.github.io/omni-apresentacoes/manual-sdr-consultoria.html</code>. Este playbook NÃO repete esses passos; ele cobre o que o manual não cobre: as etapas do pipeline, a retomada de abandono, as réguas de silêncio e no-show, a qualificação, o funil legado e todo o lado do closer. Em caso de divergência entre os dois, <b>o manual vence</b> — e avise a Rafa pra corrigir aqui.</p>
+</div>
+
+<h3>P1 · Início do dia (checklist, ~10 min)</h3>
+<ol>
+  <li>Abrir o <b>Pipedrive, pipeline 21</b>, filtrado por você (SDRs da operação: David e Layslla).</li>
+  <li>Trabalhar as filas <b>nesta ordem</b>: ① <b>Agendamento a confirmar</b> (reunião chegando sem confirmação = risco imediato) → ② <b>MQL (agendar)</b> com horário pedido para hoje → ③ <b>Retomada</b> → ④ <b>deals com etiqueta "no-show"</b> (filtro por etiqueta, em qualquer etapa) → ⑤ resto.</li>
+  <li>Checar o <b>Google Chat</b>: alertas de pedido de horário fora da grade têm o link da conversa do lead.</li>
+  <li>Abrir o <b>dashboard do funil de chat</b> (painel ao vivo): quantos cadastros, abandonos e agendamentos entraram desde ontem.</li>
+  <li>Prazos: alerta de agenda no Google Chat → responder em <b>até 30 minutos</b> dentro do horário de atendimento (manual §01). Mensagem recebida de lead → o quanto antes: quem responde na hora agenda mais.</li>
+</ol>
+
+<h3>P2 · MQL (agendar): lead qualificado que pediu outro horário</h3>
+<p><b>O passo a passo completo (com telas) é a seção 01 do Manual do SDR.</b> Em resumo, pra este documento se sustentar sozinho: abra a conversa no Chatwoot pelo link do alerta → veja os horários livres na página da Mara (<code>cal.omnihypnosis.com.br/diumara/consultoria-omni</code>) → ofereça <b>dois horários próximos</b> do que o lead pediu (nunca lista grande) → agende você mesmo na página, preenchendo o campo "De que se trata" com <b>Consultoria OMNI</b> e usando <b>o MESMO e-mail que está no negócio do Pipedrive</b> (e-mail trocado = a reunião não aparece no CRM e o lembrete não sai) → aguarde ~10s e confira se a atividade "Reunião Agendada" apareceu no deal → confirme por WhatsApp. Nunca crie a reunião pelo Google Agenda nem mande link de Meet solto. O que este playbook acrescenta é o contexto de processo:</p>
+<ol>
+  <li>A etapa 492 recebe quem qualificou mas não fechou horário: pedido fora da grade (o horário desejado fica no campo <code>pesquisa_horario</code>), horário suspenso (motivo <code>horario_bloqueado</code>) ou overbooking (horário da grade que estava ocupado). Em todos, chega o alerta <b>[AGENDA]</b> no Google Chat.</li>
+  <li><b>Prazo: responder em até 30 minutos</b>, dentro do horário de atendimento (8h-20h). Quem pediu horário está com a decisão quente.</li>
+  <li>Antes de oferecer agenda, leia o resumo do chat no deal — <b>não repita pergunta que o chat já fez</b>.</li>
+  <li>Agendou (pela página, conforme o manual) → o deal vai sozinho para 490 → seguir o P4 (confirmação).</li>
+  <li><b>Se o lead não responder à sua oferta de horários:</b> segue a régua de silêncio do P3 (novo toque no dia seguinte → dia 4 → dia 7).</li>
+</ol>
+<div class="panel"><b>A agenda real é a página do Cal.com da closer (Mara)</b> — <code>cal.omnihypnosis.com.br/diumara/consultoria-omni</code>. <b>O que aparece ali é o que existe; o que não aparece, não existe</b> (isso já inclui suspensões temporárias de horário). Pedido de noite, fim de semana ou horário suspenso: ofereça primeiro <b>o mais próximo que existe</b> — a maioria aceita. Insistiu que só pode naquele? <b>Fale com a Rafa antes de prometer</b>: atendimento noturno existe em casos pontuais e quem decide é ela. Nunca prometa horário que você não conseguiu reservar na página.</div>
+
+<h3>P3 · Retomada: lead que abandonou o chat (processo MANUAL enquanto a régua W1-W4 estiver desligada)</h3>
+<ol>
+  <li>O worker move o lead para 491 após 30 min de silêncio no chat. É a fila que mais converte — trate como prioridade do dia.</li>
+  <li>Abrir o deal e ler o resumo parcial: até onde o chat foi, o que ele já respondeu.</li>
+  <li>Primeiro toque (mesmo dia, dentro do horário de atendimento 8h-20h):<br><span class="q">"Oi {nome}, ótima tarde! Aqui é a {seu nome}, da OMNI Brasil. Você começou uma conversa na nossa página sobre a formação e parou na metade. Suas respostas ficaram salvas — posso continuar com você por aqui mesmo?"</span></li>
+  <li>Terminar a qualificação NA CONVERSA (só o que faltou): se imagina atendendo → transformação vivida → janela ("o que aconteceu nos últimos meses?") → dados objetivos agrupados numa mensagem (idade, escolaridade) → decisor por último → nota de comprometimento 0-10 (corte 7; abaixo: UMA tentativa de reacender, depois deferir com elegância).</li>
+  <li>Qualificado → agendar (P2, passos 4-5). Não responde → régua de silêncio: toque 1 após 4h da SUA abertura sem resposta → toque 2 no dia seguinte → toque 3 no dia 4 (reframe) → toque 4 no dia 7 (breakup). Máximo 4 toques de follow-up. <span class="small">Como contar: a abertura não é follow-up — abertura + toque de 4h no MESMO dia é permitido e esperado; a regra "nunca 2 no mesmo dia" vale entre os follow-ups (do toque 1 em diante).</span></li>
+  <li>Breakup sem resposta ou botão/resposta negativa → <b>Perdido</b> com motivo.</li>
+  <li><b>Fim de semana:</b> não há grade nem cobertura de SDR sáb/dom. O "primeiro toque no mesmo dia" vale para dias úteis; quem abandonou sexta à noite ou no fim de semana entra como PRIMEIRA prioridade da fila de Retomada na segunda às 8h30 (o backlog do fim de semana fura a fila normal). Lead que só pode atender no sábado → sábado não existe na agenda: oferecer o mais próximo que existe na página do Cal.com; se insistir que só pode naquele, falar com a Rafa antes de prometer (manual §01).</li>
+</ol>
+
+<h3>P4 · Agendamento a confirmar: garantir o "confirmado" (atenção máxima)</h3>
+<ol>
+  <li>Quando o lead agenda, o robô já mandou o lembrete de criação pedindo pra responder "confirmado" e o convite por e-mail. O clique no botão CONFIRMAR move o deal sozinho para 112 — <b>você não move nada</b>.</li>
+  <li>Sem confirmação em até 4h (ou até 17h do dia anterior à reunião, o que vier antes), cobre:<br><span class="q">"{nome}, seu horário de {dia} às {hora} com a {especialista} está reservado, mas ainda preciso da sua confirmação pra garantir. Me responde com um ok que eu seguro ele pra você."</span></li>
+  <li>Reforçar o preparo: <span class="q">"São 50 minutos por vídeo, câmera aberta. Separa papel e caneta — e se a decisão for em casal, é importante {ele/ela} participar junto."</span></li>
+  <li><b>Os 4 lembretes automáticos (criação, 24h, 1h, 5 min) são amarrados à RESERVA, não à etapa</b> — um deal parado em 490 recebe os lembretes normalmente. A diferença do 112 é só o clique no CONFIRMAR.</li>
+  <li>Sem resposta até 20h da véspera (fim do horário de atendimento): o slot pode ser oferecido a outro lead no dia seguinte — mas SEMPRE mande antes a copy de liberação: <span class="q">"{nome}, sem sua resposta vou precisar liberar seu horário pra outra pessoa. Prefere que eu reagende pra {dia} no mesmo horário?"</span></li>
+  <li><b>Chegou a hora da reunião com o deal ainda em 490</b> (nunca confirmou, mas você não liberou o slot): a reunião EXISTE no Cal.com — o closer entra na sala normalmente. Apareceu = segue o fluxo (mover para 112 vira detalhe de registro). Não apareceu = no-show normal (P5).</li>
+  <li>Reserva sem confirmação NÃO conta como agendamento seu. Após 2 horários reservados e perdidos sem confirmação, <b>trava de remarcação</b>: pare de oferecer agenda e pergunte: <span class="q">"faz sentido seguir com a consultoria agora, ou prefere que eu te procure mais pra frente?"</span></li>
+</ol>
+
+<h3>P5 · No-show: resgate de quem faltou</h3>
+<ol>
+  <li><b>Quando é no-show:</b> o closer espera 10 minutos na sala; aos 5 min manda "estou na sala, consegue entrar?". Aos 10 min sem lead, é no-show: <b>o CLOSER aplica a etiqueta "no-show" no deal</b> (ele estava na sala) — o deal NÃO muda de etapa, fique onde estiver (490 ou 112) — e o SDR assume o resgate a partir daqui, filtrando o pipeline pela etiqueta.</li>
+  <li>Resgate no mesmo dia, sem minimizar (proibido "sem problema nenhum"). Exceção: consultoria que termina depois das 20h (fora do horário de atendimento) — o resgate sai na manhã seguinte, a partir das 8h, e conta como o toque do "mesmo dia":<br><span class="q">"{nome}, sua consultoria era agora há pouco e você não conseguiu entrar. Sem sua resposta vou precisar liberar sua vaga pra outra pessoa. Prefere que eu reagende pra {próximo dia} no mesmo horário? Ainda tenho livre."</span></li>
+  <li>Segunda tentativa (dia seguinte, pergunta de comprometimento firme):<br><span class="q">"{nome}, eu gostaria muito que nosso time te ajudasse, mas preciso saber: você ainda tem interesse na consultoria para {objetivo dele}, ou posso passar a oportunidade para outra pessoa?"</span></li>
+  <li>Terceira e última tentativa no dia 3 (breakup): <span class="q">"{nome}, vou liberar sua vaga. Seu cadastro fica ativo — quando fizer sentido retomar, me chama por aqui."</span></li>
+  <li>Reagendou → <b>remova a etiqueta "no-show"</b>, registre em nota, e o fluxo segue normal (novo ciclo de confirmação, P4 — o deal já está na etapa certa, nada se move). Sem resposta após o breakup → no dia 4, <b>Perdido com motivo "NO-SHOW SEM RECUPERAÇÃO"</b>. Régua fechada: mesmo dia → dia seguinte → dia 3 → Perdido no dia 4.</li>
+</ol>
+
+<h3>P6 · Remarcação e cancelamento</h3>
+<p><b>O passo a passo (com telas) é a seção 04 do Manual do SDR.</b> Em resumo: abrir o negócio no Pipedrive → atividade "Reunião Agendada" → link "Remarcar ou cancelar" (<code>…?changes=true</code>) → Reagendar ou Cancelar → escolher o novo horário (só aparecem os que existem de verdade) → pronto, não mexa em mais nada: o Pipedrive se atualiza sozinho e os lembretes passam a sair no horário novo. Sem o link na atividade (reunião antiga/marcada à mão)? Agende o horário novo pela página da Mara com o e-mail do lead e avise a Rafa pra cancelar a antiga. O que este playbook acrescenta:</p>
+<ul>
+  <li><b>As duas regras que não mudam (manual §05):</b> remarcou? faça NA HORA, pelo Cal.com — <b>nunca mude a data só no Pipedrive</b> (ele não sabe se a agenda está livre e o link do Meet continua no horário velho). E reunião marcada por você FORA do chat: a atualização automática não alcança — atualize agenda E Pipedrive, na hora.</li>
+  <li>Remarcou = cobrar de novo o "confirmado" da NOVA data (mesma copy do P4).</li>
+  <li><b>Se o deal já estava em Reunião confirmada (112):</b> ele FICA em 112 — não volta etapa. Monitore pela atividade da reunião (atualizada com a nova data); a confirmação da nova data é cobrada no WhatsApp e registrada em nota. (A etapa 490 é só para quem nunca confirmou nenhuma data.)</li>
+  <li>Avisou antes que não vai = remarcação, não no-show. A etiqueta "no-show" é só pra quem FALTOU sem avisar.</li>
+</ul>
+
+<h3>P7 · Funil legado (65): o que ainda cai lá</h3>
+<ul>
+  <li>Lead de <b>formulário</b> (páginas antigas/home) continua nascendo no funil 65, recebendo M0 (~1 min) + 4 toques automáticos. Depois disso, é qualificação humana clássica: você qualifica no WhatsApp (gabarito de perfil + gate 0-10) e agenda no Cal.com — o mesmo P2/P4 valem.</li>
+  <li>Prioridade sempre menor que as filas do 21 (o chat converte ~8x mais).</li>
+</ul>
+
+<h3>P8 · Regras transversais do SDR</h3>
+<ul>
+  <li><b>Duas escalas de comprometimento:</b> chat = 1-5, corte 3 (dossiê chega "X/5") · atendimento humano = 0-10, corte 7. Não converter uma na outra. O gate vence o perfil: lead com perfil ótimo e nota baixa não agenda — reacende primeiro ("o que faria isso virar um 5/um 8 pra você?").</li>
+  <li><b>Preço:</b> você não negocia. Perguntou? Cite só a tabela (Master R$ 14.900 / 12x R$ 1.497) e devolva pra consultoria. Piso não existe na sua boca.</li>
+  <li><b>Menor de 18 / médio incompleto:</b> reprovar com dignidade + curso de auto-hipnoterapia. <b>18-21 anos:</b> formulário de aprovação, retorno em 2 dias úteis, suspender a qualificação. <b>Superior incompleto não reprova.</b></li>
+  <li><b>Paciente (quer ser atendida, não se formar) — alerta [PACIENTE], manual §03:</b> o chat já perguntou se ela queria aprender as técnicas e ela escolheu ser atendida — <b>não tente reverter pra consultoria</b>. O alerta cai num canal separado onde o terapeuta também está e ele recebe contato + perfil junto com você. Sua parte: garantir que alguém pegou — ninguém respondeu no canal em <b>2 horas úteis</b>? Marque a Rafa. O combinado com a pessoa é que um Omniterapeuta chama em até 1 dia útil. <b>Risco emocional</b> (menção a se machucar/não querer viver): parar tudo, acolher, CVV 188, escalar na hora. Na dúvida, tratar como risco.</li>
+  <li><b>LGPD / "quem te deu meu número?":</b> validar → origem concreta (UTM no deal) → remover na hora (opt-out AC + bloquear WABA + Perdido "solicitou remoção") → confirmar por escrito. O que não conseguir remover, escalar no mesmo dia.</li>
+  <li><b>Horário de atendimento: 8h às 20h — nada sai fora disso</b> (manual §06). Fora dele, a mensagem segura pra manhã seguinte. Vale pras SUAS mensagens, não pro horário da reunião.</li>
+  <li><b>Registro padrão no deal (toda interação):</b> cada toque em nota curta (data + canal + resultado) · nota de comprometimento apurada + leitura de comportamento (respondeu rápido/devagar, engajado/monossílabo) · decisor · restrições de horário. O próximo do rodízio (e o closer) herdam o deal pelo que você escreveu — deal sem nota é deal cego.</li>
+</ul>
+
+<h3>P9 · O relógio do SDR (todos os prazos num lugar só)</h3>
+<table>
+  <tr><th>O quê</th><th>Prazo</th></tr>
+  <tr><td>Primeira resposta a lead que te chamou</td><td>5 min (online)</td></tr>
+  <tr><td>Alerta [AGENDA] no 492 (pediu horário)</td><td>responder em até 30 min (8h-20h); sem resposta do lead à oferta: régua P3</td></tr>
+  <tr><td>Cobrança de confirmação (490)</td><td>4h sem confirmar OU 17h da véspera — o que vier antes</td></tr>
+  <tr><td>Liberação de slot não confirmado</td><td>após as 20h da véspera, sempre com a copy de liberação antes</td></tr>
+  <tr><td>Retomada (491) — primeiro toque</td><td>mesmo dia (dia útil); fim de semana → prioridade nº 1 da segunda 8h30</td></tr>
+  <tr><td>Régua de silêncio (qualificação)</td><td>abertura → +4h → dia seguinte → dia 4 → dia 7 (breakup); máx. 4 follow-ups</td></tr>
+  <tr><td>Régua de no-show (etiqueta)</td><td>mesmo dia → dia seguinte → dia 3 (breakup) → Perdido dia 4</td></tr>
+  <tr><td>Horário de atendimento</td><td>8h às 20h — nada sai fora disso; fora dele, manhã seguinte</td></tr>
+</table>
+
+<h3>P10 · Quando dá errado (correções e exceções)</h3>
+<ul>
+  <li><b>Deal movido manualmente pra etapa errada</b> (ex.: colega jogou Retomada direto em 112): corrigir erro de CRM NÃO é "voltar etapa" — a regra "nunca volta etapa" protege o fluxo do LEAD, não o erro de operação. Checar no Cal.com se existe booking real: existe → deal vai pra 490 e roda o P4; não existe → volta pra etapa verdadeira e agenda do zero. Sempre registrar nota "correção de movimentação" + avisar no Google Chat.</li>
+  <li><b>Falso-negativo do gate do chat</b> (lead desqualificada automaticamente que você vê que é ICP forte — ex.: enfermeira que já atende, Perdida por "recusou o investimento"): você NÃO reabre nem reaborda por conta própria. Sinalizar no Google Chat com o link do deal e o motivo; a coordenação decide e autoriza a copy. Regra interina: a coordenação revisa semanalmente os Perdidos por "recusou investimento"/"momento" com perfil de círculo 1.</li>
+  <li><b>Sistema fora do ar / lembrete que não saiu / acesso faltando:</b> não opere no escuro nem improvise por fora — Google Chat na hora, com print.</li>
+</ul>
+
+<h2 id="s4">4 · Processos do CLOSER — passo a passo</h2>
+
+<h3>C1 · Antes da call (10 min antes, obrigatório)</h3>
+<ol>
+  <li>Abrir o deal em <b>Reunião confirmada</b> e ler o <b>dossiê do chat</b> (atividade/resumo no deal). O que vem nele: perfil e profissão · dor nas palavras do lead · renda familiar e se investe em desenvolvimento · se viu a tela de investimento e como reagiu · <b>nota de comprometimento 1-5</b> · "por que agora" nas palavras dele · <b>decisor</b> (se alinha com alguém, o chat JÁ CONVIDOU essa pessoa pra consultoria — confirme se vem) · e, se a nota foi baixa, "o que falta pra virar prioridade".</li>
+  <li>Escolher o <b>depoimento-espelho</b> pelo perfil (saúde que já atende → dentista que integrou ao consultório · "tá caro" → psicóloga R$50k/mês · sem tempo/mãe → Taiane e Angelina · transição → ex-executivo).</li>
+  <li>Preparar os slides de credibilidade (bloco 0) e o link da sala.</li>
+</ol>
+
+<h3>C2 · A consultoria (50-60 min, 15 blocos)</h3>
+<p>Roteiro completo bloco a bloco, com falas e critérios de avaliação, está no <b>Kit de Onboarding Comercial</b> (§5). O esqueleto: <b>0</b> credibilidade + contrato → <b>1</b> momento atual → <b>2</b> potencial/contraste → <b>3</b> ponte ao futuro → <b>4</b> custo da inércia + trava invisível → <b>5</b> devolutiva (ativo→trava→custo→caminho) → <b>6</b> maturidade ("pra já ou outro momento?") → <b>7</b> decisor ANTES do caminho → <b>8</b> caminho em 3 camadas → <b>9</b> estrutura prática → <b>10</b> depoimento-espelho → <b>11</b> segurança → <b>12</b> compromisso → <b>13</b> investimento + SILÊNCIO → <b>14</b> próximo passo com data e hora.</p>
+<div class="panel"><b>As 5 flags que alertam a gestão na avaliação por IA:</b> score &lt;50 · nota 0 em devolutiva ou no silêncio pós-preço · avançar de bloco sem o lead alinhado 3+ vezes · silêncio pós-preço quebrado em 3+ calls seguidas · não identificar o decisor quando o lead citou cônjuge/sócio.</div>
+
+<h3>C3 · Depois da call: movendo o deal</h3>
+<ol>
+  <li><b>Compareceu</b> → mover para <b>Reunião Realizada (113)</b> + registrar no deal: dor, decisor, objeções tratadas, próximo passo com data.</li>
+  <li><b>Quer resolver e recebeu o caminho</b> → <b>Oportunidade (116)</b>. "Preciso pensar" com retorno marcado vive aqui — sempre com data e hora ("amanhã 14h ou quinta 10h?") — <b>mesmo que o valor já tenha sido apresentado</b>. O que separa 116 de 114 não é o preço ter saído: é haver negociação ATIVA.</li>
+  <li><b>Negociação ativa de condições/decisor</b> (contraproposta, call de casal marcada, discussão de forma de pagamento) → <b>Negociação (114)</b>.</li>
+  <li><b>Compareceu mas o bloco 6 disse "outro momento"</b> (não é oportunidade) → <b>Perdido com motivo "Não é o momento (pós-consultoria)"</b> + registrar a dor e o prazo que o lead deu — é esse registro que alimenta a reabordagem futura. O deal NÃO fica órfão em 113.</li>
+  <li><b>Pagamento efetivado</b> → <b>Venda (280)</b>. Prometeu mas não pagou = continua em Negociação.</li>
+  <li><b>Follow-up do closer em 116/114 (cadência):</b> até 3 toques em 7 dias — D+1 (retomar o próximo passo combinado), D+3 (reframe: custo da inércia), D+6 (pergunta direta: "faz sentido seguir?"). São mensagens 1:1 personalizadas pelo contexto da call — não é disparo em volume, então não dependem de aprovação de template; use as palavras do próprio lead. Dia 7 sem contato → reativar uma última vez ou Perdido com motivo honesto.</li>
+</ol>
+<div class="panel">
+<b>Venda (280) — como registrar:</b> mover SOMENTE com pagamento efetivado (link pago / comprovante), nunca com promessa. <b>Valor do deal = valor total efetivamente contratado:</b> à vista → o valor à vista (ex.: R$ 14.900) · parcelado → o total do parcelamento (ex.: 12x R$ 1.497 = R$ 17.964) · piso → o total da condição fechada. Data de ganho = data do pagamento. Checklist coletado na call: nome completo, CPF, e-mail, forma de pagamento.
+</div>
+<div class="panel">
+<b>Motivos de Perdido (lista v1 — usar sempre um destes; Rafa calibra):</b> Recusou o investimento <span class="small">(aplicado pelo gate automático do chat)</span> · Quer terapia pra si · Não é o momento (pós-consultoria) · Perdeu por preço <span class="small">(pós-negociação do closer: recusou piso/FPH)</span> · NO-SHOW SEM RECUPERAÇÃO · Sem conexão / encerrou (régua esgotada) · Solicitou remoção (LGPD) · Anti-perfil (recolocação / sem fit). Motivo estruturado é o que alimenta dashboard e reabordagem — "outros" não existe.
+</div>
+
+<h3>C4 · Fechamento: preço, piso e casal</h3>
+<ul>
+  <li><b>Sequência única:</b> ① tabela Master (R$ 14.900 / 12x R$ 1.497, âncora R$ 23.900) → ② piso do Master, verbal, só após <b>2 recusas reais</b> → ③ FPH tabela (R$ 8.900 / 12x R$ 890) → ④ piso FPH. Piso é condição de fechamento imediato — nunca "pra pensar".<br><span class="small"><b>Como contar recusa real (exemplo literal):</b> "tá caro" cru = OBJEÇÃO (trate: caro vs prioridade, ROI, depoimento). O "não" que vem DEPOIS do tratamento = recusa 1. Trate por outro ângulo (custo da inércia); novo "não" = recusa 2 → piso liberado. Pedido de desconto ("me dá 20%?") não é recusa — responda como objeção "está caro". Anote no deal: "recusa 1/2" — a auditoria ouve 100% das calls.</span></li>
+  <li><b>Pagamento autorizado:</b> à vista ou 12x cartão. Boleto/entrada: suspensos — "deixa eu montar a melhor condição e te retorno por escrito ainda hoje" + escalar à coordenação.</li>
+  <li><b>Co-decisor ausente:</b> apresenta TUDO ao lead presente com valor de TABELA; call de validação de 15 min com os dois em até 48h, marcada na hora (pode ser à noite). O piso, se precisar, só abre com os dois juntos.<br><span class="small"><b>Mecânica da call de validação:</b> ela NÃO passa pelo Cal.com nem pelo ciclo de confirmação do SDR — é compromisso direto seu: crie a atividade no deal (tipo chamada, data/hora fechadas na call), mande o link da sua própria sala pelo WhatsApp na hora, e VOCÊ confirma com o lead no WhatsApp no dia. O deal permanece em Negociação (114). Roteiro: recap da devolutiva (2 min) → caminho em 3 camadas → depoimento-espelho → perguntas do cônjuge (responda ao cônjuge, não ao lead) → você reapresenta o investimento (nunca deixe o lead "explicar o preço") → "à vista ou parcelado?" + silêncio.</span></li>
+  <li><b>Fechou:</b> coletar nome completo, CPF, e-mail e forma na própria call → acionar a coordenação no canal interno AINDA NA CALL para link de pagamento/contrato → acompanhar até o pagamento cair → só então registrar a Venda (280), conforme o quadro "como registrar" acima.</li>
+  <li><b>Garantia:</b> só se perguntarem. Termo exato: "Garantia de Prontidão" (Módulos 2 e 3 completos + no último dia não se sentir pronto pra atender + devolve material = 100%) + 7 dias CDC à parte. Fora das janelas: "quem trata é a coordenação — te retorno por escrito hoje".</li>
+</ul>
+
+<h2 id="s5">5 · Ferramentas: onde cada coisa acontece</h2>
+<table>
+  <tr><th>Ferramenta</th><th>O que você faz nela</th></tr>
+  <tr><td><b>Pipedrive — pipeline 21 (Closer)</b></td><td>A vida do lead. Filas do SDR, dossiê do chat no deal, atividade da reunião com <b>link de remarcar/cancelar</b>, registro de notas, mover etapas manuais (113, 116, 114, 280) e aplicar/remover a etiqueta "no-show".</td></tr>
+  <tr><td><b>WhatsApp oficial (WABA)</b></td><td>Conversa com o lead. Lembretes automáticos saem daqui (criação, 24h, 1h, 5 min); suas mensagens de retomada, confirmação e resgate também.</td></tr>
+  <tr><td><b>Cal.com</b></td><td>A agenda REAL da closer (Mara — Diumara Carvalho): <code>cal.omnihypnosis.com.br/diumara/consultoria-omni</code> (deixar nos favoritos). O que aparece ali existe; o que não aparece, não existe. O chat agenda sozinho; o SDR agenda por essa página nos encaixes (manual §01) e remarca pelo link da atividade (manual §04). Atendimento noturno: casos pontuais, decisão da Rafa. Nas copies, "{especialista}" = o nome da closer (vem na atividade do deal e no lembrete de 24h).</td></tr>
+  <tr><td><b>Google Chat interno</b></td><td>Seus alertas — [AGENDA] (pediu horário), [URGENTE] (consultoria em &lt;1h), sem link do Meet, [PACIENTE] (canal separado com o terapeuta) — sempre com os links da conversa e do negócio · escalonamentos pra Rafa.</td></tr>
+  <tr><td><b>Chatwoot</b></td><td>As conversas com o lead — o link vem em todo alerta (manual §06).</td></tr>
+  <tr><td><b>Dashboard do funil de chat</b></td><td>Números ao vivo: cadastros → entraram → abandonaram → desqualificadas → agendaram, com motivos de desqualificação.</td></tr>
+  <tr><td><b>Painel SDR (dash OMNI)</b></td><td>Suas entradas por etapa (Lead Geral até Reunião confirmada) por SDR — é onde a gestão acompanha seu funil.</td></tr>
+</table>
+<p class="small">Acessos são entregues no onboarding. Se algo estiver sem acesso no dia 1, escale no Google Chat — não opere no escuro.</p>
+
+<h2 id="s6">6 · Regras de ouro (valem para todos)</h2>
+<ul>
+  <li><b>Saudação da casa:</b> "ótimo dia / ótima tarde / excelente dia" — nunca "bom dia". Vocabulário: Omniterapia (não "hipnose"), formação (não "curso"), profissional (não "aluno").</li>
+  <li><b>A máquina move, o humano confirma:</b> nunca mova manualmente um deal que a automação move (493→491→492→490→112). Suas etapas manuais são: 113, 116, 114, 280 e Perdido — no-show não move nada, é etiqueta. Única exceção autorizada: <b>correção de erro de movimentação</b> (P10, sempre com nota + aviso no Google Chat).</li>
+  <li><b>"Coordenação" neste documento = Rafa Mendes</b> (gestão comercial) e quem ela designar. Canal de escalonamento: o Google Chat interno da operação.</li>
+  <li><b>Perdido sempre com motivo estruturado.</b> É o que alimenta o dashboard e a reabordagem.</li>
+  <li><b>Nunca prometa horário que você não conseguiu reservar na página.</b> Prometer e não ter é pior do que oferecer outro dia. E nunca mude data de reunião só no Pipedrive — remarcação é pelo Cal.com, sempre.</li>
+  <li><b>Pediu para parar? Parou.</b> Quem clica no botão negativo sai da régua — mensagem depois disso é motivo de bloqueio e derruba a qualidade do nosso número.</li>
+  <li><b>Nunca agendar pra bater número</b> — vira no-show e queima o closer. Desqualificar com elegância é proteção de margem.</li>
+  <li><b>Copy de disparo em volume precisa de aprovação prévia</b> (Rafa, Michael, Fernanda ou Julia) antes de ir a produção — vale pra qualquer template ou mensagem fixa nova que você queira criar.</li>
+  <li><b>Não improvise resposta que não existe:</b> servidor público, datas de turma, condições especiais, cancelamento fora das janelas → "quem trata é a coordenação, te retorno por escrito ainda hoje" + escalar DE VERDADE no mesmo dia.</li>
+  <li><b>Material complementar:</b> o <b>Kit de Onboarding Comercial</b> (mesmo diretório de outputs, <code>toca-o-sino-2026-08/</code>) traz o contexto completo — posicionamento, ICP e círculos, tabela de objeções, script dos 15 blocos e números do funil. Este playbook diz O QUE fazer e QUANDO; o kit aprofunda o COMO falar.</li>
+</ul>
+
+<footer>
+  OMNI Brasil · Playbook do Time de Vendas v1.2 · 17/08/2026 · Construído sobre o processo vigente desde a virada de 13/08 (chat de qualificação + pipeline 21), com dados verificados no código e nas configurações reais (lead-intake, disparo-comercial, Cal.com, Pipedrive). Validado por simulação de execução (SDR e closer simulados, 18 cenários) na v1.1. <b>v1.2: alinhado ao Manual do SDR · Consultoria Premium</b> (gringoles777.github.io/omni-apresentacoes/manual-sdr-consultoria.html), fonte da verdade operacional de agenda, alertas e horário de atendimento — os passos click-level vivem lá, resumidos aqui só no essencial. <b>v1.3 (decisão Rafa, 17/08): no-show deixa de ser etapa e vira ETIQUETA</b>, aplicável em Agendamento a confirmar e em Reunião confirmada — o deal não muda de etapa ao faltar. Documento vivo — mudou o processo, atualiza aqui primeiro.
+</footer>
+
+</div>
+</body>
+</html>
