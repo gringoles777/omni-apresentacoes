@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Funil de Agosto — Régua Antiga vs Nova | OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:      #F4F6F6;
+    --card:       #FFFFFF;
+    --ink:        #14191B;
+    --ink-soft:   #4A585C;
+    --ink-faint:  #7C8B8F;
+    --rule:       #DDE3E3;
+    --rule-soft:  #E9EDED;
+    --accent:     #0E5C63;
+    --accent-dim: #D5E5E6;
+    --pos:        #2C6B4C;
+    --pos-bg:     #E1EFE7;
+    --neg:        #A43526;
+    --neg-bg:     #F6E3DF;
+    --warn:       #8A6414;
+    --warn-bg:    #F5EBD6;
+    --shadow:     0 1px 2px rgba(20,25,27,.05), 0 8px 24px -16px rgba(20,25,27,.25);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #0E1416;
+      --card:       #161E20;
+      --ink:        #E7EDED;
+      --ink-soft:   #A3B2B5;
+      --ink-faint:  #74858A;
+      --rule:       #263133;
+      --rule-soft:  #1E2729;
+      --accent:     #63C4CB;
+      --accent-dim: #1B3B3E;
+      --pos:        #79C79B;
+      --pos-bg:     #17301F;
+      --neg:        #E8907F;
+      --neg-bg:     #351B17;
+      --warn:       #D6B064;
+      --warn-bg:    #322614;
+      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper:      #0E1416;
+    --card:       #161E20;
+    --ink:        #E7EDED;
+    --ink-soft:   #A3B2B5;
+    --ink-faint:  #74858A;
+    --rule:       #263133;
+    --rule-soft:  #1E2729;
+    --accent:     #63C4CB;
+    --accent-dim: #1B3B3E;
+    --pos:        #79C79B;
+    --pos-bg:     #17301F;
+    --neg:        #E8907F;
+    --neg-bg:     #351B17;
+    --warn:       #D6B064;
+    --warn-bg:    #322614;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 5vw, 4rem);
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  header { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  h1 {
+    font-family: Newsreader, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 6.5vw, 3.9rem);
+    line-height: 1.04;
+    letter-spacing: -.015em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    font-family: Newsreader, Georgia, serif;
+    font-size: clamp(1.08rem, 2.2vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 48ch;
+    margin: 0;
+  }
+
+  .sourceline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.4rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    color: var(--ink-faint);
+  }
+  .sourceline b { color: var(--ink-soft); font-weight: 500; }
+
+  /* ---------- scorecard ---------- */
+
+  .scores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .score {
+    background: var(--card);
+    padding: 1.15rem 1.25rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+  }
+
+  .score-label {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .score-pair {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .score-from { font-size: 1rem; color: var(--ink-faint); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .score-arrow { color: var(--ink-faint); font-size: .85rem; }
+  .score-to { font-family: Newsreader, Georgia, serif; font-size: 1.85rem; line-height: 1; }
+  .score-solo { font-family: Newsreader, Georgia, serif; font-size: 2.1rem; line-height: 1; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  h2 {
+    font-family: Newsreader, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.55rem, 3.4vw, 2.05rem);
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: .75rem;
+  }
+  h2 .num {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: .08em;
+    flex: none;
+  }
+
+  h3 {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  p { margin: 0; max-width: 68ch; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  section > p + p { margin-top: -.35rem; }
+
+  /* ---------- tables ---------- */
+
+  .scroller {
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--card);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .875rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  thead th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .67rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    text-align: right;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    white-space: nowrap;
+  }
+  thead th:first-child { text-align: left; }
+
+  tbody td {
+    padding: .62rem 1rem;
+    border-bottom: 1px solid var(--rule-soft);
+    text-align: right;
+    white-space: nowrap;
+    color: var(--ink-soft);
+  }
+  tbody td:first-child {
+    text-align: left;
+    color: var(--ink);
+    white-space: normal;
+    min-width: 14rem;
+  }
+  tbody td.txt { text-align: left; white-space: normal; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  tbody tr.key td { background: var(--accent-dim); color: var(--ink); font-weight: 500; }
+  tbody tr.key td:first-child { font-weight: 600; }
+
+  tbody tr.sub td:first-child {
+    padding-left: 2.1rem;
+    color: var(--ink-faint);
+    font-size: .82rem;
+  }
+
+  tbody tr.spacer td { padding: 0; height: .5rem; background: var(--rule-soft); border: 0; }
+
+  .delta {
+    display: inline-block;
+    padding: .1rem .45rem;
+    border-radius: 2px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .76rem;
+    font-weight: 500;
+  }
+  .delta.up   { color: var(--pos); background: var(--pos-bg); }
+  .delta.down { color: var(--neg); background: var(--neg-bg); }
+  .delta.flat { color: var(--ink-faint); background: var(--rule-soft); }
+  .delta.flag { color: var(--warn); background: var(--warn-bg); }
+
+  .note-mark {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .7rem;
+    color: var(--warn);
+    padding-left: .3rem;
+  }
+
+  /* ---------- bar ---------- */
+
+  .bar {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .bar-track {
+    flex: 1;
+    max-width: 7rem;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--rule-soft);
+    overflow: hidden;
+  }
+  .bar-fill { display: block; height: 100%; background: var(--accent); }
+  .bar-fill.warn { background: var(--warn); }
+  .bar-fill.neg  { background: var(--neg); }
+
+  /* ---------- callouts ---------- */
+
+  .caveats { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .caveat {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1.35rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    box-shadow: var(--shadow);
+  }
+  .caveat > .eyebrow { color: var(--warn); }
+
+  .verdict {
+    border-left: 2px solid var(--accent);
+    padding: .15rem 0 .15rem 1.1rem;
+    font-family: Newsreader, Georgia, serif;
+    font-size: 1.12rem;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 62ch;
+  }
+
+  .answer {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    padding: 1.1rem 1.35rem;
+    font-family: Newsreader, Georgia, serif;
+    font-size: 1.14rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .answer b { font-weight: 600; }
+
+  /* ---------- recommendations ---------- */
+
+  ol.recs {
+    list-style: none;
+    counter-reset: rec;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  ol.recs li {
+    counter-increment: rec;
+    background: var(--card);
+    padding: 1rem 1.35rem 1.1rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: .3rem 0;
+    align-items: baseline;
+  }
+  ol.recs li::before {
+    content: counter(rec, decimal-leading-zero);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: .06em;
+  }
+  ol.recs li h3 { grid-column: 2; }
+  ol.recs li p { grid-column: 2; font-size: .92rem; }
+
+  .appendix { border-top: 1px solid var(--rule); padding-top: 2.25rem; }
+  .appendix h2 { font-size: 1.3rem; }
+  .appendix table { font-size: .82rem; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    color: var(--ink-faint);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 34rem) {
+    tbody td:first-child { min-width: 10rem; font-size: .82rem; }
+    .score-to { font-size: 1.55rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">OMNI Brasil · OBA 2 + Google Ads × Pipedrive</div>
+    <h1>Agosto em dois cortes</h1>
+    <p class="standfirst">
+      Em 12/08 a régua de lead mudou: só é lead quem agenda. Os volumes deixaram de ser
+      comparáveis — o que ainda é comparável é o que acontece depois do agendamento.
+    </p>
+    <div class="sourceline">
+      <span><b>P1</b> 01–11/08 · 11 dias · régua antiga</span>
+      <span><b>P2</b> 12–19/08 · 8 dias · régua nova</span>
+      <span><b>Mídia</b> Meta OBA 2 + Google Ads</span>
+      <span><b>Ruído removido</b> 34 deals</span>
+      <span><b>Emitido</b> 20/08/2026</span>
+    </div>
+  </header>
+
+  <div class="scores">
+    <div class="score">
+      <div class="score-label">Investimento / dia</div>
+      <div class="score-pair">
+        <span class="score-from">R$ 963</span>
+        <span class="score-arrow">→</span>
+        <span class="score-to">R$ 595</span>
+      </div>
+      <span class="delta down">−38,2%</span>
+    </div>
+    <div class="score">
+      <div class="score-label">Agendamentos / dia</div>
+      <div class="score-pair">
+        <span class="score-from">1,45</span>
+        <span class="score-arrow">→</span>
+        <span class="score-to">4,50</span>
+      </div>
+      <span class="delta up">+209%</span>
+    </div>
+    <div class="score">
+      <div class="score-label">Custo por agendamento</div>
+      <div class="score-pair">
+        <span class="score-from">R$ 662</span>
+        <span class="score-arrow">→</span>
+        <span class="score-to">R$ 132</span>
+      </div>
+      <span class="delta up">−80,0%</span>
+    </div>
+    <div class="score">
+      <div class="score-label">Taxa de no-show · P2</div>
+      <div class="score-pair">
+        <span class="score-solo">68,4%</span>
+      </div>
+      <span class="delta down">era 50,0%</span>
+    </div>
+  </div>
+
+  <p class="verdict">
+    A régua nova entregou o que prometeu: com 38% menos verba por dia, o funil produz 3,1x mais
+    agendamentos e custa 80% menos por agendamento. Mas o gargalo apenas mudou de lugar —
+    saiu de “MQL não vira reunião” e foi para “reunião marcada não acontece”.
+  </p>
+
+  <!-- 0 -->
+  <section>
+    <h2><span class="num">00</span> O que mudou em 12/08</h2>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col"></th><th scope="col">Até 11/08</th><th scope="col">De 12/08 em diante</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>O que conta como lead</td><td class="txt">Preencheu o formulário e chegou na página de obrigado</td><td class="txt">Preencheu, passou pelo chat de qualificação por IA e <strong>agendou reunião</strong></td></tr>
+          <tr><td>Perfil capturado</td><td class="txt">Interessado / curioso</td><td class="txt">Qualificado com perfil aderente</td></tr>
+          <tr><td>Onde entra no CRM</td><td class="txt">SDR-Novo · pipeline 65</td><td class="txt">Closer · pipeline 21</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A queda de leads não é perda de performance — é mudança de régua, com o objetivo declarado de
+      nutrir o algoritmo com lead qualificado em vez de volume. Por isso este relatório para de comparar
+      “leads” entre os períodos e passa a comparar <strong>o que acontece depois do agendamento</strong>,
+      que é a mesma coisa nos dois modelos.
+    </p>
+  </section>
+
+  <!-- 1 -->
+  <section>
+    <h2><span class="num">01</span> Os leads que agendam estão comparecendo?</h2>
+    <div class="answer">
+      <b>Não.</b> De cada 10 reuniões agendadas que já tiveram desfecho, cerca de 7 não aconteceram.
+      A taxa de no-show do P2 é de <b>68,4%</b> — contra 50,0% na régua antiga.
+    </div>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Etapa · P2 (12–19/08)</th><th scope="col">Nº</th><th scope="col">Proporção</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Deals no funil Closer</td><td>90</td><td>—</td></tr>
+          <tr class="key"><td>Agendaram reunião</td><td>36</td><td>40,0% dos deals</td></tr>
+          <tr class="sub"><td>Realizaram</td><td>6</td><td>—</td></tr>
+          <tr class="sub"><td>Pendentes — reunião futura</td><td>17</td><td>—</td></tr>
+          <tr class="sub"><td>Perdidos sem realizar</td><td>13</td><td>—</td></tr>
+          <tr class="spacer"><td colspan="3"></td></tr>
+          <tr class="key"><td>Taxa de comparecimento <span class="note-mark">n=19 com desfecho</span></td><td>31,6%</td><td><span class="bar"><span class="bar-track"><span class="bar-fill" style="width:31.6%"></span></span></span></td></tr>
+          <tr class="key"><td>Taxa de no-show <span class="note-mark">n=19 com desfecho</span></td><td>68,4%</td><td><span class="bar"><span class="bar-track"><span class="bar-fill neg" style="width:68.4%"></span></span></span></td></tr>
+          <tr><td>Comparecimento sobre todos os 36 agendados</td><td>16,7%</td><td><span class="bar"><span class="bar-track"><span class="bar-fill warn" style="width:16.7%"></span></span></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Os 17 pendentes ficam fora do cálculo de no-show — são reuniões que ainda vão acontecer, e
+      incluí-las subestimaria o comparecimento.
+    </p>
+
+    <h3>Por que não compareceram (n=13)</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Motivo</th><th scope="col">Nº</th><th scope="col">%</th><th scope="col">Natureza</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ENCERROU CONTATO</td><td>4</td><td>31%</td><td><span class="delta flag">operacional</span></td></tr>
+          <tr><td>CADASTROU ERRADO</td><td>3</td><td>23%</td><td><span class="delta flag">dado</span></td></tr>
+          <tr><td>SEM INTERESSE/NECESSIDADE</td><td>3</td><td>23%</td><td><span class="delta flat">desqualificação</span></td></tr>
+          <tr><td>SEM BUDGET</td><td>2</td><td>15%</td><td><span class="delta flat">desqualificação</span></td></tr>
+          <tr><td>SEM TEMPO</td><td>1</td><td>8%</td><td><span class="delta flag">operacional</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>54% das perdas são falha de contato ou de dado</strong> — sumiram após agendar ou erraram
+      o cadastro. Apenas 38% são desqualificação real. O no-show é um problema de confirmação e de
+      captura, não da régua de qualificação.
+    </p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2><span class="num">02</span> Quem realizou a reunião, para onde foi?</h2>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Etapa · P2</th><th scope="col">Nº</th><th scope="col">% das realizadas</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Reuniões realizadas</td><td>6</td><td>100%</td></tr>
+          <tr class="key"><td>Viraram oportunidade</td><td>4</td><td>67%</td></tr>
+          <tr><td>Seguiram para negociação</td><td>0</td><td>0%</td></tr>
+          <tr><td>Vendas</td><td>0</td><td>0%</td></tr>
+          <tr><td>Perdidos após a reunião</td><td>3</td><td>50%</td></tr>
+          <tr><td>Ainda em aberto</td><td>3</td><td>50%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Deal a deal</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Deal</th><th scope="col">Situação</th><th scope="col">Oportunidade</th><th scope="col">Desfecho</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>#285062</td><td class="txt">Aberto em Oportunidade</td><td>Sim</td><td class="txt">Em andamento</td></tr>
+          <tr><td>#285060</td><td class="txt">Aberto em Oportunidade</td><td>Sim</td><td class="txt">Em andamento</td></tr>
+          <tr><td>#285041</td><td class="txt">Aberto em Oportunidade</td><td>Sim</td><td class="txt">Em andamento</td></tr>
+          <tr><td>#285074</td><td class="txt">Perdido</td><td>Sim</td><td class="txt">SEM INTERESSE/NECESSIDADE</td></tr>
+          <tr><td>#285061</td><td class="txt">Perdido</td><td>Não</td><td class="txt">SEM BUDGET</td></tr>
+          <tr><td>#284894</td><td class="txt">Perdido</td><td>Não</td><td class="txt">SEM BUDGET</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A reunião converte bem em oportunidade — 67%, contra 83% na régua antiga, com amostra minúscula
+      nos dois casos. Nenhuma chegou a negociação ainda, o que é esperado: a reunião mais antiga desse
+      grupo tem menos de 8 dias.
+    </p>
+    <p>
+      <strong>Os dois “SEM BUDGET” são o único sinal de alerta de qualificação.</strong> O chat de IA não
+      está filtrando capacidade de investimento antes de mandar o lead para a agenda do closer — e a
+      reunião do closer é o recurso mais caro do funil.
+    </p>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2><span class="num">03</span> A cascata da régua antiga (01–11/08)</h2>
+    <p>Base: 390 leads que entraram como Leads Gerais ou MQL.</p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Etapa</th><th scope="col">Nº</th><th scope="col">% da etapa anterior</th><th scope="col">% do lead</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Leads</td><td>390</td><td>—</td><td>100%</td></tr>
+          <tr><td>MQL</td><td>347</td><td>89,0%</td><td>89,0%</td></tr>
+          <tr class="key"><td>MQL → Reunião agendada</td><td>16</td><td>4,6%</td><td>4,1%</td></tr>
+          <tr class="key"><td>Agendada → Realizada</td><td>6</td><td>37,5%</td><td>1,5%</td></tr>
+          <tr class="key"><td>Realizada → Oportunidade</td><td>5</td><td>83,3%</td><td>1,3%</td></tr>
+          <tr class="key"><td>Oportunidade → Negociação/Venda</td><td>1</td><td>20,0%</td><td>0,3%</td></tr>
+          <tr><td>Venda concretizada</td><td>1</td><td>20,0% da oportunidade</td><td>0,3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>O gargalo da régua antiga está escancarado:</strong> de 347 MQLs, apenas 16 viraram
+      agendamento — 4,6%. Era exatamente esse funil que a mudança de 12/08 veio corrigir.
+    </p>
+
+    <h3>Reuniões realizadas dadas como perdidas · P1</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Indicador</th><th scope="col">Valor</th><th scope="col">Motivo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Realizadas perdidas</td><td>1 de 6 · 16,7%</td><td class="txt">SEM INTERESSE/NECESSIDADE (100%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>No-show na régua antiga, para comparação</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Indicador · P1</th><th scope="col">Valor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Agendados</td><td>16</td></tr>
+          <tr><td>Realizados</td><td>6</td></tr>
+          <tr><td>Pendentes</td><td>4</td></tr>
+          <tr><td>Perdidos sem realizar</td><td>6</td></tr>
+          <tr class="key"><td>Taxa de no-show <span class="note-mark">n=12 com desfecho</span></td><td>50,0%</td></tr>
+          <tr><td>Motivo único</td><td>ENCERROU CONTATO · 6 de 6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2><span class="num">04</span> Investimento em média diária</h2>
+    <p>
+      Os períodos têm 11 e 8 dias. Comparar totais distorce — a base correta é a média diária.
+      Meta restrito à conta OBA 2; Hypnoflash fora de toda a análise.
+    </p>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Investimento</th><th scope="col">P1 · 11 dias</th><th scope="col">P2 · 8 dias</th><th scope="col">Var.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Meta — OBA 2</td><td>R$ 8.079,74</td><td>R$ 3.300,40</td><td><span class="delta down">−59,2%</span></td></tr>
+          <tr><td>Google Ads</td><td>R$ 2.515,28</td><td>R$ 1.460,43</td><td><span class="delta down">−41,9%</span></td></tr>
+          <tr><td>Total do período</td><td>R$ 10.595,02</td><td>R$ 4.760,83</td><td><span class="delta down">−55,1%</span></td></tr>
+          <tr class="key"><td>Investimento por dia</td><td>R$ 963,18</td><td>R$ 595,10</td><td><span class="delta down">−38,2%</span></td></tr>
+          <tr class="sub"><td>Meta OBA 2 / dia</td><td>R$ 734,52</td><td>R$ 412,55</td><td><span class="delta down">−43,8%</span></td></tr>
+          <tr class="sub"><td>Google Ads / dia</td><td>R$ 228,66</td><td>R$ 182,55</td><td><span class="delta down">−20,2%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Produção normalizada por dia</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Por dia</th><th scope="col">P1</th><th scope="col">P2</th><th scope="col">Var.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Investimento</td><td>R$ 963,18</td><td>R$ 595,10</td><td><span class="delta down">−38,2%</span></td></tr>
+          <tr><td>Leads <span class="note-mark">régua diferente</span></td><td>35,45</td><td>11,25</td><td><span class="delta flat">−68,3%</span></td></tr>
+          <tr class="key"><td>Reuniões agendadas</td><td>1,45</td><td>4,50</td><td><span class="delta up">+209,4%</span></td></tr>
+          <tr class="key"><td>Reuniões realizadas</td><td>0,55</td><td>0,75</td><td><span class="delta up">+37,5%</span></td></tr>
+          <tr><td>Oportunidades</td><td>0,45</td><td>0,50</td><td><span class="delta up">+10,0%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Custos unitários</h3>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Indicador</th><th scope="col">P1</th><th scope="col">P2</th><th scope="col">Var.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Custo por lead <span class="note-mark">réguas diferentes</span></td><td>R$ 27,17</td><td>R$ 52,90</td><td><span class="delta flat">+94,7%</span></td></tr>
+          <tr class="key"><td>Custo por agendamento</td><td>R$ 662,19</td><td>R$ 132,25</td><td><span class="delta up">−80,0%</span></td></tr>
+          <tr class="key"><td>Custo por reunião realizada</td><td>R$ 1.765,84</td><td>R$ 793,47</td><td><span class="delta up">−55,1%</span></td></tr>
+          <tr class="key"><td>Custo por oportunidade</td><td>R$ 2.119,00</td><td>R$ 1.190,21</td><td><span class="delta up">−43,8%</span></td></tr>
+          <tr><td>CAC</td><td>R$ 10.595,02</td><td>— <span class="note-mark">0 vendas</span></td><td><span class="delta flat">—</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      <strong>O custo por lead dobrou — e isso é o esperado e o desejado.</strong> O lead do P2 é alguém
+      que já agendou; o do P1 era qualquer um que preencheu formulário. Comparar os dois é comparar
+      coisas diferentes. Os indicadores de decisão são os três destacados acima, e todos melhoraram
+      entre 44% e 80%.
+    </p>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2><span class="num">05</span> Conclusões</h2>
+    <div class="caveats">
+      <div class="caveat">
+        <div class="eyebrow" style="color:var(--accent)">Funcionou</div>
+        <h3>A mudança de régua entregou o que prometia</h3>
+        <p>
+          Gastando 38% menos por dia, o P2 produz 3,1x mais agendamentos por dia e custa 80% menos por
+          agendamento. O funil velho convertia 4,6% de MQL em agendamento; o novo entrega o agendamento
+          como condição de entrada.
+        </p>
+      </div>
+      <div class="caveat">
+        <div class="eyebrow">Atenção</div>
+        <h3>O gargalo mudou de lugar — e piorou</h3>
+        <p>
+          Saiu de “MQL não vira reunião” (4,6% no P1) e foi para “reunião agendada não acontece”:
+          no-show de 68,4% no P2 contra 50,0% no P1. O problema cresceu junto com o volume, e cada real
+          adicional em mídia hoje compra agendamento que não acontece.
+        </p>
+      </div>
+      <div class="caveat">
+        <div class="eyebrow">Corrigível</div>
+        <h3>O no-show é operacional, não de qualificação</h3>
+        <p>
+          ENCERROU CONTATO (31%) e CADASTROU ERRADO (23%) somam 54% das perdas — falhas de confirmação
+          e de captura de dado. Dá para atacar sem mexer na régua de qualificação.
+        </p>
+      </div>
+      <div class="caveat">
+        <div class="eyebrow">Ainda ilegível</div>
+        <h3>Venda no P2 não pode ser julgada</h3>
+        <p>
+          Zero vendas, mas com 17 agendamentos pendentes e nenhuma reunião com mais de 8 dias.
+          O CAC do novo modelo só fica legível por volta de 05/09.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2><span class="num">06</span> Recomendações</h2>
+    <ol class="recs">
+      <li>
+        <h3>Atacar o no-show antes de escalar verba</h3>
+        <p>Com 68,4% de no-show, subir investimento multiplica agendamento que não acontece. Confirmação ativa em D-1 e D-0, com resposta do lead, é o maior ganho disponível hoje.</p>
+      </li>
+      <li>
+        <h3>Corrigir a captura de dado no formulário</h3>
+        <p>CADASTROU ERRADO responde por 23% das perdas pós-agendamento. Validação de telefone e e-mail elimina boa parte disso.</p>
+      </li>
+      <li>
+        <h3>Incluir filtro de budget no chat de qualificação</h3>
+        <p>Dois dos três perdidos pós-reunião foram SEM BUDGET. A reunião do closer é o recurso mais caro do funil e não deveria ser gasta nesse perfil.</p>
+      </li>
+      <li>
+        <h3>Aposentar o custo por lead como indicador de eficiência</h3>
+        <p>Com a nova régua ele vira número descritivo, não de performance. Decidir por custo por agendamento, por reunião realizada e por oportunidade.</p>
+      </li>
+      <li>
+        <h3>Reavaliar em 05/09</h3>
+        <p>Com os 17 agendamentos pendentes maturados, para fechar CAC e conversão em venda do novo modelo.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="appendix">
+    <h2><span class="num">A1</span> Definições usadas</h2>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th scope="col">Métrica</th><th scope="col">Critério</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lead · P1</td><td class="txt">Deal criado entrando em 480 (Leads Gerais) ou 420 (MQL)</td></tr>
+          <tr><td>Lead · P2</td><td class="txt">Deal criado no pipeline 21 (Closer)</td></tr>
+          <tr><td>Reunião agendada</td><td class="txt">Passou por 490, 112, 423 ou 485 — ou adiante</td></tr>
+          <tr><td>Reunião realizada</td><td class="txt">Passou por 113 — ou adiante</td></tr>
+          <tr><td>Oportunidade</td><td class="txt">Passou por 116, 114 ou 280</td></tr>
+          <tr><td>Negociação</td><td class="txt">Passou por 114 ou 280</td></tr>
+          <tr><td>Venda</td><td class="txt">status = won</td></tr>
+          <tr><td>No-show</td><td class="txt">Agendou, não realizou e foi marcado como perdido</td></tr>
+          <tr><td>Pendente</td><td class="txt">Agendou, não realizou e segue aberto</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Taxa de no-show calculada sobre agendamentos com desfecho definido (realizados + perdidos).
+      Excluídos da base: pipelines 25, 32, 62 e 70 (upsell, CS, Hypnoflash) e deals com motivo
+      TESTE ou DUPLICIDADE — 34 no total.
+    </p>
+  </section>
+
+  <footer>
+    Squad aiox-ads · ads-traffic-chief — 595 deals lidos via Pipedrive <code>/deals/{id}/flow</code>, sem erros de coleta; 561 após limpeza de ruído.<br>
+    Meta Ads API restrita à conta Omni Brasil [OBA] 2. Google Ads API: customer 6713237463.
+  </footer>
+
+</div>
+</body>
+</html>
