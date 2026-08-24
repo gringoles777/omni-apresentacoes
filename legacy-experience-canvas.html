@@ -325,6 +325,12 @@ header.topbar {
 .track li.task.done strong { color: var(--color-cream-50); font-weight: 500; }
 .track li.upd { color: var(--color-teal); font-size: 12.5px; }
 .track li.upd::before { content: none; }
+.tag-novo {
+  display: inline-block; font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;
+  padding: 2px 7px; border-radius: var(--radius-pill); margin-left: 7px; white-space: nowrap;
+  background: rgba(232,200,106,0.12); border: 1px solid rgba(232,200,106,0.35); color: var(--status-thinking);
+}
+.track-name .tag-novo { margin-left: 4px; }
 
 /* ═══════════════════════════════════════════════════
    CONFIG / SETUP BANNER
@@ -935,6 +941,7 @@ footer {
             <ul>
               <li class="task" data-task="w2-02"><button class="chk" aria-label="Marcar como concluída"></button>Puxar a <strong>lista de alunos no portal</strong> — quem já se pré-inscreveu mas ainda não pagou a pré-inscrição</li>
               <li class="task" data-task="w2-03"><button class="chk" aria-label="Marcar como concluída"></button>Escrever a mensagem para essa lista, comunicando a <strong>urgência da virada de lote</strong></li>
+              <li class="task" data-task="w2-12"><button class="chk" aria-label="Marcar como concluída"></button>No mesmo levantamento, fechar com a Eliza os <strong>números da base</strong>: inscritos deste Legacy, compradores que nunca agendaram e ingressos dos membros Black. É o que destrava os cenários de meta e o funil reverso — três questões do canvas travadas nisso desde 12/08 <span class="tag-novo">análise 24/08</span></li>
             </ul>
           </div>
 
@@ -942,6 +949,14 @@ footer {
             <div class="track-name">Trilha 3 · Convidados dos alunos</div>
             <ul>
               <li class="task" data-task="w2-04"><button class="chk" aria-label="Marcar como concluída"></button>Escrever o <strong>e-mail e o WhatsApp</strong> para a lista de convidados dos alunos, chamando para a <strong>aula do dia 27/08</strong></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Trilha 4 · Preparação da aula de 27/08 <span class="tag-novo">análise 24/08</span></div>
+            <ul>
+              <li class="task" data-task="w2-13"><button class="chk" aria-label="Marcar como concluída"></button>Definir o <strong>tema da aula de 27/08</strong> <span class="who">Michael</span> — o convite sai dia 25, então o tema precisa estar de pé antes da copy <span class="tag-novo">análise 24/08</span></li>
+              <li class="task" data-task="w2-14"><button class="chk" aria-label="Marcar como concluída"></button><strong>Aprovar a copy</strong> dos disparos antes de ir ao ar (regra de ouro: disparo em volume passa por Rafa, Michael, Fernanda ou Julia) <span class="tag-novo">análise 24/08</span></li>
             </ul>
           </div>
 
@@ -961,6 +976,7 @@ footer {
             <div class="track-name">Depoimentos</div>
             <ul>
               <li class="task" data-task="w2-05"><button class="chk" aria-label="Marcar como concluída"></button>Finalizar a <strong>separação dos depoimentos do Legacy</strong></li>
+              <li class="task" data-task="w2-15"><button class="chk" aria-label="Marcar como concluída"></button><strong>Publicar os depoimentos escolhidos na página do Legacy</strong> — a página no ar hoje não tem nenhum, e depoimento estava no escopo acordado para 21/08 <span class="tag-novo">análise 24/08</span></li>
             </ul>
           </div>
 
@@ -986,6 +1002,21 @@ footer {
             <div class="track-name">Campanha externa · Terapeutas</div>
             <ul>
               <li class="task" data-task="w2-07"><button class="chk" aria-label="Marcar como concluída"></button>Iniciar os <strong>preparativos da campanha Legacy — Terapeutas</strong></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Decisões de que a campanha depende <span class="tag-novo">análise 24/08</span></div>
+            <ul>
+              <li class="task" data-task="w2-16"><button class="chk" aria-label="Marcar como concluída"></button>Fechar com o Michael o <strong>orçamento de tráfego e o split</strong> entre remarketing de alunos e campanha externa — em discussão desde 12/08 e pré-requisito do material que vai para o gestor em 31/08 <span class="tag-novo">análise 24/08</span></li>
+              <li class="task" data-task="w2-17"><button class="chk" aria-label="Marcar como concluída"></button>Fechar o <strong>calendário de aulas de setembro e outubro</strong> — é responsabilidade da Fernanda no briefing, está em discussão no canvas e define o destino do tráfego frio até o carrinho fechar em 19/10 <span class="tag-novo">análise 24/08</span></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Aula de 27/08 · comparecimento <span class="tag-novo">análise 24/08</span></div>
+            <ul>
+              <li class="task" data-task="w2-18"><button class="chk" aria-label="Marcar como concluída"></button>Gravar com o Michael o <strong>vídeo curto de preparação</strong> para a aula <span class="who">Michael</span> — recomendação já registrada no canvas para elevar o comparecimento, sem oferta <span class="tag-novo">análise 24/08</span></li>
             </ul>
           </div>
         </div>
@@ -1021,7 +1052,21 @@ footer {
             <div class="track-name">Campanha externa · Material</div>
             <ul>
               <li class="task" data-task="w2-10"><button class="chk" aria-label="Marcar como concluída"></button>Enviar para aprovação a <strong>LP e os criativos</strong> da campanha externa</li>
+              <li class="task" data-task="w2-19"><button class="chk" aria-label="Marcar como concluída"></button>Confirmar o <strong>destino do tráfego frio</strong>: pelo funil aprovado, campanha externa leva para a <strong>AULA</strong>, não direto para a página de vendas — só afiliados e venda 1:1 vão direto <span class="tag-novo">análise 24/08</span></li>
             </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Virada do lote 1 → 2 <span class="tag-novo">análise 24/08</span></div>
+            <ul>
+              <li class="task" data-task="w2-20"><button class="chk" aria-label="Marcar como concluída"></button>Decidir se a virada <strong>acontece em 31/08 ou é antecipada</strong>, conforme o ritmo de vendas <span class="tag-novo">análise 24/08</span></li>
+              <li class="task" data-task="w2-21"><button class="chk" aria-label="Marcar como concluída"></button>Preparar a <strong>última chamada do lote 1</strong> para os quatro públicos: grupo de alunos, Comunidade, base de e-mail e pré-inscritos que ainda não pagaram <span class="tag-novo">análise 24/08</span></li>
+              <li class="task" data-task="w2-22"><button class="chk" aria-label="Marcar como concluída"></button>Avisar <strong>afiliados e alunos indicadores</strong> antes da virada — eles vendem com o preço na mão <span class="tag-novo">análise 24/08</span></li>
+            </ul>
+          </div>
+
+          <div class="cond">
+            <strong>Ponto cego da semana:</strong> 31/08 é o último dia do lote 1 (R$3.997) e não havia nenhuma ação de virada no cronograma. A página no ar anuncia “1º lote — até 31 de agosto” em três pontos, e o lote 2 é R$5.997.
           </div>
         </div>
       </div>
@@ -1040,6 +1085,14 @@ footer {
               <li class="task" data-task="w2-11"><button class="chk" aria-label="Marcar como concluída"></button>Ajustes finais e <strong>envio do material do Legacy Experience para o gestor de tráfego</strong></li>
             </ul>
           </div>
+
+          <div class="track">
+            <div class="track-name">Virada do lote na comunicação <span class="tag-novo">análise 24/08</span></div>
+            <ul>
+              <li class="task" data-task="w2-23"><button class="chk" aria-label="Marcar como concluída"></button>Atualizar a <strong>página do Legacy e o formulário de pré-inscrição</strong> para o <strong>lote 2 (R$5.997)</strong> — preço, parcelamento, âncora e as três menções a “1º lote até 31 de agosto” <span class="tag-novo">análise 24/08</span></li>
+              <li class="task" data-task="w2-24"><button class="chk" aria-label="Marcar como concluída"></button>Disparar a <strong>última chamada</strong> preparada em 28/08 <span class="tag-novo">análise 24/08</span></li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -1054,6 +1107,21 @@ footer {
               <li>Dois públicos distintos na mesma semana: os <strong>pré-inscritos que ainda não pagaram</strong> (24/08) e os <strong>convidados indicados pelos alunos</strong> (24 a 27/08)</li>
               <li>O argumento para os pré-inscritos é a <span class="gold">virada de lote</span>; o argumento para os convidados é a <strong>aula do dia 27/08</strong></li>
               <li>A <strong>página do Legacy</strong> precisa estar aprovada antes dos disparos — é o destino de todos esses convites</li>
+            </ul>
+          </div>
+
+          <div class="brief-card">
+            <h4>⏳ Fora da semana, mas o relógio corre</h4>
+            <ul>
+              <li><strong>Termos do portal</strong> — participação, uso de imagem e LGPD num termo só, mais o
+                  termo de afiliado. As respostas do canvas mandam “confirmar com a Julia se já está no ar”, e
+                  ninguém confirmou. Já há pré-inscrição rodando e afiliado podendo vender</li>
+              <li><strong>Código promocional de afiliado no portal</strong> — prazo do briefing era 14/08; vale
+                  checar se está funcionando antes de a campanha escalar</li>
+              <li><strong>Logística do evento</strong> com o Ítalo: som, luz, palco e gravação sem fornecedor nem
+                  custo fechado — evento em 21 a 24/10</li>
+              <li><strong>Seguro do evento</strong> e a <strong>participação do Marcão</strong> seguem sem
+                  definição desde 12/08</li>
             </ul>
           </div>
 
@@ -1123,7 +1191,7 @@ alter publication supabase_realtime add table public.legacy_experience_canvas;</
 
 <footer>
   OMNI Brasil · Legacy Experience · Canvas gerado em maio 2026 · Sync via Supabase
-  <br><span style="opacity:0.4;font-size:9px;">build v2.1 — cronograma de divulgação atualizado em 2026-08-14</span>
+  <br><span style="opacity:0.4;font-size:9px;">build v2.3 — cronograma em abas por semana · pendências da análise de 2026-08-24</span>
 </footer>
 
 </div><!-- #main -->
