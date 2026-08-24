@@ -217,7 +217,7 @@ header.topbar {
 /* ═══════════════════════════════════════════════════
    CRONOGRAMA DE DIVULGAÇÃO
    ═══════════════════════════════════════════════════ */
-#cronograma, #cronograma-lancamento { max-width: 1400px; margin: 0 auto 24px; padding: 0 32px; }
+#cronograma { max-width: 1400px; margin: 0 auto 24px; padding: 0 32px; }
 .crono-box {
   background: var(--color-dark); border: 1px solid var(--color-gold-30);
   border-radius: var(--radius-card); overflow: hidden;
@@ -282,6 +282,49 @@ header.topbar {
   font-family: var(--font-serif); font-size: 15px; line-height: 1.6; color: var(--color-cream);
 }
 .idea-quote span { display: block; font-family: var(--font-body); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-gold); margin-bottom: 8px; }
+
+/* ── abas por semana ── */
+.week-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; border-bottom: 1px solid var(--color-gold-20); padding-bottom: 16px; }
+.week-tab {
+  display: flex; align-items: center; gap: 10px; padding: 10px 15px;
+  border-radius: 8px; border: 1px solid var(--color-gold-20); background: transparent;
+  color: var(--color-cream-50); font-family: var(--font-body); font-size: 11.5px;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .18s;
+}
+.week-tab:hover { border-color: var(--color-gold-30); color: var(--color-cream); }
+.week-tab.active { background: var(--color-gold-15); border-color: var(--color-gold); color: var(--color-gold); }
+.wk-badge { font-size: 9px; padding: 3px 8px; border-radius: var(--radius-pill); letter-spacing: 1px; font-weight: 600; }
+.wk-badge.done { background: rgba(42,157,143,0.15); color: var(--color-teal); }
+.wk-badge.live { background: rgba(200,168,75,0.20); color: var(--color-gold-light); }
+.wk-count { font-size: 10.5px; color: var(--color-cream-30); font-variant-numeric: tabular-nums; }
+.week-tab.active .wk-count { color: var(--color-cream-50); }
+.week-panel { display: none; }
+.week-panel.active { display: block; }
+.week-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+.week-title { font-family: var(--font-display); font-size: 17px; font-weight: 500; color: var(--color-cream); letter-spacing: .5px; }
+.week-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-cream-30); margin-top: 4px; }
+.week-prog { display: flex; align-items: center; gap: 10px; min-width: 190px; }
+.week-prog-track { flex: 1; height: 4px; border-radius: 4px; background: rgba(245,240,232,0.08); overflow: hidden; }
+.week-prog-fill { height: 100%; width: 0; border-radius: 4px; background: var(--color-teal); transition: width .3s; }
+.week-prog-txt { font-size: 10.5px; letter-spacing: 1px; color: var(--color-cream-50); white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* ── tarefas com check ── */
+.track li.task { padding-left: 27px; }
+.track li.task::before { content: none; }
+.chk {
+  position: absolute; left: 0; top: 5px; width: 16px; height: 16px; padding: 0;
+  border-radius: 4px; border: 1px solid var(--color-gold-30); background: transparent;
+  cursor: pointer; transition: all .15s; flex-shrink: 0;
+}
+.chk:hover { border-color: var(--color-gold); background: var(--color-gold-10); }
+.track li.task.done > .chk {
+  background: var(--color-teal); border-color: var(--color-teal);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%230A0A0A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.4l3 3 6-6.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 13px;
+}
+.track li.task.done { color: var(--color-cream-30); }
+.track li.task.done strong { color: var(--color-cream-50); font-weight: 500; }
+.track li.upd { color: var(--color-teal); font-size: 12.5px; }
+.track li.upd::before { content: none; }
 
 /* ═══════════════════════════════════════════════════
    CONFIG / SETUP BANNER
@@ -645,185 +688,44 @@ footer {
 </section>
 
 <!-- CRONOGRAMA DE LANÇAMENTO · SEMANA 24 A 31/08 -->
-<section id="cronograma-lancamento">
-  <div class="crono-box open" id="crono-lanc-box">
-    <div class="crono-head" onclick="document.getElementById('crono-lanc-box').classList.toggle('open')">
-      <span class="cat-icon">🚀</span>
-      <span class="cat-title">Cronograma de Lançamento · Venda do Legacy · 24 a 31/08</span>
-      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Semana em execução · atualizado 24/08/2026</span>
-      <span class="cat-chevron">▼</span>
-    </div>
-    <div class="crono-body">
-
-      <!-- ── 24/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">24/08</div>
-          <div class="day-dow">Segunda</div>
-          <div class="day-tag">Produção</div>
-        </div>
-        <div class="day-items">
-
-          <div class="track">
-            <div class="track-name">Trilha 1 · Página do Legacy</div>
-            <ul>
-              <li><strong>Finalização da página do Legacy</strong> — está em aprovação <span class="who">Michael</span></li>
-            </ul>
-          </div>
-
-          <div class="track">
-            <div class="track-name">Trilha 2 · Pré-inscritos que ainda não pagaram</div>
-            <ul>
-              <li>Puxar a <strong>lista de alunos no portal</strong> — quem já se pré-inscreveu mas ainda não pagou a pré-inscrição</li>
-              <li>Escrever a mensagem para essa lista, comunicando a <strong>urgência da virada de lote</strong></li>
-            </ul>
-          </div>
-
-          <div class="track">
-            <div class="track-name">Trilha 3 · Convidados dos alunos</div>
-            <ul>
-              <li>Escrever o <strong>e-mail e o WhatsApp</strong> para a lista de convidados dos alunos, chamando para a <strong>aula do dia 27/08</strong></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ── 25/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">25/08</div>
-          <div class="day-dow">Terça</div>
-          <div class="day-tag marco">Disparo</div>
-        </div>
-        <div class="day-items">
-
-          <div class="track">
-            <div class="track-name">Depoimentos</div>
-            <ul>
-              <li>Finalizar a <strong>separação dos depoimentos do Legacy</strong></li>
-            </ul>
-          </div>
-
-          <div class="track">
-            <div class="track-name">Convite da aula</div>
-            <ul>
-              <li>Enviar o <strong>convite para a aula de 27/08</strong> (material escrito em 24/08)</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- ── 26/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">26/08</div>
-          <div class="day-dow">Quarta</div>
-          <div class="day-tag">Preparação</div>
-        </div>
-        <div class="day-items">
-          <div class="track">
-            <div class="track-name">Campanha externa · Terapeutas</div>
-            <ul>
-              <li>Iniciar os <strong>preparativos da campanha Legacy — Terapeutas</strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 27/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">27/08</div>
-          <div class="day-dow">Quinta</div>
-          <div class="day-tag marco">Aula ao vivo</div>
-        </div>
-        <div class="day-items">
-          <div class="track">
-            <div class="track-name">Aula especial para convidados</div>
-            <ul>
-              <li><strong>Reforço da aula</strong> para os convidados — indicados dos alunos</li>
-              <li>Enviar o <strong>convite e o link no grupo dos alunos</strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 28/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">28/08</div>
-          <div class="day-dow">Sexta</div>
-          <div class="day-tag">Aprovação</div>
-        </div>
-        <div class="day-items">
-          <div class="track">
-            <div class="track-name">Campanha externa · Material</div>
-            <ul>
-              <li>Enviar para aprovação a <strong>LP e os criativos</strong> da campanha externa</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── 31/08 ── -->
-      <div class="day">
-        <div class="day-when">
-          <div class="day-date">31/08</div>
-          <div class="day-dow">Segunda</div>
-          <div class="day-tag marco">Entrega</div>
-        </div>
-        <div class="day-items">
-          <div class="track">
-            <div class="track-name">Handoff para o tráfego</div>
-            <ul>
-              <li>Ajustes finais e <strong>envio do material do Legacy Experience para o gestor de tráfego</strong></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── LEITURA DA SEMANA ── -->
-      <div class="crono-foot">
-        <div class="track-name">Leitura da semana</div>
-        <div class="decision-grid">
-
-          <div class="brief-card">
-            <h4>🔥 Frente interna · Base que já conhece a OMNI</h4>
-            <ul>
-              <li>Dois públicos distintos na mesma semana: os <strong>pré-inscritos que ainda não pagaram</strong> (24/08) e os <strong>convidados indicados pelos alunos</strong> (24 a 27/08)</li>
-              <li>O argumento para os pré-inscritos é a <span class="gold">virada de lote</span>; o argumento para os convidados é a <strong>aula do dia 27/08</strong></li>
-              <li>A <strong>página do Legacy</strong> precisa estar aprovada antes dos disparos — é o destino de todos esses convites</li>
-            </ul>
-          </div>
-
-          <div class="brief-card">
-            <h4>📣 Frente externa · Campanha Terapeutas sai da fase 2</h4>
-            <ul>
-              <li>A campanha externa para terapeutas, antes adiada, <strong>entra em preparação a partir de 26/08</strong></li>
-              <li>Sequência fechada: <strong>26/08</strong> preparativos → <strong>28/08</strong> LP e criativos para aprovação → <strong>31/08</strong> material na mão do gestor de tráfego</li>
-              <li>Os <strong>depoimentos separados em 25/08</strong> alimentam tanto a página quanto os criativos da campanha</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- CRONOGRAMA DE DIVULGAÇÃO -->
+<!-- CRONOGRAMA DE EXECUÇÃO · ABAS POR SEMANA -->
 <section id="cronograma">
-  <div class="crono-box" id="crono-box">
+  <div class="crono-box open" id="crono-box">
     <div class="crono-head" onclick="document.getElementById('crono-box').classList.toggle('open')">
-      <span class="cat-icon">📣</span>
-      <span class="cat-title">Cronograma de Divulgação · Abertura do Legacy · 17 a 21/08 (concluído)</span>
-      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Reunião Michael + Fernanda · 14/08/2026</span>
+      <span class="cat-icon">📅</span>
+      <span class="cat-title">Cronograma de Execução · Legacy Experience</span>
+      <span style="font-size:10px;letter-spacing:2px;color:var(--color-cream-50);text-transform:uppercase">Histórico por semana</span>
       <span class="cat-chevron">▼</span>
     </div>
     <div class="crono-body">
+
+      <div class="week-tabs">
+        <button class="week-tab" data-week="w1">
+          <span>Semana 1 · 17 – 21/08</span>
+          <span class="wk-badge done">Concluída</span>
+          <span class="wk-count">—</span>
+        </button>
+        <button class="week-tab active" data-week="w2">
+          <span>Semana 2 · 24 – 31/08</span>
+          <span class="wk-badge live">Em execução</span>
+          <span class="wk-count">—</span>
+        </button>
+      </div>
+
+      <!-- ══ SEMANA 1 · 17 a 21/08 ══ -->
+      <div class="week-panel" id="w1">
+      <div class="week-meta">
+        <div class="week-head-txt">
+          <div class="week-title">Abertura do Legacy · divulgação para a base</div>
+          <div class="week-sub">Reunião Michael + Fernanda · 14/08/2026</div>
+        </div>
+        <div class="week-prog">
+          <div class="week-prog-track"><div class="week-prog-fill" data-week-fill="w1"></div></div>
+          <span class="week-prog-txt" data-week-txt="w1">—</span>
+        </div>
+      </div>
 
       <!-- ── 17/08 ── -->
       <div class="day">
@@ -837,25 +739,25 @@ footer {
           <div class="track">
             <div class="track-name">Trilha 1 · Grupo de WhatsApp dos alunos</div>
             <ul>
-              <li>Escrever a mensagem de divulgação para o grupo <span class="who">Fernanda</span> <span class="who" style="background:rgba(42,157,143,0.12);border-color:rgba(42,157,143,0.35);color:var(--color-teal)">✓ Pronta 17/08</span></li>
-              <li>Gravar o vídeo explicando <strong>como os alunos cadastram as pessoas interessadas</strong> e fazem a pré-inscrição no portal <span class="who">Michael</span></li>
-              <li>Rodar os <strong>testes do pré-cadastro no portal</strong> — ponta a ponta, antes de qualquer disparo</li>
+              <li class="task done" data-task="w1-01"><button class="chk" aria-label="Marcar como concluída"></button>Escrever a mensagem de divulgação para o grupo <span class="who">Fernanda</span></li>
+              <li class="task done" data-task="w1-02"><button class="chk" aria-label="Marcar como concluída"></button>Gravar o vídeo explicando <strong>como os alunos cadastram as pessoas interessadas</strong> e fazem a pré-inscrição no portal <span class="who">Michael</span></li>
+              <li class="task done" data-task="w1-03"><button class="chk" aria-label="Marcar como concluída"></button>Rodar os <strong>testes do pré-cadastro no portal</strong> — ponta a ponta, antes de qualquer disparo</li>
             </ul>
           </div>
 
           <div class="track">
             <div class="track-name">Trilha 2 · Comunidade OMNI (em paralelo)</div>
             <ul>
-              <li>Escrever a mensagem com a <strong>chamada para o vídeo</strong> que o Michael vai gravar <span class="who">Fernanda</span></li>
-              <li>Gravar o vídeo da Comunidade <span class="who">Michael</span> — pauta: o <strong>novo momento da OMNI</strong>, a série de lives semanais e a oportunidade de participar do Legacy Experience em outubro. Fecha convidando para a <strong>aula do dia 20/08</strong></li>
-              <li>Escolher o <strong>tema da aula de 20/08</strong> <span class="who">Michael</span></li>
+              <li class="task done" data-task="w1-04"><button class="chk" aria-label="Marcar como concluída"></button>Escrever a mensagem com a <strong>chamada para o vídeo</strong> que o Michael vai gravar <span class="who">Fernanda</span></li>
+              <li class="task done" data-task="w1-05"><button class="chk" aria-label="Marcar como concluída"></button>Gravar o vídeo da Comunidade <span class="who">Michael</span> — pauta: o <strong>novo momento da OMNI</strong>, a série de lives semanais e a oportunidade de participar do Legacy Experience em outubro. Fecha convidando para a <strong>aula do dia 20/08</strong></li>
+              <li class="task done" data-task="w1-06"><button class="chk" aria-label="Marcar como concluída"></button>Escolher o <strong>tema da aula de 20/08</strong> <span class="who">Michael</span></li>
             </ul>
           </div>
 
           <div class="track">
             <div class="track-name">Operacional · Inventário de vagas</div>
             <ul>
-              <li>Confirmar com a Eliza <strong>quantos ingressos teremos disponíveis para vender</strong>, descontadas as vagas dos alunos que já têm direito de participação <span class="who">Fernanda</span></li>
+              <li class="task done" data-task="w1-07"><button class="chk" aria-label="Marcar como concluída"></button>Confirmar com a Eliza <strong>quantos ingressos teremos disponíveis para vender</strong>, descontadas as vagas dos alunos que já têm direito de participação <span class="who">Fernanda</span></li>
             </ul>
           </div>
 
@@ -872,21 +774,21 @@ footer {
         <div class="day-items">
 
           <div class="cond">
-            <strong>Gate:</strong> os disparos de 18/08 dependem de tudo estar testado e aprovado no dia 17. Se algo não passar, faz-se o ajuste e a data-limite para as mensagens irem ao ar é <strong>19/08</strong>.
+            <strong>Gate:</strong> os disparos de 18/08 dependiam de tudo estar testado e aprovado no dia 17. Se algo não passasse, o ajuste seria feito e a data-limite para as mensagens irem ao ar seria <strong>19/08</strong>.
           </div>
 
           <div class="track">
-            <div class="track-name">Se aprovado · Disparos</div>
+            <div class="track-name">Disparos</div>
             <ul>
-              <li>Enviar a mensagem no <strong>grupo dos alunos</strong></li>
-              <li>Publicar a mensagem na <strong>Comunidade OMNI</strong> (com o vídeo do Michael)</li>
+              <li class="task done" data-task="w1-08"><button class="chk" aria-label="Marcar como concluída"></button>Enviar a mensagem no <strong>grupo dos alunos</strong></li>
+              <li class="task done" data-task="w1-09"><button class="chk" aria-label="Marcar como concluída"></button>Publicar a mensagem na <strong>Comunidade OMNI</strong> (com o vídeo do Michael)</li>
             </ul>
           </div>
 
           <div class="track">
             <div class="track-name">Trilha 3 · E-mail para a base</div>
             <ul>
-              <li>Preparar a <strong>série de e-mails-convite</strong> chamando a base para a comunidade de WhatsApp, para participarem desse novo momento da OMNI <span class="who">Fernanda</span></li>
+              <li class="task done" data-task="w1-10"><button class="chk" aria-label="Marcar como concluída"></button>Preparar a <strong>série de e-mails-convite</strong> chamando a base para a comunidade de WhatsApp, para participarem desse novo momento da OMNI <span class="who">Fernanda</span></li>
               <li>A mesma série já leva o <strong>convite para a aula do dia 20/08</strong></li>
             </ul>
           </div>
@@ -905,13 +807,13 @@ footer {
           <div class="track">
             <div class="track-name">Contingência</div>
             <ul>
-              <li><strong>Data-limite</strong> para as mensagens do grupo de alunos irem ao ar, caso tenha havido ajuste depois dos testes</li>
+              <li><strong>Data-limite</strong> para as mensagens do grupo de alunos irem ao ar, caso tivesse havido ajuste depois dos testes</li>
             </ul>
           </div>
           <div class="track">
             <div class="track-name">Trilha 4 · Página do Legacy</div>
             <ul>
-              <li>Início da confecção de uma <strong>página básica do Legacy</strong> <span class="who">Fernanda</span></li>
+              <li class="task done" data-task="w1-11"><button class="chk" aria-label="Marcar como concluída"></button>Início da confecção de uma <strong>página básica do Legacy</strong> <span class="who">Fernanda</span></li>
             </ul>
           </div>
         </div>
@@ -928,8 +830,8 @@ footer {
           <div class="track">
             <div class="track-name">Aula de convidados</div>
             <ul>
-              <li>Aula ao vivo para a Comunidade e para a base convidada — <strong>tema a definir pelo Michael</strong> (decisão de 17/08)</li>
-              <li>É o destino de todos os convites disparados em 18/08: grupo, Comunidade e série de e-mails</li>
+              <li class="task done" data-task="w1-12"><button class="chk" aria-label="Marcar como concluída"></button>Aula ao vivo para a Comunidade e para a base convidada — <strong>tema a definir pelo Michael</strong> (decisão de 17/08)</li>
+              <li>Foi o destino de todos os convites disparados em 18/08: grupo, Comunidade e série de e-mails</li>
             </ul>
           </div>
         </div>
@@ -946,7 +848,7 @@ footer {
           <div class="track">
             <div class="track-name">Prazo final · Página do Legacy</div>
             <ul>
-              <li>Página no ar. Escopo acordado:</li>
+              <li class="task done" data-task="w1-13"><button class="chk" aria-label="Marcar como concluída"></button>Página no ar. Escopo acordado:</li>
               <li>O que é o evento</li>
               <li>Para quem é</li>
               <li>Depoimentos</li>
@@ -981,6 +883,7 @@ footer {
               <li>A <strong>campanha externa para terapeutas</strong>, com foco em vendas do Legacy, fica para um <strong>momento futuro</strong> — uma segunda fase</li>
               <li>Enquanto isso, aproveitamos a <strong>distribuição de conteúdo que já está rodando</strong> para esse público como aquecimento</li>
               <li>Michael também vai falar mais sobre o Legacy no <strong>conteúdo das redes sociais</strong></li>
+              <li class="upd">↳ <strong>Atualização:</strong> essa fase 2 foi antecipada — a campanha entra em preparação em <span class="gold">26/08</span> (Semana 2)</li>
             </ul>
           </div>
 
@@ -995,6 +898,178 @@ footer {
 
         </div>
       </div>
+
+      </div><!-- /w1 -->
+
+      <!-- ══ SEMANA 2 · 24 a 31/08 ══ -->
+      <div class="week-panel active" id="w2">
+      <div class="week-meta">
+        <div class="week-head-txt">
+          <div class="week-title">Lançamento · venda do Legacy até o fim do mês</div>
+          <div class="week-sub">Atualizado em 24/08/2026</div>
+        </div>
+        <div class="week-prog">
+          <div class="week-prog-track"><div class="week-prog-fill" data-week-fill="w2"></div></div>
+          <span class="week-prog-txt" data-week-txt="w2">—</span>
+        </div>
+      </div>
+
+      <!-- ── 24/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">24/08</div>
+          <div class="day-dow">Segunda</div>
+          <div class="day-tag">Produção</div>
+        </div>
+        <div class="day-items">
+
+          <div class="track">
+            <div class="track-name">Trilha 1 · Página do Legacy</div>
+            <ul>
+              <li class="task" data-task="w2-01"><button class="chk" aria-label="Marcar como concluída"></button><strong>Finalização da página do Legacy</strong> — está em aprovação <span class="who">Michael</span></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Trilha 2 · Pré-inscritos que ainda não pagaram</div>
+            <ul>
+              <li class="task" data-task="w2-02"><button class="chk" aria-label="Marcar como concluída"></button>Puxar a <strong>lista de alunos no portal</strong> — quem já se pré-inscreveu mas ainda não pagou a pré-inscrição</li>
+              <li class="task" data-task="w2-03"><button class="chk" aria-label="Marcar como concluída"></button>Escrever a mensagem para essa lista, comunicando a <strong>urgência da virada de lote</strong></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Trilha 3 · Convidados dos alunos</div>
+            <ul>
+              <li class="task" data-task="w2-04"><button class="chk" aria-label="Marcar como concluída"></button>Escrever o <strong>e-mail e o WhatsApp</strong> para a lista de convidados dos alunos, chamando para a <strong>aula do dia 27/08</strong></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── 25/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">25/08</div>
+          <div class="day-dow">Terça</div>
+          <div class="day-tag marco">Disparo</div>
+        </div>
+        <div class="day-items">
+
+          <div class="track">
+            <div class="track-name">Depoimentos</div>
+            <ul>
+              <li class="task" data-task="w2-05"><button class="chk" aria-label="Marcar como concluída"></button>Finalizar a <strong>separação dos depoimentos do Legacy</strong></li>
+            </ul>
+          </div>
+
+          <div class="track">
+            <div class="track-name">Convite da aula</div>
+            <ul>
+              <li class="task" data-task="w2-06"><button class="chk" aria-label="Marcar como concluída"></button>Enviar o <strong>convite para a aula de 27/08</strong> (material escrito em 24/08)</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── 26/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">26/08</div>
+          <div class="day-dow">Quarta</div>
+          <div class="day-tag">Preparação</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Campanha externa · Terapeutas</div>
+            <ul>
+              <li class="task" data-task="w2-07"><button class="chk" aria-label="Marcar como concluída"></button>Iniciar os <strong>preparativos da campanha Legacy — Terapeutas</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 27/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">27/08</div>
+          <div class="day-dow">Quinta</div>
+          <div class="day-tag marco">Aula ao vivo</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Aula especial para convidados</div>
+            <ul>
+              <li class="task" data-task="w2-08"><button class="chk" aria-label="Marcar como concluída"></button><strong>Reforço da aula</strong> para os convidados — indicados dos alunos</li>
+              <li class="task" data-task="w2-09"><button class="chk" aria-label="Marcar como concluída"></button>Enviar o <strong>convite e o link no grupo dos alunos</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 28/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">28/08</div>
+          <div class="day-dow">Sexta</div>
+          <div class="day-tag">Aprovação</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Campanha externa · Material</div>
+            <ul>
+              <li class="task" data-task="w2-10"><button class="chk" aria-label="Marcar como concluída"></button>Enviar para aprovação a <strong>LP e os criativos</strong> da campanha externa</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 31/08 ── -->
+      <div class="day">
+        <div class="day-when">
+          <div class="day-date">31/08</div>
+          <div class="day-dow">Segunda</div>
+          <div class="day-tag marco">Entrega</div>
+        </div>
+        <div class="day-items">
+          <div class="track">
+            <div class="track-name">Handoff para o tráfego</div>
+            <ul>
+              <li class="task" data-task="w2-11"><button class="chk" aria-label="Marcar como concluída"></button>Ajustes finais e <strong>envio do material do Legacy Experience para o gestor de tráfego</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LEITURA DA SEMANA ── -->
+      <div class="crono-foot">
+        <div class="track-name">Leitura da semana</div>
+        <div class="decision-grid">
+
+          <div class="brief-card">
+            <h4>🔥 Frente interna · Base que já conhece a OMNI</h4>
+            <ul>
+              <li>Dois públicos distintos na mesma semana: os <strong>pré-inscritos que ainda não pagaram</strong> (24/08) e os <strong>convidados indicados pelos alunos</strong> (24 a 27/08)</li>
+              <li>O argumento para os pré-inscritos é a <span class="gold">virada de lote</span>; o argumento para os convidados é a <strong>aula do dia 27/08</strong></li>
+              <li>A <strong>página do Legacy</strong> precisa estar aprovada antes dos disparos — é o destino de todos esses convites</li>
+            </ul>
+          </div>
+
+          <div class="brief-card">
+            <h4>📣 Frente externa · Campanha Terapeutas sai da fase 2</h4>
+            <ul>
+              <li>A campanha externa para terapeutas, antes adiada, <strong>entra em preparação a partir de 26/08</strong></li>
+              <li>Sequência fechada: <strong>26/08</strong> preparativos → <strong>28/08</strong> LP e criativos para aprovação → <strong>31/08</strong> material na mão do gestor de tráfego</li>
+              <li>Os <strong>depoimentos separados em 25/08</strong> alimentam tanto a página quanto os criativos da campanha</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      </div><!-- /w2 -->
 
     </div>
   </div>
@@ -1603,6 +1678,59 @@ function fmtDate(iso) {
 
 // BOOT
 if (sessionStorage.getItem(LS_AUTH) === '1') init();
+</script>
+
+<script>
+// ═══════════════════════════════════════════════════
+// CRONOGRAMA · abas por semana + checks (localStorage)
+// ═══════════════════════════════════════════════════
+(function () {
+  var KEY = 'le_tasks_v1';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function persist() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function counts() {
+    document.querySelectorAll('.week-panel').forEach(function (panel) {
+      var all  = panel.querySelectorAll('li.task').length;
+      var done = panel.querySelectorAll('li.task.done').length;
+      var pct  = all ? Math.round(done / all * 100) : 0;
+      var fill = document.querySelector('[data-week-fill="' + panel.id + '"]');
+      var txt  = document.querySelector('[data-week-txt="' + panel.id + '"]');
+      var tab  = document.querySelector('.week-tab[data-week="' + panel.id + '"] .wk-count');
+      if (fill) fill.style.width = pct + '%';
+      if (txt)  txt.textContent  = done + '/' + all + ' concluídas';
+      if (tab)  tab.textContent  = done + '/' + all;
+    });
+  }
+
+  document.querySelectorAll('li.task').forEach(function (li) {
+    var id = li.dataset.task;
+    if (Object.prototype.hasOwnProperty.call(state, id)) li.classList.toggle('done', !!state[id]);
+    var btn = li.querySelector('.chk');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var on = !li.classList.contains('done');
+      li.classList.toggle('done', on);
+      state[id] = on;
+      persist();
+      counts();
+    });
+  });
+
+  document.querySelectorAll('.week-tab').forEach(function (tab) {
+    tab.addEventListener('click', function (e) {
+      e.stopPropagation();
+      document.querySelectorAll('.week-tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.week-panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      var panel = document.getElementById(tab.dataset.week);
+      if (panel) panel.classList.add('active');
+    });
+  });
+
+  counts();
+})();
 </script>
 </body>
 </html>
