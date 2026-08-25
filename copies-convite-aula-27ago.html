@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Copies — Convite Aula 27/08 · Desbloqueie a Sua Vida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black:#050505; --dark:#0D0D0D; --elev:#151515;
+      --gold:#C8A84B; --gold-light:#E8C86A; --gold-10:rgba(200,168,75,.10);
+      --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+      --cream:#F5F0E8; --cream-70:rgba(245,240,232,.70); --cream-50:rgba(245,240,232,.50);
+      --cream-30:rgba(245,240,232,.30); --teal:#2A9D8F; --amber:#E8C86A;
+      --display:'Oswald',sans-serif; --body:'Inter',system-ui,sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--black);color:var(--cream-70);font-family:var(--body);line-height:1.7;font-size:15px}
+
+    header.top{
+      position:sticky;top:0;z-index:50;background:rgba(13,13,13,.94);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--gold-20);padding:16px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap
+    }
+    .brand{font-family:var(--display);font-size:15px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;font-weight:600}
+    .top .sep{width:1px;height:22px;background:var(--gold-20)}
+    .top h1{font-family:var(--display);font-size:17px;font-weight:500;color:var(--cream);letter-spacing:.5px}
+    .top .status{margin-left:auto;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);
+      border:1px solid rgba(232,200,106,.35);background:rgba(232,200,106,.10);padding:5px 12px;border-radius:50px;font-weight:700}
+
+    .wrap{max-width:960px;margin:0 auto;padding:34px 28px 90px}
+
+    .brief{background:var(--dark);border:1px solid var(--gold-20);border-radius:10px;padding:24px 26px;margin-bottom:34px}
+    .brief h2{font-family:var(--display);font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500}
+    .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 22px}
+    .fact{font-size:13.5px}
+    .fact b{display:block;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--cream-30);margin-bottom:3px;font-weight:600}
+    .fact span{color:var(--cream)}
+    .brief p{font-size:13.5px;margin-top:16px;padding-top:16px;border-top:1px solid var(--gold-10)}
+    .brief strong{color:var(--cream)}
+
+    .sec-title{font-family:var(--display);font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--cream-30);
+      margin:34px 0 16px;display:flex;align-items:center;gap:14px}
+    .sec-title::after{content:'';flex:1;height:1px;background:var(--gold-10)}
+
+    .piece{background:var(--dark);border:1px solid var(--gold-20);border-radius:10px;margin-bottom:18px;overflow:hidden}
+    .piece-head{padding:16px 22px;background:var(--gold-10);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .piece-head .num{font-family:var(--display);font-size:20px;color:var(--gold);line-height:1;min-width:26px}
+    .piece-head .t{font-family:var(--display);font-size:15px;color:var(--cream);letter-spacing:.4px;flex:1;min-width:180px}
+    .when{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);
+      background:var(--gold-10);border:1px solid var(--gold-30);padding:3px 9px;border-radius:50px;white-space:nowrap;font-weight:600}
+    .who{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);
+      background:rgba(42,157,143,.12);border:1px solid rgba(42,157,143,.35);padding:3px 9px;border-radius:50px;white-space:nowrap;font-weight:600}
+    .btn-copy{background:transparent;border:1px solid var(--gold-30);color:var(--gold);font-family:var(--body);
+      font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:6px 13px;border-radius:6px;cursor:pointer;transition:.15s}
+    .btn-copy:hover{background:var(--gold);color:#0A0A0A;border-color:var(--gold)}
+    .btn-copy.ok{background:var(--teal);border-color:var(--teal);color:#0A0A0A}
+
+    .subject{padding:14px 22px;border-bottom:1px solid var(--gold-10);font-size:13.5px}
+    .subject div+div{margin-top:5px}
+    .subject b{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--cream-30);margin-right:8px;font-weight:600}
+    .subject span{color:var(--cream);font-weight:500}
+
+    .body-txt{padding:22px;white-space:pre-wrap;font-size:14.5px;line-height:1.8;color:var(--cream-70)}
+    .body-txt em{color:var(--cream);font-style:normal;font-weight:600}
+    .body-txt .q{display:block;border-left:2px solid var(--gold-30);padding:2px 0 2px 15px;margin:3px 0;color:var(--cream);font-style:italic}
+    .body-txt .mark{color:var(--gold-light);font-weight:600}
+
+    .notes{background:var(--dark);border:1px solid var(--gold-20);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:22px 26px;margin-top:34px}
+    .notes h3{font-family:var(--display);font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500}
+    .notes li{list-style:none;font-size:13.5px;padding:7px 0 7px 18px;position:relative}
+    .notes li::before{content:'◆';position:absolute;left:0;top:9px;font-size:7px;color:var(--gold)}
+    .notes strong{color:var(--cream)}
+
+    footer{text-align:center;font-size:11px;color:var(--cream-30);padding:36px 20px 0;letter-spacing:1px}
+
+    @media(max-width:640px){
+      .wrap{padding:24px 16px 70px}
+      header.top{padding:14px 16px}
+      .top h1{font-size:14px}
+      .body-txt{font-size:14px;padding:18px}
+    }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <span class="brand">OMNI</span>
+  <span class="sep"></span>
+  <h1>Convite · Aula “Desbloqueie a Sua Vida”</h1>
+  <span class="status">Aguardando aprovação</span>
+</header>
+
+<div class="wrap">
+
+  <div class="brief">
+    <h2>O que é</h2>
+    <div class="facts">
+      <div class="fact"><b>Aula</b><span>Desbloqueie a Sua Vida · Michael Arruda</span></div>
+      <div class="fact"><b>Quando</b><span>Quinta, 27/08, às 20h45</span></div>
+      <div class="fact"><b>Onde</b><span>Ao vivo no Zoom · sem gravação</span></div>
+      <div class="fact"><b>Público</b><span>Convidados dos alunos</span></div>
+      <div class="fact"><b>Objetivo</b><span>Comparecimento — a oferta é feita na aula</span></div>
+      <div class="fact"><b>Aprovação</b><span>Fernanda + Michael (palavra final dele)</span></div>
+    </div>
+    <p><strong>Sem escassez artificial:</strong> a sala não tem limite de pessoas, então nenhuma peça fala em vagas. A urgência vem só do que é verdade — é ao vivo e não tem replay. <strong>Nenhuma peça vende o Legacy:</strong> preço, lote e pré-inscrição não aparecem. <strong>Trocar antes de disparar:</strong> <span style="color:var(--gold-light)">[NOME]</span> pelo primeiro nome e <span style="color:var(--gold-light)">[LINK]</span> pela sala que o Michael criar.</p>
+  </div>
+
+  <div class="sec-title">E-mails · sequência de 3</div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">1</span>
+      <span class="t">O convite</span>
+      <span class="when">Terça 25/08 · manhã</span>
+      <button class="btn-copy" data-copy="e1">Copiar</button>
+    </div>
+    <div class="subject">
+      <div><b>Assunto</b><span>Reservaram um lugar para você na quinta, às 20h45</span></div>
+      <div><b>Pré-header</b><span>Aula ao vivo com Michael Arruda. Não vai ter gravação.</span></div>
+    </div>
+    <div class="body-txt" id="e1">Olá, [NOME].
+
+Alguém que gosta de você guardou o seu lugar numa aula ao vivo com <em>Michael Arruda</em>, fundador da OMNI Brasil.
+
+Ela se chama <em>Desbloqueie a Sua Vida</em> e acontece <em>nesta quinta, 27 de agosto, às 20h45</em>.
+
+O assunto é um só, e é incômodo: por que uma pessoa sabe exatamente o que precisa fazer — e não faz.
+
+Não é preguiça. Não é falta de estudo. Em quase todo mundo que chega até a OMNI, o que trava está num lugar mais fundo: na mente, naquilo que a pessoa acredita que pode pedir, cobrar e ocupar.
+
+Em onze anos formando profissionais no Brasil, o Michael viu esse mesmo padrão se repetir em terapeuta, em empresário, em advogado, em gente que já ganha bem e mesmo assim esbarra num teto que não sabe explicar.
+
+Na quinta ele vai mostrar onde essa trava mora e como ela é desativada.
+
+<em>É ao vivo e não terá gravação.</em> Quem não estiver na sala, não vê.
+
+Guarde o horário: <em>quinta, 27/08, às 20h45.</em>
+
+Até lá,
+Equipe OMNI Brasil</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">2</span>
+      <span class="t">O mecanismo</span>
+      <span class="when">Quarta 26/08 · fim da tarde</span>
+      <button class="btn-copy" data-copy="e2">Copiar</button>
+    </div>
+    <div class="subject">
+      <div><b>Assunto</b><span>Você sabe o que precisa ser feito. E não faz.</span></div>
+      <div><b>Pré-header</b><span>Amanhã, 20h45, ao vivo com Michael Arruda.</span></div>
+    </div>
+    <div class="body-txt" id="e2">Olá, [NOME].
+
+Leia estas frases devagar:
+
+<span class="q">“Eu sei exatamente o que precisa ser feito. E não faço.”</span><span class="q">“Trabalho mais do que todo mundo à minha volta, e o dinheiro não acompanha.”</span><span class="q">“Na hora de dizer o meu preço, eu amoleço.”</span><span class="q">“Cheguei longe, mas travei num teto que não consigo explicar.”</span><span class="q">“Eu resolvo a vida de todo mundo, menos a minha.”</span>
+São frases reais, ditas por pessoas diferentes, em profissões diferentes.
+
+Repare no que elas têm em comum: <em>nenhuma se resolve estudando mais</em>.
+
+Quem diz isso já fez cursos. Já tem técnica. Muita gente aí tem até resultado — e continua com a sensação de estar carregando o mundo nas costas e recebendo pela metade.
+
+O ponto é que o valor que você consegue pedir em voz alta foi decidido bem antes da conversa com o cliente. Ele foi decidido lá atrás, no que você aprendeu a acreditar sobre o quanto vale.
+
+<em>Amanhã, quinta, às 20h45</em>, o Michael vai abrir esse mecanismo na aula <em>Desbloqueie a Sua Vida</em>: onde a trava se instala, por que ela resiste a tanto conhecimento e o que faz ela ceder.
+
+Ao vivo, sem gravação.
+
+Nos vemos amanhã.
+Equipe OMNI Brasil</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">3</span>
+      <span class="t">É hoje</span>
+      <span class="when">Quinta 27/08 · manhã</span>
+      <button class="btn-copy" data-copy="e3">Copiar</button>
+    </div>
+    <div class="subject">
+      <div><b>Assunto</b><span>Hoje, 20h45 — sua vaga na aula do Michael</span></div>
+      <div><b>Pré-header</b><span>Ao vivo, sem replay. O link está aqui dentro.</span></div>
+    </div>
+    <div class="body-txt" id="e3">Olá, [NOME].
+
+É hoje.
+
+<em>Desbloqueie a Sua Vida</em>, ao vivo com Michael Arruda.
+<em>Hoje, quinta-feira, às 20h45.</em>
+
+👉 <em>Entrar na sala:</em> [LINK]
+
+Três coisas que fazem diferença:
+
+<em>Entre alguns minutos antes.</em> A aula começa no horário e a primeira parte é a que mais mexe com as pessoas.
+
+<em>Fique num lugar em que você possa se ouvir.</em> Não é uma aula para assistir enquanto se faz outra coisa.
+
+<em>Tenha papel e caneta por perto.</em> Em algum momento vai aparecer uma frase que é exatamente a sua. Vale anotar.
+
+<em>Não vai ter gravação.</em> O Legacy nunca foi um material para consumir depois — e essa aula segue a mesma lógica. O que acontece hoje depende de você estar ali.
+
+Até as 20h45.
+Equipe OMNI Brasil</div>
+  </div>
+
+  <div class="sec-title">WhatsApp · convidados dos alunos</div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">4</span>
+      <span class="t">Véspera</span>
+      <span class="when">Quarta 26/08 · início da noite</span>
+      <button class="btn-copy" data-copy="w1">Copiar</button>
+    </div>
+    <div class="body-txt" id="w1">Oi, [NOME]! Tudo bem?
+
+Amanhã, quinta, às 20h45, tem uma aula ao vivo com o Michael Arruda, fundador da OMNI Brasil — e o seu lugar já está garantido.
+
+O nome dela é <em>Desbloqueie a Sua Vida</em>.
+
+Ela responde uma pergunta chata: por que a gente sabe o que precisa fazer e mesmo assim não faz? Por que o dinheiro não acompanha o tanto que a gente trabalha?
+
+A resposta não é estudar mais. É outra coisa — e é disso que ele vai falar.
+
+<em>É ao vivo e não vai ter gravação.</em> Amanhã, 20h45. Te espero lá? 🙌</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">5</span>
+      <span class="t">Falta 1 hora</span>
+      <span class="when">Quinta 27/08 · 19h45</span>
+      <button class="btn-copy" data-copy="w2">Copiar</button>
+    </div>
+    <div class="body-txt" id="w2">[NOME], falta 1 hora! ⏰
+
+<em>Desbloqueie a Sua Vida</em> — com Michael Arruda, hoje às 20h45.
+
+👉 [LINK]
+
+Entra uns minutinhos antes e escolhe um canto tranquinho da casa. A primeira parte é a que mais mexe com as pessoas — e não vai ter gravação para rever depois.
+
+Até já! 🧡</div>
+  </div>
+
+  <div class="sec-title">Grupos</div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">6</span>
+      <span class="t">Grupo das turmas</span>
+      <span class="who">Disparo: CS · Eliza</span>
+      <span class="when">Terça 25/08</span>
+      <button class="btn-copy" data-copy="g1">Copiar</button>
+    </div>
+    <div class="body-txt" id="g1">Turma, atenção 👇
+
+<em>Nesta quinta, 27/08, às 20h45</em>, o Michael faz a aula <em>Desbloqueie a Sua Vida</em> — e ela é <em>exclusiva para os convidados de vocês</em>.
+
+Vocês conhecem essa aula por dentro. Sabem o que acontece com uma pessoa quando ela entende, ao vivo, que o que trava a vida dela não é falta de conhecimento.
+
+Agora pensem em quem está do lado de vocês:
+
+• aquele parente que trabalha demais e ganha de menos
+• o amigo que se formou, é bom no que faz e não consegue cobrar
+• a pessoa que resolve a vida de todo mundo, menos a dela
+
+<em>É essa pessoa que a gente quer na sala na quinta.</em>
+
+<em>Como fazer:</em> cadastre seu convidado no portal e nos avise. A equipe cuida do resto — e é o convidado que recebe o convite e o link.
+
+E lembrem: <em>quem leva alguém para o Legacy refaz o Legacy sem pagar nada</em>. Vocês voltam para viver os quatro dias de novo, ao lado de quem vocês levaram.
+
+Quinta, 20h45, ao vivo e sem gravação. Quem você vai levar? 🧡</div>
+  </div>
+
+  <div class="piece">
+    <div class="piece-head">
+      <span class="num">7</span>
+      <span class="t">Comunidade OMNI</span>
+      <span class="who">Disparo: Fernanda</span>
+      <span class="when">Terça 25/08</span>
+      <button class="btn-copy" data-copy="c1">Copiar</button>
+    </div>
+    <div class="body-txt" id="c1">Boa tarde, Comunidade! 🧡
+
+A aula desta semana já tem data: <em>quinta-feira, 27/08, às 20h45</em>, com o Michael — <em>Desbloqueie a Sua Vida</em>.
+
+Só que esta aqui tem um endereço específico: ela é <em>para os convidados dos nossos alunos</em>.
+
+O motivo é simples. A aula fala sobre uma coisa que quase ninguém percebe sozinho: o que segura a vida da gente quase nunca é falta de conhecimento. É o que a gente acredita que pode pedir, cobrar e ocupar. E isso é difícil de escutar de si mesmo — costuma chegar por alguém que se importa.
+
+Então o convite desta semana é outro: <em>pense em quem você levaria</em>.
+
+Aquela pessoa que trabalha demais e ganha de menos. Que se formou e nunca começou. Que resolve a vida de todo mundo, menos a dela.
+
+Se você é aluno e quer levar alguém, cadastre seu convidado no portal — a equipe envia o convite e o link direto para ele.
+
+Ao vivo, quinta, 20h45. Sem gravação. 🚀</div>
+  </div>
+
+  <div class="notes">
+    <h3>Decisões que estão dentro da copy</h3>
+    <ul>
+      <li><strong>A tese acompanha a LP nova.</strong> A página deixou de falar só com terapeuta e passou a falar com líder, empreendedor e profissional liberal — as peças seguem o mesmo eixo: não é falta de conhecimento, é a mente.</li>
+      <li><strong>A mecânica do ex-aluno aparece só no grupo das turmas</strong>, que é onde ela vende: quem leva alguém refaz o Legacy sem pagar nada.</li>
+      <li><strong>A Comunidade recebeu um enquadramento diferente.</strong> Como a aula é fechada, a mensagem convida os membros a levarem alguém em vez de anunciar uma aula que eles não podem assistir. Se a ideia for abrir a aula para a Comunidade, a peça 7 precisa ser reescrita.</li>
+      <li><strong>Nenhuma peça promete prazo de atendimento nem fala de preço</strong> — as duas regras que valem para tudo que sai daqui até a virada do lote.</li>
+    </ul>
+  </div>
+
+  <footer>OMNI Brasil · Legacy Experience · copies escritas em 25/08/2026</footer>
+</div>
+
+<script>
+document.querySelectorAll('.btn-copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var el=document.getElementById(btn.dataset.copy);
+    if(!el) return;
+    var txt=el.innerText.replace(/\n{3,}/g,'\n\n').trim();
+    navigator.clipboard.writeText(txt).then(function(){
+      var old=btn.textContent;
+      btn.textContent='Copiado'; btn.classList.add('ok');
+      setTimeout(function(){btn.textContent=old;btn.classList.remove('ok');},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
