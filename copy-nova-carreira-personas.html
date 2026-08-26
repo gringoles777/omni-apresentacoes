@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="pt-BR"><head><!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END --><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Teste de Personas — LP Nova Carreira</title><style>
+body{background:#050505;color:#F5F0E8;font-family:'Helvetica Neue',Arial,sans-serif;max-width:900px;margin:0 auto;padding:30px 22px;line-height:1.55}
+h1{font-size:1.9rem;line-height:1.15} h2{color:#C8A84B;font-size:1.15rem;letter-spacing:1px;text-transform:uppercase;margin:36px 0 12px}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem} th,td{border:1px solid #2b2617;padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e0e0e;color:#C8A84B;font-size:.78rem;text-transform:uppercase;letter-spacing:1px} td{color:#cfc8b8}
+b{color:#fff} code{background:#141414;color:#9a937f;padding:1px 5px;border-radius:4px;font-size:.85em}
+ol{padding-left:22px} li{margin:8px 0;color:#d9d2c3} p{color:#cfc8b8}
+</style></head><body><h1>Teste de personas reais — LP Nova Carreira (v7.5 → v7.6)</h1>
+<p>Data: 26/08/2026 · Fonte das personas: <code>workspace/businesses/omni_brasil/outputs/autopsia-pico-simulador-2026-08/PERSONAS.yaml</code></p>
+<p>(28 personas mineradas de 29 calls avaliadas, 567 conversas de Chatwoot e 374 DMs; falas literais, regra No Invention)</p>
+<h2>Placar</h2>
+<table><tr><th>Persona</th><th>Perfil</th><th>Círculo</th><th>&quot;É pra mim&quot;</th><th>&quot;Confio&quot;</th><th>Clicaria</th></tr><tr><td>Gisele</td><td>Corretora/gerente comercial, mãe solo de 3, compradora real</td><td>2</td><td>8</td><td>6</td><td>Sim</td></tr><tr><td>Bruno</td><td>Ex-servidor, 12 anos em licitações, alto interesse e baixa urgência</td><td>2</td><td>8</td><td>5</td><td>Talvez</td></tr><tr><td>Amanda</td><td>Bancária de recuperação de crédito, marido é decisor oculto</td><td>2</td><td>7</td><td>6</td><td>Talvez</td></tr><tr><td>M. O.</td><td>Servidor concursado, quer carreira dupla</td><td>2</td><td>7</td><td>5</td><td>Talvez</td></tr><tr><td>Wilson</td><td>Empresário da construção civil, tem capital</td><td>2</td><td>6</td><td>7</td><td>Sim</td></tr><tr><td>Farmacêutica de hospital</td><td>20 anos de hospital, mãe solo, medo da técnica</td><td>2</td><td>6</td><td>4</td><td>Talvez</td></tr><tr><td>J. (biomédica)</td><td>Quer saber se PODE atuar legalmente</td><td>2</td><td>5</td><td>6</td><td>Talvez</td></tr><tr><td>Ethiene</td><td>Ex-bancária, quer recolocação (anti-MQL)</td><td>anti</td><td>2</td><td>5</td><td>Não</td></tr><tr><td>Thiago</td><td>Veio do Instagram achando que era grátis (anti-MQL)</td><td>anti</td><td>2</td><td>4</td><td>Não</td></tr></table>
+<p>Média do público-alvo (7 primeiras): <b>6,7 de encaixe · 5,6 de confiança</b>.</p>
+<p>Os dois anti-MQL rejeitaram a página, que é o comportamento desejado. Mas rejeitaram tarde: só na tabela.</p>
+<h2>Os 5 padrões (o que se repetiu)</h2>
+<ol><li><b>A faixa &quot;R$10 mil a R$25 mil&quot; derruba confiança em 8 das 9.</b> Palavras delas: &quot;parece que o preço muda conforme a minha cara&quot; (Gisele), &quot;quinze mil de diferença é muita coisa pra eu explicar em casa&quot; (Amanda), &quot;me passaram 7.900 antes&quot; (Bruno). NÃO RESOLVIDO na v7.6: depende de decisão da Rafa (valor único ou parcela).</li>
+<li><b>&quot;Cerca de R$30 mil&quot; sem lastro soava a caso escolhido a dedo</b> (8 das 9). Resolvido: agora ancora no case real da Mária de Fátima e devolve o controle ao leitor.</li>
+<li><b>Objeção legal (posso atuar sem CRP?) é bloqueio de compra</b> para J. (biomédica) e Thiago. Resolvido parcialmente: &quot;você não precisa ser psicólogo&quot;. A afirmação sobre exercício legal continua PENDENTE de fonte oficial.</li>
+<li><b>A família aparece na dor e nunca mais volta</b> (Bruno e Amanda). Resolvido: convite explícito para trazer o decisor à consultoria.</li>
+<li><b>A página demorava a dizer qual é a profissão</b> (Ethiene leu como consultoria de recolocação e abandonou). Resolvido: profissão nomeada na primeira linha.</li>
+</ol><h2>Ajustes aplicados na v7.6</h2>
+<table><tr><th>#</th><th>Origem</th><th>Mudança</th></tr><tr><td>1</td><td>Ethiene</td><td>Topo: &quot;uma nova profissão: terapeuta de consultório&quot;</td></tr><tr><td>2</td><td>Thiago</td><td>Sob o botão: &quot;A conversa é gratuita. A formação é paga.&quot;</td></tr><tr><td>3</td><td>M. O.</td><td>&quot;estabilidade não existe&quot; virou &quot;não vai colocar a renda da casa em risco&quot; (atacava justamente quem tem estabilidade)</td></tr><tr><td>4</td><td>Wilson</td><td>Checkpoint novo para dono de negócio com capital</td></tr><tr><td>5</td><td>J. biomédica, Thiago</td><td>&quot;Você não precisa ser psicólogo nem ter formação prévia em saúde&quot;</td></tr><tr><td>6</td><td>Farmacêutica</td><td>&quot;Prática supervisionada desde o início: protocolo, limites e quando encaminhar&quot;</td></tr><tr><td>7</td><td>8 das 9</td><td>R$30 mil ancorado no case da Mária de Fátima, sem alegar média</td></tr><tr><td>8</td><td>Bruno, Amanda</td><td>CTA: &quot;Se a decisão passa por mais alguém em casa, chame essa pessoa&quot;</td></tr><tr><td>9</td><td>Ethiene</td><td>Anti-filtro: &quot;Nem para quem quer se recolocar em outra empresa&quot;</td></tr></table>
+<h2>Pendências que só a Rafa decide</h2>
+<ol><li><b>Preço:</b> manter a faixa larga, escrever um valor único, ou trocar por parcela. Hoje é o maior dreno de confiança da página.</li>
+<li><b>Base legal:</b> existe texto oficial sobre exercício da hipnoterapia sem CRP? A mineração do Drive não encontrou nada com fonte.</li>
+<li><b>Casos:</b> Mária de Fátima, Angelina, bancário(a) e Simone Parra dependem de relato e autorização (pedido enviado ao Michael em 25/08).</li></ol></body></html>
