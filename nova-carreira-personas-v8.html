@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="pt-BR"><head><!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END --><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Personas v8 — Nova Carreira</title><style>body{background:#050505;color:#F5F0E8;font-family:'Helvetica Neue',Arial,sans-serif;max-width:920px;margin:0 auto;padding:30px 22px;line-height:1.55}h1{font-size:1.8rem}h2{color:#C8A84B;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;margin:34px 0 12px}table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem}th,td{border:1px solid #2b2617;padding:9px 11px;text-align:left;vertical-align:top}th{background:#0e0e0e;color:#C8A84B;font-size:.78rem;text-transform:uppercase}td{color:#cfc8b8}b{color:#fff}li{margin:8px 0;color:#d9d2c3}p{color:#cfc8b8}code{background:#141414;color:#9a937f;padding:1px 5px}</style></head><body><h1>2ª rodada de personas — página v8 no design final (28/08/2026)</h1>
+<p>Mesmas 9 personas reais do <code>PERSONAS.yaml</code>, agora navegando a PÁGINA construída (design, formulário e FAQ em sanfona), não mais o rascunho de texto.</p>
+<h2>Placar: v7.6 (texto) → v8 (página)</h2>
+<table><tr><th>Persona</th><th>É pra mim</th><th>Confio</th><th>Preencheria o formulário</th></tr><tr><td>Gisele (corretora, mãe de 3, compradora real)</td><td>8 → <b>9</b></td><td>6 → <b>7</b></td><td>Sim</td></tr><tr><td>Bruno (ex-servidor)</td><td>8 → <b>8</b></td><td>5 → <b>6</b></td><td>Talvez</td></tr><tr><td>Amanda (bancária)</td><td>7 → <b>8</b></td><td>6 → <b>7</b></td><td>Talvez</td></tr><tr><td>M. O. (servidor concursado)</td><td>7 → <b>7</b></td><td>5 → <b>7</b></td><td>Talvez, puxando pro sim</td></tr><tr><td>Wilson (empresário)</td><td>6 → <b>6</b></td><td>7 → <b>8</b></td><td>Sim</td></tr><tr><td>Farmacêutica de hospital</td><td>6 → <b>6</b></td><td>4 → <b>7</b></td><td>Talvez</td></tr><tr><td>J. (biomédica)</td><td>5 → <b>6</b></td><td>6 → <b>8</b></td><td>Talvez, puxando pro sim</td></tr><tr><td>Ethiene (anti-MQL)</td><td>2 → <b>2</b></td><td>5 → <b>7</b></td><td>Não (correto)</td></tr><tr><td>Thiago (anti-MQL)</td><td>2 → <b>2</b></td><td>4 → <b>6</b></td><td>Não (correto)</td></tr></table>
+<p><b>Público-alvo (7 primeiras): encaixe 6,7 → 7,1 · confiança 5,6 → 7,1.</b></p>
+<p>A confiança subiu em 9 de 9. Os dois anti-MQL continuam rejeitando, e agora se desqualificam MAIS CEDO: a Ethiene sai na dobra 3, não mais na tabela.</p>
+<h2>O que a rodada mostrou, e o que foi corrigido</h2>
+<table><tr><th>Achado</th><th>Quem</th><th>Correção aplicada na v8.1</th></tr><tr><td>&quot;Até R$50 mil&quot; assusta mais do que o piso acalma; parece que o R$7 mil é isca</td><td>6 de 9</td><td>FAQ do preço reescrito: o caminho de entrada já forma para atender, os maiores incluem entrega de serviço, e todos são parcelados</td></tr><tr><td>Ninguém sabia quanto tempo dura a conversa</td><td>4</td><td>Pergunta nova: 45 a 60 minutos, por vídeo (duração somada dos blocos do Manual Operacional)</td></tr><tr><td>&quot;Investir proporcional ao ganho&quot; soou como aviso de que vão cobrar caro</td><td>3</td><td>Virou &quot;Aceita planejar o investimento, em vez de procurar o mais barato&quot;</td></tr><tr><td>Servidor e quem tem horário fixo não sabia se conciliava</td><td>2</td><td>Pergunta nova sobre horário fixo e cargo público, e critério novo no filtro sobre manter a estabilidade</td></tr><tr><td>Quem já é da saúde não se viu</td><td>1 (bloqueio de compra)</td><td>&quot;Se você já vem da saúde, essa bagagem conta a favor&quot; + pergunta no FAQ</td></tr><tr><td>Medo sobre a segurança da técnica</td><td>1, repetido nas duas rodadas</td><td>Pergunta nova sobre o processo ser seguro (redação técnica a confirmar com o Michael)</td></tr></table>
+<h2>O que NÃO foi corrigido, e por quê</h2>
+<ol><li><b>CRP e base legal do exercício.</b> Continua sem fonte no repositório e no Drive. Segue como bloqueio de compra para o perfil da biomédica e do Thiago. É a pendência nº 1.</li>
+<li><b>Case de empresário.</b> O Wilson não se vê em nenhum dos três cases. Depende do Michael.</li>
+<li><b>Custo de ficar parado.</b> O Bruno (&quot;alto interesse, baixa urgência&quot;) não encontra na página nenhuma razão para agir hoje. Mexer nisso exige decisão sua: é o tipo de alavanca que aumenta conversão e pode soar como pressão, o oposto do tom que você escolheu.</li></ol></body></html>
