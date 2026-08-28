@@ -68,6 +68,12 @@
   footer { max-width: 720px; margin: 0 auto; padding: 40px 24px 70px; font-size: 12.5px; color: #77705e; text-align: center; }
   footer p { margin-bottom: 4px; }
   .disclaimer { font-style: italic; font-size: 12px; color: #77705e; margin-top: 14px; }
+  details{border:1px solid #2b2617;background:#0c0c0c;margin:10px 0;padding:0}
+  summary{cursor:pointer;padding:14px 18px;color:#F5F0E8;font-weight:700;font-size:1rem;list-style:none}
+  summary::marker{display:none}
+  summary::after{content:"+";float:right;color:#C8A84B;font-weight:700}
+  details[open] summary::after{content:"−"}
+  details p{padding:0 18px 16px;color:#cfc8b8;font-size:.95rem}
 </style>
 <style>
   table { width:100%; border-collapse: collapse; margin: 22px 0; font-size: .92rem; }
@@ -80,11 +86,17 @@
   .steps li::before { content:"✓"; position:absolute; left:0; color:#C8A84B; font-weight:700; }
   .logos { display:flex; gap:14px; flex-wrap:wrap; margin-top:22px; }
   .logos span { border:1px solid #2b2617; padding:10px 18px; font-size:.8rem; letter-spacing:2px; color:#C8A84B; }
+  details{border:1px solid #2b2617;background:#0c0c0c;margin:10px 0;padding:0}
+  summary{cursor:pointer;padding:14px 18px;color:#F5F0E8;font-weight:700;font-size:1rem;list-style:none}
+  summary::marker{display:none}
+  summary::after{content:"+";float:right;color:#C8A84B;font-weight:700}
+  details[open] summary::after{content:"−"}
+  details p{padding:0 18px 16px;color:#cfc8b8;font-size:.95rem}
 </style>
 </head>
 <body>
 
-<div class="review-banner">RASCUNHO PARA REVISÃO INTERNA · COPY v7.7 (FEEDBACK DA RAFA APLICADO) · NÃO É A PÁGINA FINAL</div>
+<div class="review-banner">RASCUNHO PARA REVISÃO INTERNA · COPY v7.8 (FILTRO AMPLIADO + CONSULTORIA + PERGUNTAS) · NÃO É A PÁGINA FINAL</div>
 <div class="topbar">CONVERSA GRATUITA SOBRE A SUA TRANSIÇÃO · NÃO É REUNIÃO DE VENDAS</div>
 
 <section>
@@ -206,7 +218,7 @@
   <h2>Você já considerou as outras saídas. <strong>Faça a conta de cada uma.</strong></h2>
   <table>
     <tr><th></th><th>Graduação ou pós comum</th><th>Abrir uma franquia</th><th>Formação completa com acompanhamento</th></tr>
-    <tr><td>Investimento</td><td>Graduação em psicologia: mais de R$60 mil. Pós de mercado: mensalidades por 1 a 2 anos</td><td>R$64.900 no menor modelo da Cacau Show. Até R$310 mil nos maiores</td><td><strong>R$10 mil a R$25 mil</strong> (formação + mentoria)</td></tr>
+    <tr><td>Investimento</td><td>Graduação em psicologia: mais de R$60 mil. Pós de mercado: mensalidades por 1 a 2 anos</td><td>R$64.900 no menor modelo da Cacau Show. Até R$310 mil nos maiores</td><td><strong>A partir de R$7 mil</strong>, conforme o caminho. Detalhado nas perguntas, no fim da página</td></tr>
     <tr><td>Tempo até você operar</td><td>5 anos na graduação. 1 a 2 anos na pós, sem sair do emprego</td><td>Ponto + obra + licença antes do primeiro cliente</td><td><strong>Atendendo em até 3 meses</strong>, com supervisão</td></tr>
     <tr><td>Quando o retorno começa</td><td>Anos, e só com recolocação ou promoção</td><td>12 a 24 meses, contando da loja já aberta</td><td><strong>A partir de 3 meses</strong></td></tr>
     <tr><td>O que você tem no fim</td><td>Um diploma a mais no mercado de onde você quer sair</td><td>Um ponto comercial: aluguel + estoque + folha</td><td><strong>Uma profissão sua.</strong> Sem ponto, sem estoque, sem folha</td></tr>
@@ -240,14 +252,41 @@
   <div class="eyebrow">Mercado pedindo gente não quer dizer que serve pra qualquer um</div>
   <h2>Esta conversa <strong>é para você se:</strong></h2>
   <ul class="check ok">
-    <li>Tem experiência real e já atravessou desafios</li>
-    <li>Se sente bem ajudando pessoas e não foge da dor do outro</li>
-    <li>Acredita no potencial da mente e em cuidar das emoções</li>
-    <li>Quer ser bem remunerado por excelência, mas faz pelo sentido</li>
+    <li>Quer ajudar pessoas com uma ferramenta de excelência, que garante resultado e te posiciona</li>
+    <li>Quer transformar vidas como <strong>profissão séria, que paga as suas contas</strong>, sem depender de outra carreira</li>
+    <li>Tem experiência de vida e entrega resultado no que faz, com seriedade</li>
+    <li>Quer <strong>o caminho inteiro para virar profissional</strong>, não uma técnica solta pra descobrir o resto sozinho</li>
+    <li>Quer ser acompanhado por quem já tem resultado, e estar entre profissionais que somam com você</li>
+    <li>Valoriza uma instituição renomada, que não some da noite pro dia</li>
+    <li>Quer transicionar de forma organizada, <strong>sem largar tudo de uma vez e sem colocar a família em risco</strong></li>
+    <li>Está disposto a investir proporcional ao ganho que quer ter</li>
+  </ul>
+  <h2 style="margin-top:34px">Não é para você <strong>se:</strong></h2>
+  <ul class="check">
+    <li>Procura um curso baratinho, ou quer aprender a técnica só por curiosidade</li>
+    <li>Quer apenas uma renda extra, sem intenção de mudar de profissão</li>
+    <li>Busca dinheiro fácil ou uma solução mágica</li>
+    <li>Não tem experiência profissional nem de vida</li>
+    <li>Não sente prazer em trabalhar com pessoas</li>
+    <li>Quer se recolocar em outra empresa. Aqui é para quem quer atender</li>
+  </ul>
+</section>
+
+<section>
+  <div class="eyebrow">Por isso a conversa vem antes</div>
+  <h2>Virar profissional <strong>não se resolve comprando um curso.</strong></h2>
+  <div class="sub"><p>As soluções da OMNI são caminhos completos. E caminho se monta com planejamento, não com um clique.</p></div>
+  <p class="sub" style="margin-top:18px"><strong>Na consultoria, você sai com:</strong></p>
+  <ul class="check ok">
+    <li>Seus <strong>pontos fortes e talentos mapeados</strong>, e se eles favorecem essa profissão</li>
+    <li><strong>Clareza dos seus objetivos</strong> e do caminho até eles</li>
+    <li>As <strong>travas que você precisa resolver</strong> para alcançar resultado de excelência</li>
+    <li><strong>Qual o melhor caminho pra você</strong>, de acordo com a sua experiência e os seus objetivos</li>
   </ul>
   <div class="box">
-    <p>Não é para quem busca dinheiro fácil, nem só mais um emprego pra pagar contas.</p>
-    <p><strong>Nem para quem quer se recolocar em outra empresa. É para quem quer atender.</strong></p>
+    <p>O consultor OMNI conduz cada um desses passos com você.</p>
+    <p>Se no fim vocês entenderem que a OMNI tem a solução para o seu contexto, ele apresenta, com todas as condições.</p>
+    <p><strong>Se não tiver, ele diz.</strong></p>
   </div>
 </section>
 
@@ -267,6 +306,18 @@
     <p>Daqui a cinco anos, o que não volta é o tempo que você passou torcendo pro dia acabar.</p>
     <p><strong>Transformação que se prova.</strong></p>
   </div>
+</section>
+
+
+<section>
+  <div class="eyebrow">Perguntas</div>
+  <h2>O que <strong>todo mundo pergunta.</strong></h2>
+  <details><summary>Quanto custa?</summary><p>O investimento varia conforme a sua necessidade, os seus objetivos e a forma como você quer fazer essa transição. Vai de treinamentos mais focados e objetivos, <strong>a partir de R$7 mil</strong>, até caminhos que incluem entrega de serviço, que podem chegar a <strong>R$50 mil</strong>. Na consultoria você descobre qual faz sentido para o seu caso, com todas as condições.</p></details>
+  <details><summary>Preciso ser psicólogo?</summary><p>Não. Você não precisa de psicologia nem de formação prévia em saúde. A maior parte de quem se forma vem de outra carreira.</p></details>
+  <details><summary>Preciso largar o meu emprego?</summary><p>Não. As aulas são online, à noite e no fim de semana. Você constrói em paralelo e decide o ritmo da transição.</p></details>
+  <details><summary>Em quanto tempo eu começo a atender?</summary><p>Em até 3 meses, com protocolo e prática supervisionada desde o início.</p></details>
+  <details><summary>Alguém vai me ligar depois?</summary><p>Só se você quiser. O primeiro contato é o chat aqui na página, e a consultoria só acontece se você agendar.</p></details>
+  <details><summary>A decisão passa por mais alguém em casa?</summary><p>Chame essa pessoa para a conversa. A consultoria pode ser feita a dois.</p></details>
 </section>
 
 <footer>
