@@ -4,7 +4,7 @@
 <!-- OMNI-GATE-START -->
 <style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
 <script>(function(){
-  var K='omni_gate_v1';
+  var K='omni_gate_onepager';
   try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
   var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
   function build(){
@@ -15,7 +15,7 @@
     document.body.appendChild(o);
     var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
     function tryit(){
-      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      if(pw.value==='omni'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
       else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
     }
     btn.addEventListener('click',tryit);
