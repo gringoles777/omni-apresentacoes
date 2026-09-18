@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="omni-locked">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Projeto CRM OMNI — Migração Pipedrive · OMNI Brasil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html.omni-locked body>*:not(#omni-gate){visibility:hidden}
+  :root{
+    --bg:#050505; --panel:#111111; --panel2:#151510; --dark:#1A1A1A;
+    --ink:#F5F0E8; --ink-70:rgba(245,240,232,.7); --ink-50:rgba(245,240,232,.5); --ink-30:rgba(245,240,232,.3);
+    --gold:#C8A84B; --gold-light:#E8C86A; --gold-deep:#9A7A2E;
+    --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.20); --gold-30:rgba(200,168,75,.30);
+    --teal:#2A9D8F; --teal-10:rgba(42,157,143,.10); --red:#E05C5C; --navy:#0A1628;
+    --display:'Oswald','Arial Black',sans-serif; --body:'Inter','Open Sans',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+    --grad-gold:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;padding-bottom:80px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  header{padding:80px 0 56px;text-align:center;background:radial-gradient(ellipse at 50% -20%,rgba(200,168,75,.12),transparent 60%)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:20px}
+  h1{font-family:var(--display);font-weight:700;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.12;text-transform:uppercase;letter-spacing:1px}
+  h1 .gold{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .lead{max-width:720px;margin:24px auto 0;color:var(--ink-70);font-size:17px}
+  .meta{margin-top:28px;font-family:var(--mono);font-size:12px;color:var(--ink-50);letter-spacing:1px}
+  .badge{display:inline-block;margin-top:16px;padding:6px 18px;border:1px solid var(--gold-30);border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+  section{padding:56px 0 8px}
+  .sec-kicker{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;letter-spacing:1px;margin-bottom:28px}
+  h2 em{font-style:normal;color:var(--gold)}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{background:var(--panel);border:1px solid var(--gold-20);border-radius:14px;padding:28px}
+  .card h3{font-family:var(--display);font-size:19px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+  .card .role{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .card p{color:var(--ink-70);font-size:14.5px}
+  .card.dead{border-color:rgba(224,92,92,.35)}
+  .card.dead .role{color:var(--red)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:8px 0 20px}
+  .stat{background:var(--panel2);border:1px solid var(--gold-20);border-radius:12px;padding:20px 16px;text-align:center}
+  .stat .num{font-family:var(--display);font-size:30px;font-weight:700;color:var(--gold)}
+  .stat .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-50);margin-top:6px;line-height:1.5}
+  .flow{margin:12px 0 8px;border-left:2px solid var(--gold-30);padding-left:28px;display:flex;flex-direction:column;gap:18px}
+  .step{position:relative}
+  .step::before{content:'';position:absolute;left:-35px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-10)}
+  .step b{font-family:var(--display);letter-spacing:.5px;text-transform:uppercase;font-weight:600}
+  .step span{display:block;color:var(--ink-70);font-size:14.5px}
+  .cascade{background:var(--panel);border:1px solid var(--gold-20);border-radius:14px;padding:28px;margin-top:20px}
+  .cascade .title{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+  .cascade ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .cascade li{padding-left:26px;position:relative;color:var(--ink-70);font-size:15px}
+  .cascade li::before{content:'▸';position:absolute;left:2px;color:var(--gold)}
+  .cascade li b{color:var(--ink)}
+  table{width:100%;border-collapse:collapse;margin:8px 0 24px;font-size:14px}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-align:left;padding:10px 12px;border-bottom:1px solid var(--gold-30)}
+  td{padding:10px 12px;border-bottom:1px solid rgba(245,240,232,.08);color:var(--ink-70);vertical-align:top}
+  td:first-child{color:var(--ink);font-weight:500}
+  .tscroll{overflow-x:auto}
+  .phase{display:grid;grid-template-columns:110px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid rgba(245,240,232,.08)}
+  .phase .tag{font-family:var(--display);font-size:20px;font-weight:700;color:var(--gold);text-transform:uppercase}
+  .phase .tag small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:400;color:var(--ink-50);letter-spacing:1px;margin-top:4px}
+  .phase .desc b{display:block;margin-bottom:4px;font-weight:600}
+  .phase .desc p{color:var(--ink-70);font-size:14.5px}
+  .phase .gate{margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--teal)}
+  .callout{background:var(--teal-10);border:1px solid rgba(42,157,143,.35);border-radius:12px;padding:20px 24px;margin:20px 0;color:var(--ink-70);font-size:14.5px}
+  .callout b{color:var(--teal)}
+  .warn{background:rgba(224,92,92,.08);border:1px solid rgba(224,92,92,.3);border-radius:12px;padding:20px 24px;margin:20px 0;color:var(--ink-70);font-size:14.5px}
+  .warn b{color:var(--red)}
+  footer{margin-top:64px;padding-top:32px;border-top:1px solid var(--gold-20);text-align:center;font-family:var(--mono);font-size:11.5px;color:var(--ink-30);letter-spacing:1px;line-height:2}
+  footer .inf{font-size:22px;color:var(--gold);letter-spacing:0}
+  @media(max-width:640px){.phase{grid-template-columns:1fr;gap:6px}}
+</style>
+</head>
+<body>
+
+<div id="omni-gate" style="position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;visibility:visible">
+  <div style="text-align:center;max-width:360px;width:90%">
+    <div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div>
+    <div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div>
+    <input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box">
+    <button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button>
+    <div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var K='omni-gate-crm-migracao',H=document.documentElement;
+  function unlock(){H.className=H.className.replace(/\s*omni-locked/,'');var o=document.getElementById('omni-gate');if(o&&o.parentNode)o.parentNode.removeChild(o);}
+  try{if(sessionStorage.getItem(K)==='1'){unlock();return;}}catch(e){}
+  var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+  function tryit(){
+    if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}unlock();}
+    else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+  }
+  btn.addEventListener('click',tryit);
+  pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+  pw.focus();
+})();
+</script>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Projeto · Setembro 2026</div>
+    <h1>CRM OMNI como <span class="gold">banco interno</span><br>e a saída do Pipedrive</h1>
+    <p class="lead">O comercial trabalha no CRM da Toca o Sino. Todos os dados da empresa — leads, vendas, pós-venda, financeiro, campanhas — vivem num CRM nosso. O Pipedrive é desligado.</p>
+    <div class="badge">Aguardando aprovação · Rafa Mendes</div>
+    <div class="meta">Baseado em 4 varreduras do repositório + leitura real das APIs (Pipedrive e Toca o Sino) · 18/09/2026</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">01 · Visão</div>
+    <h2>Três sistemas, <em>um papel cada</em></h2>
+    <div class="grid3">
+      <div class="card">
+        <h3>CRM Toca o Sino</h3>
+        <div class="role">Interface do comercial</div>
+        <p>SDRs e closers do João Rosa continuam trabalhando onde já estão. A API deles ganhou <b style="color:var(--gold)">leitura em 18/09</b> — conseguimos espelhar tudo.</p>
+      </div>
+      <div class="card" style="border-color:var(--gold);box-shadow:0 0 24px rgba(200,168,75,.12)">
+        <h3>CRM OMNI (novo)</h3>
+        <div class="role">Banco interno da empresa</div>
+        <p>Recebe <b style="color:var(--gold)">todos</b> os dados: leads, vendas, pós-venda, financeiro e campanhas. Roda os processos pós-ganho e alimenta o dashboard. Nasce sobre o Postgres da VPS, aproveitando omni-os e omni-cs.</p>
+      </div>
+      <div class="card dead">
+        <h3>Pipedrive</h3>
+        <div class="role">Desligado ao final</div>
+        <p>Reduzido durante a transição, cancelado após 2 ciclos de venda conciliados. Economia de <b style="color:var(--red)">~R$ 3.000/mês</b> (R$ 36 mil/ano).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">02 · O fluxo garantido</div>
+    <h2>Do lead à venda, <em>tudo automatizado</em></h2>
+    <div class="flow">
+      <div class="step"><b>Lead chega</b><span>LPs, chat de qualificação, agenda via Cal.com — exatamente como hoje (nada muda na aquisição).</span></div>
+      <div class="step"><b>Comercial trabalha no Toca o Sino</b><span>Espelho automático dos dados deles no nosso banco a cada 10-15 min.</span></div>
+      <div class="step"><b>Venda ganha → registrada no CRM OMNI</b><span>Tela "Registrar Venda": produto, valor do contrato, entrada, forma de pagamento, closer. 30 segundos.</span></div>
+    </div>
+    <div class="cascade">
+      <div class="title">O registro dispara a cascata automática</div>
+      <ul>
+        <li><b>Contrato</b> — link ZapSign do modelo do produto, por WhatsApp e e-mail, com re-aviso em 48h se não assinar. Fim do "Fabi monta, Michael valida" para produto de tabela.</li>
+        <li><b>Onboarding</b> — e-mail imediato + WhatsApp automático (hoje o WhatsApp é manual). Copy fixa aprovada pela Rafa/Michael antes de ativar.</li>
+        <li><b>Pós-venda</b> — jornada CS criada com o dossiê completo do cliente; Julia/Lorena/Elisa notificadas.</li>
+        <li><b>Financeiro</b> — Ítalo notificado; venda gravada no formato da conciliação dele (venda esperada × recebido no gateway).</li>
+        <li><b>Dashboard</b> — números atualizados na hora, sem Pipedrive.</li>
+      </ul>
+    </div>
+    <div class="callout"><b>Rede de segurança:</b> se o closer marcar "ganho" no CRM deles e ninguém registrar a venda no nosso em 24h, o sistema abre pendência e avisa a Rafa.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">03 · O que encontramos</div>
+    <h2>Estado atual, <em>medido nas APIs</em></h2>
+    <div class="stats">
+      <div class="stat"><div class="num">205 mil</div><div class="lbl">Deals no Pipedrive</div></div>
+      <div class="stat"><div class="num">343 mil</div><div class="lbl">Pessoas na base</div></div>
+      <div class="stat"><div class="num">63%</div><div class="lbl">da base é o funil RECALL (arquivo morto)</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Usuários ativos restantes</div></div>
+      <div class="stat"><div class="num">1.105</div><div class="lbl">Leads no CRM Toca o Sino</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Automações disparando em venda ganha</div></div>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>Pós-ganho manual</h3><p>Nenhuma automação dispara na venda. Réguas de pós-venda no Pipedrive tiveram 2-3 deals no ano. Contrato: Fabi monta, Michael valida caso a caso (ZapSign). Onboarding por WhatsApp: o time envia à mão.</p></div>
+      <div class="card"><h3>Venda não vive no CRM deles</h3><p>O Toca o Sino tem 733 leads abertos, 371 perdidos e <b style="color:var(--gold)">1 ganho</b> — sem campos de valor, produto ou pagamento. Por isso o registro oficial da venda passa a ser nosso.</p></div>
+      <div class="card"><h3>Campanhas sem histórico</h3><p>Não existe série histórica de spend/CPL/CTR — o dashboard consulta Meta/Google ao vivo e o briefing diário descarta os dados. O CRM novo arquiva tudo, diariamente.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">04 · Ritmo do negócio</div>
+    <h2>Vendas nos últimos <em>12 meses</em></h2>
+    <div class="tscroll">
+    <table>
+      <tr><th>Mês</th><th>Out</th><th>Nov</th><th>Dez</th><th>Jan</th><th>Fev</th><th>Mar</th><th>Abr</th><th>Mai</th><th>Jun</th><th>Jul</th><th>Ago</th><th>Set*</th></tr>
+      <tr><td>Ganhos</td><td>35</td><td>25</td><td>17</td><td>6</td><td>10</td><td>14</td><td>10</td><td>10</td><td>9</td><td>11</td><td>4</td><td>8</td></tr>
+      <tr><td>Valor (R$ mil)</td><td>345</td><td>298</td><td>184</td><td>61</td><td>76</td><td>75</td><td>84</td><td>69</td><td>72</td><td>92</td><td>48</td><td>90</td></tr>
+    </table>
+    </div>
+    <p style="color:var(--ink-50);font-size:13px">* Setembro parcial (extração em 18/09). Volume de 4-35 vendas/mês torna a tela "Registrar Venda" trivial de operar. Atenção herdada da análise de agosto: o campo de valor às vezes registra a entrada, não o contrato — o CRM novo separa os dois.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">05 · Fases</div>
+    <h2>8-10 semanas <em>até o desligamento</em></h2>
+    <div class="phase"><div class="tag">F0<small>1-2 sem</small></div><div class="desc"><b>Fundação</b><p>Schema <code style="font-family:var(--mono);color:var(--gold)">crm</code> no Postgres da VPS + app omni-crm mínimo. ETL histórico completo do Pipedrive — incluindo o histórico de etapas (flow), que é irrecuperável depois. Espelho do Toca o Sino no ar.</p><div class="gate">GATE: histórico conferido por amostragem · espelho batendo com a UI deles</div></div></div>
+    <div class="phase"><div class="tag">F1<small>2-3 sem</small></div><div class="desc"><b>Venda ganha (o coração)</b><p>Tela Registrar Venda + cascata completa: contrato, onboarding, pós-venda, financeiro. Valor principal no ar em ~1 mês.</p><div class="gate">GATE: 1ª venda real com cascata completa · copies aprovadas</div></div></div>
+    <div class="phase"><div class="tag">F2<small>2 sem ∥</small></div><div class="desc"><b>Dashboard</b><p>Novo motor de dados com os mesmos endpoints; dupla leitura Pipedrive × banco novo até bater.</p><div class="gate">GATE: números batendo por 2 ciclos</div></div></div>
+    <div class="phase"><div class="tag">F3<small>2-3 sem</small></div><div class="desc"><b>Pós-venda operacional</b><p>omni-cs sai do mock e liga no banco real: jornada, confirmações, FUP. Carga das planilhas da Elisa.</p><div class="gate">GATE: Julia/Lorena/Elisa operando no sistema</div></div></div>
+    <div class="phase"><div class="tag">F4<small>1 sem ∥</small></div><div class="desc"><b>Arquivo de campanhas</b><p>Job diário Meta/Google persistindo métricas por anúncio + ligação UTM ↔ venda.</p><div class="gate">GATE: 30 dias de série contínua</div></div></div>
+    <div class="phase" style="border-bottom:none"><div class="tag">F5</div><div class="desc"><b>Desligamento do Pipedrive</b><p>Migrar leituras restantes, substituir as Automations nativas por jobs nossos, congelar escrita, backup final, cancelar assinatura.</p><div class="gate">GATE: 2 ciclos completos de venda conciliados sem consultar o Pipedrive</div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">06 · Decisões em aberto</div>
+    <h2>O que precisa de <em>resposta</em></h2>
+    <div class="tscroll">
+    <table>
+      <tr><th>#</th><th>Decisão</th><th>Dono</th><th>Recomendação</th></tr>
+      <tr><td>D1</td><td>Financeiro: CRM substitui ou alimenta a planilha do Ítalo?</td><td>Rafa + Ítalo</td><td>Alimentar primeiro; substituir quando ele confiar</td></tr>
+      <tr><td>D2</td><td>Pipedrive 100% cancelado ao final (incl. pós-venda)?</td><td>Rafa + Michael</td><td>Sim — pós-venda migra na F3</td></tr>
+      <tr><td>D3</td><td>Links de contrato ZapSign por produto</td><td>Rafa</td><td>Cadastrar como configuração na F1</td></tr>
+      <tr><td>D4</td><td>Copy do onboarding (WhatsApp + e-mail)</td><td>Rafa aprova</td><td>Redigir na F1 e submeter</td></tr>
+      <tr><td>D5</td><td>Pedir algo ao Matheus?</td><td>Rafa (ponte)</td><td>Só webhook de mudança de etapa, se fácil; o poll resolve</td></tr>
+      <tr><td>D6</td><td>Quem registra a venda?</td><td>Rafa</td><td>O closer, com vigia de 24h como rede</td></tr>
+      <tr><td>D7</td><td>Substituto das cadências (Automations do Pipedrive)</td><td>técnica</td><td>Job próprio no lead-intake (padrão já existente)</td></tr>
+    </table>
+    </div>
+    <div class="warn"><b>Alerta do inventário:</b> os webhooks do Pipedrive aparecem zerados para o token da Rafa — os do intake devem estar registrados sob outro usuário/app. Confirmar com a Julia antes de qualquer redução de plano.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-kicker">07 · O que não muda</div>
+    <h2>Intacto <em>durante todo o projeto</em></h2>
+    <div class="grid3">
+      <div class="card"><h3>Aquisição</h3><p>LPs, chat de qualificação, agenda/Cal.com, lembretes, disparos, Chatwoot — o funil de entrada continua exatamente como está.</p></div>
+      <div class="card"><h3>Espelho de ida</h3><p>Lead, ping, resultado e notas continuam fluindo para o CRM do Toca o Sino como hoje.</p></div>
+      <div class="card"><h3>Regras da casa</h3><p>Sem n8n. Segredos no vault. Copy de disparo automático só entra no ar com aprovação explícita.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="inf">∞</div>
+    OMNI BRASIL · HERITAGE MEETS PRECISION<br>
+    Documentos completos no repositório: workspace/businesses/omni_brasil/outputs/crm-migracao-2026-09/<br>
+    PROJETO-MIGRACAO-CRM.md · ANEXO-INVENTARIO-PIPEDRIVE.md · 18/09/2026
+  </div>
+</footer>
+
+</body>
+</html>
