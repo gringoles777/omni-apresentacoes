@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Workshop Pago OMNI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --black:#050505; --dark:#0D0D0D; --elev:#161410; --line:#2A261C; --line-soft:#1E1B15;
+  --gold:#C8A84B; --gold-l:#E8C86A; --gold-d:#9A7A2E; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.22);
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.72); --cream-50:rgba(245,240,232,.52);
+  --teal:#2A9D8F; --teal-10:rgba(42,157,143,.14); --warn:#D98C3F; --warn-10:rgba(217,140,63,.13);
+  --f-display:'Oswald','Arial Black',sans-serif; --f-serif:'DM Serif Display',Georgia,serif;
+  --f-body:'Inter','Open Sans',system-ui,sans-serif; --f-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; background:var(--black); color:var(--cream); font-family:var(--f-body); font-size:15.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+a{color:var(--gold-l)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold-l); outline-offset:3px}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:clamp(16px,4vw,40px)}
+.prose{max-width:68ch}
+
+/* nav */
+.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:rgba(5,5,5,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; gap:22px; align-items:center; overflow-x:auto; scrollbar-width:none; padding-block:12px}
+.nav .wrap::-webkit-scrollbar{display:none}
+.nav .brand{font-family:var(--f-display); letter-spacing:.18em; font-size:12px; color:var(--gold); white-space:nowrap; text-transform:uppercase}
+.nav a{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50); text-decoration:none; white-space:nowrap; letter-spacing:.04em}
+.nav a:hover{color:var(--gold-l)}
+
+/* hero */
+header.hero{padding-block:56px 40px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse 70% 90% at 85% 0%, rgba(200,168,75,.10), transparent 60%)}
+.eyebrow{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold)}
+h1{font-family:var(--f-serif); font-weight:400; font-size:clamp(2.3rem,5.6vw,4.2rem); line-height:1.04; margin:14px 0 18px; text-wrap:balance}
+h1 em{font-style:italic; background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lede{font-size:clamp(1rem,1.6vw,1.13rem); color:var(--cream-70); max-width:64ch; margin:0}
+.meta{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:22px; font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+.meta b{color:var(--cream); font-weight:500}
+.stop{margin-top:26px; display:inline-flex; gap:10px; align-items:center; padding:9px 14px; border:1px solid var(--warn); color:var(--warn); background:var(--warn-10); border-radius:3px; font-family:var(--f-mono); font-size:12px}
+
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:34px}
+.kpi{background:var(--dark); padding:18px 18px 16px}
+.kpi .n{font-family:var(--f-display); font-size:clamp(1.7rem,3.4vw,2.4rem); color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12.5px; color:var(--cream-70); margin-top:8px; line-height:1.4}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section.s{padding-block:56px; border-bottom:1px solid var(--line-soft)}
+.sh{display:flex; gap:16px; align-items:baseline; margin-bottom:22px; flex-wrap:wrap}
+.sh .num{font-family:var(--f-mono); font-size:12px; color:var(--gold-d); letter-spacing:.08em}
+h2{font-family:var(--f-display); font-weight:500; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(1.45rem,2.9vw,2.05rem); margin:0; line-height:1.15; text-wrap:balance}
+.for{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:2px; border:1px solid var(--line); color:var(--cream-50)}
+.for.traf{border-color:var(--teal); color:var(--teal); background:var(--teal-10)}
+h3{font-family:var(--f-display); font-weight:500; font-size:1.08rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin:34px 0 12px}
+p{margin:0 0 14px}
+.muted{color:var(--cream-50)}
+.small{font-size:13.5px}
+.thesis{font-family:var(--f-serif); font-size:clamp(1.3rem,2.4vw,1.75rem); line-height:1.3; color:var(--cream); max-width:36ch; margin:0 0 26px; text-wrap:balance}
+.thesis::before{content:"“"; color:var(--gold)}
+.thesis::after{content:"”"; color:var(--gold)}
+
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:860px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--elev); border:1px solid var(--line); padding:18px 18px 16px; border-radius:4px}
+.card h4{font-family:var(--f-display); font-weight:500; font-size:1rem; letter-spacing:.05em; text-transform:uppercase; margin:0 0 8px; color:var(--cream)}
+.card p,.card li{font-size:14px; color:var(--cream-70)}
+.card p:last-child{margin:0}
+.card.hl{border-color:var(--gold-d); background:linear-gradient(180deg,rgba(200,168,75,.09),rgba(200,168,75,.02))}
+
+ol.steps,ul.list{margin:0; padding-left:0; list-style:none; display:grid; gap:10px}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s; position:relative; padding-left:34px; font-size:14px; color:var(--cream-70)}
+ol.steps li::before{content:counter(s,decimal-leading-zero); position:absolute; left:0; top:1px; font-family:var(--f-mono); font-size:11.5px; color:var(--gold)}
+ol.steps li b,ul.list li b{color:var(--cream); font-weight:600}
+ul.list li{position:relative; padding-left:18px; font-size:14px; color:var(--cream-70)}
+ul.list li::before{content:""; position:absolute; left:2px; top:.62em; width:6px; height:6px; background:var(--gold-d); transform:rotate(45deg)}
+
+/* phase columns */
+.phase{border-top:2px solid var(--gold-d); padding-top:14px}
+.phase .tag{font-family:var(--f-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold)}
+.phase h4{font-family:var(--f-display); font-size:1.25rem; font-weight:500; text-transform:uppercase; margin:4px 0 14px; letter-spacing:.03em}
+
+/* tables */
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:4px; margin:6px 0 10px}
+table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:560px}
+th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+th{font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); background:var(--dark); position:sticky; top:0}
+td{color:var(--cream-70)}
+td:first-child{color:var(--cream)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.key td{background:var(--gold-10); color:var(--cream); font-weight:500}
+col.base{background:rgba(200,168,75,.05)}
+.note{font-size:13px; color:var(--cream-50); border-left:2px solid var(--line); padding-left:12px; margin-top:10px}
+
+/* funnel */
+.funnel{display:flex; flex-wrap:wrap; gap:0; align-items:stretch; margin:8px 0 6px}
+.fs{flex:1 1 150px; min-width:0; padding:14px 16px; background:var(--elev); border:1px solid var(--line); position:relative}
+.fs + .fs{border-left:0}
+.fs .v{font-family:var(--f-display); font-size:1.7rem; color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.fs .k{font-size:12.5px; color:var(--cream-70); margin-top:6px}
+.fs .p{font-family:var(--f-mono); font-size:11px; color:var(--gold-d); margin-top:6px}
+@media (max-width:640px){.fs{flex-basis:45%} .fs + .fs{border-left:1px solid var(--line)}}
+
+/* budget bars */
+.bars{display:grid; gap:10px; margin-top:8px}
+.bar{display:grid; grid-template-columns:118px 1fr 78px; gap:12px; align-items:center; font-size:13px}
+.bar .lab{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-70)}
+.bar .trk{height:12px; background:var(--dark); border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.bar .fill{height:100%; background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+.bar .val{font-family:var(--f-mono); text-align:right; color:var(--cream); font-variant-numeric:tabular-nums}
+.bar .sub{grid-column:2 / 4; font-size:11.5px; color:var(--cream-50); margin-top:-6px}
+
+/* names */
+.names{display:grid; gap:10px}
+.name{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px; padding:16px 18px; background:var(--elev); border:1px solid var(--line); border-radius:4px}
+.name .t{font-family:var(--f-serif); font-size:1.15rem; line-height:1.25; color:var(--cream)}
+.name .c{font-size:13.5px; color:var(--cream-70)}
+.name .c b{display:block; font-family:var(--f-mono); font-size:10.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-d); margin-bottom:4px}
+.name.fav{border-color:var(--gold); background:linear-gradient(135deg,rgba(200,168,75,.13),rgba(200,168,75,.02) 60%)}
+.name.fav .t::after{content:"Favorita"; display:inline-block; margin-left:10px; vertical-align:middle; font-family:var(--f-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--black); background:var(--gold); padding:2px 7px; border-radius:2px}
+@media (max-width:760px){.name{grid-template-columns:1fr; gap:10px}}
+
+/* tsunami */
+.tsu{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:end}
+.tsu .lvl{background:var(--elev); border:1px solid var(--line); border-radius:4px; padding:14px}
+.tsu .lvl:nth-child(1){min-height:150px} .tsu .lvl:nth-child(2){min-height:180px; border-color:#3a3322} .tsu .lvl:nth-child(3){min-height:210px; border-color:var(--gold-d)} .tsu .lvl:nth-child(4){min-height:240px; border-color:var(--gold); background:linear-gradient(180deg,rgba(200,168,75,.16),rgba(200,168,75,.03))}
+.tsu .who{font-family:var(--f-display); font-size:1.02rem; text-transform:uppercase; color:var(--gold-l); letter-spacing:.04em}
+.tsu .what{font-size:13.5px; color:var(--cream); margin:8px 0 6px}
+.tsu .cond{font-size:12px; color:var(--cream-50)}
+@media (max-width:760px){.tsu{grid-template-columns:1fr 1fr} .tsu .lvl{min-height:0!important}}
+
+/* timeline */
+.tl{display:grid; gap:0; border-left:1px solid var(--gold-d); margin-left:6px}
+.tli{position:relative; padding:0 0 22px 24px}
+.tli::before{content:""; position:absolute; left:-5px; top:6px; width:9px; height:9px; background:var(--black); border:1px solid var(--gold); transform:rotate(45deg)}
+.tli.ev::before{background:var(--gold)}
+.tli .d{font-family:var(--f-mono); font-size:11.5px; color:var(--gold); letter-spacing:.05em}
+.tli .h{font-family:var(--f-display); font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; margin:2px 0 4px}
+.tli p{font-size:14px; color:var(--cream-70); margin:0 0 4px}
+.tli .m{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+
+.check li{list-style:none; position:relative; padding-left:28px; font-size:14px; color:var(--cream-70)}
+.check{padding:0; margin:0; display:grid; gap:9px}
+.check li::before{content:""; position:absolute; left:0; top:3px; width:14px; height:14px; border:1px solid var(--gold-d); border-radius:2px}
+
+.pill{display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; padding:2px 7px; border-radius:2px; white-space:nowrap}
+.pill.ok{background:var(--teal-10); color:var(--teal)} .pill.cf{background:var(--warn-10); color:var(--warn)}
+
+footer{padding-block:40px 60px; font-size:12.5px; color:var(--cream-50)}
+footer .wrap{display:grid; gap:8px}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Seções">
+  <div class="wrap">
+    <span class="brand">OMNI · Workshop Pago</span>
+    <a href="#estrategia">Estratégia</a>
+    <a href="#mecanica">Mecânica</a>
+    <a href="#numeros">Números</a>
+    <a href="#decisoes">Decisões</a>
+    <a href="#nome">Big Idea</a>
+    <a href="#oferta">Oferta</a>
+    <a href="#trafego">Tráfego</a>
+    <a href="#funil">Funil</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#fase2">Fase 2</a>
+    <a href="#escada">Escada</a>
+    <a href="#riscos">Riscos</a>
+    <a href="#proximos">Próximos passos</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Planejamento · baseado na reunião com Thiago Kiss de 27/08/2026</div>
+    <h1>O workshop de R$27 que <em>compra leads</em> para vender a Pós</h1>
+    <p class="lede">Um dia inteiro ao vivo no Zoom, vendido só para público quente. A aula entrega uma vitória prática, o pitch apresenta a nova Formação/Pós com preço aberto, e o time comercial fecha no 1 a 1. O ingresso não é o negócio: é a forma mais barata de colocar 160 pessoas qualificadas na mesma sala.</p>
+    <div class="meta">
+      <span>Para <b>Rafa Mendes</b> e <b>gestor de tráfego</b></span>
+      <span>Apresentação: <b>Michael Arruda</b></span>
+      <span>Versão <b>21/09/2026</b></span>
+    </div>
+    <div class="stop">Nada foi executado. Sem campanha, página, disparo ou gasto. Este é o plano para decisão.</div>
+
+    <div class="kpis" role="list">
+      <div class="kpi" role="listitem"><div class="n">200</div><div class="l">compradores de ingresso (meta-base)</div></div>
+      <div class="kpi" role="listitem"><div class="n">160</div><div class="l">pessoas no Zoom, com 80% de comparecimento</div></div>
+      <div class="kpi" role="listitem"><div class="n">8</div><div class="l">matrículas até D+30, ou 4% da lista</div></div>
+      <div class="kpi" role="listitem"><div class="n">R$10,8k</div><div class="l">mídia bruta em cerca de 30 dias de venda</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1 -->
+<section class="s" id="estrategia"><div class="wrap">
+  <div class="sh"><span class="num">01</span><h2>A estratégia em uma frase</h2></div>
+  <p class="thesis">Vender um dia prático por R$27 para quem já conhece a OMNI, entregar uma vitória concreta, apresentar ao vivo a oferta de maior valor e fechar individualmente os qualificados.</p>
+  <div class="grid g4">
+    <div class="card"><h4>O ingresso qualifica</h4><p>Quem paga R$27 aparece. Thiago relatou comparecimento acima de 80%, algo que lançamento gratuito não atinge.</p></div>
+    <div class="card"><h4>É compra de leads</h4><p>Ingresso e bump só subsidiam a mídia. O dinheiro vem das matrículas nos 30 dias seguintes, inclusive de quem faltou.</p></div>
+    <div class="card"><h4>Pitch no auge</h4><p>A oferta entra depois que a pessoa destrava algo na aula, com preço e forma de pagamento abertos.</p></div>
+    <div class="card"><h4>Humano fecha</h4><p>O time liga durante a live e nos dias seguintes. Michael fica na entrega; Rafa comanda a sala comercial.</p></div>
+  </div>
+  <p class="note">Thiago recomendou começar pela versão simples: só público quente, um evento por mês. A versão difícil, com lives gratuitas para frio, fica para a fase 2.</p>
+</div></section>
+
+<!-- 2 -->
+<section class="s" id="mecanica"><div class="wrap">
+  <div class="sh"><span class="num">02</span><h2>Mecânica completa</h2></div>
+  <div class="grid g3">
+    <div class="phase"><div class="tag">Cerca de 30 dias antes</div><h4>Antes do evento</h4>
+      <ol class="steps">
+        <li><b>Um avatar, uma promessa, um produto.</b> Nada de pitch genérico para todos os públicos.</li>
+        <li><b>Ingresso de R$27</b> para público quente, dia inteiro no Zoom.</li>
+        <li><b>O nome qualifica.</b> Promessa aberta demais trouxe lead pior na 2ª edição do Thiago.</li>
+        <li><b>Volume de criativos:</b> cerca de 30 peças, com depoimento narrado e prova de venda de ingresso.</li>
+        <li><b>Um único order bump de R$27.</b> Três bumps mataram a escala dele.</li>
+        <li><b>Obrigado, área de membros e grupo</b> de WhatsApp, com três tentativas de colocar todos no grupo.</li>
+        <li><b>Contato humano 1 a 1</b> com cada comprador. O "divisor de águas".</li>
+        <li><b>Check-in</b> dias antes: pesquisa de avatar com presente no final.</li>
+      </ol>
+    </div>
+    <div class="phase"><div class="tag">Dia D</div><h4>Durante o evento</h4>
+      <ol class="steps">
+        <li><b>Prática com "cara de Legacy",</b> exercícios, sem virar vitrine de depoimentos.</li>
+        <li><b>Ponte no auge:</b> "agora que vocês destravaram isso, muita gente me pergunta do acompanhamento".</li>
+        <li><b>Pitch completo</b> com produto, preço, pagamento, capacidade e bônus.</li>
+        <li><b>Notícia boa e ruim:</b> condição única, mas o time não faz 200 onboardings amanhã.</li>
+        <li><b>Aplicação</b> com taxa opcional de R$97, abatida na matrícula.</li>
+        <li><b>Closers ligam durante a live.</b> O diretor do Thiago fechou 4 vendas ali.</li>
+        <li><b>Bônus tsunami</b> por ordem de pagamento.</li>
+      </ol>
+    </div>
+    <div class="phase"><div class="tag">D0 a D+30</div><h4>Depois do evento</h4>
+      <ol class="steps">
+        <li><b>Ligar primeiro</b> para quem pagou os R$97 e tem perfil.</li>
+        <li><b>Depois</b> os aplicantes sem taxa, os interessados do check-in e os ausentes.</li>
+        <li><b>Concluir pagamentos</b>, devolver taxas e iniciar onboarding.</li>
+        <li><b>Trabalhar a lista por 30 dias.</b> Thiago vendeu para quem nem foi à live.</li>
+        <li><b>Medir pela coorte:</b> vendas, cancelamentos e caixa recebido.</li>
+        <li><b>Repetir mensalmente,</b> alternando temas entre meses. Nunca dois eventos no mesmo mês.</li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<!-- 3 -->
+<section class="s" id="numeros"><div class="wrap">
+  <div class="sh"><span class="num">03</span><h2>Números do Thiago e projeção OMNI</h2></div>
+  <h3>O que ele relatou</h3>
+  <div class="funnel" aria-label="Funil do primeiro lançamento do Thiago">
+    <div class="fs"><div class="v">200</div><div class="k">ingressos em 30 dias</div><div class="p">~6,7 por dia</div></div>
+    <div class="fs"><div class="v">160</div><div class="k">no Zoom</div><div class="p">80% de presença</div></div>
+    <div class="fs"><div class="v">10</div><div class="k">vendas da mentoria</div><div class="p">5% da lista</div></div>
+    <div class="fs"><div class="v">~R$200k</div><div class="k">em vendas</div><div class="p">ticket R$19.800</div></div>
+    <div class="fs"><div class="v">R$7k</div><div class="k">tráfego líquido</div><div class="p">após abater ingressos</div></div>
+  </div>
+  <p class="note">A conversão de 5% é sobre a lista de compradores, não sobre os presentes. A 2ª edição estava em 3,33% parcial, com nome de evento mais aberto. Números relatados, sem auditoria. Há uma inconsistência a pedir ao Thiago: 200 ingressos de R$27 geram R$5.400, não os R$13 mil do exemplo que ele deu.</p>
+
+  <h3>Projeção para a OMNI</h3>
+  <div class="tw"><table>
+    <colgroup><col><col><col class="base"><col></colgroup>
+    <thead><tr><th>Indicador</th><th class="r">Conservador</th><th class="r">Base</th><th class="r">Otimista</th></tr></thead>
+    <tbody>
+      <tr><td>Compradores de ingresso</td><td class="r">150</td><td class="r">200</td><td class="r">300</td></tr>
+      <tr><td>Comparecimento</td><td class="r">70%</td><td class="r">80%</td><td class="r">85%</td></tr>
+      <tr><td>Pessoas no Zoom</td><td class="r">105</td><td class="r">160</td><td class="r">255</td></tr>
+      <tr><td>Conversão da lista até D+30</td><td class="r">2%</td><td class="r">4%</td><td class="r">5%</td></tr>
+      <tr><td>Matrículas até D+30</td><td class="r">3</td><td class="r">8</td><td class="r">15</td></tr>
+      <tr><td>Das quais até D+7</td><td class="r">2</td><td class="r">6</td><td class="r">10</td></tr>
+      <tr><td>Ticket hipotético da Pós</td><td class="r">R$15.000</td><td class="r">R$15.000</td><td class="r">R$15.000</td></tr>
+      <tr class="key"><td>Receita contratual da Pós</td><td class="r">R$45.000</td><td class="r">R$120.000</td><td class="r">R$225.000</td></tr>
+      <tr><td>Ingressos + bump (bump em 20/30/35%)</td><td class="r">R$4.860</td><td class="r">R$7.020</td><td class="r">R$10.935</td></tr>
+      <tr><td>CPA de ingresso assumido</td><td class="r">R$70</td><td class="r">R$54</td><td class="r">R$54</td></tr>
+      <tr><td>Mídia bruta</td><td class="r">R$10.500</td><td class="r">R$10.800</td><td class="r">R$16.200</td></tr>
+      <tr class="key"><td>Mídia líquida após ingressos e bump</td><td class="r">R$5.640</td><td class="r">R$3.780</td><td class="r">R$5.265</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g2" style="margin-top:14px">
+    <div class="card"><h4>Premissas</h4><ul class="list">
+      <li>R$15 mil é hipótese para decisão, <b>não é preço aprovado da Pós</b>. A fonte única de preços ainda não tem esse produto.</li>
+      <li>Receita contratual não é caixa. Oito matrículas em 12x de R$1.250 geram R$10 mil na primeira parcela.</li>
+      <li>Valores sem tributos, tarifas, comissões, produção, entrega e inadimplência.</li>
+    </ul></div>
+    <div class="card"><h4>Leitura para decisão</h4><ul class="list">
+      <li>Para ter 150 no Zoom com 80% de presença, são necessários 188 compradores. Por isso a meta é 200.</li>
+      <li>Com 10 matrículas, ou 5% de 200, chega-se aos R$150 mil que o Thiago citou.</li>
+      <li>Se o CPA for R$70 em vez de R$54, a mídia vai a R$14 mil. O piloto pode perder dinheiro.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 4 -->
+<section class="s" id="decisoes"><div class="wrap">
+  <div class="sh"><span class="num">04</span><h2>Decisões antes de abrir vendas</h2><span class="for">Michael + Rafa</span></div>
+  <div class="tw"><table>
+    <thead><tr><th>Decisão</th><th>Recomendação</th><th>Condição para avançar</th></tr></thead>
+    <tbody>
+      <tr><td>Produto do pitch</td><td><b>Nova Formação/Pós</b> para quem quer entrar na carreira. Black fica para um evento futuro com terapeutas já atuantes.</td><td>Escopo, preço, contrato e turma consolidados. Se a Pós não estiver pronta, usar o Master e ajustar a promessa antes do primeiro ingresso.</td></tr>
+      <tr><td>Avatar do 1º evento</td><td>Profissional estabelecido, 35+, corporativo ou liberal, que quer a carreira terapêutica sem abandonar a renda atual.</td><td>Medir o tamanho da base quente desse perfil. Quem só quer terapia pessoal não qualifica para este pitch.</td></tr>
+      <tr><td>Big Idea e nome</td><td><b>Plano de Carreira Terapêutica: sua transição segura em um dia</b>.</td><td>Michael valida a entrega do dia. Rafa testa a compreensão em 5 a 10 conversas com leads reais.</td></tr>
+      <tr><td>Preço e ancoragem</td><td>R$15 mil como hipótese interna, ancorado nas entregas. Não publicar ainda.</td><td>Registrar a tabela da Pós em PRECOS-VIGENTES antes de qualquer copy.</td></tr>
+      <tr><td>Preço aberto ao vivo</td><td>Sim, como no método Thiago: a pessoa conhece o investimento antes de aplicar.</td><td>Rafa decide, porque materiais atuais reservam o preço ao consultor.</td></tr>
+      <tr><td>Data</td><td>Candidata: <b>sábado, 31/10/2026, 10h às 19h</b>.</td><td>Não colide com o Legacy de 21 a 24/10. Validar feriado próximo e escala do time.</td></tr>
+      <tr><td>Taxa de R$97</td><td>Opcional, abatida na matrícula e <b>devolvida integralmente</b> se não houver matrícula.</td><td>Política, responsável financeiro e rotina de devolução definidos. Se não estiver pronto, começar sem taxa.</td></tr>
+      <tr><td>Forma de pagamento</td><td>Preferir cartão e Pix. Não copiar a regra "só cartão" do Thiago automaticamente.</td><td>Boleto parcelado só com política de crédito aprovada.</td></tr>
+      <tr><td>Vagas e verba</td><td>Meta de 8 matrículas, capacidade de até 15 onboardings, mídia de R$10,8 mil.</td><td>Confirmar entrega para 15. R$16,2 mil é cenário de expansão, não autorização.</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 5 -->
+<section class="s" id="nome"><div class="wrap">
+  <div class="sh"><span class="num">05</span><h2>Big Idea e opções de nome</h2></div>
+  <div class="prose">
+    <p><b>Big Idea:</b> a pessoa não precisa resolver toda a mudança de carreira agora. Precisa sair da intenção vaga e construir uma ponte verificável entre a vida atual e a formação para atender pessoas.</p>
+    <p class="muted small">Regra do Thiago aplicada: promessa de resolução em um dia, não "descubra como". Evitar "destrave sua vida", que puxa quem quer terapia pessoal, e evitar promessa de R$30 mil por mês, que atrai pela renda antes da vocação.</p>
+  </div>
+  <div class="names">
+    <div class="name fav"><div class="t">Plano de Carreira Terapêutica: sua transição segura em um dia</div><div class="c"><b>Sai do dia com</b>Plano pessoal de 90 dias com rotina de estudo, caminho formativo e próximo passo datado.</div><div class="c"><b>Qualifica</b>Já trabalha, quer a carreira terapêutica e pretende preservar a renda enquanto se prepara.</div></div>
+    <div class="name"><div class="t">Segunda Carreira com Propósito: monte seu caminho na Omniterapia em um dia</div><div class="c"><b>Sai do dia com</b>Mapa de decisão entre manter a carreira, testar uma segunda atuação e investir na formação.</div><div class="c"><b>Qualifica</b>Interesse profissional real, não só uma experiência de bem-estar.</div></div>
+    <div class="name"><div class="t">Do Corporativo à Carreira Terapêutica: um dia para organizar sua mudança</div><div class="c"><b>Sai do dia com</b>Plano de transição com tempo semanal disponível e critérios para decidir sem impulso.</div><div class="c"><b>Qualifica</b>Executivo, gestor ou corporativo que considera atender pessoas.</div></div>
+    <div class="name"><div class="t">Seu Primeiro Projeto de Carreira Terapêutica</div><div class="c"><b>Sai do dia com</b>Projeto de uma página com público, competências a desenvolver e agenda.</div><div class="c"><b>Qualifica</b>Ainda não atende e aceita que o próximo passo é formação e prática.</div></div>
+    <div class="name"><div class="t">Da Experiência de Vida à Carreira Terapêutica</div><div class="c"><b>Sai do dia com</b>Inventário de experiências e mapa das competências que faltam.</div><div class="c"><b>Qualifica</b>Profissional maduro disposto a estudar para ajudar pessoas.</div></div>
+  </div>
+  <p class="note">Subtítulo sugerido para a favorita: "sem precisar abandonar sua renda atual para começar a se preparar". Sujeito à aprovação de copy.</p>
+</div></section>
+
+<!-- 6 -->
+<section class="s" id="oferta"><div class="wrap">
+  <div class="sh"><span class="num">06</span><h2>Oferta do pitch</h2></div>
+  <div class="grid g2">
+    <div>
+      <h3 style="margin-top:0">Roteiro do pitch</h3>
+      <ol class="steps">
+        <li><b>Recuperar a entrega:</b> a pessoa concluiu o plano e viu o que falta.</li>
+        <li><b>Mostrar a lacuna:</b> técnica, prática e confiança exigem uma jornada.</li>
+        <li><b>Uma oferta só:</b> a Pós. Black é o degrau seguinte, sem segundo pitch.</li>
+        <li><b>Explicar a jornada:</b> 4 módulos em 12 meses, certificação no módulo 1.</li>
+        <li><b>Mostrar como cabe na rotina</b> de quem trabalha.</li>
+        <li><b>Garantias com termos</b> já previstos na FAQ, sem inventar garantia de renda.</li>
+        <li><b>Preço aprovado, pagamento e custo total</b>, incluindo opcionais.</li>
+        <li><b>Capacidade, bônus e aplicação.</b> Comercial começa a ligar.</li>
+      </ol>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Taxa de aplicação de R$97</h3>
+      <div class="card">
+        <p>No relato do Thiago há uma contradição: "100% reembolsável", mas quem desiste perde a taxa. A proposta resolve isso:</p>
+        <ul class="list">
+          <li><b>Matriculou:</b> abate R$97 do total.</li>
+          <li><b>Não matriculou,</b> por reprovação ou desistência: devolução integral.</li>
+          <li>Devolução solicitada em até 2 dias úteis após a decisão.</li>
+          <li>A taxa dá <b>prioridade de contato</b>, não compra vaga nem bônus.</li>
+        </ul>
+      </div>
+      <h3>Escassez justificada</h3>
+      <p class="small muted">Até 15 entradas na coorte, só se suporte e comercial confirmarem capacidade. A justificativa é real: cada aluno tem onboarding e acompanhamento. Critérios explicados ao grupo; recusas tratadas em particular, em vez do "descarte ao vivo" do Thiago.</p>
+    </div>
+  </div>
+
+  <h3>Escada de bônus tsunami</h3>
+  <div class="tsu">
+    <div class="lvl"><div class="who">Todos do dia</div><div class="what">Treinamento gravado de Social Selling, com Davi Oliveira</div><div class="cond">Pagos até 23h59 do dia do workshop</div></div>
+    <div class="lvl"><div class="who">10 primeiros</div><div class="what">Revisão individual de posicionamento com a equipe, 30 min</div><div class="cond">Agenda em até 30 dias</div></div>
+    <div class="lvl"><div class="who">3 primeiros</div><div class="what">Sessão individual de hipnoterapia com profissional da equipe</div><div class="cond">Sem vínculo a promessa de cura</div></div>
+    <div class="lvl"><div class="who">O primeiro</div><div class="what">Reunião estratégica individual com Michael, 60 min</div><div class="cond">Sem acompanhamento contínuo</div></div>
+  </div>
+  <p class="note">Ordem por pagamento confirmado, declarada desde o início. Todos os itens existem na entrega Black, mas o uso na Pós, as licenças e as agendas estão a confirmar. Legacy não entra como bônus automático porque ocupa vaga presencial e já é benefício previsto na FAQ da Pós.</p>
+</div></section>
+
+<!-- 7 -->
+<section class="s" id="trafego"><div class="wrap">
+  <div class="sh"><span class="num">07</span><h2>Plano de tráfego</h2><span class="for traf">Para o gestor</span></div>
+  <div class="grid g2">
+    <div>
+      <h3 style="margin-top:0">Públicos quentes</h3>
+      <div class="tw"><table style="min-width:0">
+        <thead><tr><th>Grupo</th><th class="r">Verba</th></tr></thead>
+        <tbody>
+          <tr><td>Engajados com conteúdo de carreira e formação, janelas de 30, 90 e 180 dias</td><td class="r">60% · R$6.480</td></tr>
+          <tr><td>Leads de formação e transição que não compraram</td><td class="r">25% · R$2.700</td></tr>
+          <tr><td>Visitantes de página, intenção recente e abandono de checkout</td><td class="r">15% · R$1.620</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Excluir compradores do ingresso, matriculados e membros Black. Sem interesses amplos nem expansão para frio neste ciclo. Tamanho real das bases a levantar.</p>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Verba por semana · R$10.800</h3>
+      <div class="bars">
+        <div class="bar"><span class="lab">S1 · 28/09</span><span class="trk"><span class="fill" style="width:44%;display:block"></span></span><span class="val">R$1.200</span></div>
+        <div class="bar"><span class="lab">S2 · 05/10</span><span class="trk"><span class="fill" style="width:78%;display:block"></span></span><span class="val">R$2.100</span><span class="sub">acumulado indicativo: 60 ingressos</span></div>
+        <div class="bar"><span class="lab">S3 · 12/10</span><span class="trk"><span class="fill" style="width:89%;display:block"></span></span><span class="val">R$2.400</span><span class="sub">105 ingressos</span></div>
+        <div class="bar"><span class="lab">S4 · 19/10</span><span class="trk"><span class="fill" style="width:89%;display:block"></span></span><span class="val">R$2.400</span><span class="sub">150 ingressos</span></div>
+        <div class="bar"><span class="lab">S5 · 26/10</span><span class="trk"><span class="fill" style="width:100%;display:block"></span></span><span class="val">R$2.700</span><span class="sub">200 ingressos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Regras de escala</h3>
+  <div class="grid g3">
+    <div class="card"><h4>Não buscar zero a zero</h4><p>Se o ingresso paga toda a mídia, faltou escala. A regra do Thiago é investir cerca de 2x o que volta em ingresso. Isso não autoriza gasto sem qualidade.</p></div>
+    <div class="card"><h4>CPA</h4><p>Alvo de R$54. Entre R$54 e R$70, investigar. Acima de R$70 com amostra, revisar criativo, página e perfil antes de subir verba.</p></div>
+    <div class="card"><h4>Ritmo</h4><p>Primeira leitura após 72h e 20 compras. Criativo com 3 CPAs gastos sem venda entra em revisão. Aumentos de até 20% a cada 48h.</p></div>
+  </div>
+  <p class="note">Não trocar a Big Idea no meio do piloto porque outra promessa gera clique barato. Foi isso que piorou a 2ª edição do Thiago.</p>
+
+  <h3>Matriz de criativos</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Linha</th><th>Formato</th><th>Prova</th><th>Prioridade</th></tr></thead>
+    <tbody>
+      <tr><td>Transição de carreira real</td><td>Michael narra um depoimento sobre print</td><td>Roberto Monfort: executivo, mais de R$20 mil por mês após 3 meses como terapeuta</td><td><span class="pill ok">Prioritária</span></td></tr>
+      <tr><td>O plano concreto do dia</td><td>Michael mostra um modelo de plano preenchido</td><td>O entregável do workshop</td><td><span class="pill ok">Prioritária</span></td></tr>
+      <tr><td>Tempo e segurança da transição</td><td>Vídeo curto ou estático em volume</td><td>Exercício de horas semanais e próximo passo</td><td><span class="pill ok">Prioritária</span></td></tr>
+      <tr><td>Propósito com maturidade</td><td>Caso narrado</td><td>Elizabete Monteiro, professora aposentada e pós-doutora</td><td><span class="pill ok">Prioritária</span></td></tr>
+      <tr><td>Experiência OMNI</td><td>Relato do Thiago sobre o Legacy</td><td>R$650 mil no mês após a imersão</td><td><span class="pill cf">Secundária</span></td></tr>
+      <tr><td>Movimento de inscrições</td><td>Tela do celular com vendas de ingresso</td><td>Só com volume real, dados ocultos</td><td><span class="pill cf">Quando houver volume</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="small muted">Começar com 12 peças e chegar a 24 ou 30 conforme aprendizado. No orgânico, palavra-chave <b>CARREIRA</b> em vez de HIPNOSE, por qualificar melhor o avatar. ManyChat aparece no repositório como ação a implementar, ainda não ativo.</p>
+
+  <h3>KPIs por etapa</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Etapa</th><th>Definição</th><th class="r">Meta-base</th></tr></thead>
+    <tbody>
+      <tr><td>Ingressos</td><td>Compradores únicos pagos</td><td class="r">200</td></tr>
+      <tr><td>CPA de mídia</td><td>Mídia ÷ compras atribuídas</td><td class="r">R$54</td></tr>
+      <tr><td>Conversão da página</td><td>Compras ÷ visitantes únicos</td><td class="r">3%</td></tr>
+      <tr><td>Order bump</td><td>Bump ÷ compradores</td><td class="r">30%</td></tr>
+      <tr><td>Entrada no grupo</td><td>No grupo ÷ compradores</td><td class="r">90%</td></tr>
+      <tr><td>Contato humano</td><td>Tentativa 1 a 1 em até um dia útil</td><td class="r">100%</td></tr>
+      <tr><td>Check-in</td><td>Formulários válidos ÷ compradores</td><td class="r">70%</td></tr>
+      <tr><td>Comparecimento</td><td>Presentes únicos ÷ compradores</td><td class="r">80%</td></tr>
+      <tr><td>Retenção até o pitch</td><td>Presentes no pitch ÷ presentes</td><td class="r">80%</td></tr>
+      <tr><td>Aplicações</td><td>Aplicações válidas ÷ compradores</td><td class="r">25% · 50</td></tr>
+      <tr><td>Calls até D+7</td><td>Calls realizadas ÷ aplicações</td><td class="r">80% · 40</td></tr>
+      <tr><td>Matrículas D+7</td><td>Pagamentos confirmados</td><td class="r">6</td></tr>
+      <tr class="key"><td>Conversão final D+30</td><td>Matrículas ÷ compradores</td><td class="r">4% · 8</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 8 -->
+<section class="s" id="funil"><div class="wrap">
+  <div class="sh"><span class="num">08</span><h2>Funil operacional pós-compra</h2></div>
+  <div class="grid g2">
+    <div>
+      <h3 style="margin-top:0">Jornada do comprador</h3>
+      <ol class="steps">
+        <li><b>Compra:</b> ingresso, bump opcional e confirmação clara de data e duração.</li>
+        <li><b>Página de obrigado</b> com vídeo curto de Michael e botão do grupo.</li>
+        <li><b>Área de membros</b> com boas-vindas, preparação e link do grupo.</li>
+        <li><b>Fora do grupo?</b> Suporte faz contato individual. Automação só pela squad dona, com texto aprovado.</li>
+        <li><b>Contato humano:</b> SDR acolhe, entende a motivação e registra. Sem pitch antecipado.</li>
+        <li><b>Check-in em D-7</b> com o presente no final.</li>
+        <li><b>Preparação final:</b> reservar o dia, testar o Zoom.</li>
+        <li><b>Aplicação e fechamento</b> no dia e na semana seguinte.</li>
+      </ol>
+    </div>
+    <div class="grid" style="align-content:start">
+      <div class="card hl"><h4>Order bump · R$27</h4><p><b style="color:var(--cream)">Procrastinação Zero.</b> Curso gravado de 60 minutos que já existe, está fora de divulgação e combina com um avatar que adia a própria transição. Preço e acesso a confirmar.</p></div>
+      <div class="card hl"><h4>Presente do check-in</h4><p><b style="color:var(--cream)">Mapa da sua transição: tempo, recursos e próximo passo.</b> Checklist de uma página, a produzir. Alternativa: um áudio existente da Auto-Hipnoterapia Avançada.</p></div>
+      <div class="card"><h4>Time de fechamento</h4><p>Rafa lidera a sala. Dois closers dedicados, SDRs nas filas, suporte no acesso e financeiro na conciliação. Michael fica na aula e não vira recurso de cada fechamento. 40 calls somam cerca de 15 horas por closer na semana.</p></div>
+    </div>
+  </div>
+
+  <h3>Ordem de ligação</h3>
+  <ol class="steps">
+    <li><b>Aplicante com perfil que pagou R$97.</b></li>
+    <li><b>Aplicante com perfil sem taxa</b>, por intenção e horário.</li>
+    <li><b>Comprador com alto interesse</b> no check-in ou na live, ainda sem aplicação.</li>
+    <li><b>Ausentes interessados</b> e demais que autorizaram contato.</li>
+  </ol>
+
+  <h3>Follow-up de 30 dias</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Janela</th><th>Trabalho do time</th><th>Resultado esperado</th></tr></thead>
+    <tbody>
+      <tr><td>D0</td><td>Atendimento durante e após o pitch, fila organizada</td><td>Primeiras matrículas</td></tr>
+      <tr><td>D+1 a D+3</td><td>Calls pendentes, conversas com cônjuge, ausentes, devoluções</td><td>Resolver intenção quente</td></tr>
+      <tr><td>D+4 a D+7</td><td>Concluir as 40 calls, revisar objeções com Rafa</td><td>6 matrículas acumuladas</td></tr>
+      <tr><td>D+8 a D+14</td><td>Contato sobre a objeção real e o plano construído</td><td>Recuperar quem tem encaixe</td></tr>
+      <tr><td>D+15 a D+21</td><td>Prova compatível e convite para conversa</td><td>Avanço sem pressão diária</td></tr>
+      <tr><td>D+22 a D+30</td><td>Encerrar pendências e registrar motivo de não compra</td><td>8 matrículas e diagnóstico da coorte</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Até seis tentativas individuais por pessoa no período, parando na recusa. A janela de matrícula da turma de novembro precisa ser definida; se fechar antes de D+30, a projeção cai para 6.</p>
+</div></section>
+
+<!-- 9 -->
+<section class="s" id="cronograma"><div class="wrap">
+  <div class="sh"><span class="num">09</span><h2>Cronograma</h2></div>
+  <div class="grid g2">
+    <div class="tl">
+      <div class="tli"><div class="d">21 a 27/09 · Preparação</div><div class="h">Decisões e materiais</div><p>Michael e Rafa fecham produto, avatar, preço, data, taxa e teto. Pedir materiais ao Thiago.</p><div class="m">Não abrir venda com produto indefinido</div></div>
+      <div class="tli"><div class="d">28/09 a 04/10 · Semana 1</div><div class="h">Oferta e jornada</div><p>Página, checkout, área, grupo, primeiro lote de criativos. Abertura em 01/10 se estiver pronto.</p><div class="m">Mídia R$1.200 · copy aprovada antes de publicar</div></div>
+      <div class="tli"><div class="d">05 a 11/10 · Semana 2</div><div class="h">Primeira leitura</div><p>Ler os 20 primeiros compradores, revisar CPA e perfil, novas peças.</p><div class="m">Mídia R$2.100 · 60 ingressos</div></div>
+      <div class="tli"><div class="d">12 a 18/10 · Semana 3</div><div class="h">Escalar o que funciona</div><p>Ensaio de aula e pitch, agenda de bônus e closers.</p><div class="m">Mídia R$2.400 · 105 ingressos</div></div>
+      <div class="tli"><div class="d">19 a 25/10 · Semana 4</div><div class="h">Check-in durante o Legacy</div><p>Equipe opera; Michael no Legacy de 21 a 24/10, sem produção nova dele.</p><div class="m">Mídia R$2.400 · 150 ingressos</div></div>
+      <div class="tli ev"><div class="d">31/10 · Sábado</div><div class="h">Workshop ao vivo</div><p>Últimos ingressos na semana, revisão técnica e ensaio comercial.</p><div class="m">Mídia R$2.700 · 200 ingressos, 160 presentes</div></div>
+      <div class="tli"><div class="d">01 a 07/11 · Semana pós</div><div class="h">Fechamento</div><p>Calls, matrículas, devoluções, bônus e onboarding.</p><div class="m">40 calls · 6 matrículas</div></div>
+      <div class="tli"><div class="d">08 a 30/11</div><div class="h">Coorte D+30</div><p>Follow-up, apuração e decisão do próximo ciclo.</p><div class="m">8 matrículas</div></div>
+    </div>
+    <div>
+      <h3 style="margin-top:0">Agenda do dia · 31/10</h3>
+      <div class="tw"><table style="min-width:0">
+        <thead><tr><th>Horário</th><th>Entrega</th></tr></thead>
+        <tbody>
+          <tr><td>10h</td><td>Abertura, critérios e objetivo do dia</td></tr>
+          <tr><td>10h30</td><td>Exercícios de direção de carreira</td></tr>
+          <tr><td>12h</td><td>Almoço</td></tr>
+          <tr><td>13h</td><td>Experiência prática conduzida por Michael</td></tr>
+          <tr><td>14h30</td><td>Construção do plano individual de transição</td></tr>
+          <tr><td>15h30</td><td>Intervalo e ponte para a oferta</td></tr>
+          <tr class="key"><td>16h</td><td>Pitch e aplicações; comercial começa a ligar</td></tr>
+          <tr><td>17h</td><td>Dúvidas e consolidação do plano</td></tr>
+          <tr><td>18h30</td><td>Fechamento e próximos passos</td></tr>
+        </tbody>
+      </table></div>
+      <p class="small muted">Horário de Brasília. Confirmar equipe comercial até 20h, que é o limite de atendimento prometido nas regras de copy.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 10 -->
+<section class="s" id="fase2"><div class="wrap">
+  <div class="sh"><span class="num">10</span><h2>Fase 2 · lives gratuitas para público frio</h2><span class="for traf">Para o gestor</span></div>
+  <div class="grid g2">
+    <div>
+      <p>A "estratégia difícil" do Thiago resolve o esgotamento do público quente. Live gratuita semanal de uma hora no Zoom, só para frio, com autoridade, entrega e três depoimentos. Antes do presente final, convite para o workshop em <b>10x de R$3</b> enquanto a live acontece. Ele relatou 70% dos presentes comprando ingresso.</p>
+      <p class="small muted">Nunca mostrar live gratuita e workshop para a mesma pessoa. Duas rotas separadas, com exclusões cruzadas.</p>
+    </div>
+    <div class="card"><h4>Quando entrar</h4><ul class="list">
+      <li>Depois de validar a primeira coorte, no 2º ou 3º ciclo.</li>
+      <li>Comparecimento de pelo menos 75% e conversão de pelo menos 3%.</li>
+      <li>Entrega comportando novos alunos e leitura D+30 disponível.</li>
+      <li>Planejar com 30% de conversão, não 70%: cerca de 223 presentes por live em três edições para vender 200 ingressos.</li>
+      <li>Atenção: 10x R$3 somam R$30, não R$27. Validar no checkout.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 11 -->
+<section class="s" id="escada"><div class="wrap">
+  <div class="sh"><span class="num">11</span><h2>O diagnóstico do Thiago sobre a escada</h2></div>
+  <div class="prose">
+    <p>"O buraco é mais embaixo." Thiago disse que não sabe explicar Legacy, Aliança nem Black, só a Formação. Rafa confirmou o funil invertido: a receita principal vem do Black. Ele separa os produtos dele por um critério objetivo, faturamento, e vende resultado, não o como. A lição transferível é definir o estágio do cliente antes da oferta.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Necessidade principal</th><th>Produto</th><th>Papel</th></tr></thead>
+    <tbody>
+      <tr><td>Iniciar carreira terapêutica</td><td>Formação/Pós, ou Master conforme encaixe</td><td>Destino do 1º workshop</td></tr>
+      <tr><td>Consolidar e crescer como terapeuta</td><td>Black</td><td>Próximo degrau, ou evento futuro próprio</td></tr>
+      <tr><td>Transformação pessoal experiencial</td><td>Legacy</td><td>Rota própria, inclusive para quem não quer profissão</td></tr>
+      <tr><td>Empresário OMNI maduro</td><td>Aliança de Ouro</td><td>Convite; faturamento acima de R$100 mil por mês</td></tr>
+      <tr><td>Dor e autocuidado</td><td>HypnoFlash no Reset da Dor</td><td>Rota B2C, não qualifica para carreira</td></tr>
+      <tr><td>Desenvolvimento pessoal inicial</td><td>Auto-Hipnoterapia Avançada</td><td>Entrada e preparação</td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h4>Ações estruturais</h4><ul class="list">
+      <li>Uma ficha por oferta: para quem, problema, entrega, critério, preço e próximo passo.</li>
+      <li>Consolidar Formação, Master e Pós numa nomenclatura que o comercial explique sem contradição.</li>
+      <li>Segmentar o CRM por intenção e estágio, não por origem.</li>
+      <li>Uma promessa por evento; temas alternados mês a mês.</li>
+    </ul></div>
+    <div class="card"><h4>Vender autoridade e resultado</h4><ul class="list">
+      <li><b>Thiago Kiss:</b> R$650 mil no mês após o Legacy. Autorização verbal a documentar; não é case da Pós.</li>
+      <li><b>Roberto Monfort:</b> melhor aderência ao avatar de transição.</li>
+      <li><b>"Catuaba":</b> depoimento original e autorização a localizar.</li>
+      <li>Narrativas por avatar, cada uma com um case: psicólogo, holístico, mãe, 35+.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- 12 -->
+<section class="s" id="riscos"><div class="wrap">
+  <div class="sh"><span class="num">12</span><h2>Riscos e pontos de atenção</h2></div>
+  <div class="grid g3">
+    <div class="card"><h4>Copy sem aprovação</h4><p>Todo texto para lead, mensagem em volume e template precisa de OK explícito de Rafa, Michael, Fernanda ou Julia, com registro. Aprovar a estratégia não aprova a redação.</p></div>
+    <div class="card"><h4>Domínios de squads</h4><p>Templates Meta ficam com @template-chief, automações n8n com @n8n-chief. Vídeo e dashboard também têm donos. Este plano só registra dependências.</p></div>
+    <div class="card"><h4>Promessa de saúde ou renda</h4><p>Nada de cura, habilitação em um dia ou renda garantida. Cases são individuais.</p></div>
+    <div class="card"><h4>Preço divergente</h4><p>A fonte única é PRECOS-VIGENTES. Documentos da Pós divergem em encontros e datas; fechar uma ficha final antes da copy.</p></div>
+    <div class="card"><h4>Taxa e caixa</h4><p>Taxa "reembolsável" tem de ser devolvida de fato. Contrato não é caixa; medir recebido, atraso e estorno.</p></div>
+    <div class="card"><h4>Dependência de Michael</h4><p>Legacy de 21 a 24/10 cai no meio da venda. Produzir antes e limitar bônus que dependam dele.</p></div>
+    <div class="card"><h4>Lead barato e errado</h4><p>Não otimizar só CPA. Ler check-in e conversas para medir intenção profissional.</p></div>
+    <div class="card"><h4>Checkout e acesso</h4><p>Testar compra, bump, acesso, grupo e reembolso de ponta a ponta antes de abrir.</p></div>
+    <div class="card"><h4>Materiais do Thiago</h4><p>Pedir autorização para modelar a estrutura. Adaptar com ativos OMNI, sem copiar marca ou página.</p></div>
+  </div>
+</div></section>
+
+<!-- 13 -->
+<section class="s" id="proximos"><div class="wrap">
+  <div class="sh"><span class="num">13</span><h2>Próximos passos</h2></div>
+  <div class="grid g2">
+    <div>
+      <h3 style="margin-top:0">Checklist de decisão</h3>
+      <ul class="check">
+        <li>Aprovar um produto, um avatar e uma promessa.</li>
+        <li>Confirmar que a Pós pode ser ofertada e entregue; alinhar com Master e FPH.</li>
+        <li>Fechar preço, parcelamento, garantias e janela de matrícula.</li>
+        <li>Validar 31/10, escala comercial, Zoom e conflito com o Legacy.</li>
+        <li>Gestor levanta tamanho da base quente e CPA histórico, sem mexer em campanhas.</li>
+        <li>Aprovar ou ajustar o teto de R$10.800.</li>
+        <li>Testar o nome favorito com leads reais.</li>
+        <li>Localizar depoimentos e autorizações de Roberto, Elizabete, Thiago e "Catuaba".</li>
+        <li>Confirmar Procrastinação Zero como bump.</li>
+        <li>Confirmar bônus, agendas e licenças.</li>
+        <li>Definir regra da taxa e responsável financeiro.</li>
+        <li>Definir plataforma de ingresso e área de membros; verificar ManyChat.</li>
+        <li>Nomear closers, SDRs, suporte e dono do relatório.</li>
+        <li>Aprovar toda copy antes de publicar.</li>
+        <li>Agendar revisões em D+7 e D+30.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-top:0">O que pedir ao Thiago</h3>
+      <div class="tw"><table style="min-width:0">
+        <tbody>
+          <tr><td>Gravação do workshop com o horário do pitch</td></tr>
+          <tr><td>Slides, pitch e condições escritas da oferta</td></tr>
+          <tr><td>Página de captura, obrigado, checkout, área e vídeo de boas-vindas</td></tr>
+          <tr><td>Formulários de check-in e de aplicação</td></tr>
+          <tr><td>Política exata da taxa de R$97</td></tr>
+          <tr><td>Regulamento do tsunami e vídeo pré-pitch</td></tr>
+          <tr><td>Criativos com gasto, CPA e perfil de cada anúncio</td></tr>
+          <tr><td>Relatório conciliado de cada lançamento: ingressos, bump, mídia, vendas e estornos</td></tr>
+          <tr><td>Vendas separadas em D0, D+7 e D+30, incluindo ausentes</td></tr>
+          <tr><td>Tamanho da base quente dele e segmentações</td></tr>
+          <tr><td>Tamanho do time comercial e volume de calls</td></tr>
+          <tr><td>Dados das lives frias</td></tr>
+          <tr><td>Autorização escrita do depoimento e números realizados</td></tr>
+          <tr><td>Revisão do avatar e do nome antes da abertura</td></tr>
+          <tr><td>Reunião mensal de acompanhamento</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+  <div class="card hl" style="margin-top:24px"><h4>Decisão pedida nesta reunião</h4><p>Aprovar a direção do piloto e fechar as pendências de oferta e capacidade. Com isso resolvido, a execução começa em 28/09 mirando 200 compradores. Aprovar este plano não publica copy nem autoriza gasto.</p></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>OMNI Hypnosis Training Center Brasil · planejamento interno, não distribuir fora da equipe.</span>
+  <span>Fontes: reunião com Thiago Kiss em 27/08/2026, preços vigentes, offerbooks e FAQ da Pós, depoimentos e registro de capacidades do repositório. Análise feita pelo Codex e revisada no Claude Code.</span>
+</div></footer>
+</body>
+</html>
