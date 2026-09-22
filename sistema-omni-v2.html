@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="omni-locked">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1'){var H0=document.documentElement;H0.className=H0.className.replace(/\s*omni-locked/,'');return;}}catch(e){}
+  var H=document.documentElement;
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistema OMNI v2</title>
+<meta name="description" content="Projeto do Sistema OMNI: CRM de marketing e vendas ligado ao portal, ao CS e ao financeiro. Decisões fechadas em 22/09/2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --dark:#0D0D0D; --elev:#141414; --line:rgba(200,168,75,.16);
+  --gold:#C8A84B; --gold-l:#E8C86A; --gold-d:#9A7A2E;
+  --cream:#F5F0E8; --cream70:rgba(245,240,232,.70); --cream50:rgba(245,240,232,.50);
+  --ok:#3FA66F; --warn:#D9A036; --bad:#C2544B; --info:#4A8FB5; --teal:#2A9D8F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--cream);font-family:Inter,system-ui,sans-serif;font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 0}
+.hin{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bn{font-family:Oswald,sans-serif;font-weight:700;color:var(--gold);letter-spacing:5.5px;font-size:14px;text-transform:uppercase}
+.sub{font-size:10.5px;color:var(--cream50);text-transform:uppercase;letter-spacing:2.6px;border-left:1px solid var(--line);padding-left:14px}
+nav{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
+nav a{color:var(--cream50);text-decoration:none;font-size:11px;letter-spacing:1.6px;text-transform:uppercase}
+nav a:hover{color:var(--gold)}
+main{max-width:1100px;margin:0 auto;padding:0 20px 100px}
+.kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-d);margin:64px 0 10px}
+h1{font-family:Oswald,sans-serif;font-weight:600;font-size:clamp(32px,5.5vw,54px);line-height:1.1;margin:0 0 16px;letter-spacing:-.4px}
+h1 em{font-style:normal;color:var(--gold)}
+.lede{font-size:18px;color:var(--cream70);max-width:70ch;margin-bottom:10px}
+.meta{font-size:12px;color:var(--cream50);letter-spacing:1.6px;text-transform:uppercase;margin-bottom:30px}
+h2{font-family:Oswald,sans-serif;font-weight:600;font-size:26px;margin:0 0 6px;color:var(--gold);letter-spacing:.4px}
+.h2sub{color:var(--cream50);font-size:14.5px;margin-bottom:22px;max-width:74ch}
+h3{font-family:Oswald,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;color:var(--cream);letter-spacing:.3px}
+p{margin-bottom:12px;max-width:76ch}
+strong{font-weight:600;color:var(--cream)}
+section{padding-top:8px}
+.grid{display:grid;gap:14px;margin:18px 0}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--dark);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.card.key{border-color:var(--gold);background:linear-gradient(180deg,rgba(200,168,75,.08),rgba(200,168,75,.02))}
+.card p{font-size:14px;color:var(--cream70);margin-bottom:0}
+.card .n{font-family:Oswald,sans-serif;font-size:34px;color:var(--gold);line-height:1;margin-bottom:6px}
+.card .lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cream50);margin-bottom:8px}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;vertical-align:middle;margin-left:6px}
+.t-ok{background:rgba(63,166,111,.15);color:var(--ok);border:1px solid rgba(63,166,111,.35)}
+.t-warn{background:rgba(217,160,54,.13);color:var(--warn);border:1px solid rgba(217,160,54,.35)}
+.t-bad{background:rgba(194,84,75,.14);color:var(--bad);border:1px solid rgba(194,84,75,.38)}
+.t-info{background:rgba(74,143,181,.13);color:var(--info);border:1px solid rgba(74,143,181,.35)}
+.t-gold{background:rgba(200,168,75,.13);color:var(--gold);border:1px solid rgba(200,168,75,.4)}
+.wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+th{background:var(--elev);color:var(--gold);font-family:Oswald,sans-serif;font-weight:400;text-align:left;padding:11px 14px;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid rgba(245,240,232,.06);color:var(--cream70);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--cream)}
+ul{margin:0 0 12px 20px;max-width:76ch}
+li{margin-bottom:7px;color:var(--cream70)}
+li strong{color:var(--cream)}
+.quote{border-left:3px solid var(--gold);padding:14px 22px;margin:24px 0;background:var(--dark);border-radius:0 10px 10px 0;font-size:18px;color:var(--cream);font-weight:300;max-width:80ch}
+.chain{display:grid;gap:0;margin:22px 0}
+.step{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid rgba(245,240,232,.06)}
+.step:last-child{border-bottom:none}
+.step .num{font-family:Oswald,sans-serif;font-size:30px;color:var(--gold);line-height:1}
+.step .num small{display:block;font-size:10px;letter-spacing:2px;color:var(--cream50);text-transform:uppercase;margin-top:4px}
+.step h3{margin-bottom:4px}
+.step p{font-size:14px;color:var(--cream70);margin-bottom:4px}
+.arrow{color:var(--gold-d);font-family:ui-monospace,Menlo,monospace;font-size:13px;margin:6px 0 0 0;line-height:1.9}
+.phase{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid rgba(245,240,232,.06)}
+.phase:last-child{border-bottom:none}
+.phase .when{font-family:Oswald,sans-serif;color:var(--gold);font-size:18px;line-height:1.2}
+.phase .when small{display:block;color:var(--cream50);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;margin-top:6px;font-family:Inter,sans-serif}
+.phase h3{margin-bottom:6px}
+.phase p{font-size:14px;margin-bottom:6px}
+.phase .rm{font-size:13px;color:var(--ok)}
+.phase .dep{font-size:13px;color:var(--warn)}
+.sys{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:18px 0}
+.sys .card{position:relative}
+.sys .card.core{border-color:var(--gold)}
+.sys .role{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;color:var(--cream70);background:var(--elev);border:1px solid var(--line);border-radius:10px;padding:18px 20px;overflow-x:auto;line-height:1.8;margin:18px 0;white-space:pre}
+.code b{color:var(--gold);font-weight:600}
+footer{border-top:1px solid var(--line);padding:40px 20px;text-align:center;color:var(--cream50);font-size:12px;letter-spacing:1.4px;text-transform:uppercase;line-height:2}
+footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
+@media (max-width:640px){
+  .step{grid-template-columns:48px 1fr;gap:12px}
+  .phase{grid-template-columns:1fr;gap:6px}
+  nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hin">
+    <span class="bn">OMNI Brasil</span>
+    <span class="sub">Sistema OMNI · Projeto v2</span>
+    <nav>
+      <a href="#porque">Por quê</a><a href="#principios">Princípios</a><a href="#sistemas">Sistemas</a><a href="#cadeia">Cadeia da venda</a><a href="#fases">Fases</a><a href="#decisoes">Decisões</a><a href="#pendencias">Pendências</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="kicker">Projeto · 22 de setembro de 2026 · Dona: Rafa Mendes</div>
+<h1>Sistema OMNI v2: <em>do anúncio ao aluno,</em> numa pessoa só</h1>
+<p class="lede">CRM de marketing e vendas como módulo do OMNI OS, ligado ao portal (entrega), ao CS e ao financeiro. Decisões fechadas em entrevista de 22/09. Substitui o projeto de migração de 18/09.</p>
+<div class="meta">Status: aprovado pela Rafa · Primeira entrega: 1 a 2 semanas · Pipedrive desligado: novembro</div>
+
+<div class="grid g4">
+  <div class="card key"><div class="lbl">Prioridade nº 1</div><div class="n">Atribuição</div><p>Ver qual estratégia gera qual venda e realocar verba de tráfego com dado real.</p></div>
+  <div class="card"><div class="lbl">Primeira entrega</div><div class="n">1–2 sem</div><p>Espinha de dados, registro de venda, link de pagamento e dashboard lendo do banco novo.</p></div>
+  <div class="card"><div class="lbl">Economia</div><div class="n">R$ 3 mil</div><p>Por mês, quando o Pipedrive for cancelado. Consequência, não objetivo.</p></div>
+  <div class="card"><div class="lbl">Risco nº 1</div><div class="n">Adoção</div><p>Cada fase tira uma tarefa manual de alguém e tem data para a planilha antiga morrer.</p></div>
+</div>
+
+<div class="quote">O aluno compra, recebe o link, paga, recebe o contrato, assina e já está no portal, com lembretes por produto. A empresa vê a mesma pessoa do anúncio ao caixa, num lugar só, e sabe qual estratégia gerou qual venda.</div>
+
+<!-- POR QUE -->
+<section id="porque">
+<div class="kicker">01</div>
+<h2>Por que a v2 existe</h2>
+<p class="h2sub">A v1 tratava o projeto como "migração do Pipedrive". A entrevista de 22/09 mudou três coisas.</p>
+<div class="grid g3">
+  <div class="card"><h3>O objetivo não é sair do Pipedrive</h3><p>É voltar a enxergar anúncio → lead → venda. Essa visão existia com Pipedrive + dashboard e sumiu quando o comercial foi para o CRM da Toca o Sino, que não carrega UTM, valor, produto nem pagamento. O Pipedrive sai como consequência.</p></div>
+  <div class="card"><h3>O CRM é um módulo, não um sistema ao lado</h3><p>Vive dentro do OMNI OS, no mesmo banco e no mesmo cadastro de pessoa que o financeiro. O portal (entrega) fica separado e conversa pela identidade única.</p></div>
+  <div class="card"><h3>Desenho integral, construção por etapas</h3><p>O modelo de dados nasce completo. Telas e automações entram em fases, cada uma tirando uma tarefa manual. Antídoto para o financeiro que nunca chegou à produção, o CS em mock e o PRD que ficou no papel.</p></div>
+</div>
+</section>
+
+<!-- PRINCIPIOS -->
+<section id="principios">
+<div class="kicker">02</div>
+<h2>Seis princípios de desenho</h2>
+<p class="h2sub">Fechados com a Rafa. Toda decisão técnica daqui em diante responde a eles.</p>
+<div class="grid g2">
+  <div class="card key"><h3>P1 · O nosso CRM é o dono dos dados</h3><p>A Toca o Sino é uma forma de operá-lo, não a única. O funil completo (etapas, kanban, ficha, atividades, notas, motivo de perda) é modelado como se o time fosse interno. Cada lead tem o campo "operador": externo ou interno. <strong>Trocar de equipe é virar essa chave.</strong> Coexistência de closer interno com a Toca o Sino também funciona.</p></div>
+  <div class="card"><h3>P2 · Uma pessoa só</h3><p>Chave principal: telefone no formato internacional normalizado (código do país sempre, regra do 9º dígito só no Brasil). Segunda chave: e-mail. Divergência cai em fila de merge assistido, nunca em duplicata silenciosa. Liga lead, cliente no OS e aluno no portal.</p></div>
+  <div class="card"><h3>P3 · Nada manual na cadeia da venda</h3><p>Link de pagamento gerado pelo sistema, confirmação por webhook, contrato por webhook, acesso por webhook. Exceção vai para fila com dono, não para planilha.</p></div>
+  <div class="card"><h3>P4 · Cada fase tira uma tarefa manual</h3><p>E tem data para a planilha antiga morrer. Fase que só adiciona tela não entra. O sistema faz o trabalho, não pede trabalho.</p></div>
+  <div class="card"><h3>P5 · Permissão por módulo, ação e campo</h3><p>Num lugar só. CS vê a venda (produto, closer, condição) e não vê DRE, caixa nem contas. Closer externo vê só a tela de registro e os próprios leads.</p></div>
+  <div class="card"><h3>P6 · Regras da casa continuam</h3><p>Sem n8n. Segredos no vault. Mensagem automática para lead ou aluno só com texto aprovado. Dashboard, templates Meta e vídeo pelas squads donas.</p></div>
+</div>
+</section>
+
+<!-- SISTEMAS -->
+<section id="sistemas">
+<div class="kicker">03</div>
+<h2>Os sistemas e o papel de cada um</h2>
+<p class="h2sub">Três peças prontas ou pela metade, que hoje não conversam. O elo é a pessoa.</p>
+<div class="sys">
+  <div class="card core"><div class="role">Sistema da empresa</div><h3>OMNI OS</h3><p>Login, papéis, tarefas, financeiro (Julia/Ítalo) e agora o <strong>módulo CRM</strong> e o <strong>módulo CS</strong>. No ar em os.omnihypnosis.com.br. Financeiro vazio em produção; código de 19/09 fora do git.</p></div>
+  <div class="card"><div class="role">Entrega</div><h3>Portal do OMNIterapeuta</h3><p>Aluno, turmas, Black, Sentinela, acesso autorizado por e-mail. O mais maduro dos três. Já é um CRM de pós-venda. Servidor e banco próprios.</p></div>
+  <div class="card"><div class="role">Mesa do comercial externo</div><h3>CRM Toca o Sino</h3><p>Leitura liberada em 18/09. Sem valor, produto, pagamento, webhook, motivo de perda nem notas na leitura. Alimenta o nosso por espelho.</p></div>
+  <div class="card"><div class="role">Entrada</div><h3>lead-intake</h3><p>LPs, chat de qualificação, agenda, réguas. Intacto. Passa a escrever no schema crm além do Pipedrive até o cutover.</p></div>
+  <div class="card"><div class="role">Painéis</div><h3>Dashboard OMNI</h3><p>Boota no Pipedrive hoje. Troca de motor pela squad dash-omni. Passa a viver embutido no OS.</p></div>
+  <div class="card"><div class="role">Sai</div><h3>Pipedrive <span class="tag t-bad">cancelar</span></h3><p>Token é o da Rafa. Histórico (incluindo o fluxo de etapas) exportado antes de qualquer redução de plano.</p></div>
+</div>
+
+<h3 style="margin-top:28px">Modelo de dados (nasce completo na fase 0)</h3>
+<div class="code"><b>core.pessoas</b>        identidade única · telefones[] E.164 · emails[] · país · consentimento LGPD · quem_indicou → pessoa
+                    ponteiros: pipedrive_id · toca_sino_id · portal_student_id · conta_azul_id
+<b>crm.lead</b>            pessoa · UTMs completas · canal · indicação · funil · etapa · operador (externo|interno) · dono
+<b>crm.lead_evento</b>     linha do tempo: cadastro · chat · agendamento · no-show · etapa · nota · etiqueta · perda (motivo)
+<b>crm.etapa_mapa</b>      etapa Toca o Sino ↔ etapa nossa
+<b>crm.venda</b>           produto · valores · condição · closer · turma/data (editável pelo CS) · passagem_cs · próximo produto
+                    status: registrada → aguardando_pagamento → confirmada → contrato_enviado → assinado → acesso | desfeita
+<b>crm.pagamento_link</b>  gateway · url · valor · parcelas · webhook
+<b>crm.contrato</b>        modelo por produto · ZapSign · enviado · assinado · vigia 12h úteis
+<b>crm.oportunidade</b>    cliente · produto seguinte · kanban de reaquecimento
+<b>crm.campanha_metrica</b> snapshot diário Meta/Google por anúncio
+<b>crm.calendario_omni</b> turmas e eventos por produto (fonte: portal)
+<b>crm.evento_sistema</b>  tudo que disparou · <b>crm.fila_excecao</b>  o que precisa de uma pessoa</div>
+</section>
+
+<!-- CADEIA -->
+<section id="cadeia">
+<div class="kicker">04</div>
+<h2>A cadeia da venda</h2>
+<p class="h2sub">Coração do projeto. É o fluxo de hoje, automatizado, com os gatilhos onde a Rafa definiu.</p>
+<div class="chain">
+  <div class="step">
+    <div class="num">1<small>registro</small></div>
+    <div>
+      <h3>Closer registra a venda</h3>
+      <p>Via integração com o CRM da Toca o Sino (Matheus topou). Plano B: tela nossa. Meio-termo: botão deles abre a tela nossa. Campos: pessoa, produto, valor, condição, <strong>turma e data</strong> do calendário OMNI, <strong>passagem para o CS</strong> (obrigatória), próximo produto recomendado.</p>
+      <div class="arrow">→ sistema gera o <b>link de pagamento personalizado</b> (Cielo primeiro) e entrega ao closer. Nada mais dispara aqui.</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">2<small>pagamento</small></div>
+    <div>
+      <h3>Pagamento confirmado por webhook</h3>
+      <p>Casa pelo link ou pela pessoa (telefone ou e-mail normalizado). Sem par, vai para a fila de exceção com dono.</p>
+      <div class="arrow">→ venda confirmada · lead vira cliente · entrega e Ítalo avisados · dashboard atualizado<br>→ <b>contrato enviado na hora</b> (ZapSign, modelo por produto, WhatsApp + e-mail)<br>→ oportunidade do próximo produto criada no kanban de reaquecimento</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3<small>assinatura</small></div>
+    <div>
+      <h3>Contrato assinado por webhook</h3>
+      <p>Mesmo mecanismo de acesso autorizado por e-mail que o portal já usa.</p>
+      <div class="arrow">→ <b>acesso liberado no portal</b> · onboarding WhatsApp + e-mail (copy aprovada) · lembretes por produto e turma</div>
+    </div>
+  </div>
+</div>
+<div class="grid g3">
+  <div class="card"><h3>Vigias</h3><p>Contrato sem assinatura em <strong>12 horas úteis</strong>: alerta urgente. Pagamento que não caiu: closer. "Ganho" no espelho sem registro em 24h: Rafa. Pagamento sem venda: fila de exceção.</p></div>
+  <div class="card"><h3>Venda desfeita</h3><p>Reembolso, cancelamento, chargeback. Pedido por e-mail do CS, registrado no sistema com a documentação. Cascata reversa: bloqueia acesso, tira da turma, avisa financeiro e CS.</p></div>
+  <div class="card"><h3>Gateways</h3><p><strong>Cielo:</strong> link e webhook (portal já integra). <strong>Pagar.me:</strong> link e webhook. <strong>Greenn:</strong> webhook; link por API a confirmar. <strong>Eduzz:</strong> só oferta cadastrada lá.</p></div>
+</div>
+</section>
+
+<!-- FASES -->
+<section id="fases">
+<div class="kicker">05</div>
+<h2>Fases e prazos reais</h2>
+<p class="h2sub">Código é questão de dias. O calendário é ditado por dependências humanas e por gates de validação.</p>
+<div class="chain">
+  <div class="phase">
+    <div class="when">Semana 1<small>F0 · Fundação</small></div>
+    <div>
+      <h3>Sanear o OS e erguer a espinha</h3>
+      <p>Código fora do git, baseline de migrations, middleware, permissões centralizadas. Schema crm completo. Identidade única e normalização de telefone. ETL histórico do Pipedrive com fluxo por deal. Espelho do Toca o Sino com mapa de etapas. Regra de WhatsApp oficial por etapa na régua. Job diário Meta/Google.</p>
+      <div class="rm">Tira de manual: a régua volta a falar com os 190 leads mudos. Histórico deixa de ser refém do Pipedrive.</div>
+      <div class="dep">Depende de: nada externo.</div>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="when">Semana 2<small>F1 · Atribuição e venda</small></div>
+    <div>
+      <h3>Registrar Venda, link de pagamento, Visão Comercial, dashboard no banco novo</h3>
+      <p>Tela de registro + integração ou botão da Toca o Sino. Quick-add para indicação e social selling. Link Cielo e webhook. Kanban em modo leitura. Serviço novo no dashboard em dupla leitura com o Pipedrive.</p>
+      <div class="rm">Tira de manual: Ítalo deixa de casar pagamento por e-mail. Rafa realoca verba com dado real no início de outubro.</div>
+      <div class="dep">Depende de: Matheus (botão, motivo de perda, notas). Squad dash-omni.</div>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="when">Semanas 3–4<small>F2 · Cascata</small></div>
+    <div>
+      <h3>Contrato, acesso, onboarding, vigias, próximo produto</h3>
+      <p>ZapSign no pagamento, portal na assinatura, WhatsApp e e-mail com copy aprovada, lembretes por produto, vigia de 12h úteis, oportunidade de reaquecimento.</p>
+      <div class="rm">Tira de manual: Fabi deixa de montar contrato. Michael deixa de validar contrato de tabela. Elisa deixa de liberar acesso à mão.</div>
+      <div class="dep">Depende de: links de contrato por produto e copies (Rafa).</div>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="when">Semanas 5–6<small>F3 · CS no sistema</small></div>
+    <div>
+      <h3>Módulo CS dentro do OS</h3>
+      <p>Absorve o omni-cs. Ficha com passagem do closer e notas espelhadas, turma editável, kanban de reaquecimento, venda desfeita, disparos por etapa via AURA, e-mail pelo closer ou ActiveCampaign por regra de volume.</p>
+      <div class="rm">Tira de manual: planilhas da Elisa viram backup com data.</div>
+      <div class="dep">Depende de: passagem com a Julia (1 ou 2 sessões).</div>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="when">Semanas 6–8<small>F4 · Financeiro</small></div>
+    <div>
+      <h3>Venda confirmada alimenta o módulo da Julia <span class="tag t-info">não é prioridade zero</span></h3>
+      <p>Vendas e contas a receber, comissão do closer e NF na cascata. Dump do banco da Julia na VPS.</p>
+      <div class="rm">Tira de manual: planilha "Recebimento OMNI" alimentada pelo sistema; substituída quando o Ítalo confiar.</div>
+      <div class="dep">Depende de: Ítalo. Julia (dump).</div>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="when">Novembro<small>F5 · Pipedrive fora</small></div>
+    <div>
+      <h3>Migrar leituras restantes, congelar, exportar, cancelar</h3>
+      <p>Vagas da agenda, dono do deal, monitores e cadências para job próprio. Backup final. Cancelamento.</p>
+      <div class="rm">Tira de manual: R$ 3 mil por mês.</div>
+      <div class="dep">Gate: números do dashboard batendo por 2 ciclos.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DECISOES -->
+<section id="decisoes">
+<div class="kicker">06</div>
+<h2>Decisões fechadas em 22/09</h2>
+<p class="h2sub">Vinte decisões. As seis que o inventário do Michael apontou estão respondidas.</p>
+<div class="wrap"><table>
+<tr><th>#</th><th>Decisão</th><th>Resposta</th></tr>
+<tr><td>D1</td><td>Prioridade número um</td><td>Ver qual estratégia gera qual venda, para realocar verba de tráfego</td></tr>
+<tr><td>D2</td><td>Caminho</td><td>Modelo de dados completo agora, construção por etapas</td></tr>
+<tr><td>D3</td><td>Onde o CRM vive</td><td><strong>Módulo do omni-os</strong>, banco omni_os, schema crm</td></tr>
+<tr><td>D4</td><td>Identidade única</td><td>Telefone internacional normalizado + e-mail + merge assistido</td></tr>
+<tr><td>D5</td><td>Quem registra a venda</td><td>Closer, via integração com a Toca o Sino. Plano B: tela nossa. Meio-termo: botão deles abre a nossa tela</td></tr>
+<tr><td>D6</td><td>Pagamento</td><td>Link gerado pelo sistema (Cielo primeiro), webhook confirma, exceções em fila. Nada manual</td></tr>
+<tr><td>D7</td><td>Cadência</td><td>Link no registro → contrato no pagamento → acesso na assinatura. Alerta em 12h úteis</td></tr>
+<tr><td>D8</td><td>Passagem para o CS</td><td>Campo obrigatório no registro + notas espelhadas</td></tr>
+<tr><td>D9</td><td>Etapa do lead</td><td>Até 15 min de atraso aceitável. Webhook é melhoria</td></tr>
+<tr><td>D10</td><td>Venda para cliente</td><td>Toda venda gera oportunidade do próximo produto em kanban de reaquecimento</td></tr>
+<tr><td>D11</td><td>Venda desfeita</td><td>Por e-mail do CS, registrada, cascata reversa</td></tr>
+<tr><td>D12</td><td>Motivo de perda</td><td>Obrigatório. Pedir ao Matheus e espelhar</td></tr>
+<tr><td>D13</td><td>Indicação</td><td>"Quem indicou" ligado pelo WhatsApp do cliente. Base da premiação futura</td></tr>
+<tr><td>D14</td><td>Turma e data</td><td>Escolhidas no registro, do calendário OMNI. CS pode alterar</td></tr>
+<tr><td>D15</td><td>Login único</td><td>Agora não. Cada sistema com o seu</td></tr>
+<tr><td>D16</td><td>Comissão e NF</td><td>Módulo financeiro, com o Ítalo. Não é prioridade zero</td></tr>
+<tr><td>D17</td><td>Finanças pessoais do Michael</td><td>Fora do projeto e fora da OMNI</td></tr>
+<tr><td>D18</td><td>Troca de equipe comercial</td><td>Possível por chave (P1). Telas de escrita do kanban em fase própria, antecipável</td></tr>
+<tr><td>D19</td><td>Decisora</td><td>Rafa. Michael opina em detalhes de portal e OS</td></tr>
+<tr><td>D20</td><td>Os 190 leads com a régua muda</td><td>Causa provável: negócio criado sem dono recebe o dono do token (Rafa). Solução na F0: WhatsApp oficial por regra, não por dono</td></tr>
+</table></div>
+</section>
+
+<!-- PENDENCIAS -->
+<section id="pendencias">
+<div class="kicker">07</div>
+<h2>Pendências externas: pedir hoje</h2>
+<p class="h2sub">Tudo que não depende delas começa agora.</p>
+<div class="wrap"><table>
+<tr><th>Para quem</th><th>O quê</th><th>Trava</th></tr>
+<tr><td><strong>Matheus</strong> (Toca o Sino)</td><td>Data para: botão "venda feita" ou integração; motivo de perda; etiquetas e notas na leitura; webhook de etapa (melhoria)</td><td>F1</td></tr>
+<tr><td><strong>Julia</strong></td><td>Dump do Postgres, pasta financeiro-italo, tokens Conta Azul, de-para do DRE, trabalho local não commitado. 1 ou 2 sessões</td><td>F3 / F4</td></tr>
+<tr><td><strong>Rafa</strong></td><td>Links de contrato ZapSign por produto. Copies de onboarding para aprovação</td><td>F2</td></tr>
+<tr><td><strong>Greenn</strong></td><td>Confirmar geração de link por API</td><td>F1</td></tr>
+<tr><td><strong>Ítalo</strong></td><td>Conferir conta do Pagar.me (chave do vault vs chave do app)</td><td>F1</td></tr>
+<tr><td><strong>Michael</strong></td><td>Papel da Rafa no OS para construir; ambiente próprio vs produção; opinião em detalhes de portal e OS</td><td>F0</td></tr>
+</table></div>
+
+<h3 style="margin-top:28px">Riscos e mitigação</h3>
+<div class="grid g2">
+  <div class="card key"><h3>Time interno não adota <span class="tag t-bad">nº 1</span></h3><p>Elisa, Fabi, Ítalo, Jivago, Julia. Mitigação: P4 (cada fase tira uma tarefa manual, planilha antiga morre com data), cobrança da Rafa e do Michael, sistema que faz o trabalho em vez de pedir.</p></div>
+  <div class="card"><h3>Venda sem registro</h3><p>Vigia sobre "ganho" no espelho e sobre pagamento sem venda. Treinamento no kickoff da F1.</p></div>
+  <div class="card"><h3>Matheus atrasa</h3><p>Plano B pronto: tela nossa. A F1 não espera.</p></div>
+  <div class="card"><h3>Produção do OS fora do git</h3><p>Primeiro item da F0. Nenhum deploy antes.</p></div>
+  <div class="card"><h3>Dashboard quebra na troca</h3><p>Dupla leitura, gate de 2 ciclos batendo, squad dash-omni.</p></div>
+  <div class="card"><h3>Duplicata de pessoa</h3><p>Normalização na entrada e merge assistido (P2).</p></div>
+</div>
+
+<h3 style="margin-top:28px">Fora de escopo</h3>
+<p>Mudar o funil de aquisição (chat, agenda, disparos). Substituir Chatwoot, Evolution ou WABA. ERP e contabilidade (Conta Azul segue com o Ítalo). Login único. Assistente por pessoa do OS (visão do Michael, depois da F3). Finanças pessoais de qualquer sócio.</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="inf">∞</div>
+  OMNI BRASIL · HERITAGE MEETS PRECISION<br>
+  Documento completo: workspace/businesses/omni_brasil/outputs/sistema-omni-2026-09/PROJETO-SISTEMA-OMNI-v2.md<br>
+  Substitui o projeto de migração de 18/09 (v1, arquivado) · 22/09/2026
+</footer>
+
+</body>
+</html>
