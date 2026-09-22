@@ -160,7 +160,7 @@ footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
 <!-- PRINCIPIOS -->
 <section id="principios">
 <div class="kicker">02</div>
-<h2>Seis princípios de desenho</h2>
+<h2>Sete princípios de desenho</h2>
 <p class="h2sub">Fechados com a Rafa. Toda decisão técnica daqui em diante responde a eles.</p>
 <div class="grid g2">
   <div class="card key"><h3>P1 · O nosso CRM é o dono dos dados</h3><p>A Toca o Sino é uma forma de operá-lo, não a única. O funil completo (etapas, kanban, ficha, atividades, notas, motivo de perda) é modelado como se o time fosse interno. Cada lead tem o campo "operador": externo ou interno. <strong>Trocar de equipe é virar essa chave.</strong> Coexistência de closer interno com a Toca o Sino também funciona.</p></div>
@@ -168,6 +168,7 @@ footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
   <div class="card"><h3>P3 · Nada manual na cadeia da venda</h3><p>Link de pagamento gerado pelo sistema, confirmação por webhook, contrato por webhook, acesso por webhook. Exceção vai para fila com dono, não para planilha.</p></div>
   <div class="card"><h3>P4 · Cada fase tira uma tarefa manual</h3><p>E tem data para a planilha antiga morrer. Fase que só adiciona tela não entra. O sistema faz o trabalho, não pede trabalho.</p></div>
   <div class="card"><h3>P5 · Permissão por módulo, ação e campo</h3><p>Num lugar só. CS vê a venda (produto, closer, condição) e não vê DRE, caixa nem contas. Closer externo vê só a tela de registro e os próprios leads.</p></div>
+  <div class="card"><h3>P7 · Sem planilha, dado direto na fonte</h3><p>Daqui para frente primeiro. Gateways por webhook, Conta Azul, Meta e Google pela API, Toca o Sino pela rota de leitura. Histórico entra por último e também da fonte. Única exceção: exportar o Pipedrive antes do cancelamento.</p></div>
   <div class="card"><h3>P6 · Regras da casa continuam</h3><p>Sem n8n. Segredos no vault. Mensagem automática para lead ou aluno só com texto aprovado. Dashboard, templates Meta e vídeo pelas squads donas.</p></div>
 </div>
 </section>
@@ -250,8 +251,8 @@ footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
     <div class="when">Semana 1<small>F0 · Fundação</small></div>
     <div>
       <h3>Sanear o OS e erguer a espinha</h3>
-      <p>Código fora do git, baseline de migrations, middleware, permissões centralizadas. Schema crm completo. Identidade única e normalização de telefone. ETL histórico do Pipedrive com fluxo por deal. Espelho do Toca o Sino com mapa de etapas. Regra de WhatsApp oficial por etapa na régua. Job diário Meta/Google.</p>
-      <div class="rm">Tira de manual: a régua volta a falar com os 190 leads mudos. Histórico deixa de ser refém do Pipedrive.</div>
+      <p>Código fora do git, baseline de migrations, middleware, permissões centralizadas. Schema crm completo. Identidade única e normalização de telefone. Espelho do Toca o Sino com mapa de etapas. Regra de WhatsApp oficial por etapa na régua. Job diário Meta/Google.</p>
+      <div class="rm">Tira de manual: a régua volta a falar com os 190 leads mudos.</div>
       <div class="dep">Depende de: nada externo.</div>
     </div>
   </div>
@@ -279,23 +280,23 @@ footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
       <h3>Módulo CS dentro do OS</h3>
       <p>Absorve o omni-cs. Ficha com passagem do closer e notas espelhadas, turma editável, kanban de reaquecimento, venda desfeita, disparos por etapa via AURA, e-mail pelo closer ou ActiveCampaign por regra de volume.</p>
       <div class="rm">Tira de manual: planilhas da Elisa viram backup com data.</div>
-      <div class="dep">Depende de: passagem com a Julia (1 ou 2 sessões).</div>
+      <div class="dep">Depende de: Julia só confirmar se há trabalho local não commitado.</div>
     </div>
   </div>
   <div class="phase">
     <div class="when">Semanas 6–8<small>F4 · Financeiro</small></div>
     <div>
       <h3>Venda confirmada alimenta o módulo da Julia <span class="tag t-info">não é prioridade zero</span></h3>
-      <p>Vendas e contas a receber, comissão do closer e NF na cascata. Dump do banco da Julia na VPS.</p>
+      <p>Vendas e contas a receber, comissão do closer e NF na cascata. Fontes diretas: gateways e Conta Azul. Sem planilha.</p>
       <div class="rm">Tira de manual: planilha "Recebimento OMNI" alimentada pelo sistema; substituída quando o Ítalo confiar.</div>
-      <div class="dep">Depende de: Ítalo. Julia (dump).</div>
+      <div class="dep">Depende de: Ítalo (autoriza Conta Azul e gateways).</div>
     </div>
   </div>
   <div class="phase">
     <div class="when">Novembro<small>F5 · Pipedrive fora</small></div>
     <div>
       <h3>Migrar leituras restantes, congelar, exportar, cancelar</h3>
-      <p>Vagas da agenda, dono do deal, monitores e cadências para job próprio. Backup final. Cancelamento.</p>
+      <p><strong>Pré-requisito: exportar o histórico completo (incluindo o fluxo de etapas), porque some no cancelamento.</strong> Vagas da agenda, dono do deal, monitores e cadências para job próprio. Cancelamento.</p>
       <div class="rm">Tira de manual: R$ 3 mil por mês.</div>
       <div class="dep">Gate: números do dashboard batendo por 2 ciclos.</div>
     </div>
@@ -340,11 +341,11 @@ footer .inf{font-size:28px;color:var(--gold);letter-spacing:0;margin-bottom:6px}
 <p class="h2sub">Tudo que não depende delas começa agora.</p>
 <div class="wrap"><table>
 <tr><th>Para quem</th><th>O quê</th><th>Trava</th></tr>
-<tr><td><strong>Matheus</strong> (Toca o Sino)</td><td>Data para: botão "venda feita" ou integração; motivo de perda; etiquetas e notas na leitura; webhook de etapa (melhoria)</td><td>F1</td></tr>
-<tr><td><strong>Julia</strong></td><td>Dump do Postgres, pasta financeiro-italo, tokens Conta Azul, de-para do DRE, trabalho local não commitado. 1 ou 2 sessões</td><td>F3 / F4</td></tr>
+<tr><td><strong>Matheus</strong> (Toca o Sino)</td><td>Motivo de perda, notas e etiquetas na rota de leitura: pedido em 22/09, entrega prometida para o mesmo dia <span class="tag t-ok">em andamento</span>. Botão "venda feita": pedir na F1 com URL e campos prontos</td><td>F1</td></tr>
+<tr><td><strong>Julia</strong></td><td>Só confirmar se há trabalho do omni-os no computador dela que não subiu para o git</td><td>F3</td></tr>
 <tr><td><strong>Rafa</strong></td><td>Links de contrato ZapSign por produto. Copies de onboarding para aprovação</td><td>F2</td></tr>
 <tr><td><strong>Greenn</strong></td><td>Confirmar geração de link por API</td><td>F1</td></tr>
-<tr><td><strong>Ítalo</strong></td><td>Conferir conta do Pagar.me (chave do vault vs chave do app)</td><td>F1</td></tr>
+<tr><td><strong>Ítalo</strong></td><td>Autorizar Conta Azul e gateways no servidor (fontes diretas, sem planilha). Conferir conta do Pagar.me</td><td>F1 / F4</td></tr>
 <tr><td><strong>Michael</strong></td><td>Papel da Rafa no OS para construir; ambiente próprio vs produção; opinião em detalhes de portal e OS</td><td>F0</td></tr>
 </table></div>
 
