@@ -503,7 +503,7 @@
     .video-hero { width: 92vw; }
   }
 
-  /* ===== v2: pilha de valor, ferramentas, bloqueios ===== */
+  /* ===== v2 ===== */
   .stack-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(7, auto); grid-auto-flow: column; gap: 10px 28px; width: 100%; max-width: 1180px; margin-top: 10px; }
   .stack-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 16px; border: 1px solid var(--gold-15); border-radius: 10px; background: rgba(255,255,255,0.015); }
   .stack-row span { font-size: clamp(13.5px, 1.25vw, 16px); color: var(--cream); line-height: 1.35; text-align: left; }
@@ -512,13 +512,37 @@
   .tool-card { padding: 22px 24px; }
   .tool-card h4 { font-size: 17px; margin-bottom: 8px; }
   .tool-card p { font-size: 15px; line-height: 1.55; }
-  .block-list .force-item p { font-size: clamp(16px, 1.6vw, 19px); }
-  .big-list { gap: 9px; margin-top: 6px; }
-  .big-list .force-item { padding-top: 11px; padding-bottom: 11px; }
-  .big-list .force-item p { font-size: clamp(15px, 1.45vw, 17.5px); }
-  .block-list, .big-list { max-width: 980px; }
+  .big-list { gap: 8px; margin-top: 4px; }
+  .big-list .force-item { padding-top: 10px; padding-bottom: 10px; }
+  .big-list .force-item p { font-size: clamp(14.5px, 1.35vw, 16.5px); }
+  .split-title { font-size: clamp(20px, 2.3vw, 30px); margin-bottom: 12px; text-align: left; }
   .pos-card { margin: 8px 0 4px; padding: 14px 28px; border: 1px solid var(--gold); border-radius: 12px; font-family: var(--font-title); letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); font-size: clamp(15px, 1.6vw, 20px); background: var(--gold-10); }
   .invest-was { font-family: var(--font-title); font-size: clamp(20px, 2.4vw, 30px); color: var(--cream-50); text-decoration: line-through; text-decoration-color: var(--gold); }
+  .invest-cash { font-family: var(--font-title); font-size: clamp(18px, 2vw, 26px); color: var(--gold-light); letter-spacing: 1px; }
+  .gold-txt { color: var(--gold-light); font-weight: 600; }
+  .photo-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; width: 100%; max-width: 1180px; flex: 1; }
+  .ps-text { text-align: left; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+  .ps-text .headline { text-align: left; font-size: clamp(24px, 3.1vw, 44px); }
+  .ps-text .subline { text-align: left; }
+  .photo-frame { position: relative; border: 1px solid var(--gold-30); border-radius: 16px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 50px rgba(200,168,75,0.10); }
+  .photo-frame img { display: block; width: 100%; height: min(66vh, 560px); object-fit: cover; filter: saturate(0.9) contrast(1.02); }
+  .photo-frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45)); pointer-events: none; }
+  .pf-square img { height: min(56vh, 460px); }
+  .pf-tall img { height: min(62vh, 520px); object-position: 30% 50%; }
+  .pillar-map { position: relative; width: min(1060px, 90vw); height: min(56vh, 470px); margin-top: 10px; }
+  .pillar-node { position: absolute; width: 330px; display: flex; gap: 16px; align-items: center; padding: 14px 16px; z-index: 2;
+    background: rgba(13,13,13,0.88); border: 1px solid var(--gold-15); border-radius: 14px; backdrop-filter: blur(10px); text-align: left; }
+  .pillar-node img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gold); flex-shrink: 0; box-shadow: 0 0 24px rgba(200,168,75,0.2); }
+  .pillar-node .pn-num { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 3px; color: var(--cream-50); text-transform: uppercase; }
+  .pillar-node h4 { font-family: var(--font-title); font-weight: 600; font-size: 15px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin: 3px 0 4px; line-height: 1.25; }
+  .pillar-node p { font-size: 13px; color: var(--cream-70); line-height: 1.45; }
+  .pn1 { top: 0; left: 0; } .pn2 { top: 0; right: 0; } .pn3 { bottom: 0; left: 0; } .pn4 { bottom: 0; right: 0; }
+  .pillar-map .eco-center { width: 132px; height: 132px; font-size: 20px; }
+  @media (max-width: 900px) {
+    .photo-split { grid-template-columns: 1fr; gap: 20px; } .photo-frame img { height: 34vh; }
+    .pillar-map { height: auto; display: grid; grid-template-columns: 1fr; gap: 10px; } .pillar-node { position: static; width: 100%; }
+    .pillar-map .eco-lines, .pillar-map .eco-center { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -566,28 +590,17 @@
       </div>
     </div>
 
+    <!-- A VERDADE -->
     <div class="slide">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Vamos falar a verdade</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">Você sabe transformar vidas.<br><span class="hl">Se vender é outra história.</span></h2>
-      <div class="pain-list">
-        <div class="pain-item" data-reveal style="--d:0.35s">"Eu simplesmente congelo."</div>
-        <div class="pain-item" data-reveal style="--d:0.5s">"Será que eu tenho autoridade pra cobrar isso?"</div>
-        <div class="pain-item" data-reveal style="--d:0.65s">"Eu mal entro no meu Insta."</div>
+      <div class="photo-split">
+        <div class="ps-text">
+          <span class="category" data-reveal style="--d:0s">Vamos falar a verdade</span>
+          <h2 class="headline" data-reveal style="--d:0.15s">Você sabe transformar vidas.<br><span class="hl">Agora vamos construir a vida que você merece.</span></h2>
+        </div>
+        <div class="photo-frame" data-reveal style="--d:0.3s"><img src="assets-eco-black/v2-michael-biblioteca.jpg" alt="Michael Arruda"></div>
       </div>
     </div>
-
-    <div class="slide slide-center radiant">
-      <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <div class="center-block">
-        <div class="divider" data-reveal style="--d:0s"></div>
-        <p class="quote" data-reveal style="--d:0.2s">Eu não me aventuraria sozinha, jamais.</p>
-        <div class="divider" data-reveal style="--d:0.4s"></div>
-        <h2 class="headline" data-reveal style="--d:0.55s; font-size: clamp(20px, 2.6vw, 34px);">Ninguém atravessa <span class="hl">sozinho</span>.</h2>
-      </div>
-    </div>
-
-    <!-- ATO 2 — PROVA IMEDIATA -->
 
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
@@ -645,61 +658,86 @@
 
     <!-- ATO 3 — VIRADA DE CATEGORIA -->
 
-    <!-- O DESTINO -->
-    <div class="slide slide-center pattern-crosshair radiant">
-      <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <div class="center-block">
-        <span class="category" data-reveal style="--d:0s">O destino</span>
-        <h2 class="headline" data-reveal style="--d:0.15s; font-size: clamp(22px, 3vw, 40px);">Os seus primeiros <span class="hl">R$ 100 mil</span>.<br>Com a gente do seu lado até lá.</h2>
-        <div class="divider" data-reveal style="--d:0.35s"></div>
-        <p class="subline" data-reveal style="--d:0.5s">O que separa você desse número não é falta de talento. São quatro bloqueios. E para cada um, a Black tem uma resposta.</p>
-      </div>
-    </div>
-
-    <!-- OS 4 BLOQUEIOS -->
+    <!-- NOSSO OBJETIVO -->
     <div class="slide">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Os quatro bloqueios</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">O que trava você hoje, <span class="hl">e o que resolve.</span></h2>
-      <div class="force-list block-list">
-          <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>"Não sei qual é o meu próximo passo."</strong> Reunião estratégica individual com Michael Arruda, Dossiê Estratégico Individual Personalizado e o Mentor Pessoal Black.</p></div>
-          <div class="force-item" data-reveal style="--d:0.48s"><span class="fi-marker">02</span><p><strong>"Eu travo na hora de vender."</strong> Simulador de Vendas Pessoal Nichado e mentores Faixa Ouro ao seu lado.</p></div>
-          <div class="force-item" data-reveal style="--d:0.61s"><span class="fi-marker">03</span><p><strong>"Não dou conta de fazer tudo sozinho."</strong> Assistente Pessoal Black atendendo seus leads e cadeira de equipe para quem te ajuda.</p></div>
-          <div class="force-item" data-reveal style="--d:0.74s"><span class="fi-marker">04</span><p><strong>"Fico sozinho entre um encontro e outro."</strong> Mentorias individuais ilimitadas, suporte ilimitado e uma gestora dedicada ao seu acompanhamento.</p></div>
+      <div class="photo-split">
+        <div class="ps-text">
+          <span class="category" data-reveal style="--d:0s">Nosso objetivo</span>
+          <h2 class="headline" data-reveal style="--d:0.15s">R$ 100 mil a mais<br><span class="hl">no seu bolso.</span></h2>
+          <div class="divider" data-reveal style="--d:0.35s"></div>
+          <p class="subline" data-reveal style="--d:0.5s">E, a partir daí, te preparar para o próximo passo: a <strong class="gold-txt">Aliança de Ouro</strong>.</p>
+        </div>
+        <div class="photo-frame pf-square" data-reveal style="--d:0.3s"><img src="assets-eco-black/v2-alianca-anel.jpg" alt="Aliança de Ouro"></div>
       </div>
     </div>
 
-    <!-- FERRAMENTAS PREMIUM -->
-    <div class="slide slide-center">
+    <!-- O QUE É O ECOSSISTEMA BLACK -->
+    <div class="slide slide-center radiant">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Ferramentas premium</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">Tudo personalizado <span class="hl">para você e para o seu nicho.</span></h2>
-      <div class="access-grid tools-grid">
-          <div class="access-card tool-card" data-reveal style="--d:0.3s"><h4>Dossiê Estratégico Individual Personalizado</h4><p>Sua narrativa, seu posicionamento e sua estratégia de Instagram, construídos a partir da sua reunião com Michael Arruda.</p></div>
-          <div class="access-card tool-card" data-reveal style="--d:0.42s"><h4>Mentor Pessoal Black</h4><p>A inteligência artificial que conhece o seu plano, suas tarefas e suas reuniões, e te diz exatamente o próximo passo.</p></div>
-          <div class="access-card tool-card" data-reveal style="--d:0.54s"><h4>Assistente Pessoal Black</h4><p>Atende os leads que chegam do seu tráfego, responde, agenda e funciona como a sua assistente pessoal.</p></div>
-          <div class="access-card tool-card" data-reveal style="--d:0.66s"><h4>Simulador de Vendas Pessoal Nichado</h4><p>Treine a sua venda com o cliente exato do seu nicho, quantas vezes precisar, antes da conversa real.</p></div>
+      <span class="category" data-reveal style="--d:0s">O que é o Ecossistema Black</span>
+      <h2 class="headline" data-reveal style="--d:0.12s">Você no centro. <span class="hl">Quatro pilares te levando até lá.</span></h2>
+      <div class="pillar-map" data-reveal style="--d:0.3s">
+        <svg class="eco-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <line x1="50" y1="50" x2="22" y2="18"/><line x1="50" y1="50" x2="78" y2="18"/>
+          <line x1="50" y1="50" x2="22" y2="82"/><line x1="50" y1="50" x2="78" y2="82"/>
+        </svg>
+        <div class="pillar-node pn1">
+          <img src="assets-eco-black/v2-pilar-ambiente.jpg" alt="">
+          <div><span class="pn-num">Pilar 1</span><h4>Ambiente</h4><p>Omniterapeutas de alto padrão ao seu lado, todos os dias</p></div>
+        </div>
+        <div class="pillar-node pn2">
+          <img src="assets-eco-black/v2-pilar-acompanhamento.jpg" alt="">
+          <div><span class="pn-num">Pilar 2</span><h4>Acompanhamento e estratégia</h4><p>Michael, mentores Faixa Ouro e equipe do seu lado até o resultado</p></div>
+        </div>
+        <div class="eco-center">VOCÊ</div>
+        <div class="pillar-node pn3">
+          <img src="assets-eco-black/v2-pilar-ferramentas.jpg" alt="">
+          <div><span class="pn-num">Pilar 3</span><h4>Ferramentas e acesso</h4><p>IAs pessoais, Portal, Legacy e Mentoring Day</p></div>
+        </div>
+        <div class="pillar-node pn4">
+          <img src="assets-eco-black/v2-pilar-conhecimento.jpg" alt="">
+          <div><span class="pn-num">Pilar 4</span><h4>Conhecimento e aprofundamento técnico</h4><p>Pós-graduação em Omniterapia e 7 treinamentos</p></div>
+        </div>
       </div>
     </div>
 
-    <!-- ACOMPANHAMENTO -->
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 1 &nbsp;·&nbsp; Pessoas</span>
-      <h2 class="headline" data-reveal style="--d:0.12s">Você <span class="hl">nunca mais</span> está sozinho.</h2>
-      <div class="force-list big-list">
-          <div class="force-item" data-reveal style="--d:0.3s"><span class="fi-marker">01</span><p><strong>Mentorias individuais ilimitadas.</strong> Fez a tarefa, tem reunião. Pra quem faz, a gente também faz.</p></div>
-          <div class="force-item" data-reveal style="--d:0.42s"><span class="fi-marker">02</span><p><strong>Suporte ilimitado</strong> com uma gestora dedicada ao seu acompanhamento.</p></div>
-          <div class="force-item" data-reveal style="--d:0.54s"><span class="fi-marker">03</span><p><strong>Mentores Faixa Ouro à sua disposição</strong> para construir a sua estratégia junto com você.</p></div>
-          <div class="force-item" data-reveal style="--d:0.66s"><span class="fi-marker">04</span><p><strong>48 aulas em grupo</strong> de estratégias de alto padrão com os mentores Faixa Ouro.</p></div>
-          <div class="force-item" data-reveal style="--d:0.78s"><span class="fi-marker">05</span><p><strong>Reunião estratégica individual com Michael Arruda</strong> e revisão estratégica a cada trimestre.</p></div>
-          <div class="force-item" data-reveal style="--d:0.9s"><span class="fi-marker">06</span><p><strong>Cadeira de equipe:</strong> quem te ajuda na operação também tem acesso, sempre junto com você.</p></div>
+      <span class="category" data-reveal style="--d:0s">Pilar 1 &nbsp;·&nbsp; Ambiente</span>
+      <div class="force-split">
+        <img src="assets-eco-black/print-junior-ambiente.png" alt="Depoimento de mentorando sobre o grupo Black" class="wa-print" data-reveal style="--d:0.2s">
+        <div class="force-list">
+          <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Omniterapeutas de alto padrão</strong> ao seu lado: indicação, parceria e benchmark todos os dias.</p></div>
+          <div class="force-item" data-reveal style="--d:0.5s"><span class="fi-marker">02</span><p>De <strong>zero a R$ 15 mil</strong> só de voltar a estar no grupo. A palavra é dele, ao lado.</p></div>
+          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">03</span><p>Aqui ninguém solta a mão de ninguém: <strong>o ambiente é o antídoto do congelamento</strong>.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILAR 2: ACOMPANHAMENTO E ESTRATÉGIA -->
+    <div class="slide slide-center">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <span class="category" data-reveal style="--d:0s">Pilar 2 &nbsp;·&nbsp; Acompanhamento e estratégia</span>
+      <div class="force-split">
+        <div class="photo-frame pf-tall" data-reveal style="--d:0.2s"><img src="assets-eco-black/v2-pilar-acompanhamento.jpg" alt="Michael Arruda com mentorada"></div>
+        <div>
+          <h2 class="headline split-title" data-reveal style="--d:0.25s">Você <span class="hl">nunca mais</span> está sozinho.</h2>
+          <div class="force-list big-list">
+          <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Mentorias individuais ilimitadas.</strong> Fez a tarefa, tem reunião. Pra quem faz, a gente também faz.</p></div>
+          <div class="force-item" data-reveal style="--d:0.45s"><span class="fi-marker">02</span><p><strong>Suporte ilimitado</strong> com uma gestora dedicada ao seu acompanhamento.</p></div>
+          <div class="force-item" data-reveal style="--d:0.55s"><span class="fi-marker">03</span><p><strong>Mentores Faixa Ouro à sua disposição</strong> para construir a sua estratégia junto com você.</p></div>
+          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">04</span><p><strong>48 aulas em grupo</strong> de estratégias de alto padrão com os mentores Faixa Ouro.</p></div>
+          <div class="force-item" data-reveal style="--d:0.75s"><span class="fi-marker">05</span><p><strong>Reunião estratégica individual com Michael Arruda</strong> e revisão estratégica a cada trimestre.</p></div>
+          <div class="force-item" data-reveal style="--d:0.85s"><span class="fi-marker">06</span><p><strong>Cadeira de equipe:</strong> quem te ajuda na operação também tem acesso, sempre junto com você.</p></div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">O mapa da jornada</span>
+      <span class="category" data-reveal style="--d:0s">Pilar 2 &nbsp;·&nbsp; O primeiro mês</span>
       <h2 class="headline" data-reveal style="--d:0.15s">Sua jornada no primeiro mês <span class="hl">no Ecossistema</span>.</h2>
       <div class="journey" data-reveal style="--d:0.35s">
         <div class="journey-line">
@@ -726,16 +764,16 @@
 
     <!-- ATO 4 — AS QUATRO FORÇAS -->
 
+    <!-- PILAR 3: FERRAMENTAS PREMIUM -->
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 2 &nbsp;·&nbsp; Ambiente</span>
-      <div class="force-split">
-        <img src="assets-eco-black/print-junior-ambiente.png" alt="Depoimento de mentorando sobre o grupo Black" class="wa-print" data-reveal style="--d:0.2s">
-        <div class="force-list">
-          <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Omniterapeutas de alto padrão</strong> ao seu lado: indicação, parceria e benchmark todos os dias.</p></div>
-          <div class="force-item" data-reveal style="--d:0.5s"><span class="fi-marker">02</span><p>De <strong>zero a R$ 15 mil</strong> só de voltar a estar no grupo. A palavra é dele, ao lado.</p></div>
-          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">03</span><p>Aqui ninguém solta a mão de ninguém: <strong>o ambiente é o antídoto do congelamento</strong>.</p></div>
-        </div>
+      <span class="category" data-reveal style="--d:0s">Pilar 3 &nbsp;·&nbsp; Ferramentas premium</span>
+      <h2 class="headline" data-reveal style="--d:0.15s">Tudo personalizado <span class="hl">para você e para o seu nicho.</span></h2>
+      <div class="access-grid tools-grid">
+          <div class="access-card tool-card" data-reveal style="--d:0.3s"><h4>Dossiê Estratégico Individual Personalizado</h4><p>Sua narrativa, seu posicionamento e sua estratégia de Instagram, construídos a partir da sua reunião com Michael Arruda.</p></div>
+          <div class="access-card tool-card" data-reveal style="--d:0.42s"><h4>Mentor Pessoal Black</h4><p>A inteligência artificial que conhece o seu plano, suas tarefas e suas reuniões, e te diz exatamente o próximo passo.</p></div>
+          <div class="access-card tool-card" data-reveal style="--d:0.54s"><h4>Assistente Pessoal Black</h4><p>Atende os leads que chegam do seu tráfego, responde, agenda e funciona como a sua assistente pessoal.</p></div>
+          <div class="access-card tool-card" data-reveal style="--d:0.66s"><h4>Simulador de Vendas Pessoal Nichado</h4><p>Treine a sua venda com o cliente exato do seu nicho, quantas vezes precisar, antes da conversa real.</p></div>
       </div>
     </div>
 
@@ -756,8 +794,8 @@
 
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 4 &nbsp;·&nbsp; Autoridade</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">Autoridade <span class="hl">que se prova</span>.</h2>
+      <span class="category" data-reveal style="--d:0s">Pilar 4 &nbsp;·&nbsp; Conhecimento e aprofundamento técnico</span>
+      <h2 class="headline" data-reveal style="--d:0.15s">Para dominar <span class="hl">cada frente</span>.</h2>
       <div class="pos-card" data-reveal style="--d:0.22s">Pós-graduação em Omniterapia</div>
       <p class="mono-note" data-reveal style="--d:0.28s">+ 7 TREINAMENTOS DE APROFUNDAMENTO E ESPECIALIZAÇÃO</p>
       <div class="cert-grid">
@@ -776,7 +814,7 @@
 
     <div class="slide">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Transparência</span>
+      <span class="category" data-reveal style="--d:0s">Como garantimos o resultado</span>
       <h2 class="headline" data-reveal style="--d:0.15s; font-size: clamp(19px, 2.4vw, 30px);">A gente entra com o ecossistema inteiro.<br><span class="hl">Você entra com a sua parte.</span></h2>
       <div class="force-list" style="max-width: 720px;">
         <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">&#10003;</span><p>Assistir às aulas, ao vivo ou gravadas.</p></div>
@@ -787,10 +825,22 @@
 
     <!-- ATO 6 — COMPROMISSO -->
 
-    <!-- PILHA DE VALOR -->
+    <div class="slide slide-center pattern-crosshair radiant">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <div class="center-block">
+        <span class="category" data-reveal style="--d:0s">O nosso compromisso</span>
+        <div class="guarantee-frame" data-reveal style="--d:0.2s">
+          <h2 class="headline" style="font-size: clamp(18px, 2.4vw, 32px); font-weight: 400;">Ficamos com você até os seus primeiros</h2>
+          <div class="guarantee-number gold-shimmer">R$ 100 MIL</div>
+        </div>
+        <p class="subline" data-reveal style="--d:0.45s; max-width: 700px;">Enquanto você estiver fazendo a sua parte, a gente não solta a sua mão. Até você faturar pelo menos R$ 100 mil. Mais que o dobro do seu investimento.</p>
+      </div>
+    </div>
+
+    <!-- PARTE DO QUE VOCÊ RECEBE -->
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Tudo o que você recebe</span>
+      <span class="category" data-reveal style="--d:0s">Parte do que você recebe</span>
       <div class="stack-grid">
           <div class="stack-row" data-reveal style="--d:0.2s"><span>Mentorias individuais ilimitadas</span><b>Imensurável</b></div>
           <div class="stack-row" data-reveal style="--d:0.25s"><span>12 meses de acesso ao Ecossistema Black</span><b>Imensurável</b></div>
@@ -819,27 +869,16 @@
       </div>
     </div>
 
+    <!-- INVESTIMENTO -->
     <div class="slide slide-center pattern-crosshair radiant">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
       <div class="center-block">
         <span class="category" data-reveal style="--d:0s">Investimento</span>
         <span class="invest-was" data-reveal style="--d:0.12s">R$ 150.364</span>
-        <span class="invest-label" data-reveal style="--d:0.2s">Ecossistema Black &nbsp;·&nbsp; 12 meses</span>
-        <div class="invest-value" data-reveal style="--d:0.35s">R$ 43.900</div>
-        <div class="divider" data-reveal style="--d:0.5s"></div>
-        <p class="invest-note" data-reveal style="--d:0.65s">Condições de parcelamento apresentadas individualmente na conversa de contrato.</p>
-      </div>
-    </div>
-
-    <div class="slide slide-center pattern-crosshair radiant">
-      <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <div class="center-block">
-        <span class="category" data-reveal style="--d:0s">O nosso compromisso</span>
-        <div class="guarantee-frame" data-reveal style="--d:0.2s">
-          <h2 class="headline" style="font-size: clamp(18px, 2.4vw, 32px); font-weight: 400;">Ficamos com você até os seus primeiros</h2>
-          <div class="guarantee-number gold-shimmer">R$ 100 MIL</div>
-        </div>
-        <p class="subline" data-reveal style="--d:0.45s; max-width: 700px;">Enquanto você estiver fazendo a sua parte, a gente não solta a sua mão. Até você faturar pelo menos R$ 100 mil. Mais que o dobro do seu investimento.</p>
+        <div class="invest-value" data-reveal style="--d:0.3s">12x de R$ 3.900</div>
+        <p class="invest-cash" data-reveal style="--d:0.45s">ou R$ 43.900 à vista</p>
+        <div class="divider" data-reveal style="--d:0.55s"></div>
+        <p class="invest-note" data-reveal style="--d:0.65s">Outras condições de parcelamento apresentadas individualmente para os aprovados.</p>
       </div>
     </div>
 
