@@ -520,6 +520,18 @@
   .invest-was { font-family: var(--font-title); font-size: clamp(20px, 2.4vw, 30px); color: var(--cream-50); text-decoration: line-through; text-decoration-color: var(--gold); }
   .invest-cash { font-family: var(--font-title); font-size: clamp(18px, 2vw, 26px); color: var(--gold-light); letter-spacing: 1px; }
   .gold-txt { color: var(--gold-light); font-weight: 600; }
+  .cat-big { font-size: 1.55em; color: var(--gold-light); letter-spacing: 3px; }
+  .fi-hero p { font-size: clamp(18px, 1.9vw, 24px) !important; }
+  .fi-hero p strong { font-family: var(--font-title); letter-spacing: 1.5px; }
+  .invest-parc { display: flex; align-items: baseline; justify-content: center; gap: 18px; }
+  .ip-small { font-family: var(--font-title); font-size: clamp(20px, 2.4vw, 32px); color: var(--cream-70); letter-spacing: 2px; }
+  .jgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 1080px; margin-top: 10px; }
+  .jcard { text-align: left; padding: 18px 20px; border: 1px solid var(--gold-15); border-radius: 14px; background: rgba(13,13,13,0.7); display: flex; gap: 14px; align-items: flex-start; }
+  .jcard b { font-family: var(--font-title); font-size: 26px; color: var(--gold); line-height: 1; min-width: 34px; }
+  .jcard p { font-size: clamp(14.5px, 1.4vw, 17px); color: var(--cream); line-height: 1.45; }
+  .jfork { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; }
+  .jfork span { font-size: 14px; color: var(--cream-70); letter-spacing: 1px; margin-right: 6px; }
+  @media (max-width: 900px) { .jgrid { grid-template-columns: 1fr; } }
   .photo-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; width: 100%; max-width: 1180px; flex: 1; }
   .ps-text { text-align: left; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
   .ps-text .headline { text-align: left; font-size: clamp(24px, 3.1vw, 44px); }
@@ -693,7 +705,7 @@
         <div class="eco-center">VOCÊ</div>
         <div class="pillar-node pn3">
           <img src="assets-eco-black/v2-pilar-ferramentas.jpg" alt="">
-          <div><span class="pn-num">Pilar 3</span><h4>Ferramentas e acesso</h4><p>IAs pessoais, Portal, Legacy e Mentoring Day</p></div>
+          <div><span class="pn-num">Pilar 3</span><h4>Ferramentas premium e acesso</h4><p>IAs pessoais, Portal, Legacy e Mentoring Day</p></div>
         </div>
         <div class="pillar-node pn4">
           <img src="assets-eco-black/v2-pilar-conhecimento.jpg" alt="">
@@ -711,6 +723,7 @@
           <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Omniterapeutas de alto padrão</strong> ao seu lado: indicação, parceria e benchmark todos os dias.</p></div>
           <div class="force-item" data-reveal style="--d:0.5s"><span class="fi-marker">02</span><p>De <strong>zero a R$ 15 mil</strong> só de voltar a estar no grupo. A palavra é dele, ao lado.</p></div>
           <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">03</span><p>Aqui ninguém solta a mão de ninguém: <strong>o ambiente é o antídoto do congelamento</strong>.</p></div>
+          <div class="force-item" data-reveal style="--d:0.8s"><span class="fi-marker">04</span><p><strong>Mentores Faixa Ouro à sua disposição</strong> para construir a sua estratégia junto com você.</p></div>
         </div>
       </div>
     </div>
@@ -724,70 +737,40 @@
         <div>
           <h2 class="headline split-title" data-reveal style="--d:0.25s">Você <span class="hl">nunca mais</span> está sozinho.</h2>
           <div class="force-list big-list">
-          <div class="force-item" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Mentorias individuais ilimitadas.</strong> Fez a tarefa, tem reunião. Pra quem faz, a gente também faz.</p></div>
-          <div class="force-item" data-reveal style="--d:0.45s"><span class="fi-marker">02</span><p><strong>Suporte ilimitado</strong> com uma gestora dedicada ao seu acompanhamento.</p></div>
-          <div class="force-item" data-reveal style="--d:0.55s"><span class="fi-marker">03</span><p><strong>Mentores Faixa Ouro à sua disposição</strong> para construir a sua estratégia junto com você.</p></div>
-          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">04</span><p><strong>48 aulas em grupo</strong> de estratégias de alto padrão com os mentores Faixa Ouro.</p></div>
-          <div class="force-item" data-reveal style="--d:0.75s"><span class="fi-marker">05</span><p><strong>Reunião estratégica individual com Michael Arruda</strong> e revisão estratégica a cada trimestre.</p></div>
+          <div class="force-item fi-hero" data-reveal style="--d:0.35s"><span class="fi-marker">01</span><p><strong>Mentorias individuais ilimitadas</strong></p></div>
+          <div class="force-item" data-reveal style="--d:0.45s"><span class="fi-marker">02</span><p><strong>48 aulas em grupo</strong> de estratégias de alto padrão, com Michael Arruda e mentores Faixa Ouro.</p></div>
+          <div class="force-item" data-reveal style="--d:0.55s"><span class="fi-marker">03</span><p><strong>Suporte ilimitado</strong> com uma gestora dedicada ao seu acompanhamento.</p></div>
+          <div class="force-item" data-reveal style="--d:0.65s"><span class="fi-marker">04</span><p><strong>Reunião estratégica individual com Michael Arruda</strong> para construir o seu Dossiê Estratégico.</p></div>
+          <div class="force-item" data-reveal style="--d:0.75s"><span class="fi-marker">05</span><p><strong>Revisão estratégica trimestral</strong> para alinhar a rota e as expectativas.</p></div>
           <div class="force-item" data-reveal style="--d:0.85s"><span class="fi-marker">06</span><p><strong>Cadeira de equipe:</strong> quem te ajuda na operação também tem acesso, sempre junto com você.</p></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="slide slide-center">
-      <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 2 &nbsp;·&nbsp; O primeiro mês</span>
-      <h2 class="headline" data-reveal style="--d:0.15s">Sua jornada no primeiro mês <span class="hl">no Ecossistema</span>.</h2>
-      <div class="journey" data-reveal style="--d:0.35s">
-        <div class="journey-line">
-          <div class="journey-track"></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>01</b>Reunião de liberação dos sistemas de inteligência artificial</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>02</b>Acesso a treinamentos gravados</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>03</b>Reunião individual com Michael Arruda: alinhamento de estratégia</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>04</b>Execução das tarefas combinadas</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>05</b>Gestora de suporte: auxílio e dúvidas sobre as tarefas</div></div>
-          <div class="j-step"><div class="j-dot"></div><div class="j-label"><b>06</b>Reunião com o mentor Faixa Ouro</div></div>
-        </div>
-        <svg class="journey-branches" viewBox="0 0 100 12" preserveAspectRatio="none">
-          <path d="M91.7 0 L91.7 6 L34.5 12" fill="none" vector-effect="non-scaling-stroke"/>
-          <path d="M91.7 0 L91.7 6 L50 12" fill="none" vector-effect="non-scaling-stroke"/>
-          <path d="M91.7 0 L91.7 6 L65.5 12" fill="none" vector-effect="non-scaling-stroke"/>
-        </svg>
-        <div class="journey-fork">
-          <div class="fork-chip">Trabalhar com empresas</div>
-          <div class="fork-chip">Atendimentos individuais</div>
-          <div class="fork-chip">Mentorias em grupo</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ATO 4 — AS QUATRO FORÇAS -->
-
     <!-- PILAR 3: FERRAMENTAS PREMIUM -->
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 3 &nbsp;·&nbsp; Ferramentas premium</span>
+      <span class="category" data-reveal style="--d:0s">Pilar 3 &nbsp;·&nbsp; <span class="cat-big">Ferramentas premium</span> e acesso</span>
       <h2 class="headline" data-reveal style="--d:0.15s">Tudo personalizado <span class="hl">para você e para o seu nicho.</span></h2>
       <div class="access-grid tools-grid">
           <div class="access-card tool-card" data-reveal style="--d:0.3s"><h4>Dossiê Estratégico Individual Personalizado</h4><p>Sua narrativa, seu posicionamento e sua estratégia de Instagram, construídos a partir da sua reunião com Michael Arruda.</p></div>
           <div class="access-card tool-card" data-reveal style="--d:0.42s"><h4>Mentor Pessoal Black</h4><p>A inteligência artificial que conhece o seu plano, suas tarefas e suas reuniões, e te diz exatamente o próximo passo.</p></div>
-          <div class="access-card tool-card" data-reveal style="--d:0.54s"><h4>Assistente Pessoal Black</h4><p>Atende os leads que chegam do seu tráfego, responde, agenda e funciona como a sua assistente pessoal.</p></div>
+          <div class="access-card tool-card" data-reveal style="--d:0.54s"><h4>Assistente Pessoal Black</h4><p>A IA que atende os leads que chegam do seu tráfego: responde, qualifica, agenda e funciona como a sua assistente pessoal.</p></div>
           <div class="access-card tool-card" data-reveal style="--d:0.66s"><h4>Simulador de Vendas Pessoal Nichado</h4><p>Treine a sua venda com o cliente exato do seu nicho, quantas vezes precisar, antes da conversa real.</p></div>
       </div>
     </div>
 
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <span class="category" data-reveal style="--d:0s">Pilar 3 &nbsp;·&nbsp; Acesso</span>
+      <span class="category" data-reveal style="--d:0s">Pilar 3 &nbsp;·&nbsp; Ferramentas premium e <span class="cat-big">acesso</span></span>
       <div class="force-split">
         <img src="assets-eco-black/print-kenia-acesso.png" alt="Mensagem no grupo sobre ingressos de evento para os Blacks" class="wa-print" data-reveal style="--d:0.2s">
         <div class="access-grid">
           <div class="access-card" data-reveal style="--d:0.35s"><h4>Legacy ilimitado</h4><span class="access-sub">(3 por ano)</span><p>A imersão que vira chave de identidade</p></div>
           <div class="access-card" data-reveal style="--d:0.42s"><h4>Legacy Família</h4><span class="access-sub">(2 pessoas por ano)</span><p>Para transformar o ambiente da sua família</p></div>
           <div class="access-card" data-reveal style="--d:0.49s"><h4>Mentoring Day</h4><p>Negócios, experiências e amizades para a vida toda</p></div>
-          <div class="access-card" data-reveal style="--d:0.56s"><h4>MTS</h4><p>Make the Stage: o palco como alavanca de autoridade</p></div>
-          <div class="access-card access-wide" data-reveal style="--d:0.63s"><h4>Oportunidades</h4><p>Eventos, ingressos e portas que só quem está dentro recebe</p></div>
+          <div class="access-card" data-reveal style="--d:0.63s"><h4>Oportunidades</h4><p>Eventos, ingressos e portas que só quem está dentro recebe</p></div>
         </div>
       </div>
     </div>
@@ -837,6 +820,32 @@
       </div>
     </div>
 
+    <div class="slide slide-center">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <div class="center-block">
+        <span class="category" data-reveal style="--d:0s">E se a vida acontecer?</span>
+        <h2 class="headline" data-reveal style="--d:0.2s">Você pode <span class="hl">congelar por até 6 meses</span>.<br>O relógio para e espera você.</h2>
+        <div class="divider" data-reveal style="--d:0.4s"></div>
+        <p class="subline" data-reveal style="--d:0.55s">A Black cresce e fica mais seleta a cada turma. Quem está dentro evolui junto, pelo preço em que entrou.</p>
+      </div>
+    </div>
+
+    <!-- O PRIMEIRO MÊS -->
+    <div class="slide slide-center">
+      <div class="product-mark">ECOSSISTEMA BLACK</div>
+      <span class="category" data-reveal style="--d:0s">O primeiro mês</span>
+      <h2 class="headline" data-reveal style="--d:0.12s">Sua jornada no primeiro mês <span class="hl">no Ecossistema</span>.</h2>
+      <div class="jgrid">
+          <div class="jcard" data-reveal style="--d:0.25s"><b>01</b><p>Reunião de liberação dos seus sistemas de inteligência artificial</p></div>
+          <div class="jcard" data-reveal style="--d:0.33s"><b>02</b><p>Acesso imediato aos treinamentos gravados</p></div>
+          <div class="jcard" data-reveal style="--d:0.41s"><b>03</b><p>Reunião individual com Michael Arruda: alinhamento da sua estratégia</p></div>
+          <div class="jcard" data-reveal style="--d:0.49s"><b>04</b><p>Execução das tarefas combinadas</p></div>
+          <div class="jcard" data-reveal style="--d:0.57s"><b>05</b><p>Gestora de suporte ao seu lado nas dúvidas e nas tarefas</p></div>
+          <div class="jcard" data-reveal style="--d:0.65s"><b>06</b><p>Reunião com o seu mentor Faixa Ouro</p></div>
+      </div>
+      <div class="jfork" data-reveal style="--d:0.8s"><span>A partir daí, o caminho que é seu:</span><div class="fork-chip">Trabalhar com empresas</div><div class="fork-chip">Atendimentos individuais</div><div class="fork-chip">Mentorias em grupo</div></div>
+    </div>
+
     <!-- PARTE DO QUE VOCÊ RECEBE -->
     <div class="slide slide-center">
       <div class="product-mark">ECOSSISTEMA BLACK</div>
@@ -875,20 +884,10 @@
       <div class="center-block">
         <span class="category" data-reveal style="--d:0s">Investimento</span>
         <span class="invest-was" data-reveal style="--d:0.12s">R$ 150.364</span>
-        <div class="invest-value" data-reveal style="--d:0.3s">12x de R$ 3.900</div>
+        <div class="invest-parc" data-reveal style="--d:0.3s"><span class="ip-small">12x de</span><span class="invest-value ip-big">R$ 3.900</span></div>
         <p class="invest-cash" data-reveal style="--d:0.45s">ou R$ 43.900 à vista</p>
         <div class="divider" data-reveal style="--d:0.55s"></div>
         <p class="invest-note" data-reveal style="--d:0.65s">Outras condições de parcelamento apresentadas individualmente para os aprovados.</p>
-      </div>
-    </div>
-
-    <div class="slide slide-center">
-      <div class="product-mark">ECOSSISTEMA BLACK</div>
-      <div class="center-block">
-        <span class="category" data-reveal style="--d:0s">E se a vida acontecer?</span>
-        <h2 class="headline" data-reveal style="--d:0.2s">Você pode <span class="hl">congelar por até 6 meses</span>.<br>O relógio para e espera você.</h2>
-        <div class="divider" data-reveal style="--d:0.4s"></div>
-        <p class="subline" data-reveal style="--d:0.55s">A Black cresce e fica mais seleta a cada turma. Quem está dentro evolui junto, pelo preço em que entrou.</p>
       </div>
     </div>
 
