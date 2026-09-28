@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validação do Dashboard após a troca de CRM</title>
+<meta name="description" content="Auditoria dos números do Dashboard OMNI (abas Gerenciador e Motivos de Perda) contra o CRM Toca o Sino e a fonte única do chat, setembro de 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#C9A84C; --gold-dim:rgba(201,168,76,.35); --cream:#F4F4E8; --dark:#0A0A0A; --panel:#141414; --panel-2:#1A1510;
+    --muted:rgba(244,244,232,.55); --line:rgba(244,244,232,.10);
+    --red:#E05C5C; --amber:#E0A94C; --green:#5CB88A; --teal:#4CB8B8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--dark);color:var(--cream);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.55}
+  body{padding:0 16px 80px}
+  .wrap{max-width:1100px;margin:0 auto}
+  header{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.15;margin:.35em 0 .3em}
+  .lead{color:var(--muted);max-width:820px;font-size:1.02rem}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(1.35rem,2.6vw,1.9rem);margin:0 0 .5em;color:var(--cream)}
+  h3{font-size:1rem;margin:1.4em 0 .5em;color:var(--gold);letter-spacing:.02em}
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  p{max-width:820px}
+  .verdict{margin-top:26px;padding:22px 24px;border:1px solid var(--gold);background:linear-gradient(135deg,#1A1510,#0e0e0e);border-radius:12px}
+  .verdict strong{color:var(--gold)}
+  .grid{display:grid;gap:14px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .card .lbl{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .card .big{font-family:'Playfair Display',serif;font-size:2.1rem;line-height:1.1;margin:.2em 0 .1em}
+  .card .sub{font-size:.85rem;color:var(--muted)}
+  .red{color:var(--red)} .amber{color:var(--amber)} .green{color:var(--green)} .teal{color:var(--teal)} .gold{color:var(--gold)}
+  .tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-right:6px}
+  .tag.red{border-color:rgba(224,92,92,.5);color:var(--red)} .tag.amber{border-color:rgba(224,169,76,.5);color:var(--amber)} .tag.green{border-color:rgba(92,184,138,.5);color:var(--green)}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;margin:10px 0 4px}
+  th,td{padding:10px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  td.num,th.num{text-align:right;font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+  tr.total td{border-top:1px solid var(--gold-dim);color:var(--gold);font-weight:600}
+  .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:.86rem}
+  .bar .n{font-family:'IBM Plex Mono',monospace;width:170px;color:var(--muted);flex:none}
+  .bar .t{flex:1;height:14px;background:rgba(244,244,232,.06);border-radius:7px;overflow:hidden}
+  .bar .f{height:100%;border-radius:7px;background:var(--gold)}
+  .bar .f.red{background:var(--red)} .bar .f.teal{background:var(--teal)} .bar .f.amber{background:var(--amber)} .bar .f.dim{background:rgba(244,244,232,.25)}
+  .bar .v{font-family:'IBM Plex Mono',monospace;width:64px;text-align:right;flex:none}
+  .days{display:grid;grid-template-columns:repeat(auto-fill,minmax(34px,1fr));gap:4px;margin:12px 0 6px}
+  .day{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:6px 2px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.62rem}
+  .day b{display:block;font-size:.8rem;font-weight:500;color:var(--cream)}
+  .day.hole{border-color:rgba(224,92,92,.6);background:rgba(224,92,92,.12)} .day.hole b{color:var(--red)}
+  .day.part{border-color:rgba(224,169,76,.6);background:rgba(224,169,76,.10)} .day.part b{color:var(--amber)}
+  .legend{font-size:.78rem;color:var(--muted)}
+  ol,ul{max-width:820px;padding-left:1.2em} li{margin:.35em 0}
+  .opt{border-left:3px solid var(--line);padding:6px 0 6px 16px;margin:14px 0}
+  .opt.rec{border-left-color:var(--gold)}
+  .opt h4{margin:0 0 .3em;font-size:1rem}
+  .foot{font-size:.8rem;color:var(--muted);margin-top:32px}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.82em;background:rgba(244,244,232,.07);padding:1px 5px;border-radius:4px}
+  .note{font-size:.84rem;color:var(--muted);border-left:2px solid var(--gold-dim);padding-left:12px;margin:12px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Squad dash-omni · auditoria DM-035 · 28 de setembro de 2026</div>
+  <h1>Validação do Dashboard depois da troca de CRM</h1>
+  <p class="lead">Abas <strong>Gerenciador</strong> e <strong>Motivos de Perda</strong> conferidas contra três fontes: o Pipedrive (o que o dash lê), o CRM Toca o Sino (onde o time de pré-venda trabalha e vende) e a fonte única do chat da Pesquisa Web. Período: 1 a 28 de setembro.</p>
+  <div class="verdict">
+    <strong>Veredito: os números de setembro das duas abas não servem para decisão.</strong>
+    Só "leads que entraram até 15/09" bate com a realidade. Depois disso o Pipedrive ficou cego por três motivos independentes:
+    o intake não conseguiu criar negócio lá por 6 dias (erro 403 na cota), o time passou a agendar, perder e vender no Toca o Sino sem nada voltar para o Pipedrive,
+    e as colunas do Gerenciador ainda são calculadas com a regra do funil antigo (pipeline 65), de forma que MQL, Tentativa, Conectado e Avaliado viram o mesmo número.
+  </div>
+</header>
+
+<section>
+  <h2>1. Placar lado a lado (setembro)</h2>
+  <p>Mesmo período, mesma pergunta, três respostas. O dash é a coluna da esquerda.</p>
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Indicador</th><th class="num">Dashboard<br>(Pipedrive)</th><th class="num">Chat<br>(fonte única)</th><th class="num">Toca o Sino</th><th>Leitura</th></tr></thead>
+    <tbody>
+      <tr><td>Leads que entraram</td><td class="num">464</td><td class="num">669</td><td class="num">678</td><td>Faltam <span class="red">204 leads</span> no Pipedrive (30%). Detalhe no bloco 2.</td></tr>
+      <tr><td>Reuniões agendadas</td><td class="num">20</td><td class="num">159</td><td class="num">195</td><td>O dash só conta quem clicou CONFIRMAR no lembrete. Quem agenda com o time no Toca o Sino não aparece.</td></tr>
+      <tr><td>Reuniões realizadas</td><td class="num">8</td><td class="num">n/a</td><td class="num">39</td><td>Última realizada no Pipedrive em <span class="amber">08/09</span>. No Toca o Sino, "Mesa" e "Proposta Apresentada" do cohort de setembro.</td></tr>
+      <tr><td>No-show</td><td class="num">0</td><td class="num">n/a</td><td class="num">117</td><td>A etapa 494 do Pipedrive nunca foi usada. O time marca no-show só no Toca o Sino.</td></tr>
+      <tr><td>Vendas</td><td class="num">8 · R$ 89,6 mil</td><td class="num">n/a</td><td class="num">2</td><td>As 8 do Pipedrive são todas até 08/09 (7 da closer desligada em 21/09). No Toca o Sino há 1 "Sino Pago" em 27/09 e 1 "Sino Não Pago". No OMNI OS, zero venda registrada.</td></tr>
+      <tr><td>Perdas marcadas</td><td class="num">91</td><td class="num">n/a</td><td class="num">503</td><td>As 91 do dash são <span class="red">100% do robô do chat</span>. As 137 perdas marcadas pelo time em setembro não existem no Pipedrive.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">"Chat (fonte única)" = tabela <code>pesquisa_sessoes</code> do lead-intake, sem testes nem e-mails da equipe. "Toca o Sino" = leitura completa da API deles em 28/09 às 11h50 (1.390 leads). O Toca o Sino tem 9 leads a mais que o chat porque recebe também WhatsApp recebido e Social Selling.</p>
+</section>
+
+<section>
+  <h2>2. O buraco: 204 leads de setembro nunca viraram negócio no Pipedrive</h2>
+  <p>Leads por dia no chat. Em vermelho, dias em que <strong>nenhum</strong> lead virou negócio no Pipedrive; em âmbar, dias parciais. O intake registrou o motivo no log: <code>FALHA ao criar deal no cadastro: status code 403</code> (cota diária do Pipedrive esgotada). O lead seguiu normalmente para o chat e para o Toca o Sino.</p>
+  <div class="days">
+    <div class="day">01<b>19</b></div><div class="day">02<b>24</b></div><div class="day">03<b>21</b></div><div class="day">04<b>15</b></div><div class="day">05<b>18</b></div><div class="day">06<b>26</b></div><div class="day">07<b>27</b></div>
+    <div class="day">08<b>10</b></div><div class="day">09<b>20</b></div><div class="day">10<b>27</b></div><div class="day">11<b>27</b></div><div class="day">12<b>33</b></div><div class="day">13<b>34</b></div><div class="day">14<b>21</b></div>
+    <div class="day">15<b>19</b></div><div class="day hole">16<b>23</b></div><div class="day hole">17<b>12</b></div><div class="day hole">18<b>31</b></div><div class="day hole">19<b>31</b></div><div class="day hole">20<b>29</b></div><div class="day hole">21<b>29</b></div>
+    <div class="day part">22<b>22</b></div><div class="day">23<b>32</b></div><div class="day">24<b>28</b></div><div class="day">25<b>24</b></div><div class="day part">26<b>25</b></div><div class="day part">27<b>29</b></div><div class="day part">28<b>13</b></div>
+  </div>
+  <p class="legend">Vermelho: 0 negócios criados de 155 leads (16 a 21/09). Âmbar: 22/09 faltaram 4; 26/09 faltaram 14; 27/09 faltaram 20; 28/09 faltaram 10 até as 11h. Total sem negócio: 204.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><div class="lbl">Erros 403/429 no intake</div><div class="big red">17 a 22/09</div><div class="sub">24, 20, 33, 26, 35 e 27 falhas por dia. Zero negócios criados nesses dias.</div></div>
+    <div class="card"><div class="lbl">Voltou a falhar</div><div class="big amber">27 e 28/09</div><div class="sub">25 e 46 falhas. Só 7 de 29 e 9 de 13 leads viraram negócio.</div></div>
+    <div class="card"><div class="lbl">Refresh do dash</div><div class="big amber">429 diário</div><div class="sub">33 erros em 26/09, 31 em 27/09. Hoje o DealStore carregou às 08h e falhou às 09h, 10h e 11h. O consumidor da cota segue sem dono (backlog de 21/09).</div></div>
+  </div>
+  <p class="note">Consequência direta: o funil, o AQRC, o Custo de Entrada, o Gerenciador e os Motivos de Perda mostram "0" ou subcontam de 16/09 em diante. Não é queda de captação: o Toca o Sino registrou entre 12 e 49 leads por dia no mesmo intervalo.</p>
+</section>
+
+<section>
+  <h2>3. Gerenciador: o que cada coluna mede de verdade hoje</h2>
+  <p>A aba cruza investimento da Meta e do Google com o Pipedrive. O lado do Pipedrive ficou preso na lógica de antes da virada de 14/08 (pipeline 65), e por isso quatro colunas mostram o mesmo número.</p>
+  <div class="tscroll">
+  <table>
+    <thead><tr><th>Coluna</th><th>O que deveria ser</th><th>O que é hoje</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>MQL</td><td>Lead qualificado</td><td>Todo negócio criado. O campo "Data MQL" é preenchido na criação de qualquer negócio (achado B-13, agosto).</td><td><span class="tag red">errado</span></td></tr>
+      <tr><td>Tentativa · Conectado · Avaliado</td><td>Progressão do SDR</td><td>Cópia do MQL. A regra é "está no pipeline 21, então passou por tudo". Meta: 370 = 370 = 370 = 370.</td><td><span class="tag red">colunas mortas</span></td></tr>
+      <tr><td>R.Agend.</td><td>Reunião agendada</td><td>Só quem clicou CONFIRMAR no lembrete do robô (490 para 112). 19 no mês contra 159 confirmadas no chat e 195 no Toca o Sino.</td><td><span class="tag red">subconta 8x</span></td></tr>
+      <tr><td>R.Real. · Opor. · Negoc. · Ganho</td><td>Resultado da closer</td><td>Depende de alguém mover o negócio no Pipedrive. Ninguém faz isso desde 08/09.</td><td><span class="tag red">parado</span></td></tr>
+      <tr><td>Linhas de campanha, conjunto e anúncio</td><td>Números reais por campanha</td><td><strong>Estimativa por rateio</strong> dos leads da Meta (células marcadas "est"). A API já devolve o real por campanha, mas a tela não usa. Exemplo: no Pipedrive a campanha se chama "LICKS | PQ | TESTE DE CRIATIVOS"; na Meta é "PF". Nomes diferentes, nada cruza.</td><td><span class="tag amber">estimado</span></td></tr>
+      <tr><td>Fonte "Direto"</td><td>Acesso direto</td><td>164 negócios (26%) sem UTM gravada. Inclui 3 das 8 vendas do mês (R$ 31,5 mil) que na verdade têm origem desconhecida.</td><td><span class="tag amber">sem atribuição</span></td></tr>
+      <tr><td>Fonte "Outros"</td><td>Resíduo</td><td>Recebe "meta" (34 leads), "aplicacao" (10, com 2 vendas), "chatgpt.com" (5), "GoogleYTAds" e 1 lead "teste-claude" que deveria estar filtrado.</td><td><span class="tag amber">classificação</span></td></tr>
+      <tr><td>Entradas (Custo de Entrada)</td><td>Igual ao funil</td><td>636 numa tela e 463 na outra. Uma conta criação em 3 pipelines, a outra conta entrada na etapa Lead Geral do 21.</td><td><span class="tag amber">dois números</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <h3>Como fica a linha Meta Ads em setembro</h3>
+  <div class="bar"><span class="n">MQL (na verdade: entradas)</span><div class="t"><div class="f" style="width:100%"></div></div><span class="v">370</span></div>
+  <div class="bar"><span class="n">Tentativa</span><div class="t"><div class="f dim" style="width:100%"></div></div><span class="v">370</span></div>
+  <div class="bar"><span class="n">Conectado</span><div class="t"><div class="f dim" style="width:100%"></div></div><span class="v">370</span></div>
+  <div class="bar"><span class="n">Avaliado</span><div class="t"><div class="f dim" style="width:100%"></div></div><span class="v">370</span></div>
+  <div class="bar"><span class="n">R.Agend.</span><div class="t"><div class="f red" style="width:2.2%"></div></div><span class="v">8</span></div>
+  <div class="bar"><span class="n">R.Real. / Ganho</span><div class="t"><div class="f red" style="width:0%"></div></div><span class="v">0 / 0</span></div>
+  <p class="legend">Investimento Meta no período: R$ 16.441,85. Com "Ganho = 0", o CAC da Meta aparece como traço, quando o time fechou proposta com leads dessa origem no Toca o Sino.</p>
+</section>
+
+<section>
+  <h2>4. Motivos de Perda: só o robô aparece</h2>
+  <p>A aba usa o campo nativo <code>lost_reason</code> do Pipedrive. Quem grava esse campo hoje é o robô do chat (gates de superior, orçamento e comprometimento) e a régua de WhatsApp. O time de pré-venda marca perda no Toca o Sino, que tem motivo próprio, e nada volta.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div class="lbl">O que o dash mostra (91 perdas)</div>
+      <div class="bar"><span class="n">SEM SUPERIOR</span><div class="t"><div class="f" style="width:100%"></div></div><span class="v">34</span></div>
+      <div class="bar"><span class="n">SEM BUDGET</span><div class="t"><div class="f" style="width:76%"></div></div><span class="v">26</span></div>
+      <div class="bar"><span class="n">SEM COMPROMETIMENTO</span><div class="t"><div class="f" style="width:47%"></div></div><span class="v">16</span></div>
+      <div class="bar"><span class="n">APENAS SEM CONEXÃO</span><div class="t"><div class="f" style="width:32%"></div></div><span class="v">11</span></div>
+      <div class="bar"><span class="n">HIPNOTERAPIA</span><div class="t"><div class="f" style="width:9%"></div></div><span class="v">3</span></div>
+      <div class="bar"><span class="n">ENCERROU CONTATO</span><div class="t"><div class="f" style="width:3%"></div></div><span class="v">1</span></div>
+      <div class="sub" style="margin-top:8px">Todas automáticas. Nenhuma decisão humana de venda está aqui.</div>
+    </div>
+    <div class="card">
+      <div class="lbl">O que o time marcou no Toca o Sino em setembro (137 perdas)</div>
+      <div class="bar"><span class="n">Sem interesse</span><div class="t"><div class="f red" style="width:100%"></div></div><span class="v">60</span></div>
+      <div class="bar"><span class="n">Não pode investir</span><div class="t"><div class="f red" style="width:23%"></div></div><span class="v">14</span></div>
+      <div class="bar"><span class="n">Tentativas esgotadas</span><div class="t"><div class="f red" style="width:20%"></div></div><span class="v">12</span></div>
+      <div class="bar"><span class="n">Número errado</span><div class="t"><div class="f red" style="width:18%"></div></div><span class="v">11</span></div>
+      <div class="bar"><span class="n">Teste</span><div class="t"><div class="f dim" style="width:15%"></div></div><span class="v">9</span></div>
+      <div class="bar"><span class="n">Sem retorno · Sem perfil</span><div class="t"><div class="f red" style="width:15%"></div></div><span class="v">5 · 4</span></div>
+      <div class="bar"><span class="n">Já é cliente · Declinou</span><div class="t"><div class="f red" style="width:10%"></div></div><span class="v">3 · 3</span></div>
+      <div class="bar"><span class="n">Concorrente · Curiosidade</span><div class="t"><div class="f red" style="width:7%"></div></div><span class="v">2 · 2</span></div>
+      <div class="sub" style="margin-top:8px">Mais 366 "Fora do ICP" (o mesmo robô, espelhado). 24 perdas sem motivo.</div>
+    </div>
+  </div>
+  <h3>Onde o time perde (etapa em que a perda foi marcada)</h3>
+  <div class="bar"><span class="n">Conexão</span><div class="t"><div class="f amber" style="width:100%"></div></div><span class="v">37</span></div>
+  <div class="bar"><span class="n">No Show</span><div class="t"><div class="f amber" style="width:57%"></div></div><span class="v">21</span></div>
+  <div class="bar"><span class="n">Proposta Apresentada</span><div class="t"><div class="f red" style="width:51%"></div></div><span class="v">19</span></div>
+  <div class="bar"><span class="n">Dia 1 a Dia 5</span><div class="t"><div class="f amber" style="width:95%"></div></div><span class="v">35</span></div>
+  <div class="bar"><span class="n">Entrada</span><div class="t"><div class="f amber" style="width:30%"></div></div><span class="v">11</span></div>
+  <div class="bar"><span class="n">Mesa</span><div class="t"><div class="f red" style="width:16%"></div></div><span class="v">6</span></div>
+  <p class="note">As 25 perdas em Mesa e Proposta Apresentada são as que mais custam (lead que chegou na closer) e são exatamente as que o dash não vê. O motivo delas no Toca o Sino ainda é genérico ("Sem interesse", "Não pode investir"): vale pedir ao time um motivo mais fino nessa etapa.</p>
+</section>
+
+<section>
+  <h2>5. Onde a venda vive hoje</h2>
+  <div class="grid g3">
+    <div class="card"><div class="lbl">Pipedrive</div><div class="big">8</div><div class="sub">R$ 89.558,67. Todas fechadas até 08/09. É o único lugar com valor em reais. Ninguém alimenta desde então.</div></div>
+    <div class="card"><div class="lbl">Toca o Sino</div><div class="big">2</div><div class="sub">1 "Sino Pago - Fechado" (27/09) e 1 "Sino Não Pago" com status ganho. A API deles não devolve valor da venda.</div></div>
+    <div class="card"><div class="lbl">OMNI OS (crm.vendas)</div><div class="big">0</div><div class="sub">A tela "CS registra venda" está no ar desde 25/09 e a tabela existe, mas nada foi registrado.</div></div>
+  </div>
+  <p class="note">A decisão 2 do backlog de migração (21/09) continua aberta: <strong>quem marca a venda como ganha, e em qual sistema?</strong> Sem ela, nenhum dash de faturamento vai bater, porque o único sistema com valor é o que o time parou de usar.</p>
+</section>
+
+<section>
+  <h2>6. Recomendação e decisões da Rafa</h2>
+  <p>Nada foi alterado no dashboard. Pelo protocolo da squad, a mudança só acontece com Documento de Mudança aprovado. Três caminhos:</p>
+
+  <div class="opt rec">
+    <h4><span class="tag green">recomendado</span> A. Toca o Sino vira a fonte do funil comercial no dash</h4>
+    <p>Gerenciador e Motivos de Perda passam a ler a API do Toca o Sino (etapas Entrada, Dia 1 a 4, Conexão, Sessão Agendada, No Show, Mesa, Proposta Apresentada, Sino). A UTM continua vindo do chat, cruzada pelo <code>crm_externo_id</code> que já existe em toda sessão. Meta e Google continuam alimentando investimento. O Pipedrive fica como histórico até 15/09. As colunas Tentativa, Conectado e Avaliado são substituídas pelas etapas reais deles.</p>
+    <p><strong>Pré-requisito:</strong> decidir onde a venda com valor é registrada (OMNI OS ou Toca o Sino com campo de valor pedido ao Matheus). <strong>Estimativa:</strong> 2 a 3 dias da squad, em DM próprio, com validação lado a lado antes de virar.</p>
+  </div>
+
+  <div class="opt">
+    <h4>B. Paliativo: manter o Pipedrive e espelhar o Toca o Sino nele</h4>
+    <p>Resolver a cota (403) e reprocessar os 204 leads sem negócio; criar um sync de hora em hora Toca o Sino para Pipedrive (etapa, perda com motivo, ganho). O dash não muda. <strong>Risco:</strong> cria dependência dupla de um sistema que a Rafa já declarou que não é mais o seguro, e a cota diária do Pipedrive segue sendo o ponto de falha.</p>
+  </div>
+
+  <div class="opt">
+    <h4>C. Desligar as duas abas até a decisão</h4>
+    <p>Esconder Gerenciador e Motivos de Perda (ou colocar um aviso fixo "dados a partir de 16/09 incompletos") para ninguém decidir em cima de número falso. Custo de 1 hora. Pode ser feito junto com A ou B como passo zero.</p>
+  </div>
+
+  <h3>O que precisa da Rafa</h3>
+  <ol>
+    <li><strong>Caminho A, B ou C</strong> (recomendo A, com C como passo zero imediato).</li>
+    <li><strong>Onde a venda é registrada com valor</strong>: OMNI OS (tela pronta, zero uso) ou Toca o Sino (pedir campo de valor ao Matheus).</li>
+    <li><strong>Reprocessar ou não</strong> os 204 leads de setembro no Pipedrive. Se o Pipedrive vai virar histórico, não vale a cota.</li>
+    <li><strong>Quem caça o consumidor da cota do Pipedrive</strong>. Está estourando todo dia por volta das 9h e derruba o intake e o dash. Fora do domínio da squad dash-omni.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>7. Método e fontes</h2>
+  <ul>
+    <li><strong>Dashboard:</strong> rotas <code>/api/pipedrive/gerenciador</code>, <code>motivos-perda</code>, <code>funnel</code>, <code>aqrc</code>, <code>closers</code>, <code>kpis</code>, <code>custo-entrada</code> na VPS (release 2026-09-25-1634), período 01/09 a 28/09, e o arquivo <code>stage-entries.json</code> (watermark 28/09 11h45). Código lido: <code>services/pipedrive.js</code> e <code>renderGerenciador</code> em <code>dashboard.html</code>.</li>
+    <li><strong>Toca o Sino:</strong> <code>GET /leads</code> paginado, 1.390 leads em 28/09 às 11h50. Campos novos desde a documentação de 18/09: <code>motivo_perda</code>, <code>motivo_perda_texto</code> e <code>etiquetas</code>.</li>
+    <li><strong>Chat:</strong> MySQL <code>omni_db.pesquisa_sessoes</code>, sessões de setembro com e sem <code>lead_ref</code> (negócio Pipedrive) e <code>crm_externo_id</code>, excluindo "teste" e e-mails da equipe.</li>
+    <li><strong>Logs:</strong> lead-intake (arquivos diários 16 a 28/09) e dashboard-omni-api (<code>/var/log/omni-api/out-30.log</code>).</li>
+    <li><strong>OMNI OS:</strong> tabela <code>crm.vendas</code> via Prisma da release 2026-09-25-cs-vendas.</li>
+  </ul>
+  <p class="foot">Nenhum lead identificado por nome neste relatório. Nenhum arquivo do dashboard foi alterado. Registro da squad: <code>squads/dash-omni/data/DM-035.md</code>.</p>
+</section>
+
+</div>
+</body>
+</html>
