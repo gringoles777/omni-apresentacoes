@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-block:18px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--dark);border:1px solid var(--line);padding:18px 20px;border-radius:4px}.card h3{font-family:var(--f-serif);font-weight:400;font-size:1.25rem;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-block:12px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+h2{font-family:var(--f-serif);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);margin:0}
+</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Revisão G3 Imersão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --black:#050505; --dark:#0D0D0D; --elev:#161410; --line:#2A261C; --line-soft:#1E1B15;
+  --gold:#C8A84B; --gold-l:#E8C86A; --gold-d:#9A7A2E; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.22);
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.72); --cream-50:rgba(245,240,232,.52);
+  --teal:#2A9D8F; --teal-10:rgba(42,157,143,.14); --warn:#D98C3F; --warn-10:rgba(217,140,63,.13);
+  --f-display:'Oswald','Arial Black',sans-serif; --f-serif:'DM Serif Display',Georgia,serif;
+  --f-body:'Inter','Open Sans',system-ui,sans-serif; --f-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; background:var(--black); color:var(--cream); font-family:var(--f-body); font-size:15.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+a{color:var(--gold-l)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold-l); outline-offset:3px}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:clamp(16px,4vw,40px)}
+.prose{max-width:68ch}
+
+/* nav */
+.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:rgba(5,5,5,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; gap:22px; align-items:center; overflow-x:auto; scrollbar-width:none; padding-block:12px}
+.nav .wrap::-webkit-scrollbar{display:none}
+.nav .brand{font-family:var(--f-display); letter-spacing:.18em; font-size:12px; color:var(--gold); white-space:nowrap; text-transform:uppercase}
+.nav a{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50); text-decoration:none; white-space:nowrap; letter-spacing:.04em}
+.nav a:hover{color:var(--gold-l)}
+
+/* hero */
+header.hero{padding-block:56px 40px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse 70% 90% at 85% 0%, rgba(200,168,75,.10), transparent 60%)}
+.eyebrow{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold)}
+h1{font-family:var(--f-serif); font-weight:400; font-size:clamp(2.3rem,5.6vw,4.2rem); line-height:1.04; margin:14px 0 18px; text-wrap:balance}
+h1 em{font-style:italic; background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lede{font-size:clamp(1rem,1.6vw,1.13rem); color:var(--cream-70); max-width:64ch; margin:0}
+.meta{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:22px; font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+.meta b{color:var(--cream); font-weight:500}
+.stop{margin-top:26px; display:inline-flex; gap:10px; align-items:center; padding:9px 14px; border:1px solid var(--warn); color:var(--warn); background:var(--warn-10); border-radius:3px; font-family:var(--f-mono); font-size:12px}
+
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:34px}
+.kpi{background:var(--dark); padding:18px 18px 16px}
+.kpi .n{font-family:var(--f-display); font-size:clamp(1.7rem,3.4vw,2.4rem); color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12.5px; color:var(--cream-70); margin-top:8px; line-height:1.4}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section.s{padding-block:56px; border-bottom:1px solid var(--line-soft)}
+.sh{display:flex; gap:16px; align-items:baseline; margin-bottom:22px; flex-wrap:wrap}
+.sh .num{font-family:var(--f-mono); font-size:12px; color:var(--gold-d); letter-spacing:.08em}
+h2{font-family:var(--f-display); font-weight:500; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(1.45rem,2.9vw,2.05rem); margin:0; line-height:1.15; text-wrap:balance}
+.for{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:2px; border:1px solid var(--line); color:var(--cream-50)}
+.for.traf{border-color:var(--teal); color:var(--teal); background:var(--teal-10)}
+h3{font-family:var(--f-display); font-weight:500; font-size:1.08rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin:34px 0 12px}
+p{margin:0 0 14px}
+.muted{color:var(--cream-50)}
+.small{font-size:13.5px}
+.thesis{font-family:var(--f-serif); font-size:clamp(1.3rem,2.4vw,1.75rem); line-height:1.3; color:var(--cream); max-width:36ch; margin:0 0 26px; text-wrap:balance}
+.thesis::before{content:"“"; color:var(--gold)}
+.thesis::after{content:"”"; color:var(--gold)}
+
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:860px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--elev); border:1px solid var(--line); padding:18px 18px 16px; border-radius:4px}
+.card h4{font-family:var(--f-display); font-weight:500; font-size:1rem; letter-spacing:.05em; text-transform:uppercase; margin:0 0 8px; color:var(--cream)}
+.card p,.card li{font-size:14px; color:var(--cream-70)}
+.card p:last-child{margin:0}
+.card.hl{border-color:var(--gold-d); background:linear-gradient(180deg,rgba(200,168,75,.09),rgba(200,168,75,.02))}
+
+ol.steps,ul.list{margin:0; padding-left:0; list-style:none; display:grid; gap:10px}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s; position:relative; padding-left:34px; font-size:14px; color:var(--cream-70)}
+ol.steps li::before{content:counter(s,decimal-leading-zero); position:absolute; left:0; top:1px; font-family:var(--f-mono); font-size:11.5px; color:var(--gold)}
+ol.steps li b,ul.list li b{color:var(--cream); font-weight:600}
+ul.list li{position:relative; padding-left:18px; font-size:14px; color:var(--cream-70)}
+ul.list li::before{content:""; position:absolute; left:2px; top:.62em; width:6px; height:6px; background:var(--gold-d); transform:rotate(45deg)}
+
+/* phase columns */
+.phase{border-top:2px solid var(--gold-d); padding-top:14px}
+.phase .tag{font-family:var(--f-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold)}
+.phase h4{font-family:var(--f-display); font-size:1.25rem; font-weight:500; text-transform:uppercase; margin:4px 0 14px; letter-spacing:.03em}
+
+/* tables */
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:4px; margin:6px 0 10px}
+table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:560px}
+th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+th{font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); background:var(--dark); position:sticky; top:0}
+td{color:var(--cream-70)}
+td:first-child{color:var(--cream)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.key td{background:var(--gold-10); color:var(--cream); font-weight:500}
+col.base{background:rgba(200,168,75,.05)}
+.note{font-size:13px; color:var(--cream-50); border-left:2px solid var(--line); padding-left:12px; margin-top:10px}
+
+/* funnel */
+.funnel{display:flex; flex-wrap:wrap; gap:0; align-items:stretch; margin:8px 0 6px}
+.fs{flex:1 1 150px; min-width:0; padding:14px 16px; background:var(--elev); border:1px solid var(--line); position:relative}
+.fs + .fs{border-left:0}
+.fs .v{font-family:var(--f-display); font-size:1.7rem; color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.fs .k{font-size:12.5px; color:var(--cream-70); margin-top:6px}
+.fs .p{font-family:var(--f-mono); font-size:11px; color:var(--gold-d); margin-top:6px}
+@media (max-width:640px){.fs{flex-basis:45%} .fs + .fs{border-left:1px solid var(--line)}}
+
+/* budget bars */
+.bars{display:grid; gap:10px; margin-top:8px}
+.bar{display:grid; grid-template-columns:118px 1fr 78px; gap:12px; align-items:center; font-size:13px}
+.bar .lab{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-70)}
+.bar .trk{height:12px; background:var(--dark); border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.bar .fill{height:100%; background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+.bar .val{font-family:var(--f-mono); text-align:right; color:var(--cream); font-variant-numeric:tabular-nums}
+.bar .sub{grid-column:2 / 4; font-size:11.5px; color:var(--cream-50); margin-top:-6px}
+
+/* names */
+.names{display:grid; gap:10px}
+.name{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px; padding:16px 18px; background:var(--elev); border:1px solid var(--line); border-radius:4px}
+.name .t{font-family:var(--f-serif); font-size:1.15rem; line-height:1.25; color:var(--cream)}
+.name .c{font-size:13.5px; color:var(--cream-70)}
+.name .c b{display:block; font-family:var(--f-mono); font-size:10.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-d); margin-bottom:4px}
+.name.fav{border-color:var(--gold); background:linear-gradient(135deg,rgba(200,168,75,.13),rgba(200,168,75,.02) 60%)}
+.name.fav .t::after{content:"Favorita"; display:inline-block; margin-left:10px; vertical-align:middle; font-family:var(--f-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--black); background:var(--gold); padding:2px 7px; border-radius:2px}
+@media (max-width:760px){.name{grid-template-columns:1fr; gap:10px}}
+
+/* tsunami */
+.tsu{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:end}
+.tsu .lvl{background:var(--elev); border:1px solid var(--line); border-radius:4px; padding:14px}
+.tsu .lvl:nth-child(1){min-height:150px} .tsu .lvl:nth-child(2){min-height:180px; border-color:#3a3322} .tsu .lvl:nth-child(3){min-height:210px; border-color:var(--gold-d)} .tsu .lvl:nth-child(4){min-height:240px; border-color:var(--gold); background:linear-gradient(180deg,rgba(200,168,75,.16),rgba(200,168,75,.03))}
+.tsu .who{font-family:var(--f-display); font-size:1.02rem; text-transform:uppercase; color:var(--gold-l); letter-spacing:.04em}
+.tsu .what{font-size:13.5px; color:var(--cream); margin:8px 0 6px}
+.tsu .cond{font-size:12px; color:var(--cream-50)}
+@media (max-width:760px){.tsu{grid-template-columns:1fr 1fr} .tsu .lvl{min-height:0!important}}
+
+/* timeline */
+.tl{display:grid; gap:0; border-left:1px solid var(--gold-d); margin-left:6px}
+.tli{position:relative; padding:0 0 22px 24px}
+.tli::before{content:""; position:absolute; left:-5px; top:6px; width:9px; height:9px; background:var(--black); border:1px solid var(--gold); transform:rotate(45deg)}
+.tli.ev::before{background:var(--gold)}
+.tli .d{font-family:var(--f-mono); font-size:11.5px; color:var(--gold); letter-spacing:.05em}
+.tli .h{font-family:var(--f-display); font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; margin:2px 0 4px}
+.tli p{font-size:14px; color:var(--cream-70); margin:0 0 4px}
+.tli .m{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+
+.check li{list-style:none; position:relative; padding-left:28px; font-size:14px; color:var(--cream-70)}
+.check{padding:0; margin:0; display:grid; gap:9px}
+.check li::before{content:""; position:absolute; left:0; top:3px; width:14px; height:14px; border:1px solid var(--gold-d); border-radius:2px}
+
+.pill{display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; padding:2px 7px; border-radius:2px; white-space:nowrap}
+.pill.ok{background:var(--teal-10); color:var(--teal)} .pill.cf{background:var(--warn-10); color:var(--warn)}
+
+footer{padding-block:40px 60px; font-size:12.5px; color:var(--cream-50)}
+footer .wrap{display:grid; gap:8px}
+
+/* ===== Revisão G3: complementos mobile ===== */
+.links{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.links a{display:inline-flex; align-items:center; gap:8px; padding:11px 14px; border:1px solid var(--gold-d); border-radius:3px; background:var(--gold-10); color:var(--gold-l); text-decoration:none; font-family:var(--f-mono); font-size:12px; letter-spacing:.04em; min-height:44px}
+.links a:hover{background:var(--gold-20)}
+.links a span{color:var(--cream-50)}
+.alert{margin-top:20px; padding:12px 14px; border:1px solid var(--warn); border-left-width:4px; background:var(--warn-10); color:var(--cream); font-size:14px; border-radius:3px}
+.alert b{color:var(--warn)}
+.status{display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:2px; border:1px solid var(--warn); color:var(--warn); background:var(--warn-10); white-space:nowrap; margin-left:auto}
+.card .top{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:10px}
+.card .var{font-family:var(--f-display); font-size:1.4rem; color:var(--gold-l); letter-spacing:.04em; line-height:1}
+.card .fmt{font-family:var(--f-mono); font-size:11px; color:var(--cream-50); letter-spacing:.06em; text-transform:uppercase}
+.f{margin:0 0 12px}
+.f .k{display:block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-d); margin-bottom:3px}
+.f .v{font-size:14px; color:var(--cream); line-height:1.55; overflow-wrap:anywhere}
+.f .v.q{color:var(--cream-70)}
+.f .v.big{font-family:var(--f-serif); font-size:1.15rem; color:var(--cream); line-height:1.3}
+.f:last-child{margin-bottom:0}
+.roteiro{background:var(--dark); border:1px solid var(--line); border-radius:4px; padding:14px 16px; margin:14px 0 4px}
+.roteiro .k{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px}
+.roteiro ol{margin:0; padding-left:0; list-style:none; display:grid; gap:8px}
+.roteiro li{font-size:14px; color:var(--cream); line-height:1.5}
+.roteiro li .t{font-family:var(--f-mono); font-size:11px; color:var(--gold-d); display:block}
+.roteiro li .cue{color:var(--cream-50); font-style:italic}
+.roteiro .n{font-size:12.5px; color:var(--cream-50); margin-top:10px; border-top:1px solid var(--line-soft); padding-top:8px}
+.concept{margin-top:34px; padding-top:22px; border-top:1px solid var(--line)}
+.concept:first-of-type{margin-top:8px; border-top:0; padding-top:0}
+.concept h3{margin:0 0 4px}
+.concept .desc{font-size:13.5px; color:var(--cream-50); margin:0 0 6px}
+.msg{white-space:pre-line; font-size:14.5px; color:var(--cream); background:var(--dark); border:1px solid var(--line); border-radius:4px; padding:14px 16px; line-height:1.55; overflow-wrap:anywhere}
+.msg em{font-style:normal; font-weight:600}
+.when{display:flex; flex-wrap:wrap; gap:6px 14px; font-family:var(--f-mono); font-size:11.5px; color:var(--cream-70); margin:0 0 10px}
+.when b{color:var(--gold); font-weight:500}
+.aprov{margin-top:12px; padding:10px 12px; border:1px dashed var(--gold-d); border-radius:3px; font-family:var(--f-mono); font-size:12px; color:var(--cream-70)}
+.aprov span{color:var(--cream-50)}
+.stack{display:grid; gap:16px}
+.pend{display:grid; gap:12px}
+.pend .card p{margin:0}
+.pend .card .who{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:6px}
+
+/* tabela vira card no celular */
+@media (max-width:720px){
+  .tw.cards{border:0; overflow:visible}
+  .tw.cards table{min-width:0; display:block}
+  .tw.cards thead{display:none}
+  .tw.cards tbody,.tw.cards tr,.tw.cards td{display:block; width:100%}
+  .tw.cards tr{background:var(--elev); border:1px solid var(--line); border-radius:4px; padding:6px 0; margin-bottom:12px}
+  .tw.cards td{border-bottom:0; padding:8px 14px}
+  .tw.cards td::before{content:attr(data-l); display:block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-d); margin-bottom:2px}
+  .tw.cards td:first-child{font-family:var(--f-serif); font-size:1.1rem; line-height:1.3}
+  .tw.cards td:first-child::before{color:var(--gold)}
+  header.hero{padding-block:40px 32px}
+  section.s{padding-block:40px}
+  .card{padding:16px 14px 14px}
+  .status{margin-left:0}
+}
+</style>
+
+</head>
+<body>
+<nav class="nav"><div class="wrap"><span class="brand">OMNI · Revisão G3</span>
+<a href="#decisoes">5 decisões</a><a href="#criativos">12 criativos</a><a href="#cadencia">Cadência</a><a href="#video">Vídeo 40s</a><a href="#pendencias">Pendências</a><a href="#responder">Como responder</a></div></nav>
+
+<header class="hero"><div class="wrap">
+<div class="eyebrow">Gate G3 · Imersão 31/10 · squad gestao-lancamentos</div>
+<h1>Gate G3: <em>o que a Rafa aprova</em></h1>
+<p class="lede">Copy da LP, 12 criativos, mensagens de cadência e o vídeo de 40s da página de obrigado. Tudo aqui é rascunho fiel aos arquivos da copy. Nada sobe sem o seu OK.</p>
+<div class="meta"><span>Para <b>Rafa Mendes</b></span><span>Fontes <b>criativos-v1, mensagens-cadencia-v1, lp-ingresso, pagina-obrigado</b></span><span>Versão <b>29/09/2026</b></span></div>
+<div class="links">
+<a href="https://go.omnihypnosis.com.br/previa/imersao-3110/" target="_blank" rel="noopener">Prévia LP · variante A <span>Alto Padrão</span></a>
+<a href="https://go.omnihypnosis.com.br/previa/imersao-3110/?v=b" target="_blank" rel="noopener">Prévia LP · variante B <span>Saúde e Bem-Estar</span></a>
+<a href="https://go.omnihypnosis.com.br/previa/imersao-3110/obrigado/" target="_blank" rel="noopener">Prévia · página de obrigado</a>
+</div>
+<div class="alert"><b>Atenção:</b> nada foi publicado oficialmente. As prévias acima não têm pixel nem checkout. Servem só para você ler no celular e aprovar.</div>
+</div></header>
+
+<section class="s" id="decisoes"><div class="wrap"><div class="sh"><span class="num">01</span><h2>5 decisões de copy</h2></div>
+<p class="prose">Cada linha tem um padrão. Se você não responder, a squad segue o padrão.</p>
+<div class="tw cards"><table><thead><tr><th>Decisão</th><th>O que a copy fez</th><th>Padrão se não responder</th></tr></thead><tbody>
+<tr><td data-l="Decisão 1">1. "Faturar" no subtítulo e o R$ 36,8 mil do médico</td><td data-l="O que a copy fez">"Faturar" é bruto e o R$ 36,8 mil por mês do médico é renda declarada ao IR (Demografia Médica no Brasil 2025). A copy trata o número como régua de planejamento, com fonte visível e "não é promessa" na LP e no criativo 6. O subtítulo da Rafa ficou intacto.</td><td data-l="Padrão">Manter como está.</td></tr>
+<tr><td data-l="Decisão 2">2. R$ 20 mil/mês do Roberto Monfort</td><td data-l="O que a copy fez">Ficou fora da LP. Na mesma rolagem ele ficaria abaixo da régua do médico e enfraqueceria a seção da comparação. No vídeo do criativo 1 também está fora por padrão.</td><td data-l="Padrão">Fora da LP. Só em criativo, com ressalva de resultado.</td></tr>
+<tr><td data-l="Decisão 3">3. FAQ avisa que haverá apresentação da formação</td><td data-l="O que a copy fez">Pergunta "Vai ter alguma oferta?" responde: no fim do dia o Michael apresenta o caminho de formação da OMNI para quem quiser seguir. Sem preço, sem nome da Pós. Participar não obriga a nada.</td><td data-l="Padrão">Manter.</td></tr>
+<tr><td data-l="Decisão 4">4. Replay</td><td data-l="O que a copy fez">FAQ "Vai ficar gravado?" com sugestão "Não. É ao vivo, para quem está na sala." A mensagem pós-evento para ausentes convida para conversa 1 a 1 em vez de mandar link. Reforça o compromisso do R$ 27.</td><td data-l="Padrão">Sem replay público.</td></tr>
+<tr><td data-l="Decisão 5">5. Criativo 6 (comparação com médico) na Meta</td><td data-l="O que a copy fez">É a peça de maior risco de reprovação ou limitação na Meta, mesmo com fonte visível na imagem e "não é promessa de renda" no rodapé.</td><td data-l="Padrão">Subir. Se reprovar, não recorrer e seguir com os outros 10.</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section class="s" id="criativos"><div class="wrap"><div class="sh"><span class="num">02</span><h2>12 criativos</h2><span class="for">6 pares A/B</span></div>
+<p class="prose">Público quente, nunca frio nesta versão. A e B têm o mesmo corpo; muda só o nome do evento no texto, na headline e na imagem. Botão Meta "Inscreva-se" em todas. Vídeos gravados até 20/10, uma gravação só, trocando a tela final. Texto fiel ao arquivo criativos-v1.</p>
+<div class="tw cards"><table><thead><tr><th>#</th><th>Conceito</th><th>Formato</th><th>Descrição</th></tr></thead><tbody>
+<tr><td data-l="Peça">1A / 1B</td><td data-l="Conceito">Transição real (Roberto Monfort)</td><td data-l="Formato">Vídeo 35-40s</td><td data-l="Descrição">Sábado 31/10 · ao vivo · R$ 27</td></tr>
+<tr><td data-l="Peça">2A / 2B</td><td data-l="Conceito">O plano concreto</td><td data-l="Formato">Vídeo 30-40s</td><td data-l="Descrição">Você sai com o seu plano escrito</td></tr>
+<tr><td data-l="Peça">3A / 3B</td><td data-l="Conceito">Sem formação na área</td><td data-l="Formato">Estático 1:1 e 4:5</td><td data-l="Descrição">Metodologia desde 1979</td></tr>
+<tr><td data-l="Peça">4A / 4B</td><td data-l="Conceito">Tempo e segurança</td><td data-l="Formato">Vídeo 30-40s</td><td data-l="Descrição">Construa em paralelo, com números</td></tr>
+<tr><td data-l="Peça">5A / 5B</td><td data-l="Conceito">Propósito com maturidade (Elizabete Monteiro)</td><td data-l="Formato">Estático 4:5 com foto da Elizabete</td><td data-l="Descrição">Sua trajetória conta a favor</td></tr>
+<tr><td data-l="Peça">6A / 6B</td><td data-l="Conceito">Comparação com fonte</td><td data-l="Formato">Estático 1:1 e 4:5, fonte visível na imagem</td><td data-l="Descrição">Uma régua, não uma promessa</td></tr>
+</tbody></table></div>
+
+<!-- Conceito 1 -->
+<div class="concept" id="c1"><h3>Conceito 1 · Transição real (Roberto Monfort)</h3><p class="desc">Vídeo 35-40s. Michael narra sobre print/foto do depoimento do Roberto. Roteiro igual para A e B; só a tela final muda.</p>
+<div class="roteiro"><div class="k">Roteiro do vídeo</div><ol>
+<li><span class="t">0 a 6s</span><span class="cue">(print/foto do Roberto na tela)</span> "Esse é o Roberto Monfort. Diretor de vendas. Cargo, bônus, reconhecimento."</li>
+<li><span class="t">6 a 14s</span>"E quase nenhum jantar em casa. Chegou perto de perder a família."</li>
+<li><span class="t">14 a 22s</span>"Ele não largou tudo num impulso. Fez um plano. Em três meses já estava atendendo, com agenda cheia. Voltou a jantar em casa."</li>
+<li><span class="t">22 a 34s</span><span class="cue">(Michael na câmera)</span> "No sábado, 31, eu vou construir esse plano com você. Ao vivo, das nove e meia às seis. Você sai com a sua conta feita."</li>
+<li><span class="t">34 a 40s</span><span class="cue">(tela final: título da variante + data + R$ 27)</span> "O ingresso é vinte e sete reais. O link está aqui embaixo."</li>
+</ol><div class="n">Nota: o faturamento do Roberto (R$ 20 mil+/mês) fica FORA do vídeo por padrão; decisão 2 da Rafa.</div></div>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">1A</span><span class="fmt">Vídeo 35-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (113 car.)</span><div class="v">Diretor de vendas. Cargo, bônus e quase nenhum jantar em casa. Em 3 meses, o Roberto já atendia na nova carreira.</div></div>
+<div class="f"><span class="k">Texto primário completo (453 car.)</span><div class="v q">Diretor de vendas. Cargo, bônus e quase nenhum jantar em casa. Em 3 meses, o Roberto já atendia na nova carreira. Ele não largou tudo num impulso. Fez um plano. Na Imersão Carreira Terapêutica de Alto Padrão, você constrói o seu: o que da sua carreira vale na nova, quanto cobrar e quantas horas cabem. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27. Relato do próprio profissional; resultados variam com a dedicação.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Sábado 31/10 · ao vivo · R$ 27</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Terapêutica de Alto Padrão · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">1B</span><span class="fmt">Vídeo 35-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (113 car.)</span><div class="v">Diretor de vendas. Cargo, bônus e quase nenhum jantar em casa. Em 3 meses, o Roberto já atendia na nova carreira.</div></div>
+<div class="f"><span class="k">Texto primário completo (444 car.)</span><div class="v q">Diretor de vendas. Cargo, bônus e quase nenhum jantar em casa. Em 3 meses, o Roberto já atendia na nova carreira. Ele não largou tudo num impulso. Fez um plano. Na Imersão Carreira Saúde e Bem-Estar, você constrói o seu: o que da sua carreira vale na nova, quanto cobrar e quantas horas cabem. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27. Relato do próprio profissional; resultados variam com a dedicação.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Sábado 31/10 · ao vivo · R$ 27</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Saúde e Bem-Estar · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+</div></div>
+
+<!-- Conceito 2 -->
+<div class="concept" id="c2"><h3>Conceito 2 · O plano concreto</h3><p class="desc">Vídeo 30-40s. Michael mostra um plano preenchido (folha ou tela). Roteiro igual para A e B; só a tela final muda.</p>
+<div class="roteiro"><div class="k">Roteiro do vídeo</div><ol>
+<li><span class="t">0 a 5s</span><span class="cue">(Michael segura a folha para a câmera)</span> "Isso aqui é um plano de transição de carreira. Preenchido."</li>
+<li><span class="t">5 a 15s</span><span class="cue">(close em cada campo)</span> "Renda que a pessoa quer. Preço por atendimento. Quantos clientes por mês. Quantas horas por semana. E o número que diz a hora de virar a chave."</li>
+<li><span class="t">15 a 25s</span>"Não é sonho, é conta. E tem gente que faz essa conta e descobre que ainda não é hora. Também vale."</li>
+<li><span class="t">25 a 35s</span>"No sábado, 31, você faz o seu. Ao vivo comigo, das nove e meia às seis."</li>
+<li><span class="t">35 a 40s</span><span class="cue">(tela final)</span> "Ingresso de vinte e sete reais. Link aqui embaixo."</li>
+</ol><div class="n">Nota: o plano mostrado é EXEMPLO ilustrativo; marcar "exemplo" na folha. Números fictícios só se rotulados como exemplo [A CONFIRMAR com Michael].</div></div>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">2A</span><span class="fmt">Vídeo 30-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">Isto é um plano de transição preenchido. Renda-alvo, preço, clientes por mês e horas por semana. Numa folha.</div></div>
+<div class="f"><span class="k">Texto primário completo (353 car.)</span><div class="v q">Isto é um plano de transição preenchido. Renda-alvo, preço, clientes por mês e horas por semana. Numa folha. Na Imersão Carreira Terapêutica de Alto Padrão, você sai com o seu. Não é palestra motivacional. É um dia de trabalho: você chega com dúvidas e sai com números. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Você sai com o seu plano escrito</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Terapêutica de Alto Padrão · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">2B</span><span class="fmt">Vídeo 30-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">Isto é um plano de transição preenchido. Renda-alvo, preço, clientes por mês e horas por semana. Numa folha.</div></div>
+<div class="f"><span class="k">Texto primário completo (344 car.)</span><div class="v q">Isto é um plano de transição preenchido. Renda-alvo, preço, clientes por mês e horas por semana. Numa folha. Na Imersão Carreira Saúde e Bem-Estar, você sai com o seu. Não é palestra motivacional. É um dia de trabalho: você chega com dúvidas e sai com números. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Você sai com o seu plano escrito</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Saúde e Bem-Estar · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+</div></div>
+
+<!-- Conceito 3 -->
+<div class="concept" id="c3"><h3>Conceito 3 · Sem formação na área</h3><p class="desc">Estático 1:1 e 4:5.</p>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">3A</span><span class="fmt">Estático 1:1 e 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">Não é preciso ser médico nem psicólogo para construir uma carreira terapêutica. É preciso método e um plano.</div></div>
+<div class="f"><span class="k">Texto primário completo (412 car.)</span><div class="v q">Não é preciso ser médico nem psicólogo para construir uma carreira terapêutica. É preciso método e um plano. A OMNI forma terapeutas com a mesma metodologia desde 1979. A maior parte dos mais de 4 mil formados no Brasil veio de outra carreira. Na Imersão Carreira Terapêutica de Alto Padrão, você monta o seu plano de transição. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Metodologia desde 1979</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1 (grande): Sem formação na área. / Linha 2: Com um plano. / Rodapé: Imersão Carreira Terapêutica de Alto Padrão · 31/10 · ao vivo · R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">3B</span><span class="fmt">Estático 1:1 e 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">Não é preciso ser médico nem psicólogo para construir uma carreira terapêutica. É preciso método e um plano.</div></div>
+<div class="f"><span class="k">Texto primário completo (403 car.)</span><div class="v q">Não é preciso ser médico nem psicólogo para construir uma carreira terapêutica. É preciso método e um plano. A OMNI forma terapeutas com a mesma metodologia desde 1979. A maior parte dos mais de 4 mil formados no Brasil veio de outra carreira. Na Imersão Carreira Saúde e Bem-Estar, você monta o seu plano de transição. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Metodologia desde 1979</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1 (grande): Sem formação na área. / Linha 2: Com um plano. / Rodapé: Imersão Carreira Saúde e Bem-Estar · 31/10 · ao vivo · R$ 27</div></div>
+</div>
+</div></div>
+
+<!-- Conceito 4 -->
+<div class="concept" id="c4"><h3>Conceito 4 · Tempo e segurança</h3><p class="desc">Vídeo 30-40s. Michael faz a conta de horas num quadro. Roteiro igual para A e B; só a tela final muda.</p>
+<div class="roteiro"><div class="k">Roteiro do vídeo</div><ol>
+<li><span class="t">0 a 6s</span><span class="cue">(Michael ao quadro)</span> "Todo mundo me pergunta se precisa largar o emprego. Não. A pergunta certa é outra."</li>
+<li><span class="t">6 a 18s</span><span class="cue">(escreve)</span> "Quantas horas por semana você tem de verdade? Duas noites? O sábado de manhã? Isso aqui é o seu tempo."</li>
+<li><span class="t">18 a 28s</span>"Agora: quanto você cobra por processo, e quantos processos cabem nessas horas. Isso é a sua segunda renda. Sem mexer na primeira."</li>
+<li><span class="t">28 a 36s</span>"No sábado, 31, a gente faz essa conta com a sua agenda. Ao vivo, das nove e meia às seis."</li>
+<li><span class="t">36 a 40s</span><span class="cue">(tela final)</span> "Vinte e sete reais. Link aqui embaixo."</li>
+</ol><div class="n">Nota: no quadro, só letras e setas (horas → processos → renda). Nenhum valor em reais escrito.</div></div>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">4A</span><span class="fmt">Vídeo 30-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">A pergunta não é se você larga o emprego. É quantas horas por semana cabem na nova carreira sem largar nada.</div></div>
+<div class="f"><span class="k">Texto primário completo (372 car.)</span><div class="v q">A pergunta não é se você larga o emprego. É quantas horas por semana cabem na nova carreira sem largar nada. Na Imersão Carreira Terapêutica de Alto Padrão, você faz essa conta no papel: horas disponíveis, preço por atendimento, clientes por mês e o marco que diz a hora de virar a chave. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Construa em paralelo, com números</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Terapêutica de Alto Padrão · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">4B</span><span class="fmt">Vídeo 30-40s</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (108 car.)</span><div class="v">A pergunta não é se você larga o emprego. É quantas horas por semana cabem na nova carreira sem largar nada.</div></div>
+<div class="f"><span class="k">Texto primário completo (363 car.)</span><div class="v q">A pergunta não é se você larga o emprego. É quantas horas por semana cabem na nova carreira sem largar nada. Na Imersão Carreira Saúde e Bem-Estar, você faz essa conta no papel: horas disponíveis, preço por atendimento, clientes por mês e o marco que diz a hora de virar a chave. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Construa em paralelo, com números</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Tela final do vídeo</span><div class="v q">Imersão Carreira Saúde e Bem-Estar · Sábado 31/10 · 9h30 às 18h · Ingresso R$ 27</div></div>
+</div>
+</div></div>
+
+<!-- Conceito 5 -->
+<div class="concept" id="c5"><h3>Conceito 5 · Propósito com maturidade (Elizabete Monteiro)</h3><p class="desc">Estático 4:5 com foto da Elizabete.</p>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">5A</span><span class="fmt">Estático 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (120 car.)</span><div class="v">Elizabete Monteiro se aposentou com a experiência inteira na mão e sem onde usar. Hoje dá palestras e publicou um livro.</div></div>
+<div class="f"><span class="k">Texto primário completo (385 car.)</span><div class="v q">Elizabete Monteiro se aposentou com a experiência inteira na mão e sem onde usar. Hoje dá palestras e publicou um livro. Maturidade não é atraso. É bagagem. Na Imersão Carreira Terapêutica de Alto Padrão, você descobre o que da sua trajetória vale na carreira terapêutica e monta o plano para começar. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Sua trajetória conta a favor</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1: Professora. Pós-doutora. Aposentada. / Linha 2 (grande): Recomeçou. / Rodapé: Imersão Carreira Terapêutica de Alto Padrão · 31/10 · R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">5B</span><span class="fmt">Estático 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (120 car.)</span><div class="v">Elizabete Monteiro se aposentou com a experiência inteira na mão e sem onde usar. Hoje dá palestras e publicou um livro.</div></div>
+<div class="f"><span class="k">Texto primário completo (376 car.)</span><div class="v q">Elizabete Monteiro se aposentou com a experiência inteira na mão e sem onde usar. Hoje dá palestras e publicou um livro. Maturidade não é atraso. É bagagem. Na Imersão Carreira Saúde e Bem-Estar, você descobre o que da sua trajetória vale na carreira terapêutica e monta o plano para começar. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Sua trajetória conta a favor</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1: Professora. Pós-doutora. Aposentada. / Linha 2 (grande): Recomeçou. / Rodapé: Imersão Carreira Saúde e Bem-Estar · 31/10 · R$ 27</div></div>
+</div>
+</div></div>
+
+<!-- Conceito 6 -->
+<div class="concept" id="c6"><h3>Conceito 6 · Comparação com fonte</h3><p class="desc">Estático 1:1 e 4:5, fonte visível na imagem. Peça de maior risco na Meta (decisão 5).</p>
+<div class="grid2">
+<div class="card"><div class="top"><span class="var">6A</span><span class="fmt">Estático 1:1 e 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (35 car.)</span><div class="v big">Carreira Terapêutica de Alto Padrão</div></div>
+<div class="f"><span class="k">Primeira linha (111 car.)</span><div class="v">Médicos no Brasil declaram em média R$ 36,8 mil por mês ao Imposto de Renda (Demografia Médica no Brasil 2025).</div></div>
+<div class="f"><span class="k">Texto primário completo (393 car.)</span><div class="v q">Médicos no Brasil declaram em média R$ 36,8 mil por mês ao Imposto de Renda (Demografia Médica no Brasil 2025). Quanto disso cabe numa carreira terapêutica, mesmo sem formação na área? Depende de preço, agenda e dedicação. Não é promessa. É a conta que você faz na Imersão Carreira Terapêutica de Alto Padrão. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Uma régua, não uma promessa</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1: Médico no Brasil: R$ 36,8 mil/mês em média¹ / Linha 2 (grande): Quanto disso cabe na sua agenda? / Rodapé miúdo: ¹ Demografia Médica no Brasil 2025 (FMUSP/Min. Saúde/AMB), renda média declarada no IR. Não é promessa de renda. / Faixa: Imersão Carreira Terapêutica de Alto Padrão · 31/10 · R$ 27</div></div>
+</div>
+<div class="card"><div class="top"><span class="var">6B</span><span class="fmt">Estático 1:1 e 4:5</span><span class="status">Aguarda OK</span></div>
+<div class="f"><span class="k">Headline (34 car.)</span><div class="v big">Imersão Carreira Saúde e Bem-Estar</div></div>
+<div class="f"><span class="k">Primeira linha (111 car.)</span><div class="v">Médicos no Brasil declaram em média R$ 36,8 mil por mês ao Imposto de Renda (Demografia Médica no Brasil 2025).</div></div>
+<div class="f"><span class="k">Texto primário completo (384 car.)</span><div class="v q">Médicos no Brasil declaram em média R$ 36,8 mil por mês ao Imposto de Renda (Demografia Médica no Brasil 2025). Quanto disso cabe numa carreira terapêutica, mesmo sem formação na área? Depende de preço, agenda e dedicação. Não é promessa. É a conta que você faz na Imersão Carreira Saúde e Bem-Estar. Ao vivo com Michael Arruda, sábado 31/10, das 9h30 às 18h, no Zoom. Ingresso R$ 27.</div></div>
+<div class="f"><span class="k">Descrição</span><div class="v">Uma régua, não uma promessa</div></div>
+<div class="f"><span class="k">CTA</span><div class="v">Inscreva-se</div></div>
+<div class="f"><span class="k">Texto na imagem</span><div class="v q">Linha 1: Médico no Brasil: R$ 36,8 mil/mês em média¹ / Linha 2 (grande): Quanto disso cabe na sua agenda? / Rodapé miúdo: ¹ Demografia Médica no Brasil 2025 (FMUSP/Min. Saúde/AMB), renda média declarada no IR. Não é promessa de renda. / Faixa: Imersão Carreira Saúde e Bem-Estar · 31/10 · R$ 27</div></div>
+</div>
+</div></div>
+
+<p class="note" style="margin-top:26px">Conformidade Meta aplicada pela copy: nenhuma frase afirma atributo pessoal do leitor; nenhuma promessa de renda; depoimentos sem valores e com ressalva; "hipnose" e "cura" ausentes. Prova social de ingressos ("já somos X na sala") só na fase de escala, com número real da Eduzz.</p>
+</div></section>
+
+<section class="s" id="cadencia"><div class="wrap"><div class="sh"><span class="num">03</span><h2>Mensagens de cadência</h2><span class="for traf">WhatsApp</span></div>
+<div class="alert" style="margin-top:0;margin-bottom:22px"><b>Política 17/07/2026:</b> toda mensagem em volume só sobe com OK explícito de Rafa, Michael, Fernanda ou Julia. Nada foi enviado nem submetido. Lembretes D-1, 1h e 10min vão como template pelo WABA oficial, via @template-chief. Boas-vindas, grupo, check-in e pós-evento vão pela cadência da squad disparo-comercial.</div>
+<p class="prose small muted">Variáveis: {saudacao} = "Ótimo dia" / "Ótima tarde" / "Ótima noite" conforme o horário (nunca "bom dia", nunca "Oi" seco). {primeiro_nome}. {nome_evento} = variante que a pessoa comprou (depois de 10/10, o nome vencedor). Sem pitch em nenhuma mensagem antes do evento. Envios entre 8h e 20h, exceto os lembretes do próprio dia.</p>
+
+<div class="stack">
+<div class="card"><h4>1. Boas-vindas pós-compra</h4>
+<div class="when"><span><b>Momento</b> imediata, gatilho: compra aprovada na Eduzz</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}! Aqui é da equipe do Michael Arruda.
+
+Seu ingresso para a <em>{nome_evento}</em> está confirmado.
+
+Sábado, 31/10, das 9h30 às 18h, ao vivo no Zoom.
+
+O próximo passo é entrar no grupo de avisos. É por lá que chega o link:
+{link_grupo}
+
+Nos próximos dias alguém da equipe vai falar com você por aqui, para entender o seu momento e preparar o seu dia.</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card"><h4>2. Convite ao grupo · tentativa 1</h4>
+<div class="when"><span><b>Momento</b> 2 horas depois da compra, se não entrou no grupo</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}! Vi que você ainda não entrou no grupo da Imersão.
+
+É lá que o link do Zoom vai ser enviado. Leva 5 segundos:
+{link_grupo}</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card"><h4>2. Convite ao grupo · tentativa 2</h4>
+<div class="when"><span><b>Momento</b> dia seguinte, 10h, se não entrou</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}. Passando só para garantir que você não fique sem o link do sábado, 31/10.
+
+Entra aqui no grupo de avisos:
+{link_grupo}
+
+Se preferir receber só por aqui, me responde "por aqui" que eu anoto.</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card"><h4>2. Convite ao grupo · tentativa 3</h4>
+<div class="when"><span><b>Momento</b> 3 dias depois da compra, se não entrou (para assim que a pessoa entrar)</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}. Última tentativa por aqui, prometo.
+
+O grupo é só de avisos, sem conversa, sem spam. Link do Zoom, lembretes e o presente da semana do evento:
+{link_grupo}</div>
+<p class="note">Quem responder "por aqui": marcar na lista para receber o link do Zoom individualmente em 31/10.</p>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card"><h4>3. Check-in D-7 com presente</h4>
+<div class="when"><span><b>Momento</b> sábado, 24/10, 10h</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}! Falta uma semana para a <em>{nome_evento}</em>.
+
+O Michael pediu uma coisa para você chegar no sábado com meio caminho andado.
+
+São 5 perguntas rápidas sobre o seu momento de carreira. Leva uns 3 minutos:
+{link_checkin}
+
+No final você recebe o <em>Mapa da sua transição</em>, o rascunho do plano que a gente vai completar juntos no dia 31.</div>
+<p class="note">[A CONFIRMAR] Link do formulário de check-in e o arquivo do "Mapa da sua transição" (1 página). O presente é entregue na tela final do formulário, não por mensagem. Lembrete no grupo no mesmo dia: "Quem ainda não respondeu o check-in, o link está aqui. O Mapa da sua transição sai no final: {link_checkin}"</p>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card hl"><h4>4. Lembrete D-1 (template WABA oficial)</h4>
+<div class="when"><span><b>Momento</b> sexta, 30/10, 18h</span><span><b>Canal</b> WABA oficial, template UTILITY via @template-chief · {{1}} nome, {{2}} nome do evento</span></div>
+<div class="msg">{saudacao}, {{1}}! Amanhã é o dia.
+
+<em>{{2}}</em>, sábado, 31/10, das 9h30 às 18h, ao vivo no Zoom.
+
+Para aproveitar:
+• Bloqueie o dia inteiro, com intervalo para almoço
+• Separe papel e caneta
+• Se puder, computador em vez de celular
+
+O link chega aqui amanhã cedo.</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card hl"><h4>4. Lembrete 1h antes (template WABA oficial)</h4>
+<div class="when"><span><b>Momento</b> sábado, 31/10, 8h30</span><span><b>Canal</b> WABA oficial, template UTILITY via @template-chief · {{3}} link do Zoom (botão de URL onde couber)</span></div>
+<div class="msg">Ótimo dia, {{1}}! Começamos em 1 hora, às 9h30.
+
+Seu link do Zoom:
+{{3}}
+
+Entre 5 minutos antes. Papel e caneta ao lado.</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card hl"><h4>4. Lembrete 10 minutos antes (template WABA oficial)</h4>
+<div class="when"><span><b>Momento</b> sábado, 31/10, 9h20</span><span><b>Canal</b> WABA oficial, template UTILITY via @template-chief</span></div>
+<div class="msg">{{1}}, a sala já está aberta. O Michael começa em 10 minutos.
+
+Entre agora: {{3}}</div>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+
+<div class="card"><h4>5. Pós-evento para ausentes</h4>
+<div class="when"><span><b>Momento</b> sábado, 31/10, 19h; só para quem não entrou no Zoom</span><span><b>Canal</b> WhatsApp, cadência disparo-comercial</span></div>
+<div class="msg">{saudacao}, {primeiro_nome}. Sentimos a sua falta hoje na <em>{nome_evento}</em>.
+
+Muita gente saiu com o plano de transição escrito, com as contas feitas.
+
+Se a vida atravessou o seu sábado, tudo bem. A gente não quer que você fique sem o seu plano.
+
+Posso pedir para alguém da equipe te chamar esta semana e te mostrar o que foi construído no dia?
+
+Responde "quero" que eu aviso.</div>
+<p class="note">[A CONFIRMAR] Se houver replay, trocar o convite da conversa por link com prazo. Recomendação da squad: sem replay público (decisão 4). Quem responder "quero" vai para a fila da Alexandrina e do Ismael, depois de quem pagou taxa e dos aplicantes. Quem recusar: encerra, não reabre com "obrigado" depois.</p>
+<div class="aprov">Aprovado por: ________ <span>em</span> ____/____</div>
+</div>
+</div>
+</div></section>
+
+<section class="s" id="video"><div class="wrap"><div class="sh"><span class="num">04</span><h2>Roteiro do vídeo de 40s do Michael</h2><span class="for">Página de obrigado</span></div>
+<p class="prose">Fica abaixo do botão "Entrar no grupo do WhatsApp", que é a única prioridade da página. Gravação: Michael olhando para a câmera, plano médio, fundo neutro ou sala OMNI. Tom de anfitrião, não de vendedor. Nome do evento falado como "a Imersão", para servir às duas variantes com um vídeo só.</p>
+<div class="roteiro"><div class="k">Roteiro · Michael Arruda · 40 segundos · aprox. 95 palavras</div><ol>
+<li><span class="t">0 a 5s</span>"Ótimo, você está dentro. Parabéns pela decisão."</li>
+<li><span class="t">5 a 15s</span>"Sábado, 31, das nove e meia às seis da tarde, a gente vai construir o seu plano de transição. Com números. O seu, não um modelo genérico."</li>
+<li><span class="t">15 a 27s</span>"Você vai sair com a sua conta feita: quanto cobrar, quantas horas por semana cabem, e o momento certo de virar a chave. Sem largar nada antes da hora."</li>
+<li><span class="t">27 a 35s</span>"Agora, o mais importante: clica no botão e entra no grupo. É por lá que eu mando o link do Zoom."</li>
+<li><span class="t">35 a 40s</span>"Separa o sábado. Eu te vejo lá."</li>
+</ol></div>
+<div class="grid2" style="margin-top:18px">
+<div class="card"><h4>Grupo de WhatsApp · nome e descrição</h4><p><b>Nome (sugestão):</b> Imersão Carreira 31/10. Serve às duas variantes, mantém depois de 10/10.</p><p><b>Descrição:</b> Grupo de avisos da Imersão Carreira com Michael Arruda. Sábado, 31/10, das 9h30 às 18h, ao vivo no Zoom. Aqui chegam o link e os lembretes. Só a equipe OMNI envia mensagens.</p></div>
+<div class="card"><h4>Mensagem fixada no grupo</h4><div class="msg">Ótimo, que bom ter você aqui.
+Sábado, 31/10, 9h30, a gente constrói o seu plano de transição.
+O link do Zoom sai aqui no dia, antes do início.
+Separe papel, caneta e o sábado inteiro.</div><p class="note">[A CONFIRMAR] Grupo só de avisos (admins enviam). Recomendação da squad: sim.</p></div>
+</div>
+</div></section>
+
+<section class="s" id="pendencias"><div class="wrap"><div class="sh"><span class="num">05</span><h2>Pendências que não são da Rafa</h2></div>
+<p class="prose">Itens [A CONFIRMAR] dos arquivos de copy. Bloqueiam o FINAL, mas a bola está com outra pessoa. A Rafa só precisa saber que existem.</p>
+<div class="pend">
+<div class="card"><div class="who">Bola: Rafa localiza / squad registra</div><p><b>Autorização de imagem e nome de Roberto Monfort e Elizabete Monteiro</b> para LP e anúncio pago. O plano registra "autorização a localizar" para o Roberto. Sem autorização, os criativos 1 e 5 não sobem e a seção "Quem já fez a transição" sai da LP.</p></div>
+<div class="card"><div class="who">Bola: Michael</div><p><b>Figuras públicas na LP:</b> confirmar se vale citar Thiago Nigro, Sandra de Sá, Caito Maia e Joel Jota numa página ligada a anúncio pago (já aparecem na nova-carreira).</p></div>
+<div class="card"><div class="who">Bola: Michael</div><p><b>Blocos do dia vs roteiro do Michael:</b> os 6 blocos da LP foram propostos pela copy a partir do entregável. Ajustar nomes e ordem ao roteiro que o Michael já tem. Sem horários fixos na página.</p></div>
+<div class="card"><div class="who">Bola: Rafa (Eduzz) / financeiro</div><p><b>Reembolso do ingresso:</b> política na Eduzz. Direito de arrependimento de 7 dias (CDC) vale para compra online; decidir se aparece no FAQ.</p></div>
+<div class="card"><div class="who">Bola: operação</div><p><b>Vagas do Zoom:</b> a LP fecha com "Vagas na sala conforme a capacidade do Zoom". Confirmar limite real; se não houver, apagar a linha.</p></div>
+<div class="card"><div class="who">Bola: Michael</div><p><b>Contrato da Pós:</b> ainda não existe. Bloqueia matrícula, não ingresso. Precisa estar pronto antes de 31/10.</p></div>
+<div class="card"><div class="who">Bola: Michael</div><p><b>Horário do pitch:</b> pedir ao Michael para alinhar a sala comercial e o formulário de aplicação. Também: o plano mostrado no criativo 2 é exemplo ilustrativo, rotulado como tal.</p></div>
+</div>
+</div></section>
+
+<section class="s" id="responder"><div class="wrap"><div class="sh"><span class="num">06</span><h2>Como responder</h2></div>
+<p class="prose">Pode ser em áudio ou texto, na ordem que preferir. O que não vier, segue o padrão.</p>
+<ol class="steps prose">
+<li><b>Decisão 1:</b> "faturar" e a régua do médico. OK ou mudar.</li>
+<li><b>Decisão 2:</b> R$ 20 mil do Roberto fora da LP. OK ou colocar.</li>
+<li><b>Decisão 3:</b> FAQ avisando a apresentação da formação. OK ou tirar.</li>
+<li><b>Decisão 4:</b> sem replay. OK ou com replay (e como).</li>
+<li><b>Decisão 5:</b> subir o criativo 6 e não recorrer se reprovar. OK ou segurar.</li>
+<li><b>OK da LP</b> (prévias A e B e página de obrigado) e dos 12 criativos, ou lista do que ajustar.</li>
+<li><b>OK das mensagens de cadência</b>, ou quais alterar. O registro "aprovado por" fica com a squad.</li>
+<li><b>Link do checkout Eduzz</b> do ingresso de R$ 27.</li>
+<li><b>Link do grupo</b> de WhatsApp de avisos.</li>
+<li><b>Autorizações</b> de Roberto e Elizabete, se você já tiver.</li>
+</ol>
+<p class="prose muted small" style="margin-top:22px">Com o OK, a squad fecha os textos finais, registra quem aprovou cada mensagem, o design-chief publica a LP com pixel e checkout e o gestor sobe os criativos para o teste de nome de 03 a 09/10.</p>
+</div></section>
+
+<footer class="wrap" style="padding-block:32px;font-family:var(--f-mono);font-size:11.5px;color:var(--cream-50)">OMNI Brasil · revisão interna · Gate G3 · squad gestao-lancamentos · fontes: criativos-v1.md, mensagens-cadencia-v1.md, lp-ingresso.md, pagina-obrigado.md (29/09/2026).</footer>
+</body></html>
