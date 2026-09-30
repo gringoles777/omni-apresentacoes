@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- OMNI-GATE-START -->
+<style id="omni-gate-css">html.omni-locked{visibility:hidden}#omni-gate{visibility:visible}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-block:18px}@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--dark);border:1px solid var(--line);padding:18px 20px;border-radius:4px}.card h3{font-family:var(--f-serif);font-weight:400;font-size:1.25rem;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-block:12px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+h2{font-family:var(--f-serif);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);margin:0}
+</style>
+<script>(function(){
+  var K='omni_gate_v1';
+  try{if(sessionStorage.getItem(K)==='1')return;}catch(e){}
+  var H=document.documentElement;H.className=(H.className+' omni-locked').trim();
+  function build(){
+    if(document.getElementById('omni-gate'))return;
+    var o=document.createElement('div');o.id='omni-gate';
+    o.setAttribute('style','visibility:visible;position:fixed;inset:0;z-index:2147483647;background:#0A0A0A;display:flex;align-items:center;justify-content:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif');
+    o.innerHTML='<div style="text-align:center;max-width:360px;width:90%"><div style="font-weight:900;font-size:22px;letter-spacing:6px;color:#C9A84C;text-transform:uppercase">OMNI BRASIL</div><div style="font-size:11px;letter-spacing:3px;color:rgba(244,244,232,.5);text-transform:uppercase;margin:8px 0 32px">Acesso restrito</div><input id="omni-gate-pw" type="password" placeholder="Senha" autocomplete="off" style="width:100%;padding:14px 16px;background:#141414;border:1px solid rgba(201,168,76,.3);border-radius:10px;color:#F4F4E8;font-size:15px;outline:none;text-align:center;letter-spacing:2px;box-sizing:border-box"><button id="omni-gate-go" style="width:100%;margin-top:12px;padding:14px;background:#C9A84C;border:none;border-radius:10px;color:#0A0A0A;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">Entrar</button><div id="omni-gate-err" style="height:18px;margin-top:12px;font-size:12px;color:#E05C5C"></div></div>';
+    document.body.appendChild(o);
+    var pw=document.getElementById('omni-gate-pw'),btn=document.getElementById('omni-gate-go'),err=document.getElementById('omni-gate-err');
+    function tryit(){
+      if(pw.value==='omni777'){try{sessionStorage.setItem(K,'1')}catch(e){}H.className=H.className.replace(/\s*omni-locked/,'');if(o.parentNode)o.parentNode.removeChild(o);}
+      else{err.textContent='Senha incorreta';pw.value='';pw.focus();}
+    }
+    btn.addEventListener('click',tryit);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')tryit();});
+    pw.focus();
+  }
+  if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();</script>
+<!-- OMNI-GATE-END -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Plano Imersão 31/10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --black:#050505; --dark:#0D0D0D; --elev:#161410; --line:#2A261C; --line-soft:#1E1B15;
+  --gold:#C8A84B; --gold-l:#E8C86A; --gold-d:#9A7A2E; --gold-10:rgba(200,168,75,.10); --gold-20:rgba(200,168,75,.22);
+  --cream:#F5F0E8; --cream-70:rgba(245,240,232,.72); --cream-50:rgba(245,240,232,.52);
+  --teal:#2A9D8F; --teal-10:rgba(42,157,143,.14); --warn:#D98C3F; --warn-10:rgba(217,140,63,.13);
+  --f-display:'Oswald','Arial Black',sans-serif; --f-serif:'DM Serif Display',Georgia,serif;
+  --f-body:'Inter','Open Sans',system-ui,sans-serif; --f-mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:64px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; background:var(--black); color:var(--cream); font-family:var(--f-body); font-size:15.5px; line-height:1.62; -webkit-font-smoothing:antialiased}
+a{color:var(--gold-l)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold-l); outline-offset:3px}
+.wrap{max-width:1080px; margin:0 auto; padding-inline:clamp(16px,4vw,40px)}
+.prose{max-width:68ch}
+
+/* nav */
+.nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; background:rgba(5,5,5,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex; gap:22px; align-items:center; overflow-x:auto; scrollbar-width:none; padding-block:12px}
+.nav .wrap::-webkit-scrollbar{display:none}
+.nav .brand{font-family:var(--f-display); letter-spacing:.18em; font-size:12px; color:var(--gold); white-space:nowrap; text-transform:uppercase}
+.nav a{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50); text-decoration:none; white-space:nowrap; letter-spacing:.04em}
+.nav a:hover{color:var(--gold-l)}
+
+/* hero */
+header.hero{padding-block:56px 40px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse 70% 90% at 85% 0%, rgba(200,168,75,.10), transparent 60%)}
+.eyebrow{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold)}
+h1{font-family:var(--f-serif); font-weight:400; font-size:clamp(2.3rem,5.6vw,4.2rem); line-height:1.04; margin:14px 0 18px; text-wrap:balance}
+h1 em{font-style:italic; background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lede{font-size:clamp(1rem,1.6vw,1.13rem); color:var(--cream-70); max-width:64ch; margin:0}
+.meta{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:22px; font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+.meta b{color:var(--cream); font-weight:500}
+.stop{margin-top:26px; display:inline-flex; gap:10px; align-items:center; padding:9px 14px; border:1px solid var(--warn); color:var(--warn); background:var(--warn-10); border-radius:3px; font-family:var(--f-mono); font-size:12px}
+
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:34px}
+.kpi{background:var(--dark); padding:18px 18px 16px}
+.kpi .n{font-family:var(--f-display); font-size:clamp(1.7rem,3.4vw,2.4rem); color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12.5px; color:var(--cream-70); margin-top:8px; line-height:1.4}
+@media (max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section.s{padding-block:56px; border-bottom:1px solid var(--line-soft)}
+.sh{display:flex; gap:16px; align-items:baseline; margin-bottom:22px; flex-wrap:wrap}
+.sh .num{font-family:var(--f-mono); font-size:12px; color:var(--gold-d); letter-spacing:.08em}
+h2{font-family:var(--f-display); font-weight:500; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(1.45rem,2.9vw,2.05rem); margin:0; line-height:1.15; text-wrap:balance}
+.for{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border-radius:2px; border:1px solid var(--line); color:var(--cream-50)}
+.for.traf{border-color:var(--teal); color:var(--teal); background:var(--teal-10)}
+h3{font-family:var(--f-display); font-weight:500; font-size:1.08rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); margin:34px 0 12px}
+p{margin:0 0 14px}
+.muted{color:var(--cream-50)}
+.small{font-size:13.5px}
+.thesis{font-family:var(--f-serif); font-size:clamp(1.3rem,2.4vw,1.75rem); line-height:1.3; color:var(--cream); max-width:36ch; margin:0 0 26px; text-wrap:balance}
+.thesis::before{content:"“"; color:var(--gold)}
+.thesis::after{content:"”"; color:var(--gold)}
+
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:860px){.g3,.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--elev); border:1px solid var(--line); padding:18px 18px 16px; border-radius:4px}
+.card h4{font-family:var(--f-display); font-weight:500; font-size:1rem; letter-spacing:.05em; text-transform:uppercase; margin:0 0 8px; color:var(--cream)}
+.card p,.card li{font-size:14px; color:var(--cream-70)}
+.card p:last-child{margin:0}
+.card.hl{border-color:var(--gold-d); background:linear-gradient(180deg,rgba(200,168,75,.09),rgba(200,168,75,.02))}
+
+ol.steps,ul.list{margin:0; padding-left:0; list-style:none; display:grid; gap:10px}
+ol.steps{counter-reset:s}
+ol.steps li{counter-increment:s; position:relative; padding-left:34px; font-size:14px; color:var(--cream-70)}
+ol.steps li::before{content:counter(s,decimal-leading-zero); position:absolute; left:0; top:1px; font-family:var(--f-mono); font-size:11.5px; color:var(--gold)}
+ol.steps li b,ul.list li b{color:var(--cream); font-weight:600}
+ul.list li{position:relative; padding-left:18px; font-size:14px; color:var(--cream-70)}
+ul.list li::before{content:""; position:absolute; left:2px; top:.62em; width:6px; height:6px; background:var(--gold-d); transform:rotate(45deg)}
+
+/* phase columns */
+.phase{border-top:2px solid var(--gold-d); padding-top:14px}
+.phase .tag{font-family:var(--f-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold)}
+.phase h4{font-family:var(--f-display); font-size:1.25rem; font-weight:500; text-transform:uppercase; margin:4px 0 14px; letter-spacing:.03em}
+
+/* tables */
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:4px; margin:6px 0 10px}
+table{border-collapse:collapse; width:100%; font-size:13.5px; min-width:560px}
+th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+th{font-family:var(--f-mono); font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); background:var(--dark); position:sticky; top:0}
+td{color:var(--cream-70)}
+td:first-child{color:var(--cream)}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+tr.key td{background:var(--gold-10); color:var(--cream); font-weight:500}
+col.base{background:rgba(200,168,75,.05)}
+.note{font-size:13px; color:var(--cream-50); border-left:2px solid var(--line); padding-left:12px; margin-top:10px}
+
+/* funnel */
+.funnel{display:flex; flex-wrap:wrap; gap:0; align-items:stretch; margin:8px 0 6px}
+.fs{flex:1 1 150px; min-width:0; padding:14px 16px; background:var(--elev); border:1px solid var(--line); position:relative}
+.fs + .fs{border-left:0}
+.fs .v{font-family:var(--f-display); font-size:1.7rem; color:var(--gold-l); line-height:1; font-variant-numeric:tabular-nums}
+.fs .k{font-size:12.5px; color:var(--cream-70); margin-top:6px}
+.fs .p{font-family:var(--f-mono); font-size:11px; color:var(--gold-d); margin-top:6px}
+@media (max-width:640px){.fs{flex-basis:45%} .fs + .fs{border-left:1px solid var(--line)}}
+
+/* budget bars */
+.bars{display:grid; gap:10px; margin-top:8px}
+.bar{display:grid; grid-template-columns:118px 1fr 78px; gap:12px; align-items:center; font-size:13px}
+.bar .lab{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-70)}
+.bar .trk{height:12px; background:var(--dark); border:1px solid var(--line); border-radius:2px; overflow:hidden}
+.bar .fill{height:100%; background:linear-gradient(90deg,var(--gold-d),var(--gold))}
+.bar .val{font-family:var(--f-mono); text-align:right; color:var(--cream); font-variant-numeric:tabular-nums}
+.bar .sub{grid-column:2 / 4; font-size:11.5px; color:var(--cream-50); margin-top:-6px}
+
+/* names */
+.names{display:grid; gap:10px}
+.name{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:18px; padding:16px 18px; background:var(--elev); border:1px solid var(--line); border-radius:4px}
+.name .t{font-family:var(--f-serif); font-size:1.15rem; line-height:1.25; color:var(--cream)}
+.name .c{font-size:13.5px; color:var(--cream-70)}
+.name .c b{display:block; font-family:var(--f-mono); font-size:10.5px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--gold-d); margin-bottom:4px}
+.name.fav{border-color:var(--gold); background:linear-gradient(135deg,rgba(200,168,75,.13),rgba(200,168,75,.02) 60%)}
+.name.fav .t::after{content:"Favorita"; display:inline-block; margin-left:10px; vertical-align:middle; font-family:var(--f-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--black); background:var(--gold); padding:2px 7px; border-radius:2px}
+@media (max-width:760px){.name{grid-template-columns:1fr; gap:10px}}
+
+/* tsunami */
+.tsu{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; align-items:end}
+.tsu .lvl{background:var(--elev); border:1px solid var(--line); border-radius:4px; padding:14px}
+.tsu .lvl:nth-child(1){min-height:150px} .tsu .lvl:nth-child(2){min-height:180px; border-color:#3a3322} .tsu .lvl:nth-child(3){min-height:210px; border-color:var(--gold-d)} .tsu .lvl:nth-child(4){min-height:240px; border-color:var(--gold); background:linear-gradient(180deg,rgba(200,168,75,.16),rgba(200,168,75,.03))}
+.tsu .who{font-family:var(--f-display); font-size:1.02rem; text-transform:uppercase; color:var(--gold-l); letter-spacing:.04em}
+.tsu .what{font-size:13.5px; color:var(--cream); margin:8px 0 6px}
+.tsu .cond{font-size:12px; color:var(--cream-50)}
+@media (max-width:760px){.tsu{grid-template-columns:1fr 1fr} .tsu .lvl{min-height:0!important}}
+
+/* timeline */
+.tl{display:grid; gap:0; border-left:1px solid var(--gold-d); margin-left:6px}
+.tli{position:relative; padding:0 0 22px 24px}
+.tli::before{content:""; position:absolute; left:-5px; top:6px; width:9px; height:9px; background:var(--black); border:1px solid var(--gold); transform:rotate(45deg)}
+.tli.ev::before{background:var(--gold)}
+.tli .d{font-family:var(--f-mono); font-size:11.5px; color:var(--gold); letter-spacing:.05em}
+.tli .h{font-family:var(--f-display); font-size:1.05rem; text-transform:uppercase; letter-spacing:.03em; margin:2px 0 4px}
+.tli p{font-size:14px; color:var(--cream-70); margin:0 0 4px}
+.tli .m{font-family:var(--f-mono); font-size:11.5px; color:var(--cream-50)}
+
+.check li{list-style:none; position:relative; padding-left:28px; font-size:14px; color:var(--cream-70)}
+.check{padding:0; margin:0; display:grid; gap:9px}
+.check li::before{content:""; position:absolute; left:0; top:3px; width:14px; height:14px; border:1px solid var(--gold-d); border-radius:2px}
+
+.pill{display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; padding:2px 7px; border-radius:2px; white-space:nowrap}
+.pill.ok{background:var(--teal-10); color:var(--teal)} .pill.cf{background:var(--warn-10); color:var(--warn)}
+
+footer{padding-block:40px 60px; font-size:12.5px; color:var(--cream-50)}
+footer .wrap{display:grid; gap:8px}
+</style>
+
+</head>
+<body>
+<nav class="nav"><div class="wrap"><span class="brand">OMNI · Imersão 31/10</span>
+<a href="#decisoes">Decisões</a><a href="#nomes">Teste de nome</a><a href="#cronograma">Cronograma</a><a href="#pecas">Peças</a><a href="#criativos">Criativos</a><a href="#funil">Funil</a><a href="#kpis">KPIs</a><a href="#riscos">Riscos</a><a href="#gate">Gate G2</a></div></nav>
+<header class="hero"><div class="wrap">
+<div class="eyebrow">Plano de execução · Gate G2 · squad gestao-lancamentos</div>
+<h1>Imersão Carreira Terapêutica: <em>32 dias</em> para 200 na sala e 8 matrículas na Pós</h1>
+<p class="lede">Workshop pago de R$27, sábado 31/10, 9h30 às 18h no Zoom. Pitch ao vivo da Pós-graduação em Omniterapia a R$14.900, aplicação com taxa de R$100 e fechamento no 1 a 1 pelo time do Toca o Sino. Baseado no método apresentado pelo Thiago Kiss em 27/08.</p>
+<div class="meta"><span>Para <b>Rafa Mendes</b></span><span>Modelo <b>workshop-pago-thiago-kiss v1.0</b> (owner Michael)</span><span>Versão <b>29/09/2026</b></span></div>
+<div class="stop">Aprovar este plano libera a produção das peças. Não publica copy nem autoriza gasto: copy passa pelo Gate G3 e verba é do gestor.</div>
+<div class="kpis"><div class="kpi"><div class="n">200</div><div class="l">ingressos de R$27 até 30/10</div></div><div class="kpi"><div class="n">160</div><div class="l">na sala, com 80% de presença</div></div><div class="kpi"><div class="n">50</div><div class="l">aplicações com taxa de R$100</div></div><div class="kpi"><div class="n">8</div><div class="l">matrículas na Pós até 20/11</div></div></div>
+</div></header>
+
+<section class="s" id="decisoes"><div class="wrap"><div class="sh"><span class="num">01</span><h2>Decisões fechadas em 29/09</h2></div>
+<table><thead><tr><th>Item</th><th>Decisão da Rafa</th><th>Consequência no plano</th></tr></thead><tbody>
+<tr><td>Produto e preço</td><td>Pós-graduação em Omniterapia, R$14.900</td><td>Pitch com preço aberto. Parcelamento pela calculadora do closer. Contrato da Pós ainda não existe: bloqueia matrícula, não ingresso.</td></tr>
+<tr><td>Entrada na oferta</td><td>Aplicação no evento: taxa R$100 + formulário</td><td>Assumido: abate na matrícula e devolve integralmente a quem não entra. Confirmar regra e responsável financeiro.</td></tr>
+<tr><td>Tráfego</td><td>Gestor assume campanhas e verba</td><td>Squad entrega criativos, copy de página e mensagens. Gestor faz o teste de nome e a escala. Teto de referência R$10.800.</td></tr>
+<tr><td>Order bump</td><td>Não haverá</td><td>Ingresso sozinho. Thiago sugeria um bump de R$27 só para abater mídia; opcional.</td></tr>
+<tr><td>Time comercial</td><td>Toca o Sino: Ismael e Alexandrina</td><td>Rafa comanda a sala. 50 aplicações = 25 calls por pessoa na semana pós-evento.</td></tr>
+<tr><td>Checkout</td><td>Cielo ou Greenn em avaliação</td><td><b>Recomendação: Eduzz.</b> Já usada pela OMNI, API no vault, pixel e acesso nativos. Link Cielo não dá pixel ao gestor nem acesso automático. Greenn exige conta e integração novas.</td></tr>
+<tr><td>Roteiro do dia</td><td>Michael já tem</td><td>Pedir a ele o horário do pitch para alinhar a sala comercial e o formulário de aplicação.</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="nomes"><div class="wrap"><div class="sh"><span class="num">02</span><h2>Teste de nome: 03 a 09/10</h2></div>
+<p class="prose">Os dois títulos têm o mesmo subtítulo, então o teste isola uma única variável. Regra do Thiago: o nome qualifica. Decidimos por dado, não por gosto.</p>
+<div class="grid2">
+<div class="card"><div class="eyebrow">Variante A</div><h3>Imersão Carreira Terapêutica de Alto Padrão</h3><p>Puxa quem quer carreira e ticket alto. Risco: parecer elitista ou "curso caro".</p></div>
+<div class="card"><div class="eyebrow">Variante B</div><h3>Imersão Carreira Saúde e Bem-Estar</h3><p>Mais amplo e reconhecível. Risco: atrair quem quer terapia pessoal, não profissão. O formulário pós-compra vai mostrar.</p></div>
+</div>
+<p class="prose"><b>Subtítulo dos dois:</b> Construa seu Plano Personalizado para faturar mais que médico na carreira terapêutica, mesmo sem formação na área.</p>
+<table><thead><tr><th>Regra do teste</th><th>Definição</th></tr></thead><tbody>
+<tr><td>Formato</td><td>Duas campanhas espelhadas no Meta, mesmos criativos e públicos, só o título muda. Uma LP com o título trocado por parâmetro.</td></tr>
+<tr><td>Verba</td><td>R$150 a R$250 por dia no total, definida pelo gestor. Dura 5 a 7 dias.</td></tr>
+<tr><td>Leitura</td><td>Após 72h e 20 compras somadas. Vence o menor custo por ingresso <b>com perfil de carreira</b> no formulário pós-compra (pergunta única: "por que você comprou?").</td></tr>
+<tr><td>Depois</td><td>10/10: vencedor consolida LP, criativos e grupo. Perdedor pausado. Big Idea congelada até 31/10.</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="cronograma"><div class="wrap"><div class="sh"><span class="num">03</span><h2>Cronograma</h2></div>
+<table><thead><tr><th>Janela</th><th>Etapa</th><th>O que acontece</th><th>Dono</th></tr></thead><tbody>
+<tr><td>29/09 a 02/10</td><td>Preparação</td><td>Briefing para copy e design. Checkout Eduzz com ingresso R$27 e taxa R$100 como produtos separados. Grupo de WhatsApp, página de obrigado, LP com 2 títulos.</td><td>copy-chief, design-chief, Rafa (Eduzz)</td></tr>
+<tr><td>03 a 09/10</td><td>Teste de nome</td><td>Abertura das vendas com as duas campanhas. Contato humano 1 a 1 com cada comprador começa no dia 1.</td><td>gestor, Ismael e Alexandrina</td></tr>
+<tr><td>10/10</td><td>Decisão</td><td>Nome vencedor. Consolidação das peças.</td><td>Rafa</td></tr>
+<tr><td>10 a 20/10</td><td>Escala</td><td>Novas peças com o nome vencedor. Michael grava vídeos e valida roteiro antes de viajar. Ensaio comercial.</td><td>gestor, squads, Michael</td></tr>
+<tr><td>21 a 24/10</td><td>Legacy</td><td>Michael fora. Nada novo depende dele. Check-in D-7 dispara 24/10 com presente.</td><td>operator</td></tr>
+<tr><td>25 a 30/10</td><td>Reta final</td><td>Últimos ingressos, lembretes D-1, revisão técnica do Zoom, script de ligação durante a live.</td><td>template-chief, Rafa</td></tr>
+<tr><td><b>31/10 sábado</b></td><td><b>Evento</b></td><td>9h30 às 18h. Pitch, aplicação com R$100, closers ligando durante a live.</td><td>Michael (entrega), Rafa (sala)</td></tr>
+<tr><td>01 a 07/11</td><td>Fechamento</td><td>Calls por prioridade: taxa paga com perfil, aplicante sem taxa, interessado do check-in, ausente.</td><td>Toca o Sino</td></tr>
+<tr><td>08 a 20/11</td><td>Coorte</td><td>Até 6 tentativas por pessoa. Janela de matrícula fecha antes da imersão de 24/11.</td><td>Toca o Sino</td></tr>
+<tr><td>24 a 29/11</td><td>Imersão M1</td><td>Alunos matriculados entram na primeira turma da Pós.</td><td>entrega</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="pecas"><div class="wrap"><div class="sh"><span class="num">04</span><h2>Peças e quem produz</h2></div>
+<table><thead><tr><th>Peça</th><th>Squad</th><th>Prazo</th><th>Aprovação</th></tr></thead><tbody>
+<tr><td>LP do ingresso com 2 títulos + página de obrigado</td><td>copy-chief (copy) → design-chief (build, skill landing-page)</td><td>02/10</td><td>G3 Rafa</td></tr>
+<tr><td>12 criativos iniciais (6 por título), chegando a 24</td><td>copy-chief (roteiro/hook) → design-chief (estáticos); Michael grava vídeos curtos</td><td>02/10 e 14/10</td><td>G3 Rafa; gestor opina</td></tr>
+<tr><td>Mensagens de cadência: boas-vindas, grupo, check-in D-7, lembretes, pós-evento</td><td>copy-chief → disparo-comercial; lembretes oficiais via template-chief (WABA Michael)</td><td>08/10 (cadência), 17/10 (templates Meta)</td><td>Texto final aprovado pela Rafa (política 17/07)</td></tr>
+<tr><td>Formulário de aplicação + taxa R$100 na Eduzz</td><td>Rafa (Eduzz) + squad (perguntas)</td><td>20/10</td><td>Rafa</td></tr>
+<tr><td>Presente do check-in: Mapa da sua transição (1 página)</td><td>copy-chief → design-chief</td><td>22/10</td><td>Rafa</td></tr>
+<tr><td>Script de ligação durante a live (3 min: confirmar perfil + agendar call)</td><td>copy-chief com Rafa</td><td>28/10</td><td>Rafa</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="criativos"><div class="wrap"><div class="sh"><span class="num">05</span><h2>Direção de criativos</h2></div>
+<p class="prose">Primeiras ideias para a squad de copy desenvolver e o gestor complementar. Não é copy final. Palavra-chave CARREIRA, nunca HIPNOSE. Comparação com renda de médico só com fonte pública, nunca como garantia.</p>
+<table><thead><tr><th>Linha</th><th>Formato</th><th>Prova ou mecanismo</th><th>Prioridade</th></tr></thead><tbody>
+<tr><td>Transição real</td><td>Michael narra depoimento sobre print</td><td>Roberto Monfort: executivo, acima de R$20 mil por mês após 3 meses. Autorização a localizar.</td><td>Alta</td></tr>
+<tr><td>O plano concreto</td><td>Michael mostra um plano personalizado preenchido</td><td>O entregável do dia. Responde "o que eu levo para casa?".</td><td>Alta</td></tr>
+<tr><td>Sem formação na área</td><td>Vídeo curto ou estático</td><td>Não precisa ser da saúde: metodologia de 1979, mais de 4 mil formados.</td><td>Alta</td></tr>
+<tr><td>Tempo e segurança</td><td>Estático em volume</td><td>Exercício de horas semanais sem largar a renda atual.</td><td>Alta</td></tr>
+<tr><td>Propósito com maturidade</td><td>Caso narrado</td><td>Elizabete Monteiro, professora aposentada e pós-doutora.</td><td>Média</td></tr>
+<tr><td>Mais que médico</td><td>Comparativo com fonte</td><td>Renda média do médico (fonte pública) contra ticket por processo terapêutico. Texto revisado para Meta.</td><td>Média, só após validação</td></tr>
+<tr><td>Movimento de inscrições</td><td>Tela com vendas</td><td>Só com volume real, dados ocultos.</td><td>Quando houver</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="funil"><div class="wrap"><div class="sh"><span class="num">06</span><h2>Funil operacional</h2></div>
+<div class="grid2">
+<div class="card"><h3>Do ingresso ao evento</h3><ol><li>Compra na Eduzz (R$27). Obrigado com vídeo curto do Michael e botão do grupo.</li><li>Fora do grupo em 24h: contato individual. Três tentativas.</li><li>Contato humano 1 a 1 em até um dia útil (Ismael e Alexandrina): acolhe, entende motivação, registra no Toca o Sino. Sem pitch.</li><li>Check-in D-7 (24/10) com presente no final.</li><li>Lembretes D-1, 1h e 10 min.</li></ol></div>
+<div class="card"><h3>Do pitch à matrícula</h3><ol><li>Ponte no auge da prática. Pitch com preço aberto: R$14.900.</li><li>Aplicação: formulário + taxa R$100 (abate na matrícula, devolve a quem não entra).</li><li>Closers ligam durante a live: 3 minutos, confirmam perfil e agendam call.</li><li>Ordem de ligação: taxa paga com perfil → aplicante sem taxa → interessado do check-in → ausente.</li><li>Até 6 tentativas em 20 dias, parando na recusa. Janela fecha antes de 24/11.</li></ol></div>
+</div></div></section>
+
+<section class="s" id="kpis"><div class="wrap"><div class="sh"><span class="num">07</span><h2>KPIs por etapa</h2></div>
+<table><thead><tr><th>Etapa</th><th>Definição</th><th>Meta</th></tr></thead><tbody>
+<tr><td>Ingressos</td><td>Compradores únicos pagos</td><td>200</td></tr>
+<tr><td>CPA de ingresso</td><td>Mídia ÷ compras (gestor)</td><td>≤ R$54</td></tr>
+<tr><td>Conversão da LP</td><td>Compras ÷ visitantes únicos</td><td>3%</td></tr>
+<tr><td>Entrada no grupo</td><td>No grupo ÷ compradores</td><td>90%</td></tr>
+<tr><td>Contato humano</td><td>Tentativa 1 a 1 em até 1 dia útil</td><td>100%</td></tr>
+<tr><td>Check-in</td><td>Formulários válidos ÷ compradores</td><td>70%</td></tr>
+<tr><td>Comparecimento</td><td>Presentes únicos ÷ compradores</td><td>80%</td></tr>
+<tr><td>Aplicações</td><td>Formulários com taxa ÷ compradores</td><td>25% (50)</td></tr>
+<tr><td>Calls até D+7</td><td>Calls ÷ aplicações</td><td>80% (40)</td></tr>
+<tr><td>Matrículas</td><td>Pagamento confirmado até 20/11</td><td>8 (4%)</td></tr>
+</tbody></table></div></section>
+
+<section class="s" id="riscos"><div class="wrap"><div class="sh"><span class="num">08</span><h2>Riscos</h2></div>
+<ul class="prose">
+<li><b>Prazo.</b> Abrir em 03/10 exige LP e checkout prontos em 3 dias úteis. Se atrasar, o teste de nome encurta para 5 dias; não se pula.</li>
+<li><b>Dois closers.</b> 25 calls cada na semana pós-evento. Se as aplicações passarem de 60, priorizar por perfil e taxa paga.</li>
+<li><b>Contrato da Pós.</b> Sem contrato não há matrícula. Michael precisa entregar antes de 31/10.</li>
+<li><b>Promessa de renda.</b> "Faturar mais que médico" pode ser reprovado na Meta e criar expectativa. Copy trata como comparação com fonte.</li>
+<li><b>Michael no Legacy 21 a 24/10.</b> Vídeos e roteiro validados até 20/10.</li>
+<li><b>Copy sem aprovação.</b> Toda mensagem em volume e todo template só sobem com o texto final aprovado pela Rafa, com registro.</li>
+</ul></div></section>
+
+<section class="s" id="gate"><div class="wrap"><div class="sh"><span class="num">09</span><h2>Gate G2: o que a Rafa decide agora</h2></div>
+<ol class="prose">
+<li>Aprovar o cronograma e a abertura em 03/10 com o teste de nome.</li>
+<li>Confirmar checkout: Eduzz (recomendado), Greenn ou Cielo.</li>
+<li>Confirmar regra da taxa de R$100: abate e devolve a quem não entra.</li>
+<li>Autorizar acionar copy-chief e design-chief para LP e primeiros 12 criativos.</li>
+</ol>
+<p class="prose">Com o OK, a squad aciona as peças e o cronograma vai para o vigia diário. Próximo gate: G3, com LP e criativos prontos.</p>
+</div></section>
+<footer class="wrap" style="padding-block:32px;font-family:var(--f-mono);font-size:11.5px;color:var(--cream-50)">OMNI Brasil · planejamento interno · squad gestao-lancamentos · fontes: apresentação de 21/09, decisões da Rafa de 29/09, FAQ e pitch da Pós.</footer>
+</body></html>
