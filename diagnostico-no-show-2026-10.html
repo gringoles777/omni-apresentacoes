@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico No-Show — Consultorias OMNI (out/2026)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#050505;--dark:#0D0D0D;--elev:#1A1A1A;--tex:#2D2D2D;--gold:#C8A84B;--gold-l:#E8C86A;--gold-d:#9A7A2E;--cream:#F5F0E8;--cream70:rgba(245,240,232,.7);--cream50:rgba(245,240,232,.5);--teal:#2A9D8F;--gray:#6B6B6B;--red:#D9534F;--amber:#E0A93A;--green:#4CAF7D}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--cream);font-family:Inter,system-ui,sans-serif;line-height:1.55;padding:0 16px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+header{padding:56px 0 32px;border-bottom:1px solid rgba(200,168,75,.25)}
+.kicker{color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:600}
+h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);line-height:1.15;margin:12px 0 10px;background:linear-gradient(135deg,#9A7A2E 0%,#C8A84B 40%,#E8C86A 60%,#C8A84B 80%,#9A7A2E 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--cream70);max-width:760px}
+h2{font-family:'Playfair Display',serif;color:var(--gold);font-size:26px;margin:56px 0 18px;padding-top:8px}
+h3{font-size:17px;color:var(--gold-l);margin:26px 0 10px}
+p{margin:0 0 12px;color:var(--cream70)}
+strong{color:var(--cream)}
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--elev);border:1px solid rgba(200,168,75,.18);border-radius:12px;padding:20px}
+.card.alert{border-color:rgba(217,83,79,.55);background:linear-gradient(160deg,#1f1212,#120d0d)}
+.card.ok{border-color:rgba(76,175,125,.5)}
+.card.warn{border-color:rgba(224,169,58,.5)}
+.big{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold-l);line-height:1}
+.big.red{color:var(--red)}.big.green{color:var(--green)}.big.amber{color:var(--amber)}
+.lbl{font-size:13px;color:var(--cream50);margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+.note{font-size:13px;color:var(--cream70);margin-top:10px}
+.bar{height:14px;background:var(--tex);border-radius:7px;overflow:hidden;margin:6px 0 2px}
+.bar>i{display:block;height:100%}
+.rowbar{display:grid;grid-template-columns:200px 1fr 70px;gap:12px;align-items:center;font-size:14px;margin:8px 0}
+.rowbar .v{text-align:right;color:var(--gold-l);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 20px}
+th{text-align:left;color:var(--gold);font-weight:600;border-bottom:1px solid rgba(200,168,75,.35);padding:10px 8px}
+td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;color:var(--cream70)}
+td b{color:var(--cream)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-right:6px}
+.t-red{background:rgba(217,83,79,.18);color:#ff8a86}.t-green{background:rgba(76,175,125,.18);color:#7fd8a8}.t-amber{background:rgba(224,169,58,.18);color:#f3c66a}.t-gold{background:rgba(200,168,75,.18);color:var(--gold-l)}.t-teal{background:rgba(42,157,143,.2);color:#6fd3c6}
+.step{display:grid;grid-template-columns:56px 1fr;gap:16px;margin:14px 0;padding:18px;background:var(--elev);border-left:3px solid var(--gold);border-radius:0 12px 12px 0}
+.step .n{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold);line-height:1}
+.step h4{color:var(--cream);font-size:16px;margin-bottom:6px}
+.step p{margin-bottom:6px;font-size:14px}
+ul{margin:6px 0 12px 20px;color:var(--cream70)}li{margin:4px 0}
+.copy{background:#0f0f0f;border:1px dashed rgba(200,168,75,.4);border-radius:10px;padding:14px 16px;font-size:14px;white-space:pre-wrap;color:var(--cream);margin:8px 0 14px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 16px}
+.flow span{background:var(--tex);border:1px solid rgba(200,168,75,.25);padding:8px 12px;border-radius:8px;font-size:13px}
+.flow span.bad{border-color:var(--red);color:#ff8a86}.flow span.good{border-color:var(--green)}
+.flow em{color:var(--gold);font-style:normal}
+.decis{background:linear-gradient(135deg,#1A1510,#0e0e0e);border:2px solid var(--gold);border-radius:14px;padding:22px}
+.decis li{margin:10px 0;color:var(--cream)}
+.foot{margin-top:60px;color:var(--cream50);font-size:12px;border-top:1px solid rgba(200,168,75,.2);padding-top:16px}
+@media(max-width:640px){.rowbar{grid-template-columns:1fr;gap:4px}.rowbar .v{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">OMNI Brasil · Comercial · Diagnóstico e plano</div>
+  <h1>Por que as consultorias não acontecem: no-show, lembretes e templates</h1>
+  <p class="sub">Janela analisada: 19/09 a 19/10/2026 (30 dias). Fontes: fonte única do chat (lead-intake), ledger do robô de lembretes, Chatwoot, API da Meta (WABAs David e Layslla) e CRM Toca o Sino. Preparado pela AURA na madrugada de 20/10 a pedido da Rafa.</p>
+</header>
+
+<h2>1. Resumo em 60 segundos</h2>
+<div class="grid g3">
+  <div class="card alert"><div class="big red">73%</div><div class="lbl">no-show no CRM Toca o Sino</div><div class="note">264 leads em "No Show" contra 100 que chegaram a sessão agendada, mesa ou proposta (leads atualizados nos últimos 30 dias).</div></div>
+  <div class="card alert"><div class="big red">0 de 150</div><div class="lbl">lembretes 24h / 1h / hora com entrega garantida desde 01/10</div><div class="note">Todos saíram em texto livre. 70% nunca chegaram ao telefone (a Meta recusa texto livre fora da janela de 24h e o Chatwoot mostra "enviada"). <b>Corrigido em 20/10: templates novos aprovados e robô atualizado.</b></div></div>
+  <div class="card alert"><div class="big red">60%</div><div class="lbl">dos no-shows vêm de reuniões que o nosso robô não enxerga</div><div class="note">160 dos 264 no-shows são de reuniões marcadas direto na agenda do Toca o Sino pela pré-venda, fora do chat. Zero lembrete para essas pessoas.</div></div>
+</div>
+<div class="grid g3" style="margin-top:14px">
+  <div class="card warn"><div class="big amber">29%</div><div class="lbl">confirmam presença pelo botão</div><div class="note">45 de 155 consultorias marcadas pelo chat. Outras 61 pediram remarcar e estão na fila sem novo horário.</div></div>
+  <div class="card warn"><div class="big amber">0</div><div class="lbl">mensagens da régua de quem não agendou (W1 a W4)</div><div class="note">286 de 358 candidatos ficaram em silêncio: o negócio nasce sem dono com WhatsApp oficial. O conserto está pronto no repositório, desligado, esperando seu OK.</div></div>
+  <div class="card ok"><div class="big green">97%</div><div class="lbl">entrega do que a Meta aceita</div><div class="note">Os dois números oficiais estão GREEN e conectados. Template via Chatwoot sai dos dois (a Meta devolve o wamid). O problema não é o número, é o tipo de mensagem.</div></div>
+</div>
+
+<h2>2. O que a régua atual deveria fazer e o que faz</h2>
+<p>Régua documentada (processo-reducao-no-show.md, 04/2026, e virada da agenda em 15/09): quando a pessoa marca pelo chat, o robô manda a <strong>confirmação com botões</strong> na hora, o <strong>lembrete de 24h</strong>, o de <strong>1h</strong> e o <strong>"começa agora"</strong> com botão para entrar na sala. Quem não marca entra na régua W1 a W4 (retomar o cadastro). Quem pede remarcar é remarcado automaticamente até 3 dias úteis.</p>
+<div class="flow">
+  <span class="good">Chat marca a consultoria <em>155 em 30 dias</em></span>→
+  <span class="good">Confirmação com botões (template) <em>146 enviadas · 70% lidas</em></span>→
+  <span class="bad">Lembrete 24h <em>texto livre desde 01/10</em></span>→
+  <span class="bad">Lembrete 1h <em>texto livre</em></span>→
+  <span class="bad">"Começa agora" + botão da sala <em>texto livre, sem botão</em></span>
+</div>
+<h3>Entrega por tipo de mensagem (status real no Chatwoot, 30 dias)</h3>
+<div class="rowbar"><div>Confirmação (template)</div><div class="bar"><i style="width:70%;background:var(--green)"></i></div><div class="v">70% chegou</div></div>
+<div class="rowbar"><div>24h / 1h / hora via template (até 30/09)</div><div class="bar"><i style="width:67%;background:var(--green)"></i></div><div class="v">67% chegou</div></div>
+<div class="rowbar"><div>24h / 1h / hora em texto livre (out/2026)</div><div class="bar"><i style="width:26%;background:var(--red)"></i></div><div class="v">26% chegou</div></div>
+<p class="note">"Chegou" = status delivered ou read na Meta. Texto livre: 105 de 150 ficaram em "sent" para sempre, sem wamid, ou seja, a Meta nem aceitou. O Chatwoot não mostra isso como erro, por isso o time acha que foi.</p>
+
+<h2>3. As três causas raiz</h2>
+<div class="step"><div class="n">A</div><div>
+  <h4>O link da sala mudou e quebrou os templates com botão</h4>
+  <p>Em 01/10 a consultoria passou a nascer com o link da sala do CRM Toca o Sino (crmtocaosino.com/reuniao/...) em vez do Google Meet. Os três templates aprovados em julho têm botão fixo em <b>meet.google.com/{{1}}</b>. Sem código de Meet, o robô suprime o template e cai no texto livre, que a Meta não entrega fora da janela de 24h. Esse risco estava escrito no plano da agenda (R11) e aconteceu exatamente assim.</p>
+  <p><span class="tag t-green">resolvido</span> Seis templates novos (três por número oficial) com o mesmo texto aprovado e botão para a sala, aprovados pela Meta em 20/10. Robô na VPS já os usa.</p>
+</div></div>
+<div class="step"><div class="n">B</div><div>
+  <h4>Metade das reuniões nasce fora do nosso radar</h4>
+  <p>A pré-venda marca reuniões direto na agenda do Toca o Sino (após ligação, pelo WhatsApp não oficial). Essas reuniões não existem na fonte única do chat, então não recebem confirmação, lembrete nem botão. São 160 dos 264 no-shows. O webhook da agenda deles para o OMNI OS já tem segredo cadastrado desde 09/10, mas eles ainda não começaram a enviar.</p>
+  <p><span class="tag t-amber">plano</span> Cobrar o Matheus pelo webhook "reserva_criada" (ou uma rota de leitura das reservas) e ligar o robô nessa fonte. Sem isso, nenhuma régua resolve a maior fatia do no-show.</p>
+</div></div>
+<div class="step"><div class="n">C</div><div>
+  <h4>Quem pede remarcar e quem não agenda ficam sem dono</h4>
+  <p>61 pessoas tocaram em "Preciso remarcar" (ou escreveram) e estão na fila sem novo horário: a remarcação automática só resolve quando a pessoa manda um horário que cabe em 3 dias úteis; o resto cai para "humano" e ninguém é avisado além do Google Chat. A régua W1 a W4 de quem não concluiu o agendamento está muda há semanas (286 em silêncio por falta de número emissor).</p>
+  <p><span class="tag t-amber">decisão sua</span> Ligar o emissor por regra (W1 a W4) e dar um dono diário para a fila de remarcar.</p>
+</div></div>
+
+<h2>4. Teste pedido: template via Chatwoot de número oficial para número não oficial</h2>
+<table>
+<tr><th>Envio</th><th>Origem → destino</th><th>Resultado</th></tr>
+<tr><td>Template (confirmação de consultoria) via Chatwoot</td><td>Layslla oficial (inbox 18) → WhatsApp não oficial da Layslla</td><td><span class="tag t-green">entregue e lido</span> em menos de 2 min</td></tr>
+<tr><td>Template via Chatwoot</td><td>David oficial (inbox 16) → WhatsApp não oficial da Layslla</td><td><span class="tag t-amber">aceito pela Meta</span> (wamid gerado) mas sem "entregue" no destino. Pode ser bloqueio do número do David nesse aparelho. Precisa de 2º aparelho.</td></tr>
+<tr><td>Texto livre (sem template) via Chatwoot</td><td>Inbox 16 e 18 → mesmo número</td><td><span class="tag t-red">não saiu</span> nos dois. Chatwoot marcou "enviada", mas a Meta não devolveu wamid: é a janela de 24h fechada. É exatamente o que acontece com os lembretes.</td></tr>
+<tr><td>Template via Chatwoot</td><td>Inbox 16 e 18 → <b>celular da Rafa</b> (20/10, 13:11)</td><td><span class="tag t-amber">aceito pela Meta</span> nos dois. Rafa, confira se as duas mensagens "Rafa (teste AURA inbox 16/18)" chegaram no seu WhatsApp. Isso fecha a dúvida do time.</td></tr>
+</table>
+<p><strong>Conclusão do teste:</strong> template via Chatwoot funciona nos dois números oficiais. O que "não vai" é qualquer mensagem sem template para quem não falou com o número nas últimas 24h, e o Chatwoot esconde a falha. Regra para o time: no número oficial, primeira mensagem do dia é sempre template; texto livre só depois que a pessoa responde.</p>
+
+<h2>5. O que já foi feito nesta madrugada (tudo reversível)</h2>
+<table>
+<tr><th>Ação</th><th>Onde</th><th>Como reverter</th></tr>
+<tr><td><b>6 templates novos submetidos à Meta</b>: lembrete_consultoria_24h_sala, _1h_sala, _nahora_sala nos WABAs David e Layslla. Texto idêntico ao aprovado em 21/07; só o botão aponta para crmtocaosino.com/reuniao/{{1}}. Categoria UTILITY. <b>APROVADOS pela Meta às 13:20 de 20/10</b> (12 minutos depois da submissão).</td><td>squads/meta-templates/submit-lembretes-sala-toca-sino.py + lembretes_sala_toca_sino_results.json</td><td>Apagar os 6 templates na Meta (DELETE por nome). Nada chega a lead enquanto a Meta não aprovar.</td></tr>
+<tr><td><b>Robô de lembretes</b> passou a reconhecer o link da sala e escolher o template *_sala (Meet continua com os templates antigos). Enquanto PENDING, comportamento igual ao atual (texto livre).</td><td>squads/disparo-comercial/scripts/lembrete_reuniao.py + config/disparo-config.yaml, deployados na VPS às 13:06 de 20/10</td><td>Na VPS: restaurar <code>*.bak-deploy-20261020-130610</code> dos dois arquivos. No repo: git revert do commit.</td></tr>
+<tr><td><b>Testes de entrega</b> (4 templates e 2 textos livres) para o número não oficial da Layslla e para o celular da Rafa.</td><td>Conversas 25670, 25671, 21422, 23324 no Chatwoot</td><td>Nada a reverter. Nenhum lead recebeu teste.</td></tr>
+</table>
+<p>Não fiz: religar régua para leads, nenhuma copy nova para lead, nada no n8n, nada na régua W1 a W4, nada no dashboard.</p>
+
+<h2>6. Plano de ação</h2>
+<div class="step"><div class="n">1</div><div><h4>Hoje · Lembretes voltam a chegar <span class="tag t-green">sem deploy</span></h4>
+<p><b>Feito: a Meta aprovou os 6 templates às 13:20 de 20/10.</b> A partir da próxima rodada do robô (a cada 5 min), os lembretes 24h / 1h / hora saem por template com botão "Entrar na reunião" apontando para a sala. Conferir no ledger: registros <code>oficial-template</code> em 24h/1h/hora voltam a aparecer a partir de hoje.</p>
+<p>Rafa confirma no celular as duas mensagens de teste das 13:11 (inbox 16 e 18).</p></div></div>
+<div class="step"><div class="n">2</div><div><h4>Esta semana · Trazer as reuniões da pré-venda para o robô <span class="tag t-amber">depende do Matheus</span></h4>
+<p>Pedir ao Matheus: webhook <b>reserva_criada / remarcada / cancelada</b> para o OMNI OS (rota já existe, segredo já cadastrado) ou uma rota GET das reservas futuras. Com isso o robô passa a ler as duas fontes e toda reunião recebe confirmação, lembretes e botões. Enquanto não vier: a pré-venda marca a reunião pelo painel /agenda ou pelo chat, nunca só na agenda deles.</p></div></div>
+<div class="step"><div class="n">3</div><div><h4>Esta semana · Fila de remarcar com dono <span class="tag t-gold">AIOX</span></h4>
+<p>Vigia diário às 9h (Google Chat do comercial + WhatsApp do SDR): lista de quem pediu remarcar há mais de 2h sem novo horário, com o link da conversa. Remarcação automática já existe; falta o humano para os 61 que ela não resolveu. Etiqueta "pediu-remarcar" vira coluna no painel.</p></div></div>
+<div class="step"><div class="n">4</div><div><h4>Decisão sua · Ligar a régua W1 a W4 pelo emissor por regra</h4>
+<p>Patch pronto desde 22/09 (F0-REGUA-EMISSOR-POR-REGRA.md): quem não tem dono com WhatsApp oficial passa a ser tocado por David ou Layslla, 30 por rodada, 20 s entre envios. Primeira rodada alcança até ~190 leads (rajada escalonada). Precisa do seu OK explícito e de deploy na VPS (a VPS está com versão anterior do script).</p></div></div>
+<div class="step"><div class="n">5</div><div><h4>Próximas 2 semanas · Régua de percepção de valor <span class="tag t-amber">copy para sua aprovação</span></h4>
+<p>Hoje os lembretes só lembram. Proposta de régua que vende a reunião (esqueleto abaixo, copy final gravada por você em áudio ou aprovada por texto):</p>
+<ul>
+<li><b>T0 · na hora da marcação</b>: confirmação com botões (já existe) + card com "o que você sai com" da consultoria (card de instruções já desenhado em abril, nunca anexado).</li>
+<li><b>D-1 · 24h antes</b>: lembrete com o nome da especialista e uma pergunta de preparo ("qual é o resultado que você quer tirar dessa conversa?"). Resposta reabre a janela de 24h e vira contexto para a consultora.</li>
+<li><b>H-1 e H0</b>: como hoje, com botão da sala (templates novos).</li>
+<li><b>H+15 min sem entrar</b>: "Não conseguimos te encontrar na sala. Quer que eu guarde outro horário?" com dois botões (Remarcar / Não tenho mais interesse). Remarcar entra na remarcação automática.</li>
+<li><b>D+1 sem resposta</b>: última tentativa com prova social curta (depoimento de 1 linha) e botão Remarcar.</li>
+</ul>
+<p>Isso são 2 templates novos (H+15 e D+1) para a squad meta-templates e 1 ajuste no robô. Nada vai a lead sem sua aprovação da copy.</p></div></div>
+<div class="step"><div class="n">6</div><div><h4>Contínuo · Vigia de entrega <span class="tag t-gold">AIOX</span></h4>
+<p>Toda mensagem de saída em inbox oficial que ficar sem wamid (a Meta recusou) vira alerta no Google Chat com o link da conversa, para o SDR reenviar por template. Isso acaba com o "achei que foi".</p></div></div>
+
+<h2>7. Decisões que só você pode tomar</h2>
+<div class="decis"><ol>
+<li><b>Régua W1 a W4 pelo emissor por regra</b>: ligar? (rajada escalonada de até ~190 leads, 30 por rodada)</li>
+<li><b>Reuniões da pré-venda</b>: cobrar o webhook do Matheus esta semana, ou obrigar a pré-venda a marcar pelo nosso painel até lá?</li>
+<li><b>Régua de valor (item 5)</b>: aprova o esqueleto para eu escrever a copy e abrir a proposta na squad meta-templates? Você prefere gravar áudio com o tom?</li>
+<li><b>Lembretes continuam nossos</b> (decisão D1 do plano da agenda, aberta desde 28/09)? A recomendação é sim: a Toca o Sino não tem botão de confirmar nem remarcação automática.</li>
+</ol></div>
+
+<h2>8. Números de apoio</h2>
+<table>
+<tr><th>Indicador (30 dias)</th><th>Valor</th><th>Observação</th></tr>
+<tr><td>Consultorias marcadas pelo chat</td><td><b>155</b></td><td>109 só agendadas, 45 confirmadas, 1 liberada. Média de 5 por dia útil; setembro tinha 8 a 13.</td></tr>
+<tr><td>Confirmação enviada na marcação</td><td><b>146 (94%)</b></td><td>17 suprimidas por já estarem confirmadas; 9 sem nenhum toque.</td></tr>
+<tr><td>Cliques no botão (30 dias)</td><td><b>43 confirmar · 15 remarcar · 11 remarcações automáticas</b></td><td>Handler funcionando; fila de remarcar com 61 pendentes.</td></tr>
+<tr><td>Lembretes 24h/1h/hora por template</td><td><b>220</b> (até 30/09)</td><td>67% entregue ou lido.</td></tr>
+<tr><td>Lembretes 24h/1h/hora em texto livre</td><td><b>150</b> (quase todos em outubro)</td><td>26% entregue ou lido; 105 nunca saíram.</td></tr>
+<tr><td>CRM Toca o Sino: No Show</td><td><b>264</b> (158 abertos, 106 perdidos)</td><td>104 vieram do chat, 160 de fora do chat.</td></tr>
+<tr><td>CRM Toca o Sino: Sessão agendada / Mesa / Proposta</td><td><b>21 / 26 / 53</b></td><td>Fechados ("Sino pago"): 7.</td></tr>
+<tr><td>Meta, WABA David</td><td><b>1.032 aceitas · 999 entregues</b></td><td>GREEN, conectado.</td></tr>
+<tr><td>Meta, WABA Layslla</td><td><b>497 aceitas · 487 entregues</b></td><td>GREEN, conectado (nome de exibição recusado pela Meta, não afeta envio).</td></tr>
+<tr><td>Régua W1 a W4</td><td><b>0 envios</b></td><td>358 candidatos: 286 sem número emissor, 25 concluíram, 28 responderam, 18 fora da régua.</td></tr>
+</table>
+
+<div class="foot">Gerado pela AURA em 20/10/2026. Arquivos de origem: squads/disparo-comercial (ledger lembrete-log.jsonl, regua-pesquisa), apps/lead-intake (fonte única das consultorias), Chatwoot API, Graph API v20 (analytics e phone_numbers), CRM Toca o Sino (GET /leads). Nenhum lead recebeu mensagem de teste.</div>
+</div>
+</body>
+</html>
