@@ -99,7 +99,7 @@ ul{margin:6px 0 12px 20px;color:var(--cream70)}li{margin:4px 0}
 <div class="step"><div class="n">B</div><div>
   <h4>Metade das reuniões nasce fora do nosso radar</h4>
   <p>A pré-venda marca reuniões direto na agenda do Toca o Sino (após ligação, pelo WhatsApp não oficial). Essas reuniões não existem na fonte única do chat, então não recebem confirmação, lembrete nem botão. São 160 dos 264 no-shows. O webhook da agenda deles para o OMNI OS já tem segredo cadastrado desde 09/10, mas eles ainda não começaram a enviar.</p>
-  <p><span class="tag t-amber">plano</span> Cobrar o Matheus pelo webhook "reserva_criada" (ou uma rota de leitura das reservas) e ligar o robô nessa fonte. Sem isso, nenhuma régua resolve a maior fatia do no-show.</p>
+  <p><span class="tag t-green">resolvido em 22/10</span> O webhook do CRM já chamava o OMNI OS desde 12/10 (o Matheus confirmou e passou a mandar o telefone). O OS agora encaminha cada aviso para a fonte única do robô: toda reunião marcada pela pré-venda recebe confirmação, lembretes e botões como as do chat. 10 reuniões futuras entraram na hora.</p>
 </div></div>
 <div class="step"><div class="n">C</div><div>
   <h4>Quem pede remarcar e quem não agenda ficam sem dono</h4>
@@ -130,11 +130,11 @@ ul{margin:6px 0 12px 20px;color:var(--cream70)}li{margin:4px 0}
 <div class="step"><div class="n">1</div><div><h4>Hoje · Lembretes voltam a chegar <span class="tag t-green">sem deploy</span></h4>
 <p><b>Feito: a Meta aprovou os 6 templates às 13:20 de 20/10.</b> A partir da próxima rodada do robô (a cada 5 min), os lembretes 24h / 1h / hora saem por template com botão "Entrar na reunião" apontando para a sala. Conferir no ledger: registros <code>oficial-template</code> em 24h/1h/hora voltam a aparecer a partir de hoje.</p>
 <p>Rafa confirma no celular as duas mensagens de teste das 13:11 (inbox 16 e 18).</p></div></div>
-<div class="step"><div class="n">2</div><div><h4>Esta semana · Trazer as reuniões da pré-venda para o robô <span class="tag t-amber">depende do Matheus</span></h4>
-<p>Pedir ao Matheus: webhook <b>reserva_criada / remarcada / cancelada</b> para o OMNI OS (rota já existe, segredo já cadastrado) ou uma rota GET das reservas futuras. Com isso o robô passa a ler as duas fontes e toda reunião recebe confirmação, lembretes e botões. Enquanto não vier: a pré-venda marca a reunião pelo painel /agenda ou pelo chat, nunca só na agenda deles.</p></div></div>
-<div class="step"><div class="n">3</div><div><h4>Esta semana · Fila de remarcar com dono <span class="tag t-gold">AIOX</span></h4>
+<div class="step"><div class="n">2</div><div><h4>Trazer as reuniões da pré-venda para o robô <span class="tag t-green">feito 22/10</span></h4>
+<p><b>Feito em 22/10 (CAP-143).</b> O webhook já chegava no OS; faltava o OS repassar ao robô. Agora repassa (reserva criada, remarcada, confirmada, cancelada, no-show, realizada). Reunião do chat e reunião da pré-venda viram a mesma coisa para o robô, sem duplicar.</p></div></div>
+<div class="step"><div class="n">3</div><div><h4>Fila de remarcar com dono <span class="tag t-green">feito 20/10</span></h4>
 <p>Vigia diário às 9h (Google Chat do comercial + WhatsApp do SDR): lista de quem pediu remarcar há mais de 2h sem novo horário, com o link da conversa. Remarcação automática já existe; falta o humano para os 61 que ela não resolveu. Etiqueta "pediu-remarcar" vira coluna no painel.</p></div></div>
-<div class="step"><div class="n">4</div><div><h4>Decisão sua · Ligar a régua W1 a W4 pelo emissor por regra</h4>
+<div class="step"><div class="n">4</div><div><h4>Ligar a régua W1 a W4 pelo emissor por regra <span class="tag t-green">ligada 20/10</span></h4>
 <p>Patch pronto desde 22/09 (F0-REGUA-EMISSOR-POR-REGRA.md): quem não tem dono com WhatsApp oficial passa a ser tocado por David ou Layslla, 30 por rodada, 20 s entre envios. Primeira rodada alcança até ~190 leads (rajada escalonada). Precisa do seu OK explícito e de deploy na VPS (a VPS está com versão anterior do script).</p></div></div>
 <div class="step"><div class="n">5</div><div><h4>Próximas 2 semanas · Régua de percepção de valor <span class="tag t-amber">copy para sua aprovação</span></h4>
 <p>Hoje os lembretes só lembram. Proposta de régua que vende a reunião (esqueleto abaixo, copy final gravada por você em áudio ou aprovada por texto):</p>
@@ -146,7 +146,7 @@ ul{margin:6px 0 12px 20px;color:var(--cream70)}li{margin:4px 0}
 <li><b>D+1 sem resposta</b>: última tentativa com prova social curta (depoimento de 1 linha) e botão Remarcar.</li>
 </ul>
 <p>Isso são 2 templates novos (H+15 e D+1) para a squad meta-templates e 1 ajuste no robô. Nada vai a lead sem sua aprovação da copy.</p></div></div>
-<div class="step"><div class="n">6</div><div><h4>Contínuo · Vigia de entrega <span class="tag t-gold">AIOX</span></h4>
+<div class="step"><div class="n">6</div><div><h4>Vigia de entrega <span class="tag t-green">no ar 20/10</span></h4>
 <p>Toda mensagem de saída em inbox oficial que ficar sem wamid (a Meta recusou) vira alerta no Google Chat com o link da conversa, para o SDR reenviar por template. Isso acaba com o "achei que foi".</p></div></div>
 
 <h2>7. Decisões que só você pode tomar</h2>
