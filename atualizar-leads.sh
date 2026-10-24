@@ -13,8 +13,9 @@ echo "  OMNI Brasil — Atualização manual de leads"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-export PIPEDRIVE_API_KEY="fd0d8ec92950c2fc3053b6d126ce54a4a0e03d37"
-export CHATWOOT_TOKEN="oLg7zw97T5TcomRRmfYrwecy"
+: "${PIPEDRIVE_API_KEY:?defina PIPEDRIVE_API_KEY no ambiente (fica no cofre da OMNI)}"
+: "${CHATWOOT_TOKEN:?defina CHATWOOT_TOKEN no ambiente (fica no cofre da OMNI)}"
+export PIPEDRIVE_API_KEY CHATWOOT_TOKEN
 
 echo "▶ Gerando relatório atualizado..."
 python3 scripts/update-leads-report.py

@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 """
 Gera auditoria-fluxo-tentativa-conectar.html — snapshot completo do stage 421.
 Classifica cada lead: respondeu / atrasado / D4-mover / normal / sem dados.
@@ -11,9 +12,9 @@ from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 # ── Constants ──────────────────────────────────────────────────────────────────
-PIPEDRIVE_TOKEN = "fd0d8ec92950c2fc3053b6d126ce54a4a0e03d37"
+PIPEDRIVE_TOKEN = os.environ.get("PIPEDRIVE_API_KEY", "")
 CHATWOOT_BASE   = "https://conversas-web.server.omnihypnosis.com.br"
-CHATWOOT_TOKEN  = "oLg7zw97T5TcomRRmfYrwecy"
+CHATWOOT_TOKEN  = os.environ.get("CHATWOOT_TOKEN", "")
 CHATWOOT_ACCOUNT = "1"
 
 PIPELINE_ID      = 65

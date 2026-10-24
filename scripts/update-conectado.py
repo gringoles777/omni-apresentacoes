@@ -12,7 +12,7 @@ CHATWOOT_URL = "https://conversas-web.server.omnihypnosis.com.br"
 ACCOUNT_ID = "1"
 CW_TOKEN = os.environ["CHATWOOT_TOKEN"]
 PIPE_KEY = os.environ["PIPEDRIVE_API_KEY"]
-GCHAT_WEBHOOK = "https://chat.googleapis.com/v1/spaces/AAQADhKrhJ8/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=BYk-2zqa3aEhx5rnYFWE87X9uc5U8ONgmKTCNcKfElw"
+GCHAT_WEBHOOK = os.environ.get("GCHAT_WEBHOOK", "")  # segredo do GitHub Actions; sem ele, nao avisa no Google Chat
 STAGE_ID = 422  # Conectado
 REPORT_URL = "https://gringoles777.github.io/omni-apresentacoes/leads-responderam-conectado.html"
 
@@ -84,6 +84,9 @@ def send_gchat(total_deals, total, layslla_count, david_count):
             f"👉 {REPORT_URL}"
         )
     }
+    if not GCHAT_WEBHOOK:
+        print("  [INFO] GCHAT_WEBHOOK nao definido: aviso no Google Chat pulado")
+        return
     data = json.dumps(msg).encode("utf-8")
     req = urllib.request.Request(GCHAT_WEBHOOK, data=data, headers={"Content-Type": "application/json"})
     try:
